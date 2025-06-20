@@ -70,8 +70,8 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       
       {/* Favicon et icônes */}
-      <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-      <link rel="apple-touch-icon" href="/vite.svg" />
+      <link rel="icon" type="image/png" href="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/favicon.png" />
+      <link rel="apple-touch-icon" href="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/favicon.png" />
       
       {/* Polices préchargées */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />

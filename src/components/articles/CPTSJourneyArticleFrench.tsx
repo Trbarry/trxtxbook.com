@@ -4,6 +4,28 @@ import { Award, Calendar, Target, BookOpen, Brain, Shield, Terminal, Users, Ligh
 export const CPTSJourneyArticleFrench: React.FC = () => {
   return (
     <div className="space-y-16">
+      {/* Image d'illustration CPTS */}
+      <div className="relative mb-12">
+        <div className="relative h-[400px] overflow-hidden rounded-lg border border-violet-900/20">
+          <img
+            src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/cptsimage.png"
+            alt="CPTS Journey - Certified Penetration Testing Specialist"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/60 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-8">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Mon Parcours CPTS : 5 Mois d'Apprentissage Intensif
+              </h2>
+              <p className="text-xl text-gray-200 leading-relaxed">
+                De l'eJPT au CPTS - Une transformation complète en pentesting professionnel
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Table des matières */}
       <div className="bg-[#1a1a1f] p-6 rounded-lg border border-violet-900/20 mb-12">
         <h2 className="text-xl font-bold text-violet-400 mb-6 flex items-center gap-2">
