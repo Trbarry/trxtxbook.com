@@ -1,0 +1,26 @@
+# robots.txt pour le portfolio de Tristan Barry
+# Site : https://trxtxbook.com
+
+User-agent: *
+
+# ✅ Pages principales à indexer
+Allow: /
+Allow: /writeups
+Allow: /projects
+Allow: /certifications
+Allow: /articles/
+
+# ❌ Exclusion des zones d'administration
+Disallow: /admin/
+
+# 🔧 Fichiers techniques à exclure de l'indexation
+Disallow: /_redirects
+Disallow: /dist/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# 🗺️ Sitemap XML pour l'indexation automatique
+Sitemap: https://trxtxbook.com/sitemap.xml
+
+# 🐢 Crawl-delay recommandé pour limiter la charge sur le serveur
+Crawl-delay: 1
