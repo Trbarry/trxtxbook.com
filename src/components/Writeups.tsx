@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Target, Search, Filter, Tag, Calendar, Lock, Shield, ArrowRight } from 'lucide-react';
+import { Target, Search, Filter, Tag, Calendar, Lock, Shield, ArrowRight, AlertCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { Writeup } from '../types/writeup';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -45,6 +45,7 @@ const getWriteupImage = (writeup: Writeup) => {
 export const Writeups: React.FC = () => {
   const [writeups, setWriteups] = useState<Writeup[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,6 +54,24 @@ export const Writeups: React.FC = () => {
 
   const fetchWriteups = async () => {
     try {
+      setError(null);
+      console.log('Attempting to fetch writeups from Supabase...');
+      
+      // Test basic connectivity first
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/rest/v1/`, {
+        method: 'HEAD',
+        headers: {
+          'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Supabase connectivity test failed: ${response.status} ${response.statusText}`);
+      }
+
+      console.log('Supabase connectivity test passed');
+
       const { data, error } = await supabase
         .from('writeups')
         .select('*')
@@ -60,10 +79,28 @@ export const Writeups: React.FC = () => {
         .order('created_at', { ascending: false })
         .limit(6);
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase query error:', error);
+        throw new Error(`Database query failed: ${error.message}`);
+      }
+
+      console.log('Successfully fetched writeups:', data?.length || 0);
       setWriteups(data || []);
     } catch (error) {
       console.error('Error fetching writeups:', error);
+      
+      let errorMessage = 'Failed to load writeups';
+      if (error instanceof Error) {
+        if (error.message.includes('NetworkError') || error.message.includes('fetch')) {
+          errorMessage = 'Network connection failed. Please check your internet connection and try again.';
+        } else if (error.message.includes('CORS')) {
+          errorMessage = 'Cross-origin request blocked. Please check Supabase CORS settings.';
+        } else {
+          errorMessage = error.message;
+        }
+      }
+      
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -128,6 +165,11 @@ export const Writeups: React.FC = () => {
     }
   };
 
+  const handleRetry = () => {
+    setLoading(true);
+    fetchWriteups();
+  };
+
   return (
     <section className="py-20">
       <div className="container mx-auto px-6">
@@ -149,6 +191,18 @@ export const Writeups: React.FC = () => {
         {loading ? (
           <div className="flex justify-center items-center h-48">
             <div className="animate-spin rounded-full h-12 w-12 border-4 border-violet-500 border-t-transparent"></div>
+          </div>
+        ) : error ? (
+          <div className="flex flex-col items-center justify-center h-48 text-center">
+            <AlertCircle className="w-12 h-12 text-red-400 mb-4" />
+            <h3 className="text-xl font-semibold text-red-400 mb-2">Erreur de chargement</h3>
+            <p className="text-gray-400 mb-4 max-w-md">{error}</p>
+            <button
+              onClick={handleRetry}
+              className="bg-violet-500/10 hover:bg-violet-500/20 text-violet-300 px-4 py-2 rounded-lg transition-colors"
+            >
+              Réessayer
+            </button>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
