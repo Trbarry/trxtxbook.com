@@ -23,7 +23,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
 
       {/* 🟣 H1 - Main Title */}
       <header className="text-center mb-16">
