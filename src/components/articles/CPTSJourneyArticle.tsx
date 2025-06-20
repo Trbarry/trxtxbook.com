@@ -4,7 +4,7 @@ import { CPTSJourneyArticleFrench } from './CPTSJourneyArticleFrench';
 import { CPTSJourneyArticleEnglish } from './CPTSJourneyArticleEnglish';
 
 export const CPTSJourneyArticle: React.FC = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState<'en' | 'fr'>('fr');
+  const [selectedLanguage, setSelectedLanguage] = useState<'en' | 'fr'>('en'); // Changé de 'fr' à 'en'
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
 
   const languages = {
