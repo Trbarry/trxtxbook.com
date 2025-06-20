@@ -1,23 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { BarChart3, Users, Eye, Globe, TrendingUp, Clock, RefreshCw, Smartphone, Monitor, Tablet } from 'lucide-react';
+import { 
+  BarChart3, Users, Eye, Globe, TrendingUp, Clock, RefreshCw, 
+  Smartphone, Monitor, Tablet, MapPin, Activity, UserCheck,
+  Shield, AlertTriangle, Fingerprint, Wifi
+} from 'lucide-react';
 import { useAnalytics } from '../lib/analytics';
 
-interface AnalyticsData {
+interface EnhancedAnalyticsData {
   uniqueVisitors: number;
   totalPageViews: number;
-  topPages: Array<{ path: string; count: number }>;
+  uniqueVisitorsToday: number;
+  pageViewsToday: number;
+  topPages: Array<{ path: string; count: number; unique_visitors: number }>;
   countries: Array<{ country: string; count: number }>;
+  cities: Array<{ city: string; count: number }>;
   devices: Array<{ device: string; count: number }>;
-  recentViews: Array<{
+  browsers: Array<{ browser: string; count: number }>;
+  recentVisitors: Array<{
+    visitor_id: string;
     page_path: string;
-    created_at: string;
     country?: string;
+    city?: string;
     device_type?: string;
+    ip_suffix?: string;
+    created_at: string;
+    is_returning: boolean;
   }>;
+  visitorFlow: Array<{ hour: number; visitors: number; page_views: number }>;
 }
 
 export const AnalyticsDashboard: React.FC = () => {
-  const [data, setData] = useState<AnalyticsData | null>(null);
+  const [data, setData] = useState<EnhancedAnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
   const { getAnalytics } = useAnalytics();
@@ -82,6 +95,15 @@ export const AnalyticsDashboard: React.FC = () => {
     }
   };
 
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleString('fr-FR', {
+      hour: '2-digit',
+      minute: '2-digit',
+      day: '2-digit',
+      month: '2-digit'
+    });
+  };
+
   if (loading && !data) {
     return (
       <div className="flex items-center justify-center p-8">
@@ -106,22 +128,13 @@ export const AnalyticsDashboard: React.FC = () => {
     );
   }
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleString('fr-FR', {
-      hour: '2-digit',
-      minute: '2-digit',
-      day: '2-digit',
-      month: '2-digit'
-    });
-  };
-
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <BarChart3 className="w-6 h-6 text-violet-400" />
-          <h2 className="text-2xl font-bold">Analytics du Site</h2>
+          <h2 className="text-2xl font-bold">Analytics Avancées du Site</h2>
         </div>
         <div className="flex items-center gap-4">
           <span className="text-sm text-gray-400">
@@ -143,19 +156,19 @@ export const AnalyticsDashboard: React.FC = () => {
         <div className="bg-[#1a1a1f] p-6 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-2">
             <Users className="w-5 h-5 text-blue-400" />
-            <span className="text-sm text-gray-400">Visiteurs Uniques</span>
+            <span className="text-sm text-gray-400">Visiteurs Aujourd'hui</span>
           </div>
-          <p className="text-2xl font-bold text-blue-400">{data.uniqueVisitors}</p>
-          <p className="text-xs text-gray-500 mt-1">Aujourd'hui</p>
+          <p className="text-2xl font-bold text-blue-400">{data.uniqueVisitorsToday}</p>
+          <p className="text-xs text-gray-500 mt-1">Total: {data.uniqueVisitors}</p>
         </div>
 
         <div className="bg-[#1a1a1f] p-6 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-2">
             <Eye className="w-5 h-5 text-green-400" />
-            <span className="text-sm text-gray-400">Pages Vues</span>
+            <span className="text-sm text-gray-400">Pages Vues Aujourd'hui</span>
           </div>
-          <p className="text-2xl font-bold text-green-400">{data.totalPageViews}</p>
-          <p className="text-xs text-gray-500 mt-1">Aujourd'hui</p>
+          <p className="text-2xl font-bold text-green-400">{data.pageViewsToday}</p>
+          <p className="text-xs text-gray-500 mt-1">Total: {data.totalPageViews}</p>
         </div>
 
         <div className="bg-[#1a1a1f] p-6 rounded-lg border border-violet-900/20">
@@ -164,18 +177,20 @@ export const AnalyticsDashboard: React.FC = () => {
             <span className="text-sm text-gray-400">Pages/Visiteur</span>
           </div>
           <p className="text-2xl font-bold text-violet-400">
-            {data.uniqueVisitors > 0 ? (data.totalPageViews / data.uniqueVisitors).toFixed(1) : '0'}
+            {data.uniqueVisitorsToday > 0 ? (data.pageViewsToday / data.uniqueVisitorsToday).toFixed(1) : '0'}
           </p>
-          <p className="text-xs text-gray-500 mt-1">Moyenne</p>
+          <p className="text-xs text-gray-500 mt-1">Aujourd'hui</p>
         </div>
 
         <div className="bg-[#1a1a1f] p-6 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-2">
-            <Globe className="w-5 h-5 text-orange-400" />
-            <span className="text-sm text-gray-400">Pays</span>
+            <UserCheck className="w-5 h-5 text-orange-400" />
+            <span className="text-sm text-gray-400">Visiteurs Récurrents</span>
           </div>
-          <p className="text-2xl font-bold text-orange-400">{data.countries.length}</p>
-          <p className="text-xs text-gray-500 mt-1">Différents</p>
+          <p className="text-2xl font-bold text-orange-400">
+            {data.recentVisitors.filter(v => v.is_returning).length}
+          </p>
+          <p className="text-xs text-gray-500 mt-1">Sur {data.recentVisitors.length} récents</p>
         </div>
       </div>
 
@@ -257,6 +272,43 @@ export const AnalyticsDashboard: React.FC = () => {
           )}
         </div>
 
+        {/* Browsers */}
+        <div className="bg-[#1a1a1f] p-6 rounded-lg border border-violet-900/20">
+          <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Globe className="w-5 h-5 text-violet-400" />
+            Navigateurs
+          </h3>
+          {data.browsers.length > 0 ? (
+            <div className="space-y-3">
+              {data.browsers.slice(0, 5).map((browser, index) => (
+                <div key={browser.browser} className="flex items-center justify-between">
+                  <span className="text-sm text-gray-300 truncate flex-1">
+                    {browser.browser}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-16 bg-[#2a2a2f] rounded-full h-2">
+                      <div 
+                        className="bg-cyan-500 h-2 rounded-full"
+                        style={{ 
+                          width: `${(browser.count / Math.max(...data.browsers.map(b => b.count))) * 100}%` 
+                        }}
+                      />
+                    </div>
+                    <span className="text-sm font-medium text-cyan-400 w-6 text-right">
+                      {browser.count}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-400 text-sm">Aucune donnée</p>
+          )}
+        </div>
+      </div>
+
+      {/* Location Data */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Countries */}
         <div className="bg-[#1a1a1f] p-6 rounded-lg border border-violet-900/20">
           <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
@@ -290,35 +342,114 @@ export const AnalyticsDashboard: React.FC = () => {
             <p className="text-gray-400 text-sm">Aucune donnée</p>
           )}
         </div>
+
+        {/* Cities */}
+        <div className="bg-[#1a1a1f] p-6 rounded-lg border border-violet-900/20">
+          <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <MapPin className="w-5 h-5 text-violet-400" />
+            Villes
+          </h3>
+          {data.cities.length > 0 ? (
+            <div className="space-y-3">
+              {data.cities.slice(0, 5).map((city, index) => (
+                <div key={city.city} className="flex items-center justify-between">
+                  <span className="text-sm text-gray-300 truncate flex-1">
+                    {city.city}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-16 bg-[#2a2a2f] rounded-full h-2">
+                      <div 
+                        className="bg-pink-500 h-2 rounded-full"
+                        style={{ 
+                          width: `${(city.count / Math.max(...data.cities.map(c => c.count))) * 100}%` 
+                        }}
+                      />
+                    </div>
+                    <span className="text-sm font-medium text-pink-400 w-6 text-right">
+                      {city.count}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-400 text-sm">Aucune donnée</p>
+          )}
+        </div>
       </div>
 
-      {/* Recent Activity */}
+      {/* Recent Visitors with Enhanced Info */}
       <div className="bg-[#1a1a1f] p-6 rounded-lg border border-violet-900/20">
         <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          <Clock className="w-5 h-5 text-violet-400" />
-          Activité Récente
+          <Activity className="w-5 h-5 text-violet-400" />
+          Visiteurs Récents (Informations Détaillées)
         </h3>
-        {data.recentViews.length > 0 ? (
-          <div className="space-y-2">
-            {data.recentViews.slice(0, 10).map((view, index) => (
-              <div key={index} className="flex items-center justify-between text-sm">
-                <span className="text-gray-300">
-                  {view.page_path === '/' ? 'Accueil' : view.page_path}
-                </span>
-                <div className="flex items-center gap-2 text-gray-400">
-                  {view.device_type && (
-                    <span className={`flex items-center gap-1 text-xs px-2 py-1 rounded ${getDeviceColor(view.device_type)}`}>
-                      {getDeviceIcon(view.device_type)}
-                      {getDeviceLabel(view.device_type)}
-                    </span>
-                  )}
-                  {view.country && (
-                    <span className="text-xs bg-[#2a2a2f] px-2 py-1 rounded">
-                      {view.country}
-                    </span>
-                  )}
-                  <span>{formatDate(view.created_at)}</span>
+        {data.recentVisitors.length > 0 ? (
+          <div className="space-y-3">
+            {data.recentVisitors.slice(0, 10).map((visitor, index) => (
+              <div key={index} className="bg-[#2a2a2f] p-4 rounded-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      <Fingerprint className="w-4 h-4 text-violet-400" />
+                      <span className="text-sm font-mono text-violet-300">
+                        {visitor.visitor_id}
+                      </span>
+                    </div>
+                    {visitor.is_returning && (
+                      <span className="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full">
+                        Récurrent
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-xs text-gray-500">
+                    {formatDate(visitor.created_at)}
+                  </span>
                 </div>
+                
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                  <div className="flex items-center gap-2">
+                    <Eye className="w-3 h-3 text-blue-400" />
+                    <span className="text-gray-400">Page:</span>
+                    <span className="text-blue-300 truncate">
+                      {visitor.page_path === '/' ? 'Accueil' : visitor.page_path}
+                    </span>
+                  </div>
+                  
+                  {visitor.device_type && (
+                    <div className="flex items-center gap-2">
+                      {getDeviceIcon(visitor.device_type)}
+                      <span className="text-gray-400">Appareil:</span>
+                      <span className={getDeviceColor(visitor.device_type)}>
+                        {getDeviceLabel(visitor.device_type)}
+                      </span>
+                    </div>
+                  )}
+                  
+                  {visitor.country && (
+                    <div className="flex items-center gap-2">
+                      <Globe className="w-3 h-3 text-orange-400" />
+                      <span className="text-gray-400">Pays:</span>
+                      <span className="text-orange-300">{visitor.country}</span>
+                    </div>
+                  )}
+                  
+                  {visitor.ip_suffix && (
+                    <div className="flex items-center gap-2">
+                      <Wifi className="w-3 h-3 text-cyan-400" />
+                      <span className="text-gray-400">IP:</span>
+                      <span className="text-cyan-300 font-mono">***{visitor.ip_suffix}</span>
+                    </div>
+                  )}
+                </div>
+                
+                {visitor.city && (
+                  <div className="mt-2 flex items-center gap-2 text-xs">
+                    <MapPin className="w-3 h-3 text-pink-400" />
+                    <span className="text-gray-400">Ville:</span>
+                    <span className="text-pink-300">{visitor.city}</span>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -327,35 +458,49 @@ export const AnalyticsDashboard: React.FC = () => {
         )}
       </div>
 
-      {/* Device Summary */}
-      {data.devices.length > 0 && (
+      {/* Visitor Flow */}
+      {data.visitorFlow.length > 0 && (
         <div className="bg-[#1a1a1f] p-6 rounded-lg border border-violet-900/20">
           <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-            <Monitor className="w-5 h-5 text-violet-400" />
-            Répartition des Appareils
+            <Clock className="w-5 h-5 text-violet-400" />
+            Flux de Visiteurs par Heure
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {data.devices.map((device) => {
-              const percentage = data.totalPageViews > 0 ? ((device.count / data.totalPageViews) * 100).toFixed(1) : '0';
+          <div className="grid grid-cols-12 gap-2">
+            {Array.from({ length: 24 }, (_, hour) => {
+              const hourData = data.visitorFlow.find(h => h.hour === hour);
+              const visitors = hourData?.visitors || 0;
+              const maxVisitors = Math.max(...data.visitorFlow.map(h => h.visitors));
+              const height = maxVisitors > 0 ? (visitors / maxVisitors) * 100 : 0;
+              
               return (
-                <div key={device.device} className="text-center">
-                  <div className={`mx-auto mb-2 p-3 rounded-full w-12 h-12 flex items-center justify-center ${
-                    device.device === 'mobile' ? 'bg-blue-500/20' :
-                    device.device === 'tablet' ? 'bg-purple-500/20' : 'bg-green-500/20'
-                  }`}>
-                    <span className={getDeviceColor(device.device)}>
-                      {getDeviceIcon(device.device)}
-                    </span>
+                <div key={hour} className="flex flex-col items-center">
+                  <div className="w-full bg-[#2a2a2f] rounded-t h-16 flex items-end">
+                    <div 
+                      className="w-full bg-violet-500 rounded-t transition-all duration-300"
+                      style={{ height: `${height}%` }}
+                      title={`${hour}h: ${visitors} visiteurs`}
+                    />
                   </div>
-                  <p className="text-sm font-medium text-gray-300">{getDeviceLabel(device.device)}</p>
-                  <p className={`text-lg font-bold ${getDeviceColor(device.device)}`}>{percentage}%</p>
-                  <p className="text-xs text-gray-500">{device.count} visites</p>
+                  <span className="text-xs text-gray-500 mt-1">{hour}h</span>
                 </div>
               );
             })}
           </div>
         </div>
       )}
+
+      {/* Privacy Notice */}
+      <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+        <div className="flex items-center gap-2 mb-2">
+          <Shield className="w-5 h-5 text-blue-400" />
+          <h4 className="font-medium text-blue-400">Confidentialité et Sécurité</h4>
+        </div>
+        <p className="text-blue-300 text-sm">
+          Toutes les données sont collectées de manière anonyme et respectueuse de la vie privée. 
+          Les adresses IP sont partiellement masquées, les données sont automatiquement supprimées après 90 jours, 
+          et les bots sont filtrés automatiquement.
+        </p>
+      </div>
     </div>
   );
 };

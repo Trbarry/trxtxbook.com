@@ -6,67 +6,93 @@ interface PageViewData {
   referrer?: string;
   user_agent?: string;
   session_id: string;
+  visitor_id: string;
   country?: string;
+  city?: string;
+  region?: string;
+  timezone?: string;
   device_type?: string;
+  ip_suffix?: string;
+  screen_resolution?: string;
+  language?: string;
+  is_bot: boolean;
 }
 
-interface AnalyticsData {
+interface EnhancedAnalyticsData {
   uniqueVisitors: number;
   totalPageViews: number;
-  topPages: Array<{ path: string; count: number }>;
+  uniqueVisitorsToday: number;
+  pageViewsToday: number;
+  topPages: Array<{ path: string; count: number; unique_visitors: number }>;
   countries: Array<{ country: string; count: number }>;
+  cities: Array<{ city: string; count: number }>;
   devices: Array<{ device: string; count: number }>;
-  recentViews: Array<{
+  browsers: Array<{ browser: string; count: number }>;
+  recentVisitors: Array<{
+    visitor_id: string;
     page_path: string;
-    created_at: string;
     country?: string;
+    city?: string;
     device_type?: string;
+    ip_suffix?: string;
+    created_at: string;
+    is_returning: boolean;
   }>;
+  visitorFlow: Array<{ hour: number; visitors: number; page_views: number }>;
 }
 
 class Analytics {
   private sessionId: string;
+  private visitorId: string;
   private isInitialized: boolean = false;
   private isBot: boolean = false;
   private deviceType: string;
+  private ipSuffix: string = '';
 
   constructor() {
     this.isBot = this.detectBot();
     if (!this.isBot) {
       this.deviceType = this.getDeviceType();
       this.sessionId = this.getOrCreateSessionId();
+      this.visitorId = this.getOrCreateVisitorId();
       this.initializeSession();
     }
   }
 
-  // 🤖 PROTECTION ANTI-BOTS
+  // 🤖 PROTECTION ANTI-BOTS AMÉLIORÉE
   private detectBot(): boolean {
     const userAgent = navigator.userAgent.toLowerCase();
     
-    // Liste des bots connus
+    // Liste étendue des bots connus
     const botPatterns = [
       'googlebot', 'bingbot', 'slurp', 'duckduckbot', 'baiduspider',
       'yandexbot', 'facebookexternalhit', 'twitterbot', 'linkedinbot',
       'whatsapp', 'telegrambot', 'applebot', 'crawler', 'spider',
       'bot', 'crawl', 'scrape', 'fetch', 'monitor', 'check',
       'lighthouse', 'pagespeed', 'gtmetrix', 'pingdom', 'uptime',
-      'headless', 'phantom', 'selenium', 'webdriver', 'puppeteer'
+      'headless', 'phantom', 'selenium', 'webdriver', 'puppeteer',
+      'playwright', 'curl', 'wget', 'python', 'java', 'go-http'
     ];
 
     // Vérifier si l'user agent contient des patterns de bots
     const isKnownBot = botPatterns.some(pattern => userAgent.includes(pattern));
     
-    // Vérifier si c'est un navigateur headless
-    const isHeadless = !window.navigator.webdriver && 
-                      (window.navigator.languages === undefined || 
-                       window.navigator.languages.length === 0);
-
+    // Vérifications supplémentaires
+    const hasWebdriver = 'webdriver' in navigator || (window as any).webdriver;
+    const hasPhantom = (window as any).phantom || (window as any)._phantom;
+    const hasSelenium = (window as any).selenium;
+    
     // Vérifier si les APIs normales du navigateur sont disponibles
     const hasNormalBrowserAPIs = 'localStorage' in window && 
                                 'sessionStorage' in window &&
-                                'history' in window;
+                                'history' in window &&
+                                'screen' in window;
 
-    return isKnownBot || isHeadless || !hasNormalBrowserAPIs;
+    // Vérifier la cohérence des propriétés du navigateur
+    const hasInconsistentProps = navigator.languages && navigator.languages.length === 0;
+
+    return isKnownBot || hasWebdriver || hasPhantom || hasSelenium || 
+           !hasNormalBrowserAPIs || hasInconsistentProps;
   }
 
   // 🛡️ PROTECTION CONTRE LE SPAM
@@ -75,7 +101,6 @@ class Analytics {
     const now = Date.now();
     
     if (lastTrack && (now - parseInt(lastTrack)) < 1000) {
-      // Limite : 1 tracking par seconde maximum
       return false;
     }
     
@@ -84,19 +109,58 @@ class Analytics {
   }
 
   private getOrCreateSessionId(): string {
-    let sessionId = localStorage.getItem('portfolio_session_id');
+    let sessionId = sessionStorage.getItem('portfolio_session_id');
     if (!sessionId) {
       sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      localStorage.setItem('portfolio_session_id', sessionId);
+      sessionStorage.setItem('portfolio_session_id', sessionId);
     }
     return sessionId;
   }
 
-  // 📱 DÉTECTION DU TYPE D'APPAREIL UNIQUEMENT
+  private getOrCreateVisitorId(): string {
+    let visitorId = localStorage.getItem('portfolio_visitor_id');
+    if (!visitorId) {
+      // Créer un ID unique basé sur plusieurs facteurs
+      const fingerprint = this.generateFingerprint();
+      visitorId = `visitor_${Date.now()}_${fingerprint}`;
+      localStorage.setItem('portfolio_visitor_id', visitorId);
+    }
+    return visitorId;
+  }
+
+  // 🔍 FINGERPRINTING BASIQUE (respectueux de la vie privée)
+  private generateFingerprint(): string {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      ctx.textBaseline = 'top';
+      ctx.font = '14px Arial';
+      ctx.fillText('Fingerprint', 2, 2);
+    }
+    
+    const fingerprint = [
+      navigator.language,
+      screen.width + 'x' + screen.height,
+      new Date().getTimezoneOffset(),
+      navigator.platform,
+      canvas.toDataURL().slice(-10) // Seulement les 10 derniers caractères
+    ].join('|');
+    
+    // Hash simple
+    let hash = 0;
+    for (let i = 0; i < fingerprint.length; i++) {
+      const char = fingerprint.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convert to 32-bit integer
+    }
+    
+    return Math.abs(hash).toString(36);
+  }
+
+  // 📱 DÉTECTION DU TYPE D'APPAREIL
   private getDeviceType(): string {
     const userAgent = navigator.userAgent;
     
-    // Détection précise du type d'appareil
     if (/iPad/.test(userAgent)) {
       return 'tablet';
     }
@@ -109,7 +173,6 @@ class Analytics {
       return 'tablet';
     }
     
-    // Vérification supplémentaire basée sur la taille d'écran
     if (window.screen && window.screen.width) {
       const screenWidth = window.screen.width;
       if (screenWidth <= 768) {
@@ -122,16 +185,74 @@ class Analytics {
     return 'desktop';
   }
 
+  // 🌍 GÉOLOCALISATION AMÉLIORÉE
+  private async getLocationData(): Promise<{
+    country?: string;
+    city?: string;
+    region?: string;
+    timezone?: string;
+  }> {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3000);
+      
+      const response = await fetch('https://ipapi.co/json/', {
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+      
+      const data = await response.json();
+      return {
+        country: data.country_name,
+        city: data.city,
+        region: data.region,
+        timezone: data.timezone
+      };
+    } catch {
+      return {};
+    }
+  }
+
+  // 📊 INFORMATIONS SYSTÈME
+  private getSystemInfo(): {
+    screen_resolution: string;
+    language: string;
+  } {
+    return {
+      screen_resolution: `${screen.width}x${screen.height}`,
+      language: navigator.language
+    };
+  }
+
+  // 🔢 EXTRACTION IP SUFFIX (simulé côté client)
+  private async getIpSuffix(): Promise<string> {
+    try {
+      const response = await fetch('https://api.ipify.org?format=json');
+      const data = await response.json();
+      const ip = data.ip;
+      // Extraire seulement les 6 derniers chiffres
+      const digits = ip.replace(/[^0-9]/g, '');
+      return digits.slice(-6);
+    } catch {
+      return Math.random().toString().slice(-6);
+    }
+  }
+
   private async initializeSession() {
     if (this.isInitialized || this.isBot) return;
 
     try {
+      const locationData = await this.getLocationData();
+      this.ipSuffix = await this.getIpSuffix();
+
       // Check if session exists
       const { data: existingSession } = await supabase
         .from('visitor_sessions')
         .select('*')
         .eq('session_id', this.sessionId)
         .single();
+
+      const systemInfo = this.getSystemInfo();
 
       if (existingSession) {
         // Update existing session
@@ -148,10 +269,28 @@ class Analytics {
           .from('visitor_sessions')
           .insert({
             session_id: this.sessionId,
+            visitor_id: this.visitorId,
             device_type: this.deviceType,
-            country: await this.getCountry()
+            ip_suffix: this.ipSuffix,
+            ...locationData,
+            ...systemInfo,
+            is_bot: this.isBot
           });
       }
+
+      // Update unique visitors table
+      await supabase
+        .from('unique_visitors')
+        .upsert({
+          visitor_id: this.visitorId,
+          last_visit: new Date().toISOString(),
+          ip_suffix: this.ipSuffix,
+          countries: locationData.country ? [locationData.country] : [],
+          cities: locationData.city ? [locationData.city] : [],
+          devices: [this.deviceType]
+        }, {
+          onConflict: 'visitor_id'
+        });
 
       this.isInitialized = true;
     } catch (error) {
@@ -159,46 +298,33 @@ class Analytics {
     }
   }
 
-  private async getCountry(): Promise<string | undefined> {
-    try {
-      // Using a free IP geolocation service with timeout
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 3000);
-      
-      const response = await fetch('https://ipapi.co/json/', {
-        signal: controller.signal
-      });
-      clearTimeout(timeoutId);
-      
-      const data = await response.json();
-      return data.country_name;
-    } catch {
-      return undefined;
-    }
-  }
-
   async trackPageView(path: string, title?: string) {
-    // 🚫 Ne pas tracker si c'est un bot
     if (this.isBot) {
       console.log('Bot detected, skipping analytics tracking');
       return;
     }
 
-    // 🚫 Rate limiting
     if (!this.rateLimitCheck()) {
       console.log('Rate limit exceeded, skipping tracking');
       return;
     }
 
     try {
+      const locationData = await this.getLocationData();
+      const systemInfo = this.getSystemInfo();
+
       const pageViewData: PageViewData = {
         page_path: path,
         page_title: title || document.title,
         referrer: document.referrer || undefined,
         user_agent: navigator.userAgent,
         session_id: this.sessionId,
-        country: await this.getCountry(),
-        device_type: this.deviceType
+        visitor_id: this.visitorId,
+        device_type: this.deviceType,
+        ip_suffix: this.ipSuffix,
+        is_bot: this.isBot,
+        ...locationData,
+        ...systemInfo
       };
 
       await supabase
@@ -210,100 +336,46 @@ class Analytics {
     }
   }
 
-  async getAnalytics(): Promise<AnalyticsData | null> {
+  async getEnhancedAnalytics(): Promise<EnhancedAnalyticsData | null> {
     try {
-      // Get today's date for filtering
-      const today = new Date().toISOString().split('T')[0];
+      const { data, error } = await supabase
+        .rpc('get_enhanced_analytics');
 
-      // Get all page views for today (excluding bots)
-      const { data: pageViews } = await supabase
-        .from('page_views')
-        .select('session_id, page_path, country, device_type, user_agent, created_at')
-        .gte('created_at', today)
-        .not('user_agent', 'ilike', '%bot%')
-        .not('user_agent', 'ilike', '%crawler%')
-        .not('user_agent', 'ilike', '%spider%')
-        .not('user_agent', 'ilike', '%scrape%')
-        .not('user_agent', 'ilike', '%lighthouse%')
-        .not('user_agent', 'ilike', '%pagespeed%');
+      if (error) throw error;
 
-      if (!pageViews || pageViews.length === 0) {
+      if (!data || data.length === 0) {
         return {
           uniqueVisitors: 0,
           totalPageViews: 0,
+          uniqueVisitorsToday: 0,
+          pageViewsToday: 0,
           topPages: [],
           countries: [],
+          cities: [],
           devices: [],
-          recentViews: []
+          browsers: [],
+          recentVisitors: [],
+          visitorFlow: []
         };
       }
 
-      // Calculate unique visitors
-      const uniqueVisitors = new Set(pageViews.map(pv => pv.session_id)).size;
-      const totalPageViews = pageViews.length;
-
-      // Count page views by path (fix duplication)
-      const pathCounts = new Map<string, number>();
-      pageViews.forEach(pv => {
-        const currentCount = pathCounts.get(pv.page_path) || 0;
-        pathCounts.set(pv.page_path, currentCount + 1);
-      });
-
-      // Count by country (fix duplication)
-      const countryCounts = new Map<string, number>();
-      pageViews.forEach(pv => {
-        if (pv.country) {
-          const currentCount = countryCounts.get(pv.country) || 0;
-          countryCounts.set(pv.country, currentCount + 1);
-        }
-      });
-
-      // Count by device (fix duplication)
-      const deviceCounts = new Map<string, number>();
-      pageViews.forEach(pv => {
-        if (pv.device_type) {
-          const currentCount = deviceCounts.get(pv.device_type) || 0;
-          deviceCounts.set(pv.device_type, currentCount + 1);
-        }
-      });
-
-      // Convert Maps to sorted arrays
-      const topPages = Array.from(pathCounts.entries())
-        .map(([path, count]) => ({ path, count }))
-        .sort((a, b) => b.count - a.count)
-        .slice(0, 5);
-
-      const countries = Array.from(countryCounts.entries())
-        .map(([country, count]) => ({ country, count }))
-        .sort((a, b) => b.count - a.count)
-        .slice(0, 5);
-
-      const devices = Array.from(deviceCounts.entries())
-        .map(([device, count]) => ({ device, count }))
-        .sort((a, b) => b.count - a.count);
-
-      // Get recent views (last 10)
-      const recentViews = pageViews
-        .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-        .slice(0, 10)
-        .map(pv => ({
-          page_path: pv.page_path,
-          created_at: pv.created_at,
-          country: pv.country,
-          device_type: pv.device_type
-        }));
-
+      const result = data[0];
       return {
-        uniqueVisitors,
-        totalPageViews,
-        topPages,
-        countries,
-        devices,
-        recentViews
+        uniqueVisitors: result.unique_visitors || 0,
+        totalPageViews: result.total_page_views || 0,
+        uniqueVisitorsToday: result.unique_visitors_today || 0,
+        pageViewsToday: result.page_views_today || 0,
+        topPages: result.top_pages || [],
+        countries: result.countries || [],
+        cities: result.cities || [],
+        devices: result.devices || [],
+        browsers: result.browsers || [],
+        recentVisitors: result.recent_visitors || [],
+        visitorFlow: result.visitor_flow || []
       };
 
     } catch (error) {
-      console.error('Error fetching analytics:', error);
+      console.error('Error fetching enhanced analytics:', error);
       return null;
     }
   }
@@ -318,9 +390,9 @@ export const useAnalytics = () => {
     analytics.trackPageView(path, title);
   };
 
-  const getAnalytics = () => {
-    return analytics.getAnalytics();
+  const getEnhancedAnalytics = () => {
+    return analytics.getEnhancedAnalytics();
   };
 
-  return { trackPageView, getAnalytics };
+  return { trackPageView, getAnalytics: getEnhancedAnalytics };
 };
