@@ -4,6 +4,28 @@ import { Award, Calendar, Target, BookOpen, Brain, Shield, Terminal, Users, Ligh
 export const CPTSJourneyArticleEnglish: React.FC = () => {
   return (
     <div className="space-y-16">
+      {/* CPTS Illustration Image */}
+      <div className="relative mb-12">
+        <div className="relative h-[300px] md:h-[400px] overflow-hidden rounded-lg border border-violet-900/20">
+          <img
+            src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/cptsimage.png"
+            alt="CPTS Journey - Certified Penetration Testing Specialist"
+            className="w-full h-full object-contain bg-[#1a1a1f]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 md:mb-4">
+                My CPTS Journey: 5 Months of Intensive Learning
+              </h2>
+              <p className="text-lg md:text-xl text-gray-200 leading-relaxed">
+                From eJPT to CPTS - A complete transformation in professional pentesting
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* SEO Meta Information - For reference only */}
       <div className="bg-[#2a2a2f] p-4 rounded-lg border border-violet-900/20 mb-8">
         <h3 className="text-sm font-semibold text-violet-400 mb-2">SEO Meta Tags (for reference)</h3>
@@ -134,285 +156,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 4: Five-Month Roadmap & Final Sprint */}
-      <section id="five-month-roadmap--final-sprint" className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <TrendingUp className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">4. Five-Month Roadmap & Final Sprint</h2>
-          </div>
-          
-          <div className="space-y-8">
-            {/* Subsection: Month-by-Month Breakdown */}
-            <div id="month-by-month-breakdown">
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Calendar className="w-6 h-6" />
-                Month-by-Month Breakdown
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-                <p className="text-gray-400 text-sm">
-                  This subsection will provide a detailed month-by-month study plan.
-                </p>
-              </div>
-            </div>
-
-            {/* Subsection: The Final 10 Days */}
-            <div id="the-final-10-days">
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Zap className="w-6 h-6" />
-                The Final 10 Days
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-                <p className="text-gray-400 text-sm">
-                  This subsection will detail the final sprint preparation strategy.
-                </p>
-              </div>
-            </div>
-
-            {/* Subsection: My Sysadmin Rituals */}
-            <div id="my-sysadmin-rituals">
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Coffee className="w-6 h-6" />
-                My Sysadmin Rituals
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-                <p className="text-gray-400 text-sm">
-                  This subsection will cover daily routines and habits that helped maintain productivity.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 5: Tooling, Environment & Note-Taking */}
-      <section id="tooling-environment--note-taking" className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <Terminal className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">5. Tooling, Environment & Note-Taking</h2>
-          </div>
-          
-          <div className="space-y-8">
-            {/* Subsection: Using Obsidian Effectively */}
-            <div id="using-obsidian-effectively">
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <BookOpen className="w-6 h-6" />
-                Using Obsidian Effectively
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-                <p className="text-gray-400 text-sm">
-                  This subsection will detail the Obsidian setup and note-taking methodology.
-                </p>
-              </div>
-            </div>
-
-            {/* Subsection: Using SysReptor Without Losing Your Mind */}
-            <div id="using-sysreptor-without-losing-your-mind">
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <FileText className="w-6 h-6" />
-                Using SysReptor Without Losing Your Mind
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-                <p className="text-gray-400 text-sm">
-                  This subsection will provide tips and tricks for using SysReptor effectively.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 6: Exam Week */}
-      <section id="exam-week" className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <Shield className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">6. Exam Week</h2>
-          </div>
-          
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-            <p className="text-gray-400 text-sm">
-              This section will cover the 10-day exam experience in detail.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 7: The 190-Page Report */}
-      <section id="the-190-page-report" className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <FileText className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">7. The 190-Page Report</h2>
-          </div>
-          
-          <div className="space-y-8">
-            {/* Subsection: Structure and Flow */}
-            <div id="structure-and-flow">
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Code className="w-6 h-6" />
-                Structure and Flow
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-                <p className="text-gray-400 text-sm">
-                  This subsection will detail the report structure and writing methodology.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 8: Biggest Challenges & How I Overcame Them */}
-      <section id="biggest-challenges--how-i-overcame-them" className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <Lock className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">8. Biggest Challenges & How I Overcame Them</h2>
-          </div>
-          
-          <div className="space-y-8">
-            {/* Subsection: Technical Walls I Hit */}
-            <div id="technical-walls-i-hit">
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Cpu className="w-6 h-6" />
-                Technical Walls I Hit
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-                <p className="text-gray-400 text-sm">
-                  This subsection will cover technical challenges encountered during the journey.
-                </p>
-              </div>
-            </div>
-
-            {/* Subsection: Mental Walls I Hit */}
-            <div id="mental-walls-i-hit">
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Brain className="w-6 h-6" />
-                Mental Walls I Hit
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-                <p className="text-gray-400 text-sm">
-                  This subsection will address mental challenges and burnout prevention strategies.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 9: CPTS Tips & Tricks Cheat-Sheet */}
-      <section id="cpts-tips--tricks-cheat-sheet" className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <Lightbulb className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">9. CPTS Tips & Tricks Cheat-Sheet</h2>
-          </div>
-          
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-            <p className="text-gray-400 text-sm">
-              This section will provide a comprehensive cheat-sheet of tips and tricks for CPTS success.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 10: Lessons Learned */}
-      <section id="lessons-learned" className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <CheckCircle2 className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">10. Lessons Learned</h2>
-          </div>
-          
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-            <p className="text-gray-400 text-sm">
-              This section will summarize key lessons learned throughout the CPTS journey.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 11: Post-Exam Reflection & Next Steps */}
-      <section id="post-exam-reflection--next-steps" className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <Network className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">11. Post-Exam Reflection & Next Steps</h2>
-          </div>
-          
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-            <p className="text-gray-400 text-sm">
-              This section will cover post-certification reflections and future learning plans.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 12: Further Study & Acknowledgements */}
-      <section id="further-study--acknowledgements" className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <Database className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">12. Further Study & Acknowledgements</h2>
-          </div>
-          
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-            <p className="text-gray-400 text-sm">
-              This section will include recommendations for further study and acknowledgements.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 13: Useful Resources & Bonus Files */}
-      <section id="useful-resources--bonus-files" className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <FileText className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">13. Useful Resources & Bonus Files</h2>
-          </div>
-          
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-            <p className="text-gray-400 text-sm">
-              This section will provide links to useful resources and bonus materials.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 14: Conclusion & Encouragement */}
-      <section id="conclusion--encouragement" className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <Users className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">14. Conclusion & Encouragement</h2>
-          </div>
-          
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-            <p className="text-gray-400 text-sm">
-              This section will provide final thoughts and encouragement for aspiring CPTS candidates.
-            </p>
           </div>
         </div>
       </section>
