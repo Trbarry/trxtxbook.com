@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   BarChart3, Users, Eye, Globe, TrendingUp, RefreshCw, 
-  Smartphone, Monitor, Tablet, MapPin, Activity
+  Smartphone, Monitor, Tablet, MapPin, Activity, Shield
 } from 'lucide-react';
 import { useAnalytics } from '../lib/analytics';
 
@@ -53,6 +53,15 @@ export const AnalyticsDashboard: React.FC = () => {
       case 'mobile': return <Smartphone className="w-4 h-4" />;
       case 'tablet': return <Tablet className="w-4 h-4" />;
       default: return <Monitor className="w-4 h-4" />;
+    }
+  };
+
+  const getDeviceLabel = (deviceType: string) => {
+    switch (deviceType) {
+      case 'mobile': return 'Mobile';
+      case 'tablet': return 'Tablette';
+      case 'desktop': return 'Ordinateur';
+      default: return deviceType;
     }
   };
 
@@ -207,8 +216,7 @@ export const AnalyticsDashboard: React.FC = () => {
                   <div className="flex items-center gap-2 flex-1">
                     {getDeviceIcon(device.device)}
                     <span className="text-sm text-gray-300">
-                      {device.device === 'mobile' ? 'Mobile' : 
-                       device.device === 'tablet' ? 'Tablette' : 'Ordinateur'}
+                      {getDeviceLabel(device.device)}
                     </span>
                   </div>
                   <span className="text-sm font-medium text-blue-400 ml-2">
@@ -254,8 +262,7 @@ export const AnalyticsDashboard: React.FC = () => {
                     <div className="flex items-center gap-1">
                       {getDeviceIcon(visitor.device_type)}
                       <span className="text-gray-300">
-                        {visitor.device_type === 'mobile' ? 'Mobile' : 
-                         visitor.device_type === 'tablet' ? 'Tablette' : 'PC'}
+                        {getDeviceLabel(visitor.device_type)}
                       </span>
                     </div>
                   )}
@@ -280,6 +287,18 @@ export const AnalyticsDashboard: React.FC = () => {
         ) : (
           <p className="text-gray-400 text-sm">Aucune activité récente</p>
         )}
+      </div>
+
+      {/* Privacy Notice */}
+      <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+        <div className="flex items-center gap-2 mb-2">
+          <Shield className="w-5 h-5 text-blue-400" />
+          <h4 className="font-medium text-blue-400">Confidentialité</h4>
+        </div>
+        <p className="text-blue-300 text-sm">
+          Système d'analytics simple et respectueux de la vie privée. Les données sont automatiquement 
+          supprimées après 30 jours et les bots sont filtrés automatiquement.
+        </p>
       </div>
     </div>
   );

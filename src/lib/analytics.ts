@@ -65,16 +65,13 @@ class SimpleAnalytics {
   }
 
   // Obtenir la géolocalisation
-  private async getLocation(): Promise<{ country?: string; city?: string }> {
+  private async getLocation(): Promise<{ country?: string }> {
     try {
       const response = await fetch('https://ipapi.co/json/', { 
         signal: AbortSignal.timeout(3000) 
       });
       const data = await response.json();
-      return {
-        country: data.country_name,
-        city: data.city
-      };
+      return { country: data.country_name };
     } catch {
       return {};
     }
@@ -91,10 +88,8 @@ class SimpleAnalytics {
         page_path: path,
         visitor_id: this.visitorId,
         country: location.country,
-        city: location.city,
         device_type: this.getDeviceType(),
-        browser: this.getBrowser(),
-        is_bot: false
+        browser: this.getBrowser()
       });
     } catch (error) {
       console.error('Analytics error:', error);
@@ -104,7 +99,7 @@ class SimpleAnalytics {
   // Obtenir les analytics
   async getAnalytics(): Promise<AnalyticsData | null> {
     try {
-      const { data, error } = await supabase.rpc('get_today_analytics');
+      const { data, error } = await supabase.rpc('get_simple_analytics');
       
       if (error) throw error;
       
