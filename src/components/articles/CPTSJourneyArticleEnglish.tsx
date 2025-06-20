@@ -1,29 +1,28 @@
 import React from 'react';
-import { Award, Calendar, Target, BookOpen, Brain, Shield, Terminal, Users, Lightbulb, CheckCircle2, Clock, FileText, Zap, Coffee, Monitor, Network, Lock, Code, ArrowRight, TrendingUp, Cpu, Database, ExternalLink, AlertTriangle } from 'lucide-react';
+import { Award, Calendar, Target, BookOpen, Brain, Shield, Terminal, Users, Lightbulb, CheckCircle2, Clock, FileText, Zap, Monitor, Network, Lock, Code, ArrowRight, TrendingUp, Cpu, Database } from 'lucide-react';
 
 export const CPTSJourneyArticleEnglish: React.FC = () => {
   return (
     <div className="space-y-16">
-      {/* CPTS Illustration Image */}
-      <div className="relative mb-12">
-        <div className="relative h-[300px] md:h-[400px] overflow-hidden rounded-lg border border-violet-900/20">
+      {/* CPTS Hero Section */}
+      <div className="relative mb-16">
+        <div className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-2xl shadow-xl border border-violet-900/30 bg-gradient-to-b from-[#0f0f14] via-[#181821] to-[#1a1a1f] p-6 md:p-10">
           <img
             src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/cptsimage.png"
-            alt="CPTS Journey - Certified Penetration Testing Specialist"
-            className="w-full h-full object-contain bg-[#1a1a1f]"
+            alt="CPTS Journey Artwork"
+            className="w-full h-auto mx-auto object-contain md:max-h-[400px] transition-transform duration-500 hover:scale-[1.03]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 md:mb-4">
-                My CPTS Journey: 5 Months of Intensive Learning
-              </h2>
-              <p className="text-lg md:text-xl text-gray-200 leading-relaxed">
-                From eJPT to CPTS - A complete transformation in professional pentesting
-              </p>
-            </div>
+
+          <div className="text-center mt-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-violet-300 mb-2">
+              My CPTS Journey: 5 Months of Intensive Learning
+            </h2>
+            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              From eJPT to CPTS — A complete transformation in practical pentesting and internal network hacking.
+            </p>
           </div>
         </div>
+      </div>
       </div>
 
       {/* 🟣 H1 - Main Title */}
