@@ -107,7 +107,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           Why CPTS After eJPT?
         </h3>
         <div className="bg-[#2a2a2f] p-6 rounded-lg">
-         <p className="text-gray-300 leading-relaxed">
+         <p>
   I passed the <strong>eJPT</strong> in <strong>February 2025</strong>, right in the middle of the <strong>CPTS learning path</strong>. I had just started digging into the HTB modules when I saw a <strong>promo for the exam</strong>. So I said to myself, “Let’s give it a try — even if I fail, I’ll learn something.” I had already done all the <strong>TryHackMe learning paths</strong>, including the <strong>Junior Penetration Tester track</strong>, so I had some ground to stand on. <br /><br />
 
   I was honestly <strong>stressed</strong>. First cert, first timed exam, and I didn’t think I was ready at all. But it went way better than expected — I finished it in <strong>6 hours out of the 48</strong>. That boosted my confidence a lot. If you’ve done the learning paths on THM, you can definitely take the eJPT. It’s a great cert to <strong>validate your fundamentals</strong> in networking and basic pentesting. <br /><br />
