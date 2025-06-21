@@ -24,12 +24,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Title */}
-      <header className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-violet-400 to-violet-600 bg-clip-text text-transparent mb-6">
-          My Certified Penetration Testing Specialist (CPTS) Experience
-        </h1>
-      </header>
+      
 
       {/* SEO Meta Information - Only visible in development */}
       {process.env.NODE_ENV !== 'production' && (
