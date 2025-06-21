@@ -360,7 +360,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             <p className="font-semibold text-violet-400">🔧 Key tools inside Exegol that helped me crush the CPTS:</p>
             <ul className="list-disc list-inside space-y-2 mt-2">
               <li><strong>Ligolo-ng</strong> – For tunneling and pivoting inside internal networks. Essential for lateral movement.</li>
-              <li><strong>CrackMapExec</strong> – Perfect for credential spraying, SMB enumeration, and assessing exposed shares.</li>
+              <li><strong>NetExec</strong> – Perfect for credential spraying, SMB enumeration, and assessing exposed shares.</li>
               <li><strong>FFuf</strong> – Incredibly useful for quick and precise web fuzzing during enumeration and exploitation.</li>
               <li><strong>Burp Suite</strong> – My go-to for web attacks, CSRF bypass, cookie inspection, and XSS proof of concept.</li>
               <li><strong>BloodyAD</strong> – Helped a ton with AD enumeration, much simpler than setting up BloodHound in most cases.</li>
