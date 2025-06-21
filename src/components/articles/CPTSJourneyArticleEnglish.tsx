@@ -209,7 +209,17 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
                 CPTS Learning Path Structure
               </h3>
               <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+                <p className="text-gray-300 leading-relaxed">
+      I didn’t follow a strict schedule during the CPTS path — I just aimed to work around <strong>6 to 7 hours a day</strong>, <strong>five days a week</strong>, always taking short breaks every couple of hours to stay focused. I knew from experience that <strong>rest matters just as much as active study</strong> — especially in cybersecurity, where understanding is more important than memorization.<br /><br />
+
+      My routine was pretty straightforward: <strong>start a module</strong>, <strong>finish it completely</strong>, and take <strong>structured notes</strong> as I went. Then, whenever possible, I would <strong>chain it with one or two related HTB boxes</strong>. This practical follow-up was crucial for me — the hands-on challenges helped <strong>anchor what I had just learned</strong>.<br /><br />
+
+      Each morning, I’d <strong>review the previous day’s notes</strong>, to keep everything fresh and reinforce long-term memory. It wasn’t always easy to stay on track — motivation goes up and down — but I kept telling myself that <strong>discipline had to win over comfort</strong>. Over time, it paid off. The progress wasn’t always visible day by day, but looking back, it added up fast.<br /><br />
+
+      Outside of studying, I made sure to <strong>take care of my mental and physical health</strong>. I trained <strong>four times a week</strong>, around <strong>2 to 3 hours per session</strong>, and went on <strong>regular walks with my family and my dog</strong>. Staying active and clearing my head helped me avoid burnout and come back sharper the next day. Honestly, <strong>moving your body is just as important as moving your brain</strong>.<br /><br />
+
+      And let’s be real — <strong>a good Spotify playlist</strong> makes the grind a lot more enjoyable. When I was in the zone, music helped me stay focused and turn long hours into productive ones.
+    </p>
               </div>
             </div>
 
