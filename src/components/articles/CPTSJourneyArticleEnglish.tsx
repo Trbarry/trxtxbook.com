@@ -344,36 +344,48 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
             <p>
-            Let’s get this out of the way: <strong>Kali? Forget it. Exegol wins.</strong><br />
-            As a <strong>French pentester</strong> in training, I loved that <strong>Exegol is also French-made 🇫🇷</strong> — but that’s just a bonus.
+            First of all, let me say it loud and clear: <strong>Exegol is French. COCORICO 🇫🇷</strong><br />
+            And Kali? You’re <em>mauvais</em>, like Jack in OSS 117. 🕶️ That’s right — I said it.
           </p>
           <p>
-            What really matters? <strong>It works. Always.</strong><br />
-            Exegol is a fully preconfigured offensive toolbox that runs in Docker. It launches instantly, doesn’t crash, and includes all the key tools you’ll need for the CPTS exam — ready to go. I used it throughout the entire learning path and exam, and I have zero regrets switching from Kali.
+            All jokes aside, switching from Kali to Exegol was one of the best choices I made in my CPTS prep. 
+            <strong>Exegol is a container-based offensive security environment</strong> built on top of Docker, with everything you need already installed, configured, and tested. It’s stable, lightweight, and super fast to deploy. You want a fresh environment in 2 seconds? Boom — done.
+          </p>
+          <p>
+            I used Exegol as my <strong>main offensive toolkit</strong> throughout the entire learning path and exam. It never failed me, and I’ll never go back to Kali or Parrot again. My setup was simple but powerful: 
+            <strong>Arch Linux + Exegol</strong>. That combo gave me performance, control, and consistency.
           </p>
 
-          <ul className="list-disc list-inside space-y-2">
-            <li><strong>Nmap</strong>: for fast and reliable host/service enumeration.</li>
-            <li><strong>FFuf</strong>: to discover hidden files and web routes, especially for web exploitation modules.</li>
-            <li><strong>Burp Suite</strong>: my go-to for CSRF, XSS, and cookie testing.</li>
-            <li><strong>CrackMapExec</strong>: for credential spraying and SMB enumeration — even if not officially required, super useful.</li>
-            <li><strong>Ligolo-ng</strong>: absolutely key for internal network pivoting.</li>
-            <li><strong>BloodyAD</strong>: made Active Directory enumeration much easier without needing BloodHound.</li>
-            <li><strong>Impacket tools</strong>: for dumping hashes and remote command execution.</li>
-            <li><strong>smbserver.py</strong>: super handy for quick payload delivery or loot exfiltration.</li>
-          </ul>
-
-          <p>
-            <strong>Why Exegol made my life easier:</strong>
+          <div>
+            <p className="font-semibold text-violet-400">🔧 Key tools inside Exegol that helped me crush the CPTS:</p>
             <ul className="list-disc list-inside space-y-2 mt-2">
-              <li>Everything was pre-installed and pre-configured — no wasting time.</li>
-              <li>Environment resets were instant thanks to Docker.</li>
-              <li>Clean layout, reliable tools, no distractions — just pure productivity.</li>
+              <li><strong>Ligolo-ng</strong> – For tunneling and pivoting inside internal networks. Essential for lateral movement.</li>
+              <li><strong>CrackMapExec</strong> – Perfect for credential spraying, SMB enumeration, and assessing exposed shares.</li>
+              <li><strong>FFuf</strong> – Incredibly useful for quick and precise web fuzzing during enumeration and exploitation.</li>
+              <li><strong>Burp Suite</strong> – My go-to for web attacks, CSRF bypass, cookie inspection, and XSS proof of concept.</li>
+              <li><strong>BloodyAD</strong> – Helped a ton with AD enumeration, much simpler than setting up BloodHound in most cases.</li>
+              <li><strong>Impacket Tools</strong> – Tools like `secretsdump.py`, `smbexec.py`, and `wmiexec.py` are absolute must-haves for Windows exploitation.</li>
+              <li><strong>smbserver.py</strong> – Quick and easy way to serve payloads or retrieve loot during the exam.</li>
+              <li><strong>Nmap</strong> – Of course. Fast, reliable, and all the scripts are ready to go out of the box.</li>
             </ul>
-          </p>
+          </div>
 
           <p>
-            Exegol genuinely helped me <strong>learn faster and execute better</strong>. Between the tooling, the stability, and the clean setup, it gave me a serious edge — both during prep and the exam itself.
+            What makes Exegol truly shine is how much <strong>time and headaches it saves</strong>. You don’t need to install or troubleshoot anything. Everything is preconfigured, organized, and designed for offensive ops. When you're deep into a 10-day exam grind, <strong>that matters more than anything</strong>.
+          </p>
+
+          <div>
+            <p className="font-semibold text-violet-400">✨ Why I’ll never go back:</p>
+            <ul className="list-disc list-inside space-y-2 mt-2">
+              <li>Launches in seconds with Docker, without polluting your host system.</li>
+              <li>Zero crash, zero weird package issues — unlike Kali after every `apt upgrade`.</li>
+              <li>Perfect structure for notetaking, screenshots, payload hosting, and log retention.</li>
+              <li>Felt like I was using a professional toolkit, not a hobbyist’s distro.</li>
+            </ul>
+          </div>
+
+          <p>
+            And did I mention again? <strong>It’s French 🇫🇷</strong>. And it rocks. I’ll soon publish a dedicated article on how I used Exegol during my CPTS journey — stay tuned if you're curious about making the switch!
           </p>
           </div>
         </div>
