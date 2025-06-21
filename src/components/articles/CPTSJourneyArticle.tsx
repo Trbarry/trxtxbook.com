@@ -9,13 +9,14 @@ export const CPTSJourneyArticle: React.FC = () => {
 
   const languages = {
     en: {
-      label: 'English',
-      flag: '🇺🇸',
-      title: 'From eJPT to CPTS: My Journey into Professional Pentesting',
-      subtitle: 'A comprehensive 5-month journey to CPTS certification - Complete experience report from junior to professional pentester',
-      finalMessage: 'From junior pentester to CPTS certified professional - this journey has been transformative. The road was challenging, but every hour invested was worth it for the skills and confidence gained.',
-      journeyComplete: 'Journey Complete'
-    },
+  label: 'English',
+  flag: '🇺🇸',
+  title: 'CPTS: From eJPT to Real-World Pentesting Skills',
+  subtitle: 'A focused 5-month journey to CPTS certification – From eJPT foundations to hands-on internal network hacking',
+  finalMessage: 'From junior pentester to confident CPTS-certified hacker – this journey was intense, but every hour brought real progress. I’m not at the finish line, but I’ve built a strong base for professional growth.',
+  journeyComplete: 'Major Milestone Reached'
+},
+
     fr: {
       label: 'Français',
       flag: '🇫🇷',
