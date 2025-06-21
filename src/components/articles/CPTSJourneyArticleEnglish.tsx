@@ -292,314 +292,286 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </section>
 
-      {/* Five-Month Roadmap & Final Sprint */}
-      <section className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <TrendingUp className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">Five-Month Roadmap & Final Sprint</h2>
-          </div>
-          
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Calendar className="w-6 h-6" />
-                Time Allocation Month by Month
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Zap className="w-6 h-6" />
-                Final 10-Day Sprint
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
+      {/* Final Preparation & Exam Sprint */}
+  <section className="mb-16">
+    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+      <div className="flex items-center gap-3 mb-8">
+        <TrendingUp className="w-8 h-8 text-violet-400" />
+        <h2 className="text-3xl font-bold">Final Preparation & Exam Sprint</h2>
+      </div>
+      <div className="space-y-8">
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Zap className="w-6 h-6" />
+            Final 10-Day Sprint
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      {/* Tooling, Environment & Note-Taking */}
-      <section className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <Terminal className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">Tooling, Environment & Note-Taking</h2>
-          </div>
-          
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Shield className="w-6 h-6" />
-                Exegol: My Offensive Environment
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <FileText className="w-6 h-6" />
-                SysReptor & Obsidian for Notes & Reporting
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
+  {/* Tooling, Environment & Note-Taking */}
+  <section className="mb-16">
+    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+      <div className="flex items-center gap-3 mb-8">
+        <Terminal className="w-8 h-8 text-violet-400" />
+        <h2 className="text-3xl font-bold">Tooling, Environment & Note-Taking</h2>
+      </div>
+      <div className="space-y-8">
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Shield className="w-6 h-6" />
+            Exegol: My Offensive Environment
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
           </div>
         </div>
-      </section>
-
-      {/* Exam Week */}
-      <section className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <Clock className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">Exam Week</h2>
-          </div>
-          
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Target className="w-6 h-6" />
-                Exam Format & Scope
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Calendar className="w-6 h-6" />
-                Daily Breakdown
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <FileText className="w-6 h-6" />
+            SysReptor & Obsidian for Notes & Reporting
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      {/* The 190-Page Report */}
-      <section className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <FileText className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">The 190-Page Report</h2>
-          </div>
-          
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Clock className="w-6 h-6" />
-                Real-Time Reporting Strategy
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Code className="w-6 h-6" />
-                Walkthroughs vs. Findings
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Lightbulb className="w-6 h-6" />
-                What I Included & Why
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
+  {/* Exam Week */}
+  <section className="mb-16">
+    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+      <div className="flex items-center gap-3 mb-8">
+        <Clock className="w-8 h-8 text-violet-400" />
+        <h2 className="text-3xl font-bold">Exam Week</h2>
+      </div>
+      <div className="space-y-8">
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Target className="w-6 h-6" />
+            Exam Format & Scope
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
           </div>
         </div>
-      </section>
-
-      {/* Biggest Challenges & How I Overcame Them */}
-      <section className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <Lock className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">Biggest Challenges & How I Overcame Them</h2>
-          </div>
-          
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Network className="w-6 h-6" />
-                Internal Network Pivoting
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Code className="w-6 h-6" />
-                Web Exploitation Stumbling Blocks
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Calendar className="w-6 h-6" />
+            Daily Breakdown
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      {/* Tips & Tricks Cheat-Sheet */}
-      <section className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <Lightbulb className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">Tips & Tricks Cheat-Sheet</h2>
-          </div>
-          
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Target className="w-6 h-6" />
-                Enumeration First, Always
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Shield className="w-6 h-6" />
-                Watch for Rabbit Holes
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Clock className="w-6 h-6" />
-                Time & Mental Energy Management
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
+  {/* The 190-Page Report */}
+  <section className="mb-16">
+    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+      <div className="flex items-center gap-3 mb-8">
+        <FileText className="w-8 h-8 text-violet-400" />
+        <h2 className="text-3xl font-bold">The 190-Page Report</h2>
+      </div>
+      <div className="space-y-8">
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Clock className="w-6 h-6" />
+            Real-Time Reporting Strategy
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
           </div>
         </div>
-      </section>
-
-      {/* Post-Exam Reflection & Next Steps */}
-      <section className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <CheckCircle2 className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">Post-Exam Reflection & Next Steps</h2>
-          </div>
-          
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Shield className="w-6 h-6" />
-                Comparing CPTS to OSCP
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <TrendingUp className="w-6 h-6" />
-                My Plan for OSCP, BSCP & Beyond
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Code className="w-6 h-6" />
+            Walkthroughs vs. Findings
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
           </div>
         </div>
-      </section>
-
-      {/* Further Study & Acknowledgements */}
-      <section className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <Database className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">Further Study & Acknowledgements</h2>
-          </div>
-          
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <BookOpen className="w-6 h-6" />
-                Books, Labs, Communities
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Users className="w-6 h-6" />
-                People That Helped Me Grow
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Lightbulb className="w-6 h-6" />
+            What I Included & Why
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      {/* Conclusion & Encouragement */}
-      <section className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <Users className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">Conclusion & Encouragement</h2>
-          </div>
-          
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Award className="w-6 h-6" />
-                You Can Do It Too
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
+  {/* Biggest Challenges & How I Overcame Them */}
+  <section className="mb-16">
+    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+      <div className="flex items-center gap-3 mb-8">
+        <Lock className="w-8 h-8 text-violet-400" />
+        <h2 className="text-3xl font-bold">Biggest Challenges & How I Overcame Them</h2>
+      </div>
+      <div className="space-y-8">
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Network className="w-6 h-6" />
+            Internal Network Pivoting
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
           </div>
         </div>
-      </section>
-
-      {/* Final conclusion */}
-      <div className="bg-gradient-to-r from-violet-500/10 to-violet-600/10 border border-violet-500/20 rounded-lg p-8 text-center">
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <Award className="w-8 h-8 text-violet-400" />
-          <h2 className="text-2xl font-bold text-violet-400">Journey Complete</h2>
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Code className="w-6 h-6" />
+            Web Exploitation Stumbling Blocks
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+          </div>
         </div>
-        <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-          From junior pentester to CPTS certified professional - this journey has been transformative. 
-          The road was challenging, but every hour invested was worth it for the skills and confidence gained.
-        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* Tips & Tricks Cheat-Sheet */}
+  <section className="mb-16">
+    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+      <div className="flex items-center gap-3 mb-8">
+        <Lightbulb className="w-8 h-8 text-violet-400" />
+        <h2 className="text-3xl font-bold">Tips & Tricks Cheat-Sheet</h2>
+      </div>
+      <div className="space-y-8">
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Target className="w-6 h-6" />
+            Enumeration First, Always
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+          </div>
+        </div>
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Shield className="w-6 h-6" />
+            Watch for Rabbit Holes
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+          </div>
+        </div>
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Clock className="w-6 h-6" />
+            Time & Mental Energy Management
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Post-Exam Reflection & Next Steps */}
+  <section className="mb-16">
+    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+      <div className="flex items-center gap-3 mb-8">
+        <CheckCircle2 className="w-8 h-8 text-violet-400" />
+        <h2 className="text-3xl font-bold">Post-Exam Reflection & Next Steps</h2>
+      </div>
+      <div className="space-y-8">
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Shield className="w-6 h-6" />
+            Comparing CPTS to OSCP
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+          </div>
+        </div>
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <TrendingUp className="w-6 h-6" />
+            My Plan for OSCP, BSCP & Beyond
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Further Study & Acknowledgements */}
+  <section className="mb-16">
+    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+      <div className="flex items-center gap-3 mb-8">
+        <Database className="w-8 h-8 text-violet-400" />
+        <h2 className="text-3xl font-bold">Further Study & Acknowledgements</h2>
+      </div>
+      <div className="space-y-8">
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <BookOpen className="w-6 h-6" />
+            Books, Labs, Communities
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+          </div>
+        </div>
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Users className="w-6 h-6" />
+            People That Helped Me Grow
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Conclusion & Encouragement */}
+  <section className="mb-16">
+    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+      <div className="flex items-center gap-3 mb-8">
+        <Users className="w-8 h-8 text-violet-400" />
+        <h2 className="text-3xl font-bold">Conclusion & Encouragement</h2>
+      </div>
+      <div className="space-y-8">
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Award className="w-6 h-6" />
+            You Can Do It Too
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Final conclusion */}
+  <div className="bg-gradient-to-r from-violet-500/10 to-violet-600/10 border border-violet-500/20 rounded-lg p-8 text-center">
+    <div className="flex items-center justify-center gap-3 mb-4">
+      <Award className="w-8 h-8 text-violet-400" />
+      <h2 className="text-2xl font-bold text-violet-400">Journey Complete</h2>
+    </div>
+    <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
+      From junior pentester to CPTS certified professional - this journey has been transformative. 
+      The road was challenging, but every hour invested was worth it for the skills and confidence gained.
+    </p>
       </div>
     </div>
   );
