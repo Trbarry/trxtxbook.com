@@ -24,7 +24,7 @@ import { CertificationsList } from './pages/CertificationsList';
 import { ProfileModal } from './components/ProfileModal';
 import { ScrollMenu } from './components/ScrollMenu';
 import { ScrollReveal } from './components/ScrollReveal';
-import { CyberCharacter } from './components/CyberCharacter';
+//import { CyberCharacter } from './components/CyberCharacter';
 import { MouseTrail } from './components/MouseTrail';
 import { AnalyticsTracker } from './components/AnalyticsTracker';
 
