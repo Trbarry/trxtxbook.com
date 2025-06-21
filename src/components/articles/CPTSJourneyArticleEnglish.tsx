@@ -343,7 +343,38 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             Exegol: My Offensive Environment
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+            <p>
+            Let’s get this out of the way: <strong>Kali? Forget it. Exegol wins.</strong><br />
+            As a <strong>French pentester</strong> in training, I loved that <strong>Exegol is also French-made 🇫🇷</strong> — but that’s just a bonus.
+          </p>
+          <p>
+            What really matters? <strong>It works. Always.</strong><br />
+            Exegol is a fully preconfigured offensive toolbox that runs in Docker. It launches instantly, doesn’t crash, and includes all the key tools you’ll need for the CPTS exam — ready to go. I used it throughout the entire learning path and exam, and I have zero regrets switching from Kali.
+          </p>
+
+          <ul className="list-disc list-inside space-y-2">
+            <li><strong>Nmap</strong>: for fast and reliable host/service enumeration.</li>
+            <li><strong>FFuf</strong>: to discover hidden files and web routes, especially for web exploitation modules.</li>
+            <li><strong>Burp Suite</strong>: my go-to for CSRF, XSS, and cookie testing.</li>
+            <li><strong>CrackMapExec</strong>: for credential spraying and SMB enumeration — even if not officially required, super useful.</li>
+            <li><strong>Ligolo-ng</strong>: absolutely key for internal network pivoting.</li>
+            <li><strong>BloodyAD</strong>: made Active Directory enumeration much easier without needing BloodHound.</li>
+            <li><strong>Impacket tools</strong>: for dumping hashes and remote command execution.</li>
+            <li><strong>smbserver.py</strong>: super handy for quick payload delivery or loot exfiltration.</li>
+          </ul>
+
+          <p>
+            <strong>Why Exegol made my life easier:</strong>
+            <ul className="list-disc list-inside space-y-2 mt-2">
+              <li>Everything was pre-installed and pre-configured — no wasting time.</li>
+              <li>Environment resets were instant thanks to Docker.</li>
+              <li>Clean layout, reliable tools, no distractions — just pure productivity.</li>
+            </ul>
+          </p>
+
+          <p>
+            Exegol genuinely helped me <strong>learn faster and execute better</strong>. Between the tooling, the stability, and the clean setup, it gave me a serious edge — both during prep and the exam itself.
+          </p>
           </div>
         </div>
         <div>
