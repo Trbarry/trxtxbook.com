@@ -84,7 +84,14 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           About Me
         </h3>
         <div className="bg-[#2a2a2f] p-6 rounded-lg">
-          <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+          <p className="text-gray-300 leading-relaxed">
+  I'm currently transitioning into cybersecurity through a professional retraining path. In September, I’ll begin a formal work-study program focused on IT and networking, but my journey started long before that. I used to work as a field technician in fiber optics — pulling cables, climbing ladders, doing repetitive installations. Over time, I began to feel a deep disconnect: I wasn’t learning, I wasn’t evolving, and I didn’t see long-term meaning in what I was doing. That realization was the turning point. <br /><br />
+  I made the choice to pivot into a field that truly resonates with me: cybersecurity. And from that moment on, I’ve been going all-in. For the past nine months, I’ve trained rigorously on my own — studying 6 to 7 hours a day, nearly every day. I completed all the learning paths on TryHackMe, passed the eJPT certification, and most recently earned the CPTS from Hack The Box. This wasn’t just about collecting badges. It was about building real, practical skills and proving to myself that I could reach a professional standard through hard work and dedication. <br /><br />
+  I consider myself a “tryharder” — when something ignites my passion, I give it 300%. I’m obsessive about documenting everything I learn, not just to track progress, but because writing it down helps me understand it deeply. My workflow revolves around a custom Exegol offensive environment, with Obsidian for knowledge management and SysReptor for real-time reporting. I believe learning should be active, structured, and brutally honest. I don’t skip steps. I don’t cut corners. <br /><br />
+  This article isn’t just about showcasing a personal success. I’m writing it to give back — plain and simple. When I was preparing for the CPTS, one of the most valuable resources I came across was the blog and methodology shared by Bruno Rocha Moura. His insights helped me structure my preparation, stay focused, and understand what truly mattered. In the same spirit, I hope this write-up can help someone else: whether you're hesitating to take the exam, wondering how to prepare, or simply looking for a roadmap from someone who's walked the path. <br /><br />
+  Sharing knowledge is at the core of this field. We all stand on the shoulders of others — from write-ups, Discord chats, community forums, and blog posts — and I believe we have a duty to contribute in return. If this article helps even one person find clarity, confidence, or direction, then it has served its purpose.
+</p>
+
         </div>
       </div>
 
