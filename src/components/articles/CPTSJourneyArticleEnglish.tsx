@@ -230,25 +230,25 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
               </h3>
               <div className="bg-[#2a2a2f] p-6 rounded-lg">
                 <p>
-        Pendant le <strong>CPTS learning path</strong>, j’ai pris l’habitude de faire <strong>1 à 2 box Hack The Box associées à chaque module</strong>. Par exemple, après avoir terminé un module comme <em>Web Exploitation</em>, j’allais chercher une box web orientée XSS, CSRF ou file upload dans la section "retired" ou "easy-medium". Ça me permettait d’ancrer les connaissances tout de suite en condition réelle, en utilisant exactement ce que je venais d’apprendre.
+        During the <strong>CPTS learning path</strong>, I made it a habit to complete <strong>1–2 HTB boxes per module</strong>, directly related to the topic I had just studied. For example, after finishing the <em>Web Exploitation</em> module, I’d go try an XSS or file upload challenge in the retired or easy/medium category. This helped me anchor new concepts right away by putting them into practice.
       </p>
 
       <p>
-        Une fois le path terminé, j’ai enchaîné avec des <strong>boxes “live”</strong> de HTB. Pas forcément liées aux modules, mais pour le plaisir du challenge et l’envie de progresser. C’est là que j’ai franchi un palier. Ces boxes m'ont permis de travailler des compétences plus transverses comme :
+        Once I completed the path, I moved on to doing <strong>live boxes on Hack The Box</strong>. These weren’t always tied to specific modules — I did them for fun and for the challenge. But they turned out to be incredibly valuable. These boxes helped me work on:
       </p>
 
       <ul className="list-disc list-inside space-y-1 ml-4">
-        <li>le <strong>pivoting interne</strong> (merci Ligolo-ng),</li>
-        <li>la <strong>réflexion post-exploitation</strong> (où aller après avoir une shell ?),</li>
-        <li>la <strong>gestion de l'antivirus</strong>, des EDR, etc.</li>
+        <li><strong>Internal pivoting</strong> (shoutout to Ligolo-ng),</li>
+        <li><strong>Post-exploitation logic</strong> and lateral movement,</li>
+        <li><strong>Handling AV and EDR</strong> obstacles in a realistic environment.</li>
       </ul>
 
       <p>
-        Je suis monté jusqu’au <strong>rang Pro Hacker</strong>, mais soyons honnête : certaines "hard" m’ont mis une claque, et j’ai eu besoin d’un coup de pouce pour finir. Ce n’est pas grave, l’important c’est ce qu’on apprend.
+        I eventually reached the <strong>Pro Hacker rank</strong> — not without struggle. Some hard boxes kicked my ass, and yes, I needed help sometimes. That’s okay. What matters is what you learn from the process.
       </p>
 
       <p>
-        Ensuite, j’ai suivi la <strong>playlist non-officielle d’IppSec</strong> :
+        Then I tackled the <strong>unofficial IppSec CPTS prep playlist</strong>:
         <br />
         <a href="https://www.youtube.com/watch?v=H9FcE_FMZio&list=PLidcsTyj9JXItWpbRtTg6aDEj10_F17x5" target="_blank" className="text-violet-400 hover:underline">
           HTB CPTS Prep Boxes – IppSec YouTube
@@ -256,35 +256,35 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
       </p>
 
       <p>
-        Franchement ? Ces boxes sont <strong>parfaitement sélectionnées</strong>. Maintenant que j’ai passé l’examen, je peux le dire : certaines d’entre elles contiennent <strong>des vulnérabilités presque identiques</strong> à celles de la CPTS. Mais surtout, elles forcent à :
+        And let me tell you — these boxes are <strong>brilliantly curated</strong>. Now that I’ve passed the exam, I can confirm: some of them contain <strong>vulnerabilities nearly identical</strong> to the ones found in the CPTS. More importantly, they force you to:
       </p>
 
       <ul className="list-disc list-inside space-y-1 ml-4">
-        <li><strong>enchaîner plusieurs étapes</strong> sans guidage,</li>
-        <li><strong>structurer ta progression</strong> comme pendant l’examen,</li>
-        <li><strong>gérer ton temps</strong>, tes pivots, et tes post-exploit.</li>
+        <li><strong>Chain multiple steps</strong> without guidance,</li>
+        <li><strong>Structure your workflow</strong> like in a real pentest,</li>
+        <li><strong>Manage pivots and post-exploitation scenarios</strong> on your own.</li>
       </ul>
 
       <p>
-        Ça a renforcé ma <strong>confiance</strong>. Après avoir fait cette playlist, je me suis dit : <em>"OK, je suis prêt pour les 10 jours."</em>
+        These boxes really <strong>boosted my confidence</strong>. After finishing the playlist, I said to myself: <em>"Okay, now I’m really ready for the 10-day exam."</em>
       </p>
 
       <p>
-        💬 Je sais que certains conseillent aussi les <strong>ProLabs</strong>, voire les boxes <strong>Insane</strong>, mais personnellement, je n’en ai <strong>pas ressenti le besoin</strong>. Je pense que si on fait :
+        💬 I know some people also use <strong>ProLabs</strong> or even tackle <strong>hard/insane boxes</strong> to prep, but personally, I didn’t feel the need. In my opinion, if you:
       </p>
 
       <ul className="list-disc list-inside space-y-1 ml-4">
-        <li>le path CPTS <strong>sérieusement</strong>,</li>
-        <li>les boxes par module <strong>de façon ciblée</strong>,</li>
-        <li>la playlist IppSec <strong>dans le bon timing</strong>,</li>
+        <li>complete the CPTS path <strong>seriously</strong>,</li>
+        <li>pair modules with relevant boxes <strong>consistently</strong>,</li>
+        <li>follow the IppSec playlist <strong>at the right time</strong>,</li>
       </ul>
 
       <p>
-        …alors <strong>c’est suffisant</strong>. Pas besoin de s’éparpiller. Le path CPTS contient <strong>tout ce qu’il faut</strong> pour réussir l’examen.
+        …then you already have <strong>everything you need</strong>. No need to overdo it. The CPTS learning path alone is already <strong>rich and complete</strong>.
       </p>
 
       <p>
-        <strong>🕐 Mon conseil</strong> : N’attendez pas trop longtemps après avoir fini le learning path pour vous lancer dans les boxes d’IppSec. Sinon, vous risquez d’oublier des détails. Mais ne commencez pas non plus trop tôt : mieux vaut avoir déjà bien assimilé les modules avant d’y aller à fond.
+        <strong>🕐 Personal advice</strong>: Don’t wait too long after finishing the learning path to start the IppSec boxes — you might forget key details. But don’t start them too early either. Make sure you’ve built a strong foundation from the modules before jumping in. <strong>Trust the process</strong>.
       </p>
               </div>
             </div>
