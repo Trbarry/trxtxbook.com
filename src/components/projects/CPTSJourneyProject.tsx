@@ -8,13 +8,13 @@ export const CPTSJourneyProject: Project = {
 
 Après avoir validé l'eJPT, j'avais soif d'aller plus loin, de structurer mes connaissances, et surtout de consolider ma pratique sur des bases solides. La CPTS s'est imposée comme une évidence : une formation 100% pratique, abordable, avec un contenu dense, exigeant, mais passionnant.
 
-C’est en lisant [cet article de Bruno Rocha Moura](https://www.brunorochamoura.com/posts/cpts-tips/) que j’ai décidé de documenter à mon tour mon expérience de manière approfondie, dans l’espoir d’apporter une valeur similaire à celles et ceux qui envisagent la certification.
+C'est en lisant [cet article de Bruno Rocha Moura](https://www.brunorochamoura.com/posts/cpts-tips/) que j'ai décidé de documenter à mon tour mon expérience de manière approfondie, dans l'espoir d'apporter une valeur similaire à celles et ceux qui envisagent la certification.
 
-Dans cet article, je partage tout ce que j'aurais aimé savoir avant de commencer : ma méthode de travail, les outils que j'ai adoptés (Exegol, Obsidian, Sysreptor), les erreurs que j’ai faites, et les ajustements qui m’ont permis de tenir sur la durée. J’y détaille également le déroulé de l’examen sur 10 jours et la rédaction de mon rapport final (~190 pages), sans filtre.
+Dans cet article, je partage tout ce que j'aurais aimé savoir avant de commencer : ma méthode de travail, les outils que j'ai adoptés (Exegol, Obsidian, Sysreptor), les erreurs que j'ai faites, et les ajustements qui m'ont permis de tenir sur la durée. J'y détaille également le déroulé de l'examen sur 10 jours et la rédaction de mon rapport final (~190 pages), sans filtre.
 
-Ce projet m’a fait grandir techniquement, m’a permis de repousser mes limites mentales, et m’a aidé à acquérir une rigueur que je n'avais pas auparavant. Ce n'est pas une fin, mais une étape majeure dans mon apprentissage en cybersécurité.`,
+Ce projet m'a fait grandir techniquement, m'a permis de repousser mes limites mentales, et m'a aidé à acquérir une rigueur que je n'avais pas auparavant. Ce n'est pas une fin, mais une étape majeure dans mon apprentissage en cybersécurité.`,
   tags: ["CPTS", "Pentesting", "Certification", "HTB Academy", "Cybersécurité", "Professional Development"],
-  image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=2000&q=80",
+  image: "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/bandeaucpts.png",
   features: [
     "Parcours détaillé de 5 mois de montée en compétences",
     "Méthodologie d'étude structurée avec planning réaliste",
