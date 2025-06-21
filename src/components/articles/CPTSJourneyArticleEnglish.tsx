@@ -574,4 +574,5 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
     </p>
   </div>
 </div>
-    }
+  );
+};
