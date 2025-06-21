@@ -68,26 +68,41 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
       </div>
 
       {/* Introduction & Hook */}
-      <section className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <Target className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">Introduction & Hook</h2>
-          </div>
-          
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Cpu className="w-6 h-6" />
-                Tackling the 28 CPTS MODULES
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
-          </div>
+<section className="mb-16">
+  <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+    <div className="flex items-center gap-3 mb-8">
+      <Target className="w-8 h-8 text-violet-400" />
+      <h2 className="text-3xl font-bold">Introduction & Hook</h2>
+    </div>
+
+    <div className="space-y-8">
+
+      {/* About Me section */}
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <Users className="w-6 h-6" />
+          About Me
+        </h3>
+        <div className="bg-[#2a2a2f] p-6 rounded-lg">
+          <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
         </div>
-      </section>
+      </div>
+
+      {/* CPTS Modules section */}
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <Cpu className="w-6 h-6" />
+          Tackling the 28 CPTS MODULES
+        </h3>
+        <div className="bg-[#2a2a2f] p-6 rounded-lg">
+          <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
       {/* Background: From eJPT to CPTS */}
       <section className="mb-16">
