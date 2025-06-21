@@ -8,12 +8,13 @@ import { ADProject } from './projects/ADProject';
 import { SteamDeckProject } from './projects/SteamDeckProject';
 import { ExegolProject } from './projects/ExegolProject';
 import { LinuxMintProject } from './projects/LinuxMintProject';
+import { CPTSJourneyProject } from './projects/CPTSJourneyProject';
 
 export const Projects: React.FC = () => {
   const navigate = useNavigate();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const projects: Project[] = [LinuxMintProject, ExegolProject, ADProject, SMBProject, SteamDeckProject];
+  const projects: Project[] = [CPTSJourneyProject, LinuxMintProject, ExegolProject, ADProject, SMBProject, SteamDeckProject];
 
   const handleProjectClick = (project: Project) => {
     if (project.articleUrl) {
