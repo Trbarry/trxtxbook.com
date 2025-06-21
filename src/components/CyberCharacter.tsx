@@ -2,6 +2,23 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Bot, MessageSquare, Terminal, Bug, History, Shield, Skull, Lock } from 'lucide-react';
 import { Howl } from 'howler';
 
+
+
+export const CyberCharacter: React.FC = () => {
+  if (import.meta.env.VITE_ENABLE_CYBER_BOT !== 'true') return null;
+
+  return (
+    <motion.div
+      className="fixed bottom-5 left-5 md:left-10 z-[5000] w-[128px] md:w-[156px]"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <img src="/chatbot.webp" alt="CyberCharacter" draggable={false} />
+    </motion.div>
+  );
+};
+
 interface Message {
   text: string;
   type: 'history' | 'security' | 'hack' | 'password' | 'cybercrime' | 'tech' | 'welcome';
