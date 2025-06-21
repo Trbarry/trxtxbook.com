@@ -297,12 +297,19 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-8">
             <TrendingUp className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">Final Preparation & Exam Sprint</h2>
+            <h2 className="text-3xl font-bold">Five-Month Roadmap & Final Sprint</h2>
           </div>
           
           <div className="space-y-8">
             <div>
-              
+              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+                <Calendar className="w-6 h-6" />
+                Time Allocation Month by Month
+              </h3>
+              <div className="bg-[#2a2a2f] p-6 rounded-lg">
+                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+              </div>
+            </div>
 
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
@@ -591,7 +598,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
         <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
           From junior pentester to CPTS certified professional - this journey has been transformative. 
-          The road was challenging, but every hour invested was worth it for the skills and confiddence gained.
+          The road was challenging, but every hour invested was worth it for the skills and confidence gained.
         </p>
       </div>
     </div>
