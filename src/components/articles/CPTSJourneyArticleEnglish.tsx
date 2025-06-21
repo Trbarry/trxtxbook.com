@@ -108,7 +108,20 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           Why CPTS After eJPT?
         </h3>
         <div className="bg-[#2a2a2f] p-6 rounded-lg">
-          <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+          <p className="text-gray-300 leading-relaxed">
+  I'm French and I passed the eJPT in February 2025, right in the middle of the CPTS learning path. I had just started digging into the HTB modules when I saw a promo for the exam. So I said to myself, “Let’s give it a try — even if I fail, I’ll learn something.” I had already done all the TryHackMe learning paths, including the Junior Penetration Tester track, so I had some ground to stand on. <br /><br />
+
+  I was honestly stressed. First cert, first timed exam, and I didn’t think I was ready at all. But it went way better than expected — I finished it in 6 hours out of the 48. That boosted my confidence a lot. If you’ve done the learning paths on THM, you can definitely take the eJPT. It’s a great cert to validate your fundamentals in networking and basic pentesting. <br /><br />
+
+  But right after that, when I got deeper into the CPTS modules… I saw the gap. The CPTS felt way more advanced, way more real. I realized the eJPT had confirmed I was no longer a beginner — but I still had a long way to go to be “solid”. That’s where CPTS made sense. <br /><br />
+
+  I picked CPTS instead of jumping straight into OSCP because I want to take the time to train properly — not just rush into something. Plus, let’s be honest: the OSCP is expensive, and I’ve seen a lot of feedback saying the course material isn’t that great. The HTB content, on the other hand, is super high quality. The modules are dense, structured, and practical. And the CPTS cert is affordable, which matters when you're self-funding your learning like I am. <br /><br />
+
+  I see the CPTS as a serious technical milestone before going for OSCP later, mostly for HR visibility. But right now, CPTS was the smart, realistic choice for where I was. Great content, real-world challenges, and an exam that forces you to think like a pentester — not just follow steps. <br /><br />
+
+  If you're in that same spot — somewhere between “beginner” and “ready for real engagements” — the CPTS is a great way to level up without burning out or breaking the bank.
+</p>
+
         </div>
       </div>
 
