@@ -385,8 +385,19 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </div>
 
           <p>
-            And did I mention again? <strong>It’s French 🇫🇷</strong>. And it rocks. I’ll soon publish a dedicated article on how I used Exegol during my CPTS journey — stay tuned if you're curious about making the switch!
-          </p>
+  And did I mention again? <strong>It’s French 🇫🇷</strong>. And it rocks.  
+  If you're curious about how to set it up, why I switched, and how it helped me save hours during the CPTS exam, 
+  I’ve written a full article about it:  
+  <a 
+    href="https://trxtxbook.com/articles/exegol-docker" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    className="text-violet-400 underline hover:text-violet-300"
+  >
+    Exegol: The Ultimate CPTS Toolkit
+  </a>.  
+  Feel free to check it out for a deep dive into my workflow and why I’ll never go back to Kali again.
+</p>
           </div>
         </div>
         <div>
