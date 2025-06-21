@@ -83,7 +83,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           About Me
         </h3>
         <div className="bg-[#2a2a2f] p-6 rounded-lg">
-          <p className="text-gray-300 leading-relaxed">
+          <p>
   I'm French and currently switching careers to move into cybersecurity. In September, I’ll start a formal work-study program in IT and networking, but honestly, my journey started long before that. I used to work as a field technician in fiber optics — pulling cables, doing installations, repeating the same tasks every day. After a while, I felt stuck. I wasn’t learning anything new, and I couldn’t see any real future in what I was doing. That’s what pushed me to change.<br /><br />
 
   I decided to move into cybersecurity, and since then, I’ve been fully committed. For the past nine months, I’ve trained on my own, almost every day, for about 6 to 7 hours. I finished all the learning paths on TryHackMe, passed the eJPT certification, and more recently the CPTS from Hack The Box. This wasn’t just about collecting certs — it was about learning for real, building technical skills, and proving to myself that I could grow in this field through hard work.<br /><br />
