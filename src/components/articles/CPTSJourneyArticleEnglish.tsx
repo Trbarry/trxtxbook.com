@@ -24,22 +24,24 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </div>
 
-      {/* 🟣 H1 - Main Title */}
+      {/* Main Title */}
       <header className="text-center mb-16">
         <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-violet-400 to-violet-600 bg-clip-text text-transparent mb-6">
           My Certified Penetration Testing Specialist (CPTS) Experience
         </h1>
       </header>
 
-      {/* SEO Meta Information - For reference only */}
-      <div className="bg-[#2a2a2f] p-4 rounded-lg border border-violet-900/20 mb-8">
-        <h3 className="text-sm font-semibold text-violet-400 mb-2">SEO Meta Tags (for reference)</h3>
-        <div className="text-xs text-gray-400 space-y-1">
-          <p><strong>Title:</strong> CPTS: My Journey into Professional Pentesting – From eJPT to HTB Certification</p>
-          <p><strong>Description:</strong> A full 5-month journey to the CPTS certification by Hack The Box – From eJPT to 190-page report. Study roadmap, tools, challenges, and lessons learned.</p>
-          <p><strong>Canonical:</strong> https://trxtxbook.com/articles/cpts-journey</p>
+      {/* SEO Meta Information - Only visible in development */}
+      {process.env.NODE_ENV !== 'production' && (
+        <div className="bg-[#2a2a2f] p-4 rounded-lg border border-violet-900/20 mb-8">
+          <h3 className="text-sm font-semibold text-violet-400 mb-2">SEO Meta Tags (for reference - dev only)</h3>
+          <div className="text-xs text-gray-400 space-y-1">
+            <p><strong>Title:</strong> CPTS: My Journey into Professional Pentesting – From eJPT to HTB Certification</p>
+            <p><strong>Description:</strong> A full 5-month journey to the CPTS certification by Hack The Box – From eJPT to 190-page report. Study roadmap, tools, challenges, and lessons learned.</p>
+            <p><strong>Canonical:</strong> https://trxtxbook.com/articles/cpts-journey</p>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Table of Contents */}
       <div className="bg-[#1a1a1f] p-6 rounded-lg border border-violet-900/20 mb-12">
@@ -70,7 +72,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </div>
 
-      {/* 🟪 H2 - Introduction & Hook */}
+      {/* Introduction & Hook */}
       <section className="mb-16">
         <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-8">
@@ -78,7 +80,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             <h2 className="text-3xl font-bold">Introduction & Hook</h2>
           </div>
           
-          {/* 🟦 H3 - Tackling the 28 CPTS MODULES */}
           <div className="space-y-8">
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
@@ -93,7 +94,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </section>
 
-      {/* 🟪 H2 - Background: From eJPT to CPTS */}
+      {/* Background: From eJPT to CPTS */}
       <section className="mb-16">
         <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-8">
@@ -102,7 +103,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </div>
           
           <div className="space-y-8">
-            {/* 🟦 H3 - Why CPTS After eJPT? */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Target className="w-6 h-6" />
@@ -113,7 +113,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
               </div>
             </div>
 
-            {/* 🟦 H3 - My Starting Level */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Users className="w-6 h-6" />
@@ -127,7 +126,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </section>
 
-      {/* 🟪 H2 - Study Strategy Breakdown */}
+      {/* Study Strategy Breakdown */}
       <section className="mb-16">
         <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-8">
@@ -136,7 +135,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </div>
           
           <div className="space-y-8">
-            {/* 🟦 H3 - CPTS Learning Path Structure */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <BookOpen className="w-6 h-6" />
@@ -147,7 +145,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
               </div>
             </div>
 
-            {/* 🟦 H3 - HTB Boxes, Modules & IppSec's Track */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Monitor className="w-6 h-6" />
@@ -161,7 +158,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </section>
 
-      {/* 🟪 H2 - Five-Month Roadmap & Final Sprint */}
+      {/* Five-Month Roadmap & Final Sprint */}
       <section className="mb-16">
         <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-8">
@@ -170,7 +167,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </div>
           
           <div className="space-y-8">
-            {/* 🟦 H3 - Time Allocation Month by Month */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Calendar className="w-6 h-6" />
@@ -181,7 +177,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
               </div>
             </div>
 
-            {/* 🟦 H3 - Final 10-Day Sprint */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Zap className="w-6 h-6" />
@@ -195,7 +190,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </section>
 
-      {/* 🟪 H2 - Tooling, Environment & Note-Taking */}
+      {/* Tooling, Environment & Note-Taking */}
       <section className="mb-16">
         <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-8">
@@ -204,7 +199,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </div>
           
           <div className="space-y-8">
-            {/* 🟦 H3 - Exegol: My Offensive Environment */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Shield className="w-6 h-6" />
@@ -215,7 +209,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
               </div>
             </div>
 
-            {/* 🟦 H3 - SysReptor & Obsidian for Notes & Reporting */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <FileText className="w-6 h-6" />
@@ -229,7 +222,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </section>
 
-      {/* 🟪 H2 - Exam Week */}
+      {/* Exam Week */}
       <section className="mb-16">
         <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-8">
@@ -238,7 +231,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </div>
           
           <div className="space-y-8">
-            {/* 🟦 H3 - Exam Format & Scope */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Target className="w-6 h-6" />
@@ -249,7 +241,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
               </div>
             </div>
 
-            {/* 🟦 H3 - Daily Breakdown */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Calendar className="w-6 h-6" />
@@ -263,7 +254,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </section>
 
-      {/* 🟪 H2 - The 190-Page Report */}
+      {/* The 190-Page Report */}
       <section className="mb-16">
         <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-8">
@@ -272,7 +263,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </div>
           
           <div className="space-y-8">
-            {/* 🟦 H3 - Real-Time Reporting Strategy */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Clock className="w-6 h-6" />
@@ -283,7 +273,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
               </div>
             </div>
 
-            {/* 🟦 H3 - Walkthroughs vs. Findings */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Code className="w-6 h-6" />
@@ -294,7 +283,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
               </div>
             </div>
 
-            {/* 🟦 H3 - What I Included & Why */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Lightbulb className="w-6 h-6" />
@@ -308,7 +296,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </section>
 
-      {/* 🟪 H2 - Biggest Challenges & How I Overcame Them */}
+      {/* Biggest Challenges & How I Overcame Them */}
       <section className="mb-16">
         <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-8">
@@ -317,7 +305,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </div>
           
           <div className="space-y-8">
-            {/* 🟦 H3 - Internal Network Pivoting */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Network className="w-6 h-6" />
@@ -328,7 +315,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
               </div>
             </div>
 
-            {/* 🟦 H3 - Web Exploitation Stumbling Blocks */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Code className="w-6 h-6" />
@@ -342,7 +328,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </section>
 
-      {/* 🟪 H2 - Tips & Tricks Cheat-Sheet */}
+      {/* Tips & Tricks Cheat-Sheet */}
       <section className="mb-16">
         <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-8">
@@ -351,7 +337,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </div>
           
           <div className="space-y-8">
-            {/* 🟦 H3 - Enumeration First, Always */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Target className="w-6 h-6" />
@@ -362,7 +347,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
               </div>
             </div>
 
-            {/* 🟦 H3 - Watch for Rabbit Holes */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Shield className="w-6 h-6" />
@@ -373,7 +357,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
               </div>
             </div>
 
-            {/* 🟦 H3 - Time & Mental Energy Management */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Clock className="w-6 h-6" />
@@ -387,7 +370,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </section>
 
-      {/* 🟪 H2 - Post-Exam Reflection & Next Steps */}
+      {/* Post-Exam Reflection & Next Steps */}
       <section className="mb-16">
         <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-8">
@@ -396,7 +379,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </div>
           
           <div className="space-y-8">
-            {/* 🟦 H3 - Comparing CPTS to OSCP */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Shield className="w-6 h-6" />
@@ -407,7 +389,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
               </div>
             </div>
 
-            {/* 🟦 H3 - My Plan for OSCP, BSCP & Beyond */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <TrendingUp className="w-6 h-6" />
@@ -421,7 +402,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </section>
 
-      {/* 🟪 H2 - Further Study & Acknowledgements */}
+      {/* Further Study & Acknowledgements */}
       <section className="mb-16">
         <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-8">
@@ -430,7 +411,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </div>
           
           <div className="space-y-8">
-            {/* 🟦 H3 - Books, Labs, Communities */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <BookOpen className="w-6 h-6" />
@@ -441,7 +421,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
               </div>
             </div>
 
-            {/* 🟦 H3 - People That Helped Me Grow */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Users className="w-6 h-6" />
@@ -455,7 +434,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </section>
 
-      {/* 🟪 H2 - Conclusion & Encouragement */}
+      {/* Conclusion & Encouragement */}
       <section className="mb-16">
         <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
           <div className="flex items-center gap-3 mb-8">
@@ -464,7 +443,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </div>
           
           <div className="space-y-8">
-            {/* 🟦 H3 - You Can Do It Too */}
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
                 <Award className="w-6 h-6" />
