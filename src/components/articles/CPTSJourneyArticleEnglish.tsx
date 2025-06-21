@@ -47,7 +47,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
           {[
             'Introduction & Hook',
-            'Background: From eJPT to CPTS',
             'Study Strategy Breakdown',
             'Five-Month Roadmap & Final Sprint',
             'Tooling, Environment & Note-Taking',
@@ -127,16 +126,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </div>
 
-      {/* My Starting Level */}
-      <div>
-        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-          <Shield className="w-6 h-6" />
-          My Starting Level
-        </h3>
-        <div className="bg-[#2a2a2f] p-6 rounded-lg">
-          <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-        </div>
-      </div>
+      
 
       {/* CPTS Modules */}
       <div>
