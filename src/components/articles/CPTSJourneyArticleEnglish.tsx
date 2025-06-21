@@ -134,38 +134,58 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           <Cpu className="w-6 h-6" />
           Tackling the 28 CPTS MODULES
         </h3>
-       <div>
-  <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-    <Brain className="w-6 h-6" />
-    Tackling the 28 CPTS Modules
-  </h3>
-  <div className="bg-[#2a2a2f] p-6 rounded-lg text-gray-300 leading-relaxed space-y-4">
-    <p>
-      The <strong>Penetration Tester learning path</strong> from Hack The Box was a massive journey. I spent around <strong>3 to 4 months</strong> completing all <strong>28 modules</strong>, working nearly every day — sometimes a few hours, sometimes full sessions of 10 hours. The content is <strong>dense, practical, and super well built</strong>. Even if you're starting with limited knowledge, the path brings you from near-zero to a level where you're absolutely ready for the CPTS — if you stay consistent.
+        <div className="bg-[#2a2a2f] p-6 rounded-lg">
+          <p>
+      I spent about <strong>3 to 4 months</strong> working through the entire <strong>Penetration Tester learning path</strong> on Hack The Box. I didn’t try to rush it — I treated each module like a mini-course, often going back over topics until I fully understood them. The path is **incredibly rich**, both in technical depth and in real-world relevance. I genuinely believe that anyone with motivation — even someone starting from scratch — can finish this path and be ready for the CPTS. You just need to be **consistent**, and willing to take your time when it gets tough.
     </p>
 
     <p>
-      I didn’t set a fixed duration per module. Some were fast — maybe <strong>3 hours</strong>. Others like <strong>Password Attacks</strong> or <strong>Attacking Enterprise Networks</strong> took me <strong>4 to 5 full days</strong>. Those two in particular are intense. They go deep and require real energy and focus. But I never tried to rush through them. My priority was to <strong>understand</strong> — not just to finish.
+      At first glance, the 28 modules might feel overwhelming, especially if you're new to structured cybersecurity learning. But what I appreciated right away is that the path is built with **progressive layering** in mind. It doesn’t throw you into the deep end. The first modules set the foundations, and each one adds more complexity and realism. And if you follow through, you’ll notice your own mindset changing — you stop thinking like a student and start thinking like a pentester.
     </p>
 
     <p>
-      After every module, I picked at least one <strong>HTB box or challenge</strong> related to it. That step is <strong>crucial</strong>. At the end of each chapter, HTB links you to <strong>ProLabs, challenges or community boxes</strong> — and they’re gold. They helped me lock in what I had just learned, and apply it in real pentest logic. That’s where theory becomes reflex.
+      I didn’t set fixed goals like “one module per day” — that would’ve been a mistake. Some modules took me just 2-3 hours, others like <strong>Attacking Enterprise Networks</strong> or <strong>Password Attacks</strong> took up to **5 full days**. I worked in long, focused sessions (usually 5 to 7 hours per day), with structured note-taking in <strong>Obsidian</strong>. Every time I finished a module, I would pick a related <strong>HTB box</strong> to reinforce the concepts. That connection between theory and practice is where the learning really sticks.
     </p>
 
     <p>
-      I wrote <strong>everything down</strong> along the way. I use <strong>Obsidian</strong> daily, and every module has its own section with commands, tips, and notes. This note-taking process helped me more than I expected. Not just for review — but for clarity. It forced me to process what I was doing instead of just following instructions.
+      For example, after completing <strong>Linux Privilege Escalation</strong>, I immediately tackled two medium-difficulty boxes with known privesc vectors. I used my notes as a checklist. It showed me exactly where I was solid — and where I had gaps. I can't stress this enough: <strong>your personal notes are more valuable than the module PDFs</strong>. Write everything down as if you were creating your own training material.
     </p>
 
     <p>
-      If I can give one piece of advice: <strong>do each module with a fresh mind</strong>. Avoid studying when you’re tired. You need to retain a lot over time, and learning deeply is more important than finishing quickly. Especially because the last module — <strong>Attacking Enterprise Networks</strong> — is basically a <strong>mini CPTS exam</strong>. I did it <strong>blind, without hints or solutions</strong>, and it was the perfect way to test my real skills under pressure.
+      Let me share my thoughts on some of the modules that really stood out:
+      <ul className="list-disc list-inside ml-4 mt-2 space-y-1">
+        <li><strong>Attacking Enterprise Networks</strong>: This is basically a **mini CPTS exam**. It’s long, detailed, and mimics the full exam format. I did it blind the first time — no walkthrough, no hints — and it was a turning point. If you want to measure your readiness, this is the ultimate test. It also teaches you how to chain everything together: enumeration, privilege escalation, pivoting, lateral movement, and reporting.</li>
+
+        <li><strong>Penetration Testing Process</strong>: It might seem basic at first, but this one gives you the **mindset and workflow** you’ll need for the entire path. If you're someone who likes to understand "why" before "how", this module is gold.</li>
+
+        <li><strong>Active Directory Enumeration & Attacks</strong>: One of the most **complete and clear** modules. It helped me build reusable checklists and understand how AD exploitation actually happens in real companies. It goes beyond theory — it makes you comfortable with tools and logic you'll need in the exam (and in real life).</li>
+
+        <li><strong>Documentation and Reporting</strong>: Often overlooked, but **critical for the exam**. You won’t pass CPTS if your report isn’t solid. This module gives you the format, the tone, the expectations. I even used it to structure my own CPTS report in <strong>SysReptor</strong>.</li>
+
+        <li><strong>Command Injection</strong> and <strong>SQLi</strong>: These two were a good balance of theory and application. Clear payloads, defensive mechanisms, bypass techniques — and plenty of chances to apply them in boxes. Solid.</li>
+      </ul>
     </p>
 
     <p>
-      Bottom line? The modules are <strong>more than enough</strong> to prepare you — but only if you take them seriously. Read them. Practice. Take notes. And use the extra resources. HTB didn’t just throw content together — they built a solid training path. All you have to do is walk it.
-    </p>
-  </div>
-</div>
+      On the flip side, here are some modules I found less engaging:
+      <ul className="list-disc list-inside ml-4 mt-2 space-y-1">
+        <li><strong>Password Attacks</strong>: Technically important, but too passive. You spend a lot of time waiting for brute-force attempts, which isn’t very educational past a certain point.</li>
 
+        <li><strong>Shells & Payloads</strong>: This one felt a bit **out of place**. The concepts were scattered, and most of the payload logic is better covered in the post-exploitation modules. It could’ve been tighter.</li>
+
+        <li><strong>Linux Privilege Escalation</strong>: Good examples, but I expected more structure. It lacked a clear **methodology**. I ended up expanding it using my own CTF experience and resources from g0tmi1k and PEASS.</li>
+
+        <li><strong>Vulnerability Assessment</strong>: Honestly, just a bit dry. It covers the basics of Nessus and OpenVAS, but doesn’t offer much depth. It’s not bad, just not exciting.</li>
+      </ul>
+    </p>
+
+    <p>
+      One thing to note: **even the weaker modules are still solid**. HTB really doesn’t cut corners. And the pricing is extremely fair. I went with the <strong>HTB Silver subscription</strong>, which cost me about <strong>€450 for the year</strong>. That gave me access to **all 28 modules**, the labs, the content updates, and a **voucher for the CPTS exam**. When you compare that to other certs (looking at you, OSCP), it’s honestly a steal.
+    </p>
+
+    <p>
+      My advice? Take your time. <strong>Work module by module, box by box</strong>. Document everything, and don’t move on until it clicks. The content is designed to turn you into a practitioner, not just someone who memorizes flags. And if you do it right, by the end you’ll be surprised how far you’ve come.
+    </p>
         </div>
       </div>
 
