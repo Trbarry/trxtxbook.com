@@ -229,7 +229,63 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
                 HTB Boxes, Modules & IppSec's Track
               </h3>
               <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+                <p>
+        Pendant le <strong>CPTS learning path</strong>, j’ai pris l’habitude de faire <strong>1 à 2 box Hack The Box associées à chaque module</strong>. Par exemple, après avoir terminé un module comme <em>Web Exploitation</em>, j’allais chercher une box web orientée XSS, CSRF ou file upload dans la section "retired" ou "easy-medium". Ça me permettait d’ancrer les connaissances tout de suite en condition réelle, en utilisant exactement ce que je venais d’apprendre.
+      </p>
+
+      <p>
+        Une fois le path terminé, j’ai enchaîné avec des <strong>boxes “live”</strong> de HTB. Pas forcément liées aux modules, mais pour le plaisir du challenge et l’envie de progresser. C’est là que j’ai franchi un palier. Ces boxes m'ont permis de travailler des compétences plus transverses comme :
+      </p>
+
+      <ul className="list-disc list-inside space-y-1 ml-4">
+        <li>le <strong>pivoting interne</strong> (merci Ligolo-ng),</li>
+        <li>la <strong>réflexion post-exploitation</strong> (où aller après avoir une shell ?),</li>
+        <li>la <strong>gestion de l'antivirus</strong>, des EDR, etc.</li>
+      </ul>
+
+      <p>
+        Je suis monté jusqu’au <strong>rang Pro Hacker</strong>, mais soyons honnête : certaines "hard" m’ont mis une claque, et j’ai eu besoin d’un coup de pouce pour finir. Ce n’est pas grave, l’important c’est ce qu’on apprend.
+      </p>
+
+      <p>
+        Ensuite, j’ai suivi la <strong>playlist non-officielle d’IppSec</strong> :
+        <br />
+        <a href="https://www.youtube.com/watch?v=H9FcE_FMZio&list=PLidcsTyj9JXItWpbRtTg6aDEj10_F17x5" target="_blank" className="text-violet-400 hover:underline">
+          HTB CPTS Prep Boxes – IppSec YouTube
+        </a>
+      </p>
+
+      <p>
+        Franchement ? Ces boxes sont <strong>parfaitement sélectionnées</strong>. Maintenant que j’ai passé l’examen, je peux le dire : certaines d’entre elles contiennent <strong>des vulnérabilités presque identiques</strong> à celles de la CPTS. Mais surtout, elles forcent à :
+      </p>
+
+      <ul className="list-disc list-inside space-y-1 ml-4">
+        <li><strong>enchaîner plusieurs étapes</strong> sans guidage,</li>
+        <li><strong>structurer ta progression</strong> comme pendant l’examen,</li>
+        <li><strong>gérer ton temps</strong>, tes pivots, et tes post-exploit.</li>
+      </ul>
+
+      <p>
+        Ça a renforcé ma <strong>confiance</strong>. Après avoir fait cette playlist, je me suis dit : <em>"OK, je suis prêt pour les 10 jours."</em>
+      </p>
+
+      <p>
+        💬 Je sais que certains conseillent aussi les <strong>ProLabs</strong>, voire les boxes <strong>Insane</strong>, mais personnellement, je n’en ai <strong>pas ressenti le besoin</strong>. Je pense que si on fait :
+      </p>
+
+      <ul className="list-disc list-inside space-y-1 ml-4">
+        <li>le path CPTS <strong>sérieusement</strong>,</li>
+        <li>les boxes par module <strong>de façon ciblée</strong>,</li>
+        <li>la playlist IppSec <strong>dans le bon timing</strong>,</li>
+      </ul>
+
+      <p>
+        …alors <strong>c’est suffisant</strong>. Pas besoin de s’éparpiller. Le path CPTS contient <strong>tout ce qu’il faut</strong> pour réussir l’examen.
+      </p>
+
+      <p>
+        <strong>🕐 Mon conseil</strong> : N’attendez pas trop longtemps après avoir fini le learning path pour vous lancer dans les boxes d’IppSec. Sinon, vous risquez d’oublier des détails. Mais ne commencez pas non plus trop tôt : mieux vaut avoir déjà bien assimilé les modules avant d’y aller à fond.
+      </p>
               </div>
             </div>
           </div>
