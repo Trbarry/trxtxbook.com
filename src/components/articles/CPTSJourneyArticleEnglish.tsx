@@ -180,7 +180,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
     </p>
 
     <p>
-      One thing to note: **even the weaker modules are still solid**. HTB really doesn’t cut corners. And the pricing is extremely fair. I went with the <strong>HTB Silver subscription</strong>, which cost me about <strong>€450 for the year</strong>. That gave me access to **all 28 modules**, the labs, the content updates, and a **voucher for the CPTS exam**. When you compare that to other certs (looking at you, OSCP), it’s honestly a steal.
+      One thing to note: **even the weaker modules are still solid**. HTB really doesn’t cut corners. And the pricing is extremely fair. I went with the <strong>HTB Silver subscription</strong>, which cost me about <strong>€410 for the year</strong>. That gave me access to **all 28 modules**, the labs, the content updates, and a **voucher for the CPTS exam**. When you compare that to other certs (looking at you, OSCP), it’s honestly a steal.
     </p>
 
     <p>
