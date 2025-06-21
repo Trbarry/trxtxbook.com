@@ -209,7 +209,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
                 CPTS Learning Path Structure
               </h3>
               <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-gray-300 leading-relaxed">
+                <p>
       I didn’t follow a strict schedule during the CPTS path — I just aimed to work around <strong>6 to 7 hours a day</strong>, <strong>five days a week</strong>, always taking short breaks every couple of hours to stay focused. I knew from experience that <strong>rest matters just as much as active study</strong> — especially in cybersecurity, where understanding is more important than memorization.<br /><br />
 
       My routine was pretty straightforward: <strong>start a module</strong>, <strong>finish it completely</strong>, and take <strong>structured notes</strong> as I went. Then, whenever possible, I would <strong>chain it with one or two related HTB boxes</strong>. This practical follow-up was crucial for me — the hands-on challenges helped <strong>anchor what I had just learned</strong>.<br /><br />
