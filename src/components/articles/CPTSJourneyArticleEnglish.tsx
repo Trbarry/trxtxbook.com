@@ -77,7 +77,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
 
     <div className="space-y-8">
 
-      {/* About Me section */}
+      {/* About Me */}
       <div>
         <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
           <Users className="w-6 h-6" />
@@ -88,7 +88,29 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
       </div>
 
-      {/* CPTS Modules section */}
+      {/* Why CPTS After eJPT */}
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <BookOpen className="w-6 h-6" />
+          Why CPTS After eJPT?
+        </h3>
+        <div className="bg-[#2a2a2f] p-6 rounded-lg">
+          <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+        </div>
+      </div>
+
+      {/* My Starting Level */}
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <Shield className="w-6 h-6" />
+          My Starting Level
+        </h3>
+        <div className="bg-[#2a2a2f] p-6 rounded-lg">
+          <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+        </div>
+      </div>
+
+      {/* CPTS Modules */}
       <div>
         <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
           <Cpu className="w-6 h-6" />
@@ -103,38 +125,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
   </div>
 </section>
 
-
-      {/* Background: From eJPT to CPTS */}
-      <section className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <BookOpen className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">Background: From eJPT to CPTS</h2>
-          </div>
-          
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Target className="w-6 h-6" />
-                Why CPTS After eJPT?
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Users className="w-6 h-6" />
-                My Starting Level
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Study Strategy Breakdown */}
       <section className="mb-16">
