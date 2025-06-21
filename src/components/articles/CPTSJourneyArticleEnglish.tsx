@@ -134,8 +134,38 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           <Cpu className="w-6 h-6" />
           Tackling the 28 CPTS MODULES
         </h3>
-        <div className="bg-[#2a2a2f] p-6 rounded-lg">
-          <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+       <div>
+  <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+    <Brain className="w-6 h-6" />
+    Tackling the 28 CPTS Modules
+  </h3>
+  <div className="bg-[#2a2a2f] p-6 rounded-lg text-gray-300 leading-relaxed space-y-4">
+    <p>
+      The <strong>Penetration Tester learning path</strong> from Hack The Box was a massive journey. I spent around <strong>3 to 4 months</strong> completing all <strong>28 modules</strong>, working nearly every day — sometimes a few hours, sometimes full sessions of 10 hours. The content is <strong>dense, practical, and super well built</strong>. Even if you're starting with limited knowledge, the path brings you from near-zero to a level where you're absolutely ready for the CPTS — if you stay consistent.
+    </p>
+
+    <p>
+      I didn’t set a fixed duration per module. Some were fast — maybe <strong>3 hours</strong>. Others like <strong>Password Attacks</strong> or <strong>Attacking Enterprise Networks</strong> took me <strong>4 to 5 full days</strong>. Those two in particular are intense. They go deep and require real energy and focus. But I never tried to rush through them. My priority was to <strong>understand</strong> — not just to finish.
+    </p>
+
+    <p>
+      After every module, I picked at least one <strong>HTB box or challenge</strong> related to it. That step is <strong>crucial</strong>. At the end of each chapter, HTB links you to <strong>ProLabs, challenges or community boxes</strong> — and they’re gold. They helped me lock in what I had just learned, and apply it in real pentest logic. That’s where theory becomes reflex.
+    </p>
+
+    <p>
+      I wrote <strong>everything down</strong> along the way. I use <strong>Obsidian</strong> daily, and every module has its own section with commands, tips, and notes. This note-taking process helped me more than I expected. Not just for review — but for clarity. It forced me to process what I was doing instead of just following instructions.
+    </p>
+
+    <p>
+      If I can give one piece of advice: <strong>do each module with a fresh mind</strong>. Avoid studying when you’re tired. You need to retain a lot over time, and learning deeply is more important than finishing quickly. Especially because the last module — <strong>Attacking Enterprise Networks</strong> — is basically a <strong>mini CPTS exam</strong>. I did it <strong>blind, without hints or solutions</strong>, and it was the perfect way to test my real skills under pressure.
+    </p>
+
+    <p>
+      Bottom line? The modules are <strong>more than enough</strong> to prepare you — but only if you take them seriously. Read them. Practice. Take notes. And use the extra resources. HTB didn’t just throw content together — they built a solid training path. All you have to do is walk it.
+    </p>
+  </div>
+</div>
+
         </div>
       </div>
 
