@@ -591,7 +591,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         </div>
         <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
           From junior pentester to CPTS certified professional - this journey has been transformative. 
-          The road was challenging, but every hour invested was worth it for the skills and confidence gained.
+          The road was challenging, but every hour invested was worth it for the skills and confiddence gained.
         </p>
       </div>
     </div>
