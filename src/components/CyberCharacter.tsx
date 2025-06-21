@@ -22,11 +22,29 @@ export const CyberCharacter: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
   const [dragOffset, setDragOffset] = useState<Position>({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
   
   const messageTimeoutRef = useRef<NodeJS.Timeout>();
   const glitchIntervalRef = useRef<NodeJS.Timeout>();
   const soundRef = useRef<Howl>();
   const characterRef = useRef<HTMLDivElement>(null);
+
+  // Détecter si on est sur mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Ne pas afficher le composant sur mobile
+  if (isMobile) {
+    return null;
+  }
 
   // Initialize sound effect
   useEffect(() => {
