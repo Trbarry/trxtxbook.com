@@ -166,24 +166,81 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           <BookOpen className="w-6 h-6" />
           Why CPTS After eJPT?
         </h3>
-        <div className="bg-[#2a2a2f] p-6 rounded-lg">
-         <p>
-  I passed the <strong>eJPT</strong> in <strong>February 2025</strong>, right in the middle of the <strong>CPTS learning path</strong>. I had just started digging into the HTB modules when I saw a <strong>promo for the exam</strong>. So I said to myself, “Let’s give it a try — even if I fail, I’ll learn something.” I had already done all the <strong>TryHackMe learning paths</strong>, including the <strong>Junior Penetration Tester track</strong>, so I had some ground to stand on. <br /><br />
+        <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+  {/* Passage eJPT */}
+  <div className="flex items-center gap-3 mb-2">
+    <Award className="w-6 h-6 text-violet-400" />
+    <h4 className="text-xl font-semibold text-violet-300">eJPT: The First Step</h4>
+  </div>
+  <p className="text-gray-300 text-lg">
+    I passed the <strong>eJPT</strong> in <strong>February 2025</strong>, right in the middle of the <strong>CPTS learning path</strong>.  
+    I had just started digging into the HTB modules when I saw a <strong>promo for the exam</strong>.  
+    So I said to myself, “Let’s give it a try — even if I fail, I’ll learn something.”  
+    I had already done all the <strong>TryHackMe learning paths</strong>, including the <strong>Junior Penetration Tester track</strong>, so I had some ground to stand on.
+  </p>
 
-  I was honestly <strong>stressed</strong>. First cert, first timed exam, and I didn’t think I was ready at all. But it went way better than expected — I finished it in <strong>6 hours out of the 48</strong>. That boosted my confidence a lot. If you’ve done the learning paths on THM, you can definitely take the eJPT. It’s a great cert to <strong>validate your fundamentals</strong> in networking and basic pentesting. <br /><br />
+  {/* Stress et réussite */}
+  <div className="flex items-center gap-2 mb-2">
+    <Target className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Facing the Challenge</span>
+  </div>
+  <p className="text-gray-300">
+    I was honestly <strong>stressed</strong>. First cert, first timed exam, and I didn’t think I was ready at all.  
+    But it went way better than expected — I finished it in <strong>6 hours out of the 48</strong>.  
+    That boosted my confidence a lot.
+  </p>
+  <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
+    <p className="text-violet-300 font-semibold">
+      <Brain className="w-5 h-5 inline-block mb-1 mr-1 text-violet-400" />
+      If you’ve done the learning paths on THM, you can definitely take the eJPT.
+    </p>
+    <p className="text-gray-300">
+      It’s a great cert to <strong>validate your fundamentals</strong> in networking and basic pentesting.
+    </p>
+  </div>
 
-  But right after that, when I got deeper into the CPTS modules… I saw the <strong>gap</strong>. The CPTS felt way more <strong>advanced</strong>, way more <strong>realistic</strong>. I realized the eJPT had confirmed I was <strong>no longer a beginner</strong> — but I still had a long way to go to be solid. That’s where CPTS made sense. <br /><br />
+  {/* Passage au CPTS, constat du gap */}
+  <div className="flex items-center gap-2 mb-2">
+    <ArrowRight className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">From eJPT to CPTS</span>
+  </div>
+  <p className="text-gray-300">
+    But right after that, when I got deeper into the CPTS modules…  
+    I saw the <strong>gap</strong>. The CPTS felt way more <strong>advanced</strong>, way more <strong>realistic</strong>.<br />
+    I realized the eJPT had confirmed I was <strong>no longer a beginner</strong> — but I still had a long way to go to be solid.  
+    That’s where CPTS made sense.
+  </p>
 
-  I picked CPTS instead of jumping straight into <strong>OSCP</strong> because I want to <strong>train properly</strong> — not just rush into something. Plus, let’s be honest: the OSCP is <strong>expensive</strong>, and I’ve seen a lot of feedback saying the course material isn’t that great. The <strong>HTB content</strong>, on the other hand, is <strong>super high quality</strong>. The modules are <strong>dense, structured, and practical</strong>. And the CPTS cert is <strong>affordable</strong>, which matters when you're self-funding your learning like I am. <br /><br />
+  {/* Choix stratégique CPTS vs OSCP */}
+  <div className="flex items-center gap-2 mb-2">
+    <Shield className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Why CPTS First?</span>
+  </div>
+  <p className="text-gray-300">
+    I picked CPTS instead of jumping straight into <strong>OSCP</strong> because I want to <strong>train properly</strong> — not just rush into something.  
+    Plus, let’s be honest: the OSCP is <strong>expensive</strong>, and I’ve seen a lot of feedback saying the course material isn’t that great.  
+    The <strong>HTB content</strong>, on the other hand, is <strong>super high quality</strong>.  
+    The modules are <strong>dense, structured, and practical</strong>.  
+    And the CPTS cert is <strong>affordable</strong>, which matters when you're self-funding your learning like I am.
+  </p>
 
-  I see the CPTS as a <strong>serious technical milestone</strong> before going for OSCP later, mostly for <strong>HR visibility</strong>. But right now, CPTS was the <strong>smart, realistic choice</strong> for where I was. Great content, <strong>real-world challenges</strong>, and an exam that forces you to <strong>think like a pentester</strong> — not just follow steps. <br /><br />
-
-  If you're in that same spot — somewhere between <strong>“beginner” and “ready for real engagements”</strong> — the CPTS is a great way to <strong>level up without burning out or breaking the bank</strong>.
-</p>
-
-
-
-        </div>
+  {/* Conclusion et conseil pour les lecteurs */}
+  <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
+    <p className="text-violet-300 font-semibold flex items-center gap-2">
+      <Shield className="w-5 h-5 text-violet-400" />
+      <span>CPTS: The Smart Choice</span>
+    </p>
+    <p className="text-gray-300">
+      I see the CPTS as a <strong>serious technical milestone</strong> before going for OSCP later, mostly for <strong>HR visibility</strong>.<br />
+      But right now, CPTS was the <strong>smart, realistic choice</strong> for where I was.  
+      Great content, <strong>real-world challenges</strong>, and an exam that forces you to <strong>think like a pentester</strong> — not just follow steps.
+    </p>
+  </div>
+  <p className="text-gray-400 text-base italic mt-2">
+    <span className="text-violet-400 font-semibold">Advice:</span>
+    If you're in that same spot — somewhere between <strong>“beginner” and “ready for real engagements”</strong> — the CPTS is a great way to <strong>level up without burning out or breaking the bank</strong>.
+  </p>
+</div>
       </div>
 
       
