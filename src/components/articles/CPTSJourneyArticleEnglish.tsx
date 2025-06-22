@@ -1415,7 +1415,25 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             You Can Do It Too
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+            <p className="text-gray-300 text-lg">
+      The real secret to progressing in cybersecurity — or anything, really — is <strong>hard work, patience, and resilience</strong>. Nothing comes instantly. You have to accept there will be days (sometimes many!) when you feel stuck. But if you keep pushing, the breakthroughs always come.
+    </p>
+
+    <p className="text-gray-300 text-lg">
+      Learning is a lifelong process. There is no finish line — you just keep improving a little bit every day. The more you try, the further you go, even if you don’t always see it right away.
+    </p>
+
+    <p className="text-gray-300 text-lg">
+      My only advice: <strong>don’t give up</strong>, even when it gets frustrating. Find your curiosity, enjoy the challenge, and don’t be afraid to try (and fail) again and again. <strong>When you like what you do, you can become really good at it.</strong>
+    </p>
+
+    <p className="text-gray-300 text-lg">
+      Thank you for taking the time to read this (very long!) article. I hope it helped or guided you a little — I really tried to put all my experience into words, even if it’s not always easy to explain everything.
+    </p>
+
+    <p className="text-violet-300 font-semibold text-lg">
+      You can do it too. Stay patient, keep learning, and ask for help if you need it. Progress is inevitable if you just keep showing up!
+    </p>
           </div>
         </div>
       </div>
