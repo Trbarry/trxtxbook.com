@@ -73,48 +73,74 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           About Me
         </h3>
         <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+  {/* Parcours pro */}
+  <div className="flex items-center gap-3 mb-2">
+    <BookOpen className="w-6 h-6 text-violet-400" />
+    <h4 className="text-xl font-semibold text-violet-300">A Fresh Start</h4>
+  </div>
   <p className="text-gray-300 text-lg">
     <strong>I'm a French guy, currently switching careers to move into cybersecurity.</strong>  
     In September, I’ll start a formal work-study program in IT and networking, but honestly, my journey started long before that.
   </p>
-  
+
+  {/* Métier précédent et déclic */}
   <div className="bg-violet-900/20 rounded-lg p-4 space-y-3">
-    <p className="text-violet-300 font-semibold">
-      <span className="text-xl">🔁</span> Previously a fiber optics field technician — pulling cables, doing installations, and repeating the same tasks every day. After a while, I felt stuck: no learning, no future. That’s what pushed me to change.
-    </p>
+    <div className="flex items-center gap-2">
+      <Monitor className="w-6 h-6 text-violet-400" />
+      <span className="text-violet-300 font-semibold">Fiber Optics Field Technician</span>
+    </div>
     <p className="text-gray-300">
-      I decided to move into cybersecurity. For the past nine months, I've trained on my own almost every day (6-7h daily):  
-      <ul className="list-disc ml-6 mt-2 space-y-1">
-        <li>Completed all learning paths on TryHackMe</li>
-        <li>Passed the <strong>eJPT</strong> certification</li>
-        <li>Recently cleared the <strong>CPTS (Hack The Box)</strong></li>
-      </ul>
-      This wasn’t about collecting certs — it was about <strong>real learning</strong>, building skills, and proving to myself I could grow through hard work.
+      Pulling cables, doing installations, repeating the same tasks every day. After a while, I felt stuck: no learning, no future.  
+      <span className="block font-semibold text-violet-400 mt-2">That’s what pushed me to change.</span>
     </p>
   </div>
 
-  <p className="text-gray-300 text-lg">
+  {/* Parcours d'autoformation */}
+  <div className="flex items-center gap-2 mb-2">
+    <Brain className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Self-Training Journey</span>
+  </div>
+  <p className="text-gray-300">
+    For the past nine months, I've trained on my own almost every day (6-7h daily):  
+  </p>
+  <ul className="list-disc ml-8 text-gray-300 space-y-1">
+    <li>Completed all learning paths on <strong>TryHackMe</strong></li>
+    <li>Passed the <strong>eJPT</strong> certification</li>
+    <li>Recently cleared the <strong>CPTS (Hack The Box)</strong></li>
+  </ul>
+  <p className="text-gray-300">
+    This wasn’t about collecting certs — it was about <strong>real learning</strong>, building skills, and proving to myself I could grow through hard work.
+  </p>
+
+  {/* Esprit tryhard, outils et méthodo */}
+  <div className="flex items-center gap-2 mb-2">
+    <FileText className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Tryhard Mindset & Tools</span>
+  </div>
+  <p className="text-gray-300">
     I’m what you might call a <strong>“tryharder”</strong>. When something motivates me, I give it 300%.  
     I write down everything I learn, structure my notes, and go deep:
   </p>
-  <ul className="list-disc ml-6 text-gray-300 space-y-1">
+  <ul className="list-disc ml-8 text-gray-300 space-y-1">
     <li>Custom <strong>Exegol</strong> setup</li>
     <li>Daily use of <strong>Obsidian</strong></li>
     <li>Reporting with <strong>SysReptor</strong> — even for training</li>
     <li>No skipping steps, no copy-paste walkthroughs</li>
     <li>Goal: Understand, not just repeat</li>
   </ul>
-  
-  <div className="bg-violet-900/20 rounded-lg p-4">
-    <p className="text-violet-300 font-semibold">
-      <span className="text-xl">✍️</span> Why I wrote this article
-    </p>
+
+  {/* Pourquoi cet article */}
+  <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
+    <div className="flex items-center gap-2">
+      <Users className="w-6 h-6 text-violet-400" />
+      <span className="text-violet-300 font-semibold text-lg">Why I wrote this article</span>
+    </div>
     <p className="text-gray-300">
       When preparing for the CPTS, the blog by  
       <a
         href="https://www.brunorochamoura.com/posts/cpts-tips/"
         target="_blank"
-        className="text-violet-400 hover:underline font-semibold"
+        className="text-violet-400 hover:underline font-semibold ml-1"
       >
         Bruno Rocha Moura
       </a>  
@@ -123,7 +149,8 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
       <strong>If you’re wondering whether CPTS is worth it, or you need direction, I hope this helps you.</strong>
     </p>
   </div>
-  
+
+  {/* Valeur du partage */}
   <p className="text-gray-400 text-base italic mt-2">
     <span className="text-violet-400 font-semibold">My mindset:</span>  
     In cybersecurity, we grow by helping each other — via write-ups, forums, blogs, even Discord chats.  
