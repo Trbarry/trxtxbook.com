@@ -1184,7 +1184,39 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             Time & Mental Energy Management
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+            <p className="text-gray-300 text-lg">
+      <strong>Managing your time and mental energy is just as important as technical skill during the CPTS exam.</strong>
+      <br />
+      With 10 days and a huge network, you need a plan to avoid burnout and keep your mind sharp.
+    </p>
+
+    <ul className="list-disc ml-6 space-y-2 text-gray-300">
+      <li>
+        <strong>Set a daily routine:</strong> Block out fixed sessions for pentesting and for breaks. For example, I aimed for <span className="text-violet-400 font-semibold">7 to 10 hours per day</span>, but split between morning and afternoon, with real downtime in between.
+      </li>
+      <li>
+        <strong>Take real breaks:</strong> When you hit a wall or feel tired, step away from the keyboard. Walk, stretch, eat. It helps you reset and find new ideas.
+      </li>
+      <li>
+        <strong>Don’t obsess over blocks:</strong> Getting stuck is part of the game. If you’re spinning your wheels for hours, change activity: write your report, reread your notes, or sleep on it. Sometimes the solution appears after a pause.
+      </li>
+      <li>
+        <strong>Track your progress:</strong> Note your advances (even small wins) each day. Seeing progress helps fight discouragement, especially on long exams.
+      </li>
+      <li>
+        <strong>Prioritize your energy:</strong> Attack the “hard” or creative tasks when you’re freshest—usually mornings. Use evenings for review, report writing, or prepping tomorrow’s targets.
+      </li>
+      <li>
+        <strong>Plan for slumps:</strong> Everyone has off-days. If you have a day with little progress, don’t panic. The network is big, but you only need the right path. Take care of yourself.
+      </li>
+    </ul>
+
+    <p className="text-gray-400 text-base italic mt-4">
+      Example:<br />
+      I hit a huge block around Flag 9. After wasting a whole afternoon, I forced myself to stop, go outside, and only come back the next day. Within one hour, the solution appeared, fresh.
+      <br /><br />
+      <span className="text-violet-400 font-semibold">Remember:</span> The CPTS is a marathon, not a sprint. Your brain is your best tool—treat it well.
+    </p>
           </div>
         </div>
       </div>
