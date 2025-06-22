@@ -1363,7 +1363,28 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             People That Helped Me Grow
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+            <p className="text-gray-300 text-lg">
+      I wouldn’t have reached this point alone. Here are some of the people and creators who inspired and pushed me forward in cybersecurity:
+    </p>
+
+    <ul className="list-disc ml-6 text-gray-300">
+      <li>
+        <strong>Pentesters on LinkedIn:</strong> Every day, I get inspired by people sharing their journey, technical write-ups, and advice. Just seeing others push through motivates me to keep going.
+      </li>
+      <li>
+        <strong>HacktBack:</strong> The best French pentester content, always straight to the point, super motivating. If you read this: thanks for your mindset and all the tips!
+      </li>
+      <li>
+        <strong>IppSec:</strong> The <em>GOAT</em> for Hack The Box — I learned the methodology, how to think like a hacker, and how to approach any box step by step.
+      </li>
+      <li>
+        <strong>My pentester friend:</strong> The one who threw me into the cybersecurity rabbit hole. You know who you are. Without your advice and late-night talks, I probably wouldn’t have made the leap.
+      </li>
+    </ul>
+
+    <p className="text-gray-400 italic">
+      If you inspired me, taught me something, or challenged me to do better — even with just a message or a YouTube video — thank you.
+    </p>
           </div>
         </div>
       </div>
