@@ -12,7 +12,7 @@ export const CPTSJourneyArticle: React.FC = () => {
   label: 'English',
   flag: '🇺🇸',
   title: 'CPTS Review : from INE EJPT to HackTheBox CPTS certified',
-  subtitle: 'A focused 5-month journey to CPTS certification – From eJPT foundations to hands-on internal network hacking',
+  subtitle: 'A focused 5-month journey to CPTS certification – From eJPT foundations to hands-on professional grade hacking',
   finalMessage: 'From junior pentester to confident CPTS-certified hacker – this journey was intense, but every hour brought real progress. I’m not at the finish line, but I’ve built a strong base for professional growth.',
   journeyComplete: 'Major Milestone Reached'
 },
