@@ -251,58 +251,100 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           <Cpu className="w-6 h-6" />
           Tackling the 28 CPTS MODULES
         </h3>
-       <div className="bg-[#2a2a2f] p-6 rounded-lg">
-          <p>
-      I spent about <strong>3 to 4 months</strong> working through the entire <strong>Penetration Tester learning path</strong> on Hack The Box. I didn’t try to rush it — I treated each module like a mini-course, often going back over topics until I fully understood them. The path is **incredibly rich**, both in technical depth and in real-world relevance. I genuinely believe that anyone with motivation — even someone starting from scratch — can finish this path and be ready for the CPTS. You just need to be **consistent**, and willing to take your time when it gets tough.
-    </p>
+       <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+  {/* Parcours global sur le path */}
+  <div className="flex items-center gap-3 mb-2">
+    <BookOpen className="w-6 h-6 text-violet-400" />
+    <h4 className="text-xl font-semibold text-violet-300">The Penetration Tester Learning Path</h4>
+  </div>
+  <p className="text-gray-300 text-lg">
+    I spent about <strong>3 to 4 months</strong> working through the entire <strong>Penetration Tester learning path</strong> on Hack The Box.
+    I didn’t try to rush it — I treated each module like a mini-course, often going back over topics until I fully understood them.  
+    The path is <strong>incredibly rich</strong>, both in technical depth and real-world relevance.  
+    <span className="block mt-1">Anyone with motivation — even starting from scratch — can finish this path and be ready for the CPTS.  
+    You just need to be <strong>consistent</strong>, and willing to take your time when it gets tough.</span>
+  </p>
 
-    <p>  
-      At first glance, the 28 modules might feel overwhelming, especially if you're new to structured cybersecurity learning. But what I appreciated right away is that the path is built with **progressive layering** in mind. It doesn’t throw you into the deep end. The first modules set the foundations, and each one adds more complexity and realism. And if you follow through, you’ll notice your own mindset changing — you stop thinking like a student and start thinking like a pentester.
-    </p>
+  {/* Apprentissage progressif, logique de structuration */}
+  <div className="flex items-center gap-2 mb-2">
+    <Brain className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Learning Structure</span>
+  </div>
+  <p className="text-gray-300">
+    At first glance, the 28 modules might feel overwhelming, especially if you're new to structured cybersecurity learning.  
+    But what I appreciated is the <strong>progressive layering</strong>. The first modules set the foundations, each one adds more complexity and realism.  
+    <span className="block mt-1">If you follow through, your mindset will shift — you stop thinking like a student and start thinking like a pentester.</span>
+  </p>
 
-    <p>
-      I didn’t set fixed goals like “one module per day” — that would’ve been a mistake. Some modules took me just 2-3 hours, others like <strong>Attacking Enterprise Networks</strong> or <strong>Password Attacks</strong> took up to **5 full days**. I worked in long, focused sessions (usually 5 to 7 hours per day), with structured note-taking in <strong>Obsidian</strong>. Every time I finished a module, I would pick a related <strong>HTB box</strong> to reinforce the concepts. That connection between theory and practice is where the learning really sticks.
-    </p>
+  {/* Stratégie d'apprentissage, rythme & méthode */}
+  <div className="flex items-center gap-2 mb-2">
+    <Monitor className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">My Method</span>
+  </div>
+  <p className="text-gray-300">
+    I didn’t set fixed goals like “one module per day” — some modules took 2-3 hours, others like <strong>Attacking Enterprise Networks</strong> or <strong>Password Attacks</strong> took up to <strong>5 full days</strong>.
+    I worked in long, focused sessions (usually 5 to 7 hours per day), with structured note-taking in <strong>Obsidian</strong>.
+    After each module, I picked a related <strong>HTB box</strong> to reinforce the concepts.
+    <span className="block mt-1">Connecting theory and practice is where the learning really sticks.</span>
+  </p>
 
-    <p>
-      For example, after completing <strong>Linux Privilege Escalation</strong>, I immediately tackled two medium-difficulty boxes with known privesc vectors. I used my notes as a checklist. It showed me exactly where I was solid — and where I had gaps. I can't stress this enough: <strong>your personal notes are more valuable than the module PDFs</strong>. Write everything down as if you were creating your own training material.
-    </p>
+  {/* Exemple : module > box > notes */}
+  <div className="flex items-center gap-2 mb-2">
+    <ListChecks className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">From Module to Practice</span>
+  </div>
+  <p className="text-gray-300">
+    For example, after <strong>Linux Privilege Escalation</strong>, I tackled two medium-difficulty boxes with known privesc vectors.
+    I used my notes as a checklist — it showed me exactly where I was solid, and where I had gaps.
+  </p>
+  <div className="bg-violet-900/20 rounded-lg p-4">
+    <FileText className="w-5 h-5 text-violet-400 inline-block mr-1 mb-1" />
+    <span className="text-gray-300">
+      <strong>Your personal notes are more valuable than the module PDFs.</strong>  
+      Write everything down as if you were creating your own training material.
+    </span>
+  </div>
 
-    <p>
-      Let me share my thoughts on some of the modules that really stood out:
-      <ul className="list-disc list-inside ml-4 mt-2 space-y-1">
-        <li><strong>Attacking Enterprise Networks</strong>: This is basically a **mini CPTS exam**. It’s long, detailed, and mimics the full exam format. I did it blind the first time — no walkthrough, no hints — and it was a turning point. If you want to measure your readiness, this is the ultimate test. It also teaches you how to chain everything together: enumeration, privilege escalation, pivoting, lateral movement, and reporting.</li>
+  {/* Modules marquants */}
+  <div className="flex items-center gap-2 mb-2">
+    <CheckCircle2 className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Standout Modules</span>
+  </div>
+  <div className="bg-violet-900/20 rounded-lg p-4">
+    <ul className="list-disc ml-6 text-gray-300 space-y-1">
+      <li><strong>Attacking Enterprise Networks</strong>: A <span className="font-semibold">mini CPTS exam</span>. Long, detailed, and mimics the real format. It was a turning point — the ultimate test of readiness.  
+        It teaches chaining: enumeration, privesc, pivoting, lateral movement, reporting.</li>
+      <li><strong>Penetration Testing Process</strong>: Might seem basic, but it gives you the <span className="font-semibold">mindset and workflow</span> for the entire path.</li>
+      <li><strong>Active Directory Enumeration & Attacks</strong>: The most <span className="font-semibold">complete and clear</span> module. Helped me build checklists and get real with AD exploitation — tools, logic, and real-life applicability.</li>
+      <li><strong>Documentation and Reporting</strong>: Often overlooked, but <span className="font-semibold">critical for the exam</span>. Use it to structure your own report in <strong>SysReptor</strong>.</li>
+      <li><strong>Command Injection</strong> & <strong>SQLi</strong>: Good balance of theory and practice — clear payloads, bypasses, and a lot of practice in boxes.</li>
+    </ul>
+  </div>
 
-        <li><strong>Penetration Testing Process</strong>: It might seem basic at first, but this one gives you the **mindset and workflow** you’ll need for the entire path. If you're someone who likes to understand "why" before "how", this module is gold.</li>
+  {/* Modules moins marquants */}
+  <div className="flex items-center gap-2 mb-2">
+    <Cpu className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Weaker Modules</span>
+  </div>
+  <div className="bg-violet-900/20 rounded-lg p-4">
+    <ul className="list-disc ml-6 text-gray-300 space-y-1">
+      <li><strong>Password Attacks</strong>: Important but too passive. A lot of waiting — not very educational past a certain point.</li>
+      <li><strong>Shells & Payloads</strong>: Felt <span className="font-semibold">out of place</span>, concepts scattered, better covered elsewhere.</li>
+      <li><strong>Linux Privilege Escalation</strong>: Good examples but lacked a clear <span className="font-semibold">methodology</span>. I expanded it with CTF and PEASS/g0tmi1k resources.</li>
+      <li><strong>Vulnerability Assessment</strong>: A bit dry — covers basics but not deep, nothing wrong but not exciting.</li>
+    </ul>
+  </div>
 
-        <li><strong>Active Directory Enumeration & Attacks</strong>: One of the most **complete and clear** modules. It helped me build reusable checklists and understand how AD exploitation actually happens in real companies. It goes beyond theory — it makes you comfortable with tools and logic you'll need in the exam (and in real life).</li>
-
-        <li><strong>Documentation and Reporting</strong>: Often overlooked, but **critical for the exam**. You won’t pass CPTS if your report isn’t solid. This module gives you the format, the tone, the expectations. I even used it to structure my own CPTS report in <strong>SysReptor</strong>.</li>
-
-        <li><strong>Command Injection</strong> and <strong>SQLi</strong>: These two were a good balance of theory and application. Clear payloads, defensive mechanisms, bypass techniques — and plenty of chances to apply them in boxes. Solid.</li>
-      </ul>
-    </p>
-
-    <p>
-      On the flip side, here are some modules I found less engaging:
-      <ul className="list-disc list-inside ml-4 mt-2 space-y-1">
-        <li><strong>Password Attacks</strong>: Technically important, but too passive. You spend a lot of time waiting for brute-force attempts, which isn’t very educational past a certain point.</li>
-
-        <li><strong>Shells & Payloads</strong>: This one felt a bit **out of place**. The concepts were scattered, and most of the payload logic is better covered in the post-exploitation modules. It could’ve been tighter.</li>
-
-        <li><strong>Linux Privilege Escalation</strong>: Good examples, but I expected more structure. It lacked a clear **methodology**. I ended up expanding it using my own CTF experience and resources from g0tmi1k and PEASS.</li>
-
-        <li><strong>Vulnerability Assessment</strong>: Honestly, just a bit dry. It covers the basics of Nessus and OpenVAS, but doesn’t offer much depth. It’s not bad, just not exciting.</li>
-      </ul>
-    </p>
-
-    <p>
-      One thing to note: **even the weaker modules are still solid**. HTB really doesn’t cut corners. And the pricing is extremely fair. I went with the <strong>HTB Silver subscription</strong>, which cost me about <strong>€410 for the year</strong>. That gave me access to **all 28 modules**, the labs, the content updates, and a **voucher for the CPTS exam**. When you compare that to other certs (looking at you, OSCP), it’s honestly a steal.
-    </p>
-
-    <p>
-      My advice? Take your time. <strong>Work module by module, box by box</strong>. Document everything, and don’t move on until it clicks. The content is designed to turn you into a practitioner, not just someone who memorizes flags. And if you do it right, by the end you’ll be surprised how far you’ve come.
-    </p>
+  {/* Avis sur la valeur et le prix du cursus */}
+  <div className="flex items-center gap-2 mb-2">
+    <Network className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Pricing & Value</span>
+  </div>
+  <p className="text-gray-300">
+    Even the weaker modules are <strong>still solid</strong>. HTB doesn’t cut corners, and pricing is extremely fair.
+    I went with the <strong>HTB Silver subscription</strong> — <strong>€410/year</strong> for <strong>all 28 modules</strong>, labs, updates, and a <strong>voucher for the CPTS exam</strong>.  
+    When you compare it to other certs (looking at you, OSCP), it’s honestly a steal.
+  </p>
         </div>
       </div>
 
