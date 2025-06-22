@@ -1,7 +1,6 @@
 import React from 'react';
 import { Award, Calendar, Target, BookOpen, Brain, Shield, Terminal, Users, Lightbulb, CheckCircle2, Clock, FileText, Zap, Monitor, Network, Lock, Code, ArrowRight, TrendingUp, Cpu, Database } from 'lucide-react';
-import { useState } from "react";
-import { FolderTree } from "lucide-react"; // ou l'emoji 📂 directement
+
 export const CPTSJourneyArticleEnglish: React.FC = () => {
   return (
     <div className="space-y-16">
@@ -417,22 +416,11 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
   </p>
 
   <p>Here’s a simplified version of my Obsidian tree structure:</p>
-
-const ObsidianTree = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div className="bg-[#2a2a2f] rounded-lg p-4 text-white">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer text-violet-400 font-semibold text-lg mb-2 flex items-center gap-2"
-      >
-        <FolderTree className="w-5 h-5" />
-        {isOpen ? "Hide Obsidian Tree" : "📂 Click to view full Obsidian tree structure"}
-      </button>
-
-      {isOpen && (
-        <pre className="bg-black text-white text-sm rounded p-4 overflow-x-auto whitespace-pre-wrap">
+<details className="group bg-[#2a2a2f] rounded-lg p-4 text-white open:ring-1 open:ring-violet-600 transition-all">
+  <summary className="cursor-pointer text-violet-400 font-semibold text-lg mb-2">
+    📂 Click to view full Obsidian tree structure
+  </summary>
+  <pre className="bg-black text-white text-sm rounded p-4 mt-4 overflow-x-auto whitespace-pre-wrap">
 {`📁 CPTS
   ├── 1- Information Gathering
 │   ├── 1- Service Enumeration
@@ -780,8 +768,8 @@ const ObsidianTree = () => {
 │               ├── SeDebugPrivilege
 │               └── SeImpersonate & SeAssignPrimaryToken
 `}
-</pre>
-  
+  </pre>
+</details>
   <p>
     I strongly advise anyone preparing for the CPTS to <strong>create their own structured note-taking system</strong> like this. Not only does it improve retention, but it also gives you something to reference during the exam. Organizing your thoughts while learning pays off during pressure.
   </p>
