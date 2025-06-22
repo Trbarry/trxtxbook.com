@@ -876,7 +876,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
               </p>
 
               <p>
-                The same happened with <strong>flag 12</strong>. There’s no shame in going backward to move forward. The content is dense, and it’s mentally stressful to have only 5 flags by <strong>Day 6</strong>. But don’t panic — stay calm, think smart, and keep moving.
+                The same happened with <strong>flag 12</strong>. There’s no shame in going backward to move forward. The content is dense, and it’s mentally stressful to have only 9 flags by <strong>Day 7</strong>. But don’t panic — stay calm, think smart, and keep moving.
               </p>
 
               <p>
