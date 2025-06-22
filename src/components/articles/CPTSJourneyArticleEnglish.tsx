@@ -935,16 +935,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         Lastly, <strong>don’t hesitate to use ChatGPT</strong> as your sidekick—but always verify its output.  
         I used it mainly to rephrase technical steps for clarity and to write neutral language for the report.
       </p>
-
-      <div className="mt-6 bg-[#2a2a2f] p-6 rounded-lg border border-violet-700/30">
-        <h3 className="text-violet-400 text-xl font-semibold mb-3">🔥 Personal Advice</h3>
-        <ul className="list-disc list-inside text-white space-y-2">
-          <li>Always write findings as soon as they happen.</li>
-          <li>Use SysReptor for structure, Obsidian for freedom and backup insights.</li>
-          <li>Don’t wait to be “in the mood” for reporting. Just do it live.</li>
-          <li>Tag everything. It’s your best ally when you're mentally tired on day 6.</li>
-          <li>Break long sequences into steps: Enum → Exploit → Proof → Report.</li>
-               </ul>
+        
           </div>
         </div>
         <div>
