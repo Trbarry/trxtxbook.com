@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Calendar, Target, BookOpen, Brain, Shield, Terminal, Users, Lightbulb, CheckCircle2, Clock, FileText, Zap, Monitor, Network, Lock, Code, ArrowRight, TrendingUp, Cpu, Database } from 'lucide-react';
+import { Award, Calendar, Target, BookOpen, Brain, Shield, Terminal, Users, Lightbulb, CheckCircle2, Clock, FileText, Zap, Monitor, Network, Lock, Code, ArrowRight, TrendingUp, Cpu, Database,ListChecks } from 'lucide-react';
 
 export const CPTSJourneyArticleEnglish: React.FC = () => {
   return (
@@ -345,7 +345,18 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
     I went with the <strong>HTB Silver subscription</strong> — <strong>€410/year</strong> for <strong>all 28 modules</strong>, labs, updates, and a <strong>voucher for the CPTS exam</strong>.  
     When you compare it to other certs (looking at you, OSCP), it’s honestly a steal.
   </p>
-        </div>
+
+  {/* Conseil final */}
+  <div className="bg-violet-900/20 rounded-lg p-4">
+    <span className="text-violet-400 font-semibold"><CheckCircle2 className="w-5 h-5 inline-block mb-1 mr-1" />Advice:</span>
+    <span className="text-gray-300">  
+      Take your time. <strong>Work module by module, box by box</strong>.  
+      Document everything, don’t move on until it clicks.  
+      The content is designed to turn you into a practitioner, not just someone who memorizes flags.  
+      If you do it right, you’ll be surprised how far you’ve come.
+    </span>
+  </div>
+</div>
       </div>
 
     </div>
