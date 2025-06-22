@@ -944,7 +944,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           <li>Don’t wait to be “in the mood” for reporting. Just do it live.</li>
           <li>Tag everything. It’s your best ally when you're mentally tired on day 6.</li>
           <li>Break long sequences into steps: Enum → Exploit → Proof → Report.</li>
-        </ul>
+               </ul>
           </div>
         </div>
         <div>
