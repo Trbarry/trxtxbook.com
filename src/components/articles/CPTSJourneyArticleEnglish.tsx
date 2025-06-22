@@ -418,7 +418,351 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
   <p>Here’s a simplified version of my Obsidian tree structure:</p>
 <pre className="bg-black text-white text-sm rounded p-4 overflow-x-auto whitespace-pre">
 {`📁 CPTS
-  
+  ├── 1- Information Gathering
+│   ├── 1- Service Enumeration
+│   │   ├── Services
+│   │   │   ├── DNS (53)
+│   │   │   │   ├── Attack DNS.md
+│   │   │   │   ├── Dangerous Settings
+│   │   │   │   └── Record Types
+│   │   │   ├── FTP (21)
+│   │   │   │   ├── Dangerous Settings
+│   │   │   │   └── Enumeration.md
+│   │   │   ├── IMAP (143, 993)
+│   │   │   │   └── Commands
+│   │   │   ├── IPMI (623)
+│   │   │   │   ├── Authentication
+│   │   │   │   └── Default Credentials
+│   │   │   ├── IPMI (623).md
+│   │   │   ├── Kerberos (88)
+│   │   │   │   └── Kerberos.md
+│   │   │   ├── LDAP (389,3268).md
+│   │   │   ├── MSSQL (1433, 1434, 2433)
+│   │   │   │   ├── Dangerous Settings
+│   │   │   │   ├── Enum.md
+│   │   │   │   ├── T-SQL Commands
+│   │   │   │   └── Windows Exploitation.md
+│   │   │   ├── MySQL (3306)
+│   │   │   │   ├── Basic SQL Queries
+│   │   │   │   └── Dangerous Settings
+│   │   │   ├── NFS (2049)
+│   │   │   │   ├── Dangerous Settings
+│   │   │   │   └── Enum.md
+│   │   │   ├── Oracle TNS (1521)
+│   │   │   │   ├── Enum.md
+│   │   │   │   ├── SQLplus Commands
+│   │   │   │   └── Troubleshooting
+│   │   │   ├── POP3 (110, 995)
+│   │   │   │   ├── Commands
+│   │   │   │   ├── Dangerous Settings
+│   │   │   │   └── Enum.md
+│   │   │   ├── R-Services (512, 513, 514)
+│   │   │   │   ├── Enum.md
+│   │   │   │   └── Service Breakdown
+│   │   │   ├── RDP (3389)
+│   │   │   │   └── Enumeration.md
+│   │   │   ├── RPC.md
+│   │   │   ├── Rsync (873)
+│   │   │   │   └── Enumeration.md
+│   │   │   ├── SMB (139, 445)
+│   │   │   │   ├── Dangerous Settings
+│   │   │   │   ├── Enumeration.md
+│   │   │   │   ├── RPCClient
+│   │   │   │   ├── Spidering
+│   │   │   │   └── Windows Specific
+│   │   │   ├── SMTP (25, 465, 587)
+│   │   │   │   ├── Common Commands
+│   │   │   │   └── enumeration.md
+│   │   │   ├── SNMP (161, 162, 10161, 10162)
+│   │   │   │   ├── Dangerous Settings
+│   │   │   │   └── Enumeration.md
+│   │   │   ├── SSH (22)
+│   │   │   │   ├── Authentication
+│   │   │   │   └── Dangerous Settings
+│   │   │   ├── TFTP (69)
+│   │   │   │   └── enumeration.md
+│   │   │   ├── Telnet (23).md
+│   │   │   └── WinRM (5985, 5986)
+│   │   │       └── enumeration.md
+│   │   └── Tools
+│   │       ├── Nmap
+│   │       │   ├── Firewall and IDS
+│   │       │   └── Host Discovery
+│   │       ├── WMIexec
+│   │       │   └── Wmiexec.md
+│   │       ├── creds
+│   │       │   └── Credential Tools.md
+│   │       └── tcpdump
+│   │           └── Tcpdump.md
+│   ├── Active Directory Enumeration
+│   │   ├── ACL Enumeration
+│   │   │   └── Acl ├⌐num├⌐ration.md
+│   │   ├── Credential AD enumeration
+│   │   │   ├── Credential AD Linux.md
+│   │   │   └── Credential AD windows.md
+│   │   ├── Enumerating Security Controls
+│   │   │   └── Enumerating security control.md
+│   │   ├── Hosts Enumeration
+│   │   │   └── Initial Domain Enumeration.md
+│   │   ├── LLMNR_NBT-NS Poisoning
+│   │   │   ├── From Linux.md
+│   │   │   └── From Windows.md
+│   │   ├── Living Off The Lands.md
+│   │   ├── Password Policy Enumeration
+│   │   │   └── Enumerating & Retrieving Password Policies.md
+│   │   ├── Password Spraying
+│   │   │   ├── Linux.md
+│   │   │   └── Windows.md
+│   │   ├── Resume Skill Assesment HTB.md
+│   │   ├── SMB Enumeration
+│   │   │   └── Smb ├ënum├⌐ration.md
+│   │   ├── Tools
+│   │   │   ├── BloodHound
+│   │   │   │   ├── Analysis
+│   │   │   │   └── Utilisation.md
+│   │   │   └── PowerView
+│   │   │       └── Powerview.md
+│   │   └── User Enumeration
+│   │       ├── With Access
+│   │       │   └── With Access.md
+│   │       └── Without Access
+│   │           └── User Enumeration Without access.md
+│   ├── Application Enumeration
+│   │   ├── Attacking Applications Connecting to Services.md
+│   │   ├── ColdFusion
+│   │   │   └── Cold Fusion.md
+│   │   ├── Drupal
+│   │   │   └── Drupal.md
+│   │   ├── GitLab
+│   │   │   └── Gitlab.md
+│   │   ├── IIS Tilde Enumeration
+│   │   │   └── IiS tilde ├ënum├⌐ration.md
+│   │   ├── Jenkins
+│   │   │   └── Jenkins.md
+│   │   ├── Joomla
+│   │   │   └── Joomla.md
+│   │   ├── Other Notable App.md
+│   │   ├── PRTG Network Monitor
+│   │   │   └── Prtg network monitor.md
+│   │   ├── Shellshock CGI.md
+│   │   ├── Splunk
+│   │   ├── ThinkClient App tier2 and tier3.md
+│   │   ├── Tomcat
+│   │   │   ├── Tomcat CGi.md
+│   │   │   └── Tomcat.md
+│   │   ├── Wordpress
+│   │   │   └── WordPress.md
+│   │   └── osTicket
+│   │       └── Osticket.md
+│   ├── Enumeration Basic Linux Systeme.md
+│   ├── Enumeration Basic Windows Systeme.md
+│   └── Web Enumeration
+│       ├── Active
+│       │   ├── Directory & Page Fuzzing
+│       │   │   ├── Directory And Page Fuzzing avec Dirsearch.md
+│       │   │   └── Directory and page fuzzing FFUF.md
+│       │   ├── Parameter & Value Fuzzing
+│       │   │   └── Param├⌐trer and value fuzzing.md
+│       │   ├── Subdomain & Virtual Host Fuzzing
+│       │   │   └── Subdomain and virtual host enum.md
+│       │   └── Web Server Enumeration
+│       │       └── Web server enumeration.md
+│       ├── Passive
+│       │   ├── Google Dorking
+│       │   │   └── Google dorking.md
+│       │   └── Passive Infrastructure Identification
+│       │       ├── Passive Subdomain Enumeration
+│       │       └── Passive infra enumeration.md
+│       └── Tools
+│           └── EyeWitness
+│               └── EyeWitness.md
+├── 2- Exploitation
+│   ├── Credential Exploitation.md
+│   ├── Pre-Exploitation
+│   │   ├── Shells
+│   │   │   ├── Bind Shells.md
+│   │   │   ├── Payloads.md
+│   │   │   ├── Reverse Shell.md
+│   │   │   ├── Webshells.md
+│   │   │   └── Windows Shells.md
+│   │   └── Tools
+│   │       ├── Metasploit Components.md
+│   │       ├── Metasploit Session.md
+│   │       ├── Metasploit Venom.md
+│   │       └── Searchsploit
+│   │           └── Searchsploot.md
+│   ├── Service Exploitation
+│   │   └── Web Exploitation
+│   │       ├── CGI Shellshock Attack
+│   │       │   └── CGI shellshock attack.md
+│   │       ├── CSRF.md
+│   │       ├── Command Injection
+│   │       │   ├── Cheatsheets complet.md
+│   │       │   └── Skill Assessment R├⌐sumer.md
+│   │       ├── Cross-Site Scripting (XSS)
+│   │       │   ├── Discovery
+│   │       │   ├── Phishing
+│   │       │   ├── Session Hijacking
+│   │       │   └── ≡ƒöÑ XSS to Local File Read (XSS2LFR) via JavaScript in PDF Generator.md
+│   │       ├── File Uploads
+│   │       │   └── Basic.md
+│   │       ├── HTTP Verb Tampering.md
+│   │       ├── IDOR.md
+│   │       ├── Local File Inclusion (LFI)
+│   │       │   ├── File Disclosure
+│   │       │   ├── Filter Bypass
+│   │       │   ├── LFI to RCE
+│   │       │   └── PHP decoding webpage.md
+│   │       ├── SQLi
+│   │       │   ├── SQL Injection NoSQL Injection.md
+│   │       │   ├── SQLMAP.md
+│   │       │   └── Union Sqli.md
+│   │       ├── Skill Assessment Web Attacks (xxe,idor,xml,httpverb).md
+│   │       └── XXE
+│   │           ├── Blind
+│   │           ├── File Disclosure
+│   │           ├── RCE
+│   │           ├── XXE GLOBAL.md
+│   │           └── Xxe.md
+│   └── Tools
+│       └── Credential Generating.md
+├── 3- Lateral Movement
+│   ├── Linux Lateral Movement
+│   │   └── Kerberos Pass the Ticket
+│   │       ├── Ccache Files
+│   │       │   └── Ccache Filles.md
+│   │       ├── Kerberos Pass the Tiket.md
+│   │       ├── KeyTab Files
+│   │       │   └── Keytabs File.md
+│   │       ├── Linikatz
+│   │       │   └── Linikatz.md
+│   │       └── Mimikatz.md
+│   ├── Pivoting
+│   │   ├── Advanced Tunneling
+│   │   │   ├── DNS Tunneling (Dnscat2).md
+│   │   │   └── SOCKS_ICMP Tunneling.md
+│   │   ├── Double Pivoting
+│   │   │   └── RDP et SOCKS Tunneling avec SocksOverRDP.md
+│   │   ├── Dynamic and Local Port Forwarding
+│   │   │   ├── Dynamic Port Forwarding (SOCKS, SSH).md
+│   │   │   └── Remote_Reverse Port Forwarding avec SSH.md
+│   │   ├── Meterpreter_&_Socat
+│   │   │   ├── Meterpreter Pivoting_port_forwarding.md
+│   │   │   └── Socat Reverse & Bind Shell.md
+│   │   ├── Pivoting Methods
+│   │   │   ├── Chisel ( SOCKS5 Tunneling).md
+│   │   │   ├── Netsh (Windows Port Forwarding).md
+│   │   │   ├── Plink, Sshuttle (SSH Pivoting).md
+│   │   │   └── Rpivot (Web Server Pivoting).md
+│   │   ├── Pivoting.md
+│   │   ├── Tableau  Recapitulatif des M├⌐thodes de Pivoting.md
+│   │   └── Tools
+│   │       ├── Draw.io.md
+│   │       ├── Meterpreter
+│   │       │   └── Meterpreter pivoting.md
+│   │       ├── Netsh
+│   │       │   └── Netsh.md
+│   │       ├── Plink
+│   │       │   └── Plink.md
+│   │       ├── RPIVOT
+│   │       │   └── RPIVOT.md
+│   │       └── Sshuttle
+│   ├── Windows Lateral Movement
+│   │   ├── ACL DCSYNC ATTACK.md
+│   │   ├── ADCS ESC 1 A 13 BIG DOSSIER
+│   │   │   ├── ESC1.md
+│   │   │   ├── ESC2.md
+│   │   │   └── ESC3.md
+│   │   ├── Active Directory Lateral Movement
+│   │   │   ├── ACL Exploitation_Lateral_Abuse.md
+│   │   │   ├── Double Hob Kerberos Problem.md
+│   │   │   ├── RDP
+│   │   │   │   └── Priviliged Access_rdp_winrm_linux_windows_mssql.md
+│   │   │   └── Vul Recente_print-nightmare_potipotam_NoPac.md
+│   │   ├── Domain Trust Forest
+│   │   │   ├── Attacking Domain Trust Linux.md
+│   │   │   ├── Attacking Domain Trust windows.md
+│   │   │   ├── Attacking Domain Trusts - Cross-Forest Trust Abuse - from Linux.md
+│   │   │   ├── Attacking Domain Trusts-Cross-Forest Trust Abuse - from Windows.md
+│   │   │   └── Domain Trust.md
+│   │   ├── Kerberos Pass the Ticket
+│   │   │   ├── Kerberoasting Pass The ticket from windows.md
+│   │   │   ├── Kerberos Pass the Ticket From Linux.md
+│   │   │   └── Ticket Request
+│   │   ├── Misconfiguration AD exploit.md
+│   │   ├── NTLM Pass the Hash
+│   │   ├── PowerView.ps1 AD.md
+│   │   ├── SeBackUpPrivilege Abuse.md
+│   │   └── ≡ƒº¿ ESC4 ΓÇô Exploitation via WriteOwner.md
+│   └── dfsdsfdsf.md
+├── 4- Post-Exploitation
+│   ├── Linux Post Exploitation
+│   │   ├── File Transfer
+│   │   │   ├── Linux Technique.md
+│   │   │   ├── Living Of The Lands.md
+│   │   │   ├── Technique Supplementaire.md
+│   │   │   ├── Transfer Files with Codes.md
+│   │   │   └── Windows Technique.md
+│   │   └── Privilege Escalation
+│   │       ├── 1 - Information Gathering.md
+│   │       ├── 2 - Environment-based Privilege Escalation.md
+│   │       ├── 3 - Permissions-based Privilege Escalation.md
+│   │       ├── 4 - Service-based Privilege Escalation.md
+│   │       ├── 5 - Linux Internals-based Privilege Escalation.md
+│   │       ├── 6 - Recent 0-Days.md
+│   │       └── Technique de PrivEsc.md
+│   ├── Password Attacks
+│   │   ├── Cracking Files.md
+│   │   ├── Linux Password Attacks.md
+│   │   ├── PassTheHash.md
+│   │   ├── Remote Password Attacks.md
+│   │   └── Windows Local Password Attacks.md
+│   └── Windows Post Exploitation
+│       ├── Info
+│       │   ├── Access Control List (ACL)
+│       │   ├── Accounts
+│       │   ├── Built-in AD Groups
+│       │   ├── Execution Policy
+│       │   ├── NTFS
+│       │   ├── PowerShell
+│       │   ├── Registry
+│       │   └── Services
+│       ├── Kernel Exploits
+│       └── Privilege Escalation
+│           ├── AD Certificates Services.md
+│           ├── Kerberbroasting
+│           │   ├── Kerberoasting.md
+│           │   └── Targeted Kerberoasting.md
+│           ├── Legacy Operating Systems
+│           │   ├── Windows 7
+│           │   └── Windows Server 2008
+│           ├── Password Attacks
+│           │   ├── Hydra.md
+│           │   ├── JohnTheRipper.md
+│           │   ├── Linux Credential Hunting.md
+│           │   ├── Linux Passwd, Shadow & Opasswd.md
+│           │   ├── WD Active Directory & NTDS.dit.md
+│           │   ├── WD Attacking LSASS.md
+│           │   ├── WD Credential Hunting.md
+│           │   └── WD Windows Attacking SAM and LSA.md
+│           ├── Privilege escalation
+│           │   ├── 1 - Lay of the Lands.md
+│           │   ├── 2 - Windows User Privileges.md
+│           │   ├── 3 - Windows Group Privileges.md
+│           │   ├── 4 - Attacking the OS.md
+│           │   ├── 5 - Credential Hunting.md
+│           │   ├── 6 - Restricted Environments.md
+│           │   ├── 7 - Additional Technique.md
+│           │   ├── 8 - End of life System.md
+│           │   └── Sans titre 8.md
+│           ├── Privileged Groups
+│           │   ├── Backup Operators
+│           │   ├── DnsAdmins
+│           │   └── Print Operators
+│           └── User Privileges
+│               ├── Abusing Privilege AD.md
+│               ├── SeDebugPrivilege
+│               └── SeImpersonate & SeAssignPrimaryToken
 `}
 </pre>
   <p>
