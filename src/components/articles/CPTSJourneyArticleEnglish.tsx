@@ -251,51 +251,52 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           <Cpu className="w-6 h-6" />
           Tackling the 28 CPTS MODULES
         </h3>
-       <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-  {/* Parcours global sur le path */}
+       
+<div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+  {/* Vue d'ensemble du parcours */}
   <div className="flex items-center gap-3 mb-2">
     <BookOpen className="w-6 h-6 text-violet-400" />
-    <h4 className="text-xl font-semibold text-violet-300">The Penetration Tester Learning Path</h4>
+    <h4 className="text-xl font-semibold text-violet-300">The Learning Path: 3 to 4 Months of Growth</h4>
   </div>
   <p className="text-gray-300 text-lg">
     I spent about <strong>3 to 4 months</strong> working through the entire <strong>Penetration Tester learning path</strong> on Hack The Box.
-    I didn’t try to rush it — I treated each module like a mini-course, often going back over topics until I fully understood them.  
-    The path is <strong>incredibly rich</strong>, both in technical depth and real-world relevance.  
-    <span className="block mt-1">Anyone with motivation — even starting from scratch — can finish this path and be ready for the CPTS.  
-    You just need to be <strong>consistent</strong>, and willing to take your time when it gets tough.</span>
+    I didn’t try to rush it — I treated each module like a mini-course, often going back over topics until I fully understood them.
+    The path is <strong>incredibly rich</strong>, both in technical depth and real-world relevance.
+    Anyone with motivation — even from scratch — can finish this path and be ready for the CPTS.
+    <span className="block font-semibold text-violet-400">Consistency and patience are key.</span>
   </p>
 
-  {/* Apprentissage progressif, logique de structuration */}
+  {/* Progressivité du learning path */}
   <div className="flex items-center gap-2 mb-2">
     <Brain className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Learning Structure</span>
+    <span className="text-xl font-semibold text-violet-300">A Progressive Structure</span>
   </div>
   <p className="text-gray-300">
-    At first glance, the 28 modules might feel overwhelming, especially if you're new to structured cybersecurity learning.  
-    But what I appreciated is the <strong>progressive layering</strong>. The first modules set the foundations, each one adds more complexity and realism.  
-    <span className="block mt-1">If you follow through, your mindset will shift — you stop thinking like a student and start thinking like a pentester.</span>
+    At first glance, the 28 modules might feel overwhelming, especially if you're new to structured cybersecurity learning.
+    But the path uses <strong>progressive layering</strong>: the first modules set the foundation, and each adds complexity and realism.
+    As you progress, your mindset shifts — you stop thinking like a student and start thinking like a pentester.
   </p>
 
-  {/* Stratégie d'apprentissage, rythme & méthode */}
+  {/* Méthode d'apprentissage & organisation */}
   <div className="flex items-center gap-2 mb-2">
     <Monitor className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">My Method</span>
+    <span className="text-xl font-semibold text-violet-300">Method & Workflow</span>
   </div>
   <p className="text-gray-300">
-    I didn’t set fixed goals like “one module per day” — some modules took 2-3 hours, others like <strong>Attacking Enterprise Networks</strong> or <strong>Password Attacks</strong> took up to <strong>5 full days</strong>.
-    I worked in long, focused sessions (usually 5 to 7 hours per day), with structured note-taking in <strong>Obsidian</strong>.
-    After each module, I picked a related <strong>HTB box</strong> to reinforce the concepts.
-    <span className="block mt-1">Connecting theory and practice is where the learning really sticks.</span>
+    I didn’t set fixed goals like “one module per day” — some took 2-3 hours, others like <strong>Attacking Enterprise Networks</strong> or <strong>Password Attacks</strong> up to <strong>5 days</strong>.
+    I worked in long, focused sessions (5–7 hours per day), with structured notes in <strong>Obsidian</strong>.
+    After each module, I’d pick a related <strong>HTB box</strong> to reinforce the concepts.
+    <span className="block mt-1">Connecting theory and practice is where real learning happens.</span>
   </p>
 
-  {/* Exemple : module > box > notes */}
+  {/* L'importance des notes personnelles */}
   <div className="flex items-center gap-2 mb-2">
     <ListChecks className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">From Module to Practice</span>
+    <span className="text-xl font-semibold text-violet-300">Example: Notes as a Checklist</span>
   </div>
   <p className="text-gray-300">
-    For example, after <strong>Linux Privilege Escalation</strong>, I tackled two medium-difficulty boxes with known privesc vectors.
-    I used my notes as a checklist — it showed me exactly where I was solid, and where I had gaps.
+    After <strong>Linux Privilege Escalation</strong>, I tackled two medium boxes with known privesc vectors, using my notes as a checklist.
+    It showed me exactly where I was solid — and where I had gaps.
   </p>
   <div className="bg-violet-900/20 rounded-lg p-4">
     <FileText className="w-5 h-5 text-violet-400 inline-block mr-1 mb-1" />
@@ -305,19 +306,18 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
     </span>
   </div>
 
-  {/* Modules marquants */}
+  {/* Les modules marquants */}
   <div className="flex items-center gap-2 mb-2">
     <CheckCircle2 className="w-6 h-6 text-violet-400" />
     <span className="text-xl font-semibold text-violet-300">Standout Modules</span>
   </div>
   <div className="bg-violet-900/20 rounded-lg p-4">
     <ul className="list-disc ml-6 text-gray-300 space-y-1">
-      <li><strong>Attacking Enterprise Networks</strong>: A <span className="font-semibold">mini CPTS exam</span>. Long, detailed, and mimics the real format. It was a turning point — the ultimate test of readiness.  
-        It teaches chaining: enumeration, privesc, pivoting, lateral movement, reporting.</li>
-      <li><strong>Penetration Testing Process</strong>: Might seem basic, but it gives you the <span className="font-semibold">mindset and workflow</span> for the entire path.</li>
-      <li><strong>Active Directory Enumeration & Attacks</strong>: The most <span className="font-semibold">complete and clear</span> module. Helped me build checklists and get real with AD exploitation — tools, logic, and real-life applicability.</li>
-      <li><strong>Documentation and Reporting</strong>: Often overlooked, but <span className="font-semibold">critical for the exam</span>. Use it to structure your own report in <strong>SysReptor</strong>.</li>
-      <li><strong>Command Injection</strong> & <strong>SQLi</strong>: Good balance of theory and practice — clear payloads, bypasses, and a lot of practice in boxes.</li>
+      <li><strong>Attacking Enterprise Networks</strong>: A <span className="font-semibold">mini CPTS exam</span>. Long, detailed, and mimics the real format. No walkthrough, no hints — the ultimate test. Chains enumeration, privesc, pivoting, lateral movement, reporting.</li>
+      <li><strong>Penetration Testing Process</strong>: Gives you the <span className="font-semibold">mindset and workflow</span> for the entire path. Perfect if you want to understand "why" before "how".</li>
+      <li><strong>Active Directory Enumeration & Attacks</strong>: The most <span className="font-semibold">complete and clear</span> module. Helps you build checklists and get real with AD exploitation — both tools and logic.</li>
+      <li><strong>Documentation and Reporting</strong>: <span className="font-semibold">Critical for the exam</span>. Format, tone, and expectations for your report. I structured my own CPTS report in <strong>SysReptor</strong> thanks to this module.</li>
+      <li><strong>Command Injection</strong> & <strong>SQLi</strong>: Balanced mix of theory and practice — clear payloads, bypasses, and lots of practice in boxes.</li>
     </ul>
   </div>
 
@@ -328,32 +328,32 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
   </div>
   <div className="bg-violet-900/20 rounded-lg p-4">
     <ul className="list-disc ml-6 text-gray-300 space-y-1">
-      <li><strong>Password Attacks</strong>: Important but too passive. A lot of waiting — not very educational past a certain point.</li>
-      <li><strong>Shells & Payloads</strong>: Felt <span className="font-semibold">out of place</span>, concepts scattered, better covered elsewhere.</li>
-      <li><strong>Linux Privilege Escalation</strong>: Good examples but lacked a clear <span className="font-semibold">methodology</span>. I expanded it with CTF and PEASS/g0tmi1k resources.</li>
-      <li><strong>Vulnerability Assessment</strong>: A bit dry — covers basics but not deep, nothing wrong but not exciting.</li>
+      <li><strong>Password Attacks</strong>: Important but too passive — a lot of waiting, not very educational past a point.</li>
+      <li><strong>Shells & Payloads</strong>: <span className="font-semibold">Out of place</span>. Concepts scattered, better covered elsewhere.</li>
+      <li><strong>Linux Privilege Escalation</strong>: Good examples but lacked <span className="font-semibold">methodology</span>. I expanded it using CTF, PEASS, and g0tmi1k resources.</li>
+      <li><strong>Vulnerability Assessment</strong>: A bit dry — covers the basics but not much depth. Not bad, just not exciting.</li>
     </ul>
   </div>
 
-  {/* Avis sur la valeur et le prix du cursus */}
+  {/* Rapport qualité/prix du cursus */}
   <div className="flex items-center gap-2 mb-2">
     <Network className="w-6 h-6 text-violet-400" />
     <span className="text-xl font-semibold text-violet-300">Pricing & Value</span>
   </div>
   <p className="text-gray-300">
     Even the weaker modules are <strong>still solid</strong>. HTB doesn’t cut corners, and pricing is extremely fair.
-    I went with the <strong>HTB Silver subscription</strong> — <strong>€410/year</strong> for <strong>all 28 modules</strong>, labs, updates, and a <strong>voucher for the CPTS exam</strong>.  
-    When you compare it to other certs (looking at you, OSCP), it’s honestly a steal.
+    I chose the <strong>HTB Silver subscription</strong>: <strong>€410/year</strong> for <strong>all 28 modules</strong>, labs, updates, and a <strong>voucher for the CPTS exam</strong>.
+    Compared to other certs (looking at you, OSCP), it’s honestly a steal.
   </p>
 
   {/* Conseil final */}
   <div className="bg-violet-900/20 rounded-lg p-4">
     <span className="text-violet-400 font-semibold"><CheckCircle2 className="w-5 h-5 inline-block mb-1 mr-1" />Advice:</span>
-    <span className="text-gray-300">  
+    <span className="text-gray-300">
       Take your time. <strong>Work module by module, box by box</strong>.  
-      Document everything, don’t move on until it clicks.  
-      The content is designed to turn you into a practitioner, not just someone who memorizes flags.  
-      If you do it right, you’ll be surprised how far you’ve come.
+      Document everything, and don’t move on until it clicks.
+      The content is designed to turn you into a practitioner, not just someone who memorizes flags.
+      If you do it right, by the end you’ll be surprised how far you’ve come.
     </span>
   </div>
 </div>
@@ -378,94 +378,19 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
                 <BookOpen className="w-6 h-6" />
                 CPTS Learning Path Structure
               </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-  {/* Méthode modules + boxes */}
-  <div className="flex items-center gap-3 mb-2">
-    <Terminal className="w-6 h-6 text-violet-400" />
-    <h4 className="text-xl font-semibold text-violet-300">Modules & Hands-On Practice</h4>
-  </div>
-  <p className="text-gray-300 text-lg">
-    During the <strong>CPTS learning path</strong>, I made it a habit to complete <strong>1–2 HTB boxes per module</strong>, directly related to the topic I had just studied.
-    For example, after finishing the <em>Web Exploitation</em> module, I’d go try an XSS or file upload challenge in the retired or easy/medium category.
-    This helped me anchor new concepts right away by putting them into practice.
-  </p>
+              <div className="bg-[#2a2a2f] p-6 rounded-lg">
+                <p>
+      I didn’t follow a strict schedule during the CPTS path — I just aimed to work around <strong>6 to 7 hours a day</strong>, <strong>five days a week</strong>, always taking short breaks every couple of hours to stay focused. I knew from experience that <strong>rest matters just as much as active study</strong> — especially in cybersecurity, where understanding is more important than memorization.<br /><br />
 
-  {/* Live boxes après le path */}
-  <div className="flex items-center gap-2 mb-2">
-    <Users className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Live Boxes: Leveling Up</span>
-  </div>
-  <p className="text-gray-300">
-    Once I completed the path, I moved on to doing <strong>live boxes on Hack The Box</strong>.
-    These weren’t always tied to specific modules — I did them for fun and for the challenge.
-    But they turned out to be incredibly valuable. These boxes helped me work on:
-  </p>
-  <ul className="list-disc ml-8 text-gray-300 space-y-1">
-    <li><strong>Internal pivoting</strong> (shoutout to Ligolo-ng)</li>
-    <li><strong>Post-exploitation logic</strong> and lateral movement</li>
-    <li><strong>Handling AV and EDR</strong> obstacles in a realistic environment</li>
-  </ul>
-  <p className="text-gray-300">
-    I eventually reached the <strong>Pro Hacker rank</strong> — not without struggle. Some hard boxes kicked my ass, and yes, I needed help sometimes. That’s okay. What matters is what you learn from the process.
-  </p>
+      My routine was pretty straightforward: <strong>start a module</strong>, <strong>finish it completely</strong>, and take <strong>structured notes</strong> as I went. Then, whenever possible, I would <strong>chain it with one or two related HTB boxes</strong>. This practical follow-up was crucial for me — the hands-on challenges helped <strong>anchor what I had just learned</strong>.<br /><br />
 
-  {/* Playlist IppSec */}
-  <div className="flex items-center gap-2 mb-2">
-    <BookOpen className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">The IppSec CPTS Playlist</span>
-  </div>
-  <div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
-    <ArrowRight className="w-5 h-5 text-violet-400" />
-    <span className="text-gray-300">
-      I tackled the  
-      <a href="https://www.youtube.com/watch?v=H9FcE_FMZio&list=PLidcsTyj9JXItWpbRtTg6aDEj10_F17x5"
-        target="_blank"
-        className="text-violet-400 hover:underline font-semibold ml-1"
-      >
-        unofficial IppSec CPTS prep playlist
-      </a>
-      . These boxes are <strong>brilliantly curated</strong>. Some contain vulnerabilities nearly identical to the CPTS. More importantly, they force you to:
-    </span>
-  </div>
-  <ul className="list-disc ml-8 text-gray-300 space-y-1">
-    <li><strong>Chain multiple steps</strong> without guidance</li>
-    <li><strong>Structure your workflow</strong> like in a real pentest</li>
-    <li><strong>Manage pivots and post-exploitation scenarios</strong> on your own</li>
-  </ul>
-  <p className="text-gray-300">
-    These boxes really <strong>boosted my confidence</strong>. After finishing the playlist, I said to myself: <em>"Okay, now I’m really ready for the 10-day exam."</em>
-  </p>
+      Each morning, I’d <strong>review the previous day’s notes</strong>, to keep everything fresh and reinforce long-term memory. It wasn’t always easy to stay on track — motivation goes up and down — but I kept telling myself that <strong>discipline had to win over comfort</strong>. Over time, it paid off. The progress wasn’t always visible day by day, but looking back, it added up fast.<br /><br />
 
-  {/* Les autres méthodes de prépa : ProLabs, hard/insane boxes */}
-  <div className="flex items-center gap-2 mb-2">
-    <TrendingUp className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Alternative Prep?</span>
-  </div>
-  <div className="bg-violet-900/20 rounded-lg p-4">
-    <p className="text-gray-300 mb-2">
-      💬 I know some people also use <strong>ProLabs</strong> or tackle <strong>hard/insane boxes</strong> to prep, but personally, I didn’t feel the need. In my opinion, if you:
+      Outside of studying, I made sure to <strong>take care of my mental and physical health</strong>. I trained <strong>four times a week</strong>, around <strong>2 to 3 hours per session</strong>, and went on <strong>regular walks with my family and my dog</strong>. Staying active and clearing my head helped me avoid burnout and come back sharper the next day. Honestly, <strong>moving your body is just as important as moving your brain</strong>.<br /><br />
+
+      And let’s be real — <strong>a good Spotify playlist</strong> makes the grind a lot more enjoyable. When I was in the zone, music helped me stay focused and turn long hours into productive ones.
     </p>
-    <ul className="list-disc ml-8 text-gray-300 space-y-1">
-      <li>complete the CPTS path <strong>seriously</strong>,</li>
-      <li>pair modules with relevant boxes <strong>consistently</strong>,</li>
-      <li>follow the IppSec playlist <strong>at the right time</strong>,</li>
-    </ul>
-    <p className="text-gray-300 mt-2">
-      …then you already have <strong>everything you need</strong>. No need to overdo it. The CPTS learning path alone is already <strong>rich and complete</strong>.
-    </p>
-  </div>
-
-  {/* Conseils timing sur la playlist */}
-  <div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
-    <Clock className="w-5 h-5 text-violet-400" />
-    <span className="text-gray-300">
-      <strong>Personal advice</strong>:
-      Don’t wait too long after finishing the learning path to start the IppSec boxes — you might forget key details.  
-      But don’t start them too early either.  
-      Make sure you’ve built a strong foundation from the modules before jumping in. <strong>Trust the process</strong>.
-    </span>
-  </div>
-</div>
+              </div>
             </div>
 
             <div>
@@ -473,94 +398,65 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
                 <Monitor className="w-6 h-6" />
                 HTB Boxes, Modules & IppSec's Track
               </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-  {/* Modules + practice boxes */}
-  <div className="flex items-center gap-3 mb-2">
-    <Terminal className="w-6 h-6 text-violet-400" />
-    <h4 className="text-xl font-semibold text-violet-300">Pairing Modules with Boxes</h4>
-  </div>
-  <p className="text-gray-300 text-lg">
-    During the <strong>CPTS learning path</strong>, I made it a habit to complete <strong>1–2 HTB boxes per module</strong>, directly related to the topic I had just studied.  
-    For example, after finishing <em>Web Exploitation</em>, I’d try an XSS or file upload challenge.  
-    Putting theory into practice anchored new concepts right away.
-  </p>
+              <div className="bg-[#2a2a2f] p-6 rounded-lg">
+                <p>
+        During the <strong>CPTS learning path</strong>, I made it a habit to complete <strong>1–2 HTB boxes per module</strong>, directly related to the topic I had just studied. For example, after finishing the <em>Web Exploitation</em> module, I’d go try an XSS or file upload challenge in the retired or easy/medium category. This helped me anchor new concepts right away by putting them into practice.
+      </p>
 
-  {/* Live boxes for skill-building */}
-  <div className="flex items-center gap-2 mb-2">
-    <Users className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Live Boxes: Real-World Skills</span>
-  </div>
-  <p className="text-gray-300">
-    After the path, I moved on to <strong>live boxes on Hack The Box</strong>.  
-    Not always tied to modules — just for fun and the challenge.  
-    But these boxes taught me:
-  </p>
-  <ul className="list-disc ml-8 text-gray-300 space-y-1">
-    <li><strong>Internal pivoting</strong> (shoutout to Ligolo-ng)</li>
-    <li><strong>Post-exploitation logic</strong> and lateral movement</li>
-    <li><strong>Handling AV and EDR</strong> obstacles</li>
-  </ul>
-  <p className="text-gray-300">
-    I eventually reached <strong>Pro Hacker rank</strong> — not without struggle. Some hard boxes kicked my ass, and yes, I needed help. That’s okay. What matters is what you learn from the process.
-  </p>
+      <p>
+        Once I completed the path, I moved on to doing <strong>live boxes on Hack The Box</strong>. These weren’t always tied to specific modules — I did them for fun and for the challenge. But they turned out to be incredibly valuable. These boxes helped me work on:
+      </p>
 
-  {/* IppSec playlist */}
-  <div className="flex items-center gap-2 mb-2">
-    <BookOpen className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">The IppSec CPTS Playlist</span>
-  </div>
-  <div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
-    <ArrowRight className="w-5 h-5 text-violet-400" />
-    <span className="text-gray-300">
-      I tackled the  
-      <a href="https://www.youtube.com/watch?v=H9FcE_FMZio&list=PLidcsTyj9JXItWpbRtTg6aDEj10_F17x5"
-        target="_blank"
-        className="text-violet-400 hover:underline font-semibold ml-1"
-      >
-        unofficial IppSec CPTS prep playlist
-      </a>
-      . These boxes are <strong>brilliantly curated</strong>. Some contain vulnerabilities nearly identical to the CPTS. More importantly, they force you to:
-    </span>
-  </div>
-  <ul className="list-disc ml-8 text-gray-300 space-y-1">
-    <li><strong>Chain multiple steps</strong> without guidance</li>
-    <li><strong>Structure your workflow</strong> like in a real pentest</li>
-    <li><strong>Manage pivots and post-exploitation scenarios</strong> on your own</li>
-  </ul>
-  <p className="text-gray-300">
-    These boxes really <strong>boosted my confidence</strong>. After finishing the playlist, I said to myself: <em>"Okay, now I’m really ready for the 10-day exam."</em>
-  </p>
+      <ul className="list-disc list-inside space-y-1 ml-4">
+        <li><strong>Internal pivoting</strong> (shoutout to Ligolo-ng),</li>
+        <li><strong>Post-exploitation logic</strong> and lateral movement,</li>
+        <li><strong>Handling AV and EDR</strong> obstacles in a realistic environment.</li>
+      </ul>
 
-  {/* Alternatives: ProLabs & hard/insane */}
-  <div className="flex items-center gap-2 mb-2">
-    <TrendingUp className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Alternative Prep Methods</span>
-  </div>
-  <div className="bg-violet-900/20 rounded-lg p-4">
-    <p className="text-gray-300 mb-2">
-      I know some people also use <strong>ProLabs</strong> or even tackle <strong>hard/insane boxes</strong> to prep, but personally, I didn’t feel the need. In my opinion, if you:
-    </p>
-    <ul className="list-disc ml-8 text-gray-300 space-y-1">
-      <li>complete the CPTS path <strong>seriously</strong>,</li>
-      <li>pair modules with relevant boxes <strong>consistently</strong>,</li>
-      <li>follow the IppSec playlist <strong>at the right time</strong>,</li>
-    </ul>
-    <p className="text-gray-300 mt-2">
-      …then you already have <strong>everything you need</strong>. No need to overdo it. The CPTS learning path alone is already <strong>rich and complete</strong>.
-    </p>
-  </div>
+      <p>
+        I eventually reached the <strong>Pro Hacker rank</strong> — not without struggle. Some hard boxes kicked my ass, and yes, I needed help sometimes. That’s okay. What matters is what you learn from the process.
+      </p>
 
-  {/* Conseil timing sur la playlist */}
-  <div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
-    <Clock className="w-5 h-5 text-violet-400" />
-    <span className="text-gray-300">
-      <strong>Personal advice:</strong>
-      Don’t wait too long after finishing the learning path to start the IppSec boxes — you might forget key details.  
-      But don’t start them too early either.  
-      Make sure you’ve built a strong foundation from the modules before jumping in. <strong>Trust the process</strong>.
-    </span>
-  </div>
-</div>
+      <p>
+        Then I tackled the <strong>unofficial IppSec CPTS prep playlist</strong>:
+        <br />
+        <a href="https://www.youtube.com/watch?v=H9FcE_FMZio&list=PLidcsTyj9JXItWpbRtTg6aDEj10_F17x5" target="_blank" className="text-violet-400 hover:underline">
+          HTB CPTS Prep Boxes – IppSec YouTube
+        </a>
+      </p>
+
+      <p>
+        And let me tell you — these boxes are <strong>brilliantly curated</strong>. Now that I’ve passed the exam, I can confirm: some of them contain <strong>vulnerabilities nearly identical</strong> to the ones found in the CPTS. More importantly, they force you to:
+      </p>
+
+      <ul className="list-disc list-inside space-y-1 ml-4">
+        <li><strong>Chain multiple steps</strong> without guidance,</li>
+        <li><strong>Structure your workflow</strong> like in a real pentest,</li>
+        <li><strong>Manage pivots and post-exploitation scenarios</strong> on your own.</li>
+      </ul>
+
+      <p>
+        These boxes really <strong>boosted my confidence</strong>. After finishing the playlist, I said to myself: <em>"Okay, now I’m really ready for the 10-day exam."</em>
+      </p>
+
+      <p>
+        💬 I know some people also use <strong>ProLabs</strong> or even tackle <strong>hard/insane boxes</strong> to prep, but personally, I didn’t feel the need. In my opinion, if you:
+      </p>
+
+      <ul className="list-disc list-inside space-y-1 ml-4">
+        <li>complete the CPTS path <strong>seriously</strong>,</li>
+        <li>pair modules with relevant boxes <strong>consistently</strong>,</li>
+        <li>follow the IppSec playlist <strong>at the right time</strong>,</li>
+      </ul>
+
+      <p>
+        …then you already have <strong>everything you need</strong>. No need to overdo it. The CPTS learning path alone is already <strong>rich and complete</strong>.
+      </p>
+
+      <p>
+        <strong>🕐 Personal advice</strong>: Don’t wait too long after finishing the learning path to start the IppSec boxes — you might forget key details. But don’t start them too early either. Make sure you’ve built a strong foundation from the modules before jumping in. <strong>Trust the process</strong>.
+      </p>
+              </div>
             </div>
           </div>
         </div>
@@ -579,49 +475,25 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             <Zap className="w-6 h-6" />
             Final 10-Day Sprint
           </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-  {/* Pause stratégique avant l'examen */}
-  <div className="flex items-center gap-3 mb-2">
-    <Clock className="w-6 h-6 text-violet-400" />
-    <h4 className="text-xl font-semibold text-violet-300">Day -10: Strategic Break</h4>
-  </div>
-  <p className="text-gray-300 text-lg">
-    At <strong>Day -10</strong>, I had already completed the entire <strong>learning path</strong>, the <strong>HTB boxes</strong>, and the full <strong>IppSec playlist</strong>.
-    So, I decided to take a proper break — about <strong>3 to 4 full days</strong> off.
-  </p>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p>
+        At <strong>Day -10</strong>, I had already completed the entire <strong>learning path</strong>, the <strong>HTB boxes</strong>, and the full <strong>IppSec playlist</strong>.
+        So, I decided to take a proper break — about <strong>3 to 4 full days</strong> off.
+      </p>
 
-  {/* Importance du repos */}
-  <div className="flex items-center gap-2 mb-2">
-    <Brain className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Rest Matters</span>
-  </div>
-  <div className="bg-violet-900/20 rounded-lg p-4">
-    <span className="text-gray-300">
-      I really believe that <strong>resting is just as important as grinding</strong>.  
-      Your brain needs time to digest and organize everything you've learned.
-    </span>
-  </div>
+      <p>
+        I really believe that <strong>resting is just as important as grinding</strong>. Your brain needs time to digest and organize everything you've learned.
+      </p>
 
-  {/* Reprise & organisation des notes */}
-  <div className="flex items-center gap-2 mb-2">
-    <FileText className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Note Organization</span>
-  </div>
-  <p className="text-gray-300">
-    Once I came back fresh, I spent the remaining time going through <strong>all my notes</strong> and making them cleaner and more organized inside <strong>Obsidian</strong>.
-    I structured everything properly, by phase of the pentest, and made sure I could retrieve any technique or command quickly if needed.
-  </p>
+      <p>
+        Once I came back fresh, I spent the remaining time going through <strong>all my notes</strong> and making them cleaner and more organized inside <strong>Obsidian</strong>. 
+        I structured everything properly, by phase of the pentest, and made sure I could retrieve any technique or command quickly if needed.
+      </p>
 
-  {/* Dernière ligne droite */}
-  <div className="flex items-center gap-2 mb-2">
-    <CheckCircle2 className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Final Prep</span>
-  </div>
-  <p className="text-gray-300">
-    That was my only focus during those 10 days. No more labs, no boxes, no distractions.  
-    Just refinement, calm, and preparation.
-  </p>
-</div>
+      <p>
+        That was my only focus during those 10 days. No more labs, no boxes, no distractions. Just refinement, calm, and preparation.
+      </p>
+          </div>
         </div>
       </div>
     </div>
