@@ -41,10 +41,11 @@ import { SitemapGeneratorPage } from './pages/SitemapGeneratorPage';
 
 function App() {
   // State
+  const showCyberCharacter = false;
   const [activeSection, setActiveSection] = useState('home');
   const [isLoaded, setIsLoaded] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-
+  
   // Effects
   useEffect(() => {
     setIsLoaded(true);
