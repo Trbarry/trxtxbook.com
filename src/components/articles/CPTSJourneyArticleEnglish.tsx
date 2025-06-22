@@ -858,7 +858,30 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             Daily Breakdown
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+           <p>
+                I went into the exam <strong>well-prepared</strong>, with a strong methodology and solid habits… or so I thought. On <strong>Day 1</strong>, I had promised myself to document everything into SysReptor <strong>every evening</strong>. <br/>
+                ❌ <strong>Big mistake.</strong>
+              </p>
+
+              <p>
+                What really works is the <strong>real-time trigger-based approach</strong> — every time you discover something (a port, a user, a foothold, a flag…), take a few seconds to document it <em>immediately</em>. I’ll explain this in more detail in the reporting strategy section, but take this as your first big lesson.
+              </p>
+
+              <p>
+                💡 And yes, I used <strong>ChatGPT</strong> to help me speed up parts of the writing (especially impact/mitigation sections), but I always <strong>reviewed and rewrote everything</strong> to make sure it matched my style and findings.
+              </p>
+
+              <p>
+                In terms of progress, the first days were fast — I gained solid access early and moved forward smoothly until I hit <strong>flag 9</strong>. From there, things got tougher. What helped was stepping back, <strong>re-enumerating</strong>, and reanalyzing everything. That’s how I unlocked the path to the next steps. 
+              </p>
+
+              <p>
+                The same happened with <strong>flag 12</strong>. There’s no shame in going backward to move forward. The content is dense, and it’s mentally stressful to have only 5 flags by <strong>Day 6</strong>. But don’t panic — stay calm, think smart, and keep moving.
+              </p>
+
+              <p>
+                And again: <strong>WRITE YOUR REPORT IN REAL-TIME</strong>.
+              </p>
           </div>
         </div>
       </div>
