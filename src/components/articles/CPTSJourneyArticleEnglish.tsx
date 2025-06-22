@@ -31,8 +31,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         <div className="bg-[#2a2a2f] p-4 rounded-lg border border-violet-900/20 mb-8">
           <h3 className="text-sm font-semibold text-violet-400 mb-2">SEO Meta Tags (for reference - dev only)</h3>
           <div className="text-xs text-gray-400 space-y-1">
-            <p><strong>Title:</strong> CPTS: My Journey into Professional Pentesting – From eJPT to HTB Certification</p>
-            <p><strong>Description:</strong> A full 5-month journey to the CPTS certification by Hack The Box – From eJPT to 190-page report. Study roadmap, tools, challenges, and lessons learned.</p>
+           
             <p><strong>Canonical:</strong> https://trxtxbook.com/articles/cpts-journey</p>
           </div>
         </div>
