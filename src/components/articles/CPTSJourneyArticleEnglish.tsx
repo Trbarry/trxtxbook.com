@@ -550,25 +550,50 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             <Zap className="w-6 h-6" />
             Final 10-Day Sprint
           </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p>
-        At <strong>Day -10</strong>, I had already completed the entire <strong>learning path</strong>, the <strong>HTB boxes</strong>, and the full <strong>IppSec playlist</strong>.
-        So, I decided to take a proper break — about <strong>3 to 4 full days</strong> off.
-      </p>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+  {/* Préparation finale, break avant examen */}
+  <div className="flex items-center gap-3 mb-2">
+    <Clock className="w-6 h-6 text-violet-400" />
+    <h4 className="text-xl font-semibold text-violet-300">Day -10: Strategic Break</h4>
+  </div>
+  <p className="text-gray-300 text-lg">
+    At <strong>Day -10</strong>, I had already completed the entire <strong>learning path</strong>, the <strong>HTB boxes</strong>, and the full <strong>IppSec playlist</strong>.<br/>
+    So, I decided to take a proper break — about <strong>3 to 4 full days</strong> off.
+  </p>
 
-      <p>
-        I really believe that <strong>resting is just as important as grinding</strong>. Your brain needs time to digest and organize everything you've learned.
-      </p>
+  {/* Importance du repos */}
+  <div className="flex items-center gap-2 mb-2">
+    <Brain className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Rest is Essential</span>
+  </div>
+  <div className="bg-violet-900/20 rounded-lg p-4">
+    <span className="text-gray-300">
+      I really believe that <strong>resting is just as important as grinding</strong>.
+      Your brain needs time to digest and organize everything you've learned.
+    </span>
+  </div>
 
-      <p>
-        Once I came back fresh, I spent the remaining time going through <strong>all my notes</strong> and making them cleaner and more organized inside <strong>Obsidian</strong>. 
-        I structured everything properly, by phase of the pentest, and made sure I could retrieve any technique or command quickly if needed.
-      </p>
+  {/* Organisation, structuration finale */}
+  <div className="flex items-center gap-2 mb-2">
+    <FileText className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Note Organization & Review</span>
+  </div>
+  <p className="text-gray-300">
+    Once I came back fresh, I spent the remaining time going through <strong>all my notes</strong> and making them cleaner and more organized inside <strong>Obsidian</strong>.
+    I structured everything properly, by phase of the pentest, and made sure I could retrieve any technique or command quickly if needed.
+  </p>
 
-      <p>
-        That was my only focus during those 10 days. No more labs, no boxes, no distractions. Just refinement, calm, and preparation.
-      </p>
-          </div>
+  {/* Dernière ligne droite */}
+  <div className="flex items-center gap-2 mb-2">
+    <CheckCircle2 className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Final Prep Mode</span>
+  </div>
+  <p className="text-gray-300">
+    That was my only focus during those 10 days.  
+    No more labs, no boxes, no distractions.  
+    Just refinement, calm, and preparation.
+  </p>
+</div>
         </div>
       </div>
     </div>
