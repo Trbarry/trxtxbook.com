@@ -1013,7 +1013,92 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             What I Included & Why
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+             <p>
+    In this section, I want to emphasize a crucial mindset: <strong>this isn’t just a report—it’s a certification exam</strong>. You’re not just demonstrating your technical skills; you’re showing your ability to <strong>document a pentest at the highest standard of professionalism</strong>.
+  </p>
+
+  <h4 className="text-lg font-semibold text-violet-400">🛠️ Show Everything (but only what matters)</h4>
+  <p>
+    Your goal is <strong>maximum relevance, maximum detail</strong>, but <strong>zero noise</strong>.
+    <br />
+    Every single finding I included was written with extreme precision. No filler. No vague screenshots. No unnecessary command outputs.
+    <br />
+    I reviewed every section <strong>multiple times</strong> to ensure:
+  </p>
+  <ul className="list-disc pl-6">
+    <li>It contributed meaningfully to the report</li>
+    <li>It could be understood by the reader <strong>without additional explanation</strong></li>
+    <li>It helped paint a clear picture of the attack narrative</li>
+  </ul>
+  <p><em>Ask yourself constantly: would this help the Blue Team understand what happened? If not, remove it.</em></p>
+
+  <h4 className="text-lg font-semibold text-violet-400">🔐 Sanitize EVERYTHING</h4>
+  <p>
+    <strong>This is a security report. Never forget that.</strong><br />
+    Even though this is a lab, I treated it like a real-world client engagement. That means:
+  </p>
+  <ul className="list-disc pl-6">
+    <li>Hashes: 🔒 <strong>sanitized</strong></li>
+    <li>Internal usernames: 🔒 <strong>sanitized</strong></li>
+    <li>Internal IPs and domains: 🔒 <strong>sanitized</strong></li>
+    <li>Passwords: 🔒 <strong>sanitized or masked</strong></li>
+    <li>Screenshots: 🔒 <strong>blurred or redacted</strong></li>
+  </ul>
+  <p>
+    ⚠️ A leaked report shouldn’t help an attacker reproduce the compromise. You’re proving you understand the <strong>responsibility</strong> that comes with reporting.
+  </p>
+
+  <h4 className="text-lg font-semibold text-violet-400">🔁 Clear Walkthrough, Linked to Findings</h4>
+  <p>
+    I structured my walkthrough as a <strong>step-by-step narrative</strong>, from the very first scan of the external surface to full internal Active Directory compromise.
+    <br />
+    At every relevant point, I included a direct link to the related <strong>Finding</strong> so that the reader could jump between:
+  </p>
+  <ul className="list-disc pl-6">
+    <li><strong>What I did</strong> (walkthrough)</li>
+    <li><strong>Why it matters</strong> (finding)</li>
+  </ul>
+  <p>This structure made the document <strong>easier to navigate</strong> for both technical and non-technical readers.</p>
+
+  <h4 className="text-lg font-semibold text-violet-400">🧭 Pivoting & Visibility</h4>
+  <p>
+    Internal pivoting is <strong>one of the most difficult parts</strong> of this exam. So I documented every pivot (Ligolo-ng, tunnels, routes) clearly, using:
+  </p>
+  <ul className="list-disc pl-6">
+    <li>Diagrams when needed</li>
+    <li>Short code blocks for interface config</li>
+    <li>Tables to track access level progression</li>
+  </ul>
+  <p>The goal is to let <strong>anyone skilled reproduce your attack path</strong> without asking questions.</p>
+
+  <h4 className="text-lg font-semibold text-violet-400">📎 Extra: Password Audit (DPAT)</h4>
+  <p>
+    If you manage to dump the entire DC, run a <strong>DPAT-style password audit</strong>.<br />
+    I included my sanitized results in a separate ZIP along with the PDF report. It's a great way to show:
+  </p>
+  <ul className="list-disc pl-6">
+    <li>Post-exploitation analysis</li>
+    <li>Weak password policies</li>
+    <li>Risk assessment based on real-world credentials</li>
+  </ul>
+
+  <h4 className="text-lg font-semibold text-violet-400">👥 Tailoring to the Audience</h4>
+  <p>
+    I carefully adapted the tone and structure depending on the section:
+  </p>
+  <ul className="list-disc pl-6">
+    <li><strong>Walkthrough / Findings</strong>: highly technical, precise</li>
+    <li><strong>Assessment Overview & Recommendations</strong>: accessible, high-level impact focus</li>
+  </ul>
+  <p>This demonstrates you know how to communicate with <strong>both technical and non-technical stakeholders</strong>.</p>
+
+  <h4 className="text-lg font-semibold text-violet-400">🧠 Final Words</h4>
+  <p>
+    This isn’t about flexing. This is about delivering a <strong>reproducible</strong>, <strong>professional</strong>, and <strong>secure</strong> penetration test report.
+    <br />
+    So be rigorous. Be clear. Be respectful of the responsibility that comes with this type of knowledge.
+  </p>
+  <p><strong>And once again: Sanitize everything. Always.</strong></p>
           </div>
         </div>
       </div>
