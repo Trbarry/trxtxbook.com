@@ -1490,92 +1490,114 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             <Target className="w-6 h-6" />
             Enumeration First, Always
           </h3>
-          {/* Bloc : Enumeration, The Backbone */}
-<div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-  <div className="flex items-center gap-3 mb-2">
-    <Search className="w-6 h-6 text-violet-400" />
-    <h4 className="text-xl font-semibold text-violet-300">Enumeration: The Backbone</h4>
-  </div>
-  <p className="text-gray-300 text-lg">
-    <strong>Enumeration is the backbone of the CPTS exam.</strong>  
-    The scope is intentionally broad, and the real danger is missing an attack surface because you cut corners early on.
-  </p>
-  <ul className="list-disc ml-6 space-y-2 text-gray-300">
-    <li><strong>Enumerate everything</strong> at the start: subnets, hosts, services, shares, and web endpoints—even if they seem useless.</li>
-    <li><strong>Start wide, then narrow down:</strong> Ignore nothing at first. Over time, eliminate areas that don’t lead anywhere (e.g. web apps that aren’t vulnerable).</li>
-    <li><strong>Nmap is your best friend:</strong> Always run wide scans, then targeted scans as you discover new subnets or pivots.  
-      Example: <span className="font-mono text-green-300">nmap -p- -A 10.10.0.0/16</span>
-    </li>
-    <li><strong>If you get stuck for more than a day,</strong> step back and re-enumerate. You probably missed something simple.</li>
-    <li><strong>Take notes as you go:</strong> Document every host, open port, and interesting service—even the dead ends.</li>
-    <li><strong>The exam rewards “stay simple”:</strong> Don’t overcomplicate—most paths are direct if you enumerate thoroughly and keep your head cool.</li>
-  </ul>
-  <p className="text-gray-400 text-base italic mt-4">
-    My approach: go wide, skim aggressively, and focus only where you get traction. If you hit a wall, always re-enumerate.  
-    <strong>Enumeration is 80% of the work—don’t underestimate it.</strong>
-  </p>
-</div>
-
-{/* Bloc : Watch for Rabbit Holes */}
-<div className="mt-10">
-  <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-    <Shield className="w-6 h-6" />
-    Watch for Rabbit Holes
-  </h3>
-  <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-    <p className="text-gray-300 text-lg">
-      <strong>Don’t get lost chasing ghosts.</strong>  
-      One of the most dangerous traps in the CPTS exam (and real pentests) is to spend hours—or days—following the wrong lead.
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-gray-300 text-lg">
+      <strong>Enumeration is the backbone of the CPTS exam.</strong> The scope is intentionally broad, and the real danger is missing an attack surface because you cut corners early on.
     </p>
-    <ul className="list-disc ml-6 space-y-2 text-gray-300">
-      <li><strong>Be methodical:</strong> If something looks weird but you’re not finding traction after a reasonable time (<span className="text-violet-400 font-semibold">~1–2 hours</span>), put it aside and continue elsewhere.</li>
-      <li><strong>Track your time:</strong> Literally note how long you spend on each “lead” or exploit path. If you cross the 1-hour mark with no progress, switch context.</li>
-      <li><strong>Don't force it:</strong> Not every open port or page is vulnerable. On the CPTS, there are no “hard” rabbit holes like on some HTB insane boxes—but the network is big, and you can easily waste time on dead ends.</li>
-      <li><strong>Keep a “maybe later” list:</strong> Document weird findings in your notes and move on. Come back only if you run out of other leads.</li>
-      <li><strong>Ask yourself:</strong> “Is this still aligned with the main goal (flag, DA, DC) or am I going down a side path?”</li>
-    </ul>
-    <div className="bg-violet-900/20 rounded-lg p-4 mt-4">
-      <p className="text-gray-400 text-base italic">
-        Example:  
-        I once lost half a day trying to exploit a weird error message on a web service that turned out to be a red herring.  
-        If you don’t make progress, step back, take a break, and reconsider.  
-        <br /><br />
-        <span className="text-violet-400 font-semibold">Rule:</span> When in doubt, return to enumeration.
-      </p>
-    </div>
-  </div>
-</div>
 
-{/* Bloc : Time & Mental Energy Management */}
-<div className="mt-10">
-  <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-    <Clock className="w-6 h-6" />
-    Time & Mental Energy Management
-  </h3>
-  <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-    <p className="text-gray-300 text-lg">
+    <ul className="list-disc ml-6 space-y-2 text-gray-300">
+      <li>
+        <strong>Enumerate everything</strong> at the start: subnets, hosts, services, shares, and web endpoints—even if they seem useless.
+      </li>
+      <li>
+        <strong>Start wide, then narrow down:</strong> Ignore nothing at first. Over time, eliminate areas that don’t lead anywhere (for example, web apps that aren’t vulnerable or don’t expose anything interesting).
+      </li>
+      <li>
+        <strong>Nmap is your best friend:</strong> Always run wide scans, then targeted scans as you discover new subnets or pivot points. Example: <span className="font-mono text-green-300">nmap -p- -A 10.10.0.0/16</span>
+      </li>
+      <li>
+        <strong>If you get stuck for more than a day,</strong> step back and re-enumerate. You probably missed something simple.
+      </li>
+      <li>
+        <strong>Take notes as you go:</strong> Document every host, open port, and interesting service—even the dead ends.
+      </li>
+      <li>
+        <strong>The exam rewards “stay simple”:</strong> Don’t overcomplicate—most paths are direct if you enumerate thoroughly and keep your head cool.
+      </li>
+    </ul>
+
+    <p className="text-gray-400 text-base italic mt-4">
+      My approach: go wide, skim aggressively, and focus only where you get traction. If you hit a wall, always re-enumerate. Enumeration is 80% of the work—don’t underestimate it.
+    </p>
+          </div>
+        </div>
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Shield className="w-6 h-6" />
+            Watch for Rabbit Holes
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-gray-300 text-lg">
+      <strong>Don’t get lost chasing ghosts.</strong> One of the most dangerous traps in the CPTS exam (and real pentests) is to spend hours—or days—following the wrong lead.
+    </p>
+
+    <ul className="list-disc ml-6 space-y-2 text-gray-300">
+      <li>
+        <strong>Be methodical:</strong> If something looks weird but you’re not finding traction after a reasonable time (<span className="text-violet-400 font-semibold">~1–2 hours</span>), put it aside and continue elsewhere.
+      </li>
+      <li>
+        <strong>Track your time:</strong> Literally note how long you spend on each “lead” or exploit path. If you cross the 1-hour mark with no progress, switch context.
+      </li>
+      <li>
+        <strong>Don't force it:</strong> Not every open port or page is vulnerable. On the CPTS, there are no “hard” rabbit holes like on some HTB insane boxes—but the network is big, and you can easily waste time on dead ends.
+      </li>
+      <li>
+        <strong>Keep a “maybe later” list:</strong> Document weird findings in your notes and move on. Come back only if you run out of other leads.
+      </li>
+      <li>
+        <strong>Ask yourself:</strong> “Is this still aligned with the main goal (flag, DA, DC) or am I going down a side path?”
+      </li>
+    </ul>
+
+    <p className="text-gray-400 text-base italic mt-4">
+      Example: <br />
+      I once lost half a day trying to exploit a weird error message on a web service that turned out to be a red herring. If you don’t make progress, step back, take a break, and reconsider. 
+      <br /><br />
+      <span className="text-violet-400 font-semibold">Rule:</span> When in doubt, return to enumeration.
+    </p>
+          </div>
+        </div>
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Clock className="w-6 h-6" />
+            Time & Mental Energy Management
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg">
+            <p className="text-gray-300 text-lg">
       <strong>Managing your time and mental energy is just as important as technical skill during the CPTS exam.</strong>
       <br />
       With 10 days and a huge network, you need a plan to avoid burnout and keep your mind sharp.
     </p>
+
     <ul className="list-disc ml-6 space-y-2 text-gray-300">
-      <li><strong>Set a daily routine:</strong> Block out fixed sessions for pentesting and for breaks. I aimed for <span className="text-violet-400 font-semibold">7 to 10 hours per day</span>, split between morning and afternoon, with real downtime in between.</li>
-      <li><strong>Take real breaks:</strong> When you hit a wall or feel tired, step away from the keyboard. Walk, stretch, eat. It helps you reset and find new ideas.</li>
-      <li><strong>Don’t obsess over blocks:</strong> Getting stuck is part of the game. If you’re spinning your wheels for hours, change activity: write your report, reread your notes, or sleep on it. Sometimes the solution appears after a pause.</li>
-      <li><strong>Track your progress:</strong> Note your advances (even small wins) each day. Seeing progress helps fight discouragement, especially on long exams.</li>
-      <li><strong>Prioritize your energy:</strong> Attack the “hard” or creative tasks when you’re freshest—usually mornings. Use evenings for review, report writing, or prepping tomorrow’s targets.</li>
-      <li><strong>Plan for slumps:</strong> Everyone has off-days. If you have a day with little progress, don’t panic. The network is big, but you only need the right path. Take care of yourself.</li>
+      <li>
+        <strong>Set a daily routine:</strong> Block out fixed sessions for pentesting and for breaks. For example, I aimed for <span className="text-violet-400 font-semibold">7 to 10 hours per day</span>, but split between morning and afternoon, with real downtime in btween.
+      </li>
+      <li>
+        <strong>Take real breaks:</strong> When you hit a wall or feel tired, step away from the keyboard. Walk, stretch, eat. It helps you reset and find new ideas.
+      </li>
+      <li>
+        <strong>Don’t obsess over blocks:</strong> Getting stuck is part of the game. If you’re spinning your wheels for hours, change activity: write your report, reread your notes, or sleep on it. Sometimes the solution appears after a pause.
+      </li>
+      <li>
+        <strong>Track your progress:</strong> Note your advances (even small wins) each day. Seeing progress helps fight discouragement, especially on long exams.
+      </li>
+      <li>
+        <strong>Prioritize your energy:</strong> Attack the “hard” or creative tasks when you’re freshest—usually mornings. Use evenings for review, report writing, or prepping tomorrow’s targets.
+      </li>
+      <li>
+        <strong>Plan for slumps:</strong> Everyone has off-days. If you have a day with little progress, don’t panic. The network is big, but you only need the right path. Take care of yourself.
+      </li>
     </ul>
-    <div className="bg-violet-900/20 rounded-lg p-4 mt-4">
-      <p className="text-gray-400 text-base italic">
-        Example:  
-        I hit a huge block around Flag 9. After wasting a whole afternoon, I forced myself to stop, go outside, and only come back the next day. Within one hour, the solution appeared, fresh.
-        <br /><br />
-        <span className="text-violet-400 font-semibold">Remember:</span> The CPTS is a marathon, not a sprint. Your brain is your best tool—treat it well.
-      </p>
-    </div>
-  </div>
-</div>
+
+    <p className="text-gray-400 text-base italic mt-4">
+      Example:<br />
+      I hit a huge block around Flag 9. After wasting a whole afternoon, I forced myself to stop, go outside, and only come back the next day. Within one hour, the solution appeared, fresh.
+      <br /><br />
+      <span className="text-violet-400 font-semibold">Remember:</span> The CPTS is a marathon, not a sprint. Your brain is your best tool—treat it well.
+    </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
