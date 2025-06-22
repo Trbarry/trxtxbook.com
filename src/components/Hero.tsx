@@ -7,7 +7,7 @@ setShowProfile: (show: boolean) => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
-const \[ready, setReady] = useState(false);
+const [ready, setReady] = useState(false);
 
 useEffect(() => {
 const timeout = setTimeout(() => setReady(true), 100); // attend avant d'ajouter l'anim pour éviter un LCP lent
