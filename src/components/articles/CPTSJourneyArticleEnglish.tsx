@@ -40,11 +40,9 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           {[
             'Introduction & Hook',
             'Study Strategy Breakdown',
-            'Five-Month Roadmap & Final Sprint',
             'Tooling, Environment & Note-Taking',
             'Exam Week',
             'The 190-Page Report',
-            'Biggest Challenges & How I Overcame Them',
             'Tips & Tricks Cheat-Sheet',
             'Post-Exam Reflection & Next Steps',
             'Further Study & Acknowledgements',
