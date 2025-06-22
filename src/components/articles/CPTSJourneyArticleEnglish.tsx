@@ -416,7 +416,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
   </p>
 
   <p>Here’s a simplified version of my Obsidian tree structure:</p>
-<details className="bg-[#2a2a2f] rounded-lg p-4 text-white">
+
   <summary className="cursor-pointer text-violet-400 font-semibold text-lg mb-2">
     📂 Click to view full Obsidian tree structure
   </summary>
