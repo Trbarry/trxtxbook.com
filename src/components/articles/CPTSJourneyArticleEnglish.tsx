@@ -633,7 +633,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
       className="rounded-2xl shadow-xl max-w-md"
     />
   </div>
-</div>
+
 
   <p className="text-gray-300">
     All jokes aside, switching from Kali to Exegol was one of the best choices I made in my CPTS prep.
