@@ -1574,7 +1574,8 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         <span className="text-violet-400 font-semibold">Remember:</span> The CPTS is a marathon, not a sprint. Your brain is your best tool—treat it well.
       </p>
     </div>
-        </div>
+  </div>
+</div>
       </div>
     </div>
   </section>
