@@ -1113,39 +1113,86 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             <Target className="w-6 h-6" />
             Exam Format & Scope
           </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p>
-    The CPTS exam simulates a <strong>real-world offensive engagement</strong> against a fictional company. While I can’t share too much detail due to HTB’s terms and conditions, I can confidently say: <strong>this is the closest thing to a real pentest you’ll get in a certification exam</strong>.
+         <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+  {/* Aperçu de l’examen CPTS */}
+  <div className="flex items-center gap-3 mb-2">
+    <Shield className="w-6 h-6 text-violet-400" />
+    <h4 className="text-xl font-semibold text-violet-300">CPTS Exam: The Closest Thing to a Real Pentest</h4>
+  </div>
+  <p className="text-gray-300 text-lg">
+    The CPTS exam simulates a <strong>real-world offensive engagement</strong> against a fictional company.
+    While I can’t share too much detail due to HTB’s terms and conditions, I can confidently say:  
+    <strong>This is the closest thing to a real pentest you’ll get in a certification exam.</strong>
   </p>
 
-  <p>
-    From the beginning, you’re provided with a clear scope via a letter of engagement — just like in a professional red team operation. The initial entry point is a public-facing web application, and from there, your job is to compromise the internal network and escalate access.
+  {/* Scénario et mission */}
+  <div className="flex items-center gap-2 mb-2">
+    <Terminal className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">The Engagement Scenario</span>
+  </div>
+  <p className="text-gray-300">
+    From the beginning, you’re provided with a clear scope via a letter of engagement — just like in a professional red team operation.
+    The initial entry point is a public-facing web application.  
+    Your mission? <strong>Fully compromise two separate Active Directory domains</strong> (yes, two!) and gain access to at least <strong>12 out of 14 flags</strong> across the infrastructure.
   </p>
 
-  <p>
-    Your mission? <strong>Fully compromise two separate Active Directory domains</strong> (yes, two!) and gain access to at least <strong>12 out of 14 flags</strong> spread across the infrastructure.
+  {/* Réalisme et taille du réseau */}
+  <div className="flex items-center gap-2 mb-2">
+    <Network className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">A Realistic, Segmented Network</span>
+  </div>
+  <p className="text-gray-300">
+    The network is <strong>vast and realistic</strong> — Windows & Linux hosts, segmentation, pivoting requirements.
+    Double pivoting is mandatory; tools like <strong>Ligolo-ng</strong> become essential.
   </p>
 
-  <p>
-    The network is <strong>vast and realistic</strong>. Internal segmentation, Windows and Linux hosts, and pivoting requirements will force you to approach it with method and patience. Double pivoting is mandatory — and tools like <strong>Ligolo-ng</strong> will become your best friend.
+  {/* Vulnérabilités et complexité */}
+  <div className="flex items-center gap-2 mb-2">
+    <ListChecks className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Vulnerabilities & Method</span>
+  </div>
+  <p className="text-gray-300">
+    Vulnerabilities aren’t exotic or advanced: everything is covered in the CPTS Learning Path.
+    But the <strong>scale and density</strong> can mislead you.  
+    There aren’t real "rabbit holes" like in HTB Hard/Insane boxes, but the environment is so big you can lose hours if you’re not pragmatic.
   </p>
 
-  <p>
-    The vulnerabilities themselves are not exotic or advanced: every single one of them was covered during the CPTS Learning Path. But don’t be fooled — the <strong>scale and density of the infrastructure</strong> can easily mislead you. There aren’t any real "rabbit holes" like you’d find in HTB Hard/Insane boxes, but the size of the environment means you can waste hours exploring dead ends if you don't stay pragmatic.
+  {/* Gestion du temps et mentalité */}
+  <div className="flex items-center gap-2 mb-2">
+    <Clock className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Pacing & Mindset</span>
+  </div>
+  <p className="text-gray-300">
+    The exam lasts <strong>10 full days</strong>. I worked an average of <strong>7 hours per day</strong>.
+    Expect roadblocks — sometimes I was stuck for a day or more.  
+    When that happened, I stepped back, re-enumerated, and thought critically.  
+    You’re simulating the mindset of a hacker. <strong>Creativity and adaptability</strong> are as important as technical skill.
   </p>
 
-  <p>
-    The exam spans <strong>10 full days</strong>. Personally, I worked an average of <strong>7 hours per day</strong>. Expect multiple roadblocks — sometimes I was stuck for a day or more. When that happened, I had to take a step back, re-enumerate, and think critically. You’re not just solving puzzles; you’re simulating the mindset of a hacker. Creativity and adaptability are just as important as technical skill.
-  </p>
+  {/* Conseils de réussite */}
+  <div className="flex items-center gap-2 mb-2">
+    <Brain className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">How to Succeed</span>
+  </div>
+  <div className="bg-violet-900/20 rounded-lg p-4">
+    <span className="text-gray-300">
+      The Learning Path prepares you <strong>perfectly</strong> — but don’t rely on automation or tunnel vision.
+      <br />
+      <span className="font-semibold text-violet-400">Think like an attacker. Move laterally. Stay focused. Be methodical.</span>
+    </span>
+  </div>
 
-  <p>
-    The Learning Path prepares you <strong>perfectly</strong> for this — but don’t rely on automation or tunnel vision. Think like an attacker. Move laterally. Stay focused. Be methodical.
+  {/* Rapport et reporting */}
+  <div className="flex items-center gap-2 mb-2">
+    <FileText className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Reporting</span>
+  </div>
+  <p className="text-gray-300">
+    For the report, I used <strong>SysReptor</strong> and exported everything as a polished PDF.  
+    I strongly recommend this method — it’s clean, professional, and fits HTB’s expectations.
+    Optionally, you can include annexes with technical evidence like a <strong>full DC dump or password policy audit (e.g., DPAT analysis)</strong> if relevant.
   </p>
-
-  <p>
-    For the report, I used <strong>SysReptor</strong> and exported everything as a polished PDF. I strongly recommend this method — it’s clean, professional, and fits HTB’s expectations. Optionally, you can also include annexes with technical evidence like <strong>a full DC dump or password policy audit (e.g., DPAT analysis)</strong> if relevant.
-  </p>
-          </div>
+</div>
         </div>
         <div>
           <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
