@@ -1148,7 +1148,34 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             Watch for Rabbit Holes
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+            <p className="text-gray-300 text-lg">
+      <strong>Don’t get lost chasing ghosts.</strong> One of the most dangerous traps in the CPTS exam (and real pentests) is to spend hours—or days—following the wrong lead.
+    </p>
+
+    <ul className="list-disc ml-6 space-y-2 text-gray-300">
+      <li>
+        <strong>Be methodical:</strong> If something looks weird but you’re not finding traction after a reasonable time (<span className="text-violet-400 font-semibold">~1–2 hours</span>), put it aside and continue elsewhere.
+      </li>
+      <li>
+        <strong>Track your time:</strong> Literally note how long you spend on each “lead” or exploit path. If you cross the 1-hour mark with no progress, switch context.
+      </li>
+      <li>
+        <strong>Don't force it:</strong> Not every open port or page is vulnerable. On the CPTS, there are no “hard” rabbit holes like on some HTB insane boxes—but the network is big, and you can easily waste time on dead ends.
+      </li>
+      <li>
+        <strong>Keep a “maybe later” list:</strong> Document weird findings in your notes and move on. Come back only if you run out of other leads.
+      </li>
+      <li>
+        <strong>Ask yourself:</strong> “Is this still aligned with the main goal (flag, DA, DC) or am I going down a side path?”
+      </li>
+    </ul>
+
+    <p className="text-gray-400 text-base italic mt-4">
+      Example: <br />
+      I once lost half a day trying to exploit a weird error message on a web service that turned out to be a red herring. If you don’t make progress, step back, take a break, and reconsider. 
+      <br /><br />
+      <span className="text-violet-400 font-semibold">Rule:</span> When in doubt, return to enumeration.
+    </p>
           </div>
         </div>
         <div>
