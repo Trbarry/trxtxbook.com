@@ -1112,7 +1112,34 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             Enumeration First, Always
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+            <p className="text-gray-300 text-lg">
+      <strong>Enumeration is the backbone of the CPTS exam.</strong> The scope is intentionally broad, and the real danger is missing an attack surface because you cut corners early on.
+    </p>
+
+    <ul className="list-disc ml-6 space-y-2 text-gray-300">
+      <li>
+        <strong>Enumerate everything</strong> at the start: subnets, hosts, services, shares, and web endpoints—even if they seem useless.
+      </li>
+      <li>
+        <strong>Start wide, then narrow down:</strong> Ignore nothing at first. Over time, eliminate areas that don’t lead anywhere (for example, web apps that aren’t vulnerable or don’t expose anything interesting).
+      </li>
+      <li>
+        <strong>Nmap is your best friend:</strong> Always run wide scans, then targeted scans as you discover new subnets or pivot points. Example: <span className="font-mono text-green-300">nmap -p- -A 10.10.0.0/16</span>
+      </li>
+      <li>
+        <strong>If you get stuck for more than a day,</strong> step back and re-enumerate. You probably missed something simple.
+      </li>
+      <li>
+        <strong>Take notes as you go:</strong> Document every host, open port, and interesting service—even the dead ends.
+      </li>
+      <li>
+        <strong>The exam rewards “stay simple”:</strong> Don’t overcomplicate—most paths are direct if you enumerate thoroughly and keep your head cool.
+      </li>
+    </ul>
+
+    <p className="text-gray-400 text-base italic mt-4">
+      My approach: go wide, skim aggressively, and focus only where you get traction. If you hit a wall, always re-enumerate. Enumeration is 80% of the work—don’t underestimate it.
+    </p>
           </div>
         </div>
         <div>
