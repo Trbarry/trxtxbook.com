@@ -356,7 +356,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
       If you do it right, you’ll be surprised how far you’ve come.
     </span>
   </div>
-
+      </div>
 
     </div>
   </div>
