@@ -378,19 +378,60 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
                 <BookOpen className="w-6 h-6" />
                 CPTS Learning Path Structure
               </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p>
-      I didn’t follow a strict schedule during the CPTS path — I just aimed to work around <strong>6 to 7 hours a day</strong>, <strong>five days a week</strong>, always taking short breaks every couple of hours to stay focused. I knew from experience that <strong>rest matters just as much as active study</strong> — especially in cybersecurity, where understanding is more important than memorization.<br /><br />
+             <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+  {/* Routine de travail et organisation générale */}
+  <div className="flex items-center gap-3 mb-2">
+    <Calendar className="w-6 h-6 text-violet-400" />
+    <h4 className="text-xl font-semibold text-violet-300">My Study Routine</h4>
+  </div>
+  <p className="text-gray-300 text-lg">
+    I didn’t follow a strict schedule during the CPTS path — I just aimed to work around <strong>6 to 7 hours a day</strong>, <strong>five days a week</strong>, always taking short breaks every couple of hours to stay focused.
+    I knew from experience that <strong>rest matters just as much as active study</strong> — especially in cybersecurity, where understanding is more important than memorization.
+  </p>
 
-      My routine was pretty straightforward: <strong>start a module</strong>, <strong>finish it completely</strong>, and take <strong>structured notes</strong> as I went. Then, whenever possible, I would <strong>chain it with one or two related HTB boxes</strong>. This practical follow-up was crucial for me — the hands-on challenges helped <strong>anchor what I had just learned</strong>.<br /><br />
+  {/* Méthodologie d’apprentissage */}
+  <div className="flex items-center gap-2 mb-2">
+    <Monitor className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Learning Process</span>
+  </div>
+  <p className="text-gray-300">
+    My routine was pretty straightforward: <strong>start a module</strong>, <strong>finish it completely</strong>, and take <strong>structured notes</strong> as I went.
+    Whenever possible, I would <strong>chain it with one or two related HTB boxes</strong>.  
+    This practical follow-up was crucial — the hands-on challenges helped <strong>anchor what I had just learned</strong>.
+  </p>
 
-      Each morning, I’d <strong>review the previous day’s notes</strong>, to keep everything fresh and reinforce long-term memory. It wasn’t always easy to stay on track — motivation goes up and down — but I kept telling myself that <strong>discipline had to win over comfort</strong>. Over time, it paid off. The progress wasn’t always visible day by day, but looking back, it added up fast.<br /><br />
+  {/* Révision quotidienne */}
+  <div className="flex items-center gap-2 mb-2">
+    <FileText className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Daily Review</span>
+  </div>
+  <p className="text-gray-300">
+    Each morning, I’d <strong>review the previous day’s notes</strong> to keep everything fresh and reinforce long-term memory.
+    It wasn’t always easy to stay on track — motivation goes up and down — but I kept telling myself that <strong>discipline had to win over comfort</strong>.
+    Over time, it paid off. The progress wasn’t always visible day by day, but looking back, it added up fast.
+  </p>
 
-      Outside of studying, I made sure to <strong>take care of my mental and physical health</strong>. I trained <strong>four times a week</strong>, around <strong>2 to 3 hours per session</strong>, and went on <strong>regular walks with my family and my dog</strong>. Staying active and clearing my head helped me avoid burnout and come back sharper the next day. Honestly, <strong>moving your body is just as important as moving your brain</strong>.<br /><br />
+  {/* Hygiène de vie et bien-être */}
+  <div className="flex items-center gap-2 mb-2">
+    <Brain className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Physical & Mental Health</span>
+  </div>
+  <p className="text-gray-300">
+    Outside of studying, I made sure to <strong>take care of my mental and physical health</strong>.
+    I trained <strong>four times a week</strong>, around <strong>2 to 3 hours per session</strong>, and went on <strong>regular walks with my family and my dog</strong>.
+    Staying active and clearing my head helped me avoid burnout and come back sharper the next day.
+    <span className="block mt-1 font-semibold text-violet-400">Moving your body is just as important as moving your brain.</span>
+  </p>
 
-      And let’s be real — <strong>a good Spotify playlist</strong> makes the grind a lot more enjoyable. When I was in the zone, music helped me stay focused and turn long hours into productive ones.
-    </p>
-              </div>
+  {/* Motivation, musique, ambiance */}
+  <div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
+    <Zap className="w-6 h-6 text-violet-400" />
+    <span className="text-gray-300">
+      And let’s be real — <strong>a good Spotify playlist</strong> makes the grind a lot more enjoyable.
+      When I was in the zone, music helped me stay focused and turn long hours into productive ones.
+    </span>
+  </div>
+</div>
             </div>
 
             <div>
