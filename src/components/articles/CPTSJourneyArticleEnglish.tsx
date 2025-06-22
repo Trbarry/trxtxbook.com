@@ -1329,55 +1329,31 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
             <p className="text-gray-300 text-lg">
-      <strong>My journey is far from over.</strong>  
-      In cybersecurity, you’re always learning, always leveling up. Here’s how I keep growing — and who helped me get this far.
+      <strong>Learning never stops in cybersecurity.</strong>  
+      I keep pushing my level thanks to hands-on practice and the support I get every day.
     </p>
 
     <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
-      <h3 className="text-xl font-semibold text-violet-300 mb-2">My Toolbox for Progress</h3>
+      <h3 className="text-xl font-semibold text-violet-300 mb-2">Labs &amp; Platforms</h3>
       <ul className="list-disc ml-6 text-gray-300">
-        <li>
-          <strong>Books:</strong>  
-          - <span className="text-blue-300">The Web Application Hacker’s Handbook</span> (pour les bases et l’attaque web)  
-          - <span className="text-blue-300">Active Directory Attacks for Red and Blue Teams</span> (pour l’interne)  
-          - <span className="text-blue-300">Linux Privilege Escalation by Tib3rius</span> (pratique, efficace)
-        </li>
-        <li>
-          <strong>Labs:</strong>  
-          - <span className="text-violet-300">Hack The Box</span> (machines, ProLabs, parcours CPTS)  
-          - <span className="text-green-300">TryHackMe</span> (pour progresser à son rythme, en anglais ou français)  
-          - <span className="text-pink-300">PortSwigger Academy</span> (indispensable pour le web)
-        </li>
-        <li>
-          <strong>Communities:</strong>  
-          - <span className="text-violet-300">Discord HTB France</span> (entraide et challenge, sans spoil)  
-          - <span className="text-blue-300">LinkedIn</span> (échanges pros, retours d’expérience)  
-          - <span className="text-yellow-300">Twitter/X</span> (veille technique, offres de job)
-        </li>
+        <li>TryHackMe — great for structured learning and basics</li>
+        <li>Hack The Box — real-world boxes and advanced Active Directory labs</li>
+        <li>PortSwigger Web Security Academy — the reference for mastering web vulns</li>
+        <li>Root-Me — perfect for CTF challenges and pure exploitation</li>
+        <li>Exegol — my daily pentest environment, highly customizable</li>
       </ul>
     </div>
 
     <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
-      <h3 className="text-xl font-semibold text-violet-300 mb-2">Who Helped Me</h3>
-      <p className="text-gray-300">
-        Personne n’avance seul. Merci à&nbsp;:
-      </p>
+      <h3 className="text-xl font-semibold text-violet-300 mb-2">Community &amp; Support</h3>
       <ul className="list-disc ml-6 text-gray-300">
-        <li>
-          <strong>Les formateurs et mentors en ligne</strong> (HTB, PortSwigger, IppSec, John Hammond, Sandoz, Root-Me…)
-        </li>
-        <li>
-          <strong>La communauté</strong> (Discords, forums, collègues d’alternance, LinkedIn)
-        </li>
-        <li>
-          <strong>Les proches</strong> qui m’ont laissé bosser 8h d’affilée sans broncher&nbsp;!
-        </li>
+        <li>LinkedIn — for networking, inspiration, and following other pentesters</li>
+        <li>My family, my wife, and my dog — honestly, you need support outside the screen too</li>
       </ul>
     </div>
 
-    <p className="text-gray-400 text-base italic mt-2">
-      If you want to go fast, go alone.<br/>
-      If you want to go far, go together.
+    <p className="text-gray-400 italic">
+      If you’re reading this and helped me along the way, thank you — you know who you are.
     </p>
           </div>
         </div>
