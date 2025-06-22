@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Calendar, Target, BookOpen, Brain, Shield, Terminal, Users, Lightbulb, CheckCircle2, Clock, FileText, Zap, Monitor, Network, Lock, Code, ArrowRight, TrendingUp, Cpu, Database, BookOpen, Monitor, Brain, FileText, Users } from 'lucide-react';
+import { Award, Calendar, Target, BookOpen, Brain, Shield, Terminal, Users, Lightbulb, CheckCircle2, Clock, FileText, Zap, Monitor, Network, Lock, Code, ArrowRight, TrendingUp, Cpu, Database,  Brain, FileText, Users } from 'lucide-react';
 
 export const CPTSJourneyArticleEnglish: React.FC = () => {
   return (
