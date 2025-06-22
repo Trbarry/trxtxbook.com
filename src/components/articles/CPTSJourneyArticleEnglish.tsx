@@ -620,8 +620,14 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
     <h4 className="text-xl font-semibold text-violet-300">Exegol: The Ultimate Offensive Toolkit 🇫🇷</h4>
   </div>
   <p className="text-gray-300">
-    First of all, let me say it loud and clear: <strong>Exegol is French. COCORICO 🇫🇷</strong><br />
-    And Kali? You’re <em>mauvais</em>, like Jack in OSS 117. 🕶️ That’s right — I said it.
+    First of all, let me say it loud and clear: <strong>Exegol is French. COCORICO 🇫🇷</strong><br 
+                                                              <img
+  src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/oss117meme.webp"
+  alt="OSS 117 Meme"
+  className="w-full max-w-md mx-auto rounded-2xl shadow-lg mb-6"
+/>
+/>
+And Kali? You’re <em>mauvais</em>, like Jack in OSS 117. 🕶️ That’s right — I said it.
   </p>
   <p className="text-gray-300">
     All jokes aside, switching from Kali to Exegol was one of the best choices I made in my CPTS prep.
