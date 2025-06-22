@@ -876,11 +876,11 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
               </p>
 
               <p>
-                The same happened with <strong>flag 12</strong>. There’s no shame in going backward to move forward. The content is dense, and it’s mentally stressful to have only 9 flags by <strong>Day 7</strong>. But don’t panic — stay calm, think smart, and keep moving.
+                The same happened with <strong>flag 12</strong>. There’s no shame in going backward to move forward. The content is dense, and it’s mentally stressful to have only 9 flags by <strong>Day </strong>. But don’t panic — stay calm, think smart, and keep moving.
               </p>
 
               <p>
-                And again: <strong>WRITE YOUR REPORT IN REAL-TIME</strong>.
+                And  again: <strong>WRITE YOUR REPORT IN REAL-TIME</strong>.
               </p>
           </div>
         </div>
@@ -902,40 +902,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             Real-Time Reporting Strategy
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
-           <div className="space-y-6 text-white">
-      <p>
-        During my CPTS exam, I initially planned to write the report every evening. <strong>Big mistake.</strong>  
-        With the mental fatigue and the need to keep momentum, it quickly became unsustainable.  
-        That’s when I decided to apply a <strong>real-time reporting workflow</strong>, and it made a massive difference.
-      </p>
-
-      <p>
-        I followed a <strong>trigger-based strategy</strong>: as soon as I discovered something relevant (new service, credentials, shell, etc.),  
-        I immediately documented it in <strong>SysReptor</strong> and took supporting notes in <strong>Obsidian</strong>.  
-        This method kept everything fresh, and I never had to backtrack through a mountain of logs.
-      </p>
-
-      <p>
-        For example, when I compromised a user in the <code>tricolor.local</code> domain and gained access to a shared folder,  
-        I directly opened SysReptor, created a <strong>Finding</strong>, linked the vulnerable service (SMB), inserted the steps (enum → creds → access),  
-        and dropped the screenshot. No “I’ll do it later.” I moved on with a clean state of mind.
-      </p>
-
-      <p>
-        Every note I took in Obsidian was also linked to my timeline. I used tags like <code>#flag9</code>, <code>#pivot</code>, or <code>#user-compromise</code>  
-        to keep track of my progress, and I used the graph view to reconnect ideas when I was stuck.
-      </p>
-
-      <p>
-        This approach helped me <strong>overcome blockages</strong> like Flag 9 or Flag 12. When stuck, I would revisit previous notes,  
-        spot something I had ignored, and unlock the path. Without this system, I would have been lost in the complexity of the internal network.
-      </p>
-
-      <p>
-        Lastly, <strong>don’t hesitate to use ChatGPT</strong> as your sidekick—but always verify its output.  
-        I used it mainly to rephrase technical steps for clarity and to write neutral language for the report.
-      </p>
-        
+            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
           </div>
         </div>
         <div>
