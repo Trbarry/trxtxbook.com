@@ -72,22 +72,65 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           <Users className="w-6 h-6" />
           About Me
         </h3>
-        <div className="bg-[#2a2a2f] p-6 rounded-lg">
-          <p>
-  I'm a French guy and currently switching careers to move into cybersecurity. In September, I’ll start a formal work-study program in IT and networking, but honestly, my journey started long before that. I used to work as a field technician in fiber optics — pulling cables, doing installations, repeating the same tasks every day. After a while, I felt stuck. I wasn’t learning anything new, and I couldn’t see any real future in what I was doing. That’s what pushed me to change.<br /><br />
+        <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+  <p className="text-gray-300 text-lg">
+    <strong>I'm a French guy, currently switching careers to move into cybersecurity.</strong>  
+    In September, I’ll start a formal work-study program in IT and networking, but honestly, my journey started long before that.
+  </p>
+  
+  <div className="bg-violet-900/20 rounded-lg p-4 space-y-3">
+    <p className="text-violet-300 font-semibold">
+      <span className="text-xl">🔁</span> Previously a fiber optics field technician — pulling cables, doing installations, and repeating the same tasks every day. After a while, I felt stuck: no learning, no future. That’s what pushed me to change.
+    </p>
+    <p className="text-gray-300">
+      I decided to move into cybersecurity. For the past nine months, I've trained on my own almost every day (6-7h daily):  
+      <ul className="list-disc ml-6 mt-2 space-y-1">
+        <li>Completed all learning paths on TryHackMe</li>
+        <li>Passed the <strong>eJPT</strong> certification</li>
+        <li>Recently cleared the <strong>CPTS (Hack The Box)</strong></li>
+      </ul>
+      This wasn’t about collecting certs — it was about <strong>real learning</strong>, building skills, and proving to myself I could grow through hard work.
+    </p>
+  </div>
 
-  I decided to move into cybersecurity, and since then, I’ve been fully committed. For the past nine months, I’ve trained on my own, almost every day, for about 6 to 7 hours. I finished all the learning paths on TryHackMe, passed the eJPT certification, and more recently the CPTS from Hack The Box. This wasn’t just about collecting certs — it was about learning for real, building technical skills, and proving to myself that I could grow in this field through hard work.<br /><br />
+  <p className="text-gray-300 text-lg">
+    I’m what you might call a <strong>“tryharder”</strong>. When something motivates me, I give it 300%.  
+    I write down everything I learn, structure my notes, and go deep:
+  </p>
+  <ul className="list-disc ml-6 text-gray-300 space-y-1">
+    <li>Custom <strong>Exegol</strong> setup</li>
+    <li>Daily use of <strong>Obsidian</strong></li>
+    <li>Reporting with <strong>SysReptor</strong> — even for training</li>
+    <li>No skipping steps, no copy-paste walkthroughs</li>
+    <li>Goal: Understand, not just repeat</li>
+  </ul>
+  
+  <div className="bg-violet-900/20 rounded-lg p-4">
+    <p className="text-violet-300 font-semibold">
+      <span className="text-xl">✍️</span> Why I wrote this article
+    </p>
+    <p className="text-gray-300">
+      When preparing for the CPTS, the blog by  
+      <a
+        href="https://www.brunorochamoura.com/posts/cpts-tips/"
+        target="_blank"
+        className="text-violet-400 hover:underline font-semibold"
+      >
+        Bruno Rocha Moura
+      </a>  
+      helped me a lot. His tips gave me a structure and kept me focused.<br />
+      In the same spirit, I’m writing this to give back.  
+      <strong>If you’re wondering whether CPTS is worth it, or you need direction, I hope this helps you.</strong>
+    </p>
+  </div>
+  
+  <p className="text-gray-400 text-base italic mt-2">
+    <span className="text-violet-400 font-semibold">My mindset:</span>  
+    In cybersecurity, we grow by helping each other — via write-ups, forums, blogs, even Discord chats.  
+    If this post helps even one person feel more confident or prepared, it was worth writing.
+  </p>
+</div>
 
-  I’m what you might call a “tryharder”. When something motivates me, I give it 300%. I write down everything I learn, structure all my notes, and I go deep. I work in a custom Exegol setup, I use Obsidian every day, and I write my reports with SysReptor — even when I’m just training. I don’t skip steps, and I don’t copy-paste walkthroughs. I want to understand everything I do, not just repeat what works once.<br /><br />
-
-  I wrote this article because I wanted to share. When I was preparing for the CPTS, I read the blog by <a href="https://www.brunorochamoura.com/posts/cpts-tips/" target="_blank" className="text-violet-400 hover:underline"><strong>Bruno Rocha Moura</strong></a>, and it helped me a lot. His tips gave me a structure and helped me stay focused. So in the same spirit, I’m writing this to give back. If you’re wondering whether CPTS is worth it, or if you’re already studying and need some direction, I hope this helps you in some way.<br /><br />
-
-  For me, sharing is part of the game. In this field, we all grow by helping each other — through write-ups, forums, blogs, even small Discord chats. I believe that if this post helps even one person feel more confident, or better prepared, then it was worth writing.
-</p>
-
-
-
-        </div>
       </div>
 
       {/* Why CPTS After eJPT */}
