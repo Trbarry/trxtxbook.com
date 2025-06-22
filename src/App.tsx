@@ -38,7 +38,7 @@ import { LinuxMintArticlePage } from './pages/LinuxMintArticlePage';
 import { CPTSJourneyArticlePage } from './pages/CPTSJourneyArticlePage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
 import { SitemapGeneratorPage } from './pages/SitemapGeneratorPage';
-
+const showCyberCharacter = false;
 function App() {
   // State
   const showCyberCharacter = false;
