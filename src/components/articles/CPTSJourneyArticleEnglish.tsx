@@ -407,7 +407,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
             <p>
-                Documenting a penetration test isn’t just about writing a report; it’s about making your knowledge actionable, transferable, and reusable. That’s why I used <strong>two distinct tools</strong> that complement each other perfectly:
+    Documenting a penetration test isn’t just about writing a report; it’s about making your knowledge actionable, transferable, and reusable. That’s why I used <strong>two distinct tools</strong> that complement each other perfectly:
   </p>
 
   <h4 className="text-xl font-semibold text-violet-300">Obsidian: My Personal Knowledge Hub</h4>
