@@ -473,65 +473,94 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
                 <Monitor className="w-6 h-6" />
                 HTB Boxes, Modules & IppSec's Track
               </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg">
-                <p>
-        During the <strong>CPTS learning path</strong>, I made it a habit to complete <strong>1–2 HTB boxes per module</strong>, directly related to the topic I had just studied. For example, after finishing the <em>Web Exploitation</em> module, I’d go try an XSS or file upload challenge in the retired or easy/medium category. This helped me anchor new concepts right away by putting them into practice.
-      </p>
+              <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+  {/* Modules + practice boxes */}
+  <div className="flex items-center gap-3 mb-2">
+    <Terminal className="w-6 h-6 text-violet-400" />
+    <h4 className="text-xl font-semibold text-violet-300">Pairing Modules with Boxes</h4>
+  </div>
+  <p className="text-gray-300 text-lg">
+    During the <strong>CPTS learning path</strong>, I made it a habit to complete <strong>1–2 HTB boxes per module</strong>, directly related to the topic I had just studied.  
+    For example, after finishing <em>Web Exploitation</em>, I’d try an XSS or file upload challenge.  
+    Putting theory into practice anchored new concepts right away.
+  </p>
 
-      <p>
-        Once I completed the path, I moved on to doing <strong>live boxes on Hack The Box</strong>. These weren’t always tied to specific modules — I did them for fun and for the challenge. But they turned out to be incredibly valuable. These boxes helped me work on:
-      </p>
+  {/* Live boxes for skill-building */}
+  <div className="flex items-center gap-2 mb-2">
+    <Users className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Live Boxes: Real-World Skills</span>
+  </div>
+  <p className="text-gray-300">
+    After the path, I moved on to <strong>live boxes on Hack The Box</strong>.  
+    Not always tied to modules — just for fun and the challenge.  
+    But these boxes taught me:
+  </p>
+  <ul className="list-disc ml-8 text-gray-300 space-y-1">
+    <li><strong>Internal pivoting</strong> (shoutout to Ligolo-ng)</li>
+    <li><strong>Post-exploitation logic</strong> and lateral movement</li>
+    <li><strong>Handling AV and EDR</strong> obstacles</li>
+  </ul>
+  <p className="text-gray-300">
+    I eventually reached <strong>Pro Hacker rank</strong> — not without struggle. Some hard boxes kicked my ass, and yes, I needed help. That’s okay. What matters is what you learn from the process.
+  </p>
 
-      <ul className="list-disc list-inside space-y-1 ml-4">
-        <li><strong>Internal pivoting</strong> (shoutout to Ligolo-ng),</li>
-        <li><strong>Post-exploitation logic</strong> and lateral movement,</li>
-        <li><strong>Handling AV and EDR</strong> obstacles in a realistic environment.</li>
-      </ul>
+  {/* IppSec playlist */}
+  <div className="flex items-center gap-2 mb-2">
+    <BookOpen className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">The IppSec CPTS Playlist</span>
+  </div>
+  <div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
+    <ArrowRight className="w-5 h-5 text-violet-400" />
+    <span className="text-gray-300">
+      I tackled the  
+      <a href="https://www.youtube.com/watch?v=H9FcE_FMZio&list=PLidcsTyj9JXItWpbRtTg6aDEj10_F17x5"
+        target="_blank"
+        className="text-violet-400 hover:underline font-semibold ml-1"
+      >
+        unofficial IppSec CPTS prep playlist
+      </a>
+      . These boxes are <strong>brilliantly curated</strong>. Some contain vulnerabilities nearly identical to the CPTS. More importantly, they force you to:
+    </span>
+  </div>
+  <ul className="list-disc ml-8 text-gray-300 space-y-1">
+    <li><strong>Chain multiple steps</strong> without guidance</li>
+    <li><strong>Structure your workflow</strong> like in a real pentest</li>
+    <li><strong>Manage pivots and post-exploitation scenarios</strong> on your own</li>
+  </ul>
+  <p className="text-gray-300">
+    These boxes really <strong>boosted my confidence</strong>. After finishing the playlist, I said to myself: <em>"Okay, now I’m really ready for the 10-day exam."</em>
+  </p>
 
-      <p>
-        I eventually reached the <strong>Pro Hacker rank</strong> — not without struggle. Some hard boxes kicked my ass, and yes, I needed help sometimes. That’s okay. What matters is what you learn from the process.
-      </p>
+  {/* Alternatives: ProLabs & hard/insane */}
+  <div className="flex items-center gap-2 mb-2">
+    <TrendingUp className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Alternative Prep Methods</span>
+  </div>
+  <div className="bg-violet-900/20 rounded-lg p-4">
+    <p className="text-gray-300 mb-2">
+      I know some people also use <strong>ProLabs</strong> or even tackle <strong>hard/insane boxes</strong> to prep, but personally, I didn’t feel the need. In my opinion, if you:
+    </p>
+    <ul className="list-disc ml-8 text-gray-300 space-y-1">
+      <li>complete the CPTS path <strong>seriously</strong>,</li>
+      <li>pair modules with relevant boxes <strong>consistently</strong>,</li>
+      <li>follow the IppSec playlist <strong>at the right time</strong>,</li>
+    </ul>
+    <p className="text-gray-300 mt-2">
+      …then you already have <strong>everything you need</strong>. No need to overdo it. The CPTS learning path alone is already <strong>rich and complete</strong>.
+    </p>
+  </div>
 
-      <p>
-        Then I tackled the <strong>unofficial IppSec CPTS prep playlist</strong>:
-        <br />
-        <a href="https://www.youtube.com/watch?v=H9FcE_FMZio&list=PLidcsTyj9JXItWpbRtTg6aDEj10_F17x5" target="_blank" className="text-violet-400 hover:underline">
-          HTB CPTS Prep Boxes – IppSec YouTube
-        </a>
-      </p>
-
-      <p>
-        And let me tell you — these boxes are <strong>brilliantly curated</strong>. Now that I’ve passed the exam, I can confirm: some of them contain <strong>vulnerabilities nearly identical</strong> to the ones found in the CPTS. More importantly, they force you to:
-      </p>
-
-      <ul className="list-disc list-inside space-y-1 ml-4">
-        <li><strong>Chain multiple steps</strong> without guidance,</li>
-        <li><strong>Structure your workflow</strong> like in a real pentest,</li>
-        <li><strong>Manage pivots and post-exploitation scenarios</strong> on your own.</li>
-      </ul>
-
-      <p>
-        These boxes really <strong>boosted my confidence</strong>. After finishing the playlist, I said to myself: <em>"Okay, now I’m really ready for the 10-day exam."</em>
-      </p>
-
-      <p>
-        I know some people also use <strong>ProLabs</strong> or even tackle <strong>hard/insane boxes</strong> to prep, but personally, I didn’t feel the need. In my opinion, if you:
-      </p>
-
-      <ul className="list-disc list-inside space-y-1 ml-4">
-        <li>complete the CPTS path <strong>seriously</strong>,</li>
-        <li>pair modules with relevant boxes <strong>consistently</strong>,</li>
-        <li>follow the IppSec playlist <strong>at the right time</strong>,</li>
-      </ul>
-
-      <p>
-        …then you already have <strong>everything you need</strong>. No need to overdo it. The CPTS learning path alone is already <strong>rich and complete</strong>.
-      </p>
-
-      <p>
-        <strong>🕐 Personal advice</strong>: Don’t wait too long after finishing the learning path to start the IppSec boxes — you might forget key details. But don’t start them too early either. Make sure you’ve built a strong foundation from the modules before jumping in. <strong>Trust the process</strong>.
-      </p>
-              </div>
+  {/* Conseil timing sur la playlist */}
+  <div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
+    <Clock className="w-5 h-5 text-violet-400" />
+    <span className="text-gray-300">
+      <strong>Personal advice:</strong>
+      Don’t wait too long after finishing the learning path to start the IppSec boxes — you might forget key details.  
+      But don’t start them too early either.  
+      Make sure you’ve built a strong foundation from the modules before jumping in. <strong>Trust the process</strong>.
+    </span>
+  </div>
+</div>
             </div>
           </div>
         </div>
