@@ -526,7 +526,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
       Make sure you’ve built a strong foundation from the modules before jumping in. <strong>Trust the process</strong>.
     </span>
   </div>
-</div>
           </div>
         </div>
       </section>
