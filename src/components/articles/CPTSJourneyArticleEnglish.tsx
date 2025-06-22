@@ -1199,32 +1199,56 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             <Calendar className="w-6 h-6" />
             Daily Breakdown
           </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-           <p>
-                I went into the exam <strong>well-prepared</strong>, with a strong methodology and solid habits… or so I thought. On <strong>Day 1</strong>, I had promised myself to document everything into SysReptor <strong>every evening</strong>. <br/>
-                ❌ <strong>Big mistake.</strong>
-              </p>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+  {/* Départ méthodo et première erreur */}
+  <div className="flex items-center gap-3 mb-2">
+    <FileText className="w-6 h-6 text-violet-400" />
+    <h4 className="text-xl font-semibold text-violet-300">Reporting Habits: What Not To Do</h4>
+  </div>
+  <p className="text-gray-300 text-lg">
+    I went into the exam <strong>well-prepared</strong>, with a strong methodology and solid habits… or so I thought.
+    On <strong>Day 1</strong>, I promised myself to document everything into SysReptor <strong>every evening</strong>.<br/>
+    <span className="text-red-400 font-semibold">❌ Big mistake.</span>
+  </p>
 
-              <p>
-                What really works is the <strong>real-time trigger-based approach</strong> — every time you discover something (a port, a user, a foothold, a flag…), take a few seconds to document it <em>immediately</em>. I’ll explain this in more detail in the reporting strategy section, but take this as your first big lesson.
-              </p>
+  {/* La vraie méthode qui marche */}
+  <div className="flex items-center gap-2 mb-2">
+    <ListChecks className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">The Real-Time Trigger-Based Method</span>
+  </div>
+  <div className="bg-violet-900/20 rounded-lg p-4">
+    <span className="text-gray-300">
+      What really works is the <strong>real-time trigger-based approach</strong> — every time you discover something (a port, a user, a foothold, a flag…), take a few seconds to document it <em>immediately</em>.<br/>
+      <span className="block mt-1 font-semibold text-violet-400">WRITE YOUR REPORT IN REAL-TIME.</span>
+    </span>
+  </div>
 
-              <p>
-                💡 And yes, I used <strong>ChatGPT</strong> to help me speed up parts of the writing (especially impact/mitigation sections), but I always <strong>reviewed and rewrote everything</strong> to make sure it matched my style and findings.
-              </p>
+  {/* ChatGPT pour accélérer la rédaction */}
+  <div className="flex items-center gap-2 mb-2">
+    <Zap className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Using ChatGPT (the Right Way)</span>
+  </div>
+  <p className="text-gray-300">
+    💡 Yes, I used <strong>ChatGPT</strong> to help speed up some parts of the writing (especially impact/mitigation sections),  
+    but I always <strong>reviewed and rewrote everything</strong> so it matched my style and findings.
+  </p>
 
-              <p>
-                In terms of progress, the first days were fast — I gained solid access early and moved forward smoothly until I hit <strong>flag 9</strong>. From there, things got tougher. What helped was stepping back, <strong>re-enumerating</strong>, and reanalyzing everything. That’s how I unlocked the path to the next steps. 
-              </p>
-
-              <p>
-                The same happened with <strong>flag 12</strong>. There’s no shame in going backward to move forward. The content is dense, and it’s mentally stressful to have only 9 flags by <strong>Day </strong>. But don’t panic — stay calm, think smart, and keep moving.
-              </p>
-
-              <p>
-                And  again: <strong>WRITE YOUR REPORT IN REAL-TIME</strong>.
-              </p>
-          </div>
+  {/* Retour d’expérience sur le déroulé des flags */}
+  <div className="flex items-center gap-2 mb-2">
+    <Brain className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Progress & Mental Game</span>
+  </div>
+  <p className="text-gray-300">
+    In terms of progress, the first days were fast — I gained solid access early and moved forward smoothly until I hit <strong>flag 9</strong>.
+    From there, things got tougher. What helped was stepping back, <strong>re-enumerating</strong>, and reanalyzing everything.  
+    That’s how I unlocked the next steps.
+  </p>
+  <p className="text-gray-300">
+    The same happened with <strong>flag 12</strong>. There’s no shame in going backward to move forward.  
+    The content is dense, and it’s stressful to have only 9 flags by Day X.  
+    <span className="font-semibold text-violet-400">Don’t panic — stay calm, think smart, and keep moving.</span>
+  </p>
+</div>
         </div>
       </div>
     </div>
