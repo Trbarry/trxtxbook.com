@@ -618,23 +618,19 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
   <div className="flex items-center gap-3 mb-2">
     <Cpu className="w-6 h-6 text-violet-400" />
     <h4 className="text-xl font-semibold text-violet-300">Exegol: The Ultimate Offensive Toolkit 🇫🇷</h4>
-  <div>
+  </div>
   <p className="text-gray-300">
-    First of all, let me say it loud and clear: <strong>Exegol is French. COCORICO 🇫🇷</strong>
-    <br />
-    And Kali? You’re <em>mauvais</em>, like Jack in OSS 117. 🕶️ That’s right — I said it.
-  </p>
-  
-  {/* Meme OSS 117 inséré juste après la punchline */}
-  <div className="flex justify-center my-6">
+    First of all, let me say it loud and clear: <strong>Exegol is French. COCORICO 🇫🇷</strong><br  />
+<div className="flex justify-center my-6">
     <img
       src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/oss117meme.webp"
       alt="Jack OSS 117 mauvais meme"
       className="rounded-2xl shadow-xl max-w-md"
     />
   </div>
-
-
+    
+    And Kali? You’re <em>mauvais</em>, like Jack in OSS 117. 🕶️ That’s right — I said it.
+  </p>
   <p className="text-gray-300">
     All jokes aside, switching from Kali to Exegol was one of the best choices I made in my CPTS prep.
     <strong>Exegol is a container-based offensive security environment</strong> built on Docker, with everything you need pre-installed and tested.  
