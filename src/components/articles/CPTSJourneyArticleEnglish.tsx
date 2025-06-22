@@ -406,7 +406,48 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             SysReptor & Obsidian for Notes & Reporting
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+            <p>
+                Documenting a penetration test isn’t just about writing a report; it’s about making your knowledge actionable, transferable, and reusable. That’s why I used <strong>two distinct tools</strong> that complement each other perfectly:
+  </p>
+
+  <h4 className="text-xl font-semibold text-violet-300">Obsidian: My Personal Knowledge Hub</h4>
+  <p>
+    <strong>Obsidian</strong> was my central tool for managing knowledge during the CPTS journey. I used it as my second brain, making sure every command, every CVE, and every exploitation technique was properly documented, explained, and categorized.
+  </p>
+
+  <p>Here’s a simplified version of my Obsidian tree structure:</p>
+
+  <!-- 🧠 Insert Tree Structure Here -->
+
+  <p>
+    I strongly advise anyone preparing for the CPTS to <strong>create their own structured note-taking system</strong> like this. Not only does it improve retention, but it also gives you something to reference during the exam. Organizing your thoughts while learning pays off during pressure.
+  </p>
+
+  <h4 className="text-xl font-semibold text-violet-300">SysReptor: The Final Weapon for Reporting</h4>
+  <p>
+    For the actual report submission, I used <strong>SysReptor</strong>. It’s HTB’s own reporting platform and makes the entire process smooth and professional.
+  </p>
+
+  <p>
+    What I liked most about it was the <strong>structured reporting workflow</strong>. Each vulnerability gets a dedicated “Finding” entry, with a severity level, impact, reproduction steps, screenshots, and mitigation. It helped me maintain consistency and clarity throughout my <strong>190-page report</strong>.
+  </p>
+
+  <p>Here’s what my typical SysReptor structure looked like:</p>
+
+  <ul className="list-disc pl-6 text-sm">
+    <li><strong>Walkthrough:</strong> Chronological attack steps, covering each phase</li>
+    <li><strong>Findings:</strong> Each vulnerability in detail (IDOR, SSRF, SQLi...)</li>
+    <li><strong>Flags:</strong> Flag IDs and how they were captured</li>
+    <li><strong>Recommendations:</strong> Clear, professional advice per issue</li>
+  </ul>
+
+  <p>
+    I filled SysReptor in real-time during the exam using the <strong>“trigger-based method”</strong>: every time I discovered something important or completed a step, I immediately documented it. No time wasted at the end.
+  </p>
+
+  <p>
+    <strong>Final tip:</strong> Obsidian is for you, SysReptor is for HTB. Keep both clean, concise, and well-structured.
+  </p>
           </div>
         </div>
       </div>
