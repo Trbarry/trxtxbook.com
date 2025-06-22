@@ -1,7 +1,7 @@
 import React from 'react';
 import { Award, Calendar, Target, BookOpen, Brain, Shield, Terminal, Users, Lightbulb, CheckCircle2, Clock, FileText, Zap, Monitor, Network, Lock, Code, ArrowRight, TrendingUp, Cpu, Database,ListChecks } from 'lucide-react';
 
-export const CPTSJourneyArticleEnglish: React.FC = () => {
+export const CPTSJourneyArticleFrench: React.FC = () => {
   return (
     <div className="space-y-16">
       {/* CPTS Hero Section */}
