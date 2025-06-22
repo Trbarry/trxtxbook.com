@@ -1372,7 +1372,17 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
         <strong>Pentesters on LinkedIn:</strong> Every day, I get inspired by people sharing their journey, technical write-ups, and advice. Just seeing others push through motivates me to keep going.
       </li>
       <li>
-        <strong>HacktBack:</strong> The best French pentester content, always straight to the point, super motivating. If you read this: thanks for your mindset and all the tips!
+        <strong>
+          <a
+            href="https://www.linkedin.com/in/nicolas-gomez-6b850913a/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-violet-300 underline hover:text-violet-400"
+          >
+            Nicolas Gomez (HacktBack)
+          </a>
+        </strong>
+        : The best French pentester content, always straight to the point, super motivating. If you read this: thanks for your mindset and all the tips!
       </li>
       <li>
         <strong>IppSec:</strong> The <em>GOAT</em> for Hack The Box — I learned the methodology, how to think like a hacker, and how to approach any box step by step.
