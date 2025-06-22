@@ -942,7 +942,69 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             Walkthroughs vs. Findings
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+            <p>
+        Let’s clarify this once and for all: the <strong>walkthrough</strong> is not just your internal exploitation.
+        It’s a complete step-by-step guide that should allow your reviewer to reproduce the entire attack path —
+        starting from the initial web interface all the way down to full domain compromise.
+      </p>
+
+      <p>
+        Think of it as a <strong>technical replay of your operation</strong>, written as plainly and directly as possible.
+        No justifications, no theories — just actions, ordered logically. It should follow the scope of your <em>Rules of Engagement</em>
+        and stop at full compromise.
+      </p>
+
+      <p>
+        ⚠️ Some might misinterpret the exam statement and think the walkthrough should only cover internal AD exploitation.
+        That’s wrong. You <strong>must include everything</strong> from the initial attack surface (usually web) to the very end,
+        including lateral movement, privilege escalation, trust exploitation, and any external pivoting.
+      </p>
+
+      <p>
+        Use screenshots when something is visual (like BurpSuite manipulations, web interactions, or proof of RCE),
+        and code/text blocks (<code>' '</code>) for terminal commands. But again, this section should only explain <strong>what</strong> you did,
+        not <strong>why</strong> you did it.
+      </p>
+
+      <div className="bg-[#2a2a2f] p-6 rounded-lg border border-violet-700/30">
+        <h3 className="text-violet-400 text-xl font-semibold mb-3">✅ Example of Walkthrough Content</h3>
+        <ul className="list-disc list-inside text-white space-y-2">
+          <li>Identified login page at <code>/admin</code> → performed login bruteforce → found valid creds.</li>
+          <li>Logged in, found LFI via log injection → escalated to RCE.</li>
+          <li>Gained reverse shell as <code>www-data</code> → enumerated users → pivoted to internal host.</li>
+          <li>Compromised AD user via token abuse → escalated to Domain Admin.</li>
+        </ul>
+      </div>
+
+      <p>
+        Now for the <strong>Findings</strong>: this is where your infosec brain shines.
+        Each finding is an opportunity to demonstrate your understanding of vulnerabilities, their root causes,
+        impacts, and remediation strategies.
+      </p>
+
+      <p>
+        I personally wrote <strong>23 findings</strong>. Sometimes, a single vulnerability led to multiple findings
+        because it affected various layers — for instance, a weak password policy exploited after a web vulnerability
+        deserved its own detailed breakdown.
+      </p>
+
+      <p>
+        Each finding should include:
+      </p>
+
+      <ul className="list-disc list-inside text-white space-y-2">
+        <li><strong>Title:</strong> short and impactful (e.g., "Insecure Password Storage on Internal Application").</li>
+        <li><strong>Summary:</strong> what’s affected, how, and why it matters.</li>
+        <li><strong>Technical Details:</strong> supporting screenshots, payloads, steps, and tool output.</li>
+        <li><strong>Risk Analysis:</strong> CVSS-style reasoning or your own assessment.</li>
+        <li><strong>Remediation:</strong> clear, actionable suggestions.</li>
+      </ul>
+
+      <p>
+        These two sections — walkthrough and findings — are fundamentally different.
+        One is factual and linear, the other analytical and structured. Don’t mix them.
+        Respect their intent and purpose, and your report will be powerful, clear, and professional.
+      </p>
           </div>
         </div>
         <div>
