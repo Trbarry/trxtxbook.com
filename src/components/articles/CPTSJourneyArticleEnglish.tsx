@@ -915,7 +915,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
       </p>
 
       <p>
-        For example, when I compromised a user in the <code>tricolor.local</code> domain and gained access to a shared folder,  
+        For example, when I compromised a user in the <code>domain</code> and gained access to a shared folder,  
         I directly opened SysReptor, created a <strong>Finding</strong>, linked the vulnerable service (SMB), inserted the steps (enum → creds → access),  
         and dropped the screenshot. No “I’ll do it later.” I moved on with a clean state of mind.
       </p>
