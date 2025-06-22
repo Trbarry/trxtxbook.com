@@ -20,7 +20,7 @@ export const CPTSJourneyArticle: React.FC = () => {
     fr: {
       label: 'Français',
       flag: '🇫🇷',
-      title: "CPTS Review : De l'EJPT a la CPTS de HackTheBox",
+      title: 'CPTS Review : De l\'EJPT a la CPTS de HackTheBox',
       subtitle: 'Un parcours complet de 5 mois vers la certification CPTS - Retour d\'expérience complet du niveau junior a la validation de la CPTS',
       finalMessage: 'Du pentester junior au professionnel certifié CPTS - ce parcours a été transformateur. Le chemin était difficile, mais chaque heure investie en valait la peine pour les compétences et la confiance acquises.',
       journeyComplete: 'Parcours Terminé'
