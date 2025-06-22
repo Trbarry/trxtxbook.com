@@ -13,10 +13,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             className="w-full h-auto mx-auto object-contain md:max-h-[400px] transition-transform duration-500 hover:scale-[1.03]"
           />
 
-          <div className="text-center mt-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-violet-300 mb-2">
-              My CPTS Journey: 5 Months of Intensive Learning
-            </h2>
+          
             <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               From eJPT to CPTS — A complete transformation in practical pentesting and internal network hacking.
             </p>
