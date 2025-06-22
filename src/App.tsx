@@ -38,10 +38,10 @@ import { LinuxMintArticlePage } from './pages/LinuxMintArticlePage';
 import { CPTSJourneyArticlePage } from './pages/CPTSJourneyArticlePage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
 import { SitemapGeneratorPage } from './pages/SitemapGeneratorPage';
-const showCyberCharacter = false;
+
 function App() {
   // State
-  const showCyberCharacter = false;
+  
   const [activeSection, setActiveSection] = useState('home');
   const [isLoaded, setIsLoaded] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -68,7 +68,8 @@ function App() {
         />
 
         {/* Interactive Elements */}
-        <CyberCharacter />
+        {showCyberCharacter && <CyberCharacter />}
+
         <MouseTrail />
 
         {/* Routes */}
