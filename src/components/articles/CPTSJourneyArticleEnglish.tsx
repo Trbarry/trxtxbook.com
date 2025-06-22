@@ -1097,36 +1097,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
     </div>
   </section>
 
-  {/* Biggest Challenges & How I Overcame Them */}
-  <section className="mb-16">
-    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-      <div className="flex items-center gap-3 mb-8">
-        <Lock className="w-8 h-8 text-violet-400" />
-        <h2 className="text-3xl font-bold">Biggest Challenges & How I Overcame Them</h2>
-      </div>
-      <div className="space-y-8">
-        <div>
-          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-            <Network className="w-6 h-6" />
-            Internal Network Pivoting
-          </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-          </div>
-        </div>
-        <div>
-          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-            <Code className="w-6 h-6" />
-            Web Exploitation Stumbling Blocks
-          </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  
   {/* Tips & Tricks Cheat-Sheet */}
   <section className="mb-16">
     <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
