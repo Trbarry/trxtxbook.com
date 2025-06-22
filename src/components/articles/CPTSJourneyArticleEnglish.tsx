@@ -416,9 +416,11 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
   </p>
 
   <p>Here’s a simplified version of my Obsidian tree structure:</p>
-
-  <!-- 🧠 Insert Tree Structure Here -->
-
+<pre className="bg-black text-white text-sm rounded p-4 overflow-x-auto whitespace-pre">
+{`📁 CPTS
+  
+`}
+</pre>
   <p>
     I strongly advise anyone preparing for the CPTS to <strong>create their own structured note-taking system</strong> like this. Not only does it improve retention, but it also gives you something to reference during the exam. Organizing your thoughts while learning pays off during pressure.
   </p>
