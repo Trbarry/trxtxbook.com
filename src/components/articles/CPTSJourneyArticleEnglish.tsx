@@ -819,7 +819,37 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             Exam Format & Scope
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+            <p>
+    The CPTS exam simulates a <strong>real-world offensive engagement</strong> against a fictional company. While I can’t share too much detail due to HTB’s terms and conditions, I can confidently say: <strong>this is the closest thing to a real pentest you’ll get in a certification exam</strong>.
+  </p>
+
+  <p>
+    From the beginning, you’re provided with a clear scope via a letter of engagement — just like in a professional red team operation. The initial entry point is a public-facing web application, and from there, your job is to compromise the internal network and escalate access.
+  </p>
+
+  <p>
+    Your mission? <strong>Fully compromise two separate Active Directory domains</strong> (yes, two!) and gain access to at least <strong>12 out of 14 flags</strong> spread across the infrastructure.
+  </p>
+
+  <p>
+    The network is <strong>vast and realistic</strong>. Internal segmentation, Windows and Linux hosts, and pivoting requirements will force you to approach it with method and patience. Double pivoting is mandatory — and tools like <strong>Ligolo-ng</strong> will become your best friend.
+  </p>
+
+  <p>
+    The vulnerabilities themselves are not exotic or advanced: every single one of them was covered during the CPTS Learning Path. But don’t be fooled — the <strong>scale and density of the infrastructure</strong> can easily mislead you. There aren’t any real "rabbit holes" like you’d find in HTB Hard/Insane boxes, but the size of the environment means you can waste hours exploring dead ends if you don't stay pragmatic.
+  </p>
+
+  <p>
+    The exam spans <strong>10 full days</strong>. Personally, I worked an average of <strong>7 hours per day</strong>. Expect multiple roadblocks — sometimes I was stuck for a day or more. When that happened, I had to take a step back, re-enumerate, and think critically. You’re not just solving puzzles; you’re simulating the mindset of a hacker. Creativity and adaptability are just as important as technical skill.
+  </p>
+
+  <p>
+    The Learning Path prepares you <strong>perfectly</strong> for this — but don’t rely on automation or tunnel vision. Think like an attacker. Move laterally. Stay focused. Be methodical.
+  </p>
+
+  <p>
+    For the report, I used <strong>SysReptor</strong> and exported everything as a polished PDF. I strongly recommend this method — it’s clean, professional, and fits HTB’s expectations. Optionally, you can also include annexes with technical evidence like <strong>a full DC dump or password policy audit (e.g., DPAT analysis)</strong> if relevant.
+  </p>
           </div>
         </div>
         <div>
