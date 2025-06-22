@@ -1278,7 +1278,36 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             My Plan for OSCP, BSCP & Beyond
           </h3>
           <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-violet-400 font-semibold mb-2">📝 Content to be added manually</p>
+            <p className="text-gray-300 text-lg">
+      <strong>For the next steps, my strategy is simple: keep stacking skills, keep progressing — one step at a time.</strong>
+    </p>
+
+    <div className="bg-violet-900/20 rounded-lg p-4 space-y-3">
+      <ul className="list-disc ml-6 text-gray-300">
+        <li>
+          <strong>After the CPTS:</strong> The next logical step is the <span className="text-violet-300">BSCP (Burp Suite Certified Practitioner)</span> to prove my web pentesting skills.
+        </li>
+        <li>
+          <strong>Parallel goal:</strong> I also want to pass the <span className="text-blue-300">CCNA</span> to strengthen my networking fundamentals — it's key for both pentest and admin roles.
+        </li>
+        <li>
+          <strong>Still hesitating:</strong> Should I go for the <span className="text-pink-300">CBBH (Certified Bug Bounty Hunter)</span>? Or just push on to the OSCP directly? For now, I stay open — I’ll adapt as I progress.
+        </li>
+        <li>
+          <strong>OSCP is the long-term goal:</strong> I want to wait until I’m ready, and maybe until the end of my studies or the moment I decide to chase a cybersecurity job. Until then, it's full focus on learning, labs, and pro labs if I have the time!
+        </li>
+        <li>
+          <strong>Work-study + Certs:</strong> The challenge is to balance my <span className="text-violet-300">alternance</span> (work-study), my academic path, and technical progression. It’s demanding, but that’s the game.
+        </li>
+        <li>
+          <strong>Keep learning:</strong> As always: stay humble, learn every day, and adapt the plan along the way. There’s no magic roadmap in cybersecurity — just the next step forward.
+        </li>
+      </ul>
+    </div>
+
+    <p className="text-gray-400 text-base italic mt-2">
+      <span className="text-violet-400 font-semibold">Current mindset:</span> Skills first, certifications second. The job will come when it needs to — right now, it’s about building real, durable expertise.
+    </p>
           </div>
         </div>
       </div>
