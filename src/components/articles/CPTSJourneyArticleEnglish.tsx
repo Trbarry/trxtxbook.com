@@ -515,7 +515,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
       </p>
 
       <p>
-        💬 I know some people also use <strong>ProLabs</strong> or even tackle <strong>hard/insane boxes</strong> to prep, but personally, I didn’t feel the need. In my opinion, if you:
+        I know some people also use <strong>ProLabs</strong> or even tackle <strong>hard/insane boxes</strong> to prep, but personally, I didn’t feel the need. In my opinion, if you:
       </p>
 
       <ul className="list-disc list-inside space-y-1 ml-4">
