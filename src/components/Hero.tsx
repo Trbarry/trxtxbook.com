@@ -109,4 +109,4 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
               ))}
             </div>
 
-            {
+            
