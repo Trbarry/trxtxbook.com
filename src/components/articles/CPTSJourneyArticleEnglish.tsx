@@ -416,7 +416,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
   </p>
 
   <p>Here’s a simplified version of my Obsidian tree structure:</p>
-
+<details className="bg-[#2a2a2f] rounded-lg p-4 text-white group">
   <summary className="cursor-pointer text-violet-400 font-semibold text-lg mb-2">
     📂 Click to view full Obsidian tree structure
   </summary>
@@ -769,6 +769,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
 │               └── SeImpersonate & SeAssignPrimaryToken
 `}
 </pre>
+  <details className="bg-[#2a2a2f] rounded-lg p-4 text-white group">
   <p>
     I strongly advise anyone preparing for the CPTS to <strong>create their own structured note-taking system</strong> like this. Not only does it improve retention, but it also gives you something to reference during the exam. Organizing your thoughts while learning pays off during pressure.
   </p>
