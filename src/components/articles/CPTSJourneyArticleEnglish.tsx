@@ -1017,7 +1017,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
     In this section, I want to emphasize a crucial mindset: <strong>this isn’t just a report—it’s a certification exam</strong>. You’re not just demonstrating your technical skills; you’re showing your ability to <strong>document a pentest at the highest standard of professionalism</strong>.
   </p>
 
-  <h4 className="text-lg font-semibold text-violet-400">🛠️ Show Everything (but only what matters)</h4>
+  <h4 className="text-lg font-semibold text-violet-400"> Show Everything (but only what matters)</h4>
   <p>
     Your goal is <strong>maximum relevance, maximum detail</strong>, but <strong>zero noise</strong>.
     <br />
@@ -1048,7 +1048,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
     ⚠️ A leaked report shouldn’t help an attacker reproduce the compromise. You’re proving you understand the <strong>responsibility</strong> that comes with reporting.
   </p>
 
-  <h4 className="text-lg font-semibold text-violet-400">🔁 Clear Walkthrough, Linked to Findings</h4>
+  <h4 className="text-lg font-semibold text-violet-400"> Clear Walkthrough, Linked to Findings</h4>
   <p>
     I structured my walkthrough as a <strong>step-by-step narrative</strong>, from the very first scan of the external surface to full internal Active Directory compromise.
     <br />
@@ -1060,7 +1060,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
   </ul>
   <p>This structure made the document <strong>easier to navigate</strong> for both technical and non-technical readers.</p>
 
-  <h4 className="text-lg font-semibold text-violet-400">🧭 Pivoting & Visibility</h4>
+  <h4 className="text-lg font-semibold text-violet-400"> Pivoting & Visibility</h4>
   <p>
     Internal pivoting is <strong>one of the most difficult parts</strong> of this exam. So I documented every pivot (Ligolo-ng, tunnels, routes) clearly, using:
   </p>
@@ -1071,7 +1071,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
   </ul>
   <p>The goal is to let <strong>anyone skilled reproduce your attack path</strong> without asking questions.</p>
 
-  <h4 className="text-lg font-semibold text-violet-400">📎 Extra: Password Audit (DPAT)</h4>
+  <h4 className="text-lg font-semibold text-violet-400"> Extra: Password Audit (DPAT)</h4>
   <p>
     If you manage to dump the entire DC, run a <strong>DPAT-style password audit</strong>.<br />
     I included my sanitized results in a separate ZIP along with the PDF report. It's a great way to show:
@@ -1082,7 +1082,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
     <li>Risk assessment based on real-world credentials</li>
   </ul>
 
-  <h4 className="text-lg font-semibold text-violet-400">👥 Tailoring to the Audience</h4>
+  <h4 className="text-lg font-semibold text-violet-400"> Tailoring to the Audience</h4>
   <p>
     I carefully adapted the tone and structure depending on the section:
   </p>
@@ -1092,7 +1092,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
   </ul>
   <p>This demonstrates you know how to communicate with <strong>both technical and non-technical stakeholders</strong>.</p>
 
-  <h4 className="text-lg font-semibold text-violet-400">🧠 Final Words</h4>
+  <h4 className="text-lg font-semibold text-violet-400"> Final Words</h4>
   <p>
     This isn’t about flexing. This is about delivering a <strong>reproducible</strong>, <strong>professional</strong>, and <strong>secure</strong> penetration test report.
     <br />
