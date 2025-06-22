@@ -379,67 +379,6 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
                 CPTS Learning Path Structure
               </h3>
               <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-  {/* Organisation générale */}
-  <div className="flex items-center gap-3 mb-2">
-    <Calendar className="w-6 h-6 text-violet-400" />
-    <h4 className="text-xl font-semibold text-violet-300">My Study Routine</h4>
-  </div>
-  <p className="text-gray-300 text-lg">
-    I didn’t follow a strict schedule during the CPTS path — I just aimed to work around <strong>6 to 7 hours a day</strong>, <strong>five days a week</strong>, always taking short breaks every couple of hours to stay focused.
-    I knew from experience that <strong>rest matters just as much as active study</strong> — especially in cybersecurity, where understanding is more important than memorization.
-  </p>
-
-  {/* Méthodologie d’apprentissage */}
-  <div className="flex items-center gap-2 mb-2">
-    <Monitor className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Learning Process</span>
-  </div>
-  <p className="text-gray-300">
-    My routine was straightforward: <strong>start a module</strong>, <strong>finish it completely</strong>, and take <strong>structured notes</strong> as I went.
-    Then, whenever possible, I would <strong>chain it with one or two related HTB boxes</strong>.
-    This practical follow-up was crucial — the hands-on challenges helped <strong>anchor what I had just learned</strong>.
-  </p>
-
-  {/* Révision quotidienne */}
-  <div className="flex items-center gap-2 mb-2">
-    <FileText className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Daily Review</span>
-  </div>
-  <p className="text-gray-300">
-    Each morning, I’d <strong>review the previous day’s notes</strong> to keep everything fresh and reinforce long-term memory.
-    It wasn’t always easy to stay on track — motivation goes up and down — but I kept telling myself that <strong>discipline had to win over comfort</strong>.
-    Over time, it paid off. The progress wasn’t always visible day by day, but looking back, it added up fast.
-  </p>
-
-  {/* Hygiène de vie et bien-être */}
-  <div className="flex items-center gap-2 mb-2">
-    <Brain className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Physical & Mental Health</span>
-  </div>
-  <p className="text-gray-300">
-    Outside of studying, I made sure to <strong>take care of my mental and physical health</strong>.
-    I trained <strong>four times a week</strong>, around <strong>2 to 3 hours per session</strong>, and went on <strong>regular walks with my family and my dog</strong>.
-    Staying active and clearing my head helped me avoid burnout and come back sharper the next day.
-    <span className="block mt-1 font-semibold text-violet-400">Moving your body is just as important as moving your brain.</span>
-  </p>
-
-  {/* Focus, musique et motivation */}
-  <div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
-    <Zap className="w-6 h-6 text-violet-400" />
-    <span className="text-gray-300">
-      And let’s be real — <strong>a good Spotify playlist</strong> makes the grind a lot more enjoyable.
-      When I was in the zone, music helped me stay focused and turn long hours into productive ones.
-    </span>
-  </div>
-</div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Monitor className="w-6 h-6" />
-                HTB Boxes, Modules & IppSec's Track
-              </h3>
-              <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
   {/* Méthode modules + boxes */}
   <div className="flex items-center gap-3 mb-2">
     <Terminal className="w-6 h-6 text-violet-400" />
@@ -525,8 +464,76 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
       But don’t start them too early either.  
       Make sure you’ve built a strong foundation from the modules before jumping in. <strong>Trust the process</strong>.
     </span>
-  
-          
+  </div>
+</div>
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+                <Monitor className="w-6 h-6" />
+                HTB Boxes, Modules & IppSec's Track
+              </h3>
+              <div className="bg-[#2a2a2f] p-6 rounded-lg">
+                <p>
+        During the <strong>CPTS learning path</strong>, I made it a habit to complete <strong>1–2 HTB boxes per module</strong>, directly related to the topic I had just studied. For example, after finishing the <em>Web Exploitation</em> module, I’d go try an XSS or file upload challenge in the retired or easy/medium category. This helped me anchor new concepts right away by putting them into practice.
+      </p>
+
+      <p>
+        Once I completed the path, I moved on to doing <strong>live boxes on Hack The Box</strong>. These weren’t always tied to specific modules — I did them for fun and for the challenge. But they turned out to be incredibly valuable. These boxes helped me work on:
+      </p>
+
+      <ul className="list-disc list-inside space-y-1 ml-4">
+        <li><strong>Internal pivoting</strong> (shoutout to Ligolo-ng),</li>
+        <li><strong>Post-exploitation logic</strong> and lateral movement,</li>
+        <li><strong>Handling AV and EDR</strong> obstacles in a realistic environment.</li>
+      </ul>
+
+      <p>
+        I eventually reached the <strong>Pro Hacker rank</strong> — not without struggle. Some hard boxes kicked my ass, and yes, I needed help sometimes. That’s okay. What matters is what you learn from the process.
+      </p>
+
+      <p>
+        Then I tackled the <strong>unofficial IppSec CPTS prep playlist</strong>:
+        <br />
+        <a href="https://www.youtube.com/watch?v=H9FcE_FMZio&list=PLidcsTyj9JXItWpbRtTg6aDEj10_F17x5" target="_blank" className="text-violet-400 hover:underline">
+          HTB CPTS Prep Boxes – IppSec YouTube
+        </a>
+      </p>
+
+      <p>
+        And let me tell you — these boxes are <strong>brilliantly curated</strong>. Now that I’ve passed the exam, I can confirm: some of them contain <strong>vulnerabilities nearly identical</strong> to the ones found in the CPTS. More importantly, they force you to:
+      </p>
+
+      <ul className="list-disc list-inside space-y-1 ml-4">
+        <li><strong>Chain multiple steps</strong> without guidance,</li>
+        <li><strong>Structure your workflow</strong> like in a real pentest,</li>
+        <li><strong>Manage pivots and post-exploitation scenarios</strong> on your own.</li>
+      </ul>
+
+      <p>
+        These boxes really <strong>boosted my confidence</strong>. After finishing the playlist, I said to myself: <em>"Okay, now I’m really ready for the 10-day exam."</em>
+      </p>
+
+      <p>
+        💬 I know some people also use <strong>ProLabs</strong> or even tackle <strong>hard/insane boxes</strong> to prep, but personally, I didn’t feel the need. In my opinion, if you:
+      </p>
+
+      <ul className="list-disc list-inside space-y-1 ml-4">
+        <li>complete the CPTS path <strong>seriously</strong>,</li>
+        <li>pair modules with relevant boxes <strong>consistently</strong>,</li>
+        <li>follow the IppSec playlist <strong>at the right time</strong>,</li>
+      </ul>
+
+      <p>
+        …then you already have <strong>everything you need</strong>. No need to overdo it. The CPTS learning path alone is already <strong>rich and complete</strong>.
+      </p>
+
+      <p>
+        <strong>🕐 Personal advice</strong>: Don’t wait too long after finishing the learning path to start the IppSec boxes — you might forget key details. But don’t start them too early either. Make sure you’ve built a strong foundation from the modules before jumping in. <strong>Trust the process</strong>.
+      </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
