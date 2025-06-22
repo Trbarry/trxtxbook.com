@@ -1267,205 +1267,210 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             <Clock className="w-6 h-6" />
             Real-Time Reporting Strategy
           </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p>
-        During my CPTS exam, I initially planned to write the report every evening. <strong>Big mistake.</strong>  
-        With the mental fatigue and the need to keep momentum, it quickly became unsustainable.  
-        That’s when I decided to apply a <strong>real-time reporting workflow</strong>, and it made a massive difference.
-      </p>
+          {/* --- Bloc : Real-Time Reporting Workflow --- */}
+<div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+  <div className="flex items-center gap-3 mb-2">
+    <FileText className="w-6 h-6 text-violet-400" />
+    <h4 className="text-xl font-semibold text-violet-300">Real-Time Reporting Workflow</h4>
+  </div>
+  <p className="text-gray-300">
+    During my CPTS exam, I initially planned to write the report every evening. <strong>Big mistake.</strong>  
+    With the mental fatigue and the need to keep momentum, it quickly became unsustainable.
+    That’s when I decided to apply a <strong>real-time reporting workflow</strong>, and it made a massive difference.
+  </p>
 
-      <p>
-        I followed a <strong>trigger-based strategy</strong>: as soon as I discovered something relevant (new service, credentials, shell, etc.),  
-        I immediately documented it in <strong>SysReptor</strong> and took supporting notes in <strong>Obsidian</strong>.  
-        This method kept everything fresh, and I never had to backtrack through a mountain of logs.
-      </p>
+  <div className="flex items-center gap-2 mb-2">
+    <ListChecks className="w-5 h-5 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Trigger-Based Strategy</span>
+  </div>
+  <p className="text-gray-300">
+    As soon as I discovered something relevant (new service, credentials, shell…),  
+    I immediately documented it in <strong>SysReptor</strong> and took supporting notes in <strong>Obsidian</strong>.  
+    This kept everything fresh—never had to backtrack through a mountain of logs.
+  </p>
+  <p className="text-gray-300">
+    For example, after compromising a user and gaining access to a shared folder,  
+    I opened SysReptor, created a <strong>Finding</strong>, linked the vulnerable service, inserted steps, and dropped the screenshot.  
+    No “I’ll do it later.” I moved on with a clean state of mind.
+  </p>
 
-      <p>
-        For example, when I compromised a user in the <code>domain</code> and gained access to a shared folder,  
-        I directly opened SysReptor, created a <strong>Finding</strong>, linked the vulnerable service (SMB), inserted the steps (enum → creds → access),  
-        and dropped the screenshot. No “I’ll do it later.” I moved on with a clean state of mind.
-      </p>
+  <div className="flex items-center gap-2 mb-2">
+    <BookOpen className="w-5 h-5 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Timeline & Tags</span>
+  </div>
+  <p className="text-gray-300">
+    Every note in Obsidian was linked to my timeline.  
+    I used tags like <code>#flag9</code>, <code>#pivot</code>, <code>#user-compromise</code> to track progress and used the graph view to reconnect ideas when stuck.
+  </p>
 
-      <p>
-        Every note I took in Obsidian was also linked to my timeline. I used tags like <code>#flag9</code>, <code>#pivot</code>, or <code>#user-compromise</code>  
-        to keep track of my progress, and I used the graph view to reconnect ideas when I was stuck.
-      </p>
+  <div className="flex items-center gap-2 mb-2">
+    <CheckCircle2 className="w-5 h-5 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Unlocking Blockages</span>
+  </div>
+  <p className="text-gray-300">
+    This approach helped me <strong>overcome blockages</strong> (Flag 9, Flag 12).  
+    When stuck, I’d revisit previous notes, spot what I’d missed, and unlock the path.  
+    Without this system, I’d have been lost in the internal network complexity.
+  </p>
 
-      <p>
-        This approach helped me <strong>overcome blockages</strong> like Flag 9 or Flag 12. When stuck, I would revisit previous notes,  
-        spot something I had ignored, and unlock the path. Without this system, I would have been lost in the complexity of the internal network.
-      </p>
+  <div className="flex items-center gap-2 mb-2">
+    <Zap className="w-5 h-5 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">AI as a Sidekick</span>
+  </div>
+  <p className="text-gray-300">
+    <strong>Don’t hesitate to use ChatGPT</strong> as your sidekick—but always verify its output.
+    I used it mainly to rephrase technical steps for clarity and to write neutral language for the report.
+  </p>
+</div>
 
-      <p>
-        Lastly, <strong>don’t hesitate to use ChatGPT</strong> as your sidekick—but always verify its output.  
-        I used it mainly to rephrase technical steps for clarity and to write neutral language for the report.
-      </p>
-          </div>
-        </div>
-        <div>
-          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-            <Code className="w-6 h-6" />
-            Walkthroughs vs. Findings
-          </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p>
-        Let’s clarify this once and for all: the <strong>walkthrough</strong> is not just your internal exploitation.
-        It’s a complete step-by-step guide that should allow your reviewer to reproduce the entire attack path —
-        starting from the initial web interface all the way down to full domain compromise.
-      </p>
-
-      <p>
-        Think of it as a <strong>technical replay of your operation</strong>, written as plainly and directly as possible.
-        No justifications, no theories — just actions, ordered logically. It should follow the scope of your <em>Rules of Engagement</em>
-        and stop at full compromise.
-      </p>
-
-      <p>
-        ⚠️ Some might misinterpret the exam statement and think the walkthrough should only cover internal AD exploitation.
-        That’s wrong. You <strong>must include everything</strong> from the initial attack surface (usually web) to the very end,
-        including lateral movement, privilege escalation, trust exploitation, and any external pivoting.
-      </p>
-
-      <p>
-        Use screenshots when something is visual (like BurpSuite manipulations, web interactions, or proof of RCE),
-        and code/text blocks (<code>' '</code>) for terminal commands. But again, this section should only explain <strong>what</strong> you did,
-        not <strong>why</strong> you did it.
-      </p>
-
-      <div className="bg-[#2a2a2f] p-6 rounded-lg border border-violet-700/30">
-        <h3 className="text-violet-400 text-xl font-semibold mb-3">✅ Example of Walkthrough Content</h3>
-        <ul className="list-disc list-inside text-white space-y-2">
-          <li>Identified login page at <code>/admin</code> → performed login bruteforce → found valid creds.</li>
-          <li>Logged in, found LFI via log injection → escalated to RCE.</li>
-          <li>Gained reverse shell as <code>www-data</code> → enumerated users → pivoted to internal host.</li>
-          <li>Compromised AD user via token abuse → escalated to Domain Admin.</li>
-        </ul>
-      </div>
-
-      <p>
-        Now for the <strong>Findings</strong>: this is where your infosec brain shines.
-        Each finding is an opportunity to demonstrate your understanding of vulnerabilities, their root causes,
-        impacts, and remediation strategies.
-      </p>
-
-      <p>
-        I personally wrote <strong>23 findings</strong>. Sometimes, a single vulnerability led to multiple findings
-        because it affected various layers — for instance, a weak password policy exploited after a web vulnerability
-        deserved its own detailed breakdown.
-      </p>
-
-      <p>
-        Each finding should include:
-      </p>
-
+{/* --- Bloc : Walkthroughs vs. Findings --- */}
+<div className="mt-10">
+  <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+    <Code className="w-6 h-6" />
+    Walkthroughs vs. Findings
+  </h3>
+  <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+    {/* Walkthrough definition */}
+    <div className="flex items-center gap-2 mb-2">
+      <FileText className="w-5 h-5 text-violet-400" />
+      <span className="text-xl font-semibold text-violet-300">Walkthrough</span>
+    </div>
+    <p className="text-gray-300">
+      The <strong>walkthrough</strong> is not just your internal exploitation.  
+      It’s a complete step-by-step guide that should allow your reviewer to reproduce the entire attack path —  
+      from the initial web interface to full domain compromise.
+    </p>
+    <p className="text-gray-300">
+      Think of it as a <strong>technical replay</strong> of your operation, as plain and direct as possible.  
+      No justifications, no theory — just actions, ordered logically.  
+      It must cover everything: initial attack surface, lateral movement, escalation, trust exploitation, external pivoting.
+    </p>
+    <div className="bg-violet-900/20 rounded-lg p-4 border border-violet-700/30">
+      <h4 className="text-violet-400 text-xl font-semibold mb-3">✅ Example of Walkthrough Content</h4>
       <ul className="list-disc list-inside text-white space-y-2">
-        <li><strong>Title:</strong> short and impactful (e.g., "Insecure Password Storage on Internal Application").</li>
-        <li><strong>Summary:</strong> what’s affected, how, and why it matters.</li>
-        <li><strong>Technical Details:</strong> supporting screenshots, payloads, steps, and tool output.</li>
-        <li><strong>Risk Analysis:</strong> CVSS-style reasoning or your own assessment.</li>
-        <li><strong>Remediation:</strong> clear, actionable suggestions.</li>
+        <li>Identified login page at <code>/admin</code> → performed login bruteforce → found valid creds.</li>
+        <li>Logged in, found LFI via log injection → escalated to RCE.</li>
+        <li>Gained reverse shell as <code>www-data</code> → enumerated users → pivoted to internal host.</li>
+        <li>Compromised AD user via token abuse → escalated to Domain Admin.</li>
       </ul>
+    </div>
+    {/* Findings definition */}
+    <div className="flex items-center gap-2 mb-2 mt-6">
+      <FileText className="w-5 h-5 text-violet-400" />
+      <span className="text-xl font-semibold text-violet-300">Findings</span>
+    </div>
+    <p className="text-gray-300">
+      This is where your infosec brain shines.
+      Each finding is your chance to demonstrate understanding of vulnerabilities, their root causes, impacts, and remediation.
+      Sometimes, a single vulnerability leads to multiple findings (e.g. weak password policy after web vuln).
+    </p>
+    <ul className="list-disc list-inside text-white space-y-2">
+      <li><strong>Title:</strong> short and impactful (e.g., "Insecure Password Storage on Internal Application").</li>
+      <li><strong>Summary:</strong> what’s affected, how, and why it matters.</li>
+      <li><strong>Technical Details:</strong> screenshots, payloads, steps, tool output.</li>
+      <li><strong>Risk Analysis:</strong> CVSS-style reasoning or your own assessment.</li>
+      <li><strong>Remediation:</strong> clear, actionable suggestions.</li>
+    </ul>
+    <p className="text-gray-300">
+      These two sections — walkthrough and findings — are fundamentally different.
+      Walkthrough is factual and linear, findings are analytical and structured. Don’t mix them.
+      Respect their intent and your report will be powerful, clear, and professional.
+    </p>
+  </div>
+</div>
 
-      <p>
-        These two sections — walkthrough and findings — are fundamentally different.
-        One is factual and linear, the other analytical and structured. Don’t mix them.
-        Respect their intent and purpose, and your report will be powerful, clear, and professional.
-      </p>
-          </div>
-        </div>
-        <div>
-          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-            <Lightbulb className="w-6 h-6" />
-            What I Included & Why
-          </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-             <p>
-    In this section, I want to emphasize a crucial mindset: <strong>this isn’t just a report—it’s a certification exam</strong>. You’re not just demonstrating your technical skills; you’re showing your ability to <strong>document a pentest at the highest standard of professionalism</strong>.
-  </p>
-
-  <h4 className="text-lg font-semibold text-violet-400"> Show Everything (but only what matters)</h4>
-  <p>
-    Your goal is <strong>maximum relevance, maximum detail</strong>, but <strong>zero noise</strong>.
-    <br />
-    Every single finding I included was written with extreme precision. No filler. No vague screenshots. No unnecessary command outputs.
-    <br />
-    I reviewed every section <strong>multiple times</strong> to ensure:
-  </p>
-  <ul className="list-disc pl-6">
-    <li>It contributed meaningfully to the report</li>
-    <li>It could be understood by the reader <strong>without additional explanation</strong></li>
-    <li>It helped paint a clear picture of the attack narrative</li>
-  </ul>
-  <p><em>Ask yourself constantly: would this help the Blue Team understand what happened? If not, remove it.</em></p>
-
-  <h4 className="text-lg font-semibold text-violet-400">🔐 Sanitize EVERYTHING</h4>
-  <p>
-    <strong>This is a security report. Never forget that.</strong><br />
-    Even though this is a lab, I treated it like a real-world client engagement. That means:
-  </p>
-  <ul className="list-disc pl-6">
-    <li>Hashes: 🔒 <strong>sanitized</strong></li>
-    <li>Internal usernames: 🔒 <strong>sanitized</strong></li>
-    <li>Internal IPs and domains: 🔒 <strong>sanitized</strong></li>
-    <li>Passwords: 🔒 <strong>sanitized or masked</strong></li>
-    <li>Screenshots: 🔒 <strong>blurred or redacted</strong></li>
-  </ul>
-  <p>
-    ⚠️ A leaked report shouldn’t help an attacker reproduce the compromise. You’re proving you understand the <strong>responsibility</strong> that comes with reporting.
-  </p>
-
-  <h4 className="text-lg font-semibold text-violet-400"> Clear Walkthrough, Linked to Findings</h4>
-  <p>
-    I structured my walkthrough as a <strong>step-by-step narrative</strong>, from the very first scan of the external surface to full internal Active Directory compromise.
-    <br />
-    At every relevant point, I included a direct link to the related <strong>Finding</strong> so that the reader could jump between:
-  </p>
-  <ul className="list-disc pl-6">
-    <li><strong>What I did</strong> (walkthrough)</li>
-    <li><strong>Why it matters</strong> (finding)</li>
-  </ul>
-  <p>This structure made the document <strong>easier to navigate</strong> for both technical and non-technical readers.</p>
-
-  <h4 className="text-lg font-semibold text-violet-400"> Pivoting & Visibility</h4>
-  <p>
-    Internal pivoting is <strong>one of the most difficult parts</strong> of this exam. So I documented every pivot (Ligolo-ng, tunnels, routes) clearly, using:
-  </p>
-  <ul className="list-disc pl-6">
-    <li>Diagrams when needed</li>
-    <li>Short code blocks for interface config</li>
-    <li>Tables to track access level progression</li>
-  </ul>
-  <p>The goal is to let <strong>anyone skilled reproduce your attack path</strong> without asking questions.</p>
-
-  <h4 className="text-lg font-semibold text-violet-400"> Extra: Password Audit (DPAT)</h4>
-  <p>
-    If you manage to dump the entire DC, run a <strong>DPAT-style password audit</strong>.<br />
-    I included my sanitized results in a separate ZIP along with the PDF report. It's a great way to show:
-  </p>
-  <ul className="list-disc pl-6">
-    <li>Post-exploitation analysis</li>
-    <li>Weak password policies</li>
-    <li>Risk assessment based on real-world credentials</li>
-  </ul>
-
-  <h4 className="text-lg font-semibold text-violet-400"> Tailoring to the Audience</h4>
-  <p>
-    I carefully adapted the tone and structure depending on the section:
-  </p>
-  <ul className="list-disc pl-6">
-    <li><strong>Walkthrough / Findings</strong>: highly technical, precise</li>
-    <li><strong>Assessment Overview & Recommendations</strong>: accessible, high-level impact focus</li>
-  </ul>
-  <p>This demonstrates you know how to communicate with <strong>both technical and non-technical stakeholders</strong>.</p>
-
-  <h4 className="text-lg font-semibold text-violet-400"> Final Words</h4>
-  <p>
-    This isn’t about flexing. This is about delivering a <strong>reproducible</strong>, <strong>professional</strong>, and <strong>secure</strong> penetration test report.
-    <br />
-    So be rigorous. Be clear. Be respectful of the responsibility that comes with this type of knowledge.
-  </p>
-  <p><strong>And once again: Sanitize everything. Always.</strong></p>
-          </div>
+{/* --- Bloc : What I Included & Why --- */}
+<div className="mt-10">
+  <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+    <Lightbulb className="w-6 h-6" />
+    What I Included & Why
+  </h3>
+  <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+    {/* Mindset */}
+    <div className="flex items-center gap-2 mb-2">
+      <BookOpen className="w-5 h-5 text-violet-400" />
+      <span className="text-xl font-semibold text-violet-300">Mindset: Certification, Not Just a Report</span>
+    </div>
+    <p className="text-gray-300">
+      This isn’t just a report—it’s a certification exam.  
+      You’re not only demonstrating technical skills, but also your ability to <strong>document a pentest at the highest professional standard</strong>.
+    </p>
+    {/* Maximum relevance */}
+    <h4 className="text-lg font-semibold text-violet-400">Show Everything (but only what matters)</h4>
+    <p className="text-gray-300">
+      Your goal: <strong>maximum relevance, maximum detail, zero noise</strong>.  
+      Every finding was written with extreme precision.  
+      I reviewed every section <strong>multiple times</strong> to ensure it contributed meaningfully,  
+      could be understood standalone, and painted a clear attack narrative.
+      <br /><em>Would this help the Blue Team understand what happened? If not, remove it.</em>
+    </p>
+    {/* Sanitize */}
+    <h4 className="text-lg font-semibold text-violet-400">🔐 Sanitize EVERYTHING</h4>
+    <p className="text-gray-300">
+      <strong>This is a security report. Never forget that.</strong>  
+      Even in a lab, treat it like a real-world client engagement:
+    </p>
+    <ul className="list-disc pl-6 text-gray-300">
+      <li>Hashes: 🔒 <strong>sanitized</strong></li>
+      <li>Internal usernames: 🔒 <strong>sanitized</strong></li>
+      <li>Internal IPs/domains: 🔒 <strong>sanitized</strong></li>
+      <li>Passwords: 🔒 <strong>sanitized or masked</strong></li>
+      <li>Screenshots: 🔒 <strong>blurred or redacted</strong></li>
+    </ul>
+    <p className="text-gray-300">
+      ⚠️ A leaked report shouldn’t help an attacker reproduce the compromise. Prove you understand the <strong>responsibility</strong> of reporting.
+    </p>
+    {/* Walkthrough linked to findings */}
+    <h4 className="text-lg font-semibold text-violet-400">Clear Walkthrough, Linked to Findings</h4>
+    <p className="text-gray-300">
+      My walkthrough was a <strong>step-by-step narrative</strong>, from the first scan to full AD compromise.
+      At every relevant point, I included direct links to related <strong>Findings</strong> for easy navigation.
+      This structure made the document easier for technical and non-technical readers.
+    </p>
+    {/* Pivoting */}
+    <h4 className="text-lg font-semibold text-violet-400">Pivoting & Visibility</h4>
+    <p className="text-gray-300">
+      Internal pivoting is <strong>one of the hardest parts</strong>.  
+      I documented every pivot (Ligolo-ng, tunnels, routes) clearly, with:
+    </p>
+    <ul className="list-disc pl-6 text-gray-300">
+      <li>Diagrams when needed</li>
+      <li>Short code blocks for interface config</li>
+      <li>Tables to track access progression</li>
+    </ul>
+    <p className="text-gray-300">
+      The goal: <strong>anyone skilled can reproduce your attack path</strong> without asking questions.
+    </p>
+    {/* DPAT */}
+    <h4 className="text-lg font-semibold text-violet-400">Extra: Password Audit (DPAT)</h4>
+    <p className="text-gray-300">
+      If you manage to dump the DC, run a <strong>DPAT-style password audit</strong>.  
+      I included sanitized results in a ZIP with the PDF report:  
+      great to show post-exploitation analysis, weak policies, and real-world risk.
+    </p>
+    {/* Audience */}
+    <h4 className="text-lg font-semibold text-violet-400">Tailoring to the Audience</h4>
+    <p className="text-gray-300">
+      I adapted tone and structure by section:
+    </p>
+    <ul className="list-disc pl-6 text-gray-300">
+      <li><strong>Walkthrough / Findings</strong>: highly technical, precise</li>
+      <li><strong>Assessment Overview & Recommendations</strong>: accessible, impact-focused</li>
+    </ul>
+    <p className="text-gray-300">
+      This shows you can communicate with <strong>both technical and non-technical stakeholders</strong>.
+    </p>
+    {/* Conclusion */}
+    <h4 className="text-lg font-semibold text-violet-400">Final Words</h4>
+    <p className="text-gray-300">
+      This isn’t about flexing.  
+      It’s about delivering a <strong>reproducible</strong>, <strong>professional</strong>, and <strong>secure</strong> pentest report.
+      <br />
+      Be rigorous, clear, and respectful of the responsibility that comes with this knowledge.
+      <br /><strong>And once again: Sanitize everything. Always.</strong>
+    </p>
+  </div>
+</div>
         </div>
       </div>
     </div>
