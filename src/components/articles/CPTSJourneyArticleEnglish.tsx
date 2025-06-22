@@ -431,7 +431,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
       When I was in the zone, music helped me stay focused and turn long hours into productive ones.
     </span>
   </div>
-</div>
+
 
             <div>
               <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
