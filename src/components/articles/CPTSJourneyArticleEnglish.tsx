@@ -23,7 +23,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
           </div>
         </div>
       </div>
-
+ 
       
 
       {/* SEO Meta Information - Only visible in development */}
