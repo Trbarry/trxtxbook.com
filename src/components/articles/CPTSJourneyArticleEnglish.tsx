@@ -612,464 +612,150 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
             <Shield className="w-6 h-6" />
             Exegol: My Offensive Environment
           </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p>
-            First of all, let me say it loud and clear: <strong>Exegol is French. COCORICO 🇫🇷</strong><br />
-            And Kali? You’re <em>mauvais</em>, like Jack in OSS 117. 🕶️ That’s right — I said it.
-          </p>
-          <p>
-            All jokes aside, switching from Kali to Exegol was one of the best choices I made in my CPTS prep. 
-            <strong>Exegol is a container-based offensive security environment</strong> built on top of Docker, with everything you need already installed, configured, and tested. It’s stable, lightweight, and super fast to deploy. You want a fresh environment in 2 seconds? Boom — done.
-          </p>
-          <p>
-            I used Exegol as my <strong>main offensive toolkit</strong> throughout the entire learning path and exam. It never failed me, and I’ll never go back to Kali or Parrot again. My setup was simple but powerful: 
-            <strong>Arch Linux + Exegol</strong>. That combo gave me performance, control, and consistency.
-          </p>
-
-          <div>
-            <p className="font-semibold text-violet-400">🔧 Key tools inside Exegol that helped me crush the CPTS:</p>
-            <ul className="list-disc list-inside space-y-2 mt-2">
-              <li><strong>Ligolo-ng</strong> – For tunneling and pivoting inside internal networks. Essential for lateral movement.</li>
-              <li><strong>NetExec</strong> – Perfect for credential spraying, SMB enumeration, and assessing exposed shares.</li>
-              <li><strong>FFuf</strong> – Incredibly useful for quick and precise web fuzzing during enumeration and exploitation.</li>
-              <li><strong>Burp Suite</strong> – My go-to for web attacks, CSRF bypass, cookie inspection, and XSS proof of concept.</li>
-              <li><strong>BloodyAD</strong> – Helped a ton with AD enumeration, much simpler than setting up BloodHound in most cases.</li>
-              <li><strong>Impacket Tools</strong> – Tools like `secretsdump.py`, `smbexec.py`, and `wmiexec.py` are absolute must-haves for Windows exploitation.</li>
-              <li><strong>smbserver.py</strong> – Quick and easy way to serve payloads or retrieve loot during the exam.</li>
-              <li><strong>Nmap</strong> – Of course. Fast, reliable, and all the scripts are ready to go out of the box.</li>
-            </ul>
-          </div>
-
-          <p>
-            What makes Exegol truly shine is how much <strong>time and headaches it saves</strong>. You don’t need to install or troubleshoot anything. Everything is preconfigured, organized, and designed for offensive ops. When you're deep into a 10-day exam grind, <strong>that matters more than anything</strong>.
-          </p>
-
-          <div>
-            <p className="font-semibold text-violet-400">✨ Why I’ll never go back:</p>
-            <ul className="list-disc list-inside space-y-2 mt-2">
-              <li>Launches in seconds with Docker, without polluting your host system.</li>
-              <li>Zero crash, zero weird package issues — unlike Kali after every `apt upgrade`.</li>
-              <li>Perfect structure for notetaking, screenshots, payload hosting, and log retention.</li>
-              <li>Felt like I was using a professional toolkit, not a hobbyist’s distro.</li>
-            </ul>
-          </div>
-
-          <p>
-  And did I mention again? <strong>It’s French 🇫🇷</strong>. And it rocks.  
-  If you're curious about how to set it up, why I switched, and how it helped me save hours during the CPTS exam, 
-  I’ve written a full article about it:  
-  <a 
-    href="https://trxtxbook.com/articles/exegol-docker" 
-    target="_blank" 
-    rel="noopener noreferrer" 
-    className="text-violet-400 underline hover:text-violet-300"
-  >
-    Exegol: The Ultimate CPTS Toolkit
-  </a>.  
-  Feel free to check it out for a deep dive into my workflow and why I’ll never go back to Kali again.
-</p>
-          </div>
-        </div>
-        <div>
-          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-            <FileText className="w-6 h-6" />
-            SysReptor & Obsidian for Notes & Reporting
-          </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p>
-    Documenting a penetration test isn’t just about writing a report; it’s about making your knowledge actionable, transferable, and reusable. That’s why I used <strong>two distinct tools</strong> that complement each other perfectly:
+          {/* --- Bloc Exegol --- */}
+<div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+  {/* Exegol, le choix de l'environnement */}
+  <div className="flex items-center gap-3 mb-2">
+    <Cpu className="w-6 h-6 text-violet-400" />
+    <h4 className="text-xl font-semibold text-violet-300">Exegol: The Ultimate Offensive Toolkit 🇫🇷</h4>
+  </div>
+  <p className="text-gray-300">
+    First of all, let me say it loud and clear: <strong>Exegol is French. COCORICO 🇫🇷</strong><br />
+    And Kali? You’re <em>mauvais</em>, like Jack in OSS 117. 🕶️ That’s right — I said it.
+  </p>
+  <p className="text-gray-300">
+    All jokes aside, switching from Kali to Exegol was one of the best choices I made in my CPTS prep.
+    <strong>Exegol is a container-based offensive security environment</strong> built on Docker, with everything you need pre-installed and tested.  
+    Stable, lightweight, super fast to deploy — a fresh environment in 2 seconds? Boom — done.
+  </p>
+  <p className="text-gray-300">
+    I used Exegol as my <strong>main offensive toolkit</strong> through the entire learning path and exam.  
+    My setup: <strong>Arch Linux + Exegol</strong>. Performance, control, and consistency.
   </p>
 
-  <h4 className="text-xl font-semibold text-violet-300">Obsidian: My Personal Knowledge Hub</h4>
-  <p>
-    <strong>Obsidian</strong> was my central tool for managing knowledge during the CPTS journey. I used it as my second brain, making sure every command, every CVE, and every exploitation technique was properly documented, explained, and categorized.
+  {/* Outils clés dans Exegol */}
+  <div className="bg-violet-900/20 rounded-lg p-4">
+    <Terminal className="w-5 h-5 text-violet-400 inline-block mb-1 mr-2" />
+    <span className="font-semibold text-violet-400">Key tools inside Exegol:</span>
+    <ul className="list-disc ml-6 text-gray-300 mt-2 space-y-1">
+      <li><strong>Ligolo-ng</strong> — For tunneling and pivoting inside internal networks. Essential for lateral movement.</li>
+      <li><strong>NetExec</strong> — Perfect for credential spraying, SMB enumeration, and assessing exposed shares.</li>
+      <li><strong>FFuf</strong> — Fast, precise web fuzzing for enumeration and exploitation.</li>
+      <li><strong>Burp Suite</strong> — Web attacks, CSRF bypass, cookie inspection, XSS PoC.</li>
+      <li><strong>BloodyAD</strong> — Simple, efficient AD enumeration (easier than BloodHound in many cases).</li>
+      <li><strong>Impacket Tools</strong> — <code>secretsdump.py</code>, <code>smbexec.py</code>, <code>wmiexec.py</code> are must-haves for Windows.</li>
+      <li><strong>smbserver.py</strong> — To serve payloads or retrieve loot during the exam.</li>
+      <li><strong>Nmap</strong> — Fast, reliable, all scripts ready out of the box.</li>
+    </ul>
+  </div>
+
+  {/* Pourquoi Exegol est incontournable */}
+  <p className="text-gray-300">
+    What makes Exegol shine: <strong>it saves time and headaches</strong>.  
+    No installation, no troubleshooting. Everything’s preconfigured, organized, and ready for offensive ops.  
+    <span className="font-semibold text-violet-400">When you're deep into a 10-day exam grind, that matters more than anything.</span>
   </p>
 
-  <p>Here’s a simplified version of my Obsidian tree structure:</p>
-<details className="group bg-[#2a2a2f] rounded-lg p-4 text-white open:ring-1 open:ring-violet-600 transition-all">
-  <summary className="cursor-pointer text-violet-400 font-semibold text-lg mb-2">
-    📂 Click to view full Obsidian tree structure
-  </summary>
-  <pre className="bg-black text-white text-sm rounded p-4 mt-4 overflow-x-auto whitespace-pre-wrap">
+  {/* Atouts majeurs Exegol */}
+  <div className="bg-violet-900/20 rounded-lg p-4">
+    <span className="font-semibold text-violet-400">✨ Why I’ll never go back:</span>
+    <ul className="list-disc ml-6 text-gray-300 mt-2 space-y-1">
+      <li>Launches in seconds with Docker, without polluting your host system.</li>
+      <li>Zero crash, zero weird package issues — unlike Kali after every <code>apt upgrade</code>.</li>
+      <li>Perfect structure for notetaking, screenshots, payload hosting, and log retention.</li>
+      <li>Feels like a professional toolkit, not a hobbyist’s distro.</li>
+    </ul>
+  </div>
+
+  <p className="text-gray-300">
+    And did I mention? <strong>It’s French 🇫🇷</strong>.  
+    If you're curious about setup, workflow and why I’ll never go back to Kali, check my article:<br />
+    <a
+      href="https://trxtxbook.com/articles/exegol-docker"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-violet-400 underline hover:text-violet-300"
+    >
+      Exegol: The Ultimate CPTS Toolkit
+    </a>
+    .
+  </p>
+</div>
+
+{/* --- Bloc Obsidian & SysReptor --- */}
+<div className="mt-10">
+  <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+    <FileText className="w-6 h-6" />
+    SysReptor & Obsidian for Notes & Reporting
+  </h3>
+  <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+    {/* Obsidian */}
+    <div>
+      <h4 className="text-xl font-semibold text-violet-300 flex items-center gap-2">
+        <BookOpen className="w-5 h-5 text-violet-400" /> Obsidian: My Personal Knowledge Hub
+      </h4>
+      <p className="text-gray-300">
+        <strong>Obsidian</strong> was my central tool for managing knowledge during the CPTS journey.
+        Every command, every CVE, every technique was properly documented, explained, and categorized.
+      </p>
+      <p className="text-gray-300">Here’s a simplified version of my Obsidian tree structure:</p>
+      <details className="group bg-[#2a2a2f] rounded-lg p-4 text-white open:ring-1 open:ring-violet-600 transition-all">
+        <summary className="cursor-pointer text-violet-400 font-semibold text-lg mb-2">
+          📂 Click to view full Obsidian tree structure
+        </summary>
+        <pre className="bg-black text-white text-sm rounded p-4 mt-4 overflow-x-auto whitespace-pre-wrap">
 {`📁 CPTS
-  ├── 1- Information Gathering
-│   ├── 1- Service Enumeration
-│   │   ├── Services
-│   │   │   ├── DNS (53)
-│   │   │   │   ├── Attack DNS.md
-│   │   │   │   ├── Dangerous Settings
-│   │   │   │   └── Record Types
-│   │   │   ├── FTP (21)
-│   │   │   │   ├── Dangerous Settings
-│   │   │   │   └── Enumeration.md
-│   │   │   ├── IMAP (143, 993)
-│   │   │   │   └── Commands
-│   │   │   ├── IPMI (623)
-│   │   │   │   ├── Authentication
-│   │   │   │   └── Default Credentials
-│   │   │   ├── IPMI (623).md
-│   │   │   ├── Kerberos (88)
-│   │   │   │   └── Kerberos.md
-│   │   │   ├── LDAP (389,3268).md
-│   │   │   ├── MSSQL (1433, 1434, 2433)
-│   │   │   │   ├── Dangerous Settings
-│   │   │   │   ├── Enum.md
-│   │   │   │   ├── T-SQL Commands
-│   │   │   │   └── Windows Exploitation.md
-│   │   │   ├── MySQL (3306)
-│   │   │   │   ├── Basic SQL Queries
-│   │   │   │   └── Dangerous Settings
-│   │   │   ├── NFS (2049)
-│   │   │   │   ├── Dangerous Settings
-│   │   │   │   └── Enum.md
-│   │   │   ├── Oracle TNS (1521)
-│   │   │   │   ├── Enum.md
-│   │   │   │   ├── SQLplus Commands
-│   │   │   │   └── Troubleshooting
-│   │   │   ├── POP3 (110, 995)
-│   │   │   │   ├── Commands
-│   │   │   │   ├── Dangerous Settings
-│   │   │   │   └── Enum.md
-│   │   │   ├── R-Services (512, 513, 514)
-│   │   │   │   ├── Enum.md
-│   │   │   │   └── Service Breakdown
-│   │   │   ├── RDP (3389)
-│   │   │   │   └── Enumeration.md
-│   │   │   ├── RPC.md
-│   │   │   ├── Rsync (873)
-│   │   │   │   └── Enumeration.md
-│   │   │   ├── SMB (139, 445)
-│   │   │   │   ├── Dangerous Settings
-│   │   │   │   ├── Enumeration.md
-│   │   │   │   ├── RPCClient
-│   │   │   │   ├── Spidering
-│   │   │   │   └── Windows Specific
-│   │   │   ├── SMTP (25, 465, 587)
-│   │   │   │   ├── Common Commands
-│   │   │   │   └── enumeration.md
-│   │   │   ├── SNMP (161, 162, 10161, 10162)
-│   │   │   │   ├── Dangerous Settings
-│   │   │   │   └── Enumeration.md
-│   │   │   ├── SSH (22)
-│   │   │   │   ├── Authentication
-│   │   │   │   └── Dangerous Settings
-│   │   │   ├── TFTP (69)
-│   │   │   │   └── enumeration.md
-│   │   │   ├── Telnet (23).md
-│   │   │   └── WinRM (5985, 5986)
-│   │   │       └── enumeration.md
-│   │   └── Tools
-│   │       ├── Nmap
-│   │       │   ├── Firewall and IDS
-│   │       │   └── Host Discovery
-│   │       ├── WMIexec
-│   │       │   └── Wmiexec.md
-│   │       ├── creds
-│   │       │   └── Credential Tools.md
-│   │       └── tcpdump
-│   │           └── Tcpdump.md
-│   ├── Active Directory Enumeration
-│   │   ├── ACL Enumeration
-│   │   │   └── Acl ├⌐num├⌐ration.md
-│   │   ├── Credential AD enumeration
-│   │   │   ├── Credential AD Linux.md
-│   │   │   └── Credential AD windows.md
-│   │   ├── Enumerating Security Controls
-│   │   │   └── Enumerating security control.md
-│   │   ├── Hosts Enumeration
-│   │   │   └── Initial Domain Enumeration.md
-│   │   ├── LLMNR_NBT-NS Poisoning
-│   │   │   ├── From Linux.md
-│   │   │   └── From Windows.md
-│   │   ├── Living Off The Lands.md
-│   │   ├── Password Policy Enumeration
-│   │   │   └── Enumerating & Retrieving Password Policies.md
-│   │   ├── Password Spraying
-│   │   │   ├── Linux.md
-│   │   │   └── Windows.md
-│   │   ├── Resume Skill Assesment HTB.md
-│   │   ├── SMB Enumeration
-│   │   │   └── Smb ├ënum├⌐ration.md
-│   │   ├── Tools
-│   │   │   ├── BloodHound
-│   │   │   │   ├── Analysis
-│   │   │   │   └── Utilisation.md
-│   │   │   └── PowerView
-│   │   │       └── Powerview.md
-│   │   └── User Enumeration
-│   │       ├── With Access
-│   │       │   └── With Access.md
-│   │       └── Without Access
-│   │           └── User Enumeration Without access.md
-│   ├── Application Enumeration
-│   │   ├── Attacking Applications Connecting to Services.md
-│   │   ├── ColdFusion
-│   │   │   └── Cold Fusion.md
-│   │   ├── Drupal
-│   │   │   └── Drupal.md
-│   │   ├── GitLab
-│   │   │   └── Gitlab.md
-│   │   ├── IIS Tilde Enumeration
-│   │   │   └── IiS tilde ├ënum├⌐ration.md
-│   │   ├── Jenkins
-│   │   │   └── Jenkins.md
-│   │   ├── Joomla
-│   │   │   └── Joomla.md
-│   │   ├── Other Notable App.md
-│   │   ├── PRTG Network Monitor
-│   │   │   └── Prtg network monitor.md
-│   │   ├── Shellshock CGI.md
-│   │   ├── Splunk
-│   │   ├── ThinkClient App tier2 and tier3.md
-│   │   ├── Tomcat
-│   │   │   ├── Tomcat CGi.md
-│   │   │   └── Tomcat.md
-│   │   ├── Wordpress
-│   │   │   └── WordPress.md
-│   │   └── osTicket
-│   │       └── Osticket.md
-│   ├── Enumeration Basic Linux Systeme.md
-│   ├── Enumeration Basic Windows Systeme.md
-│   └── Web Enumeration
-│       ├── Active
-│       │   ├── Directory & Page Fuzzing
-│       │   │   ├── Directory And Page Fuzzing avec Dirsearch.md
-│       │   │   └── Directory and page fuzzing FFUF.md
-│       │   ├── Parameter & Value Fuzzing
-│       │   │   └── Param├⌐trer and value fuzzing.md
-│       │   ├── Subdomain & Virtual Host Fuzzing
-│       │   │   └── Subdomain and virtual host enum.md
-│       │   └── Web Server Enumeration
-│       │       └── Web server enumeration.md
-│       ├── Passive
-│       │   ├── Google Dorking
-│       │   │   └── Google dorking.md
-│       │   └── Passive Infrastructure Identification
-│       │       ├── Passive Subdomain Enumeration
-│       │       └── Passive infra enumeration.md
-│       └── Tools
-│           └── EyeWitness
-│               └── EyeWitness.md
-├── 2- Exploitation
-│   ├── Credential Exploitation.md
-│   ├── Pre-Exploitation
-│   │   ├── Shells
-│   │   │   ├── Bind Shells.md
-│   │   │   ├── Payloads.md
-│   │   │   ├── Reverse Shell.md
-│   │   │   ├── Webshells.md
-│   │   │   └── Windows Shells.md
-│   │   └── Tools
-│   │       ├── Metasploit Components.md
-│   │       ├── Metasploit Session.md
-│   │       ├── Metasploit Venom.md
-│   │       └── Searchsploit
-│   │           └── Searchsploot.md
-│   ├── Service Exploitation
-│   │   └── Web Exploitation
-│   │       ├── CGI Shellshock Attack
-│   │       │   └── CGI shellshock attack.md
-│   │       ├── CSRF.md
-│   │       ├── Command Injection
-│   │       │   ├── Cheatsheets complet.md
-│   │       │   └── Skill Assessment R├⌐sumer.md
-│   │       ├── Cross-Site Scripting (XSS)
-│   │       │   ├── Discovery
-│   │       │   ├── Phishing
-│   │       │   ├── Session Hijacking
-│   │       │   └── ≡ƒöÑ XSS to Local File Read (XSS2LFR) via JavaScript in PDF Generator.md
-│   │       ├── File Uploads
-│   │       │   └── Basic.md
-│   │       ├── HTTP Verb Tampering.md
-│   │       ├── IDOR.md
-│   │       ├── Local File Inclusion (LFI)
-│   │       │   ├── File Disclosure
-│   │       │   ├── Filter Bypass
-│   │       │   ├── LFI to RCE
-│   │       │   └── PHP decoding webpage.md
-│   │       ├── SQLi
-│   │       │   ├── SQL Injection NoSQL Injection.md
-│   │       │   ├── SQLMAP.md
-│   │       │   └── Union Sqli.md
-│   │       ├── Skill Assessment Web Attacks (xxe,idor,xml,httpverb).md
-│   │       └── XXE
-│   │           ├── Blind
-│   │           ├── File Disclosure
-│   │           ├── RCE
-│   │           ├── XXE GLOBAL.md
-│   │           └── Xxe.md
-│   └── Tools
-│       └── Credential Generating.md
-├── 3- Lateral Movement
-│   ├── Linux Lateral Movement
-│   │   └── Kerberos Pass the Ticket
-│   │       ├── Ccache Files
-│   │       │   └── Ccache Filles.md
-│   │       ├── Kerberos Pass the Tiket.md
-│   │       ├── KeyTab Files
-│   │       │   └── Keytabs File.md
-│   │       ├── Linikatz
-│   │       │   └── Linikatz.md
-│   │       └── Mimikatz.md
-│   ├── Pivoting
-│   │   ├── Advanced Tunneling
-│   │   │   ├── DNS Tunneling (Dnscat2).md
-│   │   │   └── SOCKS_ICMP Tunneling.md
-│   │   ├── Double Pivoting
-│   │   │   └── RDP et SOCKS Tunneling avec SocksOverRDP.md
-│   │   ├── Dynamic and Local Port Forwarding
-│   │   │   ├── Dynamic Port Forwarding (SOCKS, SSH).md
-│   │   │   └── Remote_Reverse Port Forwarding avec SSH.md
-│   │   ├── Meterpreter_&_Socat
-│   │   │   ├── Meterpreter Pivoting_port_forwarding.md
-│   │   │   └── Socat Reverse & Bind Shell.md
-│   │   ├── Pivoting Methods
-│   │   │   ├── Chisel ( SOCKS5 Tunneling).md
-│   │   │   ├── Netsh (Windows Port Forwarding).md
-│   │   │   ├── Plink, Sshuttle (SSH Pivoting).md
-│   │   │   └── Rpivot (Web Server Pivoting).md
-│   │   ├── Pivoting.md
-│   │   ├── Tableau  Recapitulatif des M├⌐thodes de Pivoting.md
-│   │   └── Tools
-│   │       ├── Draw.io.md
-│   │       ├── Meterpreter
-│   │       │   └── Meterpreter pivoting.md
-│   │       ├── Netsh
-│   │       │   └── Netsh.md
-│   │       ├── Plink
-│   │       │   └── Plink.md
-│   │       ├── RPIVOT
-│   │       │   └── RPIVOT.md
-│   │       └── Sshuttle
-│   ├── Windows Lateral Movement
-│   │   ├── ACL DCSYNC ATTACK.md
-│   │   ├── ADCS ESC 1 A 13 BIG DOSSIER
-│   │   │   ├── ESC1.md
-│   │   │   ├── ESC2.md
-│   │   │   └── ESC3.md
-│   │   ├── Active Directory Lateral Movement
-│   │   │   ├── ACL Exploitation_Lateral_Abuse.md
-│   │   │   ├── Double Hob Kerberos Problem.md
-│   │   │   ├── RDP
-│   │   │   │   └── Priviliged Access_rdp_winrm_linux_windows_mssql.md
-│   │   │   └── Vul Recente_print-nightmare_potipotam_NoPac.md
-│   │   ├── Domain Trust Forest
-│   │   │   ├── Attacking Domain Trust Linux.md
-│   │   │   ├── Attacking Domain Trust windows.md
-│   │   │   ├── Attacking Domain Trusts - Cross-Forest Trust Abuse - from Linux.md
-│   │   │   ├── Attacking Domain Trusts-Cross-Forest Trust Abuse - from Windows.md
-│   │   │   └── Domain Trust.md
-│   │   ├── Kerberos Pass the Ticket
-│   │   │   ├── Kerberoasting Pass The ticket from windows.md
-│   │   │   ├── Kerberos Pass the Ticket From Linux.md
-│   │   │   └── Ticket Request
-│   │   ├── Misconfiguration AD exploit.md
-│   │   ├── NTLM Pass the Hash
-│   │   ├── PowerView.ps1 AD.md
-│   │   ├── SeBackUpPrivilege Abuse.md
-│   │   └── ≡ƒº¿ ESC4 ΓÇô Exploitation via WriteOwner.md
-│   └── dfsdsfdsf.md
-├── 4- Post-Exploitation
-│   ├── Linux Post Exploitation
-│   │   ├── File Transfer
-│   │   │   ├── Linux Technique.md
-│   │   │   ├── Living Of The Lands.md
-│   │   │   ├── Technique Supplementaire.md
-│   │   │   ├── Transfer Files with Codes.md
-│   │   │   └── Windows Technique.md
-│   │   └── Privilege Escalation
-│   │       ├── 1 - Information Gathering.md
-│   │       ├── 2 - Environment-based Privilege Escalation.md
-│   │       ├── 3 - Permissions-based Privilege Escalation.md
-│   │       ├── 4 - Service-based Privilege Escalation.md
-│   │       ├── 5 - Linux Internals-based Privilege Escalation.md
-│   │       ├── 6 - Recent 0-Days.md
-│   │       └── Technique de PrivEsc.md
-│   ├── Password Attacks
-│   │   ├── Cracking Files.md
-│   │   ├── Linux Password Attacks.md
-│   │   ├── PassTheHash.md
-│   │   ├── Remote Password Attacks.md
-│   │   └── Windows Local Password Attacks.md
-│   └── Windows Post Exploitation
-│       ├── Info
-│       │   ├── Access Control List (ACL)
-│       │   ├── Accounts
-│       │   ├── Built-in AD Groups
-│       │   ├── Execution Policy
-│       │   ├── NTFS
-│       │   ├── PowerShell
-│       │   ├── Registry
-│       │   └── Services
-│       ├── Kernel Exploits
-│       └── Privilege Escalation
-│           ├── AD Certificates Services.md
-│           ├── Kerberbroasting
-│           │   ├── Kerberoasting.md
-│           │   └── Targeted Kerberoasting.md
-│           ├── Legacy Operating Systems
-│           │   ├── Windows 7
-│           │   └── Windows Server 2008
-│           ├── Password Attacks
-│           │   ├── Hydra.md
-│           │   ├── JohnTheRipper.md
-│           │   ├── Linux Credential Hunting.md
-│           │   ├── Linux Passwd, Shadow & Opasswd.md
-│           │   ├── WD Active Directory & NTDS.dit.md
-│           │   ├── WD Attacking LSASS.md
-│           │   ├── WD Credential Hunting.md
-│           │   └── WD Windows Attacking SAM and LSA.md
-│           ├── Privilege escalation
-│           │   ├── 1 - Lay of the Lands.md
-│           │   ├── 2 - Windows User Privileges.md
-│           │   ├── 3 - Windows Group Privileges.md
-│           │   ├── 4 - Attacking the OS.md
-│           │   ├── 5 - Credential Hunting.md
-│           │   ├── 6 - Restricted Environments.md
-│           │   ├── 7 - Additional Technique.md
-│           │   ├── 8 - End of life System.md
-│           │   └── Sans titre 8.md
-│           ├── Privileged Groups
-│           │   ├── Backup Operators
-│           │   ├── DnsAdmins
-│           │   └── Print Operators
-│           └── User Privileges
-│               ├── Abusing Privilege AD.md
-│               ├── SeDebugPrivilege
-│               └── SeImpersonate & SeAssignPrimaryToken
-`}
-  </pre>
-</details>
-  <p>
-    I strongly advise anyone preparing for the CPTS to <strong>create their own structured note-taking system</strong> like this. Not only does it improve retention, but it also gives you something to reference during the exam. Organizing your thoughts while learning pays off during pressure.
-  </p>
+├── 1- Information Gathering
+│   ├── 1- Service Enumeration
+│   │   ├── Services
+│   │   │   ├── DNS (53)
+│   │   │   │   ├── Attack DNS.md
+│   │   │   │   └── Record Types
+...`}
+        </pre>
+      </details>
+      <p className="text-gray-300">
+        <span className="font-semibold text-violet-400">My advice:</span> <br />
+        Create your own structured note-taking system.  
+        It improves retention and gives you something to reference during the exam.  
+        <span className="block">Organizing your thoughts while learning pays off under pressure.</span>
+      </p>
+    </div>
 
-  <h4 className="text-xl font-semibold text-violet-300">SysReptor: The Final Weapon for Reporting</h4>
-  <p>
-    For the actual report submission, I used <strong>SysReptor</strong>. It’s HTB’s own reporting platform and makes the entire process smooth and professional.
-  </p>
-
-  <p>
-    What I liked most about it was the <strong>structured reporting workflow</strong>. Each vulnerability gets a dedicated “Finding” entry, with a severity level, impact, reproduction steps, screenshots, and mitigation. It helped me maintain consistency and clarity throughout my <strong>190-page report</strong>.
-  </p>
-
-  <p>Here’s what my typical SysReptor structure looked like:</p>
-
-  <ul className="list-disc pl-6 text-sm">
-    <li><strong>Walkthrough:</strong> Chronological attack steps, covering each phase</li>
-    <li><strong>Findings:</strong> Each vulnerability in detail (IDOR, SSRF, SQLi...)</li>
-    <li><strong>Flags:</strong> Flag IDs and how they were captured</li>
-    <li><strong>Recommendations:</strong> Clear, professional advice per issue</li>
-  </ul>
-
-  <p>
-    I filled SysReptor in real-time during the exam using the <strong>“trigger-based method”</strong>: every time I discovered something important or completed a step, I immediately documented it. No time wasted at the end.
-  </p>
-
-  <p>
-    <strong>Final tip:</strong> Obsidian is for you, SysReptor is for HTB. Keep both clean, concise, and well-structured.
-  </p>
-          </div>
+    {/* SysReptor */}
+    <div>
+      <h4 className="text-xl font-semibold text-violet-300 flex items-center gap-2 mt-8">
+        <Network className="w-5 h-5 text-violet-400" /> SysReptor: The Final Weapon for Reporting
+      </h4>
+      <p className="text-gray-300">
+        For the actual report submission, I used <strong>SysReptor</strong>.  
+        It’s HTB’s own reporting platform, making the process smooth and professional.
+      </p>
+      <p className="text-gray-300">
+        What I liked most was the <strong>structured reporting workflow</strong>:  
+        each vulnerability is a dedicated “Finding” entry, with severity, impact, reproduction steps, screenshots, and mitigation.  
+        It helped maintain consistency and clarity throughout my <strong>190-page report</strong>.
+      </p>
+      <p className="text-gray-300">Here’s what my typical SysReptor structure looked like:</p>
+      <ul className="list-disc ml-6 text-gray-300 text-sm space-y-1">
+        <li><strong>Walkthrough:</strong> Chronological attack steps, covering each phase</li>
+        <li><strong>Findings:</strong> Each vulnerability in detail (IDOR, SSRF, SQLi...)</li>
+        <li><strong>Flags:</strong> Flag IDs and how they were captured</li>
+        <li><strong>Recommendations:</strong> Clear, professional advice per issue</li>
+      </ul>
+      <p className="text-gray-300">
+        I filled SysReptor in real-time during the exam using the <strong>“trigger-based method”</strong>: every time I discovered something important or completed a step, I immediately documented it. No time wasted at the end.
+      </p>
+      <div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2 mt-4">
+        <CheckCircle2 className="w-5 h-5 text-violet-400" />
+        <span className="text-gray-300">
+          <strong>Final tip:</strong> Obsidian is for you, SysReptor is for HTB.<br />
+          Keep both clean, concise, and well-structured.
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
         </div>
       </div>
     </div>
