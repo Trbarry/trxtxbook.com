@@ -153,7 +153,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
   {/* Valeur du partage */}
   <p className="text-gray-400 text-base italic mt-2">
     <span className="text-violet-400 font-semibold">My mindset:</span>  
-    In cybersecurity, we grow by helping each other — via write-ups, forums, blogs, even Discord chats.  
+    In cybersecurity , we grow by helping each other — via write-ups, forums, blogs, even Discord chats.  
     If this post helps even one person feel more confident or prepared, it was worth writing.
   </p>
 </div>
