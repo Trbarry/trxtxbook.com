@@ -701,10 +701,10 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
       <p className="text-gray-300">Here’s a simplified version of my Obsidian tree structure:</p>
       <details className="group bg-[#2a2a2f] rounded-lg p-4 text-white open:ring-1 open:ring-violet-600 transition-all">
         <summary className="cursor-pointer text-violet-400 font-semibold text-lg mb-2">
-          📂 Click to view full Obsidian tree structure
+           Click to view full Obsidian tree structure
         </summary>
         <pre className="bg-black text-white text-sm rounded p-4 mt-4 overflow-x-auto whitespace-pre-wrap">
-{📁 CPTS
+{` CPTS
   ├── 1- Information Gathering
 │   ├── 1- Service Enumeration
 │   │   ├── Services
@@ -1050,7 +1050,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
 │               ├── Abusing Privilege AD.md
 │               ├── SeDebugPrivilege
 │               └── SeImpersonate & SeAssignPrimaryToken
-}
+`}
         </pre>
       </details>
       <p className="text-gray-300">
