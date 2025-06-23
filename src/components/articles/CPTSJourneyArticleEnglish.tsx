@@ -8,7 +8,7 @@ export const CPTSJourneyArticleEnglish: React.FC = () => {
       <div className="relative mb-16">
         <div className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-2xl shadow-xl border border-violet-900/30 bg-gradient-to-b from-[#0f0f14] via-[#181821] to-[#1a1a1f] p-6 md:p-10">
           <img
-            src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/cptsimage.png"
+            src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets//bandeaucpts.png"
             alt="CPTS Journey Artwork"
             className="w-full h-auto mx-auto object-contain md:max-h-[400px] transition-transform duration-500 hover:scale-[1.03]"
           />
