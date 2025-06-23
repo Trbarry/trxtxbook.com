@@ -1300,7 +1300,7 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
   <p className="text-gray-300">
     Par exemple, après avoir compromis un user et eu accès à un dossier partagé,  
     j’ouvrais SysReptor, créais une entrée <strong>Finding</strong>, reliais le service vulnérable, mettais les étapes, la capture…  
-    Pas de “je ferai ça plus tard”. Je pouvais avancer l’esprit libre.
+    Pas de “je ferai ça plus tard”. Je pouvais avancer l’esprit libre
   </p>
 
 
