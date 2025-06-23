@@ -540,158 +540,162 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
 </section>
 
 
-      {/* Final Preparation & Exam Sprint */}
-  <section className="mb-16">
-    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-      <div className="flex items-center gap-3 mb-8">
-        <TrendingUp className="w-8 h-8 text-violet-400" />
-        <h2 className="text-3xl font-bold">Final Preparation & Exam Sprint</h2>
-      </div>
-      <div className="space-y-8">
-        <div>
-          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-            <Zap className="w-6 h-6" />
-            Final 10-Day Sprint
-          </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-  {/* Préparation finale, break avant examen */}
-  <div className="flex items-center gap-3 mb-2">
-    <Clock className="w-6 h-6 text-violet-400" />
-    <h4 className="text-xl font-semibold text-violet-300">Day -10: Strategic Break</h4>
-  </div>
-  <p className="text-gray-300 text-lg">
-    At <strong>Day -10</strong>, I had already completed the entire <strong>learning path</strong>, the <strong>HTB boxes</strong>, and the full <strong>IppSec playlist</strong>.<br/>
-    So, I decided to take a proper break — about <strong>3 to 4 full days</strong> off.
-  </p>
-
-  {/* Importance du repos */}
-  <div className="flex items-center gap-2 mb-2">
-    <Brain className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Rest is Essential</span>
-  </div>
-  <div className="bg-violet-900/20 rounded-lg p-4">
-    <span className="text-gray-300">
-      I really believe that <strong>resting is just as important as grinding</strong>.
-      Your brain needs time to digest and organize everything you've learned.
-    </span>
-  </div>
-
-  {/* Organisation, structuration finale */}
-  <div className="flex items-center gap-2 mb-2">
-    <FileText className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Note Organization & Review</span>
-  </div>
-  <p className="text-gray-300">
-    Once I came back fresh, I spent the remaining time going through <strong>all my notes</strong> and making them cleaner and more organized inside <strong>Obsidian</strong>.
-    I structured everything properly, by phase of the pentest, and made sure I could retrieve any technique or command quickly if needed.
-  </p>
-
-  {/* Dernière ligne droite */}
-  <div className="flex items-center gap-2 mb-2">
-    <CheckCircle2 className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Final Prep Mode</span>
-  </div>
-  <p className="text-gray-300">
-    That was my only focus during those 10 days.  
-    No more labs, no boxes, no distractions.  
-    Just refinement, calm, and preparation.
-  </p>
+      {/* Préparation finale & Sprint examen */}
+<section className="mb-16">
+  <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+    <div className="flex items-center gap-3 mb-8">
+      <TrendingUp className="w-8 h-8 text-violet-400" />
+      <h2 className="text-3xl font-bold">Préparation finale & Sprint d’examen</h2>
+    </div>
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <Zap className="w-6 h-6" />
+          Sprint final : 10 jours
+        </h3>
+        <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+{/* Préparation finale, break avant examen */}
+<div className="flex items-center gap-3 mb-2">
+  <Clock className="w-6 h-6 text-violet-400" />
+  <h4 className="text-xl font-semibold text-violet-300">Jour -10 : Pause stratégique</h4>
 </div>
+<p className="text-gray-300 text-lg">
+  À <strong>J-10</strong>, j’avais déjà terminé tout le <strong>learning path</strong>, les <strong>boxes HTB</strong> et l’intégralité de la <strong>playlist IppSec</strong>.<br/>
+  Donc, j’ai décidé de vraiment lever le pied : <strong>3 à 4 jours complets</strong> de repos total.
+</p>
+
+{/* Importance du repos */}
+<div className="flex items-center gap-2 mb-2">
+  <Brain className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Le repos, c’est crucial</span>
+</div>
+<div className="bg-violet-900/20 rounded-lg p-4">
+  <span className="text-gray-300">
+    Je suis convaincu que <strong>se reposer est aussi important que charbonner</strong>.
+    Ton cerveau a besoin de temps pour digérer et organiser tout ce que tu as appris.
+  </span>
+</div>
+
+{/* Organisation, structuration finale */}
+<div className="flex items-center gap-2 mb-2">
+  <FileText className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Organisation & relecture des notes</span>
+</div>
+<p className="text-gray-300">
+  Une fois reposé, j’ai passé le reste du temps à relire <strong>toutes mes notes</strong> et à les rendre plus propres et structurées dans <strong>Obsidian</strong>.
+  J’ai tout organisé par phase du pentest, et je me suis assuré de pouvoir retrouver n’importe quelle technique ou commande rapidement si besoin.
+</p>
+
+{/* Dernière ligne droite */}
+<div className="flex items-center gap-2 mb-2">
+  <CheckCircle2 className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Dernière ligne droite</span>
+</div>
+<p className="text-gray-300">
+  C’était mon unique focus sur ces 10 jours.<br/>
+  Plus de labs, plus de boxes, plus de distractions.<br/>
+  Juste affiner, rester calme et préparer le mental.
+</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  {/* Tooling, Environment & Note-Taking */}
-  <section className="mb-16">
-    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-      <div className="flex items-center gap-3 mb-8">
-        <Terminal className="w-8 h-8 text-violet-400" />
-        <h2 className="text-3xl font-bold">Tooling, Environment & Note-Taking</h2>
-      </div>
-      <div className="space-y-8">
-        <div>
-          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-            <Shield className="w-6 h-6" />
-            Exegol: My Offensive Environment
-          </h3>
-          {/* --- Bloc Exegol --- */}
+{/* Outils, environnement & prise de notes */}
+<section className="mb-16">
+  <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+    <div className="flex items-center gap-3 mb-8">
+      <Terminal className="w-8 h-8 text-violet-400" />
+      <h2 className="text-3xl font-bold">Outils, environnement & prise de notes</h2>
+    </div>
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <Shield className="w-6 h-6" />
+          Exegol : Mon environnement d’attaque
+        </h3>
+        {/* --- Bloc Exegol --- */}
 <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-  {/* Exegol, le choix de l'environnement */}
-  <div className="flex items-center gap-3 mb-2">
-    <Cpu className="w-6 h-6 text-violet-400" />
-    <h4 className="text-xl font-semibold text-violet-300">Exegol: The Ultimate Offensive Toolkit 🇫🇷</h4>
-  </div>
-  <p className="text-gray-300">
-    First of all, let me say it loud and clear: <strong>Exegol is French. COCORICO 🇫🇷</strong><br  />
-<div className="flex justify-center my-6">
-    <img
-      src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/oss117meme.webp"
-      alt="Jack OSS 117 mauvais meme"
-      className="rounded-2xl shadow-xl max-w-md"
-    />
-  </div>
-    
-    And Kali? You’re <em>mauvais</em>, like Jack in OSS 117. 🕶️ That’s right — I said it.
-  </p>
-  <p className="text-gray-300">
-    All jokes aside, switching from Kali to Exegol was one of the best choices I made in my CPTS prep.
-    <strong>Exegol is a container-based offensive security environment</strong> built on Docker, with everything you need pre-installed and tested.  
-    Stable, lightweight, super fast to deploy — a fresh environment in 2 seconds? Boom — done.
-  </p>
-  <p className="text-gray-300">
-    I used Exegol as my <strong>main offensive toolkit</strong> through the entire learning path and exam.  
-    My setup: <strong>Arch Linux + Exegol</strong>. Performance, control, and consistency.
-  </p>
-
-  {/* Outils clés dans Exegol */}
-  <div className="bg-violet-900/20 rounded-lg p-4">
-    <Terminal className="w-5 h-5 text-violet-400 inline-block mb-1 mr-2" />
-    <span className="font-semibold text-violet-400">Key tools inside Exegol:</span>
-    <ul className="list-disc ml-6 text-gray-300 mt-2 space-y-1">
-      <li><strong>Ligolo-ng</strong> — For tunneling and pivoting inside internal networks. Essential for lateral movement.</li>
-      <li><strong>NetExec</strong> — Perfect for credential spraying, SMB enumeration, and assessing exposed shares.</li>
-      <li><strong>FFuf</strong> — Fast, precise web fuzzing for enumeration and exploitation.</li>
-      <li><strong>Burp Suite</strong> — Web attacks, CSRF bypass, cookie inspection, XSS PoC.</li>
-      <li><strong>BloodyAD</strong> — Simple, efficient AD enumeration (easier than BloodHound in many cases).</li>
-      <li><strong>Impacket Tools</strong> — <code>secretsdump.py</code>, <code>smbexec.py</code>, <code>wmiexec.py</code> are must-haves for Windows.</li>
-      <li><strong>smbserver.py</strong> — To serve payloads or retrieve loot during the exam.</li>
-      <li><strong>Nmap</strong> — Fast, reliable, all scripts ready out of the box.</li>
-    </ul>
-  </div>
-
-  {/* Pourquoi Exegol est incontournable */}
-  <p className="text-gray-300">
-    What makes Exegol shine: <strong>it saves time and headaches</strong>.  
-    No installation, no troubleshooting. Everything’s preconfigured, organized, and ready for offensive ops.  
-    <span className="font-semibold text-violet-400">When you're deep into a 10-day exam grind, that matters more than anything.</span>
-  </p>
-
-  {/* Atouts majeurs Exegol */}
-  <div className="bg-violet-900/20 rounded-lg p-4">
-    <span className="font-semibold text-violet-400">✨ Why I’ll never go back:</span>
-    <ul className="list-disc ml-6 text-gray-300 mt-2 space-y-1">
-      <li>Launches in seconds with Docker, without polluting your host system.</li>
-      <li>Zero crash, zero weird package issues — unlike Kali after every <code>apt upgrade</code>.</li>
-      <li>Perfect structure for notetaking, screenshots, payload hosting, and log retention.</li>
-      <li>Feels like a professional toolkit, not a hobbyist’s distro.</li>
-    </ul>
-  </div>
-
-  <p className="text-gray-300">
-    And did I mention? <strong>It’s French 🇫🇷</strong>.  
-    If you're curious about setup, workflow and why I’ll never go back to Kali, check my article:<br />
-    <a
-      href="https://trxtxbook.com/articles/exegol-docker"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-violet-400 underline hover:text-violet-300"
-    >
-      Exegol: The Ultimate CPTS Toolkit
-    </a>
-    .
-  </p>
+{/* Exegol, le choix de l'environnement */}
+<div className="flex items-center gap-3 mb-2">
+  <Cpu className="w-6 h-6 text-violet-400" />
+  <h4 className="text-xl font-semibold text-violet-300">Exegol : le top du toolkit offensif 🇫🇷</h4>
 </div>
+<p className="text-gray-300">
+  Je le dis haut et fort : <strong>Exegol, c’est français. COCORICO 🇫🇷</strong><br  />
+<div className="flex justify-center my-6">
+  <img
+    src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/oss117meme.webp"
+    alt="Jack OSS 117 mauvais meme"
+    className="rounded-2xl shadow-xl max-w-md"
+  />
+</div>
+  Et Kali ? T’es <em>mauvais</em>, comme Jack dans OSS 117. 🕶️ Voilà, c’est dit.
+</p>
+<p className="text-gray-300">
+  Blague à part, passer de Kali à Exegol a été l’une des meilleures décisions de ma prépa CPTS.
+  <strong>Exegol, c’est un environnement offensif basé sur Docker</strong>, tout préinstallé, tout testé.
+  Stable, léger, déployé en 2 secondes chrono — tu veux un environnement tout frais ? Boom, c’est prêt.
+</p>
+<p className="text-gray-300">
+  J’ai utilisé Exegol comme <strong>mon principal environnement offensif</strong> tout au long du cursus et de l’examen.
+  Mon setup : <strong>Arch Linux + Exegol</strong>. Performance, maîtrise, fiabilité.
+</p>
+
+{/* Outils clés dans Exegol */}
+<div className="bg-violet-900/20 rounded-lg p-4">
+  <Terminal className="w-5 h-5 text-violet-400 inline-block mb-1 mr-2" />
+  <span className="font-semibold text-violet-400">Outils phares d’Exegol :</span>
+  <ul className="list-disc ml-6 text-gray-300 mt-2 space-y-1">
+    <li><strong>Ligolo-ng</strong> : Pour le tunneling et le pivoting sur des réseaux internes. Indispensable en lateral movement.</li>
+    <li><strong>NetExec</strong> : Parfait pour le credential spraying, l’énumération SMB et la gestion des partages exposés.</li>
+    <li><strong>FFuf</strong> : Fuzz web rapide et précis, pour l’énumération comme l’exploitation.</li>
+    <li><strong>Burp Suite</strong> : Attaques web, contournement CSRF, inspection de cookies, PoC XSS.</li>
+    <li><strong>BloodyAD</strong> : Enum AD simple, rapide, plus efficace que BloodHound dans plein de cas.</li>
+    <li><strong>Impacket Tools</strong> : <code>secretsdump.py</code>, <code>smbexec.py</code>, <code>wmiexec.py</code> — indispensables sur Windows.</li>
+    <li><strong>smbserver.py</strong> : Pour servir des payloads ou récupérer du loot pendant l’exam.</li>
+    <li><strong>Nmap</strong> : Rapide, fiable, tous les scripts prêts dès le départ.</li>
+  </ul>
+</div>
+
+{/* Pourquoi Exegol est incontournable */}
+<p className="text-gray-300">
+  Ce qui fait la force d’Exegol : <strong>tu gagnes un temps fou</strong>.
+  Pas d’install, pas de prise de tête. Tout est déjà configuré, prêt pour l’attaque.
+  <span className="font-semibold text-violet-400">Quand t’es au cœur d’un exam CPTS de 10 jours, ça compte plus que tout.</span>
+</p>
+
+{/* Atouts majeurs Exegol */}
+<div className="bg-violet-900/20 rounded-lg p-4">
+  <span className="font-semibold text-violet-400">✨ Pourquoi je ne reviendrai jamais en arrière :</span>
+  <ul className="list-disc ml-6 text-gray-300 mt-2 space-y-1">
+    <li>Lancement en quelques secondes avec Docker, sans polluer ta machine hôte.</li>
+    <li>Zero crash, aucun bug chelou de package — rien à voir avec Kali après chaque <code>apt upgrade</code>.</li>
+    <li>Structure parfaite pour prise de notes, screenshots, hébergement de payloads et logs.</li>
+    <li>Ça fait pro, pas “distro de hobbyiste”.</li>
+  </ul>
+</div>
+
+<p className="text-gray-300">
+  Et au cas où tu l’aurais raté : <strong>c’est français 🇫🇷</strong>.<br/>
+  Si tu veux voir le détail du setup, du workflow et pourquoi je ne reviendrai jamais sur Kali, lis mon article :<br />
+  <a
+    href="https://trxtxbook.com/articles/exegol-docker"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-violet-400 underline hover:text-violet-300"
+  >
+    Exegol : Le toolkit ultime pour la CPTS
+  </a>
+  .
+</p>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 {/* --- Bloc Obsidian & SysReptor --- */}
 <div className="mt-10">
