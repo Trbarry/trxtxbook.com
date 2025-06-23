@@ -14,7 +14,7 @@ Dans cet article, je partage tout ce que j'aurais aimé savoir avant de commence
 
 Ce projet m'a fait grandir techniquement, m'a permis de repousser mes limites mentales, et m'a aidé à acquérir une rigueur que je n'avais pas auparavant. Ce n'est pas une fin, mais une étape majeure dans mon apprentissage en cybersécurité.`,
   tags: ["CPTS", "Pentesting", "Certification", "HTB Academy", "Cybersécurité", "Professional Development"],
-  image: "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/bandeaucpts.png",
+  image: "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets//bandeaucpts.png",
   features: [
     "Parcours détaillé de 5 mois de montée en compétences",
     "Méthodologie d'étude structurée avec planning réaliste",
