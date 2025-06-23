@@ -366,178 +366,179 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
 </section>
 
 
-      {/* Study Strategy Breakdown */}
-      <section className="mb-16">
-        <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-          <div className="flex items-center gap-3 mb-8">
-            <Brain className="w-8 h-8 text-violet-400" />
-            <h2 className="text-3xl font-bold">Study Strategy Breakdown</h2>
-          </div>
-          
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <BookOpen className="w-6 h-6" />
-                CPTS Learning Path Structure
-              </h3>
-             <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-  {/* Routine de travail et organisation générale */}
-  <div className="flex items-center gap-3 mb-2">
-    <Calendar className="w-6 h-6 text-violet-400" />
-    <h4 className="text-xl font-semibold text-violet-300">My Study Routine</h4>
-  </div>
-  <p className="text-gray-300 text-lg">
-    I didn’t follow a strict schedule during the CPTS path — I just aimed to work around <strong>6 to 7 hours a day</strong>, <strong>five days a week</strong>, always taking short breaks every couple of hours to stay focused.
-    I knew from experience that <strong>rest matters just as much as active study</strong> — especially in cybersecurity, where understanding is more imporant than memorization.
-  </p>
-
-  {/* Méthodologie d’apprentissage */}
-  <div className="flex items-center gap-2 mb-2">
-    <Monitor className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Learning Process</span>
-  </div>
-  <p className="text-gray-300">
-    My routine was pretty straightforward: <strong>start a module</strong>, <strong>finish it completely</strong>, and take <strong>structured notes</strong> as I went.
-    Whenever possible, I would <strong>chain it with one or two related HTB boxes</strong>.  
-    This practical follow-up was crucial — the hands-on challenges helped <strong>anchor what I had just learned</strong>.
-  </p>
-
-  {/* Révision quotidienne */}
-  <div className="flex items-center gap-2 mb-2">
-    <FileText className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Daily Review</span>
-  </div>
-  <p className="text-gray-300">
-    Each morning, I’d <strong>review the previous day’s notes</strong> to keep everything fresh and reinforce long-term memory.
-    It wasn’t always easy to stay on track — motivation goes up and down — but I kept telling myself that <strong>discipline had to win over comfort</strong>.
-    Over time, it paid off. The progress wasn’t always visible day by day, but looking back, it added up fast.
-  </p>
-
-  {/* Hygiène de vie et bien-être */}
-  <div className="flex items-center gap-2 mb-2">
-    <Brain className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Physical & Mental Health</span>
-  </div>
-  <p className="text-gray-300">
-    Outside of studying, I made sure to <strong>take care of my mental and physical health</strong>.
-    I trained <strong>four times a week</strong>, around <strong>2 to 3 hours per session</strong>, and went on <strong>regular walks with my family and my dog</strong>.
-    Staying active and clearing my head helped me avoid burnout and come back sharper the next day.
-    <span className="block mt-1 font-semibold text-violet-400">Moving your body is just as important as moving your brain.</span>
-  </p>
-
-  {/* Motivation, musique, ambiance */}
-  <div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
-    <Zap className="w-6 h-6 text-violet-400" />
-    <span className="text-gray-300">
-      And let’s be real — <strong>a good Spotify playlist</strong> makes the grind a lot more enjoyable.
-      When I was in the zone, music helped me stay focused and turn long hours into productive ones.
-    </span>
-  </div>
+      {/* Décomposition de la stratégie d'apprentissage */}
+<section className="mb-16">
+  <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+    <div className="flex items-center gap-3 mb-8">
+      <Brain className="w-8 h-8 text-violet-400" />
+      <h2 className="text-3xl font-bold">Décomposition de ma stratégie d'apprentissage</h2>
+    </div>
+    
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <BookOpen className="w-6 h-6" />
+          Structure du parcours CPTS
+        </h3>
+        <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+{/* Routine de travail et organisation générale */}
+<div className="flex items-center gap-3 mb-2">
+  <Calendar className="w-6 h-6 text-violet-400" />
+  <h4 className="text-xl font-semibold text-violet-300">Ma routine de travail</h4>
 </div>
-            </div>
+<p className="text-gray-300 text-lg">
+  Je n’ai pas suivi de planning strict durant le cursus CPTS : je visais simplement environ <strong>6 à 7 heures par jour</strong>, <strong>cinq jours par semaine</strong>, en prenant toujours des pauses toutes les deux heures pour garder la concentration.
+  Avec l’expérience, j’ai compris que <strong>le repos compte autant que le temps de travail</strong> — surtout en cybersécurité, où la compréhension est plus importante que le “par cœur”.
+</p>
 
-            <div>
-              <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-                <Monitor className="w-6 h-6" />
-                HTB Boxes, Modules & IppSec's Track
-              </h3>
-             <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-  {/* Associer modules et boxes */}
-  <div className="flex items-center gap-3 mb-2">
-    <Terminal className="w-6 h-6 text-violet-400" />
-    <h4 className="text-xl font-semibold text-violet-300">From Modules to Practice</h4>
-  </div>
-  <p className="text-gray-300 text-lg">
-    During the <strong>CPTS learning path</strong>, I made it a habit to complete <strong>1–2 HTB boxes per module</strong>, directly related to the topic I had just studied.
-    For example, after finishing <em>Web Exploitation</em>, I’d go try an XSS or file upload challenge (retired, easy/medium).
-    This hands-on practice helped anchor new concepts immediately.
-  </p>
-
-  {/* Live boxes : montée en niveau */}
-  <div className="flex items-center gap-2 mb-2">
-    <Users className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Leveling Up with Live Boxes</span>
-  </div>
-  <p className="text-gray-300">
-    Once I completed the path, I moved on to <strong>live boxes on Hack The Box</strong>.  
-    Not always tied to modules — just for fun and the challenge.  
-    These boxes helped me work on:
-  </p>
-  <ul className="list-disc ml-8 text-gray-300 space-y-1">
-    <li><strong>Internal pivoting</strong> (shoutout to Ligolo-ng)</li>
-    <li><strong>Post-exploitation logic</strong> and lateral movement</li>
-    <li><strong>Handling AV and EDR</strong> obstacles in a realistic environment</li>
-  </ul>
-  <p className="text-gray-300">
-    I eventually reached the <strong>Pro Hacker rank</strong> — not without struggle. Some hard boxes kicked my ass, and yes, I needed help.  
-    That’s okay. What matters is what you learn from the process.
-  </p>
-
-  {/* Playlist IppSec */}
-  <div className="flex items-center gap-2 mb-2">
-    <BookOpen className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">The IppSec CPTS Playlist</span>
-  </div>
-  <div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
-    <ArrowRight className="w-5 h-5 text-violet-400" />
-    <span className="text-gray-300">
-      I tackled the  
-      <a href="https://www.youtube.com/watch?v=H9FcE_FMZio&list=PLidcsTyj9JXItWpbRtTg6aDEj10_F17x5"
-        target="_blank"
-        className="text-violet-400 hover:underline font-semibold ml-1"
-      >
-        unofficial IppSec CPTS prep playlist
-      </a>
-      . These boxes are <strong>brilliantly curated</strong>. Some have vulnerabilities nearly identical to the CPTS.  
-      More importantly, they force you to:
-    </span>
-  </div>
-  <ul className="list-disc ml-8 text-gray-300 space-y-1">
-    <li><strong>Chain multiple steps</strong> without guidance</li>
-    <li><strong>Structure your workflow</strong> like in a real pentest</li>
-    <li><strong>Manage pivots and post-exploitation scenarios</strong> on your own</li>
-  </ul>
-  <p className="text-gray-300">
-    These boxes really <strong>boosted my confidence</strong>.  
-    After finishing the playlist, I said to myself: <em>"Okay, now I’m really ready for the 10-day exam."</em>
-  </p>
-
-  {/* Préparation alternative : ProLabs, hard/insane */}
-  <div className="flex items-center gap-2 mb-2">
-    <TrendingUp className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Alternative Prep Methods</span>
-  </div>
-  <div className="bg-violet-900/20 rounded-lg p-4">
-    <p className="text-gray-300 mb-2">
-      💬 I know some people also use <strong>ProLabs</strong> or even tackle <strong>hard/insane boxes</strong> to prep, but personally, I didn’t feel the need.
-      In my opinion, if you:
-    </p>
-    <ul className="list-disc ml-8 text-gray-300 space-y-1">
-      <li>complete the CPTS path <strong>seriously</strong>,</li>
-      <li>pair modules with relevant boxes <strong>consistently</strong>,</li>
-      <li>follow the IppSec playlist <strong>at the right time</strong>,</li>
-    </ul>
-    <p className="text-gray-300 mt-2">
-      …then you already have <strong>everything you need</strong>.  
-      No need to overdo it. The CPTS learning path alone is already <strong>rich and complete</strong>.
-    </p>
-  </div>
-
-  {/* Conseil timing playlist */}
-  <div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
-    <Clock className="w-5 h-5 text-violet-400" />
-    <span className="text-gray-300">
-      <strong>Personal advice:</strong>
-      Don’t wait too long after finishing the learning path to start the IppSec boxes — you might forget key details.
-      But don’t start them too early either.  
-      Make sure you’ve built a strong foundation from the modules before jumping in. <strong>Trust the process</strong>.
-    </span>
-  </div>
+{/* Méthodologie d’apprentissage */}
+<div className="flex items-center gap-2 mb-2">
+  <Monitor className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Processus d’apprentissage</span>
 </div>
-            </div>
-          </div>
+<p className="text-gray-300">
+  Ma routine était simple : <strong>je démarrais un module</strong>, <strong>j’allais au bout</strong>, et je prenais <strong>des notes structurées</strong> au fil de l’eau.
+  Dès que possible, je <strong>enchaînais avec une ou deux boxes HTB</strong> en lien avec le thème du module.<br/>
+  Cette pratique était essentielle : les défis pratiques m’aidaient à <strong>ancrer tout de suite ce que je venais de voir</strong>.
+</p>
+
+{/* Révision quotidienne */}
+<div className="flex items-center gap-2 mb-2">
+  <FileText className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Révision quotidienne</span>
+</div>
+<p className="text-gray-300">
+  Chaque matin, je <strong>relisais mes notes de la veille</strong> pour garder tout en tête et renforcer la mémoire à long terme.
+  Ce n’était pas toujours facile de garder la motivation — il y a des hauts et des bas — mais je me répétais que <strong>la discipline devait l’emporter sur le confort</strong>.
+  À la longue, ça a payé. Les progrès n’étaient pas toujours visibles au jour le jour, mais avec le recul, l’accumulation est flagrante.
+</p>
+
+{/* Hygiène de vie et bien-être */}
+<div className="flex items-center gap-2 mb-2">
+  <Brain className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Santé physique & mentale</span>
+</div>
+<p className="text-gray-300">
+  En dehors du travail, je veillais à <strong>prendre soin de ma santé mentale et physique</strong>.
+  Je m’entraînais <strong>quatre fois par semaine</strong>, <strong>2 à 3 heures par séance</strong>, et je faisais des <strong>balades régulières avec ma famille et mon chien</strong>.
+  Rester actif, m’aérer l’esprit, m’a permis d’éviter le burnout et de revenir plus frais chaque jour.
+  <span className="block mt-1 font-semibold text-violet-400">Bouger son corps, c’est aussi important que de faire carburer son cerveau.</span>
+</p>
+
+{/* Motivation, musique, ambiance */}
+<div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
+  <Zap className="w-6 h-6 text-violet-400" />
+  <span className="text-gray-300">
+    Soyons honnêtes — <strong>une bonne playlist Spotify</strong> rend le grind bien plus agréable.
+    Quand j’étais dans le flow, la musique m’aidait à rester focus et à transformer les longues sessions en heures productives.
+  </span>
+</div>
         </div>
-      </section>
+      </div>
+
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <Monitor className="w-6 h-6" />
+          Boxes HTB, modules & playlist IppSec
+        </h3>
+        <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+{/* Associer modules et boxes */}
+<div className="flex items-center gap-3 mb-2">
+  <Terminal className="w-6 h-6 text-violet-400" />
+  <h4 className="text-xl font-semibold text-violet-300">De la théorie à la pratique</h4>
+</div>
+<p className="text-gray-300 text-lg">
+  Pendant le <strong>parcours CPTS</strong>, je m’imposais de faire <strong>1 à 2 boxes HTB par module</strong>, toujours en lien direct avec la thématique étudiée.
+  Par exemple, après le module <em>Web Exploitation</em>, j’allais chercher un challenge XSS ou file upload (en box easy/medium, souvent retirée).
+  Cette pratique concrète m’a permis d’ancrer chaque notion immédiatement.
+</p>
+
+{/* Live boxes : montée en niveau */}
+<div className="flex items-center gap-2 mb-2">
+  <Users className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Monter en niveau avec les live boxes</span>
+</div>
+<p className="text-gray-300">
+  Une fois le cursus fini, je suis passé sur les <strong>live boxes de Hack The Box</strong>.<br/>
+  Pas forcément reliées aux modules — juste pour le plaisir et le challenge.<br/>
+  Ces boxes m’ont permis de bosser :
+</p>
+<ul className="list-disc ml-8 text-gray-300 space-y-1">
+  <li><strong>Le pivoting interne</strong> (big up à Ligolo-ng)</li>
+  <li><strong>La logique post-exploitation</strong> et le déplacement latéral</li>
+  <li><strong>La gestion des antivirus et EDR</strong> en environnement réaliste</li>
+</ul>
+<p className="text-gray-300">
+  J’ai fini par atteindre le rang <strong>Pro Hacker</strong> — pas sans galérer. Certaines boxes dures m’ont mis la misère, oui, j’ai eu besoin d’aide.
+  C’est normal. Ce qui compte, c’est ce que tu retiens du process.
+</p>
+
+{/* Playlist IppSec */}
+<div className="flex items-center gap-2 mb-2">
+  <BookOpen className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">La playlist IppSec CPTS</span>
+</div>
+<div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
+  <ArrowRight className="w-5 h-5 text-violet-400" />
+  <span className="text-gray-300">
+    J’ai attaqué la  
+    <a href="https://www.youtube.com/watch?v=H9FcE_FMZio&list=PLidcsTyj9JXItWpbRtTg6aDEj10_F17x5"
+      target="_blank"
+      className="text-violet-400 hover:underline font-semibold ml-1"
+    >
+      playlist CPTS d’IppSec (non officielle)
+    </a>
+    . Les boxes sont <strong>super bien sélectionnées</strong>. Certaines contiennent des vulnérabilités quasiment identiques à l’examen CPTS.<br/>
+    Mais surtout, elles t’obligent à :
+  </span>
+</div>
+<ul className="list-disc ml-8 text-gray-300 space-y-1">
+  <li><strong>Enchaîner plusieurs étapes</strong> sans aide</li>
+  <li><strong>Structurer ton workflow</strong> comme dans un vrai pentest</li>
+  <li><strong>Gérer seul le pivot et la post-exploitation</strong></li>
+</ul>
+<p className="text-gray-300">
+  Ces boxes m’ont vraiment <strong>fait prendre confiance</strong>.<br/>
+  Après la playlist, je me suis dit : <em>“Ok, là je me sens prêt pour les 10 jours d’examen.”</em>
+</p>
+
+{/* Préparation alternative : ProLabs, hard/insane */}
+<div className="flex items-center gap-2 mb-2">
+  <TrendingUp className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Méthodes de préparation alternatives</span>
+</div>
+<div className="bg-violet-900/20 rounded-lg p-4">
+  <p className="text-gray-300 mb-2">
+    💬 Je sais que certains bossent aussi sur les <strong>ProLabs</strong> ou carrément des boxes hard/insane pour se préparer, mais perso je n’en ai pas ressenti le besoin.
+    Pour moi, si tu :
+  </p>
+  <ul className="list-disc ml-8 text-gray-300 space-y-1">
+    <li>fais sérieusement le parcours CPTS,</li>
+    <li>associes modules et boxes <strong>de façon régulière</strong>,</li>
+    <li>lances la playlist IppSec <strong>au bon moment</strong>,</li>
+  </ul>
+  <p className="text-gray-300 mt-2">
+    …tu as déjà <strong>tout ce qu’il faut</strong>.<br/>
+    Pas besoin d’en faire trop. Le learning path CPTS à lui seul est déjà <strong>très complet</strong>.
+  </p>
+</div>
+
+{/* Conseil timing playlist */}
+<div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
+  <Clock className="w-5 h-5 text-violet-400" />
+  <span className="text-gray-300">
+    <strong>Conseil perso :</strong>
+    N’attends pas trop après avoir fini le cursus avant d’attaquer la playlist IppSec — tu risques d’oublier des points clés.
+    Mais ne commence pas trop tôt non plus.<br/>
+    Prends le temps d’acquérir les bases avec les modules avant d’y aller. <strong>Fais-toi confiance.</strong>
+  </span>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* Final Preparation & Exam Sprint */}
   <section className="mb-16">
