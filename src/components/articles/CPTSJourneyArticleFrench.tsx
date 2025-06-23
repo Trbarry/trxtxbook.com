@@ -1183,46 +1183,46 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
 
 
   {/* Conseils de réussite */}
-  <div className="flex items-center gap-2 mb-2">
-    <Brain className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">How to Succeed</span>
-  </div>
-  <div className="bg-violet-900/20 rounded-lg p-4">
-    <span className="text-gray-300">
-      The Learning Path prepares you <strong>perfectly</strong> — but don’t rely on automation or tunnel vision.
-      <br />
-      <span className="font-semibold text-violet-400">Think like an attacker. Move laterally. Stay focused. Be methodical.</span>
-    </span>
-  </div>
-
-  {/* Rapport et reporting */}
-  <div className="flex items-center gap-2 mb-2">
-    <FileText className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Reporting</span>
-  </div>
-  <p className="text-gray-300">
-    For the report, I used <strong>SysReptor</strong> and exported everything as a polished PDF.  
-    I strongly recommend this method — it’s clean, professional, and fits HTB’s expectations.
-    Optionally, you can include annexes with technical evidence like a <strong>full DC dump or password policy audit (e.g., DPAT analysis)</strong> if relevant.
-  </p>
+<div className="flex items-center gap-2 mb-2">
+  <Brain className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Pour réussir</span>
 </div>
-        </div>
-        <div>
-          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-            <Calendar className="w-6 h-6" />
-            Daily Breakdown
-          </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-  {/* Départ méthodo et première erreur */}
-  <div className="flex items-center gap-3 mb-2">
-    <FileText className="w-6 h-6 text-violet-400" />
-    <h4 className="text-xl font-semibold text-violet-300">Reporting Habits: What Not To Do</h4>
-  </div>
-  <p className="text-gray-300 text-lg">
-    I went into the exam <strong>well-prepared</strong>, with a strong methodology and solid habits… or so I thought.
-    On <strong>Day 1</strong>, I promised myself to document everything into SysReptor <strong>every evening</strong>.<br/>
-    <span className="text-red-400 font-semibold">❌ Big mistake.</span>
-  </p>
+<div className="bg-violet-900/20 rounded-lg p-4">
+  <span className="text-gray-300">
+    Le learning path te prépare <strong>parfaitement</strong> — mais ne te repose pas sur l’automatisation ou sur une vision trop tunnel.<br />
+    <span className="font-semibold text-violet-400">Pense comme un attaquant. Déplace-toi latéralement. Reste focus. Sois méthodique.</span>
+  </span>
+</div>
+
+{/* Rapport et reporting */}
+<div className="flex items-center gap-2 mb-2">
+  <FileText className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Reporting</span>
+</div>
+<p className="text-gray-300">
+  Pour le rapport, j’ai utilisé <strong>SysReptor</strong> et tout exporté en PDF propre et pro.<br />
+  Je recommande vivement cette méthode : c’est clean, professionnel, et ça colle aux attentes de HTB.<br />
+  Tu peux ajouter des annexes avec des preuves techniques comme un <strong>dump DC complet ou une analyse de politique de mot de passe (type DPAT)</strong> si c’est pertinent.
+</p>
+</div>
+      </div>
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <Calendar className="w-6 h-6" />
+          Déroulé journalier
+        </h3>
+        <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+{/* Départ méthodo et première erreur */}
+<div className="flex items-center gap-3 mb-2">
+  <FileText className="w-6 h-6 text-violet-400" />
+  <h4 className="text-xl font-semibold text-violet-300">Habitudes de reporting : à ne pas faire</h4>
+</div>
+<p className="text-gray-300 text-lg">
+  Je suis arrivé à l’examen <strong>très bien préparé</strong>, avec une méthodologie solide et des bons réflexes… enfin, c’est ce que je croyais.<br/>
+  Le <strong>premier jour</strong>, je me suis promis de tout documenter dans SysReptor <strong>chaque soir</strong>.<br/>
+  <span className="text-red-400 font-semibold">❌ Grosse erreur.</span>
+</p>
+
 
   {/* La vraie méthode qui marche */}
   <div className="flex items-center gap-2 mb-2">
