@@ -161,87 +161,87 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
 
       </div>
 
-      {/* Why CPTS After eJPT */}
+      {/* Pourquoi la CPTS après l’eJPT ? */}
       <div>
         <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
           <BookOpen className="w-6 h-6" />
-          Why CPTS After eJPT?
+          Pourquoi la CPTS après l’eJPT ?
         </h3>
         <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
   {/* Passage eJPT */}
   <div className="flex items-center gap-3 mb-2">
     <Award className="w-6 h-6 text-violet-400" />
-    <h4 className="text-xl font-semibold text-violet-300">eJPT: The First Step</h4>
+    <h4 className="text-xl font-semibold text-violet-300">eJPT : Le premier palier</h4>
   </div>
   <p className="text-gray-300 text-lg">
-    I passed the <strong>eJPT</strong> in <strong>February 2025</strong>, right in the middle of the <strong>CPTS learning path</strong>.  
-    I had just started digging into the HTB modules when I saw a <strong>promo for the exam</strong>.  
-    So I said to myself, “Let’s give it a try — even if I fail, I’ll learn something.”  
-    I had already done all the <strong>TryHackMe learning paths</strong>, including the <strong>Junior Penetration Tester track</strong>, so I had some ground to stand on.
+    J’ai validé la <strong>eJPT</strong> en <strong>février 2025</strong>, en plein milieu de mon apprentissage du <strong>parcours CPTS</strong>.<br />
+    Je venais à peine de commencer à creuser les modules HTB quand j’ai vu une <strong>promo sur l’exam</strong>.<br />
+    Je me suis dit : « Autant tenter — même si j’échoue, j’aurai appris quelque chose. »<br />
+    J’avais déjà terminé tous les <strong>learning paths TryHackMe</strong>, y compris la filière <strong>Junior Penetration Tester</strong>, donc j’avais un minimum de bases.
   </p>
 
   {/* Stress et réussite */}
   <div className="flex items-center gap-2 mb-2">
     <Target className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Facing the Challenge</span>
+    <span className="text-xl font-semibold text-violet-300">Se lancer malgré le stress</span>
   </div>
   <p className="text-gray-300">
-    I was honestly <strong>stressed</strong>. First cert, first timed exam, and I didn’t think I was ready at all.  
-    But it went way better than expected — I finished it in <strong>6 hours out of the 48</strong>.  
-    That boosted my confidence a lot.
+    Pour être honnête, j’étais <strong>super stressé</strong>. Première certif, premier exam chronométré, et franchement je me sentais pas prêt.<br />
+    Mais au final, ça s’est bien mieux passé que prévu : j’ai fini en <strong>6h sur les 48</strong>.<br />
+    Clairement, ça m’a donné un vrai coup de boost niveau confiance.
   </p>
   <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
     <p className="text-violet-300 font-semibold">
       <Brain className="w-5 h-5 inline-block mb-1 mr-1 text-violet-400" />
-      If you’ve done the learning paths on THM, you can definitely take the eJPT.
+      Si tu as déjà fait les parcours sur THM, tu peux clairement tenter la eJPT.
     </p>
     <p className="text-gray-300">
-      It’s a great cert to <strong>validate your fundamentals</strong> in networking and basic pentesting.
+      C’est une super certif pour <strong>valider tes bases</strong> en réseau et pentest.
     </p>
   </div>
 
   {/* Passage au CPTS, constat du gap */}
   <div className="flex items-center gap-2 mb-2">
     <ArrowRight className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">From eJPT to CPTS</span>
+    <span className="text-xl font-semibold text-violet-300">De l’eJPT à la CPTS</span>
   </div>
   <p className="text-gray-300">
-    But right after that, when I got deeper into the CPTS modules…  
-    I saw the <strong>gap</strong>. The CPTS felt way more <strong>advanced</strong>, way more <strong>realistic</strong>.<br />
-    I realized the eJPT had confirmed I was <strong>no longer a beginner</strong> — but I still had a long way to go to be solid.  
-    That’s where CPTS made sense.
+    Mais juste après, en attaquant sérieusement les modules CPTS…  
+    J’ai vraiment vu le <strong>gap</strong>. La CPTS est tout de suite <strong>plus avancée</strong>, beaucoup plus <strong>réaliste</strong>.<br />
+    La eJPT m’a confirmé que je n’étais <strong>plus vraiment débutant</strong> — mais il me restait pas mal de chemin pour être solide.<br />
+    C’est là que la CPTS a pris tout son sens.
   </p>
 
   {/* Choix stratégique CPTS vs OSCP */}
   <div className="flex items-center gap-2 mb-2">
     <Shield className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Why CPTS First?</span>
+    <span className="text-xl font-semibold text-violet-300">Pourquoi commencer par la CPTS ?</span>
   </div>
   <p className="text-gray-300">
-    I picked CPTS instead of jumping straight into <strong>OSCP</strong> because I want to <strong>train properly</strong> — not just rush into something.  
-    Plus, let’s be honest: the OSCP is <strong>expensive</strong>, and I’ve seen a lot of feedback saying the course material isn’t that great.  
-    The <strong>HTB content</strong>, on the other hand, is <strong>super high quality</strong>.  
-    The modules are <strong>dense, structured, and practical</strong>.  
-    And the CPTS cert is <strong>affordable</strong>, which matters when you're self-funding your learning like I am.
+    J’ai choisi la CPTS plutôt que d’aller direct sur l’<strong>OSCP</strong> parce que je veux <strong>me former proprement</strong> — pas juste rusher pour le papier.<br />
+    Et soyons francs : l’OSCP, c’est <strong>très cher</strong>, et j’ai vu beaucoup de retours sur la qualité assez discutable du contenu.<br />
+    Alors que <strong>HTB</strong>, c’est <strong>ultra quali</strong> : modules <strong>denses, structurés, pratiques</strong>.<br />
+    Et la CPTS reste <strong>accessible financièrement</strong>, ce qui compte quand tu finances tout toi-même.
   </p>
 
   {/* Conclusion et conseil pour les lecteurs */}
   <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
     <p className="text-violet-300 font-semibold flex items-center gap-2">
       <Shield className="w-5 h-5 text-violet-400" />
-      <span>CPTS: The Smart Choice</span>
+      <span>CPTS : le choix malin</span>
     </p>
     <p className="text-gray-300">
-      I see the CPTS as a <strong>serious technical milestone</strong> before going for OSCP later, mostly for <strong>HR visibility</strong>.<br />
-      But right now, CPTS was the <strong>smart, realistic choice</strong> for where I was.  
-      Great content, <strong>real-world challenges</strong>, and an exam that forces you to <strong>think like a pentester</strong> — not just follow steps.
+      Pour moi, la CPTS c’est un <strong>véritable palier technique</strong> avant de viser l’OSCP (qui reste surtout utile pour <strong>le CV et les RH</strong>).<br />
+      Mais à ce moment-là, la CPTS était le <strong>choix logique et réaliste</strong> vu mon niveau.<br />
+      Contenu de qualité, <strong>défis réalistes</strong>, et un exam qui t’oblige à <strong>réfléchir comme un pentester</strong> — pas juste à suivre une recette.
     </p>
   </div>
   <p className="text-gray-400 text-base italic mt-2">
-    <span className="text-violet-400 font-semibold">Advice:</span>
-    If you're in that same spot — somewhere between <strong>“beginner” and “ready for real engagements”</strong> — the CPTS is a great way to <strong>level up without burning out or breaking the bank</strong>.
+    <span className="text-violet-400 font-semibold">Mon conseil :</span>
+    Si tu es entre <strong>“débutant” et “prêt pour des missions réelles”</strong>, la CPTS est parfaite pour <strong>monter en compétences sans te cramer ni exploser ton budget</strong>.
   </p>
 </div>
+
       </div>
 
       
