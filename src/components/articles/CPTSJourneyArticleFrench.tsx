@@ -678,18 +678,18 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
 </div>
 
   <p className="text-gray-300">
-    And did I mention? <strong>It’s French 🇫🇷</strong>.  
-    If you're curious about setup, workflow and why I’ll never go back to Kali, check my article:<br />
-    <a
-      href="https://trxtxbook.com/articles/exegol-docker"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-violet-400 underline hover:text-violet-300"
-    >
-      Exegol: The Ultimate CPTS Toolkit
-    </a>
-    .
-  </p>
+  Et au cas où tu l’aurais raté : <strong>c’est français 🇫🇷</strong>.<br/>
+  Si tu veux voir le détail du setup, du workflow et pourquoi je ne reviendrai jamais sur Kali, lis mon article :<br />
+  <a
+    href="https://trxtxbook.com/articles/exegol-docker"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-violet-400 underline hover:text-violet-300"
+  >
+    Exegol : Le toolkit ultime pour la CPTS
+  </a>
+  .
+</p>
 </div>
 
 {/* --- Bloc Obsidian & SysReptor --- */}
