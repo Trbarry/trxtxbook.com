@@ -79,64 +79,64 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
     <h4 className="text-xl font-semibold text-violet-300">A Fresh Start</h4>
   </div>
   <p className="text-gray-300 text-lg">
-    <strong>I'm a French guy, currently switching careers to move into cybersecurity.</strong>  
-    In September, I’ll start a formal work-study program in IT and networking, but honestly, my journey started long before that.
+    <strong>Je suis français, actuellement en reconversion pour me lancer dans la cybersécurité.</strong>  
+    En septembre, j’attaque officiellement une alternance en informatique et réseaux, mais pour être honnête, mon parcours a commencé bien avant ça.
   </p>
 
   {/* Métier précédent et déclic */}
   <div className="bg-violet-900/20 rounded-lg p-4 space-y-3">
     <div className="flex items-center gap-2">
       <Monitor className="w-6 h-6 text-violet-400" />
-      <span className="text-violet-300 font-semibold">Fiber Optics Field Technician</span>
+      <span className="text-violet-300 font-semibold">Technicien Fibre Optique</span>
     </div>
     <p className="text-gray-300">
-      Pulling cables, doing installations, repeating the same tasks every day. After a while, I felt stuck: no learning, no future.  
-      <span className="block font-semibold text-violet-400 mt-2">That’s what pushed me to change.</span>
+      Tirer des câbles, installer, répéter les mêmes gestes chaque jour. À force, j’ai eu l’impression de tourner en rond : aucun apprentissage, aucun avenir.
+      <span className="block font-semibold text-violet-400 mt-2">C’est ce qui m’a poussé à changer.</span>
     </p>
   </div>
 
   {/* Parcours d'autoformation */}
   <div className="flex items-center gap-2 mb-2">
     <Brain className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Self-Training Journey</span>
+    <span className="text-xl font-semibold text-violet-300">Parcours autodidacte</span>
   </div>
   <p className="text-gray-300">
-    For the past nine months, I've trained on my own almost every day (6-7h daily):  
+    Depuis neuf mois, je me forme seul quasiment tous les jours (6 à 7h/jour) :
   </p>
   <ul className="list-disc ml-8 text-gray-300 space-y-1">
-    <li>Completed all learning paths on <strong>TryHackMe</strong></li>
-    <li>Passed the <strong>eJPT</strong> certification</li>
-    <li>Recently cleared the <strong>CPTS (Hack The Box)</strong></li>
+    <li>J’ai validé tous les parcours sur <strong>TryHackMe</strong></li>
+    <li>J’ai passé la certification <strong>eJPT</strong></li>
+    <li>Dernièrement, j’ai réussi la <strong>CPTS (Hack The Box)</strong></li>
   </ul>
   <p className="text-gray-300">
-    This wasn’t about collecting certs — it was about <strong>real learning</strong>, building skills, and proving to myself I could grow through hard work.
+    Pour moi, le but n’a jamais été de “collectionner” les certifs — mais d’<strong>apprendre pour de vrai</strong>, développer des compétences et me prouver que le travail paye vraiment.
   </p>
 
   {/* Esprit tryhard, outils et méthodo */}
   <div className="flex items-center gap-2 mb-2">
     <FileText className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Tryhard Mindset & Tools</span>
+    <span className="text-xl font-semibold text-violet-300">Esprit tryhard & outils</span>
   </div>
   <p className="text-gray-300">
-    I’m what you might call a <strong>“tryharder”</strong>. When something motivates me, I give it 300%.  
-    I write down everything I learn, structure my notes, and go deep:
+    Je suis un vrai “tryharder” : quand un truc me motive, j’y vais à fond, sans compter.  
+    Je note tout, je structure, je vais au bout des choses :
   </p>
   <ul className="list-disc ml-8 text-gray-300 space-y-1">
-    <li>Custom <strong>Exegol</strong> setup</li>
-    <li>Daily use of <strong>Obsidian</strong></li>
-    <li>Reporting with <strong>SysReptor</strong> — even for training</li>
-    <li>No skipping steps, no copy-paste walkthroughs</li>
-    <li>Goal: Understand, not just repeat</li>
+    <li>Setup <strong>Exegol</strong> custom</li>
+    <li><strong>Obsidian</strong> au quotidien</li>
+    <li>Reporting avec <strong>SysReptor</strong> — même à l’entraînement</li>
+    <li>Jamais de raccourcis, jamais de copier-coller de write-up</li>
+    <li>Objectif : comprendre, pas juste reproduire</li>
   </ul>
 
   {/* Pourquoi cet article */}
   <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
     <div className="flex items-center gap-2">
       <Users className="w-6 h-6 text-violet-400" />
-      <span className="text-violet-300 font-semibold text-lg">Why I wrote this article</span>
+      <span className="text-violet-300 font-semibold text-lg">Pourquoi cet article</span>
     </div>
     <p className="text-gray-300">
-      When preparing for the CPTS, the blog by  
+      Quand je préparais la CPTS, le blog de  
       <a
         href="https://www.brunorochamoura.com/posts/cpts-tips/"
         target="_blank"
@@ -144,17 +144,17 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
       >
         Bruno Rocha Moura
       </a>  
-      helped me a lot. His tips gave me a structure and kept me focused.<br />
-      In the same spirit, I’m writing this to give back.  
-      <strong>If you’re wondering whether CPTS is worth it, or you need direction, I hope this helps you.</strong>
+      m’a vraiment aidé. Ses conseils m’ont donné une vraie structure, ça m’a permis de garder le cap.<br />
+      Dans le même état d’esprit, j’écris cet article pour “rendre la pareille”.
+      <strong>Si tu te demandes si la CPTS vaut le coup ou que tu ne sais pas comment attaquer la prépa, j’espère que ça te donnera des repères.</strong>
     </p>
   </div>
 
   {/* Valeur du partage */}
   <p className="text-gray-400 text-base italic mt-2">
-    <span className="text-violet-400 font-semibold">My mindset:</span>  
-    In cybersecurity , we grow by helping each other — via write-ups, forums, blogs, even Discord chats.  
-    If this post helps even one person feel more confident or prepared, it was worth writing.
+    <span className="text-violet-400 font-semibold">Mon état d’esprit :</span>  
+    En cybersécurité, on progresse surtout parce qu’on s’aide entre nous — via les write-ups, les forums, les blogs, ou même Discord.  
+    Si ce post aide ne serait-ce qu’une personne à se sentir plus prête ou plus sereine, il aura servi à quelque chose.
   </p>
 </div>
 
