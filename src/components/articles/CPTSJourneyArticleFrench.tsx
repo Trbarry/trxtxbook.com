@@ -714,7 +714,6 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
            Clique ici pour voir toute la structure d’arborescence Obsidian
         </summary>
         <pre className="bg-black text-white text-sm rounded p-4 mt-4 overflow-x-auto whitespace-pre-wrap">
-
 {` CPTS
   ├── 1- Information Gathering
 │   ├── 1- Service Enumeration
@@ -1065,12 +1064,13 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
         </pre>
       </details>
       <p className="text-gray-300">
-        <span className="font-semibold text-violet-400">My advice:</span> <br />
-        Create your own structured note-taking system.  
-        It improves retention and gives you something to reference during the exam.  
-        <span className="block">Organizing your thoughts while learning pays off under pressure.</span>
+        <span className="font-semibold text-violet-400">Mon conseil :</span> <br />
+        Crée ton propre système de prise de notes structuré.<br />
+        Ça améliore la mémorisation et te donne un vrai support de référence le jour de l’examen.<br />
+        <span className="block">Organiser ses idées tout au long de l’apprentissage, ça fait la différence sous pression.</span>
       </p>
     </div>
+
 
     {/* SysReptor */}
     <div>
