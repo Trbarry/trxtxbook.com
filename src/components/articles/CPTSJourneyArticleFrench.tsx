@@ -1726,143 +1726,142 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
 </section>
 
 
-  {/* Further Study & Acknowledgements */}
-  <section className="mb-16">
-    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-      <div className="flex items-center gap-3 mb-8">
-        <Database className="w-8 h-8 text-violet-400" />
-        <h2 className="text-3xl font-bold">Further Study & Acknowledgements</h2>
-      </div>
-      <div className="space-y-8">
-        <div>
-          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-            <BookOpen className="w-6 h-6" />
-            Books, Labs, Communities
-          </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-gray-300 text-lg">
-      <strong>Learning never stops in cybersecurity.</strong>  
-      I keep pushing my level thanks to hands-on practice and the support I get every day.
-    </p>
-
-    <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
-      <h3 className="text-xl font-semibold text-violet-300 mb-2">Labs &amp; Platforms</h3>
-      <ul className="list-disc ml-6 text-gray-300">
-        <li>TryHackMe — great for structured learning and basics</li>
-        <li>Hack The Box — real-world boxes and advanced Active Directory labs</li>
-        <li>PortSwigger Web Security Academy — the reference for mastering web vulns</li>
-        <li>Root-Me — perfect for CTF challenges and pure exploitation</li>
-        <li>Exegol — my daily pentest environment, highly customizable</li>
-      </ul>
+  {/* Aller plus loin & Remerciements */}
+<section className="mb-16">
+  <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+    <div className="flex items-center gap-3 mb-8">
+      <Database className="w-8 h-8 text-violet-400" />
+      <h2 className="text-3xl font-bold">Pour aller plus loin & Remerciements</h2>
     </div>
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <BookOpen className="w-6 h-6" />
+          Livres, Labs, Communautés
+        </h3>
+        <div className="bg-[#2a2a2f] p-6 rounded-lg">
+          <p className="text-gray-300 text-lg">
+            <strong>En cybersécurité, l’apprentissage ne s’arrête jamais.</strong>  
+            Je continue de progresser chaque jour grâce à la pratique, mais aussi grâce au soutien que je reçois au quotidien.
+          </p>
 
-    <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
-      <h3 className="text-xl font-semibold text-violet-300 mb-2">Community &amp; Support</h3>
-      <ul className="list-disc ml-6 text-gray-300">
-        <li>LinkedIn — for networking, inspiration, and following other pentesters</li>
-        <li>My family, my wife, and my dog — honestly, you need support outside the screen too</li>
-      </ul>
-    </div>
-
-    <p className="text-gray-400 italic">
-      If you’re reading this and helped me along the way, thank you — you know who you are.
-    </p>
+          <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
+            <h3 className="text-xl font-semibold text-violet-300 mb-2">Labs &amp; Plateformes</h3>
+            <ul className="list-disc ml-6 text-gray-300">
+              <li>TryHackMe — parfait pour l’apprentissage structuré et les bases</li>
+              <li>Hack The Box — boxes réalistes et labs Active Directory avancés</li>
+              <li>PortSwigger Web Security Academy — la référence pour maîtriser les failles web</li>
+              <li>Root-Me — idéal pour s’entraîner sur des challenges CTF et l’exploitation pure</li>
+              <li>Exegol — mon environnement pentest quotidien, ultra personnalisable</li>
+            </ul>
           </div>
-        </div>
-        <div>
-          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-            <Users className="w-6 h-6" />
-            People That Helped Me Grow
-          </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-gray-300 text-lg">
-      I wouldn’t have reached this point alone. Here are some of the people and creators who inspired and pushed me forward in cybersecurity:
-    </p>
 
-    <ul className="list-disc ml-6 text-gray-300">
-      <li>
-        <strong>Pentesters on LinkedIn:</strong> Every day, I get inspired by people sharing their journey, technical write-ups, and advice. Just seeing others push through motivates me to keep going.
-      </li>
-      <li>
-        <strong>
-          <a
-            href="https://www.linkedin.com/in/nicolas-gomez-6b850913a/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-violet-300 underline hover:text-violet-400"
-          >
-            Nicolas Gomez (HacktBack)
-          </a>
-        </strong>
-        : The best French pentester content, always straight to the point, super motivating. If you read this: thanks for your mindset and all the tips!
-      </li>
-      <li>
-        <strong>IppSec:</strong> The <em>GOAT</em> for Hack The Box — I learned the methodology, how to think like a hacker, and how to approach any box step by step.
-      </li>
-      <li>
-        <strong>My pentester friend:</strong> The one who threw me into the cybersecurity rabbit hole. You know who you are. Without your advice and late-night talks, I probably wouldn’t have made the leap.
-      </li>
-    </ul>
-
-    <p className="text-gray-400 italic">
-      If you inspired me, taught me something, or challenged me to do better — even with just a message or a YouTube video — thank you.
-    </p>
+          <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
+            <h3 className="text-xl font-semibold text-violet-300 mb-2">Communauté &amp; Soutien</h3>
+            <ul className="list-disc ml-6 text-gray-300">
+              <li>LinkedIn — pour élargir son réseau, s’inspirer et suivre d’autres pentesters</li>
+              <li>Ma famille, ma compagne et mon chien — franchement, il faut du soutien en dehors de l’écran aussi</li>
+            </ul>
           </div>
+
+          <p className="text-gray-400 italic">
+            Si tu lis ces lignes et que tu m’as aidé d’une façon ou d’une autre, merci — tu te reconnaîtras.
+          </p>
         </div>
       </div>
-    </div>
-  </section>
 
-  {/* Conclusion & Encouragement */}
-  <section className="mb-16">
-    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-      <div className="flex items-center gap-3 mb-8">
-        <Users className="w-8 h-8 text-violet-400" />
-        <h2 className="text-3xl font-bold">Conclusion & Encouragement</h2>
-      </div>
-      <div className="space-y-8">
-        <div>
-          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-            <Award className="w-6 h-6" />
-            You Can Do It Too
-          </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-gray-300 text-lg">
-      The real secret to progressing in cybersecurity — or anything, really — is <strong>hard work, patience, and resilience</strong>. Nothing comes instantly. You have to accept there will be days (sometimes many!) when you feel stuck. But if you keep pushing, the breakthroughs always come.
-    </p>
+      {/* Remerciements individuels */}
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <Users className="w-6 h-6" />
+          Celles et ceux qui m’ont fait grandir
+        </h3>
+        <div className="bg-[#2a2a2f] p-6 rounded-lg">
+          <p className="text-gray-300 text-lg">
+            Je ne serais jamais arrivé là tout seul. Voici quelques personnes et créateurs qui m’ont inspiré et poussé à progresser en cybersécu :
+          </p>
 
-    <p className="text-gray-300 text-lg">
-      Learning is a lifelong process. There is no finish line — you just keep improving a little bit every day. The more you try, the further you go, even if you don’t always see it right away.
-    </p>
+          <ul className="list-disc ml-6 text-gray-300">
+            <li>
+              <strong>La communauté pentest sur LinkedIn :</strong> Tous les jours, je trouve de l’inspiration grâce aux partages d’expériences, de write-ups techniques ou de conseils. Voir d’autres progresser, ça motive à ne rien lâcher.
+            </li>
+            <li>
+              <strong>
+                <a
+                  href="https://www.linkedin.com/in/nicolas-gomez-6b850913a/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-violet-300 underline hover:text-violet-400"
+                >
+                  Nicolas Gomez (HacktBack)
+                </a>
+              </strong>
+              : Le meilleur contenu pentest francophone, toujours cash, ultra motivant. Si tu passes par ici : merci pour ton état d’esprit et tous tes conseils !
+            </li>
+            <li>
+              <strong>IppSec :</strong> Le <em>GOAT</em> de Hack The Box — c’est grâce à lui que j’ai appris la méthodo, le raisonnement “hacker”, et comment aborder n’importe quelle box pas à pas.
+            </li>
+            <li>
+              <strong>Mon pote pentester :</strong> Celui qui m’a mis le pied à l’étrier et plongé dans le terrier de la cybersécurité. Tu te reconnaîtras. Sans tes conseils et nos discussions de minuit, j’aurais sûrement jamais osé me lancer.
+            </li>
+          </ul>
 
-    <p className="text-gray-300 text-lg">
-      My only advice: <strong>don’t give up</strong>, even when it gets frustrating. Find your curiosity, enjoy the challenge, and don’t be afraid to try (and fail) again and again. <strong>When you like what you do, you can become really good at it.</strong>
-    </p>
-
-    <p className="text-gray-300 text-lg">
-      Thank you for taking the time to read this (very long!) article. I hope it helped or guided you a little — I really tried to put all my experience into words, even if it’s not always easy to explain everything.
-    </p>
-
-    <p className="text-violet-300 font-semibold text-lg">
-      You can do it too. Stay patient, keep learning, and ask for help if you need it. Progress is inevitable if you just keep showing up!
-    </p>
-          </div>
+          <p className="text-gray-400 italic">
+            Si tu m’as inspiré, appris un truc, ou juste donné envie de progresser — même par un simple message ou une vidéo YouTube — merci.
+          </p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  {/* Final conclusion */}
-  <div className="bg-gradient-to-r from-violet-500/10 to-violet-600/10 border border-violet-500/20 rounded-lg p-8 text-center">
-    <div className="flex items-center justify-center gap-3 mb-4">
-      <Award className="w-8 h-8 text-violet-400" />
-      <h2 className="text-2xl font-bold text-violet-400">Journey Complete</h2>
+{/* Conclusion & Motivation */}
+<section className="mb-16">
+  <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+    <div className="flex items-center gap-3 mb-8">
+      <Users className="w-8 h-8 text-violet-400" />
+      <h2 className="text-3xl font-bold">Conclusion & Motivation</h2>
     </div>
-    <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-      From junior pentester to CPTS certified professional - this journey has been transformative. 
-      The road was challenging, but every hour invested was worth it for the skills and confidence gained.
-    </p>
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <Award className="w-6 h-6" />
+          Toi aussi, tu peux le faire
+        </h3>
+        <div className="bg-[#2a2a2f] p-6 rounded-lg">
+          <p className="text-gray-300 text-lg">
+            Le vrai secret pour progresser en cybersécurité — ou dans n’importe quel domaine — c’est <strong>le travail, la patience, et la persévérance</strong>. Rien ne vient tout de suite. Il faut accepter qu’il y aura des jours (parfois beaucoup !) où tu te sentiras bloqué. Mais si tu continues, les déclics finissent toujours par arriver.
+          </p>
+
+          <p className="text-gray-300 text-lg">
+            Apprendre, c’est pour la vie. Il n’y a pas de ligne d’arrivée — juste l’envie de t’améliorer un peu chaque jour. Plus tu essayes, plus tu vas loin, même si ça ne se voit pas tout de suite.
+          </p>
+
+          <p className="text-gray-300 text-lg">
+            Mon seul conseil : <strong>lâche rien</strong>, même quand c’est frustrant. Trouve ce qui te rend curieux, prends du plaisir à te challenger, et n’aie pas peur d’essayer (et de rater) encore et encore. <strong>Quand t’aimes ce que tu fais, tu finis toujours par devenir très bon.</strong>
+          </p>
+
+          <p className="text-gray-300 text-lg">
+            Merci d’avoir pris le temps de lire ce (très long !) article. J’espère t’avoir aidé ou donné des repères — j’ai vraiment essayé de tout mettre à plat, même si c’est parfois difficile de tout retranscrire.
+          </p>
+
+          <p className="text-violet-300 font-semibold text-lg">
+            Tu peux le faire toi aussi. Reste patient, continue d’apprendre, et demande de l’aide si besoin. Le progrès est inévitable si tu reviens chaque jour à la charge !
+          </p>
+        </div>
       </div>
     </div>
-  );
-};
+  </div>
+</section>
+
+{/* Conclusion finale */}
+<div className="bg-gradient-to-r from-violet-500/10 to-violet-600/10 border border-violet-500/20 rounded-lg p-8 text-center">
+  <div className="flex items-center justify-center gap-3 mb-4">
+    <Award className="w-8 h-8 text-violet-400" />
+    <h2 className="text-2xl font-bold text-violet-400">Parcours terminé</h2>
+  </div>
+  <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
+    D’apprenti pentester à certifié CPTS — ce parcours m’a transformé.  
+    Le chemin était exigeant, mais chaque heure investie valait le coup pour les compétences et la confiance gagnées.
+  </p>
+</div>
