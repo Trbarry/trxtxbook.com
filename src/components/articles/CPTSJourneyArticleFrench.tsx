@@ -696,24 +696,25 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
 <div className="mt-10">
   <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
     <FileText className="w-6 h-6" />
-    SysReptor & Obsidian for Notes & Reporting
+    SysReptor & Obsidian pour la prise de notes et le reporting
   </h3>
   <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
     {/* Obsidian */}
     <div>
       <h4 className="text-xl font-semibold text-violet-300 flex items-center gap-2">
-        <BookOpen className="w-5 h-5 text-violet-400" /> Obsidian: My Personal Knowledge Hub
+        <BookOpen className="w-5 h-5 text-violet-400" /> Obsidian : mon espace de connaissance personnel
       </h4>
       <p className="text-gray-300">
-        <strong>Obsidian</strong> was my central tool for managing knowledge during the CPTS journey.
-        Every command, every CVE, every technique was properly documented, explained, and categorized.
+        <strong>Obsidian</strong> a été mon outil central pour gérer tout mon savoir pendant la préparation de la CPTS.
+        Chaque commande, chaque CVE, chaque technique était documentée, expliquée et classée correctement.
       </p>
-      <p className="text-gray-300">Here’s a simplified version of my Obsidian tree structure:</p>
+      <p className="text-gray-300">Voici une version simplifiée de l’arborescence que j’utilise dans Obsidian :</p>
       <details className="group bg-[#2a2a2f] rounded-lg p-4 text-white open:ring-1 open:ring-violet-600 transition-all">
         <summary className="cursor-pointer text-violet-400 font-semibold text-lg mb-2">
-           Click to view full Obsidian tree structure
+           Clique ici pour voir toute la structure d’arborescence Obsidian
         </summary>
         <pre className="bg-black text-white text-sm rounded p-4 mt-4 overflow-x-auto whitespace-pre-wrap">
+
 {` CPTS
   ├── 1- Information Gathering
 │   ├── 1- Service Enumeration
