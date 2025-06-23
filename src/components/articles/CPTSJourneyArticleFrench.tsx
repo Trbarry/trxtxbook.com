@@ -1164,6 +1164,11 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
   Tu peux ajouter des annexes avec des preuves techniques (dump DC complet, analyse de politique de mot de passe type DPAT…) si pertinent.
 </p>
 
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Calendar className="w-6 h-6" />
+            Daily Breakdown
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
   {/* Départ méthodo et première erreur */}
   <div className="flex items-center gap-3 mb-2">
     <FileText className="w-6 h-6 text-violet-400" />
