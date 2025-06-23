@@ -1742,16 +1742,16 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
         <div className="bg-[#2a2a2f] p-6 rounded-lg">
           <p className="text-gray-300 text-lg">
             <strong>En cybersécurité, l’apprentissage ne s’arrête jamais.</strong>  
-            Je continue de progresser chaque jour grâce à la pratique, mais aussi grâce au soutien que je reçois au quotidien.
+            Je continue de monter en compétences chaque jour grâce à la pratique, mais aussi grâce au soutien que je reçois.
           </p>
 
           <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
             <h3 className="text-xl font-semibold text-violet-300 mb-2">Labs &amp; Plateformes</h3>
             <ul className="list-disc ml-6 text-gray-300">
-              <li>TryHackMe — parfait pour l’apprentissage structuré et les bases</li>
-              <li>Hack The Box — boxes réalistes et labs Active Directory avancés</li>
-              <li>PortSwigger Web Security Academy — la référence pour maîtriser les failles web</li>
-              <li>Root-Me — idéal pour s’entraîner sur des challenges CTF et l’exploitation pure</li>
+              <li>TryHackMe — idéal pour les bases et l’apprentissage structuré</li>
+              <li>Hack The Box — des environnements réalistes et des labs Active Directory avancés</li>
+              <li>PortSwigger Web Security Academy — la référence pour maîtriser les vulnérabilités web</li>
+              <li>Root-Me — parfait pour les challenges CTF et l’exploitation pure</li>
               <li>Exegol — mon environnement pentest quotidien, ultra personnalisable</li>
             </ul>
           </div>
@@ -1759,13 +1759,13 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
           <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
             <h3 className="text-xl font-semibold text-violet-300 mb-2">Communauté &amp; Soutien</h3>
             <ul className="list-disc ml-6 text-gray-300">
-              <li>LinkedIn — pour élargir son réseau, s’inspirer et suivre d’autres pentesters</li>
-              <li>Ma famille, ma compagne et mon chien — franchement, il faut du soutien en dehors de l’écran aussi</li>
+              <li>LinkedIn — pour élargir son réseau et s’inspirer d’autres pentesters</li>
+              <li>Ma famille, ma compagne et mon chien — parce qu’il faut aussi du soutien hors écran</li>
             </ul>
           </div>
 
           <p className="text-gray-400 italic">
-            Si tu lis ces lignes et que tu m’as aidé d’une façon ou d’une autre, merci — tu te reconnaîtras.
+            Si tu lis ça et que tu m’as aidé, merci — tu te reconnaîtras.
           </p>
         </div>
       </div>
@@ -1778,12 +1778,12 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
         </h3>
         <div className="bg-[#2a2a2f] p-6 rounded-lg">
           <p className="text-gray-300 text-lg">
-            Je ne serais jamais arrivé là tout seul. Voici quelques personnes et créateurs qui m’ont inspiré et poussé à progresser en cybersécu :
+            Je ne serais jamais arrivé là tout seul. Voici quelques personnes et créateurs qui m’ont inspiré et poussé à progresser en cybersécurité :
           </p>
 
           <ul className="list-disc ml-6 text-gray-300">
             <li>
-              <strong>La communauté pentest sur LinkedIn :</strong> Tous les jours, je trouve de l’inspiration grâce aux partages d’expériences, de write-ups techniques ou de conseils. Voir d’autres progresser, ça motive à ne rien lâcher.
+              <strong>La commu pentest sur LinkedIn :</strong> chaque jour je trouve de l’inspiration grâce aux partages, write-ups et conseils. Voir les autres avancer, ça motive à ne rien lâcher.
             </li>
             <li>
               <strong>
@@ -1796,18 +1796,18 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
                   Nicolas Gomez (HacktBack)
                 </a>
               </strong>
-              : Le meilleur contenu pentest francophone, toujours cash, ultra motivant. Si tu passes par ici : merci pour ton état d’esprit et tous tes conseils !
+              : Meilleur contenu pentest FR, toujours cash, ultra motivant. Merci pour l’état d’esprit et tous tes tips !
             </li>
             <li>
-              <strong>IppSec :</strong> Le <em>GOAT</em> de Hack The Box — c’est grâce à lui que j’ai appris la méthodo, le raisonnement “hacker”, et comment aborder n’importe quelle box pas à pas.
+              <strong>IppSec :</strong> le <em>GOAT</em> Hack The Box — c’est grâce à lui que j’ai compris la méthodo, la logique “hacker” et l’approche box par box.
             </li>
             <li>
-              <strong>Mon pote pentester :</strong> Celui qui m’a mis le pied à l’étrier et plongé dans le terrier de la cybersécurité. Tu te reconnaîtras. Sans tes conseils et nos discussions de minuit, j’aurais sûrement jamais osé me lancer.
+              <strong>Mon pote pentester :</strong> celui qui m’a fait plonger dans le terrier cyber. Tu te reconnaîtras ! Sans tes conseils et nos discussions de minuit, je ne me serais peut-être jamais lancé.
             </li>
           </ul>
 
           <p className="text-gray-400 italic">
-            Si tu m’as inspiré, appris un truc, ou juste donné envie de progresser — même par un simple message ou une vidéo YouTube — merci.
+            Si tu m’as inspiré ou appris un truc, même juste par un message ou une vidéo, merci.
           </p>
         </div>
       </div>
@@ -1830,23 +1830,19 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
         </h3>
         <div className="bg-[#2a2a2f] p-6 rounded-lg">
           <p className="text-gray-300 text-lg">
-            Le vrai secret pour progresser en cybersécurité — ou dans n’importe quel domaine — c’est <strong>le travail, la patience, et la persévérance</strong>. Rien ne vient tout de suite. Il faut accepter qu’il y aura des jours (parfois beaucoup !) où tu te sentiras bloqué. Mais si tu continues, les déclics finissent toujours par arriver.
+            Le vrai secret pour progresser en cybersécurité (ou dans n’importe quel domaine), c’est <strong>le travail, la patience et la persévérance</strong>. Rien ne tombe du ciel. Il y aura forcément des jours où tu te sens bloqué — parfois longtemps. Mais si tu tiens bon, le déclic finit toujours par arriver.
           </p>
-
           <p className="text-gray-300 text-lg">
-            Apprendre, c’est pour la vie. Il n’y a pas de ligne d’arrivée — juste l’envie de t’améliorer un peu chaque jour. Plus tu essayes, plus tu vas loin, même si ça ne se voit pas tout de suite.
+            Apprendre, c’est un chemin sans ligne d’arrivée. Il suffit d’avancer un peu chaque jour. Plus tu tentes, plus tu progresses, même si tu ne t’en rends pas toujours compte sur le moment.
           </p>
-
           <p className="text-gray-300 text-lg">
-            Mon seul conseil : <strong>lâche rien</strong>, même quand c’est frustrant. Trouve ce qui te rend curieux, prends du plaisir à te challenger, et n’aie pas peur d’essayer (et de rater) encore et encore. <strong>Quand t’aimes ce que tu fais, tu finis toujours par devenir très bon.</strong>
+            Mon conseil : <strong>lâche rien</strong>, même dans les moments de doute. Trouve ce qui t’intrigue, apprécie le challenge et n’aie pas peur d’échouer (et de recommencer). <strong>Quand tu prends plaisir à ce que tu fais, tu finis par devenir vraiment bon.</strong>
           </p>
-
           <p className="text-gray-300 text-lg">
-            Merci d’avoir pris le temps de lire ce (très long !) article. J’espère t’avoir aidé ou donné des repères — j’ai vraiment essayé de tout mettre à plat, même si c’est parfois difficile de tout retranscrire.
+            Merci d’avoir pris le temps de lire (jusqu’au bout !) ce long article. J’espère t’avoir aidé ou au moins donné quelques repères. J’ai essayé de retranscrire toute mon expérience, même si c’est pas toujours simple à expliquer.
           </p>
-
           <p className="text-violet-300 font-semibold text-lg">
-            Tu peux le faire toi aussi. Reste patient, continue d’apprendre, et demande de l’aide si besoin. Le progrès est inévitable si tu reviens chaque jour à la charge !
+            Toi aussi tu peux le faire. Prends ton temps, continue à apprendre, et demande de l’aide si tu bloques. Le progrès arrive forcément à force de revenir chaque jour !
           </p>
         </div>
       </div>
@@ -1861,9 +1857,10 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
     <h2 className="text-2xl font-bold text-violet-400">Parcours terminé</h2>
   </div>
   <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-    D’apprenti pentester à certifié CPTS — ce parcours m’a transformé.  
-    Le chemin était exigeant, mais chaque heure investie valait le coup pour les compétences et la confiance gagnées.
+    D’apprenti pentester à certifié CPTS — ce parcours m’a transformé.<br />
+    Le chemin n’a pas été facile, mais chaque heure investie en valait la peine pour les compétences et la confiance acquises.
   </p>
 </div>
-);
-      };
+
+// Si tu es dans un composant React
+// export default CPTSJourneyArticleFr;
