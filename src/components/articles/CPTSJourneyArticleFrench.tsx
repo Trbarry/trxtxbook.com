@@ -150,6 +150,14 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
     </p>
   </div>
 
+  {/* Value of sharing */}
+  <p className="text-gray-400 text-base italic mt-2">
+    <span className="text-violet-400 font-semibold">My mindset:</span>
+    In cybersecurity, we mainly progress because we help each other—through write-ups, forums, blogs, or even Discord.
+    If this post helps even just one person feel more ready or more at ease, it was worth writing.
+  </p>
+</div>
+
       </div>
 
       {/* Why CPTS After eJPT */}
