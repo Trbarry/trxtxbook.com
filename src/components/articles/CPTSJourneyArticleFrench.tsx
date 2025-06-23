@@ -660,22 +660,22 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
 </div>
 
   {/* Pourquoi Exegol est incontournable */}
-  <p className="text-gray-300">
-    What makes Exegol shine: <strong>it saves time and headaches</strong>.  
-    No installation, no troubleshooting. Everything’s preconfigured, organized, and ready for offensive ops.  
-    <span className="font-semibold text-violet-400">When you're deep into a 10-day exam grind, that matters more than anything.</span>
-  </p>
+<p className="text-gray-300">
+  Ce qui fait la force d’Exegol : <strong>tu gagnes un temps fou</strong>.
+  Pas d’install, pas de prise de tête. Tout est déjà configuré, prêt pour l’attaque.
+  <span className="font-semibold text-violet-400">Quand t’es au cœur d’un exam CPTS de 10 jours, ça compte plus que tout.</span>
+</p>
 
-  {/* Atouts majeurs Exegol */}
-  <div className="bg-violet-900/20 rounded-lg p-4">
-    <span className="font-semibold text-violet-400">✨ Why I’ll never go back:</span>
-    <ul className="list-disc ml-6 text-gray-300 mt-2 space-y-1">
-      <li>Launches in seconds with Docker, without polluting your host system.</li>
-      <li>Zero crash, zero weird package issues — unlike Kali after every <code>apt upgrade</code>.</li>
-      <li>Perfect structure for notetaking, screenshots, payload hosting, and log retention.</li>
-      <li>Feels like a professional toolkit, not a hobbyist’s distro.</li>
-    </ul>
-  </div>
+{/* Atouts majeurs Exegol */}
+<div className="bg-violet-900/20 rounded-lg p-4">
+  <span className="font-semibold text-violet-400">✨ Pourquoi je ne reviendrai jamais en arrière :</span>
+  <ul className="list-disc ml-6 text-gray-300 mt-2 space-y-1">
+    <li>Lancement en quelques secondes avec Docker, sans polluer ta machine hôte.</li>
+    <li>Zero crash, aucun bug chelou de package — rien à voir avec Kali après chaque <code>apt upgrade</code>.</li>
+    <li>Structure parfaite pour prise de notes, screenshots, hébergement de payloads et logs.</li>
+    <li>Ça fait pro, pas “distro de hobbyiste”.</li>
+  </ul>
+</div>
 
   <p className="text-gray-300">
     And did I mention? <strong>It’s French 🇫🇷</strong>.  
