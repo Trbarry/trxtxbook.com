@@ -1625,96 +1625,106 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
 </section>
 
 
-  {/* Post-Exam Reflection & Next Steps */}
-  <section className="mb-16">
-    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-      <div className="flex items-center gap-3 mb-8">
-        <CheckCircle2 className="w-8 h-8 text-violet-400" />
-        <h2 className="text-3xl font-bold">Post-Exam Reflection & Next Steps</h2>
-      </div>
-      <div className="space-y-8">
-        <div>
-          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-            <Shield className="w-6 h-6" />
-            Comparing CPTS to OSCP
-          </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-gray-300 text-lg">
-      <strong>Passing the CPTS was a real challenge — both technically and mentally.</strong> The exam forced me to be methodical, rigorous, and to manage my stress over a long period. I came out stronger and much more confident in my pentesting workflow.
-    </p>
-
-    <div className="bg-violet-900/20 rounded-lg p-4 space-y-3">
-      <p className="text-violet-300 font-semibold">
-        <span className="text-xl">💡</span> I haven’t taken the OSCP yet — it’s expensive, and I want to do it when I’ll be job-hunting in cybersecurity.
-      </p>
-      <ul className="list-disc ml-6 text-gray-300">
-        <li>
-          <strong>CPTS is more technical and realistic:</strong> The scope is huge, the networks are complex, and you have to think like a real pentester (double pivot, full AD compromise, custom enumeration).
-        </li>
-        <li>
-          <strong>OSCP is famous for a reason:</strong> Even if technically less advanced than the CPTS in 2025, it’s still THE certificate most HR will recognize immediately — especially outside of the HTB community.
-        </li>
-        <li>
-          <strong>The 24h format of the OSCP exam is brutal:</strong> It creates huge stress and leaves little room for errors, whereas the CPTS is more like a real pentest, spread out over 10 days — which teaches you stamina and process management.
-        </li>
-        <li>
-          <strong>Recognition is evolving:</strong> CPTS is getting more attention, especially in Europe and among technical teams. Recruiters are starting to understand its value. But OSCP is still the standard on LinkedIn job offers for now.
-        </li>
-        <li>
-          <strong>Reporting style differs:</strong> CPTS puts a heavy focus on detailed and real-world reporting (SysReptor, findings, walktrough). OSCP is more focused on root/user.txt, with a simpler report at the end.
-        </li>
-        <li>
-          <strong>Personal approach:</strong> For now, my focus is on progressing technically. When I feel ready and need the OSCP line on my CV, I’ll attack it — not before.
-        </li>
-      </ul>
+  {/* Retour d’expérience & Prochaines étapes */}
+<section className="mb-16">
+  <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+    <div className="flex items-center gap-3 mb-8">
+      <CheckCircle2 className="w-8 h-8 text-violet-400" />
+      <h2 className="text-3xl font-bold">Retour d’expérience & prochaines étapes</h2>
     </div>
+    <div className="space-y-8">
 
-    <p className="text-gray-400 text-base italic mt-2">
-      <span className="text-violet-400 font-semibold">My advice:</span> Don’t chase the OSCP just for the name. Build up your skills, get solid on real-world labs, and pick the right moment for you. Both certifications can open doors, but your competence and mindset will always make the difference.
-    </p>
+      {/* Comparaison CPTS / OSCP */}
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <Shield className="w-6 h-6" />
+          Comparer la CPTS à l’OSCP
+        </h3>
+        <div className="bg-[#2a2a2f] p-6 rounded-lg">
+          <p className="text-gray-300 text-lg">
+            <strong>Réussir la CPTS, c’est un vrai défi — autant technique que mental.</strong>
+            L’examen m’a forcé à être méthodique, rigoureux, à gérer mon stress sur la durée.
+            J’en ressors plus solide, avec beaucoup plus de confiance dans mon workflow pentest.
+          </p>
+
+          <div className="bg-violet-900/20 rounded-lg p-4 space-y-3">
+            <p className="text-violet-300 font-semibold">
+              <span className="text-xl">💡</span> Je n’ai pas encore passé l’OSCP — c’est cher, et je veux le faire quand je serai en recherche d’emploi cybersécurité.
+            </p>
+            <ul className="list-disc ml-6 text-gray-300">
+              <li>
+                <strong>La CPTS est plus technique et réaliste :</strong> le scope est immense, les réseaux complexes, il faut raisonner comme un vrai pentester (double pivot, full compromise AD, énum custom).
+              </li>
+              <li>
+                <strong>L’OSCP reste la référence :</strong> Même si, techniquement, il est un peu en dessous de la CPTS en 2025, c’est LA certif que les RH reconnaissent d’emblée — surtout hors de la commu HTB.
+              </li>
+              <li>
+                <strong>Le format 24h de l’OSCP est brutal :</strong> Ça met une grosse pression, très peu de droit à l’erreur, alors que la CPTS ressemble plus à un vrai pentest sur 10 jours — on apprend l’endurance et la gestion de process.
+              </li>
+              <li>
+                <strong>La reconnaissance évolue :</strong> La CPTS gagne en visibilité, surtout en Europe et auprès des techs. Les recruteurs commencent à en voir la valeur. Mais l’OSCP reste la référence sur les offres LinkedIn pour l’instant.
+              </li>
+              <li>
+                <strong>Le reporting diffère :</strong> La CPTS met un vrai focus sur la rédaction détaillée et réaliste (SysReptor, findings, walkthrough). L’OSCP est plus centré sur root/user.txt, avec un rapport final plus léger.
+              </li>
+              <li>
+                <strong>Mon approche :</strong> Pour l’instant, je veux progresser techniquement. Quand je serai prêt et que j’aurai besoin de la ligne OSCP sur le CV, j’y irai — pas avant.
+              </li>
+            </ul>
           </div>
-        </div>
-        <div>
-          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-            <TrendingUp className="w-6 h-6" />
-            My Plan for OSCP, BSCP & Beyond
-          </h3>
-          <div className="bg-[#2a2a2f] p-6 rounded-lg">
-            <p className="text-gray-300 text-lg">
-      <strong>For the next steps, my strategy is simple: keep stacking skills, keep progressing — one step at a time.</strong>
-    </p>
 
-    <div className="bg-violet-900/20 rounded-lg p-4 space-y-3">
-      <ul className="list-disc ml-6 text-gray-300">
-        <li>
-          <strong>After the CPTS:</strong> The next logical step is the <span className="text-violet-300">BSCP (Burp Suite Certified Practitioner)</span> to prove my web pentesting skills.
-        </li>
-        <li>
-          <strong>Parallel goal:</strong> I also want to pass the <span className="text-blue-300">CCNA</span> to strengthen my networking fundamentals — it's key for both pentest and admin roles.
-        </li>
-        <li>
-          <strong>Still hesitating:</strong> Should I go for the <span className="text-pink-300">CBBH (Certified Bug Bounty Hunter)</span>? Or just push on to the OSCP directly? For now, I stay open — I’ll adapt as I progress.
-        </li>
-        <li>
-          <strong>OSCP is the long-term goal:</strong> I want to wait until I’m ready, and maybe until the end of my studies or the moment I decide to chase a cybersecurity job. Until then, it's full focus on learning, labs, and pro labs if I have the time!
-        </li>
-        <li>
-          <strong>Work-study + Certs:</strong> The challenge is to balance my <span className="text-violet-300">alternance</span> (work-study), my academic path, and technical progression. It’s demanding, but that’s the game.
-        </li>
-        <li>
-          <strong>Keep learning:</strong> As always: stay humble, learn every day, and adapt the plan along the way. There’s no magic roadmap in cybersecurity — just the next step forward.
-        </li>
-      </ul>
-    </div>
-
-    <p className="text-gray-400 text-base italic mt-2">
-      <span className="text-violet-400 font-semibold">Current mindset:</span> Skills first, certifications second. The job will come when it needs to — right now, it’s about building real, durable expertise.
-    </p>
-          </div>
+          <p className="text-gray-400 text-base italic mt-2">
+            <span className="text-violet-400 font-semibold">Mon conseil :</span>
+            Ne cours pas après l’OSCP juste pour le nom. Monte en compétences, deviens solide sur les labs réels, et choisis le bon moment pour toi.
+            Les deux certifs ouvrent des portes, mais ce sont toujours tes vraies compétences et ton état d’esprit qui feront la différence.
+          </p>
         </div>
       </div>
+
+      {/* Plan OSCP, BSCP, suite */}
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <TrendingUp className="w-6 h-6" />
+          Mon plan : OSCP, BSCP & la suite
+        </h3>
+        <div className="bg-[#2a2a2f] p-6 rounded-lg">
+          <p className="text-gray-300 text-lg">
+            <strong>Pour la suite, la stratégie est simple : empiler les skills, progresser — une étape après l’autre.</strong>
+          </p>
+
+          <div className="bg-violet-900/20 rounded-lg p-4 space-y-3">
+            <ul className="list-disc ml-6 text-gray-300">
+              <li>
+                <strong>Après la CPTS :</strong> Prochain objectif logique : la <span className="text-violet-300">BSCP (Burp Suite Certified Practitioner)</span> pour valider mes compétences en pentest web.
+              </li>
+              <li>
+                <strong>Objectif parallèle :</strong> Je vise aussi la <span className="text-blue-300">CCNA</span> pour renforcer les bases réseau — clé pour le pentest et l’admin.
+              </li>
+              <li>
+                <strong>Hésitation en cours :</strong> Partir sur la <span className="text-pink-300">CBBH (Certified Bug Bounty Hunter)</span> ? Ou foncer direct sur l’OSCP ? Pour l’instant, je reste ouvert, je verrai selon la progression.
+              </li>
+              <li>
+                <strong>OSCP = objectif long terme :</strong> J’attendrai d’être prêt, peut-être en fin d’études ou quand je viserai un poste en cybersécu. Jusque-là, full focus : labs, pro labs si possible, apprentissage.
+              </li>
+              <li>
+                <strong>Alternance + certifs :</strong> Le défi c’est d’équilibrer <span className="text-violet-300">l’alternance</span>, le parcours scolaire, et la progression technique. C’est exigeant — mais c’est le jeu.
+              </li>
+              <li>
+                <strong>Continuer d’apprendre :</strong> Comme toujours : rester humble, apprendre tous les jours, ajuster la route au fil du temps. Il n’y a pas de roadmap magique en cybersécu — juste la prochaine étape à franchir.
+              </li>
+            </ul>
+          </div>
+
+          <p className="text-gray-400 text-base italic mt-2">
+            <span className="text-violet-400 font-semibold">Mentalité actuelle :</span>
+            Les compétences d’abord, les certifs ensuite. Le job viendra en temps voulu — pour l’instant, je construis une expertise réelle et durable.
+          </p>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   {/* Further Study & Acknowledgements */}
   <section className="mb-16">
