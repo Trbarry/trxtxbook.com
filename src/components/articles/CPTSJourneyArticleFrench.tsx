@@ -38,15 +38,15 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
           {[
-            'Introduction & Hook',
-            'Study Strategy Breakdown',
-            'Tooling, Environment & Note-Taking',
-            'Exam Week',
-            'The 190-Page Report',
-            'Tips & Tricks Cheat-Sheet',
-            'Post-Exam Reflection & Next Steps',
-            'Further Study & Acknowledgements',
-            'Conclusion & Encouragement'
+            'Introduction & Accroche',
+  'Stratégie d’Apprentissage Détaillée',
+  'Outils, Environnement & Prise de Notes',
+  'La Semaine d’Examen',
+  'Le Rapport de 190 Pages',
+  'Cheat-Sheet : Conseils & Astuces',
+  'Retour d’Expérience & Prochaines Étapes',
+  'Ressources Complémentaires & Remerciements',
+  'Conclusion & Motivation'
           ].map((item, index) => (
             <div key={index} className="flex items-center gap-2 text-gray-400 hover:text-violet-400 transition-colors">
               <ArrowRight className="w-3 h-3" />
