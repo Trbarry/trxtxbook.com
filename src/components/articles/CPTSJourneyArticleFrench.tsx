@@ -1231,7 +1231,7 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
 </div>
 <div className="bg-violet-900/20 rounded-lg p-4">
   <span className="text-gray-300">
-    Ce qui fonctionne vraiment, c’est l’approche <strong>“trigger-based” en temps réel</strong> : chaque fois que tu découvres quelque chose (un port, un utilisateur, un accès, un flag…), prends quelques secondes pour le documenter <em>immédiatement</em>.<br/>
+    Ce qui fonctionne vraiment, c’est l’approche <strong>“trigger-based” en temps réel</strong> : à chaque découverte (port, user, accès initial, flag…), prends quelques secondes pour le documenter <em>immédiatement</em>.<br/>
     <span className="block mt-1 font-semibold text-violet-400">RÉDIGE TON RAPPORT EN TEMPS RÉEL.</span>
   </span>
 </div>
@@ -1239,11 +1239,11 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
 {/* ChatGPT pour accélérer la rédaction */}
 <div className="flex items-center gap-2 mb-2">
   <Zap className="w-6 h-6 text-violet-400" />
-  <span className="text-xl font-semibold text-violet-300">Utiliser ChatGPT (de la bonne façon)</span>
+  <span className="text-xl font-semibold text-violet-300">Bien utiliser ChatGPT</span>
 </div>
 <p className="text-gray-300">
-  💡 Oui, j’ai utilisé <strong>ChatGPT</strong> pour accélérer certains passages (surtout l’impact et les recommandations),  
-  mais j’ai toujours <strong>relu et réécrit chaque partie</strong> pour coller à mon style et à ce que j’avais vraiment trouvé.
+  💡 Oui, j’ai utilisé <strong>ChatGPT</strong> pour gagner du temps sur certaines parties (surtout l’impact ou la mitigation),  
+  mais j’ai toujours <strong>relu et réécrit tout</strong> pour que ça colle à mon style et à mes findings.
 </p>
 
 {/* Retour d’expérience sur le déroulé des flags */}
@@ -1252,18 +1252,21 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
   <span className="text-xl font-semibold text-violet-300">Progression & mental</span>
 </div>
 <p className="text-gray-300">
-  Sur la progression : les premiers jours ont été rapides — j’ai eu un bon accès d’entrée et j’ai avancé sans accroc jusqu’au <strong>flag 9</strong>.
-  À partir de là, ça s’est corsé. Ce qui m’a aidé, c’est de prendre du recul, <strong>re-énumérer</strong>, tout reposer à plat.
-  C’est comme ça que j’ai débloqué la suite.
+  Côté progression : les premiers jours, tout s’est enchaîné vite — j’ai eu un bon accès de départ et j’ai avancé jusqu’au <strong>flag 9</strong> sans accroc.
+  Ensuite, c’est devenu plus compliqué. Ce qui m’a sauvé, c’est de prendre du recul, <strong>re-énumérer</strong>, tout reposer à plat pour trouver ce qui bloquait.
 </p>
 <p className="text-gray-300">
-  Même chose pour le <strong>flag 12</strong>. Aucun problème à revenir en arrière pour avancer.
-  Le contenu est dense et c’est stressant d’avoir “seulement” 9 flags au bout de X jours.
-  <span className="font-semibold text-violet-400">Ne panique pas : reste calme, réfléchis bien, continue d’avancer.</span>
+  Même chose avec le <strong>flag 12</strong>. Aucun problème à devoir revenir en arrière pour avancer.  
+  Le contenu est dense, et c’est stressant d’avoir seulement 9 flags à X jours.  
+  <span className="font-semibold text-violet-400">Ne panique pas : reste calme, réfléchis posément, continue d’avancer.</span>
 </p>
 </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-{/* --- Bloc : Stratégie de reporting en temps réel --- */}
+{/* Le rapport de 190 pages */}
 <section className="mb-16">
   <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
     <div className="flex items-center gap-3 mb-8">
@@ -1276,16 +1279,16 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
           <Clock className="w-6 h-6" />
           Stratégie de reporting en temps réel
         </h3>
-        {/* --- Bloc : workflow reporting temps réel --- */}
+        {/* --- Bloc : Workflow de reporting en temps réel --- */}
 <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
   <div className="flex items-center gap-3 mb-2">
     <FileText className="w-6 h-6 text-violet-400" />
     <h4 className="text-xl font-semibold text-violet-300">Workflow de reporting en temps réel</h4>
   </div>
   <p className="text-gray-300">
-    Pendant l’examen CPTS, j’avais d’abord prévu d’écrire le rapport chaque soir. <strong>Grosse erreur.</strong>
+    Pendant l’examen CPTS, j’avais prévu au départ de rédiger le rapport chaque soir. <strong>Grosse erreur.</strong><br/>
     Avec la fatigue mentale et l’envie de garder le rythme, ça ne tenait pas sur la durée.
-    J’ai alors adopté une <strong>méthode de reporting en temps réel</strong>, et ça a tout changé.
+    J’ai donc décidé d’appliquer un <strong>workflow de reporting en temps réel</strong>, et ça a tout changé.
   </p>
 
   <div className="flex items-center gap-2 mb-2">
@@ -1293,45 +1296,46 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
     <span className="text-xl font-semibold text-violet-300">Stratégie “trigger-based”</span>
   </div>
   <p className="text-gray-300">
-    Dès que je découvrais quelque chose d’important (nouveau service, creds, shell…),  
-    je le documentais tout de suite dans <strong>SysReptor</strong> et je prenais des notes complémentaires dans <strong>Obsidian</strong>.<br/>
-    Tout restait frais dans ma tête : jamais eu besoin de retourner fouiller dans 200 logs plus tard.
+    Dès que je découvrais un élément important (nouveau service, credentials, shell…),  
+    je le documentais immédiatement dans <strong>SysReptor</strong> et prenais en parallèle des notes dans <strong>Obsidian</strong>.<br/>
+    Résultat : tout restait frais, plus besoin de revenir farfouiller dans une montagne de logs.
   </p>
   <p className="text-gray-300">
-    Par exemple, après avoir compromis un user et eu accès à un dossier partagé,  
-    j’ouvrais SysReptor, créais une entrée <strong>Finding</strong>, reliais le service vulnérable, mettais les étapes, la capture…  
-    Pas de “je ferai ça plus tard”. Je pouvais avancer l’esprit libre
+    Par exemple, après avoir compromis un utilisateur et accédé à un dossier partagé,  
+    j’ouvrais SysReptor, créais un <strong>Finding</strong>, reliais le service vulnérable, ajoutais les étapes et la capture d’écran.  
+    Pas de “je le ferai plus tard”. Ça permet d’avancer l’esprit tranquille.
   </p>
-
 
   <div className="flex items-center gap-2 mb-2">
     <BookOpen className="w-5 h-5 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Timeline & Tags</span>
+    <span className="text-xl font-semibold text-violet-300">Timeline & tags</span>
   </div>
   <p className="text-gray-300">
-    Every note in Obsidian was linked to my timeline.  
-    I used tags like <code>#flag9</code>, <code>#pivot</code>, <code>#user-compromise</code> to track progress and used the graph view to reconnect ideas when stuck.
+    Chaque note dans Obsidian était liée à ma timeline.<br/>
+    J’utilisais des tags comme <code>#flag9</code>, <code>#pivot</code>, <code>#user-compromise</code> pour suivre l’avancement,  
+    et la vue “graph” pour reconnecter les idées quand j’étais bloqué.
   </p>
 
   <div className="flex items-center gap-2 mb-2">
     <CheckCircle2 className="w-5 h-5 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Unlocking Blockages</span>
+    <span className="text-xl font-semibold text-violet-300">Débloquer les situations</span>
   </div>
   <p className="text-gray-300">
-    This approach helped me <strong>overcome blockages</strong> (Flag 9, Flag 12).  
-    When stuck, I’d revisit previous notes, spot what I’d missed, and unlock the path.  
-    Without this system, I’d have been lost in the internal network complexity.
+    Cette méthode m’a vraiment <strong>aidé à sortir des blocages</strong> (Flag 9, Flag 12).
+    Quand j’étais coincé, je revenais sur les anciennes notes, trouvais ce que j’avais raté et ça débloquait la suite.<br/>
+    Sans ce système, je me serais perdu dans la complexité du réseau interne.
   </p>
 
   <div className="flex items-center gap-2 mb-2">
     <Zap className="w-5 h-5 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">AI as a Sidekick</span>
+    <span className="text-xl font-semibold text-violet-300">L’IA comme copilote</span>
   </div>
   <p className="text-gray-300">
-    <strong>Don’t hesitate to use ChatGPT</strong> as your sidekick—but always verify its output.
-    I used it mainly to rephrase technical steps for clarity and to write neutral language for the report.
+    <strong>N’hésite pas à utiliser ChatGPT</strong> comme copilote — mais vérifie toujours ce que ça sort.
+    Je m’en suis surtout servi pour reformuler des étapes techniques ou pour donner un ton neutre à certaines parties du rapport.
   </p>
 </div>
+
 
 {/* --- Bloc : Walkthroughs vs. Findings --- */}
 <div className="mt-10">
