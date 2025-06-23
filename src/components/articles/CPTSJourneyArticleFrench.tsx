@@ -1112,74 +1112,75 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
     </div>
   </section>
 
-  {/* Exam Week */}
-  <section className="mb-16">
-    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-      <div className="flex items-center gap-3 mb-8">
-        <Clock className="w-8 h-8 text-violet-400" />
-        <h2 className="text-3xl font-bold">Exam Week</h2>
-      </div>
-      <div className="space-y-8">
-        <div>
-          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-            <Target className="w-6 h-6" />
-            Exam Format & Scope
-          </h3>
-         <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-  {/* Aperçu de l’examen CPTS */}
-  <div className="flex items-center gap-3 mb-2">
-    <Shield className="w-6 h-6 text-violet-400" />
-    <h4 className="text-xl font-semibold text-violet-300">CPTS Exam: The Closest Thing to a Real Pentest</h4>
-  </div>
-  <p className="text-gray-300 text-lg">
-    The CPTS exam simulates a <strong>real-world offensive engagement</strong> against a fictional company.
-    While I can’t share too much detail due to HTB’s terms and conditions, I can confidently say:  
-    <strong>This is the closest thing to a real pentest you’ll get in a certification exam.</strong>
-  </p>
+  {/* Semaine d’examen */}
+<section className="mb-16">
+  <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+    <div className="flex items-center gap-3 mb-8">
+      <Clock className="w-8 h-8 text-violet-400" />
+      <h2 className="text-3xl font-bold">Semaine d’examen</h2>
+    </div>
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <Target className="w-6 h-6" />
+          Format & périmètre de l’examen
+        </h3>
+       <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+{/* Aperçu de l’examen CPTS */}
+<div className="flex items-center gap-3 mb-2">
+  <Shield className="w-6 h-6 text-violet-400" />
+  <h4 className="text-xl font-semibold text-violet-300">Examen CPTS : l’expérience la plus proche d’un vrai pentest</h4>
+</div>
+<p className="text-gray-300 text-lg">
+  L’examen CPTS simule une <strong>vraie mission offensive</strong> contre une entreprise fictive.
+  Je ne peux pas donner trop de détails (HTB oblige), mais je peux l’affirmer :<br/>
+  <strong>C’est ce qui se rapproche le plus d’un vrai pentest en certification.</strong>
+</p>
 
-  {/* Scénario et mission */}
-  <div className="flex items-center gap-2 mb-2">
-    <Terminal className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">The Engagement Scenario</span>
-  </div>
-  <p className="text-gray-300">
-    From the beginning, you’re provided with a clear scope via a letter of engagement — just like in a professional red team operation.
-    The initial entry point is a public-facing web application.  
-    Your mission? <strong>Fully compromise two separate Active Directory domains</strong> (yes, two!) and gain access to at least <strong>12 out of 14 flags</strong> across the infrastructure.
-  </p>
+{/* Scénario et mission */}
+<div className="flex items-center gap-2 mb-2">
+  <Terminal className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Le scénario d’engagement</span>
+</div>
+<p className="text-gray-300">
+  Dès le début, tu reçois un périmètre précis via une lettre d’engagement — comme dans un vrai mandat red team.
+  Le point d’entrée initial est une webapp exposée.<br/>
+  Ta mission : <strong>compromettre entièrement deux domaines Active Directory distincts</strong> (oui, deux !) et capturer au moins <strong>12 flags sur 14</strong> à travers l’infra.
+</p>
 
-  {/* Réalisme et taille du réseau */}
-  <div className="flex items-center gap-2 mb-2">
-    <Network className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">A Realistic, Segmented Network</span>
-  </div>
-  <p className="text-gray-300">
-    The network is <strong>vast and realistic</strong> — Windows & Linux hosts, segmentation, pivoting requirements.
-    Double pivoting is mandatory; tools like <strong>Ligolo-ng</strong> become essential.
-  </p>
+{/* Réalisme et taille du réseau */}
+<div className="flex items-center gap-2 mb-2">
+  <Network className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Un réseau réaliste et segmenté</span>
+</div>
+<p className="text-gray-300">
+  Le réseau est <strong>vaste et crédible</strong> : machines Windows & Linux, segmentation, pivots obligatoires.
+  Le double pivot est indispensable ; des outils comme <strong>Ligolo-ng</strong> deviennent essentiels.
+</p>
 
-  {/* Vulnérabilités et complexité */}
-  <div className="flex items-center gap-2 mb-2">
-    <ListChecks className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Vulnerabilities & Method</span>
-  </div>
-  <p className="text-gray-300">
-    Vulnerabilities aren’t exotic or advanced: everything is covered in the CPTS Learning Path.
-    But the <strong>scale and density</strong> can mislead you.  
-    There aren’t real "rabbit holes" like in HTB Hard/Insane boxes, but the environment is so big you can lose hours if you’re not pragmatic.
-  </p>
+{/* Vulnérabilités et complexité */}
+<div className="flex items-center gap-2 mb-2">
+  <ListChecks className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Vulnérabilités & méthodologie</span>
+</div>
+<p className="text-gray-300">
+  Les vulnérabilités ne sont ni exotiques ni hyper avancées : tout est abordé dans le learning path CPTS.<br/>
+  Mais <strong>l’ampleur et la densité</strong> peuvent te perdre.
+  Il n’y a pas de vrais “rabbit holes” comme dans les boxes Hard/Insane, mais l’environnement est tellement vaste qu’on peut perdre des heures si on n’est pas pragmatique.
+</p>
 
-  {/* Gestion du temps et mentalité */}
-  <div className="flex items-center gap-2 mb-2">
-    <Clock className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Pacing & Mindset</span>
-  </div>
-  <p className="text-gray-300">
-    The exam lasts <strong>10 full days</strong>. I worked an average of <strong>7 hours per day</strong>.
-    Expect roadblocks — sometimes I was stuck for a day or more.  
-    When that happened, I stepped back, re-enumerated, and thought critically.  
-    You’re simulating the mindset of a hacker. <strong>Creativity and adaptability</strong> are as important as technical skill.
-  </p>
+{/* Gestion du temps et mentalité */}
+<div className="flex items-center gap-2 mb-2">
+  <Clock className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Gestion du temps & mentalité</span>
+</div>
+<p className="text-gray-300">
+  L’examen dure <strong>10 jours complets</strong>. J’ai bossé en moyenne <strong>7h par jour</strong>.<br/>
+  Prépare-toi à être bloqué : il m’est arrivé de rester coincé plus d’une journée.
+  Dans ces cas-là, il faut prendre du recul, relancer l’énumération et réfléchir autrement.<br/>
+  Il faut vraiment adopter la mentalité d’un attaquant. <strong>Créativité et adaptabilité</strong> comptent autant que la technique pure.
+</p>
+
 
   {/* Conseils de réussite */}
   <div className="flex items-center gap-2 mb-2">
