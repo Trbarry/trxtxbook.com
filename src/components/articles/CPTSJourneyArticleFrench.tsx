@@ -1865,3 +1865,5 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
     Le chemin était exigeant, mais chaque heure investie valait le coup pour les compétences et la confiance gagnées.
   </p>
 </div>
+);
+      };
