@@ -1072,98 +1072,139 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
     </div>
 
 
-    {/* Semaine d’examen */}
-<section className="mb-16">
-  <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-    <div className="flex items-center gap-3 mb-8">
-      <Clock className="w-8 h-8 text-violet-400" />
-      <h2 className="text-3xl font-bold">Semaine d’examen</h2>
+    {/* SysReptor */}
+<div>
+  <h4 className="text-xl font-semibold text-violet-300 flex items-center gap-2 mt-8">
+    <Network className="w-5 h-5 text-violet-400" /> SysReptor : l’arme ultime pour le reporting
+  </h4>
+  <p className="text-gray-300">
+    Pour la remise du rapport final, j’ai utilisé <strong>SysReptor</strong>.<br/>
+    C’est la plateforme de reporting développée par HTB, qui rend la rédaction fluide et professionnelle.
+  </p>
+  <p className="text-gray-300">
+    Ce que j’ai le plus apprécié : le <strong>workflow de reporting très structuré</strong>.<br/>
+    Chaque vulnérabilité devient une “Finding” dédiée, avec sévérité, impact, étapes de reproduction, captures d’écran et recommandations.<br/>
+    Résultat : cohérence et clarté sur l’ensemble de mon <strong>rapport de 190 pages</strong>.
+  </p>
+  <p className="text-gray-300">Voici à quoi ressemblait la structure type de mon rapport SysReptor :</p>
+  <ul className="list-disc ml-6 text-gray-300 text-sm space-y-1">
+    <li><strong>Walkthrough :</strong> Étapes chronologiques de l’attaque, phase par phase</li>
+    <li><strong>Findings :</strong> Chaque vulnérabilité en détail (IDOR, SSRF, SQLi...)</li>
+    <li><strong>Flags :</strong> Liste des flags, comment ils ont été récupérés</li>
+    <li><strong>Recommendations :</strong> Conseils clairs et pros pour chaque faille</li>
+  </ul>
+  <p className="text-gray-300">
+    J’ai rempli SysReptor en temps réel pendant l’examen, avec la <strong>méthode “trigger-based”</strong> : à chaque découverte ou étape franchie, je documentais tout de suite. Aucun rush de rédaction à la fin.
+  </p>
+  <div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2 mt-4">
+    <CheckCircle2 className="w-5 h-5 text-violet-400" />
+    <span className="text-gray-300">
+      <strong>Conseil final :</strong> Obsidian, c’est pour toi ; SysReptor, c’est pour HTB.<br />
+      Garde les deux propres, synthétiques et bien structurés.
+    </span>
+  </div>
+</div>
+
+  </div>
+</div>
+        </div>
+      </div>
     </div>
-    <div className="space-y-8">
-      <div>
-        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-          <Target className="w-6 h-6" />
-          Format & Périmètre de l’examen
-        </h3>
-       <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-{/* Aperçu de l’examen CPTS */}
-<div className="flex items-center gap-3 mb-2">
-  <Shield className="w-6 h-6 text-violet-400" />
-  <h4 className="text-xl font-semibold text-violet-300">Examen CPTS : l’expérience la plus proche d’un vrai pentest</h4>
-</div>
-<p className="text-gray-300 text-lg">
-  L’examen CPTS simule une <strong>vraie mission offensive</strong> contre une entreprise fictive.
-  Je ne peux pas donner trop de détails (HTB oblige), mais je peux l’affirmer sans hésiter :<br/>
-  <strong>C’est le plus proche d’un vrai pentest qu’on puisse avoir en certification.</strong>
-</p>
+  </section>
 
-{/* Scénario et mission */}
-<div className="flex items-center gap-2 mb-2">
-  <Terminal className="w-6 h-6 text-violet-400" />
-  <span className="text-xl font-semibold text-violet-300">Le scénario d’engagement</span>
-</div>
-<p className="text-gray-300">
-  Dès le départ, tu reçois un périmètre clair via une lettre d’engagement — exactement comme dans une mission red team réelle.
-  Le point d’entrée initial, c’est une application web exposée.<br/>
-  Ta mission : <strong>compromettre entièrement deux domaines Active Directory distincts</strong> (oui, deux !) et obtenir au moins <strong>12 flags sur 14</strong> dans toute l’infra.
-</p>
+  {/* Exam Week */}
+  <section className="mb-16">
+    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+      <div className="flex items-center gap-3 mb-8">
+        <Clock className="w-8 h-8 text-violet-400" />
+        <h2 className="text-3xl font-bold">Exam Week</h2>
+      </div>
+      <div className="space-y-8">
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Target className="w-6 h-6" />
+            Exam Format & Scope
+          </h3>
+         <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+  {/* Aperçu de l’examen CPTS */}
+  <div className="flex items-center gap-3 mb-2">
+    <Shield className="w-6 h-6 text-violet-400" />
+    <h4 className="text-xl font-semibold text-violet-300">CPTS Exam: The Closest Thing to a Real Pentest</h4>
+  </div>
+  <p className="text-gray-300 text-lg">
+    The CPTS exam simulates a <strong>real-world offensive engagement</strong> against a fictional company.
+    While I can’t share too much detail due to HTB’s terms and conditions, I can confidently say:  
+    <strong>This is the closest thing to a real pentest you’ll get in a certification exam.</strong>
+  </p>
 
-{/* Réalisme et taille du réseau */}
-<div className="flex items-center gap-2 mb-2">
-  <Network className="w-6 h-6 text-violet-400" />
-  <span className="text-xl font-semibold text-violet-300">Un réseau réaliste et segmenté</span>
-</div>
-<p className="text-gray-300">
-  Le réseau est <strong>vaste et crédible</strong> : machines Windows & Linux, segmentation, pivots obligatoires.
-  Le double pivot est obligatoire ; des outils comme <strong>Ligolo-ng</strong> sont indispensables.
-</p>
+  {/* Scénario et mission */}
+  <div className="flex items-center gap-2 mb-2">
+    <Terminal className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">The Engagement Scenario</span>
+  </div>
+  <p className="text-gray-300">
+    From the beginning, you’re provided with a clear scope via a letter of engagement — just like in a professional red team operation.
+    The initial entry point is a public-facing web application.  
+    Your mission? <strong>Fully compromise two separate Active Directory domains</strong> (yes, two!) and gain access to at least <strong>12 out of 14 flags</strong> across the infrastructure.
+  </p>
 
-{/* Vulnérabilités et complexité */}
-<div className="flex items-center gap-2 mb-2">
-  <ListChecks className="w-6 h-6 text-violet-400" />
-  <span className="text-xl font-semibold text-violet-300">Vulnérabilités & méthode</span>
-</div>
-<p className="text-gray-300">
-  Les vulnérabilités ne sont ni exotiques ni très avancées : tout est couvert dans le learning path CPTS.
-  Mais <strong>l’ampleur et la densité</strong> peuvent dérouter.<br/>
-  Il n’y a pas de vrais “rabbit holes” comme dans les boxes HTB Hard/Insane, mais l’environnement est tellement vaste que tu peux vite perdre des heures si tu n’es pas pragmatique.
-</p>
+  {/* Réalisme et taille du réseau */}
+  <div className="flex items-center gap-2 mb-2">
+    <Network className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">A Realistic, Segmented Network</span>
+  </div>
+  <p className="text-gray-300">
+    The network is <strong>vast and realistic</strong> — Windows & Linux hosts, segmentation, pivoting requirements.
+    Double pivoting is mandatory; tools like <strong>Ligolo-ng</strong> become essential.
+  </p>
 
-{/* Gestion du temps et mentalité */}
-<div className="flex items-center gap-2 mb-2">
-  <Clock className="w-6 h-6 text-violet-400" />
-  <span className="text-xl font-semibold text-violet-300">Rythme & mentalité</span>
-</div>
-<p className="text-gray-300">
-  L’examen dure <strong>10 jours complets</strong>. J’ai bossé en moyenne <strong>7h par jour</strong>.<br/>
-  Prévois des blocages — parfois tu peux rester coincé une journée ou plus.<br/>
-  Quand ça arrive, il faut faire une pause, recommencer l’énumération, réfléchir différemment.<br/>
-  Tu dois vraiment te mettre dans la tête d’un attaquant. <strong>Créativité et capacité d’adaptation</strong> comptent autant que la technique.
-</p>
+  {/* Vulnérabilités et complexité */}
+  <div className="flex items-center gap-2 mb-2">
+    <ListChecks className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Vulnerabilities & Method</span>
+  </div>
+  <p className="text-gray-300">
+    Vulnerabilities aren’t exotic or advanced: everything is covered in the CPTS Learning Path.
+    But the <strong>scale and density</strong> can mislead you.  
+    There aren’t real "rabbit holes" like in HTB Hard/Insane boxes, but the environment is so big you can lose hours if you’re not pragmatic.
+  </p>
 
-{/* Conseils de réussite */}
-<div className="flex items-center gap-2 mb-2">
-  <Brain className="w-6 h-6 text-violet-400" />
-  <span className="text-xl font-semibold text-violet-300">Pour réussir</span>
-</div>
-<div className="bg-violet-900/20 rounded-lg p-4">
-  <span className="text-gray-300">
-    Le learning path te prépare <strong>parfaitement</strong> — mais ne tombe pas dans l’automatisation ou la vision tunnel.<br />
-    <span className="font-semibold text-violet-400">Pense comme un attaquant. Déplace-toi latéralement. Reste focus. Sois méthodique.</span>
-  </span>
-</div>
+  {/* Gestion du temps et mentalité */}
+  <div className="flex items-center gap-2 mb-2">
+    <Clock className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Pacing & Mindset</span>
+  </div>
+  <p className="text-gray-300">
+    The exam lasts <strong>10 full days</strong>. I worked an average of <strong>7 hours per day</strong>.
+    Expect roadblocks — sometimes I was stuck for a day or more.  
+    When that happened, I stepped back, re-enumerated, and thought critically.  
+    You’re simulating the mindset of a hacker. <strong>Creativity and adaptability</strong> are as important as technical skill.
+  </p>
 
-{/* Rapport et reporting */}
-<div className="flex items-center gap-2 mb-2">
-  <FileText className="w-6 h-6 text-violet-400" />
-  <span className="text-xl font-semibold text-violet-300">Reporting</span>
-</div>
-<p className="text-gray-300">
-  Pour le rapport, j’ai utilisé <strong>SysReptor</strong> et exporté le tout en PDF pro et clean.<br/>
-  Je recommande vraiment cette méthode : c’est propre, pro, parfaitement aligné avec les attentes HTB.
-  Tu peux ajouter des annexes avec des preuves techniques (dump DC complet, analyse de politique de mot de passe type DPAT…) si pertinent.
-</p>
+  {/* Conseils de réussite */}
+  <div className="flex items-center gap-2 mb-2">
+    <Brain className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">How to Succeed</span>
+  </div>
+  <div className="bg-violet-900/20 rounded-lg p-4">
+    <span className="text-gray-300">
+      The Learning Path prepares you <strong>perfectly</strong> — but don’t rely on automation or tunnel vision.
+      <br />
+      <span className="font-semibold text-violet-400">Think like an attacker. Move laterally. Stay focused. Be methodical.</span>
+    </span>
+  </div>
 
+  {/* Rapport et reporting */}
+  <div className="flex items-center gap-2 mb-2">
+    <FileText className="w-6 h-6 text-violet-400" />
+    <span className="text-xl font-semibold text-violet-300">Reporting</span>
+  </div>
+  <p className="text-gray-300">
+    For the report, I used <strong>SysReptor</strong> and exported everything as a polished PDF.  
+    I strongly recommend this method — it’s clean, professional, and fits HTB’s expectations.
+    Optionally, you can include annexes with technical evidence like a <strong>full DC dump or password policy audit (e.g., DPAT analysis)</strong> if relevant.
+  </p>
+</div>
         </div>
         <div>
           <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
