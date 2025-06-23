@@ -39,14 +39,14 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
           {[
             'Introduction & Accroche',
-  'Stratégie d’Apprentissage Détaillée',
-  'Outils, Environnement & Prise de Notes',
-  'La Semaine d’Examen',
-  'Le Rapport de 190 Pages',
-  'Cheat-Sheet : Conseils & Astuces',
-  'Retour d’Expérience & Prochaines Étapes',
-  'Ressources Complémentaires & Remerciements',
-  'Conclusion & Motivation'
+            'Stratégie d’Apprentissage Détaillée',
+            'Outils, Environnement & Prise de Notes',
+            'La Semaine d’Examen',
+            'Le Rapport de 190 Pages',
+            'Cheat-Sheet : Conseils & Astuces',
+            'Retour d’Expérience & Prochaines Étapes',
+            'Ressources Complémentaires & Remerciements',
+            'Conclusion & Motivation'
           ].map((item, index) => (
             <div key={index} className="flex items-center gap-2 text-gray-400 hover:text-violet-400 transition-colors">
               <ArrowRight className="w-3 h-3" />
@@ -73,90 +73,82 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
           About Me
         </h3>
         <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-  {/* Parcours pro */}
+  {/* Professional Background */}
   <div className="flex items-center gap-3 mb-2">
     <BookOpen className="w-6 h-6 text-violet-400" />
     <h4 className="text-xl font-semibold text-violet-300">A Fresh Start</h4>
   </div>
   <p className="text-gray-300 text-lg">
-    <strong>Je suis français, actuellement en reconversion pour me lancer dans la cybersécurité.</strong>  
-    En septembre, j’attaque officiellement une alternance en informatique et réseaux, mais pour être honnête, mon parcours a commencé bien avant ça.
+    <strong>I'm French, currently switching careers to move into cybersecurity.</strong>
+    This September, I’ll officially start a work-study program in IT and networking, but honestly, my journey started well before that.
   </p>
 
-  {/* Métier précédent et déclic */}
+  {/* Previous job and trigger */}
   <div className="bg-violet-900/20 rounded-lg p-4 space-y-3">
     <div className="flex items-center gap-2">
       <Monitor className="w-6 h-6 text-violet-400" />
-      <span className="text-violet-300 font-semibold">Technicien Fibre Optique</span>
+      <span className="text-violet-300 font-semibold">Fiber Optic Technician</span>
     </div>
     <p className="text-gray-300">
-      Tirer des câbles, installer, répéter les mêmes gestes chaque jour. À force, j’ai eu l’impression de tourner en rond : aucun apprentissage, aucun avenir.
-      <span className="block font-semibold text-violet-400 mt-2">C’est ce qui m’a poussé à changer.</span>
+      Pulling cables, installing, repeating the same actions every day. After a while, I felt like I was going in circles—no learning, no future.
+      <span className="block font-semibold text-violet-400 mt-2">That’s what pushed me to change direction.</span>
     </p>
   </div>
 
-  {/* Parcours d'autoformation */}
+  {/* Self-taught journey */}
   <div className="flex items-center gap-2 mb-2">
     <Brain className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Parcours autodidacte</span>
+    <span className="text-xl font-semibold text-violet-300">Self-Taught Path</span>
   </div>
   <p className="text-gray-300">
-    Depuis neuf mois, je me forme seul quasiment tous les jours (6 à 7h/jour) :
+    For the past nine months, I’ve been self-studying nearly every day (6 to 7 hours/day):
   </p>
   <ul className="list-disc ml-8 text-gray-300 space-y-1">
-    <li>J’ai validé tous les parcours sur <strong>TryHackMe</strong></li>
-    <li>J’ai passé la certification <strong>eJPT</strong></li>
-    <li>Dernièrement, j’ai réussi la <strong>CPTS (Hack The Box)</strong></li>
+    <li>I completed all the learning paths on <strong>TryHackMe</strong></li>
+    <li>I passed the <strong>eJPT</strong> certification</li>
+    <li>Most recently, I earned the <strong>CPTS (Hack The Box)</strong></li>
   </ul>
   <p className="text-gray-300">
-    Pour moi, le but n’a jamais été de “collectionner” les certifs — mais d’<strong>apprendre pour de vrai</strong>, développer des compétences et me prouver que le travail paye vraiment.
+    For me, it was never about “collecting” certificates—but about <strong>real learning</strong>, building skills, and proving to myself that hard work really does pay off.
   </p>
 
-  {/* Esprit tryhard, outils et méthodo */}
+  {/* Tryhard mindset, tools & method */}
   <div className="flex items-center gap-2 mb-2">
     <FileText className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Esprit tryhard & outils</span>
+    <span className="text-xl font-semibold text-violet-300">Tryhard Mindset & Tools</span>
   </div>
   <p className="text-gray-300">
-    Je suis un vrai “tryharder” : quand un truc me motive, j’y vais à fond, sans compter.  
-    Je note tout, je structure, je vais au bout des choses :
+    I’m a real “tryharder”: when I’m motivated by something, I go all in.  
+    I write down everything, I structure it, I dig deep:
   </p>
   <ul className="list-disc ml-8 text-gray-300 space-y-1">
-    <li>Setup <strong>Exegol</strong> custom</li>
-    <li><strong>Obsidian</strong> au quotidien</li>
-    <li>Reporting avec <strong>SysReptor</strong> — même à l’entraînement</li>
-    <li>Jamais de raccourcis, jamais de copier-coller de write-up</li>
-    <li>Objectif : comprendre, pas juste reproduire</li>
+    <li>Custom <strong>Exegol</strong> setup</li>
+    <li>Using <strong>Obsidian</strong> daily</li>
+    <li>Reporting with <strong>SysReptor</strong>—even for training</li>
+    <li>No shortcuts, never copy-pasting write-ups</li>
+    <li>Goal: understand, not just reproduce</li>
   </ul>
 
-  {/* Pourquoi cet article */}
+  {/* Why this article */}
   <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
     <div className="flex items-center gap-2">
       <Users className="w-6 h-6 text-violet-400" />
-      <span className="text-violet-300 font-semibold text-lg">Pourquoi cet article</span>
+      <span className="text-violet-300 font-semibold text-lg">Why this article</span>
     </div>
     <p className="text-gray-300">
-      Quand je préparais la CPTS, le blog de  
+      While I was preparing for the CPTS, the blog by
       <a
         href="https://www.brunorochamoura.com/posts/cpts-tips/"
         target="_blank"
         className="text-violet-400 hover:underline font-semibold ml-1"
       >
         Bruno Rocha Moura
-      </a>  
-      m’a vraiment aidé. Ses conseils m’ont donné une vraie structure, ça m’a permis de garder le cap.<br />
-      Dans le même état d’esprit, j’écris cet article pour “rendre la pareille”.
-      <strong>Si tu te demandes si la CPTS vaut le coup ou que tu ne sais pas comment attaquer la prépa, j’espère que ça te donnera des repères.</strong>
+      </a>
+      really helped me out. His advice gave me real structure and helped me stay on track.<br />
+      In the same spirit, I’m writing this article to “pay it forward.”
+      <strong>If you’re wondering if the CPTS is worth it, or you don’t know how to start preparing, I hope this will give you some guidance.</strong>
     </p>
   </div>
-
-  {/* Valeur du partage */}
-  <p className="text-gray-400 text-base italic mt-2">
-    <span className="text-violet-400 font-semibold">Mon état d’esprit :</span>  
-    En cybersécurité, on progresse surtout parce qu’on s’aide entre nous — via les write-ups, les forums, les blogs, ou même Discord.  
-    Si ce post aide ne serait-ce qu’une personne à se sentir plus prête ou plus sereine, il aura servi à quelque chose.
-  </p>
-</div>
 
       </div>
 
