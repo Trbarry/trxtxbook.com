@@ -1341,154 +1341,150 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
 <div className="mt-10">
   <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
     <Code className="w-6 h-6" />
-    Walkthroughs vs. Findings
+    Walkthrough vs. Findings
   </h3>
   <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-    {/* Walkthrough definition */}
+    {/* Définition Walkthrough */}
     <div className="flex items-center gap-2 mb-2">
       <FileText className="w-5 h-5 text-violet-400" />
       <span className="text-xl font-semibold text-violet-300">Walkthrough</span>
     </div>
     <p className="text-gray-300">
-      The <strong>walkthrough</strong> is not just your internal exploitation.  
-      It’s a complete step-by-step guide that should allow your reviewer to reproduce the entire attack path —  
-      from the initial web interface to full domain compromise.
+      Le <strong>walkthrough</strong>, ce n’est pas juste ton exploitation interne.
+      C’est un guide étape par étape complet, qui doit permettre au relecteur de **reproduire tout le chemin d’attaque** —
+      depuis l’interface web initiale jusqu’à la compromission complète des domaines.
     </p>
     <p className="text-gray-300">
-      Think of it as a <strong>technical replay</strong> of your operation, as plain and direct as possible.  
-      No justifications, no theory — just actions, ordered logically.  
-      It must cover everything: initial attack surface, lateral movement, escalation, trust exploitation, external pivoting.
+      Considère-le comme un <strong>replay technique</strong> de ton opération, le plus simple et direct possible.
+      Pas de justifications, pas de théorie : uniquement des actions, classées logiquement.<br/>
+      Il doit tout couvrir : surface d’attaque initiale, déplacement latéral, élévation de privilèges, exploitation de la confiance, pivot externe.
     </p>
     <div className="bg-violet-900/20 rounded-lg p-4 border border-violet-700/30">
-      <h4 className="text-violet-400 text-xl font-semibold mb-3">✅ Example of Walkthrough Content</h4>
+      <h4 className="text-violet-400 text-xl font-semibold mb-3">✅ Exemple de contenu Walkthrough</h4>
       <ul className="list-disc list-inside text-white space-y-2">
-        <li>Identified login page at <code>/admin</code> → performed login bruteforce → found valid creds.</li>
-        <li>Logged in, found LFI via log injection → escalated to RCE.</li>
-        <li>Gained reverse shell as <code>www-data</code> → enumerated users → pivoted to internal host.</li>
-        <li>Compromised AD user via token abuse → escalated to Domain Admin.</li>
+        <li>Page de login trouvée sur <code>/admin</code> → brute-force → credentials valides trouvés.</li>
+        <li>Connexion, LFI via injection de logs → escalade en RCE.</li>
+        <li>Shell inversé obtenu en tant que <code>www-data</code> → énumération utilisateurs → pivot sur une machine interne.</li>
+        <li>Compte AD compromis par abus de token → escalade en Domain Admin.</li>
       </ul>
     </div>
-    {/* Findings definition */}
+    {/* Définition Findings */}
     <div className="flex items-center gap-2 mb-2 mt-6">
       <FileText className="w-5 h-5 text-violet-400" />
       <span className="text-xl font-semibold text-violet-300">Findings</span>
     </div>
     <p className="text-gray-300">
-      This is where your infosec brain shines.
-      Each finding is your chance to demonstrate understanding of vulnerabilities, their root causes, impacts, and remediation.
-      Sometimes, a single vulnerability leads to multiple findings (e.g. weak password policy after web vuln).
+      C’est là que tu dois montrer ta compréhension en sécurité.
+      Chaque finding est l’occasion de prouver que tu comprends les vulnérabilités, leur cause, leur impact, et les mesures à prendre.
+      Parfois, une vulnérabilité unique amène plusieurs findings (ex. : politique de mot de passe faible révélée après une faille web).
     </p>
     <ul className="list-disc list-inside text-white space-y-2">
-      <li><strong>Title:</strong> short and impactful (e.g., "Insecure Password Storage on Internal Application").</li>
-      <li><strong>Summary:</strong> what’s affected, how, and why it matters.</li>
-      <li><strong>Technical Details:</strong> screenshots, payloads, steps, tool output.</li>
-      <li><strong>Risk Analysis:</strong> CVSS-style reasoning or your own assessment.</li>
-      <li><strong>Remediation:</strong> clear, actionable suggestions.</li>
+      <li><strong>Titre :</strong> court et impactant (ex : “Stockage de mots de passe non sécurisé sur l’application interne”)</li>
+      <li><strong>Résumé :</strong> ce qui est affecté, comment, et pourquoi c’est important</li>
+      <li><strong>Détails techniques :</strong> captures, payloads, étapes, outputs d’outils</li>
+      <li><strong>Analyse de risque :</strong> raisonnement à la CVSS ou ton propre avis</li>
+      <li><strong>Remédiation :</strong> conseils clairs, exploitables immédiatement</li>
     </ul>
     <p className="text-gray-300">
-      These two sections — walkthrough and findings — are fundamentally different.
-      Walkthrough is factual and linear, findings are analytical and structured. Don’t mix them.
-      Respect their intent and your report will be powerful, clear, and professional.
+      Ces deux parties — walkthrough et findings — sont fondamentalement différentes.
+      Le walkthrough est factuel et linéaire, les findings sont analytiques et structurés. Ne mélange pas les deux.
+      Si tu respectes cette distinction, ton rapport sera clair, puissant et pro.
     </p>
   </div>
 </div>
 
-{/* --- Bloc : What I Included & Why --- */}
+{/* --- Bloc : Ce que j’ai inclus & pourquoi --- */}
 <div className="mt-10">
   <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
     <Lightbulb className="w-6 h-6" />
-    What I Included & Why
+    Ce que j’ai inclus & pourquoi
   </h3>
   <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
-    {/* Mindset */}
+    {/* Esprit */}
     <div className="flex items-center gap-2 mb-2">
       <BookOpen className="w-5 h-5 text-violet-400" />
-      <span className="text-xl font-semibold text-violet-300">Mindset: Certification, Not Just a Report</span>
+      <span className="text-xl font-semibold text-violet-300">État d’esprit : une certif, pas juste un rapport</span>
     </div>
     <p className="text-gray-300">
-      This isn’t just a report—it’s a certification exam.  
-      You’re not only demonstrating technical skills, but also your ability to <strong>document a pentest at the highest professional standard</strong>.
+      Ce n’est pas juste un rapport : c’est un examen de certification.<br/>
+      Tu dois prouver tes compétences techniques **et** ta capacité à <strong>documenter un pentest au plus haut niveau pro</strong>.
     </p>
-    {/* Maximum relevance */}
-    <h4 className="text-lg font-semibold text-violet-400">Show Everything (but only what matters)</h4>
+    {/* Pertinence max */}
+    <h4 className="text-lg font-semibold text-violet-400">Tout montrer (mais que ce qui compte)</h4>
     <p className="text-gray-300">
-      Your goal: <strong>maximum relevance, maximum detail, zero noise</strong>.  
-      Every finding was written with extreme precision.  
-      I reviewed every section <strong>multiple times</strong> to ensure it contributed meaningfully,  
-      could be understood standalone, and painted a clear attack narrative.
-      <br /><em>Would this help the Blue Team understand what happened? If not, remove it.</em>
+      Ton but : <strong>pertinence maximale, détails maximum, zéro bruit</strong>.<br/>
+      Chaque finding était écrit avec une extrême précision.<br/>
+      J’ai relu chaque section <strong>plusieurs fois</strong> pour m’assurer qu’elle apportait quelque chose,
+      pouvait être comprise seule, et racontait un chemin d’attaque cohérent.<br/>
+      <em>Est-ce que ça aiderait la Blue Team à comprendre ce qui s’est passé ? Si non, je retire.</em>
     </p>
     {/* Sanitize */}
-    <h4 className="text-lg font-semibold text-violet-400">🔐 Sanitize EVERYTHING</h4>
+    <h4 className="text-lg font-semibold text-violet-400">🔐 Tout anonymiser / nettoyer</h4>
     <p className="text-gray-300">
-      <strong>This is a security report. Never forget that.</strong>  
-      Even in a lab, treat it like a real-world client engagement:
+      <strong>C’est un rapport de sécurité. Ne l’oublie jamais.</strong><br/>
+      Même dans un lab, traite-le comme une vraie mission client :
     </p>
     <ul className="list-disc pl-6 text-gray-300">
-      <li>Hashes: 🔒 <strong>sanitized</strong></li>
-      <li>Internal usernames: 🔒 <strong>sanitized</strong></li>
-      <li>Internal IPs/domains: 🔒 <strong>sanitized</strong></li>
-      <li>Passwords: 🔒 <strong>sanitized or masked</strong></li>
-      <li>Screenshots: 🔒 <strong>blurred or redacted</strong></li>
+      <li>Hashes : 🔒 <strong>anonymisés</strong></li>
+      <li>Identifiants internes : 🔒 <strong>anonymisés</strong></li>
+      <li>IPs/domaines internes : 🔒 <strong>anonymisés</strong></li>
+      <li>Mots de passe : 🔒 <strong>anonymisés ou masqués</strong></li>
+      <li>Captures d’écran : 🔒 <strong>floutées ou caviardées</strong></li>
     </ul>
     <p className="text-gray-300">
-      ⚠️ A leaked report shouldn’t help an attacker reproduce the compromise. Prove you understand the <strong>responsibility</strong> of reporting.
+      ⚠️ Un rapport qui fuite ne doit jamais aider un attaquant à reproduire la compromission. Montre que tu as compris la notion de <strong>responsabilité</strong> dans le reporting.
     </p>
-    {/* Walkthrough linked to findings */}
-    <h4 className="text-lg font-semibold text-violet-400">Clear Walkthrough, Linked to Findings</h4>
+    {/* Lien findings/walkthrough */}
+    <h4 className="text-lg font-semibold text-violet-400">Walkthrough clair, findings liés</h4>
     <p className="text-gray-300">
-      My walkthrough was a <strong>step-by-step narrative</strong>, from the first scan to full AD compromise.
-      At every relevant point, I included direct links to related <strong>Findings</strong> for easy navigation.
-      This structure made the document easier for technical and non-technical readers.
+      Mon walkthrough était un <strong>récit étape par étape</strong>, du premier scan à la compromission totale de l’AD.<br/>
+      À chaque point clé, je mettais des liens directs vers les <strong>findings</strong> concernés pour naviguer facilement.
+      Cette structure rendait le doc accessible autant pour les profils techniques que non techniques.
     </p>
     {/* Pivoting */}
-    <h4 className="text-lg font-semibold text-violet-400">Pivoting & Visibility</h4>
+    <h4 className="text-lg font-semibold text-violet-400">Pivot & lisibilité</h4>
     <p className="text-gray-300">
-      Internal pivoting is <strong>one of the hardest parts</strong>.  
-      I documented every pivot (Ligolo-ng, tunnels, routes) clearly, with:
+      Le pivot interne, c’est <strong>un des points les plus durs</strong>.<br/>
+      J’ai documenté chaque pivot (Ligolo-ng, tunnels, routes) clairement, avec :
     </p>
     <ul className="list-disc pl-6 text-gray-300">
-      <li>Diagrams when needed</li>
-      <li>Short code blocks for interface config</li>
-      <li>Tables to track access progression</li>
+      <li>Schémas quand nécessaire</li>
+      <li>Petits extraits de config réseau</li>
+      <li>Tableaux de suivi de l’avancement</li>
     </ul>
     <p className="text-gray-300">
-      The goal: <strong>anyone skilled can reproduce your attack path</strong> without asking questions.
+      L’objectif : <strong>n’importe quel analyste peut rejouer tout le chemin d’attaque</strong> sans poser de questions.
     </p>
     {/* DPAT */}
-    <h4 className="text-lg font-semibold text-violet-400">Extra: Password Audit (DPAT)</h4>
+    <h4 className="text-lg font-semibold text-violet-400">En bonus : Audit de mots de passe (DPAT)</h4>
     <p className="text-gray-300">
-      If you manage to dump the DC, run a <strong>DPAT-style password audit</strong>.  
-      I included sanitized results in a ZIP with the PDF report:  
-      great to show post-exploitation analysis, weak policies, and real-world risk.
+      Si tu arrives à dumper le DC, lance un <strong>audit de mots de passe façon DPAT</strong>.<br/>
+      J’ai inclus les résultats anonymisés dans un ZIP joint au PDF du rapport :  
+      c’est excellent pour montrer l’analyse post-exploitation, les faiblesses de politique et le risque réel.
     </p>
     {/* Audience */}
-    <h4 className="text-lg font-semibold text-violet-400">Tailoring to the Audience</h4>
+    <h4 className="text-lg font-semibold text-violet-400">Adapter au public</h4>
     <p className="text-gray-300">
-      I adapted tone and structure by section:
+      J’ai adapté le ton et la structure selon la partie :
     </p>
     <ul className="list-disc pl-6 text-gray-300">
-      <li><strong>Walkthrough / Findings</strong>: highly technical, precise</li>
-      <li><strong>Assessment Overview & Recommendations</strong>: accessible, impact-focused</li>
+      <li><strong>Walkthrough / Findings</strong> : technique, précis</li>
+      <li><strong>Résumé et recommandations</strong> : vulgarisé, focus sur l’impact</li>
     </ul>
     <p className="text-gray-300">
-      This shows you can communicate with <strong>both technical and non-technical stakeholders</strong>.
+      Ça montre que tu sais communiquer avec <strong>des profils techniques et non techniques</strong>.
     </p>
     {/* Conclusion */}
-    <h4 className="text-lg font-semibold text-violet-400">Final Words</h4>
+    <h4 className="text-lg font-semibold text-violet-400">Derniers mots</h4>
     <p className="text-gray-300">
-      This isn’t about flexing.  
-      It’s about delivering a <strong>reproducible</strong>, <strong>professional</strong>, and <strong>secure</strong> pentest report.
-      <br />
-      Be rigorous, clear, and respectful of the responsibility that comes with this knowledge.
-      <br /><strong>And once again: Sanitize everything. Always.</strong>
+      Il ne s’agit pas d’étaler sa technique.<br/>
+      Le but, c’est de livrer un rapport <strong>reproductible</strong>, <strong>pro</strong> et <strong>sécure</strong>.<br/>
+      Sois rigoureux, clair, et garde en tête la responsabilité qui va avec cette connaissance.<br/>
+      <strong>Et encore une fois : anonymise tout. Toujours.</strong>
     </p>
   </div>
 </div>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   
   {/* Tips & Tricks Cheat-Sheet */}
