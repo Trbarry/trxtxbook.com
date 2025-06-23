@@ -1164,6 +1164,7 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
   Tu peux ajouter des annexes avec des preuves techniques (dump DC complet, analyse de politique de mot de passe type DPAT…) si pertinent.
 </p>
 
+</div>
         </div>
         <div>
           <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
