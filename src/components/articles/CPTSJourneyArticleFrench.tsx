@@ -551,17 +551,17 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
       <div>
         <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
           <Zap className="w-6 h-6" />
-          Sprint final : 10 jours
+          Sprint final : 10 jours
         </h3>
         <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
 {/* Préparation finale, break avant examen */}
 <div className="flex items-center gap-3 mb-2">
   <Clock className="w-6 h-6 text-violet-400" />
-  <h4 className="text-xl font-semibold text-violet-300">Jour -10 : Pause stratégique</h4>
+  <h4 className="text-xl font-semibold text-violet-300">Jour -10 : Pause stratégique</h4>
 </div>
 <p className="text-gray-300 text-lg">
   À <strong>J-10</strong>, j’avais déjà terminé tout le <strong>learning path</strong>, les <strong>boxes HTB</strong> et l’intégralité de la <strong>playlist IppSec</strong>.<br/>
-  Donc, j’ai décidé de vraiment lever le pied : <strong>3 à 4 jours complets</strong> de repos total.
+  Donc, j’ai décidé de vraiment lever le pied : <strong>3 à 4 jours complets</strong> de repos total.
 </p>
 
 {/* Importance du repos */}
@@ -613,17 +613,17 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
       <div>
         <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
           <Shield className="w-6 h-6" />
-          Exegol : Mon environnement d’attaque
+          Exegol : Mon environnement d’attaque
         </h3>
         {/* --- Bloc Exegol --- */}
 <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
 {/* Exegol, le choix de l'environnement */}
 <div className="flex items-center gap-3 mb-2">
   <Cpu className="w-6 h-6 text-violet-400" />
-  <h4 className="text-xl font-semibold text-violet-300">Exegol : le top du toolkit offensif 🇫🇷</h4>
+  <h4 className="text-xl font-semibold text-violet-300">Exegol : le top du toolkit offensif 🇫🇷</h4>
 </div>
 <p className="text-gray-300">
-  Je le dis haut et fort : <strong>Exegol, c’est français. COCORICO 🇫🇷</strong><br  />
+  Je le dis haut et fort : <strong>Exegol, c’est français. COCORICO 🇫🇷</strong><br  />
 <div className="flex justify-center my-6">
   <img
     src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/oss117meme.webp"
@@ -631,71 +631,66 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
     className="rounded-2xl shadow-xl max-w-md"
   />
 </div>
-  Et Kali ? T’es <em>mauvais</em>, comme Jack dans OSS 117. 🕶️ Voilà, c’est dit.
+  Et Kali ? T’es <em>mauvais</em>, comme Jack dans OSS 117. 🕶️ Voilà, c’est dit.
 </p>
 <p className="text-gray-300">
   Blague à part, passer de Kali à Exegol a été l’une des meilleures décisions de ma prépa CPTS.
   <strong>Exegol, c’est un environnement offensif basé sur Docker</strong>, tout préinstallé, tout testé.
-  Stable, léger, déployé en 2 secondes chrono — tu veux un environnement tout frais ? Boom, c’est prêt.
+  Stable, léger, déployé en 2 secondes chrono — tu veux un environnement tout frais ? Boom, c’est prêt.
 </p>
 <p className="text-gray-300">
   J’ai utilisé Exegol comme <strong>mon principal environnement offensif</strong> tout au long du cursus et de l’examen.
-  Mon setup : <strong>Arch Linux + Exegol</strong>. Performance, maîtrise, fiabilité.
+  Mon setup : <strong>Arch Linux + Exegol</strong>. Performance, maîtrise, fiabilité.
 </p>
 
 {/* Outils clés dans Exegol */}
 <div className="bg-violet-900/20 rounded-lg p-4">
   <Terminal className="w-5 h-5 text-violet-400 inline-block mb-1 mr-2" />
-  <span className="font-semibold text-violet-400">Outils phares d’Exegol :</span>
+  <span className="font-semibold text-violet-400">Outils phares d’Exegol :</span>
   <ul className="list-disc ml-6 text-gray-300 mt-2 space-y-1">
-    <li><strong>Ligolo-ng</strong> : Pour le tunneling et le pivoting sur des réseaux internes. Indispensable en lateral movement.</li>
-    <li><strong>NetExec</strong> : Parfait pour le credential spraying, l’énumération SMB et la gestion des partages exposés.</li>
-    <li><strong>FFuf</strong> : Fuzz web rapide et précis, pour l’énumération comme l’exploitation.</li>
-    <li><strong>Burp Suite</strong> : Attaques web, contournement CSRF, inspection de cookies, PoC XSS.</li>
-    <li><strong>BloodyAD</strong> : Enum AD simple, rapide, plus efficace que BloodHound dans plein de cas.</li>
-    <li><strong>Impacket Tools</strong> : <code>secretsdump.py</code>, <code>smbexec.py</code>, <code>wmiexec.py</code> — indispensables sur Windows.</li>
-    <li><strong>smbserver.py</strong> : Pour servir des payloads ou récupérer du loot pendant l’exam.</li>
-    <li><strong>Nmap</strong> : Rapide, fiable, tous les scripts prêts dès le départ.</li>
+    <li><strong>Ligolo-ng</strong> : Pour le tunneling et le pivoting sur des réseaux internes. Indispensable en lateral movement.</li>
+    <li><strong>NetExec</strong> : Parfait pour le credential spraying, l’énumération SMB et la gestion des partages exposés.</li>
+    <li><strong>FFuf</strong> : Fuzz web rapide et précis, pour l’énumération comme l’exploitation.</li>
+    <li><strong>Burp Suite</strong> : Attaques web, contournement CSRF, inspection de cookies, PoC XSS.</li>
+    <li><strong>BloodyAD</strong> : Enum AD simple, rapide, plus efficace que BloodHound dans plein de cas.</li>
+    <li><strong>Impacket Tools</strong> : <code>secretsdump.py</code>, <code>smbexec.py</code>, <code>wmiexec.py</code> — indispensables sur Windows.</li>
+    <li><strong>smbserver.py</strong> : Pour servir des payloads ou récupérer du loot pendant l’exam.</li>
+    <li><strong>Nmap</strong> : Rapide, fiable, tous les scripts prêts dès le départ.</li>
   </ul>
 </div>
 
-{/* Pourquoi Exegol est incontournable */}
-<p className="text-gray-300">
-  Ce qui fait la force d’Exegol : <strong>tu gagnes un temps fou</strong>.
-  Pas d’install, pas de prise de tête. Tout est déjà configuré, prêt pour l’attaque.
-  <span className="font-semibold text-violet-400">Quand t’es au cœur d’un exam CPTS de 10 jours, ça compte plus que tout.</span>
-</p>
+  {/* Pourquoi Exegol est incontournable */}
+  <p className="text-gray-300">
+    What makes Exegol shine: <strong>it saves time and headaches</strong>.  
+    No installation, no troubleshooting. Everything’s preconfigured, organized, and ready for offensive ops.  
+    <span className="font-semibold text-violet-400">When you're deep into a 10-day exam grind, that matters more than anything.</span>
+  </p>
 
-{/* Atouts majeurs Exegol */}
-<div className="bg-violet-900/20 rounded-lg p-4">
-  <span className="font-semibold text-violet-400">✨ Pourquoi je ne reviendrai jamais en arrière :</span>
-  <ul className="list-disc ml-6 text-gray-300 mt-2 space-y-1">
-    <li>Lancement en quelques secondes avec Docker, sans polluer ta machine hôte.</li>
-    <li>Zero crash, aucun bug chelou de package — rien à voir avec Kali après chaque <code>apt upgrade</code>.</li>
-    <li>Structure parfaite pour prise de notes, screenshots, hébergement de payloads et logs.</li>
-    <li>Ça fait pro, pas “distro de hobbyiste”.</li>
-  </ul>
-</div>
-
-<p className="text-gray-300">
-  Et au cas où tu l’aurais raté : <strong>c’est français 🇫🇷</strong>.<br/>
-  Si tu veux voir le détail du setup, du workflow et pourquoi je ne reviendrai jamais sur Kali, lis mon article :<br />
-  <a
-    href="https://trxtxbook.com/articles/exegol-docker"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-violet-400 underline hover:text-violet-300"
-  >
-    Exegol : Le toolkit ultime pour la CPTS
-  </a>
-  .
-</p>
-</div>
-      </div>
-    </div>
+  {/* Atouts majeurs Exegol */}
+  <div className="bg-violet-900/20 rounded-lg p-4">
+    <span className="font-semibold text-violet-400">✨ Why I’ll never go back:</span>
+    <ul className="list-disc ml-6 text-gray-300 mt-2 space-y-1">
+      <li>Launches in seconds with Docker, without polluting your host system.</li>
+      <li>Zero crash, zero weird package issues — unlike Kali after every <code>apt upgrade</code>.</li>
+      <li>Perfect structure for notetaking, screenshots, payload hosting, and log retention.</li>
+      <li>Feels like a professional toolkit, not a hobbyist’s distro.</li>
+    </ul>
   </div>
-</section>
 
+  <p className="text-gray-300">
+    And did I mention? <strong>It’s French 🇫🇷</strong>.  
+    If you're curious about setup, workflow and why I’ll never go back to Kali, check my article:<br />
+    <a
+      href="https://trxtxbook.com/articles/exegol-docker"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-violet-400 underline hover:text-violet-300"
+    >
+      Exegol: The Ultimate CPTS Toolkit
+    </a>
+    .
+  </p>
+</div>
 
 {/* --- Bloc Obsidian & SysReptor --- */}
 <div className="mt-10">
