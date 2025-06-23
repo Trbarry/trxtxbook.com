@@ -1225,87 +1225,84 @@ export const CPTSJourneyArticleFrench: React.FC = () => {
 
 
   {/* La vraie méthode qui marche */}
-  <div className="flex items-center gap-2 mb-2">
-    <ListChecks className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">The Real-Time Trigger-Based Method</span>
-  </div>
-  <div className="bg-violet-900/20 rounded-lg p-4">
-    <span className="text-gray-300">
-      What really works is the <strong>real-time trigger-based approach</strong> — every time you discover something (a port, a user, a foothold, a flag…), take a few seconds to document it <em>immediately</em>.<br/>
-      <span className="block mt-1 font-semibold text-violet-400">WRITE YOUR REPORT IN REAL-TIME.</span>
-    </span>
-  </div>
-
-  {/* ChatGPT pour accélérer la rédaction */}
-  <div className="flex items-center gap-2 mb-2">
-    <Zap className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Using ChatGPT (the Right Way)</span>
-  </div>
-  <p className="text-gray-300">
-    💡 Yes, I used <strong>ChatGPT</strong> to help speed up some parts of the writing (especially impact/mitigation sections),  
-    but I always <strong>reviewed and rewrote everything</strong> so it matched my style and findings.
-  </p>
-
-  {/* Retour d’expérience sur le déroulé des flags */}
-  <div className="flex items-center gap-2 mb-2">
-    <Brain className="w-6 h-6 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Progress & Mental Game</span>
-  </div>
-  <p className="text-gray-300">
-    In terms of progress, the first days were fast — I gained solid access early and moved forward smoothly until I hit <strong>flag 9</strong>.
-    From there, things got tougher. What helped was stepping back, <strong>re-enumerating</strong>, and reanalyzing everything.  
-    That’s how I unlocked the next steps.
-  </p>
-  <p className="text-gray-300">
-    The same happened with <strong>flag 12</strong>. There’s no shame in going backward to move forward.  
-    The content is dense, and it’s stressful to have only 9 flags by Day X.  
-    <span className="font-semibold text-violet-400">Don’t panic — stay calm, think smart, and keep moving.</span>
-  </p>
+<div className="flex items-center gap-2 mb-2">
+  <ListChecks className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">La méthode trigger-based en temps réel</span>
 </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<div className="bg-violet-900/20 rounded-lg p-4">
+  <span className="text-gray-300">
+    Ce qui fonctionne vraiment, c’est l’approche <strong>“trigger-based” en temps réel</strong> : chaque fois que tu découvres quelque chose (un port, un utilisateur, un accès, un flag…), prends quelques secondes pour le documenter <em>immédiatement</em>.<br/>
+    <span className="block mt-1 font-semibold text-violet-400">RÉDIGE TON RAPPORT EN TEMPS RÉEL.</span>
+  </span>
+</div>
 
-  {/* The 190-Page Report */}
-  <section className="mb-16">
-    <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
-      <div className="flex items-center gap-3 mb-8">
-        <FileText className="w-8 h-8 text-violet-400" />
-        <h2 className="text-3xl font-bold">The 190-Page Report</h2>
-      </div>
-      <div className="space-y-8">
-        <div>
-          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
-            <Clock className="w-6 h-6" />
-            Real-Time Reporting Strategy
-          </h3>
-          {/* --- Bloc : Real-Time Reporting Workflow --- */}
+{/* ChatGPT pour accélérer la rédaction */}
+<div className="flex items-center gap-2 mb-2">
+  <Zap className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Utiliser ChatGPT (de la bonne façon)</span>
+</div>
+<p className="text-gray-300">
+  💡 Oui, j’ai utilisé <strong>ChatGPT</strong> pour accélérer certains passages (surtout l’impact et les recommandations),  
+  mais j’ai toujours <strong>relu et réécrit chaque partie</strong> pour coller à mon style et à ce que j’avais vraiment trouvé.
+</p>
+
+{/* Retour d’expérience sur le déroulé des flags */}
+<div className="flex items-center gap-2 mb-2">
+  <Brain className="w-6 h-6 text-violet-400" />
+  <span className="text-xl font-semibold text-violet-300">Progression & mental</span>
+</div>
+<p className="text-gray-300">
+  Sur la progression : les premiers jours ont été rapides — j’ai eu un bon accès d’entrée et j’ai avancé sans accroc jusqu’au <strong>flag 9</strong>.
+  À partir de là, ça s’est corsé. Ce qui m’a aidé, c’est de prendre du recul, <strong>re-énumérer</strong>, tout reposer à plat.
+  C’est comme ça que j’ai débloqué la suite.
+</p>
+<p className="text-gray-300">
+  Même chose pour le <strong>flag 12</strong>. Aucun problème à revenir en arrière pour avancer.
+  Le contenu est dense et c’est stressant d’avoir “seulement” 9 flags au bout de X jours.
+  <span className="font-semibold text-violet-400">Ne panique pas : reste calme, réfléchis bien, continue d’avancer.</span>
+</p>
+</div>
+
+{/* --- Bloc : Stratégie de reporting en temps réel --- */}
+<section className="mb-16">
+  <div className="bg-[#1a1a1f] p-8 rounded-lg border border-violet-900/20">
+    <div className="flex items-center gap-3 mb-8">
+      <FileText className="w-8 h-8 text-violet-400" />
+      <h2 className="text-3xl font-bold">Le rapport de 190 pages</h2>
+    </div>
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+          <Clock className="w-6 h-6" />
+          Stratégie de reporting en temps réel
+        </h3>
+        {/* --- Bloc : workflow reporting temps réel --- */}
 <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
   <div className="flex items-center gap-3 mb-2">
     <FileText className="w-6 h-6 text-violet-400" />
-    <h4 className="text-xl font-semibold text-violet-300">Real-Time Reporting Workflow</h4>
+    <h4 className="text-xl font-semibold text-violet-300">Workflow de reporting en temps réel</h4>
   </div>
   <p className="text-gray-300">
-    During my CPTS exam, I initially planned to write the report every evening. <strong>Big mistake.</strong>  
-    With the mental fatigue and the need to keep momentum, it quickly became unsustainable.
-    That’s when I decided to apply a <strong>real-time reporting workflow</strong>, and it made a massive difference.
+    Pendant l’examen CPTS, j’avais d’abord prévu d’écrire le rapport chaque soir. <strong>Grosse erreur.</strong>
+    Avec la fatigue mentale et l’envie de garder le rythme, ça ne tenait pas sur la durée.
+    J’ai alors adopté une <strong>méthode de reporting en temps réel</strong>, et ça a tout changé.
   </p>
 
   <div className="flex items-center gap-2 mb-2">
     <ListChecks className="w-5 h-5 text-violet-400" />
-    <span className="text-xl font-semibold text-violet-300">Trigger-Based Strategy</span>
+    <span className="text-xl font-semibold text-violet-300">Stratégie “trigger-based”</span>
   </div>
   <p className="text-gray-300">
-    As soon as I discovered something relevant (new service, credentials, shell…),  
-    I immediately documented it in <strong>SysReptor</strong> and took supporting notes in <strong>Obsidian</strong>.  
-    This kept everything fresh—never had to backtrack through a mountain of logs.
+    Dès que je découvrais quelque chose d’important (nouveau service, creds, shell…),  
+    je le documentais tout de suite dans <strong>SysReptor</strong> et je prenais des notes complémentaires dans <strong>Obsidian</strong>.<br/>
+    Tout restait frais dans ma tête : jamais eu besoin de retourner fouiller dans 200 logs plus tard.
   </p>
   <p className="text-gray-300">
-    For example, after compromising a user and gaining access to a shared folder,  
-    I opened SysReptor, created a <strong>Finding</strong>, linked the vulnerable service, inserted steps, and dropped the screenshot.  
-    No “I’ll do it later.” I moved on with a clean state of mind.
+    Par exemple, après avoir compromis un user et eu accès à un dossier partagé,  
+    j’ouvrais SysReptor, créais une entrée <strong>Finding</strong>, reliais le service vulnérable, mettais les étapes, la capture…  
+    Pas de “je ferai ça plus tard”. Je pouvais avancer l’esprit libre.
   </p>
+
 
   <div className="flex items-center gap-2 mb-2">
     <BookOpen className="w-5 h-5 text-violet-400" />
