@@ -16,6 +16,15 @@ export default {
           800: '#5b21b6',
           900: '#4c1d95',
         },
+        // Ajout du fond sombre global
+        'night-900': '#0a0a0f',
+      },
+      backgroundImage: {
+        'halo-violet': `
+          radial-gradient(circle at 50% 20%, rgba(139, 92, 246, 0.12), transparent 70%),
+          radial-gradient(circle at 90% 10%, rgba(139, 92, 246, 0.06), transparent 40%),
+          radial-gradient(ellipse at 10% 90%, rgba(139, 92, 246, 0.08), transparent 40%)
+        `,
       },
       fontFamily: {
         mono: ['JetBrains Mono', 'monospace'],
