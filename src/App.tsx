@@ -39,21 +39,26 @@ import { CPTSJourneyArticlePage } from './pages/CPTSJourneyArticlePage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
 import { SitemapGeneratorPage } from './pages/SitemapGeneratorPage';
 
+// Animated background
+import { AnimatedBackground } from "./components/AnimatedBackground";
+
 function App() {
-  // State
   const showCyberCharacter = false;
   const [activeSection, setActiveSection] = useState('home');
   const [isLoaded, setIsLoaded] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-  
-  // Effects
+
   useEffect(() => {
     setIsLoaded(true);
   }, []);
 
   return (
     <Router>
-      <div className="min-h-screen bg-[#0a0a0f] text-gray-100 cyber-theme">
+      <div className="min-h-screen relative text-gray-100 cyber-theme overflow-hidden">
+        
+        {/* Fond animé */}
+        <AnimatedBackground />
+
         {/* SEO Head - Global */}
         <SEOHead />
         
@@ -67,64 +72,36 @@ function App() {
           activeSection={activeSection}
         />
 
-        {/* Interactive Elements */}
         {showCyberCharacter && <CyberCharacter />}
 
         <MouseTrail />
 
         {/* Routes */}
         <Routes>
-          {/* Home Page */}
           <Route path="/" element={
             <>
               <ScrollMenu activeSection={activeSection} setActiveSection={setActiveSection} />
               <div id="home">
                 <Hero isLoaded={isLoaded} setShowProfile={setShowProfile} />
               </div>
-              <ScrollReveal>
-                <div id="stats">
-                  <Stats />
-                </div>
-              </ScrollReveal>
-              <ScrollReveal>
-                <div id="formation">
-                  <Formation />
-                </div>
-              </ScrollReveal>
-              <ScrollReveal>
-                <div id="projects">
-                  <Projects />
-                </div>
-              </ScrollReveal>
-              <ScrollReveal>
-                <div id="writeups">
-                  <Writeups />
-                </div>
-              </ScrollReveal>
-              <ScrollReveal>
-                <div id="contact">
-                  <Contact />
-                </div>
-              </ScrollReveal>
+              <ScrollReveal><div id="stats"><Stats /></div></ScrollReveal>
+              <ScrollReveal><div id="formation"><Formation /></div></ScrollReveal>
+              <ScrollReveal><div id="projects"><Projects /></div></ScrollReveal>
+              <ScrollReveal><div id="writeups"><Writeups /></div></ScrollReveal>
+              <ScrollReveal><div id="contact"><Contact /></div></ScrollReveal>
             </>
           } />
-
-          {/* Content Pages */}
           <Route path="/writeups" element={<WriteupsList />} />
           <Route path="/writeups/:slug" element={<WriteupPage />} />
           <Route path="/writeups/dog" element={<DogWriteupPage />} />
           <Route path="/projects" element={<ProjectsList />} />
           <Route path="/certifications" element={<CertificationsList />} />
-
-          {/* Article Pages */}
           <Route path="/articles/smb-server" element={<ArticlePage />} />
           <Route path="/articles/ad-network" element={<ADArticlePage />} />
           <Route path="/articles/steam-deck-kali" element={<SteamDeckArticlePage />} />
           <Route path="/articles/exegol-docker" element={<ExegolArticlePage />} />
           <Route path="/articles/linux-mint-revival" element={<LinuxMintArticlePage />} />
           <Route path="/articles/cpts-journey" element={<CPTSJourneyArticlePage />} />
-
-          {/* Admin Pages */}
           <Route path="/admin/analytics" element={<AnalyticsPage />} />
           <Route path="/admin/sitemap-generator" element={<SitemapGeneratorPage />} />
         </Routes>
@@ -132,7 +109,6 @@ function App() {
         {/* Footer */}
         <Footer />
 
-        {/* Modals */}
         {showProfile && <ProfileModal onClose={() => setShowProfile(false)} />}
       </div>
     </Router>
