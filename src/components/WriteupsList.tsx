@@ -1,193 +1,66 @@
 import React, { useState, useEffect } from 'react';
-import { Target, Search, Filter, Tag, Calendar, Lock, Shield } from 'lucide-react';
+import { 
+  Search, 
+  Target, 
+  Calendar, 
+  Terminal, 
+  Lock, 
+  Hash, 
+  FileWarning, 
+  Filter, 
+  Shield,
+  ArrowRight,
+  AlertCircle
+} from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { Writeup } from '../types/writeup';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { SEOHead } from './SEOHead';
 
-// Composant pour les tags avec masquage complet
-const SecureTag: React.FC<{
-  tag: string;
-  isBlurred: boolean;
-  variant?: 'default' | 'active' | 'active-green';
-}> = ({ tag, isBlurred, variant = 'default' }) => {
-  const styles = {
-    default: 'bg-[#2a2a2f] text-gray-300',
-    active: 'bg-yellow-500/10 text-yellow-300',
-    'active-green': 'bg-green-500/10 text-green-300'
-  };
-
-  if (isBlurred) {
-    return (
-      <div className={`inline-flex items-center gap-1 px-2 py-1 rounded ${styles[variant]}`}>
-        <Tag className="w-3 h-3" />
-        <div className="w-12 h-3 bg-current opacity-50 rounded" />
-      </div>
-    );
-  }
-
-  return (
-    <div className={`inline-flex items-center gap-1 px-2 py-1 rounded ${styles[variant]}`}>
-      <Tag className="w-3 h-3" />
-      <span>{tag}</span>
-    </div>
-  );
-};
-
-const getWriteupImage = (writeup: Writeup) => {
-  if (writeup.slug === 'hackthebox-cat-analysis') {
-    return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
-  }
-  if (writeup.slug === 'hackthebox-dog') {
-    return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
-  }
-  return "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80";
-};
-
-// Composant pour la carte de write-up
-const WriteupCard: React.FC<{
-  writeup: Writeup;
-  onClick: () => void;
-}> = ({ writeup, onClick }) => {
-  const isActiveCat = writeup.slug === 'hackthebox-cat-analysis';
-  const isActiveDog = writeup.slug === 'hackthebox-dog';
-  const isActive = isActiveCat || isActiveDog;
-
-  const getDifficultyColor = (difficulty: string): string => {
-    switch (difficulty.toLowerCase()) {
-      case 'facile': return 'bg-green-500/20 text-green-300';
-      case 'moyen': return 'bg-yellow-500/20 text-yellow-300';
-      default: return 'bg-red-500/20 text-red-300';
-    }
-  };
-
-  const getActiveStyles = () => {
-    if (isActiveCat) {
-      return {
-        border: 'border-yellow-500/20 hover:border-yellow-500/50',
-        bg: 'bg-yellow-500/10',
-        text: 'text-yellow-500',
-        iconColor: 'text-yellow-500'
-      };
-    }
-    if (isActiveDog) {
-      return {
-        border: 'border-green-500/20 hover:border-green-500/50',
-        bg: 'bg-green-500/10',
-        text: 'text-green-500',
-        iconColor: 'text-green-500'
-      };
-    }
-    return {
-      border: 'border-violet-900/20 hover:border-violet-500/50',
-      bg: 'bg-violet-500/10',
-      text: 'text-violet-300',
-      iconColor: 'text-violet-400'
-    };
-  };
-
-  const styles = getActiveStyles();
-
-  const formatDate = (dateString: string): string => {
-    return new Date(dateString).toLocaleDateString('fr-FR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
-  return (
-    <div
-      onClick={onClick}
-      className={`group bg-[#1a1a1f] rounded-lg border transition-all duration-300 cursor-pointer
-                transform hover:-translate-y-1 overflow-hidden ${styles.border}`}
-    >
-      {/* Image de couverture */}
-      <div className="relative h-48 overflow-hidden">
-        <img
-          src={getWriteupImage(writeup)}
-          alt={writeup.title}
-          className={`w-full h-full object-cover transition-transform duration-500
-                   group-hover:scale-105 ${isActive ? 'blur-sm' : ''}`}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1f] via-[#1a1a1f]/50 to-transparent" />
-        
-        {isActive && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className={`${styles.bg} p-3 rounded-full transform transition-transform duration-300 group-hover:scale-110`}>
-              <Lock className={`w-8 h-8 ${styles.iconColor}`} />
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Contenu */}
-      <div className="p-6 space-y-4">
-        <div className="flex justify-between items-start">
-          <h3 className={`text-xl font-semibold ${styles.text}`}>
-            {writeup.title}
-          </h3>
-          <div className={`flex items-center gap-2 px-2 py-1 rounded text-xs ${styles.bg} ${styles.text}`}>
-            <Shield className="w-3 h-3" />
-            <span>{isActive ? 'Active' : writeup.difficulty}</span>
-          </div>
-        </div>
-
-        <p className="text-gray-400 text-sm line-clamp-2">
-          {isActive 
-            ? "Write-up temporairement indisponible - Machine active sur HackTheBox"
-            : writeup.description}
-        </p>
-
-        {/* Tags avec masquage complet */}
-        <div className="flex flex-wrap gap-2">
-          {writeup.tags.map((tag, index) => (
-            <SecureTag
-              key={index}
-              tag={tag}
-              isBlurred={isActive}
-              variant={isActiveDog ? 'active-green' : isActiveCat ? 'active' : 'default'}
-            />
-          ))}
-        </div>
-
-        {/* Footer */}
-        <div className="flex justify-between items-center text-sm text-gray-500 pt-2">
-          <div className="flex items-center gap-2">
-            <Calendar className="w-4 h-4" />
-            <span>{formatDate(writeup.created_at)}</span>
-          </div>
-          <div className={`px-2 py-1 rounded flex items-center gap-2 ${styles.bg} ${styles.text}`}>
-            <Target className="w-3 h-3" />
-            <span>{writeup.points} pts</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Composant principal
 export const WriteupsList: React.FC = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
   const [writeups, setWriteups] = useState<Writeup[]>([]);
+  const [filteredWriteups, setFilteredWriteups] = useState<Writeup[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState<string>('all');
-  const [selectedDifficulty, setSelectedDifficulty] = useState<string>('all');
+  const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchWriteups();
-    
-    const params = new URLSearchParams(location.search);
-    const platformParam = params.get('platform');
-    if (platformParam) {
-      setSelectedPlatform(platformParam);
+  }, []);
+
+  // Filtrage dynamique
+  useEffect(() => {
+    let results = writeups;
+
+    // Filtre Recherche
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      results = results.filter(w => 
+        w.title.toLowerCase().includes(query) || 
+        w.description?.toLowerCase().includes(query) ||
+        w.tags?.some(tag => tag.toLowerCase().includes(query))
+      );
     }
-  }, [location]);
+
+    // Filtre Plateforme
+    if (selectedPlatform !== 'all') {
+      results = results.filter(w => {
+        if (selectedPlatform === 'htb') return w.slug.includes('hackthebox');
+        if (selectedPlatform === 'thm') return w.slug.includes('tryhackme');
+        if (selectedPlatform === 'rootme') return w.slug.includes('root-me');
+        return true;
+      });
+    }
+
+    setFilteredWriteups(results);
+  }, [searchQuery, selectedPlatform, writeups]);
 
   const fetchWriteups = async () => {
     try {
+      setError(null);
       const { data, error } = await supabase
         .from('writeups')
         .select('*')
@@ -196,116 +69,204 @@ export const WriteupsList: React.FC = () => {
 
       if (error) throw error;
       setWriteups(data || []);
-    } catch (error) {
-      console.error('Error fetching writeups:', error);
+      setFilteredWriteups(data || []);
+    } catch (err: any) {
+      console.error('Error fetching writeups:', err);
+      setError('Impossible de charger les archives. Vérifiez votre connexion.');
     } finally {
       setLoading(false);
     }
   };
 
-  const handlePlatformChange = (platform: string) => {
-    setSelectedPlatform(platform);
-    const params = new URLSearchParams(location.search);
-    if (platform === 'all') {
-      params.delete('platform');
-    } else {
-      params.set('platform', platform);
-    }
-    navigate({ search: params.toString() });
+  const getDifficultyStyles = (difficulty: string) => {
+    const d = difficulty?.toLowerCase() || '';
+    if (d.includes('easy') || d.includes('facile')) return 'text-green-400 border-green-500/20 bg-green-500/5';
+    if (d.includes('medium') || d.includes('moyen')) return 'text-orange-400 border-orange-500/20 bg-orange-500/5';
+    if (d.includes('hard') || d.includes('difficile') || d.includes('insane')) return 'text-red-500 border-red-500/20 bg-red-500/5';
+    return 'text-gray-400 border-gray-500/20 bg-gray-500/5';
   };
 
-  const filteredWriteups = writeups.filter(writeup => {
-    const matchesSearch = writeup.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         writeup.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         writeup.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesPlatform = selectedPlatform === 'all' || writeup.platform.toLowerCase() === selectedPlatform;
-    const matchesDifficulty = selectedDifficulty === 'all' || writeup.difficulty === selectedDifficulty;
-    
-    return matchesSearch && matchesPlatform && matchesDifficulty;
-  });
+  const getPlatformLabel = (slug: string) => {
+    if (slug.includes('hackthebox')) return 'HackTheBox';
+    if (slug.includes('tryhackme')) return 'TryHackMe';
+    if (slug.includes('root-me')) return 'Root-Me';
+    return 'CTF';
+  };
 
-  const platforms = ['all', ...new Set(writeups.map(w => w.platform.toLowerCase()))];
-  const difficulties = ['all', ...new Set(writeups.map(w => w.difficulty))];
-
-  const handleWriteupClick = (writeup: Writeup) => {
-    const isActiveCat = writeup.slug === 'hackthebox-cat-analysis';
-    const isActiveDog = writeup.slug === 'hackthebox-dog';
-    
-    if (isActiveCat || isActiveDog) {
-      // Stay on the current page for active write-ups
-      return;
-    }
-    
-    navigate(`/writeups/${writeup.slug}`);
+  const getWriteupImage = (writeup: Writeup) => {
+    if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
+    if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
+    return "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80";
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-20 bg-[#0a0a0f]">
-      <div className="container mx-auto px-6">
-        {/* En-tête avec filtres */}
-        <div className="flex items-center justify-between mb-12">
-          <h1 className="text-3xl font-bold flex items-center gap-3">
-            <Target className="w-8 h-8 text-violet-500" />
-            Write-ups CTF
-          </h1>
-          <div className="flex gap-4">
-            <div className="relative">
-              <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Rechercher..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-[#1a1a1f] rounded-lg border border-violet-900/20 
-                         focus:border-violet-500/50 focus:outline-none transition-colors"
-              />
+    <>
+      <SEOHead 
+        title="Archives Write-ups & CTF | Tristan Barry"
+        description="Base de connaissances techniques : rapports d'intrusion, solutions de CTF (HackTheBox, TryHackMe) et documentation de vulnérabilités."
+      />
+      
+      <div className="min-h-screen pt-32 pb-24 bg-black text-gray-100">
+        <div className="container mx-auto px-6">
+          
+          {/* En-tête de page */}
+          <div className="flex flex-col items-center text-center mb-16">
+            <div className="p-3 bg-[#1a1a1f] rounded-xl border border-white/10 mb-6">
+              <Terminal className="w-10 h-10 text-violet-500" />
             </div>
-            <div className="flex gap-2">
-              <select
-                value={selectedPlatform}
-                onChange={(e) => handlePlatformChange(e.target.value)}
-                className="px-4 py-2 bg-[#1a1a1f] rounded-lg border border-violet-900/20 
-                         focus:border-violet-500/50 focus:outline-none transition-colors"
-              >
-                {platforms.map(platform => (
-                  <option key={platform} value={platform}>
-                    {platform === 'all' ? 'Toutes les plateformes' : platform}
-                  </option>
-                ))}
-              </select>
-              <select
-                value={selectedDifficulty}
-                onChange={(e) => setSelectedDifficulty(e.target.value)}
-                className="px-4 py-2 bg-[#1a1a1f] rounded-lg border border-violet-900/20 
-                         focus:border-violet-500/50 focus:outline-none transition-colors"
-              >
-                {difficulties.map(difficulty => (
-                  <option key={difficulty} value={difficulty}>
-                    {difficulty === 'all' ? 'Toutes les difficultés' : difficulty}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Base de Connaissances
+            </h1>
+            <p className="text-gray-400 max-w-2xl text-lg">
+              Documentation technique de mes opérations offensives. <br/>
+              <span className="text-sm text-gray-500">HackTheBox • TryHackMe • Root-Me • Labs Personnels</span>
+            </p>
           </div>
-        </div>
 
-        {/* Liste des write-ups */}
-        {loading ? (
-          <div className="flex justify-center items-center h-48">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-violet-500 border-t-transparent" />
+          {/* Barre de Contrôle (Search & Filter) */}
+          <div className="max-w-6xl mx-auto mb-12">
+            <div className="flex flex-col md:flex-row gap-4 p-4 bg-[#1a1a1f] rounded-2xl border border-white/5">
+              
+              {/* Search Input */}
+              <div className="relative flex-1">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                <input 
+                  type="text"
+                  placeholder="Rechercher un rapport (nom, tag, CVE...)"
+                  className="w-full bg-black/50 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-gray-200 placeholder-gray-600 focus:outline-none focus:border-violet-500/50 transition-all"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+
+              {/* Platform Filters */}
+              <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
+                {[
+                  { id: 'all', label: 'Tout' },
+                  { id: 'htb', label: 'HackTheBox' },
+                  { id: 'thm', label: 'TryHackMe' },
+                  { id: 'rootme', label: 'Root-Me' }
+                ].map((platform) => (
+                  <button
+                    key={platform.id}
+                    onClick={() => setSelectedPlatform(platform.id)}
+                    className={`px-4 py-3 rounded-xl text-sm font-medium whitespace-nowrap transition-all border
+                      ${selectedPlatform === platform.id 
+                        ? 'bg-violet-600 text-white border-violet-500 shadow-lg shadow-violet-500/20' 
+                        : 'bg-black/30 text-gray-400 border-white/5 hover:bg-white/5 hover:text-white'}`}
+                  >
+                    {platform.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredWriteups.map((writeup) => (
-              <WriteupCard
-                key={writeup.id}
-                writeup={writeup}
-                onClick={() => handleWriteupClick(writeup)}
-              />
-            ))}
-          </div>
-        )}
+
+          {/* État de chargement / Erreur */}
+          {loading ? (
+            <div className="flex justify-center py-32">
+              <div className="animate-spin rounded-full h-12 w-12 border-2 border-violet-500 border-t-transparent"></div>
+            </div>
+          ) : error ? (
+            <div className="flex flex-col items-center justify-center py-20 text-center">
+              <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
+              <h3 className="text-xl font-bold text-white mb-2">Erreur système</h3>
+              <p className="text-gray-400">{error}</p>
+            </div>
+          ) : filteredWriteups.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-20 text-center bg-[#1a1a1f]/50 rounded-2xl border border-white/5">
+              <Shield className="w-16 h-16 text-gray-600 mb-4" />
+              <h3 className="text-xl font-bold text-white mb-2">Aucun rapport trouvé</h3>
+              <p className="text-gray-400">Essayez de modifier vos critères de recherche.</p>
+            </div>
+          ) : (
+            /* Grille de Résultats */
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {filteredWriteups.map((writeup) => {
+                const isActiveMachine = writeup.slug === 'hackthebox-cat-analysis' || writeup.slug === 'hackthebox-dog';
+                
+                return (
+                  <div
+                    key={writeup.id}
+                    onClick={() => !isActiveMachine && navigate(`/writeups/${writeup.slug}`)}
+                    className={`group relative bg-[#1a1a1f] rounded-2xl border border-white/5 overflow-hidden flex flex-col h-full
+                             transition-all duration-300 ${isActiveMachine ? 'cursor-not-allowed opacity-80' : 'cursor-pointer hover:border-violet-500/30 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]'}`}
+                  >
+                    {/* Image Header */}
+                    <div className="relative h-48 overflow-hidden border-b border-white/5">
+                      <img
+                        src={getWriteupImage(writeup)}
+                        alt={writeup.title}
+                        className={`w-full h-full object-cover transition-transform duration-700 
+                                 ${isActiveMachine ? 'blur-md scale-110 grayscale' : 'group-hover:scale-110'}`}
+                      />
+                      
+                      {/* Badge Platforme */}
+                      <div className="absolute top-4 left-4 z-10">
+                          <span className="px-2.5 py-1 bg-black/80 backdrop-blur border border-white/10 rounded text-[10px] font-bold uppercase tracking-wider text-white">
+                              {getPlatformLabel(writeup.slug || '')}
+                          </span>
+                      </div>
+
+                      {/* Overlay Active Machine */}
+                      {isActiveMachine && (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 z-20 backdrop-blur-[2px]">
+                          <div className="flex items-center gap-2 text-yellow-500 mb-2">
+                              <Lock className="w-5 h-5" />
+                              <span className="font-bold tracking-widest uppercase">Restricted</span>
+                          </div>
+                          <span className="text-[10px] text-gray-400 uppercase tracking-wide border border-yellow-500/20 px-2 py-1 rounded bg-yellow-500/5">
+                              Active Machine
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Contenu */}
+                    <div className="p-6 flex-1 flex flex-col">
+                      <div className="flex justify-between items-start mb-4">
+                          <span className={`text-[10px] font-bold px-2 py-1 rounded border uppercase tracking-wider ${getDifficultyStyles(writeup.difficulty)}`}>
+                              {writeup.difficulty || 'N/A'}
+                          </span>
+                          <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                              <Calendar className="w-3.5 h-3.5" />
+                              {new Date(writeup.created_at).toLocaleDateString('fr-FR')}
+                          </div>
+                      </div>
+
+                      <h3 className={`text-xl font-bold mb-3 line-clamp-1 ${isActiveMachine ? 'text-gray-500' : 'text-white group-hover:text-violet-400'} transition-colors`}>
+                        {writeup.title}
+                      </h3>
+
+                      <p className="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2 flex-grow">
+                          {isActiveMachine 
+                              ? <span className="flex items-center gap-2 text-yellow-500/80 italic"><FileWarning className="w-4 h-4"/> Contenu masqué pour conformité éthique.</span>
+                              : writeup.description || "Analyse technique détaillée."}
+                      </p>
+
+                      {/* Footer Card */}
+                      <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
+                          <div className="flex gap-2">
+                              {writeup.tags?.slice(0, 2).map((tag, i) => (
+                                  <span key={i} className="text-[10px] text-gray-500 bg-white/5 px-2 py-1 rounded flex items-center gap-1">
+                                      <Hash className="w-3 h-3 text-violet-500/50" />
+                                      {tag}
+                                  </span>
+                              ))}
+                          </div>
+                          
+                          {!isActiveMachine && (
+                              <ArrowRight className="w-4 h-4 text-violet-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                          )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };

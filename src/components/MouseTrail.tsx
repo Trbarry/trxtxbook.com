@@ -3,155 +3,180 @@ import React, { useEffect, useRef } from 'react';
 interface Particle {
   x: number;
   y: number;
+  vx: number;
+  vy: number;
   size: number;
-  alpha: number;
-  dx: number;
-  dy: number;
-  isBlack: boolean;
-  rotation: number;
-  spin: number;
-  color: string;
-  glowSize: number;
+  life: number;
+  maxLife: number;
+  colorKey: 'violet' | 'blue' | 'cyan';
 }
 
 export const MouseTrail: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number | null>(null);
   const particlesRef = useRef<Particle[]>([]);
   const mouseRef = useRef({ x: 0, y: 0 });
-  const prevMouseRef = useRef({ x: 0, y: 0 });
-  const frameRef = useRef<number>();
+  const lastMouseRef = useRef({ x: 0, y: 0 });
+  
+  // Cache pour les sprites pré-rendus (Performance +++)
+  const spritesRef = useRef<Record<string, HTMLCanvasElement>>({});
+
+  // Configuration
+  const PARTICLE_LIFETIME = 40; // Durée de vie en frames
+  const SPAWN_THRESHOLD = 5;    // Distance min pour créer une particule (px)
+
+  // Génération des sprites au démarrage (Une seule fois)
+  const generateSprite = (color: string, size: number) => {
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return canvas;
+
+    const center = size / 2;
+    const gradient = ctx.createRadialGradient(center, center, 0, center, center, center);
+    
+    // Cœur brillant
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 1)'); 
+    // Couleur principale
+    gradient.addColorStop(0.2, color.replace(')', ', 0.8)')); 
+    // Fondu vers transparent
+    gradient.addColorStop(0.6, color.replace(')', ', 0.1)')); 
+    gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, size, size);
+    return canvas;
+  };
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
-    const ctx = canvas.getContext('2d', { alpha: true });
+    const ctx = canvas.getContext('2d', { alpha: true }); // alpha: true est important pour la transparence
     if (!ctx) return;
 
-    // Configuration optimisée pour la haute résolution
-    const handleResize = () => {
-      const scale = window.devicePixelRatio || 1;
-      canvas.width = window.innerWidth * scale;
-      canvas.height = window.innerHeight * scale;
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
-      ctx.scale(scale, scale);
+    // 1. Pré-calcul des Sprites (Gros gain de perf)
+    spritesRef.current = {
+      violet: generateSprite('rgba(139, 92, 246)', 64), // Violet-500
+      blue: generateSprite('rgba(59, 130, 246)', 64),   // Blue-500
+      cyan: generateSprite('rgba(6, 182, 212)', 64),    // Cyan-500
     };
-    handleResize();
-    window.addEventListener('resize', handleResize);
 
-    // Gestion optimisée du mouvement de la souris
-    let lastTime = 0;
-    const throttleDelay = 1000 / 60; // 60fps pour une meilleure performance
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    // 2. Boucle d'animation intelligente
+    const animate = () => {
+      // Si plus de particules, on arrête la boucle pour économiser la batterie
+      if (particlesRef.current.length === 0) {
+        if (animationRef.current) {
+          cancelAnimationFrame(animationRef.current);
+          animationRef.current = null;
+        }
+        // On nettoie une dernière fois
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        return;
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // 'lighter' ou 'screen' donne cet effet néon quand les particules se superposent
+      ctx.globalCompositeOperation = 'lighter'; 
+
+      // Mise à jour et dessin
+      for (let i = particlesRef.current.length - 1; i >= 0; i--) {
+        const p = particlesRef.current[i];
+        
+        p.life--;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.size *= 0.96; // Réduction progressive
+
+        // Si morte, on supprime
+        if (p.life <= 0 || p.size < 0.5) {
+          particlesRef.current.splice(i, 1);
+          continue;
+        }
+
+        // Dessin optimisé via drawImage (bien plus rapide que createRadialGradient)
+        const opacity = p.life / p.maxLife;
+        ctx.globalAlpha = opacity;
+        
+        const sprite = spritesRef.current[p.colorKey];
+        if (sprite) {
+          // On dessine l'image pré-calculée centrée sur la position de la particule
+          const drawSize = p.size * 4; // Facteur d'échelle pour le halo
+          ctx.drawImage(
+            sprite, 
+            p.x - drawSize / 2, 
+            p.y - drawSize / 2, 
+            drawSize, 
+            drawSize
+          );
+        }
+      }
+
+      animationRef.current = requestAnimationFrame(animate);
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
-      const currentTime = Date.now();
-      if (currentTime - lastTime < throttleDelay) return;
-      lastTime = currentTime;
+      const { clientX, clientY } = e;
+      mouseRef.current = { x: clientX, y: clientY };
 
-      prevMouseRef.current = { ...mouseRef.current };
-      mouseRef.current = { x: e.clientX, y: e.clientY };
+      // Calcul de la distance parcourue depuis le dernier point
+      const dx = clientX - lastMouseRef.current.x;
+      const dy = clientY - lastMouseRef.current.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
 
-      const dx = mouseRef.current.x - prevMouseRef.current.x;
-      const dy = mouseRef.current.y - prevMouseRef.current.y;
-      const speed = Math.sqrt(dx * dx + dy * dy);
+      // Interpolation : Si la souris bouge vite, on ajoute des particules entre les points
+      // pour éviter l'effet "pointillés"
+      if (distance > SPAWN_THRESHOLD) {
+        const steps = Math.min(Math.floor(distance / SPAWN_THRESHOLD), 10); // Max 10 particules par frame pour pas saturer
+        
+        for (let i = 0; i < steps; i++) {
+          const t = i / steps;
+          const x = lastMouseRef.current.x + dx * t;
+          const y = lastMouseRef.current.y + dy * t;
+          
+          // Sélection aléatoire de couleur cyber
+          const rand = Math.random();
+          let colorKey: 'violet' | 'blue' | 'cyan' = 'violet';
+          if (rand > 0.6) colorKey = 'blue';
+          if (rand > 0.9) colorKey = 'cyan';
 
-      if (speed > 1) {
-        // Création de particules avec une meilleure distribution
-        for (let i = 0; i < 3; i++) {
-          const colors = ['rgba(139, 92, 246, ', 'rgba(167, 139, 250, ', 'rgba(196, 181, 253, '];
           particlesRef.current.push({
-            x: mouseRef.current.x - dx * (i / 3),
-            y: mouseRef.current.y - dy * (i / 3),
-            size: Math.random() * 3 + 2,
-            alpha: 1,
-            dx: (dx / speed) * (Math.random() * 2 - 1) * 0.3,
-            dy: (dy / speed) * (Math.random() * 2 - 1) * 0.3,
-            isBlack: Math.random() > 0.8,
-            rotation: Math.random() * Math.PI * 2,
-            spin: (Math.random() * 2 - 1) * 0.1,
-            color: colors[Math.floor(Math.random() * colors.length)],
-            glowSize: Math.random() * 20 + 10
+            x,
+            y,
+            vx: (Math.random() - 0.5) * 0.5, // Très léger mouvement aléatoire
+            vy: (Math.random() - 0.5) * 0.5,
+            size: Math.random() * 4 + 2,     // Taille variable
+            life: PARTICLE_LIFETIME,
+            maxLife: PARTICLE_LIFETIME,
+            colorKey
           });
+        }
+        
+        lastMouseRef.current = { x: clientX, y: clientY };
+
+        // Si la boucle d'animation n'est pas active, on la lance
+        if (!animationRef.current) {
+          animate();
         }
       }
     };
 
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.globalCompositeOperation = 'screen';
-
-      particlesRef.current = particlesRef.current.filter(particle => {
-        particle.x += particle.dx;
-        particle.y += particle.dy;
-        particle.alpha *= 0.96;
-        particle.rotation += particle.spin;
-        particle.size *= 0.97;
-
-        // Effet de glow amélioré
-        const drawGlow = (radius: number, alpha: number) => {
-          const gradient = ctx.createRadialGradient(
-            particle.x, particle.y, 0,
-            particle.x, particle.y, radius
-          );
-
-          const color = particle.isBlack 
-            ? `rgba(10, 10, 15, ${alpha * particle.alpha})`
-            : `${particle.color}${alpha * particle.alpha})`;
-          
-          gradient.addColorStop(0, color);
-          gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-
-          ctx.beginPath();
-          ctx.arc(particle.x, particle.y, radius, 0, Math.PI * 2);
-          ctx.fillStyle = gradient;
-          ctx.fill();
-        };
-
-        // Effets de glow multicouches
-        drawGlow(particle.glowSize * 1.5, 0.1);
-        drawGlow(particle.glowSize, 0.2);
-        drawGlow(particle.size * 2, 0.3);
-
-        // Particule centrale avec rotation
-        ctx.save();
-        ctx.translate(particle.x, particle.y);
-        ctx.rotate(particle.rotation);
-        
-        // Forme géométrique aléatoire
-        if (Math.random() > 0.5) {
-          ctx.beginPath();
-          ctx.rect(-particle.size * 0.4, -particle.size * 0.4, 
-                   particle.size * 0.8, particle.size * 0.8);
-        } else {
-          ctx.beginPath();
-          ctx.moveTo(0, -particle.size * 0.4);
-          ctx.lineTo(particle.size * 0.4, particle.size * 0.4);
-          ctx.lineTo(-particle.size * 0.4, particle.size * 0.4);
-          ctx.closePath();
-        }
-
-        ctx.fillStyle = particle.isBlack
-          ? `rgba(10, 10, 15, ${particle.alpha})`
-          : `${particle.color}${particle.alpha})`;
-        ctx.fill();
-        ctx.restore();
-
-        return particle.alpha > 0.01 && particle.size > 0.1;
-      });
-
-      frameRef.current = requestAnimationFrame(animate);
-    };
-
     window.addEventListener('mousemove', handleMouseMove);
-    animate();
+
+    // Initialisation de la position souris
+    lastMouseRef.current = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
-      if (frameRef.current) {
-        cancelAnimationFrame(frameRef.current);
-      }
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
   }, []);
 
@@ -160,8 +185,8 @@ export const MouseTrail: React.FC = () => {
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-[9999]"
       style={{ 
-        opacity: 0.8,
-        mixBlendMode: 'screen'
+        // Pas de CSS mix-blend-mode lourd ici, on gère ça dans le canvas
+        opacity: 0.8 
       }}
     />
   );

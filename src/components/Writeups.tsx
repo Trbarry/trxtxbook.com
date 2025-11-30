@@ -1,46 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Target, Search, Filter, Tag, Calendar, Lock, Shield, ArrowRight, AlertCircle } from 'lucide-react';
+import { 
+  Target, 
+  ArrowRight, 
+  AlertCircle, 
+  Calendar, 
+  Terminal, 
+  Shield, 
+  Lock, 
+  Eye,
+  Hash
+} from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { Writeup } from '../types/writeup';
-import { useLocation, useNavigate } from 'react-router-dom';
-
-const SecureTag: React.FC<{
-  tag: string;
-  isBlurred: boolean;
-  variant?: 'default' | 'active' | 'active-green';
-}> = ({ tag, isBlurred, variant = 'default' }) => {
-  const styles = {
-    default: 'bg-[#2a2a2f] text-gray-300',
-    active: 'bg-yellow-500/10 text-yellow-300',
-    'active-green': 'bg-green-500/10 text-green-300'
-  };
-
-  if (isBlurred) {
-    return (
-      <div className={`inline-flex items-center gap-1 px-2 py-1 rounded ${styles[variant]}`}>
-        <Tag className="w-3 h-3" />
-        <div className="w-12 h-3 bg-current opacity-50 rounded" />
-      </div>
-    );
-  }
-
-  return (
-    <div className={`inline-flex items-center gap-1 px-2 py-1 rounded ${styles[variant]}`}>
-      <Tag className="w-3 h-3" />
-      <span>{tag}</span>
-    </div>
-  );
-};
-
-const getWriteupImage = (writeup: Writeup) => {
-  if (writeup.slug === 'hackthebox-cat-analysis') {
-    return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
-  }
-  if (writeup.slug === 'hackthebox-dog') {
-    return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
-  }
-  return "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80";
-};
+import { useNavigate } from 'react-router-dom';
 
 export const Writeups: React.FC = () => {
   const [writeups, setWriteups] = useState<Writeup[]>([]);
@@ -55,223 +27,167 @@ export const Writeups: React.FC = () => {
   const fetchWriteups = async () => {
     try {
       setError(null);
-      console.log('Attempting to fetch writeups from Supabase...');
-      
-      // Test basic connectivity first
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/rest/v1/`, {
-        method: 'HEAD',
-        headers: {
-          'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error(`Supabase connectivity test failed: ${response.status} ${response.statusText}`);
-      }
-
-      console.log('Supabase connectivity test passed');
-
+      // On récupère les 3 derniers writeups publiés
       const { data, error } = await supabase
         .from('writeups')
         .select('*')
         .eq('published', true)
         .order('created_at', { ascending: false })
-        .limit(6);
+        .limit(3);
 
-      if (error) {
-        console.error('Supabase query error:', error);
-        throw new Error(`Database query failed: ${error.message}`);
-      }
-
-      console.log('Successfully fetched writeups:', data?.length || 0);
+      if (error) throw error;
       setWriteups(data || []);
-    } catch (error) {
-      console.error('Error fetching writeups:', error);
-      
-      let errorMessage = 'Failed to load writeups';
-      if (error instanceof Error) {
-        if (error.message.includes('NetworkError') || error.message.includes('fetch')) {
-          errorMessage = 'Network connection failed. Please check your internet connection and try again.';
-        } else if (error.message.includes('CORS')) {
-          errorMessage = 'Cross-origin request blocked. Please check Supabase CORS settings.';
-        } else {
-          errorMessage = error.message;
-        }
-      }
-      
-      setError(errorMessage);
+    } catch (err: any) {
+      console.error('Error fetching writeups:', err);
+      setError('Impossible de charger les rapports récents.');
     } finally {
       setLoading(false);
     }
   };
 
-  const formatDate = (dateString: string): string => {
-    return new Date(dateString).toLocaleDateString('fr-FR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
-  const getDifficultyColor = (difficulty: string): string => {
-    switch (difficulty.toLowerCase()) {
-      case 'facile':
-      case 'easy':
-        return 'bg-green-500/20 text-green-300';
-      case 'moyen':
-        return 'bg-yellow-500/20 text-yellow-300';
-      default:
-        return 'bg-red-500/20 text-red-300';
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty?.toLowerCase()) {
+      case 'facile': case 'easy': return 'text-green-400 border-green-500/30 bg-green-500/10';
+      case 'moyen': case 'medium': return 'text-orange-400 border-orange-500/30 bg-orange-500/10';
+      case 'difficile': case 'hard': case 'insane': return 'text-red-500 border-red-500/30 bg-red-500/10';
+      default: return 'text-gray-400 border-gray-500/30 bg-gray-500/10';
     }
   };
 
-  const getActiveStyles = (writeup: Writeup) => {
-    const isActiveCat = writeup.slug === 'hackthebox-cat-analysis';
-    const isActiveDog = writeup.slug === 'hackthebox-dog';
-
-    if (isActiveCat) {
-      return {
-        border: 'border-yellow-500/20 hover:border-yellow-500/50',
-        bg: 'bg-yellow-500/10',
-        text: 'text-yellow-500',
-        iconColor: 'text-yellow-500'
-      };
-    }
-    if (isActiveDog) {
-      return {
-        border: 'border-green-500/20 hover:border-green-500/50',
-        bg: 'bg-green-500/10',
-        text: 'text-green-500',
-        iconColor: 'text-green-500'
-      };
-    }
-    return {
-      border: 'border-violet-900/20 hover:border-violet-500/50',
-      bg: 'bg-violet-500/10',
-      text: 'text-violet-300',
-      iconColor: 'text-violet-400'
-    };
+  const getPlatformIcon = (slug: string) => {
+    if (slug.includes('hackthebox')) return 'HTB';
+    if (slug.includes('tryhackme')) return 'THM';
+    if (slug.includes('root-me')) return 'RM';
+    return 'CTF';
   };
 
-  const handleWriteupClick = (writeup: Writeup) => {
-    const isActiveCat = writeup.slug === 'hackthebox-cat-analysis';
-    const isActiveDog = writeup.slug === 'hackthebox-dog';
-    
-    if (isActiveCat || isActiveDog) {
-      navigate('/writeups');
-    } else {
-      navigate(`/writeups/${writeup.slug}`);
-    }
-  };
-
-  const handleRetry = () => {
-    setLoading(true);
-    fetchWriteups();
+  // Gestion des images (Fallback si pas d'image)
+  const getWriteupImage = (writeup: Writeup) => {
+    if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
+    if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
+    // Image par défaut générique "Cyber"
+    return "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80";
   };
 
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between mb-12">
-          <h2 className="text-3xl font-bold flex items-center gap-3">
-            <Target className="w-8 h-8 text-violet-500" />
-            Write-ups CTF Récents
-          </h2>
+    <section id="writeups" className="py-24 bg-black relative">
+      <div className="container mx-auto px-6 relative z-10">
+        
+        {/* En-tête */}
+        <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
+          <div className="flex items-center gap-3">
+            <div className="p-3 bg-[#1a1a1f] rounded-xl border border-white/10">
+              <Terminal className="w-8 h-8 text-violet-500" />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold text-white">Rapports d'Intrusion</h2>
+              <p className="text-gray-500 text-sm mt-1">Documentation technique des machines compromises</p>
+            </div>
+          </div>
+          
           <button
             onClick={() => navigate('/writeups')}
-            className="flex items-center gap-2 text-sm bg-violet-500/10 px-4 py-2 rounded-lg
-                     hover:bg-violet-500/20 transition-colors group"
+            className="group flex items-center gap-2 text-sm font-medium bg-[#1a1a1f] text-gray-300 px-5 py-3 rounded-xl
+                     border border-white/10 hover:border-violet-500/50 hover:text-white transition-all duration-300"
           >
-            <span>Voir tous les write-ups</span>
+            <span>Archives complètes</span>
             <ArrowRight className="w-4 h-4 transform transition-transform group-hover:translate-x-1" />
           </button>
         </div>
 
+        {/* État de chargement / Erreur */}
         {loading ? (
-          <div className="flex justify-center items-center h-48">
+          <div className="flex justify-center py-20">
             <div className="animate-spin rounded-full h-12 w-12 border-4 border-violet-500 border-t-transparent"></div>
           </div>
         ) : error ? (
-          <div className="flex flex-col items-center justify-center h-48 text-center">
-            <AlertCircle className="w-12 h-12 text-red-400 mb-4" />
-            <h3 className="text-xl font-semibold text-red-400 mb-2">Erreur de chargement</h3>
-            <p className="text-gray-400 mb-4 max-w-md">{error}</p>
-            <button
-              onClick={handleRetry}
-              className="bg-violet-500/10 hover:bg-violet-500/20 text-violet-300 px-4 py-2 rounded-lg transition-colors"
-            >
-              Réessayer
-            </button>
+          <div className="text-center py-12 bg-[#1a1a1f] rounded-xl border border-red-500/20">
+            <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
+            <p className="text-gray-400">{error}</p>
           </div>
         ) : (
+          /* Grille des Cards */
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {writeups.map((writeup) => {
-              const isActiveCat = writeup.slug === 'hackthebox-cat-analysis';
-              const isActiveDog = writeup.slug === 'hackthebox-dog';
-              const isActive = isActiveCat || isActiveDog;
-              const styles = getActiveStyles(writeup);
+              // Logique "Machine Active"
+              const isActiveMachine = writeup.slug === 'hackthebox-cat-analysis' || writeup.slug === 'hackthebox-dog';
               
               return (
                 <div
                   key={writeup.id}
-                  onClick={() => handleWriteupClick(writeup)}
-                  className={`cyber-card bg-[#1a1a1f] rounded-lg border transition-all duration-300 cursor-pointer
-                           transform hover:-translate-y-1 overflow-hidden ${styles.border}`}
+                  onClick={() => !isActiveMachine && navigate(`/writeups/${writeup.slug}`)}
+                  className={`group relative bg-[#1a1a1f] rounded-2xl border border-white/5 overflow-hidden flex flex-col h-full
+                           transition-all duration-300 ${isActiveMachine ? 'cursor-not-allowed opacity-80' : 'cursor-pointer hover:-translate-y-2 hover:border-violet-500/30 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]'}`}
                 >
+                  {/* Image Header */}
                   <div className="relative h-48 overflow-hidden">
                     <img
                       src={getWriteupImage(writeup)}
                       alt={writeup.title}
-                      className={`w-full h-full object-cover transition-transform duration-300 group-hover:scale-105
-                              ${isActive ? 'blur-sm' : ''}`}
+                      className={`w-full h-full object-cover transition-transform duration-700 
+                               ${isActiveMachine ? 'blur-md scale-110 grayscale' : 'group-hover:scale-110'}`}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1f] via-[#1a1a1f]/50 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1f] via-[#1a1a1f]/60 to-transparent" />
                     
-                    {isActive && (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className={`${styles.bg} p-3 rounded-full transform transition-transform duration-300 group-hover:scale-110`}>
-                          <Lock className={`w-8 h-8 ${styles.iconColor}`} />
+                    {/* Badge Platforme */}
+                    <div className="absolute top-4 left-4">
+                        <span className="px-3 py-1 bg-black/60 backdrop-blur-md border border-white/10 rounded-lg text-xs font-bold text-white shadow-xl">
+                            {getPlatformIcon(writeup.slug || '')}
+                        </span>
+                    </div>
+
+                    {/* Overlay Machine Active */}
+                    {isActiveMachine && (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 backdrop-blur-sm z-20">
+                        <div className="p-3 bg-yellow-500/10 rounded-full border border-yellow-500/20 mb-2">
+                            <Lock className="w-6 h-6 text-yellow-500" />
                         </div>
+                        <span className="text-yellow-500 font-bold text-sm tracking-widest uppercase border border-yellow-500/30 px-3 py-1 rounded bg-black/50">
+                            Classified / Active
+                        </span>
                       </div>
                     )}
                   </div>
 
-                  <div className="p-6">
+                  {/* Contenu */}
+                  <div className="p-6 pt-2 flex-1 flex flex-col">
                     <div className="flex justify-between items-start mb-4">
-                      <h3 className={`text-xl font-semibold ${styles.text}`}>
-                        {writeup.title}
-                      </h3>
-                      <span className={`text-xs px-2 py-1 rounded ${styles.bg} ${styles.text}`}>
-                        {isActive ? 'Active' : writeup.difficulty}
-                      </span>
+                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider ${getDifficultyColor(writeup.difficulty)}`}>
+                            {writeup.difficulty || 'Unknown'}
+                        </span>
+                        <div className="flex items-center gap-1 text-xs text-gray-500">
+                            <Calendar className="w-3 h-3" />
+                            {new Date(writeup.created_at).toLocaleDateString('fr-FR')}
+                        </div>
                     </div>
 
-                    <p className="text-gray-400 text-sm mb-4 line-clamp-2">
-                      {isActive 
-                        ? "Write-up temporairement indisponible - Machine active sur HackTheBox"
-                        : writeup.description}
+                    <h3 className={`text-xl font-bold mb-3 line-clamp-1 ${isActiveMachine ? 'text-gray-500' : 'text-white group-hover:text-violet-400'} transition-colors`}>
+                      {writeup.title}
+                    </h3>
+
+                    <p className="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2 flex-grow">
+                        {isActiveMachine 
+                            ? "Le rapport est verrouillé car la machine est toujours active sur la plateforme. Conformité éthique." 
+                            : writeup.description || "Analyse technique détaillée de la compromission : reconnaissance, exploitation et élévation de privilèges."}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {writeup.tags.map((tag, i) => (
-                        <SecureTag
-                          key={i}
-                          tag={tag}
-                          isBlurred={isActive}
-                          variant={isActiveDog ? 'active-green' : isActiveCat ? 'active' : 'default'}
-                        />
-                      ))}
-                    </div>
-
-                    <div className="flex justify-between items-center text-sm text-gray-500">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4" />
-                        <span>{formatDate(writeup.created_at)}</span>
-                      </div>
-                      <span className={`px-2 py-1 rounded ${styles.bg} ${styles.text}`}>
-                        {writeup.points} pts
-                      </span>
+                    {/* Footer Card */}
+                    <div className="mt-auto flex items-center justify-between border-t border-white/5 pt-4">
+                        <div className="flex items-center gap-3">
+                            {writeup.tags?.slice(0, 2).map((tag, i) => (
+                                <div key={i} className="flex items-center gap-1 text-xs text-gray-500">
+                                    <Hash className="w-3 h-3 text-violet-500/50" />
+                                    {tag}
+                                </div>
+                            ))}
+                        </div>
+                        
+                        {!isActiveMachine && (
+                            <div className="flex items-center gap-2 text-xs font-bold text-violet-400 opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0">
+                                Lire le rapport
+                                <ArrowRight className="w-3 h-3" />
+                            </div>
+                        )}
                     </div>
                   </div>
                 </div>
