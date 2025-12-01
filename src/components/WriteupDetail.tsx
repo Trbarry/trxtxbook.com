@@ -43,6 +43,11 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
   };
 
   const getWriteupImage = () => {
+    // Priorité DB
+    if (writeup.images && writeup.images.length > 0) {
+      return writeup.images[0];
+    }
+
     if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
     if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
     return "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80";

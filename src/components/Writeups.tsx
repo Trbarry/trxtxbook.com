@@ -61,11 +61,13 @@ export const Writeups: React.FC = () => {
     return 'CTF';
   };
 
-  // Gestion des images (Fallback si pas d'image)
   const getWriteupImage = (writeup: Writeup) => {
+    if (writeup.images && writeup.images.length > 0) {
+      return writeup.images[0];
+    }
+    
     if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
     if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
-    // Image par défaut générique "Cyber"
     return "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80";
   };
 

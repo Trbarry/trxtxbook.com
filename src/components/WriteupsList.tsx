@@ -94,8 +94,16 @@ export const WriteupsList: React.FC = () => {
   };
 
   const getWriteupImage = (writeup: Writeup) => {
+    // 1. Priorité absolue : L'image définie dans la base de données (Supabase)
+    if (writeup.images && writeup.images.length > 0) {
+      return writeup.images[0];
+    }
+
+    // 2. Fallbacks (Ancienne méthode "en dur", à garder au cas où)
     if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
     if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
+    
+    // 3. Image par défaut (Si rien n'est trouvé)
     return "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80";
   };
 
