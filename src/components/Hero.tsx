@@ -24,12 +24,14 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
     <section className="pt-32 pb-20 relative overflow-hidden min-h-[90vh] flex flex-col justify-center bg-black">
       {/* Background avec effet Cyber */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <img
-          src={getOptimizedUrl("https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80", 1920)}
-          alt="Cyberpunk Background"
-          fetchPriority="high" // <--- C'est LA clé pour le score LCP
-          className="absolute inset-0 w-full h-full object-cover opacity-5 blur-sm"
-        />
+        // Modifie l'appel de l'image de fond :
+      <img
+  // On demande 1920px de large max, et qualité 70 (suffisant pour un fond sombre)
+  src={getOptimizedUrl("https://images.unsplash.com/photo-1550751827-4bd374c3f58b", 1920, 70)}
+  alt="Cyberpunk Background"
+  fetchPriority="high"
+  className="absolute inset-0 w-full h-full object-cover opacity-5 blur-sm"
+/>
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-[#0a0a0f]/90 to-[#0a0a0f]" />
         {/* Grille décorative subtile */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
