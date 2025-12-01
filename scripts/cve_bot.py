@@ -2,12 +2,12 @@ import requests
 import os
 from supabase import create_client, Client
 
+# Récupération des variables d'environnement
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
 
 def get_latest_critical_cves():
     print("🔍 Recherche des dernières CVE...")
-    
     url = "https://cve.circl.lu/api/last"
     
     try:
@@ -18,14 +18,13 @@ def get_latest_critical_cves():
         critical_cves = []
         
         for item in data:
-            # MODIFICATION ICI : On baisse le seuil à 7.0 (High) pour avoir des données
             cvss = item.get('cvss')
             try:
                 cvss_score = float(cvss) if cvss else 0.0
             except ValueError:
                 cvss_score = 0.0
 
-            # On prend tout ce qui est supérieur à 7.0 (High + Critical)
+            # Seuil à 7.0 pour être sûr d'avoir des résultats
             if cvss_score >= 7.0:
                 cve_id = item.get('id')
                 print(f"  🚨 Trouvé : {cve_id} (CVSS: {cvss_score})")
@@ -51,9 +50,9 @@ def get_latest_critical_cves():
         return []
 
 def update_database(cves):
-    # Vérification explicite des clés avant de continuer
     if not SUPABASE_URL or not SUPABASE_KEY:
-        print("❌ ERREUR FATALE : Les clés Supabase sont introuvables dans l'environnement !")
+        # Cette erreur s'affichera si les secrets GitHub ne passent pas
+        print("❌ ERREUR FATALE : Les clés Supabase sont vides. Vérifiez vos Secrets GitHub !")
         return
 
     if not cves:
@@ -75,9 +74,9 @@ def update_database(cves):
 if __name__ == "__main__":
     print("--- Démarrage du Security Watch Bot ---")
     
-    # DEBUG : Vérification de la présence des clés (Affiche TRUE ou FALSE, pas la clé)
+    # CORRECTION ICI : On utilise les variables Python définies en haut (lignes 6 et 7)
     print(f"DEBUG: URL présente ? {bool(SUPABASE_URL)}")
-    print(f"DEBUG: KEY présente ? {bool(SUPABASE_SERVICE_KEY)}")
+    print(f"DEBUG: KEY présente ? {bool(SUPABASE_KEY)}")
     
     cves = get_latest_critical_cves()
     update_database(cves)
