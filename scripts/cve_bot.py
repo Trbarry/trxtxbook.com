@@ -7,7 +7,8 @@ SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
 
 def get_latest_critical_cves():
     print("🔍 Recherche des dernières CVE...")
-    url = "https://cve.circl.lu/api/last"
+    # On demande un peu plus de résultats (50) pour être sûr de trouver des CVE parmi les MAL
+    url = "https://cve.circl.lu/api/last/50"
     
     try:
         response = requests.get(url, timeout=10)
@@ -19,8 +20,9 @@ def get_latest_critical_cves():
         for item in data:
             cve_id = item.get('id')
             
-            # --- SÉCURITÉ 1 : On ignore si pas d'ID ---
-            if not cve_id:
+            # --- FILTRE 1 : On ne veut que des vraies CVE ---
+            # On ignore les "MAL-" (Malware packages) ou autres formats bizarres
+            if not cve_id or not cve_id.startswith("CVE-"):
                 continue
 
             cvss = item.get('cvss')
@@ -29,28 +31,26 @@ def get_latest_critical_cves():
             except ValueError:
                 cvss_score = 0.0
 
-            # --- SÉCURITÉ 2 : On remet le filtre (même bas) ---
-            # On garde un filtre minimal (ex: 7.0) pour éviter le bruit
-            # ou on laisse tout passer si c'est pour le test, 
-            # MAIS on s'assure d'avoir un ID valide.
+            # --- FILTRE 2 : Un minimum de criticité ---
+            # On garde ce qui est au moins "Medium" (4.0) pour avoir des scores à afficher
+            if cvss_score >= 4.0:
+                print(f"  📥 Trouvé : {cve_id} (CVSS: {cvss_score})")
+                
+                cve = {
+                    "cve_id": cve_id,
+                    "description": item.get('summary', 'Pas de description disponible'),
+                    "cvss_score": cvss_score,
+                    "affected_product": "Voir détails",
+                    "published_date": item.get('Published'),
+                    "reference_url": f"https://nvd.nist.gov/vuln/detail/{cve_id}"
+                }
+                critical_cves.append(cve)
             
-            # Pour le test, on prend tout ce qui a un ID valide :
-            print(f"  📥 Trouvé : {cve_id} (CVSS: {cvss_score})")
-            
-            cve = {
-                "cve_id": cve_id,
-                "description": item.get('summary', 'Pas de description disponible'),
-                "cvss_score": cvss_score,
-                "affected_product": "Voir détails",
-                "published_date": item.get('Published'),
-                "reference_url": f"https://nvd.nist.gov/vuln/detail/{cve_id}"
-            }
-            critical_cves.append(cve)
-            
+            # On s'arrête quand on a trouvé 5 belles CVE
             if len(critical_cves) >= 5:
                 break
         
-        print(f"✅ {len(critical_cves)} CVEs valides trouvées.")
+        print(f"✅ {len(critical_cves)} CVEs qualifiées trouvées.")
         return critical_cves
 
     except Exception as e:
@@ -63,7 +63,7 @@ def update_database(cves):
         return
 
     if not cves:
-        print("⚠️ Aucune CVE à enregistrer.")
+        print("⚠️ Aucune CVE pertinente trouvée ce jour (que des MAL ou low score).")
         return
 
     print(f"💾 Connexion à Supabase...")
@@ -80,7 +80,6 @@ def update_database(cves):
 
 if __name__ == "__main__":
     print("--- Démarrage du Security Watch Bot ---")
-    # Pas besoin d'afficher les clés en debug maintenant qu'on sait qu'elles sont là
     cves = get_latest_critical_cves()
     update_database(cves)
     print("--- Terminé ---")
