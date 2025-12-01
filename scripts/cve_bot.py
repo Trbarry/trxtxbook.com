@@ -2,12 +2,11 @@ import requests
 import os
 from supabase import create_client, Client
 
-# Récupération des variables d'environnement
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
 
 def get_latest_critical_cves():
-    print("🔍 Recherche des dernières CVE (Mode Test : TOUT inclure)...")
+    print("🔍 Recherche des dernières CVE...")
     url = "https://cve.circl.lu/api/last"
     
     try:
@@ -18,17 +17,25 @@ def get_latest_critical_cves():
         critical_cves = []
         
         for item in data:
+            cve_id = item.get('id')
+            
+            # --- SÉCURITÉ 1 : On ignore si pas d'ID ---
+            if not cve_id:
+                continue
+
             cvss = item.get('cvss')
             try:
                 cvss_score = float(cvss) if cvss else 0.0
             except ValueError:
                 cvss_score = 0.0
 
-            # --- MODIFICATION ICI : ON PREND TOUT ---
-            # if cvss_score >= 7.0:  <-- On commente cette ligne
+            # --- SÉCURITÉ 2 : On remet le filtre (même bas) ---
+            # On garde un filtre minimal (ex: 7.0) pour éviter le bruit
+            # ou on laisse tout passer si c'est pour le test, 
+            # MAIS on s'assure d'avoir un ID valide.
             
-            cve_id = item.get('id')
-            print(f"  📥 Récupération : {cve_id} (CVSS: {cvss_score})")
+            # Pour le test, on prend tout ce qui a un ID valide :
+            print(f"  📥 Trouvé : {cve_id} (CVSS: {cvss_score})")
             
             cve = {
                 "cve_id": cve_id,
@@ -40,11 +47,10 @@ def get_latest_critical_cves():
             }
             critical_cves.append(cve)
             
-            # On s'arrête à 5 pour le test
             if len(critical_cves) >= 5:
                 break
         
-        print(f"✅ {len(critical_cves)} CVEs trouvées.")
+        print(f"✅ {len(critical_cves)} CVEs valides trouvées.")
         return critical_cves
 
     except Exception as e:
@@ -53,8 +59,7 @@ def get_latest_critical_cves():
 
 def update_database(cves):
     if not SUPABASE_URL or not SUPABASE_KEY:
-        # Cette erreur s'affichera si les secrets GitHub ne passent pas
-        print("❌ ERREUR FATALE : Les clés Supabase sont vides. Vérifiez vos Secrets GitHub !")
+        print("❌ ERREUR FATALE : Les clés Supabase sont vides.")
         return
 
     if not cves:
@@ -75,11 +80,7 @@ def update_database(cves):
 
 if __name__ == "__main__":
     print("--- Démarrage du Security Watch Bot ---")
-    
-    # CORRECTION ICI : On utilise les variables Python définies en haut (lignes 6 et 7)
-    print(f"DEBUG: URL présente ? {bool(SUPABASE_URL)}")
-    print(f"DEBUG: KEY présente ? {bool(SUPABASE_KEY)}")
-    
+    # Pas besoin d'afficher les clés en debug maintenant qu'on sait qu'elles sont là
     cves = get_latest_critical_cves()
     update_database(cves)
     print("--- Terminé ---")
