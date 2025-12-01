@@ -23,7 +23,7 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
   const navigate = useNavigate();
   
   // Logique pour les machines actives (Protection éthique)
-  const isActiveMachine = writeup.slug === 'hackthebox-cat-analysis' || writeup.slug === 'hackthebox-dog';
+  const isActiveMachine = false;
 
   const formatDate = (dateString: string): string => {
     return new Date(dateString).toLocaleDateString('fr-FR', {
