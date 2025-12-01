@@ -2,84 +2,83 @@ import requests
 import os
 from supabase import create_client, Client
 
-# Configuration : On récupère les variables d'environnement
-# Ces variables seront définies plus tard dans GitHub Actions
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
-SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_KEY") # Clé SERVICE_ROLE (Admin)
+SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
 
 def get_latest_critical_cves():
-    print("🔍 Recherche des dernières CVE critiques...")
+    print("🔍 Recherche des dernières CVE...")
     
-    # On utilise l'API de cve.circl.lu (Open Source et fiable)
     url = "https://cve.circl.lu/api/last"
     
     try:
         response = requests.get(url, timeout=10)
-        response.raise_for_status() # Vérifie si la requête a réussi
+        response.raise_for_status()
         data = response.json()
         
         critical_cves = []
         
         for item in data:
-            # On cherche les CVE avec un score CVSS >= 9.0 (Critique)
+            # MODIFICATION ICI : On baisse le seuil à 7.0 (High) pour avoir des données
             cvss = item.get('cvss')
-            
-            # Parfois le CVSS est null ou une chaine, on sécurise la conversion
             try:
                 cvss_score = float(cvss) if cvss else 0.0
             except ValueError:
                 cvss_score = 0.0
 
-            if cvss_score >= 9.0:
+            # On prend tout ce qui est supérieur à 7.0 (High + Critical)
+            if cvss_score >= 7.0:
                 cve_id = item.get('id')
                 print(f"  🚨 Trouvé : {cve_id} (CVSS: {cvss_score})")
                 
-                # On formate les données pour notre table Supabase
                 cve = {
                     "cve_id": cve_id,
                     "description": item.get('summary', 'Pas de description disponible'),
                     "cvss_score": cvss_score,
-                    "affected_product": "Voir détails", # L'API est parfois vague ici
+                    "affected_product": "Voir détails",
                     "published_date": item.get('Published'),
                     "reference_url": f"https://nvd.nist.gov/vuln/detail/{cve_id}"
                 }
                 critical_cves.append(cve)
                 
-            # On s'arrête dès qu'on en a 5 pour ne pas surcharger
             if len(critical_cves) >= 5:
                 break
-                
+        
+        print(f"✅ {len(critical_cves)} CVEs trouvées.")
         return critical_cves
 
     except Exception as e:
-        print(f"❌ Erreur lors de la récupération des CVE : {e}")
+        print(f"❌ Erreur API : {e}")
         return []
 
 def update_database(cves):
-    if not cves:
-        print("⚠️ Aucune CVE critique trouvée ce jour.")
-        return
-
+    # Vérification explicite des clés avant de continuer
     if not SUPABASE_URL or not SUPABASE_KEY:
-        print("❌ Erreur : Les variables d'environnement Supabase ne sont pas définies.")
+        print("❌ ERREUR FATALE : Les clés Supabase sont introuvables dans l'environnement !")
         return
 
-    print(f"💾 Connexion à Supabase ({SUPABASE_URL})...")
+    if not cves:
+        print("⚠️ Aucune CVE à enregistrer.")
+        return
+
+    print(f"💾 Connexion à Supabase...")
     
     try:
         supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
         
         for cve in cves:
-            # On utilise 'upsert' : Si l'ID existe déjà, on met à jour, sinon on crée.
-            # Cela évite les doublons et les erreurs.
             result = supabase.table('security_watch').upsert(cve, on_conflict='cve_id').execute()
-            print(f"  ✅ {cve['cve_id']} synchronisé avec succès.")
+            print(f"  ✅ {cve['cve_id']} inséré/mis à jour.")
             
     except Exception as e:
-        print(f"  ❌ Erreur lors de l'écriture en base : {e}")
+        print(f"  ❌ Erreur DB : {e}")
 
 if __name__ == "__main__":
     print("--- Démarrage du Security Watch Bot ---")
+    
+    # DEBUG : Vérification de la présence des clés (Affiche TRUE ou FALSE, pas la clé)
+    print(f"DEBUG: URL présente ? {bool(SUPABASE_URL)}")
+    print(f"DEBUG: KEY présente ? {bool(SUPABASE_SERVICE_KEY)}")
+    
     cves = get_latest_critical_cves()
     update_database(cves)
     print("--- Terminé ---")
