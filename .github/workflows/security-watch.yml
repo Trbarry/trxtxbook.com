@@ -27,7 +27,6 @@ jobs:
 
       - name: Lancement du Bot
         env:
-          # On récupère les clés depuis les "Secrets" du dépôt GitHub
           SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }} 
         run: python scripts/cve_bot.py
