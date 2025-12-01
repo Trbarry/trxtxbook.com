@@ -1,4 +1,5 @@
 import React from 'react';
+import { getOptimizedUrl } from '../lib/imageUtils';
 import { 
   Terminal, 
   BookOpen, 
@@ -23,9 +24,11 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
     <section className="pt-32 pb-20 relative overflow-hidden min-h-[90vh] flex flex-col justify-center bg-black">
       {/* Background avec effet Cyber */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div 
-          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80')] 
-                   bg-cover bg-center opacity-5 blur-sm"
+        <img
+          src={getOptimizedUrl("https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80", 1920)}
+          alt="Cyberpunk Background"
+          fetchPriority="high" // <--- C'est LA clé pour le score LCP
+          className="absolute inset-0 w-full h-full object-cover opacity-5 blur-sm"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-[#0a0a0f]/90 to-[#0a0a0f]" />
         {/* Grille décorative subtile */}
