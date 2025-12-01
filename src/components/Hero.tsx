@@ -13,6 +13,7 @@ import {
   Container        // Pour Docker
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { SecurityWatch } from './SecurityWatch'; // ✅ Import ajouté
 
 interface HeroProps {
   isLoaded: boolean;
@@ -24,16 +25,13 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
     <section className="pt-32 pb-20 relative overflow-hidden min-h-[90vh] flex flex-col justify-center bg-black">
       {/* Background avec effet Cyber */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        // Modifie l'appel de l'image de fond :
-      <img
-  // On demande 1920px de large max, et qualité 70 (suffisant pour un fond sombre)
-  src={getOptimizedUrl("https://images.unsplash.com/photo-1550751827-4bd374c3f58b", 1920, 70)}
-  alt="Cyberpunk Background"
-  fetchPriority="high"
-  className="absolute inset-0 w-full h-full object-cover opacity-5 blur-sm"
-/>
+        <img
+          src={getOptimizedUrl("https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80", 1920)}
+          alt="Cyberpunk Background"
+          fetchPriority="high"
+          className="absolute inset-0 w-full h-full object-cover opacity-5 blur-sm"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-[#0a0a0f]/90 to-[#0a0a0f]" />
-        {/* Grille décorative subtile */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
       </div>
 
@@ -42,7 +40,6 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
           
           {/* En-tête Principal */}
           <div className="text-center mb-12">
-            {/* Badge Status */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-sm font-medium mb-6 animate-fade-in-up hover:bg-violet-500/20 transition-colors cursor-default">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -67,7 +64,6 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
           {/* Grille de Contenu (Navigation Site) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             
-            {/* Carte 1 : Writeups */}
             <Link to="/writeups" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-6 rounded-2xl border border-white/5 hover:border-violet-500/40 hover:bg-[#1f1f25] transition-all duration-300 relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                 <Terminal className="w-24 h-24 text-violet-500" />
@@ -86,7 +82,6 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
               </div>
             </Link>
 
-            {/* Carte 2 : Projets */}
             <Link to="/projects" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-6 rounded-2xl border border-white/5 hover:border-blue-500/40 hover:bg-[#1f1f25] transition-all duration-300 relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                 <Server className="w-24 h-24 text-blue-500" />
@@ -105,7 +100,6 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
               </div>
             </Link>
 
-            {/* Carte 3 : Certifications */}
             <Link to="/certifications" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-6 rounded-2xl border border-white/5 hover:border-green-500/40 hover:bg-[#1f1f25] transition-all duration-300 relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                 <Shield className="w-24 h-24 text-green-500" />
@@ -129,7 +123,6 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
           {/* Barre d'action & Tech Stack */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-[#1a1a1f]/50 p-6 rounded-2xl border border-white/5 backdrop-blur-md">
             
-            {/* Bouton Profil */}
             <button
               onClick={() => setShowProfile(true)}
               className="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white font-semibold rounded-xl transition-all shadow-lg shadow-violet-500/20 hover:shadow-violet-500/40 flex items-center justify-center gap-2 group whitespace-nowrap"
@@ -138,30 +131,29 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
               <Activity className="w-4 h-4 group-hover:animate-pulse" />
             </button>
 
-            {/* Tech Stack */}
             <div className="flex items-center gap-6 text-gray-500 overflow-x-auto max-w-full pb-2 md:pb-0 hide-scrollbar w-full md:w-auto md:justify-end">
                 <span className="text-sm font-medium uppercase tracking-wider text-gray-600 whitespace-nowrap hidden lg:inline">Stack :</span>
                 <div className="flex items-center gap-5">
-                    
-                    {/* Exegol (Custom Badge) */}
                     <div className="flex items-center gap-2 text-gray-300 hover:text-violet-400 transition-colors cursor-default group" title="Exegol">
                         <span className="font-bold text-[10px] border-2 border-current px-1 rounded group-hover:border-violet-400">EX</span>
                         <span className="hidden sm:inline text-xs font-medium">Exegol</span>
                     </div>
-
                     <div className="w-px h-4 bg-gray-800"></div>
-
                     <TechItem icon={<Terminal size={18} />} label="Bash/Zsh" />
                     <TechItem icon={<TerminalSquare size={18} />} label="PowerShell" />
                     <TechItem icon={<Code2 size={18} />} label="Python" />
                     <TechItem icon={<Container size={18} />} label="Docker" />
                 </div>
             </div>
-
           </div>
 
-          {/* === INDICE TERMINAL AJOUTÉ ICI === */}
-          <div className="flex justify-center w-full mt-4">
+          {/* === NOUVEAU : INTEGRATION DE LA VEILLE === */}
+          <div className="mt-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            <SecurityWatch />
+          </div>
+
+          {/* === INDICE TERMINAL === */}
+          <div className="flex justify-center w-full mt-8">
             <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-gray-600 font-mono bg-black/50 px-4 py-2 rounded-full border border-white/10 hover:border-violet-500/30 transition-colors cursor-help group">
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
                 System Ready.
