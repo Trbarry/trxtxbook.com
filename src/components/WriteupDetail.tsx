@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 import { 
   Shield, 
   Award, 
@@ -116,7 +117,9 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
                     prose-pre:bg-[#0a0a0f] prose-pre:border prose-pre:border-white/10
                     prose-strong:text-white prose-a:text-violet-400 hover:prose-a:text-violet-300">
                     
-                    <ReactMarkdown>{writeup.content}</ReactMarkdown>
+                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                           {writeup.content}
+                     </ReactMarkdown>
                 </div>
 
                 {/* Footer Tags */}
