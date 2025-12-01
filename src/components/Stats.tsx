@@ -38,9 +38,9 @@ export const Stats: React.FC<StatsProps> = () => {
       progression: "80.68"
     },
     rootme: {
-      rank: "121843",
-      points: 100,
-      challenges: 12
+      rank: "7462",
+      points: 1745,
+      challenges: 83
     }
   };
 
