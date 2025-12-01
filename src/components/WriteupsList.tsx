@@ -183,7 +183,7 @@ export const WriteupsList: React.FC = () => {
             /* Grille de Résultats */
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {filteredWriteups.map((writeup) => {
-                const isActiveMachine = writeup.slug === 'hackthebox-cat-analysis' || writeup.slug === 'hackthebox-dog';
+                const isActiveMachine = false;
                 
                 return (
                   <div
