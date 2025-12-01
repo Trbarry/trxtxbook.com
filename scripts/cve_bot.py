@@ -7,7 +7,7 @@ SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
 
 def get_latest_critical_cves():
-    print("🔍 Recherche des dernières CVE...")
+    print("🔍 Recherche des dernières CVE (Mode Test : TOUT inclure)...")
     url = "https://cve.circl.lu/api/last"
     
     try:
@@ -24,21 +24,23 @@ def get_latest_critical_cves():
             except ValueError:
                 cvss_score = 0.0
 
-            # Seuil à 7.0 pour être sûr d'avoir des résultats
-            if cvss_score >= 7.0:
-                cve_id = item.get('id')
-                print(f"  🚨 Trouvé : {cve_id} (CVSS: {cvss_score})")
-                
-                cve = {
-                    "cve_id": cve_id,
-                    "description": item.get('summary', 'Pas de description disponible'),
-                    "cvss_score": cvss_score,
-                    "affected_product": "Voir détails",
-                    "published_date": item.get('Published'),
-                    "reference_url": f"https://nvd.nist.gov/vuln/detail/{cve_id}"
-                }
-                critical_cves.append(cve)
-                
+            # --- MODIFICATION ICI : ON PREND TOUT ---
+            # if cvss_score >= 7.0:  <-- On commente cette ligne
+            
+            cve_id = item.get('id')
+            print(f"  📥 Récupération : {cve_id} (CVSS: {cvss_score})")
+            
+            cve = {
+                "cve_id": cve_id,
+                "description": item.get('summary', 'Pas de description disponible'),
+                "cvss_score": cvss_score,
+                "affected_product": "Voir détails",
+                "published_date": item.get('Published'),
+                "reference_url": f"https://nvd.nist.gov/vuln/detail/{cve_id}"
+            }
+            critical_cves.append(cve)
+            
+            # On s'arrête à 5 pour le test
             if len(critical_cves) >= 5:
                 break
         
