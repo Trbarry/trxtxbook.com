@@ -1,131 +1,154 @@
-TRTNXBOOK.COM : Portfolio d'Ingénierie Cybersécurité
+TRTNXBOOK.COM - Portfolio d'Ingénierie & Cybersécurité
 
-1. Overview du Projet
+1. Vue d'ensemble
 
-Ce dépôt contient le code source complet de trtnxbook.com, le portfolio technique de Tristan Barry. Conçu comme une Knowledge Base et une vitrine professionnelle, le site a pour objectif de documenter une transition de carrière réussie de l'infrastructure vers l'Ingénierie Système et la Sécurité Offensive.
+Ce dépôt contient le code source de trtnxbook.com, la plateforme technique personnelle de Tristan Barry. Conçu comme une base de connaissances (Knowledge Base) dynamique, ce projet documente la transition professionnelle de l'auteur, passant de l'infrastructure physique (fibre optique) à l'administration système et la sécurité offensive.
 
-La plateforme présente :
+L'application sert de vitrine technique démontrant des compétences en :
 
-Rapports d'Intrusion (Write-ups CTF)
+Développement Fullstack : Architecture SPA moderne, typage strict, intégration BaaS.
 
-Projets d'infrastructure (Home Lab, Active Directory, Conteneurisation)
+Cybersécurité : Rapports d'intrusion (Write-ups), gestion de secrets, logique de divulgation responsable.
 
-Le suivi des certifications professionnelles (CPTS, eJPT, AZ-900).
+Infrastructure : Gestion de projets, Active Directory, Home Lab.
 
-2. Stack Technique Fondamentale
+2. Stack Technique
 
-Catégorie
+L'architecture privilégie la performance, la sécurité et la maintenabilité.
+
+Domaine
 
 Technologie
 
-Rôle et Justification
+Justification Technique
 
 Frontend
 
-React (Hooks), TypeScript, Vite
+React 18, TypeScript, Vite
 
-Vitesse, rigueur du typage, et architecture en SPA moderne.
+Architecture basée sur les composants, typage statique fort pour la robustesse, et build tool ultra-rapide.
 
-UI Framework
+Interface (UI)
 
 Tailwind CSS 3.4
 
-Utilitaires pour le thème Deep Black et la conception responsive.
+Système de classes utilitaires pour un design system cohérent (thème "Deep Black") et responsive.
 
-Animation UX
+Expérience (UX)
 
 Framer Motion
 
-Transitions de pages fluides avec effet "Cyber-Spring" (simulation d'allumage d'écran CRT) pour une UX native et dynamique.
+Gestion des transitions de pages (cycle de vie mount/unmount) et animations physiques (spring physics).
 
 Backend
 
-Supabase (PostgreSQL)
+Supabase
 
-BaaS pour la gestion des données structurées, le stockage sécurisé des assets et les politiques RLS.
+Backend-as-a-Service (PostgreSQL) gérant l'authentification, la base de données relationnelle et le stockage d'objets.
 
-OS Développeur
+Routing
+
+React Router v6
+
+Gestion déclarative des routes et de la navigation client-side.
+
+Environnement
 
 Arch Linux / Hyprland
 
-L'interface graphique et l'UX utilisateur (Terminal CLI) reflètent l'environnement de travail de l'auteur.
+L'UX du site (notamment le terminal) est inspirée des gestionnaires de fenêtres par pavage (tiling WM).
 
-3. Architecture du Code Source (/src)
+3. Architecture du Code Source
 
-L'application est architecturée pour garantir la modularité et la performance dans le strict respect des conventions TypeScript et React.
+Le projet suit une structure modulaire stricte dans le dossier /src.
 
-3.1. Structure des Composants (/components)
+3.1. Organisation des Dossiers
 
-Dossier
+components/layout : Composants structurels persistants (Header, Footer) et wrappers d'animation (PageTransition).
 
-Description
+components/core : Blocs fonctionnels principaux de la page d'accueil (Hero, Formation, Writeups).
 
-Exemples de fichiers
+components/platforms : Cartes de visualisation de données pour les plateformes externes (HackTheBox, TryHackMe).
 
-layout
+lib : Initialisation des clients externes (supabase.ts) et utilitaires.
 
-Composants structurels globaux et animations de fond.
+pages : Vues correspondant aux routes de l'application.
 
-Header.tsx, Footer.tsx, PageTransition.tsx
+types : Définitions des interfaces TypeScript (Schemas DB).
 
-core
+3.2. Fonctionnalités Avancées
 
-Sections complètes de la page d'accueil.
+Terminal Système Interactif
 
-Hero.tsx, Formation.tsx, Writeups.tsx
+Un émulateur de terminal est accessible globalement sur l'application (Overlay Z-Index élevé).
 
-platforms
+Activation : Touches ² (Backquote) ou CTRL+K.
 
-Cartes de métriques externes (HTB, THM, Root-Me).
+Fonctionnalités : Navigation au clavier, système de fichiers simulé, historique de commandes, commandes système (neofetch, whoami, ls, cd).
 
-HackTheBoxCard.tsx, TryHackMeCard.tsx
+Moteur d'Animation
 
-lib
+L'application n'utilise pas de transitions CSS standard mais un moteur physique via Framer Motion.
 
-Logique métier et initialisation des services.
+Page Transitions : Effet "CRT Turn On" (scale + brightness) lors des changements de routes.
 
-supabase.ts, analytics.ts
+Scroll Reveal : Apparition progressive des éléments au défilement via l'API Intersection Observer.
 
-/pages
+Sécurité & Éthique (Write-ups)
 
-Vues complètes liées aux routes (URL).
+Une logique conditionnelle est implémentée pour les rapports de pentest (Writeups). Le système vérifie le slug de la machine concernée. Si la machine est toujours active sur la plateforme d'entraînement (ex: HackTheBox), le contenu est automatiquement flouté et verrouillé pour empêcher la divulgation de solutions (spoilers), respectant ainsi les règles académiques.
 
-WriteupsList.tsx, CertificationsList.tsx
+4. Architecture Backend & Données
 
-3.2. Caractéristiques Techniques (Advanced Features)
+Le backend repose sur Supabase (PostgreSQL). La configuration est gérée via SQL et le versioning des migrations.
 
-Console Interactive (Terminal CLI) :
+4.1. Modèle de Données (Schéma simplifié)
 
-Le composant <Terminal /> est un easter egg accessible globalement via les touches ² ou CTRL+K.
+writeups : Stocke les articles techniques.
 
-Il simule un shell (zsh / bash) avec des commandes de navigation (cd, ls, neofetch, cat) et des retours colorés (erreurs, succès).
+slug (Primary Key, string) : Identifiant URL unique.
 
-Utilisation de framer-motion pour un effet de descente "Quake Console".
+content (Text) : Contenu en Markdown.
 
-Animation d'Apparition :
+published (Boolean) : Flag de visibilité.
 
-Le composant <ScrollReveal /> gère l'apparition progressive des éléments (opacity/translation) en utilisant l'API IntersectionObserver sans dépendance à des classes CSS externes, optimisant les performances du thread principal.
+tags (Array) : Mots-clés pour le moteur de recherche.
 
-Sécurité des Write-ups :
+analytics : Tables dédiées aux métriques de visite (respectueuses de la vie privée, sans cookies tiers).
 
-Implémentation d'une logique frontend qui détecte les machines encore actives sur HackTheBox (via le slug) et masque ou floute le contenu des rapports par respect pour l'éthique et les règles des plateformes.
+4.2. Sécurité (Row Level Security)
 
-4. Architecture Backend (Supabase)
+L'accès aux données est contrôlé par des politiques RLS strictes au niveau de la base de données :
 
-Le backend est géré via une approche Infrastructure as Code au sein du dossier /supabase/migrations.
+Public (Anon) : Droit de lecture (SELECT) uniquement sur les enregistrements où published = true.
 
-4.1. Modèle de Données
+Admin (Auth) : Droit d'écriture (INSERT, UPDATE, DELETE) réservé à l'UUID de l'administrateur.
 
-Les données critiques sont structurées pour une récupération rapide :
+5. Installation et Développement
 
-writeups : Contenu des rapports d'intrusion, indexé par slug.
+Prérequis
 
-analytics_summary : Tables pour le système d'analytics personnalisé et respectueux de la vie privée.
+Node.js (v18+)
 
-4.2. Sécurité des Données (RLS)
+NPM ou Yarn
 
-La sécurité repose sur les politiques RLS (Row Level Security) définies dans les fichiers de migration.
+Variables d'environnement Supabase (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY)
 
-L'accès public en lecture (SELECT) est autorisé sur les tables de contenu où le champ published est TRUE.
+Commandes
 
-L'accès en écriture (INSERT, UPDATE, DELETE) est strictement limité aux utilisateurs authentifiés avec le rôle admin. 
+# Installation des dépendances
+npm install
+
+# Lancement du serveur de développement (HMR)
+npm run dev
+
+# Compilation pour la production
+npm run build
+
+# Prévisualisation du build local
+npm run preview
+
+
+6. Droits et Licence
+
+Ce projet est le portfolio personnel de Tristan Barry. Le code source est public à des fins de démonstration technique. Le contenu rédactionnel (articles, write-ups) reste la propriété intellectuelle de l'auteur.
