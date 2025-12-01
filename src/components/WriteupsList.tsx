@@ -16,6 +16,7 @@ import { supabase } from '../lib/supabase';
 import { Writeup } from '../types/writeup';
 import { useNavigate } from 'react-router-dom';
 import { SEOHead } from './SEOHead';
+import { getOptimizedUrl } from '../lib/imageUtils';
 
 export const WriteupsList: React.FC = () => {
   const [writeups, setWriteups] = useState<Writeup[]>([]);
@@ -203,11 +204,11 @@ export const WriteupsList: React.FC = () => {
                     {/* Image Header */}
                     <div className="relative h-48 overflow-hidden border-b border-white/5">
                       <img
-                        src={getWriteupImage(writeup)}
-                        alt={writeup.title}
-                        className={`w-full h-full object-cover transition-transform duration-700 
-                                 ${isActiveMachine ? 'blur-md scale-110 grayscale' : 'group-hover:scale-110'}`}
-                      />
+                        src={getOptimizedUrl(getWriteupImage(writeup), 600)} // <-- Largeur 600px suffisante pour une carte
+                         alt={writeup.title}
+                         loading="lazy" // Ajoute aussi ça pour la perf
+                          className="..."
+                       />
                       
                       {/* Badge Platforme */}
                       <div className="absolute top-4 left-4 z-10">

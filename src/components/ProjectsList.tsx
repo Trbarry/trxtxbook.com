@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { getOptimizedUrl } from '../lib/imageUtils';
+
 import { 
   FolderGit2, 
   Search, 
@@ -121,11 +123,11 @@ export const ProjectsList: React.FC = () => {
                   <div className="relative h-56 overflow-hidden border-b border-white/5">
                     <div className="absolute inset-0 bg-violet-900/20 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
                     <img 
-                      src={project.image} 
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700
-                               group-hover:scale-110 group-hover:rotate-1"
-                    />
+                     src={getOptimizedUrl(project.image, 600)} // <-- Optimisation ici
+                     alt={project.title}
+                      loading="lazy"
+                     className="..."
+                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1f] via-[#1a1a1f]/40 to-transparent opacity-90 z-10" />
                     
                     {/* Badge Article */}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getOptimizedUrl } from '../lib/imageUtils';
 import { 
   Target, 
   ArrowRight, 
@@ -124,11 +125,11 @@ export const Writeups: React.FC = () => {
                   {/* Image Header */}
                   <div className="relative h-48 overflow-hidden">
                     <img
-                      src={getWriteupImage(writeup)}
-                      alt={writeup.title}
-                      className={`w-full h-full object-cover transition-transform duration-700 
-                               ${isActiveMachine ? 'blur-md scale-110 grayscale' : 'group-hover:scale-110'}`}
-                    />
+                    src={getOptimizedUrl(getWriteupImage(writeup), 600)}
+                     alt={writeup.title}
+                    loading="lazy"
+                     className="..."
+                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1f] via-[#1a1a1f]/60 to-transparent" />
                     
                     {/* Badge Platforme */}

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
+import { getOptimizedUrl } from '../lib/imageUtils';
 import { 
   Shield, 
   Award, 
@@ -74,10 +75,10 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
         <div className="relative h-[300px] md:h-[400px] w-full overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1f] via-[#1a1a1f]/50 to-transparent z-10" />
             <img
-              src={getWriteupImage()}
-              alt={writeup.title}
-              className={`w-full h-full object-cover ${isActiveMachine ? 'blur-md opacity-50' : 'opacity-80'}`}
-            />
+             src={getOptimizedUrl(getWriteupImage(), 1200)} // <-- 1200px pour le détail
+             alt={writeup.title}
+             className="..."
+             />
 
             {/* Titre & Badges sur l'image */}
             <div className="absolute bottom-0 left-0 w-full p-8 z-20">

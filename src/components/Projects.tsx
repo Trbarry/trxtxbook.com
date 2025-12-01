@@ -9,6 +9,7 @@ import { SteamDeckProject } from './projects/SteamDeckProject';
 import { ExegolProject } from './projects/ExegolProject';
 import { LinuxMintProject } from './projects/LinuxMintProject';
 import { CPTSJourneyProject } from './projects/CPTSJourneyProject';
+import { getOptimizedUrl } from '../lib/imageUtils';
 
 export const Projects: React.FC = () => {
   const navigate = useNavigate();
@@ -79,10 +80,10 @@ export const Projects: React.FC = () => {
                 <div className="absolute inset-0 bg-violet-900/20 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
                 
                 <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-700
-                           group-hover:scale-110 group-hover:rotate-1"
+                src={getOptimizedUrl(project.image, 600)}
+                alt={project.title}
+                loading="lazy"
+                className="..."
                 />
                 
                 {/* Dégradé bas pour lisibilité */}

@@ -3,6 +3,7 @@ import { Code, ExternalLink, Github, CheckCircle2, X, ArrowRight } from 'lucide-
 import { ModalPortal } from './ModalPortal';
 import { Project } from '../types/project';
 import { useNavigate } from 'react-router-dom';
+import { getOptimizedUrl } from '../lib/imageUtils';
 
 interface ProjectDetailProps {
   project: Project;
@@ -24,10 +25,10 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose, 
       {/* En-tête avec image */}
       <div className="relative h-[300px] overflow-hidden group">
         <img
-          src={project.image}
+          src={getOptimizedUrl(project.image, 1200)} // <-- 1200px
           alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+          className="..."
+          />
         <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1f] via-[#1a1a1f]/50 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-8">
           <div className="flex items-center justify-between mb-4">
