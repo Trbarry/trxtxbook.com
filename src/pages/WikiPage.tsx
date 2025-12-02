@@ -6,7 +6,9 @@ import rehypeRaw from 'rehype-raw';
 import { 
   Search, Book, ChevronRight, ChevronDown, Hash, 
   Menu, X, Calendar, Folder, FileText, Construction, 
-  Layers, FolderOpen, CornerDownRight, Check, Copy, List
+  Layers, FolderOpen, CornerDownRight, Check, Copy, List,
+  Brain, Sparkles, AlertTriangle, ShieldCheck, GraduationCap,
+  Terminal
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -32,12 +34,10 @@ const extractHeadings = (markdown: string): TocItem[] => {
   const headings: TocItem[] = [];
   
   lines.forEach((line) => {
-    // On capture les h2 (##) et h3 (###)
     const match = line.match(/^(#{2,3})\s+(.+)$/);
     if (match) {
       const level = match[1].length;
       const text = match[2];
-      // Création d'un ID simple pour l'ancre
       const id = text.toLowerCase().replace(/[^\w]+/g, '-');
       headings.push({ id, text, level });
     }
@@ -149,6 +149,122 @@ const FileTree: React.FC<{ nodes: Record<string, TreeNode>; onSelect: (page: Wik
   );
 };
 
+// --- NOUVEAU COMPOSANT : PAGE D'ACCUEIL WIKI ---
+const WikiWelcome = () => {
+  return (
+    <div className="flex flex-col items-center justify-center py-12 px-6 max-w-4xl mx-auto animate-in fade-in zoom-in duration-500">
+      
+      {/* Hero Icon */}
+      <div className="relative mb-8 group">
+        <div className="absolute inset-0 bg-violet-500/20 rounded-full blur-3xl group-hover:bg-violet-500/30 transition-all duration-700"></div>
+        <div className="relative p-6 bg-[#13131a] rounded-2xl border border-violet-500/30 shadow-[0_0_40px_rgba(139,92,246,0.15)]">
+          <Brain className="w-16 h-16 text-violet-400" />
+          <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-yellow-400 animate-pulse" />
+        </div>
+      </div>
+
+      <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center tracking-tight">
+        Second <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-blue-400">Cerveau</span>
+      </h2>
+      
+      <p className="text-gray-400 text-lg text-center max-w-2xl leading-relaxed mb-12">
+        Bienvenue dans mon <span className="text-violet-300 font-medium">Digital Garden</span>. Une collection vivante de notes, 
+        de procédures et de retours d'expérience. Ce n'est pas un blog, c'est une extension de ma mémoire.
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-12">
+        {/* Carte : Philosophie */}
+        <div className="bg-[#1a1a20]/50 border border-white/5 rounded-xl p-6 hover:border-violet-500/30 transition-colors relative overflow-hidden group">
+          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+            <GraduationCap className="w-24 h-24 -mr-8 -mt-8 rotate-12" />
+          </div>
+          <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <Book className="w-5 h-5 text-violet-400" />
+            C'est quoi ?
+          </h3>
+          <p className="text-sm text-gray-400 leading-relaxed">
+            Ici, je centralise tout ce que j'apprends. Des cheat-sheets Nmap aux procédures Active Directory complexes.
+            Le but est simple : <strong className="text-gray-200">ne jamais chercher la même information deux fois.</strong>
+          </p>
+        </div>
+
+        {/* Carte : Réalité */}
+        <div className="bg-[#1a1a20]/50 border border-white/5 rounded-xl p-6 hover:border-yellow-500/30 transition-colors relative overflow-hidden group">
+          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+            <Terminal className="w-24 h-24 -mr-8 -mt-8 rotate-12" />
+          </div>
+          <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <AlertTriangle className="w-5 h-5 text-yellow-500" />
+            La réalité (Disclaimer)
+          </h3>
+          <p className="text-sm text-gray-400 leading-relaxed">
+            Ce sont des <strong>notes personnelles de terrain</strong>. Elles sont brutes, pragmatiques et faites pour mon usage.
+            Elles peuvent contenir des raccourcis, du "franglais", ou manquer de contexte pour un débutant complet.
+          </p>
+        </div>
+      </div>
+
+      {/* Liste Qualités / Défauts */}
+      <div className="w-full bg-[#13131a] border border-white/10 rounded-xl p-8">
+        <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6 text-center">
+          Transparence Totale
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h4 className="text-green-400 font-bold mb-4 flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4" /> Les Qualités
+            </h4>
+            <ul className="space-y-3">
+              {[
+                "100% Pratique & Testé",
+                "Droit au but (Commandes > Blabla)",
+                "Centralisé & Structuré",
+                "Mis à jour au fil de l'eau"
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
+                  <Check className="w-4 h-4 text-green-500/50 mt-0.5 shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="relative">
+             {/* Ligne de séparation verticale pour desktop */}
+            <div className="hidden md:block absolute left-0 top-0 bottom-0 w-px bg-white/5 -ml-4"></div>
+            
+            <h4 className="text-red-400 font-bold mb-4 flex items-center gap-2">
+              <Construction className="w-4 h-4" /> Les Défauts
+            </h4>
+            <ul className="space-y-3">
+              {[
+                "Contexte parfois spécifique à mes labs",
+                "Peut contenir des erreurs ou typos",
+                "Pas une documentation officielle",
+                "Certaines sections en chantier"
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
+                  <X className="w-4 h-4 text-red-500/50 mt-0.5 shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-8 flex items-center gap-2 text-xs text-gray-600 font-mono">
+        <span>sys_status: online</span>
+        <span className="w-1 h-1 bg-gray-600 rounded-full"></span>
+        <span>access_level: public_read</span>
+        <span className="w-1 h-1 bg-gray-600 rounded-full"></span>
+        <span>author: trtnx</span>
+      </div>
+    </div>
+  );
+};
+
 // --- PAGE PRINCIPALE ---
 export const WikiPage: React.FC = () => {
   const [pages, setPages] = useState<WikiPageType[]>([]);
@@ -164,7 +280,6 @@ export const WikiPage: React.FC = () => {
     if (window.innerWidth < 1024) setIsSidebarOpen(false);
   }, []);
 
-  // Génération de l'arbre
   useEffect(() => {
     const newTree: Record<string, TreeNode> = {};
     const filteredPages = pages.filter(p => 
@@ -189,7 +304,6 @@ export const WikiPage: React.FC = () => {
     setTree(newTree);
   }, [pages, searchQuery]);
 
-  // Génération du Sommaire au changement de page
   useEffect(() => {
     if (selectedPage?.content) {
       setToc(extractHeadings(selectedPage.content));
@@ -230,15 +344,12 @@ export const WikiPage: React.FC = () => {
     <>
       <SEOHead title="Knowledge Base | Tristan Barry" description="Wiki technique et documentation personnelle" />
       
-      {/* Container Global */}
       <div className="min-h-screen bg-[#0a0a0f] flex pt-24 pb-6 px-4 md:px-8 gap-6 overflow-hidden">
         
-        {/* Toggle Mobile */}
         <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="lg:hidden fixed bottom-6 right-6 z-50 bg-violet-600 p-4 rounded-full shadow-[0_0_30px_rgba(139,92,246,0.4)] text-white hover:bg-violet-500 transition-all active:scale-95">
           {isSidebarOpen ? <X /> : <Menu />}
         </button>
 
-        {/* SIDEBAR NAVIGATION */}
         <aside className={`fixed inset-y-24 left-4 lg:left-8 z-40 w-80 lg:relative lg:inset-auto lg:w-80 lg:block bg-[#13131a]/80 backdrop-blur-xl border border-white/10 rounded-2xl flex flex-col transition-all duration-500 ease-[cubic-bezier(0.25,0.8,0.25,1)] shadow-2xl ${isSidebarOpen ? 'translate-x-0 opacity-100' : '-translate-x-[120%] opacity-0 lg:translate-x-0 lg:opacity-100 lg:w-80'}`}>
           <div className="p-6 border-b border-white/5">
             <div className="flex items-center gap-3 mb-6">
@@ -270,14 +381,11 @@ export const WikiPage: React.FC = () => {
           </div>
         </aside>
 
-        {/* MAIN CONTENT AREA */}
         <main className="flex-1 bg-[#13131a]/40 backdrop-blur-md border border-white/5 rounded-2xl overflow-hidden relative shadow-2xl flex">
           
-          {/* ZONE DE LECTURE (Centre) */}
           <div className="flex-1 overflow-y-auto custom-scrollbar p-6 md:p-12 scroll-smooth">
             {selectedPage ? (
               <motion.div key={selectedPage.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="max-w-3xl mx-auto">
-                {/* Header Page */}
                 <div className="mb-10 pb-8 border-b border-white/5">
                   <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 mb-6 font-mono">
                     <span className="text-violet-400 font-bold px-2 py-1 bg-violet-500/10 rounded border border-violet-500/20">/root</span>
@@ -301,7 +409,6 @@ export const WikiPage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Contenu Markdown */}
                 <div className="min-h-[400px]">
                   {(!selectedPage.content || selectedPage.content.trim() === '') ? (
                     <MaintenanceState />
@@ -324,7 +431,6 @@ export const WikiPage: React.FC = () => {
                         components={{
                           code: CodeBlock,
                           pre: ({children}) => <>{children}</>,
-                          // Ajout d'IDs aux titres pour l'ancrage
                           h2: ({children}) => {
                             const id = String(children).toLowerCase().replace(/[^\w]+/g, '-');
                             return <h2 id={id} className="scroll-mt-24">{children}</h2>
@@ -342,18 +448,11 @@ export const WikiPage: React.FC = () => {
                 </div>
               </motion.div>
             ) : (
-              <div className="h-full flex flex-col items-center justify-center text-gray-500 p-6">
-                <div className="w-32 h-32 bg-gradient-to-tr from-violet-500/10 to-blue-500/10 rounded-full flex items-center justify-center mb-8 border border-white/5 shadow-2xl relative">
-                  <div className="absolute inset-0 rounded-full bg-violet-500/20 blur-xl animate-pulse"></div>
-                  <Layers className="w-12 h-12 text-violet-400 relative z-10" />
-                </div>
-                <h2 className="text-3xl font-bold text-white mb-3">Base de Connaissances</h2>
-                <p className="max-w-md text-center text-gray-400 leading-relaxed">Sélectionnez un nœud de données dans le panneau latéral pour commencer l'extraction.</p>
-              </div>
+              // ✅ REMPLACEMENT PAR LA NOUVELLE PAGE D'ACCUEIL
+              <WikiWelcome />
             )}
           </div>
 
-          {/* TABLE OF CONTENTS (Droite - Desktop seulement) */}
           {selectedPage && toc.length > 0 && (
             <aside className="hidden xl:block w-64 border-l border-white/5 bg-[#13131a]/30 p-6 overflow-y-auto custom-scrollbar">
               <div className="sticky top-6">
@@ -362,16 +461,12 @@ export const WikiPage: React.FC = () => {
                   Dans cette page
                 </h4>
                 <div className="space-y-1 relative">
-                  {/* Ligne guide verticale */}
                   <div className="absolute left-[3px] top-2 bottom-2 w-px bg-white/5"></div>
-                  
                   {toc.map((item) => (
                     <a
                       key={item.id}
                       href={`#${item.id}`}
-                      className={`block text-sm py-1 pl-4 border-l-2 transition-all duration-200 hover:text-violet-300 hover:border-violet-500/50
-                        ${item.level === 3 ? 'ml-3 text-gray-500 border-transparent text-xs' : 'text-gray-400 border-transparent'}
-                      `}
+                      className={`block text-sm py-1 pl-4 border-l-2 transition-all duration-200 hover:text-violet-300 hover:border-violet-500/50 ${item.level === 3 ? 'ml-3 text-gray-500 border-transparent text-xs' : 'text-gray-400 border-transparent'}`}
                       onClick={(e) => {
                         e.preventDefault();
                         document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
