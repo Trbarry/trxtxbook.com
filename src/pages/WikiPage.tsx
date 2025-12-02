@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { motion, AnimatePresence } from 'framer-motion';
-import { WikiTip } from '../components/WikiTip'; // ✅ Import du composant Tip
+import { WikiTip } from '../components/WikiTip'; // ✅ Assure-toi que ce fichier existe
 
 // --- TYPES ---
 interface TreeNode {
@@ -162,7 +162,7 @@ const FileTree: React.FC<{ nodes: Record<string, TreeNode>; onSelect: (page: Wik
   );
 };
 
-// --- PAGE D'ACCUEIL WIKI (DESIGN PREMIUM + KUDOS) ---
+// --- PAGE D'ACCUEIL WIKI (DESIGN PREMIUM) ---
 const WikiWelcome = () => {
   const stats = [
     { label: "Nodes", value: "250+", icon: Database, color: "blue" },
@@ -190,9 +190,9 @@ const WikiWelcome = () => {
           Base de connaissances dynamique, centralisant mes notes techniques, procédures et retours d'expérience.
         </p>
 
-        {/* ✅ AJOUT DU BOUTON KUDOS ICI */}
+        {/* ✅ BOUTON KUDOS GLOBAL */}
         <div className="mb-12">
-          <WikiTip /> 
+          <WikiTip context="global" />
         </div>
       </div>
 
@@ -468,9 +468,9 @@ export const WikiPage: React.FC = () => {
                   )}
                 </div>
 
-                {/* ✅ SECTION TIPS - Nouvelle intégration */}
-                <div className="mt-16">
-                   <WikiTip pageId={selectedPage.id} initialLikes={selectedPage.likes || 0} />
+                {/* ✅ SECTION TIPS - Intégration spécifique article */}
+                <div className="mt-16 pb-12 border-t border-white/5 pt-8">
+                   <WikiTip pageId={selectedPage.id} context="article" />
                 </div>
 
               </motion.div>
