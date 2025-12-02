@@ -31,6 +31,8 @@ import { Terminal } from './components/Terminal';
 const WriteupsList = lazy(() => import('./components/WriteupsList').then(module => ({ default: module.WriteupsList })));
 const ProjectsList = lazy(() => import('./components/ProjectsList').then(module => ({ default: module.ProjectsList })));
 const CertificationsList = lazy(() => import('./pages/CertificationsList').then(module => ({ default: module.CertificationsList })));
+// ✅ AJOUT : Import de la page Wiki
+const WikiPage = lazy(() => import('./pages/WikiPage').then(module => ({ default: module.WikiPage })));
 
 // Pages de détail et articles
 const WriteupPage = lazy(() => import('./pages/WriteupPage').then(module => ({ default: module.WriteupPage })));
@@ -82,6 +84,8 @@ const AnimatedRoutes = ({
           <Route path="/writeups" element={<PageTransition><WriteupsList /></PageTransition>} />
           <Route path="/projects" element={<PageTransition><ProjectsList /></PageTransition>} />
           <Route path="/certifications" element={<PageTransition><CertificationsList /></PageTransition>} />
+          {/* ✅ AJOUT : Route Wiki */}
+          <Route path="/wiki" element={<PageTransition><WikiPage /></PageTransition>} />
 
           {/* DETAILS DYNAMIQUES */}
           <Route path="/writeups/:slug" element={<PageTransition><WriteupPage /></PageTransition>} />

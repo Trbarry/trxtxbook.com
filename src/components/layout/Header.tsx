@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Laptop, Linkedin, Mail, Menu, X, Award, Github } from 'lucide-react';
+import { Laptop, Linkedin, Mail, Menu, X, Award, Github, Book } from 'lucide-react'; // ✅ AJOUT : Icone Book
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion'; // Import de la librairie d'animation
+import { motion, AnimatePresence } from 'framer-motion';
 
 const imageUrl = 'https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/photo.jpg';
 
@@ -141,6 +141,15 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
               Projects
             </Link>
 
+            {/* ✅ AJOUT : Lien Wiki Desktop */}
+            <Link
+              to="/wiki"
+              className={`px-3 py-2 text-sm uppercase tracking-wider hover:text-violet-400 transition-colors rounded-lg hover:bg-white/5 ${location.pathname === '/wiki' ? 'text-violet-500 font-semibold' : 'text-gray-400'}`}
+              onClick={() => setActiveSection('wiki')}
+            >
+              Wiki
+            </Link>
+
             <button
               onClick={handleProfileClick}
               className={`mx-2 flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-violet-600 to-violet-500 text-white rounded-full hover:shadow-lg hover:shadow-violet-500/25 transition-all duration-300 border border-white/10 transform hover:scale-105`}
@@ -212,6 +221,15 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
                   className="text-xl font-medium uppercase tracking-wider text-center py-4 border-b border-white/5 text-gray-400 hover:text-violet-400"
                 >
                   Projects
+                </Link>
+                {/* ✅ AJOUT : Lien Wiki Mobile */}
+                <Link
+                  to="/wiki"
+                  onClick={() => { setIsMenuOpen(false); setActiveSection('wiki'); }}
+                  className="flex items-center justify-center gap-2 text-xl font-medium uppercase tracking-wider text-center py-4 border-b border-white/5 text-gray-400 hover:text-violet-400"
+                >
+                  <Book className="w-5 h-5" />
+                  Wiki
                 </Link>
                 <Link
                   to="/certifications"
