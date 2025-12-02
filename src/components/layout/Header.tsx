@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Laptop, Linkedin, Mail, Menu, X, Award, Github, Book, Brain, Sparkles } from 'lucide-react';
+import { Laptop, Linkedin, Mail, Menu, X, Award, Github, Brain, Sparkles } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -99,17 +99,23 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
     >
       <nav className="container mx-auto px-6">
         <div className="flex items-center justify-between relative z-50">
-          {/* Logo */}
+          {/* Logo & Brand Name */}
           <button 
             onClick={() => handleNavigation('/', 'home')}
             className="flex items-center space-x-2 group"
           >
-            <div className="p-2 bg-violet-500/10 rounded-lg group-hover:bg-violet-500/20 transition-colors">
+            <div className="p-2 bg-violet-500/10 rounded-lg group-hover:bg-violet-500/20 transition-colors border border-violet-500/20">
               <Laptop className="w-6 h-6 text-violet-500 transition-transform duration-300 group-hover:-rotate-12" />
             </div>
-            <span className="text-lg font-bold tracking-wider group-hover:text-violet-400 transition-colors hidden sm:block">
-              Tristan Barry
-            </span>
+            
+            {/* ✅ MODIFICATION : Remplacement de "Tristan Barry" par "TRTNX" */}
+            <div className="hidden sm:flex flex-col items-start">
+              <span className="text-lg font-bold tracking-widest font-mono group-hover:text-violet-400 transition-colors">
+                TRTNX
+              </span>
+              {/* Optionnel : petit sous-titre */}
+              {/* <span className="text-[9px] text-gray-500 uppercase tracking-[0.2em] -mt-1">Portfolio</span> */}
+            </div>
           </button>
 
           {/* Toggle Menu Mobile */}
@@ -182,7 +188,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
             </button>
           </div>
 
-          {/* Socials Desktop - TAILLE AUGMENTÉE ICI */}
+          {/* Socials Desktop (Gros icônes) */}
           <div className="hidden md:flex items-center space-x-3 pl-4 border-l border-white/10 ml-4">
             <a 
               href="https://github.com/Trbarry" 
@@ -250,7 +256,6 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
                 >
                   Projects
                 </Link>
-                {/* Mobile Wiki Link */}
                 <Link
                   to="/wiki"
                   onClick={() => { setIsMenuOpen(false); setActiveSection('wiki'); }}
