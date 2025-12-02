@@ -8,10 +8,11 @@ import {
   Menu, X, Calendar, Folder, FileText, Construction, 
   Layers, FolderOpen, CornerDownRight, Check, Copy, List,
   Brain, Sparkles, AlertTriangle, ShieldCheck, GraduationCap,
-  Terminal
+  Terminal, Cpu, Network, Activity, Database
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { motion, AnimatePresence } from 'framer-motion';
+import { WikiTip } from '../components/WikiTip'; // ✅ Import du composant Tip
 
 // --- TYPES ---
 interface TreeNode {
@@ -46,7 +47,7 @@ const extractHeadings = (markdown: string): TocItem[] => {
   return headings;
 };
 
-// --- COMPOSANT CODE BLOCK ---
+// --- COMPOSANT CODE BLOCK "TERMINAL" ---
 const CodeBlock = ({ children, className, ...props }: any) => {
   const [copied, setCopied] = useState(false);
   const match = /language-(\w+)/.exec(className || '');
@@ -61,32 +62,32 @@ const CodeBlock = ({ children, className, ...props }: any) => {
 
   if (!match) {
     return (
-      <code className="bg-[#1a1a20] text-violet-200 px-1.5 py-0.5 rounded font-mono text-sm border border-white/10" {...props}>
+      <code className="bg-[#1a1a20] text-violet-200 px-1.5 py-0.5 rounded font-mono text-sm border border-white/10 shadow-sm" {...props}>
         {children}
       </code>
     );
   }
 
   return (
-    <div className="relative group my-6 rounded-xl overflow-hidden border border-white/10 bg-[#0f0f13] shadow-2xl">
-      <div className="flex items-center justify-between px-4 py-2 bg-[#1a1a20] border-b border-white/5">
-        <div className="flex items-center gap-2">
+    <div className="relative group my-8 rounded-xl overflow-hidden border border-white/10 bg-[#0f0f13] shadow-2xl ring-1 ring-white/5">
+      <div className="flex items-center justify-between px-4 py-3 bg-[#1a1a20]/80 backdrop-blur border-b border-white/5">
+        <div className="flex items-center gap-3">
           <div className="flex gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-red-500/20"></div>
-            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20"></div>
-            <div className="w-2.5 h-2.5 rounded-full bg-green-500/20"></div>
+            <div className="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/50"></div>
+            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
+            <div className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/50"></div>
           </div>
-          <span className="text-xs text-gray-500 font-mono ml-2 uppercase tracking-wider">{language}</span>
+          <span className="text-xs text-gray-500 font-mono ml-2 uppercase tracking-widest opacity-70">{language}</span>
         </div>
         <button
           onClick={handleCopy}
           className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-white transition-colors px-2 py-1 rounded hover:bg-white/5"
         >
-          {copied ? <><Check size={14} className="text-green-400" /><span className="text-green-400 font-medium">Copié !</span></> : <><Copy size={14} /><span>Copier</span></>}
+          {copied ? <><Check size={14} className="text-green-400" /><span className="text-green-400 font-medium">Copié</span></> : <><Copy size={14} /><span>Copier</span></>}
         </button>
       </div>
-      <div className="p-4 overflow-x-auto custom-scrollbar">
-        <code className={`font-mono text-sm text-gray-300 ${className}`} {...props}>{children}</code>
+      <div className="p-5 overflow-x-auto custom-scrollbar bg-black/20">
+        <code className={`font-mono text-sm text-gray-300 leading-relaxed ${className}`} {...props}>{children}</code>
       </div>
     </div>
   );
@@ -99,26 +100,34 @@ const FileTree: React.FC<{ nodes: Record<string, TreeNode>; onSelect: (page: Wik
 
   return (
     <div className="flex flex-col relative">
-      {depth > 0 && <div className="absolute left-[11px] top-0 bottom-0 w-px bg-white/5 border-l border-dashed border-white/20" />}
+      {depth > 0 && <div className="absolute left-[11px] top-0 bottom-0 w-px bg-gradient-to-b from-white/10 to-transparent" />}
       {Object.entries(nodes).sort().map(([name, node]) => {
         const hasChildren = Object.keys(node.children).length > 0;
         const isSelected = node.page?.id === selectedId;
         const isFolderOpen = expanded[name];
 
         return (
-          <div key={node.fullPath} className="relative">
+          <div key={node.fullPath} className="relative group/item">
             {(!node.page || hasChildren) && (
               <div className="my-1">
                 <button 
                   onClick={() => toggle(name)}
-                  className={`w-full text-left flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 group relative overflow-hidden ${isFolderOpen ? 'bg-white/5' : 'hover:bg-white/5'}`}
+                  className={`w-full text-left flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 relative overflow-hidden group/btn
+                    ${isFolderOpen ? 'bg-white/5' : 'hover:bg-white/5'}
+                  `}
                   style={{ paddingLeft: `${depth * 16 + 12}px` }}
                 >
                   {depth > 0 && <CornerDownRight className="absolute text-white/20 w-3 h-3" style={{ left: `${depth * 16 - 6}px` }} />}
+                  
                   <span className={`text-gray-500 transition-transform duration-300 ${isFolderOpen ? 'rotate-90 text-violet-400' : ''}`}><ChevronRight size={14} /></span>
-                  <span className={`transition-colors duration-300 ${isFolderOpen ? 'text-violet-300' : 'text-gray-400 group-hover:text-gray-200'}`}>{isFolderOpen ? <FolderOpen size={15} /> : <Folder size={15} />}</span>
+                  
+                  <span className={`transition-colors duration-300 ${isFolderOpen ? 'text-violet-300' : 'text-gray-400 group-hover/btn:text-gray-200'}`}>
+                    {isFolderOpen ? <FolderOpen size={15} /> : <Folder size={15} />}
+                  </span>
+                  
                   <span className={`text-xs font-bold uppercase tracking-wider truncate transition-colors ${isFolderOpen ? 'text-white' : 'text-gray-400'}`}>{name}</span>
                 </button>
+                
                 <AnimatePresence>
                   {isFolderOpen && (
                     <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} className="overflow-hidden">
@@ -128,13 +137,17 @@ const FileTree: React.FC<{ nodes: Record<string, TreeNode>; onSelect: (page: Wik
                 </AnimatePresence>
               </div>
             )}
+            
             {node.page && !hasChildren && (
-              <div className="my-1 relative">
-                 {depth > 0 && <CornerDownRight className="absolute top-3 text-white/20 w-3 h-3" style={{ left: `${depth * 16 + 4}px` }} />}
+              <div className="my-0.5 relative">
+                 {depth > 0 && <CornerDownRight className="absolute top-2.5 text-white/20 w-3 h-3" style={{ left: `${depth * 16 + 4}px` }} />}
                 <button
                   onClick={() => onSelect(node.page!)}
                   style={{ paddingLeft: `${depth * 16 + 28}px` }}
-                  className={`w-full text-left text-sm truncate py-2 pr-3 rounded-lg transition-all duration-300 flex items-center gap-3 relative ${isSelected ? 'text-white bg-gradient-to-r from-violet-600/20 to-transparent border-l-2 border-violet-500' : 'text-gray-500 hover:text-gray-200 hover:bg-white/5 border-l-2 border-transparent'}`}
+                  className={`w-full text-left text-sm truncate py-2 pr-3 rounded-lg transition-all duration-300 flex items-center gap-3 relative
+                    ${isSelected 
+                      ? 'text-white bg-gradient-to-r from-violet-500/10 to-transparent border-l-2 border-violet-500' 
+                      : 'text-gray-500 hover:text-gray-200 hover:bg-white/5 border-l-2 border-transparent'}`}
                 >
                   <FileText size={14} className={`transition-colors ${isSelected ? "text-violet-400" : "text-gray-600 group-hover:text-gray-400"}`} />
                   <span className="truncate">{node.page.title}</span>
@@ -149,117 +162,97 @@ const FileTree: React.FC<{ nodes: Record<string, TreeNode>; onSelect: (page: Wik
   );
 };
 
-// --- NOUVEAU COMPOSANT : PAGE D'ACCUEIL WIKI ---
+// --- PAGE D'ACCUEIL WIKI (DESIGN PREMIUM) ---
 const WikiWelcome = () => {
+  const stats = [
+    { label: "Nodes", value: "250+", icon: Database, color: "blue" },
+    { label: "Status", value: "Online", icon: Activity, color: "green" },
+    { label: "Last Update", value: "Today", icon: Calendar, color: "violet" },
+  ];
+
   return (
-    <div className="flex flex-col items-center justify-center py-12 px-6 max-w-4xl mx-auto animate-in fade-in zoom-in duration-500">
+    <div className="flex flex-col items-center justify-center py-8 px-4 md:p-12 max-w-5xl mx-auto animate-in fade-in zoom-in duration-500 w-full">
       
-      {/* Hero Icon */}
-      <div className="relative mb-8 group">
-        <div className="absolute inset-0 bg-violet-500/20 rounded-full blur-3xl group-hover:bg-violet-500/30 transition-all duration-700"></div>
-        <div className="relative p-6 bg-[#13131a] rounded-2xl border border-violet-500/30 shadow-[0_0_40px_rgba(139,92,246,0.15)]">
-          <Brain className="w-16 h-16 text-violet-400" />
-          <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-yellow-400 animate-pulse" />
-        </div>
-      </div>
-
-      <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center tracking-tight">
-        Second <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-blue-400">Cerveau</span>
-      </h2>
-      
-      <p className="text-gray-400 text-lg text-center max-w-2xl leading-relaxed mb-12">
-        Bienvenue dans mon <span className="text-violet-300 font-medium">Digital Garden</span>. Une collection vivante de notes, 
-        de procédures et de retours d'expérience. Ce n'est pas un blog, c'est une extension de ma mémoire.
-      </p>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-12">
-        {/* Carte : Philosophie */}
-        <div className="bg-[#1a1a20]/50 border border-white/5 rounded-xl p-6 hover:border-violet-500/30 transition-colors relative overflow-hidden group">
-          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-            <GraduationCap className="w-24 h-24 -mr-8 -mt-8 rotate-12" />
-          </div>
-          <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-            <Book className="w-5 h-5 text-violet-400" />
-            C'est quoi ?
-          </h3>
-          <p className="text-sm text-gray-400 leading-relaxed">
-            Ici, je centralise tout ce que j'apprends. Des cheat-sheets Nmap aux procédures Active Directory complexes.
-            Le but est simple : <strong className="text-gray-200">ne jamais chercher la même information deux fois.</strong>
-          </p>
-        </div>
-
-        {/* Carte : Réalité */}
-        <div className="bg-[#1a1a20]/50 border border-white/5 rounded-xl p-6 hover:border-yellow-500/30 transition-colors relative overflow-hidden group">
-          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-            <Terminal className="w-24 h-24 -mr-8 -mt-8 rotate-12" />
-          </div>
-          <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-            <AlertTriangle className="w-5 h-5 text-yellow-500" />
-            La réalité (Disclaimer)
-          </h3>
-          <p className="text-sm text-gray-400 leading-relaxed">
-            Ce sont des <strong>notes personnelles de terrain</strong>. Elles sont brutes, pragmatiques et faites pour mon usage.
-            Elles peuvent contenir des raccourcis, du "franglais", ou manquer de contexte pour un débutant complet.
-          </p>
-        </div>
-      </div>
-
-      {/* Liste Qualités / Défauts */}
-      <div className="w-full bg-[#13131a] border border-white/10 rounded-xl p-8">
-        <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6 text-center">
-          Transparence Totale
-        </h3>
+      {/* Hero Header */}
+      <div className="text-center mb-12 relative">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-violet-500/20 rounded-full blur-[100px] pointer-events-none"></div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <h4 className="text-green-400 font-bold mb-4 flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4" /> Les Qualités
-            </h4>
-            <ul className="space-y-3">
-              {[
-                "100% Pratique & Testé",
-                "Droit au but (Commandes > Blabla)",
-                "Centralisé & Structuré",
-                "Mis à jour au fil de l'eau"
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
-                  <Check className="w-4 h-4 text-green-500/50 mt-0.5 shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium mb-6 shadow-[0_0_15px_rgba(139,92,246,0.2)]">
+          <Brain className="w-3.5 h-3.5" />
+          <span>Second Brain v2.0</span>
+        </div>
 
-          <div className="relative">
-             {/* Ligne de séparation verticale pour desktop */}
-            <div className="hidden md:block absolute left-0 top-0 bottom-0 w-px bg-white/5 -ml-4"></div>
-            
-            <h4 className="text-red-400 font-bold mb-4 flex items-center gap-2">
-              <Construction className="w-4 h-4" /> Les Défauts
-            </h4>
-            <ul className="space-y-3">
-              {[
-                "Contexte parfois spécifique à mes labs",
-                "Peut contenir des erreurs ou typos",
-                "Pas une documentation officielle",
-                "Certaines sections en chantier"
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
-                  <X className="w-4 h-4 text-red-500/50 mt-0.5 shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+        <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+          Wiki <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">Personnel</span>
+        </h2>
+        
+        <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+          Base de connaissances dynamique, centralisant mes notes techniques, procédures et retours d'expérience.
+        </p>
+      </div>
+
+      {/* Stats Row */}
+      <div className="grid grid-cols-3 gap-4 w-full max-w-2xl mb-12">
+        {stats.map((stat, i) => (
+          <div key={i} className="bg-[#13131a]/50 border border-white/5 rounded-xl p-4 flex flex-col items-center justify-center gap-2 group hover:border-white/10 transition-colors">
+            <stat.icon className={`w-5 h-5 text-${stat.color}-400`} />
+            <div className="text-center">
+              <div className="text-lg font-bold text-white">{stat.value}</div>
+              <div className="text-[10px] text-gray-500 uppercase tracking-wider">{stat.label}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Cards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mb-12">
+        <div className="group relative bg-[#1a1a20]/50 border border-white/10 rounded-2xl p-8 overflow-hidden hover:border-violet-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]">
+          <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-500">
+            <GraduationCap className="w-32 h-32 rotate-12" />
+          </div>
+          <div className="relative z-10">
+            <div className="w-12 h-12 bg-violet-500/10 rounded-xl flex items-center justify-center mb-6 border border-violet-500/20 group-hover:scale-110 transition-transform duration-300">
+              <Book className="w-6 h-6 text-violet-400" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">Philosophie</h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Centraliser l'information pour ne jamais la chercher deux fois. Une approche "Digital Garden" où les notes évoluent, se lient entre elles et s'enrichissent avec la pratique.
+            </p>
+          </div>
+        </div>
+
+        <div className="group relative bg-[#1a1a20]/50 border border-white/10 rounded-2xl p-8 overflow-hidden hover:border-yellow-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(234,179,8,0.1)]">
+          <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-500">
+            <Terminal className="w-32 h-32 rotate-12" />
+          </div>
+          <div className="relative z-10">
+            <div className="w-12 h-12 bg-yellow-500/10 rounded-xl flex items-center justify-center mb-6 border border-yellow-500/20 group-hover:scale-110 transition-transform duration-300">
+              <AlertTriangle className="w-6 h-6 text-yellow-500" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">Disclaimer</h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Notes de terrain brutes. Le contenu privilégie l'efficacité technique à la forme académique. Certaines sections peuvent être en chantier ou contenir du "franglais".
+            </p>
           </div>
         </div>
       </div>
 
-      <div className="mt-8 flex items-center gap-2 text-xs text-gray-600 font-mono">
-        <span>sys_status: online</span>
-        <span className="w-1 h-1 bg-gray-600 rounded-full"></span>
-        <span>access_level: public_read</span>
-        <span className="w-1 h-1 bg-gray-600 rounded-full"></span>
-        <span>author: trtnx</span>
+      {/* Footer Status */}
+      <div className="w-full max-w-4xl border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 font-mono">
+        <div className="flex items-center gap-3">
+           <div className="flex items-center gap-2 px-2 py-1 bg-white/5 rounded">
+             <ShieldCheck className="w-3 h-3 text-green-500" />
+             <span>Access: Public Read</span>
+           </div>
+           <div className="flex items-center gap-2 px-2 py-1 bg-white/5 rounded">
+             <Cpu className="w-3 h-3 text-blue-500" />
+             <span>Engine: React/Supabase</span>
+           </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <span>AUTHOR:</span>
+          <span className="text-violet-400 font-bold">TRTNX</span>
+        </div>
       </div>
     </div>
   );
@@ -325,24 +318,34 @@ export const WikiPage: React.FC = () => {
   };
 
   const MaintenanceState = () => (
-    <div className="flex flex-col items-center justify-center h-[60vh] text-center p-8 border-2 border-dashed border-white/5 rounded-3xl bg-[#13131a]/30 backdrop-blur-sm">
-      <div className="relative mb-8 group">
-        <div className="absolute inset-0 bg-violet-500/20 rounded-full blur-2xl animate-pulse group-hover:bg-violet-500/30 transition-all"></div>
-        <div className="relative p-8 bg-[#1a1a20] rounded-full border border-violet-500/30 shadow-2xl">
-          <Construction className="w-16 h-16 text-violet-400" />
+    <div className="flex flex-col items-center justify-center h-[60vh] text-center p-12 border border-white/5 rounded-3xl bg-[#13131a]/50 backdrop-blur-sm relative overflow-hidden">
+      <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.02)_50%,transparent_75%,transparent_100%)] bg-[length:250%_250%] animate-[shimmer_3s_linear_infinite] pointer-events-none"></div>
+      
+      <div className="relative mb-8">
+        <div className="w-24 h-24 bg-[#1a1a20] rounded-full flex items-center justify-center border border-white/10 shadow-xl mx-auto mb-6 relative group">
+          <div className="absolute inset-0 bg-yellow-500/10 rounded-full blur-xl group-hover:bg-yellow-500/20 transition-all"></div>
+          <Construction className="w-10 h-10 text-yellow-500" />
+          <div className="absolute bottom-0 right-0 p-2 bg-[#13131a] rounded-full border border-white/10">
+            <AlertTriangle className="w-4 h-4 text-yellow-500" />
+          </div>
         </div>
       </div>
-      <h3 className="text-3xl font-bold text-white mb-4">Module non initialisé</h3>
-      <p className="text-gray-400 max-w-md leading-relaxed text-lg">Cette donnée est référencée dans le cortex mais le contenu n'a pas encore été synchronisé.</p>
-      <div className="mt-10 flex gap-4">
-        <span className="px-4 py-1.5 bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 rounded-full text-xs font-mono tracking-widest">STATUS: PENDING</span>
+      
+      <h3 className="text-2xl font-bold text-white mb-4">Contenu en cours d'ingestion</h3>
+      <p className="text-gray-400 max-w-md leading-relaxed mb-8">
+        Cette section a été indexée dans l'architecture, mais les données brutes n'ont pas encore été formatées pour l'affichage public.
+      </p>
+      
+      <div className="inline-flex items-center gap-3 px-4 py-2 bg-yellow-500/5 border border-yellow-500/10 rounded-full">
+        <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+        <span className="text-xs font-mono text-yellow-400 tracking-widest uppercase">Status: Pending Sync</span>
       </div>
     </div>
   );
 
   return (
     <>
-      <SEOHead title="Knowledge Base | Tristan Barry" description="Wiki technique et documentation personnelle" />
+      <SEOHead title="Wiki & Knowledge Base | Tristan Barry" description="Base de connaissances technique" />
       
       <div className="min-h-screen bg-[#0a0a0f] flex pt-24 pb-6 px-4 md:px-8 gap-6 overflow-hidden">
         
@@ -350,6 +353,7 @@ export const WikiPage: React.FC = () => {
           {isSidebarOpen ? <X /> : <Menu />}
         </button>
 
+        {/* SIDEBAR */}
         <aside className={`fixed inset-y-24 left-4 lg:left-8 z-40 w-80 lg:relative lg:inset-auto lg:w-80 lg:block bg-[#13131a]/80 backdrop-blur-xl border border-white/10 rounded-2xl flex flex-col transition-all duration-500 ease-[cubic-bezier(0.25,0.8,0.25,1)] shadow-2xl ${isSidebarOpen ? 'translate-x-0 opacity-100' : '-translate-x-[120%] opacity-0 lg:translate-x-0 lg:opacity-100 lg:w-80'}`}>
           <div className="p-6 border-b border-white/5">
             <div className="flex items-center gap-3 mb-6">
@@ -360,7 +364,7 @@ export const WikiPage: React.FC = () => {
               <div className="absolute inset-0 bg-violet-500/20 rounded-xl blur opacity-0 group-focus-within:opacity-100 transition-opacity duration-500" />
               <div className="relative flex items-center bg-[#0a0a0f] border border-white/10 rounded-xl focus-within:border-violet-500/50 transition-colors">
                 <Search className="ml-3 w-4 h-4 text-gray-500 group-focus-within:text-violet-400 transition-colors" />
-                <input type="text" placeholder="Rechercher..." className="w-full bg-transparent py-3 pl-3 pr-4 text-sm text-gray-200 focus:outline-none placeholder-gray-600 font-medium" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+                <input type="text" placeholder="Explorer..." className="w-full bg-transparent py-3 pl-3 pr-4 text-sm text-gray-200 focus:outline-none placeholder-gray-600 font-medium" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
               </div>
             </div>
           </div>
@@ -381,14 +385,20 @@ export const WikiPage: React.FC = () => {
           </div>
         </aside>
 
-        <main className="flex-1 bg-[#13131a]/40 backdrop-blur-md border border-white/5 rounded-2xl overflow-hidden relative shadow-2xl flex">
+        {/* MAIN CONTENT */}
+        <main className="flex-1 bg-[#13131a]/40 backdrop-blur-md border border-white/5 rounded-2xl overflow-hidden relative shadow-2xl flex flex-col">
           
-          <div className="flex-1 overflow-y-auto custom-scrollbar p-6 md:p-12 scroll-smooth">
-            {selectedPage ? (
-              <motion.div key={selectedPage.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="max-w-3xl mx-auto">
+          {selectedPage ? (
+            <div className="flex-1 overflow-y-auto custom-scrollbar p-6 md:p-12 scroll-smooth relative">
+               {/* Glow Background */}
+               <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+              <motion.div key={selectedPage.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="max-w-4xl mx-auto relative z-10">
+                
+                {/* Header Page */}
                 <div className="mb-10 pb-8 border-b border-white/5">
-                  <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 mb-6 font-mono">
-                    <span className="text-violet-400 font-bold px-2 py-1 bg-violet-500/10 rounded border border-violet-500/20">/root</span>
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 mb-6 font-mono uppercase tracking-wide">
+                    <span className="text-violet-400 font-bold px-2 py-1 bg-violet-500/10 rounded border border-violet-500/20">root</span>
                     <ChevronRight size={12} />
                     {selectedPage.category.split('/').map((cat, i) => (
                       <React.Fragment key={i}>
@@ -397,11 +407,15 @@ export const WikiPage: React.FC = () => {
                       </React.Fragment>
                     ))}
                   </div>
-                  <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-tight">{selectedPage.title}</h1>
+
+                  <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-tight">
+                    {selectedPage.title}
+                  </h1>
+                  
                   <div className="flex flex-wrap items-center gap-3">
-                    <div className="flex items-center gap-2 text-xs text-gray-400 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
+                    <div className="flex items-center gap-2 text-xs text-gray-400 bg-[#1a1a20] border border-white/10 px-3 py-1.5 rounded-full">
                       <Calendar className="w-3 h-3" />
-                      <span>{new Date(selectedPage.updated_at).toLocaleDateString('fr-FR')}</span>
+                      <span>Updated: {new Date(selectedPage.updated_at).toLocaleDateString('fr-FR')}</span>
                     </div>
                     {selectedPage.tags?.map(tag => (
                       <span key={tag} className="flex items-center gap-1 text-xs text-violet-300 bg-violet-500/10 px-3 py-1.5 rounded-full border border-violet-500/20"><Hash className="w-3 h-3" /> {tag}</span>
@@ -409,22 +423,24 @@ export const WikiPage: React.FC = () => {
                   </div>
                 </div>
 
+                {/* Contenu */}
                 <div className="min-h-[400px]">
                   {(!selectedPage.content || selectedPage.content.trim() === '') ? (
                     <MaintenanceState />
                   ) : (
                     <div className="prose prose-invert prose-violet max-w-none 
-                      prose-headings:font-bold prose-headings:text-white 
-                      prose-h1:text-3xl prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-b prose-h2:border-white/10 prose-h2:pb-2 prose-h2:scroll-mt-24
-                      prose-h3:text-xl prose-h3:text-violet-200 prose-h3:mt-8 prose-h3:scroll-mt-24
-                      prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6
-                      prose-code:text-violet-200 prose-code:bg-[#0a0a0f] prose-code:border prose-code:border-white/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none prose-code:font-mono prose-code:text-sm
-                      prose-pre:bg-[#0a0a0f] prose-pre:border prose-pre:border-white/10 prose-pre:rounded-xl prose-pre:p-0 prose-pre:shadow-lg
+                      prose-headings:font-bold prose-headings:text-white prose-headings:tracking-tight
+                      prose-h1:text-3xl prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-b prose-h2:border-white/10 prose-h2:pb-2 prose-h2:scroll-mt-32
+                      prose-h3:text-xl prose-h3:text-violet-200 prose-h3:mt-8 prose-h3:scroll-mt-32
+                      prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6 prose-p:text-[15px]
+                      prose-code:text-violet-200 prose-code:bg-[#1a1a20] prose-code:border prose-code:border-white/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none prose-code:font-mono prose-code:text-sm
+                      prose-pre:bg-transparent prose-pre:p-0 prose-pre:border-none prose-pre:shadow-none prose-pre:my-8
                       prose-li:text-gray-300 prose-li:marker:text-violet-500
                       prose-img:rounded-xl prose-img:border prose-img:border-white/10 prose-img:shadow-2xl prose-img:my-8
                       prose-strong:text-white
-                      prose-a:text-violet-400 hover:prose-a:text-violet-300 prose-a:no-underline hover:prose-a:underline
-                      prose-blockquote:border-l-4 prose-blockquote:border-violet-500 prose-blockquote:bg-violet-500/5 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-r-lg prose-blockquote:not-italic
+                      prose-a:text-violet-400 hover:prose-a:text-violet-300 prose-a:no-underline hover:prose-a:underline prose-a:font-medium
+                      prose-blockquote:border-l-4 prose-blockquote:border-violet-500 prose-blockquote:bg-violet-500/5 prose-blockquote:px-6 prose-blockquote:py-2 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-blockquote:text-gray-400
+                      prose-hr:border-white/10 prose-hr:my-12
                     ">
                       <ReactMarkdown 
                         rehypePlugins={[rehypeRaw]}
@@ -433,11 +449,11 @@ export const WikiPage: React.FC = () => {
                           pre: ({children}) => <>{children}</>,
                           h2: ({children}) => {
                             const id = String(children).toLowerCase().replace(/[^\w]+/g, '-');
-                            return <h2 id={id} className="scroll-mt-24">{children}</h2>
+                            return <h2 id={id}>{children}</h2>
                           },
                           h3: ({children}) => {
                             const id = String(children).toLowerCase().replace(/[^\w]+/g, '-');
-                            return <h3 id={id} className="scroll-mt-24">{children}</h3>
+                            return <h3 id={id}>{children}</h3>
                           }
                         }}
                       >
@@ -446,19 +462,26 @@ export const WikiPage: React.FC = () => {
                     </div>
                   )}
                 </div>
-              </motion.div>
-            ) : (
-              // ✅ REMPLACEMENT PAR LA NOUVELLE PAGE D'ACCUEIL
-              <WikiWelcome />
-            )}
-          </div>
 
-          {selectedPage && toc.length > 0 && (
-            <aside className="hidden xl:block w-64 border-l border-white/5 bg-[#13131a]/30 p-6 overflow-y-auto custom-scrollbar">
+                {/* ✅ SECTION TIPS - Nouvelle intégration */}
+                <div className="mt-16">
+                   <WikiTip pageId={selectedPage.id} initialLikes={selectedPage.likes || 0} />
+                </div>
+
+              </motion.div>
+            </div>
+          ) : (
+            // VUE D'ACCUEIL WIKI (Composant complet)
+            <WikiWelcome />
+          )}
+
+          {/* TABLE OF CONTENTS (Desktop Only) */}
+          {selectedPage && toc.length > 0 && selectedPage.content && selectedPage.content.trim() !== '' && (
+            <aside className="hidden xl:block w-72 border-l border-white/5 bg-[#13131a]/30 p-8 overflow-y-auto custom-scrollbar">
               <div className="sticky top-6">
-                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 flex items-center gap-2">
-                  <List size={12} />
-                  Dans cette page
+                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6 flex items-center gap-2">
+                  <List size={14} />
+                  Sommaire
                 </h4>
                 <div className="space-y-1 relative">
                   <div className="absolute left-[3px] top-2 bottom-2 w-px bg-white/5"></div>
@@ -466,7 +489,7 @@ export const WikiPage: React.FC = () => {
                     <a
                       key={item.id}
                       href={`#${item.id}`}
-                      className={`block text-sm py-1 pl-4 border-l-2 transition-all duration-200 hover:text-violet-300 hover:border-violet-500/50 ${item.level === 3 ? 'ml-3 text-gray-500 border-transparent text-xs' : 'text-gray-400 border-transparent'}`}
+                      className={`block text-sm py-1.5 pl-4 border-l-2 transition-all duration-200 hover:text-violet-300 hover:border-violet-500/50 ${item.level === 3 ? 'ml-3 text-gray-500 border-transparent text-xs' : 'text-gray-400 border-transparent'}`}
                       onClick={(e) => {
                         e.preventDefault();
                         document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
@@ -479,7 +502,6 @@ export const WikiPage: React.FC = () => {
               </div>
             </aside>
           )}
-
         </main>
       </div>
     </>
