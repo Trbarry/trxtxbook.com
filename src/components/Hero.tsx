@@ -13,7 +13,6 @@ import {
   Container        
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { SecurityWatch } from './SecurityWatch';
 
 interface HeroProps {
   isLoaded: boolean;
@@ -22,11 +21,9 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
   return (
-    // MODIFICATION : min-h-screen au lieu de min-h-[90vh] pour laisser respirer sur mobile
-    // Ajustement des paddings : pt-24 sur mobile, pt-32 sur desktop
     <section className="pt-24 pb-16 md:pt-32 md:pb-20 relative overflow-hidden min-h-screen flex flex-col justify-center bg-black">
       
-      {/* Background inchangé */}
+      {/* Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img
           src={getOptimizedUrl("https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80", 1920, 70)}
@@ -51,7 +48,6 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
               En poste chez Moulinvest (Alternance 2025-2027)
             </div>
             
-            {/* Titre responsive : plus petit sur mobile pour éviter les retours à la ligne moches */}
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 md:mb-6 tracking-tight">
               <span className="bg-gradient-to-r from-white via-violet-200 to-violet-400 bg-clip-text text-transparent">
                 Tristan Barry
@@ -67,8 +63,7 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
 
           {/* Grille de Contenu */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
-            {/* Carte 1 */}
-            <Link to="/writeups" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-5 md:p-6 rounded-2xl border border-white/5 hover:border-violet-500/40 transition-all duration-300 relative overflow-hidden">
+            <Link to="/writeups" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-5 md:p-6 rounded-2xl border border-white/5 hover:border-violet-500/40 hover:bg-[#1f1f25] transition-all duration-300 relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                 <Terminal className="w-16 h-16 md:w-24 md:h-24 text-violet-500" />
               </div>
@@ -85,8 +80,7 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
               </div>
             </Link>
 
-            {/* Carte 2 */}
-            <Link to="/projects" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-5 md:p-6 rounded-2xl border border-white/5 hover:border-blue-500/40 transition-all duration-300 relative overflow-hidden">
+            <Link to="/projects" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-5 md:p-6 rounded-2xl border border-white/5 hover:border-blue-500/40 hover:bg-[#1f1f25] transition-all duration-300 relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                 <Server className="w-16 h-16 md:w-24 md:h-24 text-blue-500" />
               </div>
@@ -103,7 +97,6 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
               </div>
             </Link>
 
-            {/* Carte 3 */}
             <Link to="/certifications" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-5 md:p-6 rounded-2xl border border-white/5 hover:border-green-500/40 transition-all duration-300 relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                 <Shield className="w-16 h-16 md:w-24 md:h-24 text-green-500" />
@@ -133,29 +126,21 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
               <Activity className="w-4 h-4 group-hover:animate-pulse" />
             </button>
 
-            {/* Tech Stack : Scroll horizontal plus fluide sur mobile */}
+            {/* Tech Stack */}
             <div className="w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 hide-scrollbar">
                 <div className="flex items-center gap-5 px-2 min-w-max">
                     <span className="text-sm font-medium uppercase tracking-wider text-gray-600 hidden lg:inline">Stack :</span>
-                    
                     <div className="flex items-center gap-2 text-gray-300 hover:text-violet-400 transition-colors cursor-default group" title="Exegol">
                         <span className="font-bold text-[10px] border-2 border-current px-1 rounded group-hover:border-violet-400">EX</span>
                         <span className="text-xs font-medium">Exegol</span>
                     </div>
-
                     <div className="w-px h-4 bg-gray-800"></div>
-
                     <TechItem icon={<Terminal size={16} />} label="Bash" />
                     <TechItem icon={<TerminalSquare size={16} />} label="PS" />
                     <TechItem icon={<Code2 size={16} />} label="Python" />
                     <TechItem icon={<Container size={16} />} label="Docker" />
                 </div>
             </div>
-          </div>
-
-          {/* VEILLE SÉCURITÉ - INTÉGRATION OPTIMISÉE MOBILE */}
-          <div className="mt-6 md:mt-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            <SecurityWatch />
           </div>
 
           {/* Indice Terminal */}
@@ -177,7 +162,6 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
   );
 };
 
-// Helper (inchangé sauf taille police mobile)
 const TechItem = ({ icon, label }: { icon: React.ReactNode, label: string }) => (
     <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-default group" title={label}>
         <div className="group-hover:scale-110 transition-transform">
