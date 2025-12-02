@@ -382,19 +382,22 @@ table {
   }
 }
 
-/* ... (laissez le reste du fichier tel quel) */
+/* ... (le début du fichier reste inchangé) ... */
 
 /* === OPTIMISATION MOBILE GLOBALE === */
 @media (max-width: 640px) {
   html {
-    /* Passer de 16px (standard) à 13.5px réduit l'échelle de l'interface de ~15% */
-    /* Cela donne un aspect "app native" beaucoup plus fin sur téléphone */
-    font-size: 13.5px;
+    /* Réduction drastique de l'échelle : 11px au lieu de 16px (standard) */
+    /* Cela correspond à une réduction d'environ 30% par rapport au standard */
+    /* et de 20% par rapport à votre version précédente (13.5px) */
+    font-size: 11px;
   }
   
-  /* Améliore le rendu du texte sur mobile */
+  /* Lissage des polices pour garder la lisibilité malgré la petite taille */
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Force l'ajustement de la taille du texte pour éviter les comportements bizarres sur iOS */
+    -webkit-text-size-adjust: 100%; 
   }
 }
