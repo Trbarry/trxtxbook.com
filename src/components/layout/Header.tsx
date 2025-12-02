@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Laptop, Linkedin, Mail, Menu, X, Award, Github } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-// Constants
 const imageUrl = 'https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/photo.jpg';
 
-// Types
 interface HeaderProps {
   setShowProfile: (show: boolean) => void;
   setActiveSection: (section: string) => void;
@@ -13,14 +11,12 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection, activeSection }) => {
-  // Hooks
   const navigate = useNavigate();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileAnimating, setIsProfileAnimating] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Détection du scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -29,7 +25,6 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Empêcher le scroll de la page quand le menu est ouvert
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -41,7 +36,6 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
     };
   }, [isMenuOpen]);
 
-  // Handlers
   const scrollToContact = () => {
     if (location.pathname !== '/') {
       navigate('/');
@@ -51,11 +45,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
           const headerOffset = 100;
           const elementPosition = contactSection.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
         }
         setActiveSection('contact');
       }, 100);
@@ -65,11 +55,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
         const headerOffset = 100;
         const elementPosition = contactSection.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
       }
       setActiveSection('contact');
     }
@@ -78,13 +64,8 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
 
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (location.pathname !== '/') {
-      navigate('/');
-    }
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    if (location.pathname !== '/') navigate('/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     setActiveSection('home');
     setIsMenuOpen(false);
   };
@@ -102,8 +83,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
     <header 
       className={`fixed top-0 w-full z-50 transition-all duration-300 border-b 
       ${isMenuOpen 
-        // CORRECTION MAJEURE : Ajout de 'backdrop-blur-none' et forçage de l'opacité totale
-        ? `bg-[#0a0a0f] backdrop-blur-none border-transparent ${scrolled ? 'py-3' : 'py-5'}` 
+        ? 'bg-[#0a0a0f] border-transparent py-5' 
         : scrolled 
           ? 'bg-[#0a0a0f]/90 backdrop-blur-md border-violet-900/30 py-3' 
           : 'bg-[#0a0a0f] border-transparent py-5'
@@ -111,10 +91,10 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
     >
       <nav className="container mx-auto px-6">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo (Z-Index 50 pour rester au-dessus de l'overlay) */}
           <button 
             onClick={handleLogoClick}
-            className="flex items-center space-x-2 z-20 group"
+            className="flex items-center space-x-2 z-50 group relative"
           >
             <div className="p-2 bg-violet-500/10 rounded-lg group-hover:bg-violet-500/20 transition-colors">
               <Laptop className="w-6 h-6 text-violet-500 transition-transform duration-300 group-hover:-rotate-12" />
@@ -124,20 +104,19 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
             </span>
           </button>
 
-          {/* Menu mobile Toggle */}
+          {/* Menu mobile Toggle (Z-Index 50 pour rester cliquable) */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden z-20 text-gray-400 hover:text-violet-400 transition-colors p-2"
+            className="md:hidden z-50 text-gray-400 hover:text-violet-400 transition-colors p-2 relative"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
 
-          {/* Menu overlay mobile */}
-          <div className={`fixed inset-0 bg-[#0a0a0f] transition-all duration-300 md:hidden z-10
+          {/* Menu overlay mobile (Z-Index 40 pour couvrir le contenu z-30 mais passer sous le header z-50) */}
+          <div className={`fixed inset-0 bg-[#0a0a0f] transition-all duration-300 md:hidden z-40
             ${isMenuOpen ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-full'}`}>
             
-            {/* Conteneur scrollable pour le menu mobile */}
             <div className="flex flex-col h-full pt-24 px-6 overflow-y-auto pb-10">
               
               {/* Mon Profil Button - Mobile */}
@@ -159,7 +138,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
                 </button>
               </div>
 
-              {/* Navigation Links - Mobile */}
+              {/* Navigation Links */}
               <div className="flex flex-col space-y-2 mb-auto">
                 <Link
                   to="/writeups"
@@ -210,7 +189,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
             </div>
           </div>
 
-          {/* Menu desktop (inchangé) */}
+          {/* Menu desktop (Inchangé) */}
           <div className="hidden md:flex items-center justify-center space-x-1 lg:space-x-4">
             <Link
               to="/writeups"
