@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Laptop, Linkedin, Mail, Menu, X, Award, Github, Book, Brain, Sparkles } from 'lucide-react'; // ✅ Brain & Sparkles importés
+import { Laptop, Linkedin, Mail, Menu, X, Award, Github, Book, Brain, Sparkles } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -138,7 +138,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
               Projects
             </Link>
 
-            {/* ✅ MODIFICATION : Wiki Badge Style "Hacker" dans le Header */}
+            {/* Wiki Badge */}
             <Link
               to="/wiki"
               onClick={() => setActiveSection('wiki')}
@@ -182,11 +182,33 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
             </button>
           </div>
 
-          {/* Socials Desktop */}
+          {/* Socials Desktop - TAILLE AUGMENTÉE ICI */}
           <div className="hidden md:flex items-center space-x-3 pl-4 border-l border-white/10 ml-4">
-            <a href="https://github.com/Trbarry" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white hover:bg-white/10 p-2 rounded-lg transition-all"><Github className="w-5 h-5" /></a>
-            <a href="https://www.linkedin.com/in/tristan-barry-43b91b330/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 hover:bg-white/10 p-2 rounded-lg transition-all"><Linkedin className="w-5 h-5" /></a>
-            <a href="mailto:tr.barrypro@gmail.com" className="text-gray-400 hover:text-red-400 hover:bg-white/10 p-2 rounded-lg transition-all"><Mail className="w-5 h-5" /></a>
+            <a 
+              href="https://github.com/Trbarry" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-gray-400 hover:text-white hover:bg-white/10 p-2.5 rounded-lg transition-all"
+              aria-label="GitHub"
+            >
+              <Github className="w-6 h-6" />
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/tristan-barry-43b91b330/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-gray-400 hover:text-blue-400 hover:bg-white/10 p-2.5 rounded-lg transition-all"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="w-6 h-6" />
+            </a>
+            <a 
+              href="mailto:tr.barrypro@gmail.com" 
+              className="text-gray-400 hover:text-red-400 hover:bg-white/10 p-2.5 rounded-lg transition-all"
+              aria-label="Email"
+            >
+              <Mail className="w-6 h-6" />
+            </a>
           </div>
         </div>
       </nav>
@@ -228,7 +250,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
                 >
                   Projects
                 </Link>
-                {/* Mobile Wiki Link avec Icone */}
+                {/* Mobile Wiki Link */}
                 <Link
                   to="/wiki"
                   onClick={() => { setIsMenuOpen(false); setActiveSection('wiki'); }}
