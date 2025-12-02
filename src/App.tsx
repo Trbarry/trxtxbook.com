@@ -31,7 +31,6 @@ import { Terminal } from './components/Terminal';
 const WriteupsList = lazy(() => import('./components/WriteupsList').then(module => ({ default: module.WriteupsList })));
 const ProjectsList = lazy(() => import('./components/ProjectsList').then(module => ({ default: module.ProjectsList })));
 const CertificationsList = lazy(() => import('./pages/CertificationsList').then(module => ({ default: module.CertificationsList })));
-// ✅ AJOUT : Import de la page Wiki
 const WikiPage = lazy(() => import('./pages/WikiPage').then(module => ({ default: module.WikiPage })));
 
 // Pages de détail et articles
@@ -67,24 +66,27 @@ const AnimatedRoutes = ({
           
           {/* PAGE D'ACCUEIL */}
           <Route path="/" element={
-            <PageTransition>
+            <>
+              {/* ✅ CORRECTION : ScrollMenu sorti du PageTransition pour rester fixe */}
               <ScrollMenu activeSection={activeSection} setActiveSection={setActiveSection} />
-              <div id="home">
-                <Hero isLoaded={isLoaded} setShowProfile={setShowProfile} />
-              </div>
-              <ScrollReveal><div id="stats"><Stats /></div></ScrollReveal>
-              <ScrollReveal><div id="formation"><Formation /></div></ScrollReveal>
-              <ScrollReveal><div id="projects"><Projects /></div></ScrollReveal>
-              <ScrollReveal><div id="writeups"><Writeups /></div></ScrollReveal>
-              <ScrollReveal><div id="contact"><Contact /></div></ScrollReveal>
-            </PageTransition>
+              
+              <PageTransition>
+                <div id="home">
+                  <Hero isLoaded={isLoaded} setShowProfile={setShowProfile} />
+                </div>
+                <ScrollReveal><div id="stats"><Stats /></div></ScrollReveal>
+                <ScrollReveal><div id="formation"><Formation /></div></ScrollReveal>
+                <ScrollReveal><div id="projects"><Projects /></div></ScrollReveal>
+                <ScrollReveal><div id="writeups"><Writeups /></div></ScrollReveal>
+                <ScrollReveal><div id="contact"><Contact /></div></ScrollReveal>
+              </PageTransition>
+            </>
           } />
 
           {/* LISTES */}
           <Route path="/writeups" element={<PageTransition><WriteupsList /></PageTransition>} />
           <Route path="/projects" element={<PageTransition><ProjectsList /></PageTransition>} />
           <Route path="/certifications" element={<PageTransition><CertificationsList /></PageTransition>} />
-          {/* ✅ AJOUT : Route Wiki */}
           <Route path="/wiki" element={<PageTransition><WikiPage /></PageTransition>} />
 
           {/* DETAILS DYNAMIQUES */}
@@ -117,11 +119,11 @@ function App() {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing function "easeOutQuart"
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      touchMultiplier: 2, // Améliore la réactivité sur mobile
+      touchMultiplier: 2,
     });
 
     function raf(time: number) {
@@ -130,11 +132,8 @@ function App() {
     }
 
     requestAnimationFrame(raf);
-
-    // Initialisation de l'état loaded
     setIsLoaded(true);
 
-    // Nettoyage lors du démontage
     return () => {
       lenis.destroy();
     };
