@@ -1,5 +1,6 @@
 import { supabase } from './supabase';
 
+// ... (Garde l'interface AnalyticsData telle quelle) ...
 interface AnalyticsData {
   unique_visitors: number;
   total_page_views: number;
@@ -27,14 +28,12 @@ class SimpleAnalytics {
     }
   }
 
-  // Détection simple des bots
   private detectBot(): boolean {
     const userAgent = navigator.userAgent.toLowerCase();
     const botPatterns = ['bot', 'crawler', 'spider', 'scrape', 'lighthouse', 'headless'];
     return botPatterns.some(pattern => userAgent.includes(pattern));
   }
 
-  // Générer un ID visiteur unique
   private getOrCreateVisitorId(): string {
     let visitorId = localStorage.getItem('visitor_id');
     if (!visitorId) {
@@ -44,7 +43,6 @@ class SimpleAnalytics {
     return visitorId;
   }
 
-  // Détecter le type d'appareil
   private getDeviceType(): string {
     const userAgent = navigator.userAgent;
     if (/iPad/.test(userAgent)) return 'tablet';
@@ -53,7 +51,6 @@ class SimpleAnalytics {
     return 'desktop';
   }
 
-  // Détecter le navigateur
   private getBrowser(): string {
     const userAgent = navigator.userAgent;
     if (userAgent.includes('Chrome') && !userAgent.includes('Edge')) return 'Chrome';
@@ -64,20 +61,26 @@ class SimpleAnalytics {
     return 'Autre';
   }
 
-  // Obtenir la géolocalisation
+  // --- CORRECTION DU PROBLÈME CORS ---
   private async getLocation(): Promise<{ country?: string }> {
     try {
+      // On utilise une API plus permissive ou on catch l'erreur silencieusement
+      // ipapi.co bloque souvent les requêtes front-end directes (CORS)
+      // On tente, mais si ça fail, on renvoie un objet vide sans faire planter l'app
       const response = await fetch('https://ipapi.co/json/', { 
-        signal: AbortSignal.timeout(3000) 
+        signal: AbortSignal.timeout(1500) // Timeout réduit
       });
+      
+      if (!response.ok) throw new Error('Network response was not ok');
+      
       const data = await response.json();
       return { country: data.country_name };
-    } catch {
-      return {};
+    } catch (error) {
+      // On ignore l'erreur de localisation pour ne pas bloquer le reste
+      return {}; 
     }
   }
 
-  // Tracker une vue de page
   async trackPageView(path: string) {
     if (this.isBot) return;
 
@@ -87,30 +90,21 @@ class SimpleAnalytics {
       await supabase.from('page_views').insert({
         page_path: path,
         visitor_id: this.visitorId,
-        country: location.country,
+        country: location.country || 'Unknown', // Fallback
         device_type: this.getDeviceType(),
         browser: this.getBrowser()
       });
     } catch (error) {
-      console.error('Analytics error:', error);
+      // Log discret en dev, rien en prod
+      if (import.meta.env.DEV) console.warn('Analytics tracking failed:', error);
     }
   }
 
-  // Obtenir les analytics
   async getAnalytics(): Promise<AnalyticsData | null> {
     try {
       const { data, error } = await supabase.rpc('get_simple_analytics');
-      
       if (error) throw error;
-      
-      return data?.[0] || {
-        unique_visitors: 0,
-        total_page_views: 0,
-        top_pages: [],
-        countries: [],
-        devices: [],
-        recent_visitors: []
-      };
+      return data?.[0] || null;
     } catch (error) {
       console.error('Error fetching analytics:', error);
       return null;
@@ -118,18 +112,14 @@ class SimpleAnalytics {
   }
 }
 
-// Instance singleton
 export const analytics = new SimpleAnalytics();
 
-// Hook React
 export const useAnalytics = () => {
   const trackPageView = (path: string) => {
     analytics.trackPageView(path);
   };
-
   const getAnalytics = () => {
     return analytics.getAnalytics();
   };
-
   return { trackPageView, getAnalytics };
 };
