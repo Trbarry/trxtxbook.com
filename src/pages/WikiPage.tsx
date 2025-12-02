@@ -8,11 +8,11 @@ import {
   Menu, X, Calendar, Folder, FileText, Construction, 
   Layers, FolderOpen, CornerDownRight, Check, Copy, List,
   Brain, Sparkles, AlertTriangle, ShieldCheck, GraduationCap,
-  Terminal, Cpu, Network, Activity, Database
+  Terminal, Cpu, Activity, Database
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { motion, AnimatePresence } from 'framer-motion';
-import { WikiTip } from '../components/WikiTip'; // ✅ Assure-toi que ce fichier existe
+import { WikiTip } from '../components/WikiTip'; // ✅ Assure-toi que le fichier s'appelle bien WikiTip.tsx
 
 // --- TYPES ---
 interface TreeNode {

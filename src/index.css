@@ -401,3 +401,8 @@ table {
     -webkit-text-size-adjust: 100%; 
   }
 }
+@keyframes shimmer {
+  0% { transform: translateX(-150%); }
+  50% { transform: translateX(150%); }
+  100% { transform: translateX(150%); }
+}
