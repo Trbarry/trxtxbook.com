@@ -381,3 +381,20 @@ table {
     justify-items: center;
   }
 }
+
+/* ... (laissez le reste du fichier tel quel) */
+
+/* === OPTIMISATION MOBILE GLOBALE === */
+@media (max-width: 640px) {
+  html {
+    /* Passer de 16px (standard) à 13.5px réduit l'échelle de l'interface de ~15% */
+    /* Cela donne un aspect "app native" beaucoup plus fin sur téléphone */
+    font-size: 13.5px;
+  }
+  
+  /* Améliore le rendu du texte sur mobile */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
