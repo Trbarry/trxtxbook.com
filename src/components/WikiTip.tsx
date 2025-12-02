@@ -5,8 +5,8 @@ import { supabase } from '../lib/supabase';
 import confetti from 'canvas-confetti';
 
 interface WikiTipProps {
-  pageId?: string; // Optionnel : si vide, on utilise l'ID global
-  context?: "global" | "article"; // Pour adapter le texte
+  pageId?: string;
+  context?: "global" | "article";
 }
 
 export const WikiTip: React.FC<WikiTipProps> = ({ pageId, context = "article" }) => {
@@ -15,19 +15,19 @@ export const WikiTip: React.FC<WikiTipProps> = ({ pageId, context = "article" })
   const [isLoading, setIsLoading] = useState(true);
   const [userIp, setUserIp] = useState<string | null>(null);
 
-  // ID spécial pour la page d'accueil
+  // ID Global par défaut si aucun ID n'est fourni
   const TARGET_ID = pageId || '00000000-0000-0000-0000-000000000000';
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // 1. Récupérer l'IP
+        // 1. Récupérer l'IP du visiteur
         const ipRes = await fetch('https://api.ipify.org?format=json');
         const ipData = await ipRes.json();
         const ip = ipData.ip;
         setUserIp(ip);
 
-        // 2. Récupérer les likes actuels
+        // 2. Récupérer le compteur de likes (Lecture publique autorisée sur wiki_pages)
         const { data: pageData } = await supabase
           .from('wiki_pages')
           .select('likes')
@@ -36,15 +36,14 @@ export const WikiTip: React.FC<WikiTipProps> = ({ pageId, context = "article" })
 
         if (pageData) setLikes(pageData.likes);
 
-        // 3. Vérifier si l'utilisateur a déjà voté
-        const { data: voteData } = await supabase
-          .from('wiki_votes')
-          .select('id')
-          .eq('page_id', TARGET_ID)
-          .eq('user_ip', ip)
-          .single();
+        // 3. ✅ VÉRIFICATION SÉCURISÉE VIA RPC (Au lieu du Select direct)
+        // On interroge la DB via la fonction protégée
+        const { data: voted } = await supabase.rpc('has_user_voted', { 
+          check_page_id: TARGET_ID, 
+          check_ip: ip 
+        });
 
-        if (voteData) setHasLiked(true);
+        if (voted) setHasLiked(true);
 
       } catch (error) {
         console.error("Erreur chargement kudos:", error);
@@ -59,25 +58,28 @@ export const WikiTip: React.FC<WikiTipProps> = ({ pageId, context = "article" })
   const handleVote = async () => {
     if (hasLiked || !userIp) return;
 
-    // Optimistic Update
+    // Optimistic UI : On met à jour tout de suite pour la réactivité
     setHasLiked(true);
     setLikes(prev => prev + 1);
 
-    // Confetti
+    // Boom !
     confetti({
-      particleCount: 100,
-      spread: 70,
+      particleCount: 120,
+      spread: 80,
       origin: { y: 0.6 },
-      colors: ['#8b5cf6', '#06b6d4', '#ffffff']
+      colors: ['#8b5cf6', '#06b6d4', '#ffffff'],
+      disableForReducedMotion: true
     });
 
     try {
+      // Envoi du vote via la fonction sécurisée existante
       await supabase.rpc('vote_for_page', { 
         target_page_id: TARGET_ID, 
         target_ip: userIp 
       });
     } catch (err) {
       console.error("Erreur vote:", err);
+      // Pas de rollback pour ne pas casser l'expérience utilisateur
     }
   };
 
@@ -165,7 +167,7 @@ export const WikiTip: React.FC<WikiTipProps> = ({ pageId, context = "article" })
           className="mt-3 flex items-center gap-1.5 text-[10px] text-gray-600 font-mono"
         >
           <ShieldAlert className="w-3 h-3" />
-          <span>Vote sécurisé par IP</span>
+          <span>Vote sécurisé (Hash IP)</span>
         </motion.div>
       )}
     </div>
