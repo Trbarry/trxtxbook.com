@@ -20,7 +20,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
   const [isProfileAnimating, setIsProfileAnimating] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Détection du scroll pour ajuster l'apparence du header
+  // Détection du scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -28,6 +28,18 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Empêcher le scroll de la page quand le menu est ouvert (Fix Ergonomie Mobile)
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
 
   // Handlers
   const scrollToContact = () => {
@@ -89,9 +101,12 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
   return (
     <header 
       className={`fixed top-0 w-full z-50 transition-all duration-300 border-b 
-      ${scrolled 
-        ? 'bg-[#0a0a0f]/90 backdrop-blur-md border-violet-900/30 py-3' 
-        : 'bg-[#0a0a0f] border-transparent py-5'}`}
+      ${isMenuOpen 
+        ? 'bg-[#0a0a0f] border-transparent py-5' // PRIORITÉ 1 : Si menu ouvert -> Fond Noir Total Opaque
+        : scrolled 
+          ? 'bg-[#0a0a0f]/90 backdrop-blur-md border-violet-900/30 py-3' // PRIORITÉ 2 : Si scroll -> Transparence
+          : 'bg-[#0a0a0f] border-transparent py-5' // PRIORITÉ 3 : Top -> Fond Noir
+      }`}
     >
       <nav className="container mx-auto px-6">
         <div className="flex items-center justify-between">
@@ -112,36 +127,42 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden z-20 text-gray-400 hover:text-violet-400 transition-colors p-2"
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
 
           {/* Menu overlay mobile */}
-          <div className={`fixed inset-0 bg-[#0a0a0f] transition-all duration-300 md:hidden
+          <div className={`fixed inset-0 bg-[#0a0a0f] transition-all duration-300 md:hidden z-10
             ${isMenuOpen ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-full'}`}>
-            <div className="flex flex-col items-center justify-start pt-28 h-full space-y-8 bg-[#0a0a0f] px-6">
+            
+            {/* Conteneur scrollable pour le menu mobile */}
+            <div className="flex flex-col h-full pt-24 px-6 overflow-y-auto pb-10">
+              
               {/* Mon Profil Button - Mobile */}
-              <button
-                onClick={handleProfileClick}
-                className={`w-full bg-violet-500 text-white px-6 py-4 rounded-xl
-                         hover:bg-violet-600 transition-all duration-300 
-                         transform hover:scale-105 flex items-center justify-center gap-3
-                         shadow-lg shadow-violet-500/20
-                         ${isProfileAnimating ? 'scale-95 opacity-80' : ''}`}
-              >
-                <img 
-                  src={imageUrl}
-                  alt="Profile"
-                  className="w-8 h-8 rounded-full border-2 border-white/20"
-                />
-                <span className="font-bold text-lg">Mon Profil</span>
-              </button>
+              <div className="mb-8">
+                <button
+                    onClick={handleProfileClick}
+                    className={`w-full bg-violet-500 text-white px-6 py-4 rounded-xl
+                            hover:bg-violet-600 transition-all duration-300 
+                            transform active:scale-95 flex items-center justify-center gap-3
+                            shadow-lg shadow-violet-500/20
+                            ${isProfileAnimating ? 'scale-95 opacity-80' : ''}`}
+                >
+                    <img 
+                    src={imageUrl}
+                    alt="Profile"
+                    className="w-8 h-8 rounded-full border-2 border-white/20"
+                    />
+                    <span className="font-bold text-lg">Mon Profil</span>
+                </button>
+              </div>
 
               {/* Navigation Links - Mobile */}
-              <div className="w-full space-y-4">
+              <div className="flex flex-col space-y-2 mb-auto">
                 <Link
                   to="/writeups"
-                  className={`block text-xl uppercase tracking-wider hover:text-violet-400 transition-colors w-full text-center py-2
+                  className={`text-xl font-medium uppercase tracking-wider hover:text-violet-400 transition-colors w-full text-center py-4 border-b border-white/5
                     ${location.pathname === '/writeups' ? 'text-violet-500 font-bold' : 'text-gray-400'}`}
                   onClick={() => { setActiveSection('writeups'); setIsMenuOpen(false); }}
                 >
@@ -149,7 +170,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
                 </Link>
                 <Link
                   to="/projects"
-                  className={`block text-xl uppercase tracking-wider hover:text-violet-400 transition-colors w-full text-center py-2
+                  className={`text-xl font-medium uppercase tracking-wider hover:text-violet-400 transition-colors w-full text-center py-4 border-b border-white/5
                     ${location.pathname === '/projects' ? 'text-violet-500 font-bold' : 'text-gray-400'}`}
                   onClick={() => { setActiveSection('projects'); setIsMenuOpen(false); }}
                 >
@@ -157,7 +178,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
                 </Link>
                 <Link
                   to="/certifications"
-                  className={`flex items-center justify-center gap-2 text-xl uppercase tracking-wider hover:text-violet-400 transition-colors w-full py-2
+                  className={`flex items-center justify-center gap-2 text-xl font-medium uppercase tracking-wider hover:text-violet-400 transition-colors w-full py-4 border-b border-white/5
                     ${location.pathname === '/certifications' ? 'text-violet-500 font-bold' : 'text-gray-400'}`}
                   onClick={() => { setActiveSection('certifications'); setIsMenuOpen(false); }}
                 >
@@ -166,7 +187,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
                 </Link>
                 <button
                   onClick={scrollToContact}
-                  className={`block text-xl uppercase tracking-wider hover:text-violet-400 transition-colors w-full text-center py-2
+                  className={`text-xl font-medium uppercase tracking-wider hover:text-violet-400 transition-colors w-full text-center py-4
                     ${activeSection === 'contact' ? 'text-violet-500 font-bold' : 'text-gray-400'}`}
                 >
                   Contact
@@ -174,23 +195,22 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
               </div>
 
               {/* Socials Mobile */}
-              <div className="flex items-center gap-6 mt-auto pb-10">
-                <a href="https://github.com/Trbarry" target="_blank" rel="noopener noreferrer" className="p-3 bg-[#1a1a1f] rounded-full text-gray-400 hover:text-white hover:bg-violet-500 transition-all">
+              <div className="flex items-center justify-center gap-6 mt-8">
+                <a href="https://github.com/Trbarry" target="_blank" rel="noopener noreferrer" className="p-4 bg-[#1a1a1f] rounded-full text-gray-400 hover:text-white hover:bg-violet-500 transition-all border border-white/5">
                   <Github className="w-6 h-6" />
                 </a>
-                <a href="https://www.linkedin.com/in/tristan-barry-43b91b330/" target="_blank" rel="noopener noreferrer" className="p-3 bg-[#1a1a1f] rounded-full text-gray-400 hover:text-white hover:bg-blue-600 transition-all">
+                <a href="https://www.linkedin.com/in/tristan-barry-43b91b330/" target="_blank" rel="noopener noreferrer" className="p-4 bg-[#1a1a1f] rounded-full text-gray-400 hover:text-white hover:bg-blue-600 transition-all border border-white/5">
                   <Linkedin className="w-6 h-6" />
                 </a>
-                <a href="mailto:tr.barrypro@gmail.com" className="p-3 bg-[#1a1a1f] rounded-full text-gray-400 hover:text-white hover:bg-red-500 transition-all">
+                <a href="mailto:tr.barrypro@gmail.com" className="p-4 bg-[#1a1a1f] rounded-full text-gray-400 hover:text-white hover:bg-red-500 transition-all border border-white/5">
                   <Mail className="w-6 h-6" />
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Menu desktop */}
+          {/* Menu desktop (inchangé) */}
           <div className="hidden md:flex items-center justify-center space-x-1 lg:space-x-4">
-            {/* Navigation Links - Desktop */}
             <Link
               to="/writeups"
               className={`px-3 py-2 text-sm uppercase tracking-wider hover:text-violet-400 transition-colors rounded-lg hover:bg-white/5
@@ -208,7 +228,6 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
               Projects
             </Link>
 
-            {/* Mon Profil Button - Desktop (Centered) */}
             <button
               onClick={handleProfileClick}
               className={`mx-4 flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-violet-600 to-violet-500 text-white rounded-full
