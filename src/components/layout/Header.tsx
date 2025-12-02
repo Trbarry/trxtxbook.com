@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Laptop, Linkedin, Mail, Menu, X, Award, Github, Book } from 'lucide-react'; // ✅ AJOUT : Icone Book
+import { Laptop, Linkedin, Mail, Menu, X, Award, Github, Book, Brain, Sparkles } from 'lucide-react'; // ✅ Brain & Sparkles importés
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -18,7 +18,6 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
   const [isProfileAnimating, setIsProfileAnimating] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Gestion du scroll pour le fond du header
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -27,7 +26,6 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Blocage du scroll du body quand le menu est ouvert
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -75,7 +73,6 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
     setIsMenuOpen(false);
   };
 
-  // Variantes d'animation pour le menu
   const menuVariants = {
     closed: { 
       opacity: 0,
@@ -93,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
     <header 
       className={`fixed top-0 w-full z-50 transition-colors duration-300 border-b 
       ${isMenuOpen 
-        ? 'bg-[#0a0a0f] border-transparent' // Fond noir opaque si menu ouvert
+        ? 'bg-[#0a0a0f] border-transparent' 
         : scrolled 
           ? 'bg-[#0a0a0f]/90 backdrop-blur-md border-violet-900/30' 
           : 'bg-[#0a0a0f] border-transparent'
@@ -141,13 +138,24 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
               Projects
             </Link>
 
-            {/* ✅ AJOUT : Lien Wiki Desktop */}
+            {/* ✅ MODIFICATION : Wiki Badge Style "Hacker" dans le Header */}
             <Link
               to="/wiki"
-              className={`px-3 py-2 text-sm uppercase tracking-wider hover:text-violet-400 transition-colors rounded-lg hover:bg-white/5 ${location.pathname === '/wiki' ? 'text-violet-500 font-semibold' : 'text-gray-400'}`}
               onClick={() => setActiveSection('wiki')}
+              className="group relative flex items-center justify-center mx-1"
             >
-              Wiki
+              <div className="absolute inset-0 bg-violet-500 rounded-full blur opacity-10 group-hover:opacity-30 animate-pulse transition-opacity"></div>
+              <div className={`
+                relative px-3 py-1.5 rounded-full flex items-center gap-2 border transition-all duration-300
+                ${location.pathname === '/wiki' 
+                  ? 'bg-[#1a1a1f] border-violet-500 text-violet-300 shadow-[0_0_15px_rgba(139,92,246,0.2)]' 
+                  : 'bg-[#1a1a1f]/50 border-violet-500/20 text-gray-400 hover:text-violet-300 hover:border-violet-500/50 hover:shadow-[0_0_15px_rgba(139,92,246,0.15)]'
+                }
+              `}>
+                <Brain className={`w-3.5 h-3.5 ${location.pathname === '/wiki' ? 'text-violet-400' : 'text-gray-500 group-hover:text-violet-400'} transition-colors`} />
+                <span className="text-[11px] font-bold tracking-wider uppercase">Wiki</span>
+                <Sparkles className="w-2.5 h-2.5 text-yellow-300 animate-pulse" />
+              </div>
             </Link>
 
             <button
@@ -183,7 +191,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
         </div>
       </nav>
 
-      {/* MOBILE MENU OVERLAY - Animation gérée par Framer Motion */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -195,7 +203,6 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
             className="fixed inset-0 bg-[#0a0a0f] z-40 md:hidden pt-24 px-6 overflow-y-auto"
           >
             <div className="flex flex-col h-full pb-10">
-              {/* Mon Profil Button */}
               <div className="mb-8">
                 <button
                   onClick={handleProfileClick}
@@ -206,7 +213,6 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
                 </button>
               </div>
 
-              {/* Liens de Navigation */}
               <div className="flex flex-col space-y-2 mb-auto">
                 <Link
                   to="/writeups"
@@ -222,14 +228,15 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
                 >
                   Projects
                 </Link>
-                {/* ✅ AJOUT : Lien Wiki Mobile */}
+                {/* Mobile Wiki Link avec Icone */}
                 <Link
                   to="/wiki"
                   onClick={() => { setIsMenuOpen(false); setActiveSection('wiki'); }}
                   className="flex items-center justify-center gap-2 text-xl font-medium uppercase tracking-wider text-center py-4 border-b border-white/5 text-gray-400 hover:text-violet-400"
                 >
-                  <Book className="w-5 h-5" />
+                  <Brain className="w-5 h-5" />
                   Wiki
+                  <Sparkles className="w-4 h-4 text-yellow-500" />
                 </Link>
                 <Link
                   to="/certifications"
@@ -247,7 +254,6 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
                 </button>
               </div>
 
-              {/* Socials */}
               <div className="flex items-center justify-center gap-6 mt-8">
                 <a href="https://github.com/Trbarry" target="_blank" rel="noopener noreferrer" className="p-4 bg-[#1a1a1f] rounded-full text-gray-400 hover:text-white hover:bg-violet-500 transition-all border border-white/5"><Github className="w-6 h-6" /></a>
                 <a href="https://www.linkedin.com/in/tristan-barry-43b91b330/" target="_blank" rel="noopener noreferrer" className="p-4 bg-[#1a1a1f] rounded-full text-gray-400 hover:text-white hover:bg-blue-600 transition-all border border-white/5"><Linkedin className="w-6 h-6" /></a>

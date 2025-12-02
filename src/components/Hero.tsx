@@ -8,9 +8,7 @@ import {
   Activity, 
   Code2,           
   TerminalSquare,  
-  Container,
-  Brain,        
-  Sparkles
+  Container        
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -39,7 +37,7 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
         <div className={`max-w-5xl mx-auto transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           
           {/* En-tête Principal */}
-          <div className="text-center mb-8 md:mb-12 relative">
+          <div className="text-center mb-8 md:mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-[10px] sm:text-xs font-medium mb-4 md:mb-6 animate-fade-in-up hover:bg-violet-500/20 transition-colors cursor-default">
               <span className="relative flex h-1.5 w-1.5 md:h-2 md:w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -48,34 +46,10 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
               En poste chez Moulinvest
             </div>
             
-            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-3 md:mb-6 tracking-tight relative inline-block">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-3 md:mb-6 tracking-tight">
               <span className="bg-gradient-to-r from-white via-violet-200 to-violet-400 bg-clip-text text-transparent">
                 Tristan Barry
               </span>
-
-              {/* --- BADGE WIKI FLOTTANT (Innovant) --- */}
-              <Link 
-                to="/wiki"
-                className="absolute -top-6 -right-6 md:-top-4 md:-right-12 group"
-                title="Accéder au Second Cerveau"
-              >
-                <div className="relative flex items-center justify-center">
-                  {/* Halo animé */}
-                  <div className="absolute inset-0 bg-violet-500 rounded-full blur opacity-20 group-hover:opacity-40 animate-pulse transition-opacity"></div>
-                  
-                  {/* Pillule principale */}
-                  <div className="relative bg-[#1a1a1f] border border-violet-500/30 text-violet-300 px-3 py-1.5 rounded-full flex items-center gap-2 shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all duration-300 group-hover:scale-105 group-hover:border-violet-400 group-hover:shadow-[0_0_25px_rgba(139,92,246,0.5)]">
-                    <Brain className="w-3 h-3 md:w-4 md:h-4 text-violet-400" />
-                    <span className="text-[10px] md:text-xs font-bold tracking-wider uppercase">Wiki</span>
-                    <Sparkles className="w-2.5 h-2.5 text-yellow-300 animate-pulse" />
-                  </div>
-
-                  {/* Ligne connecteur visuel (Style HUD) */}
-                  <div className="absolute top-1/2 right-full w-3 h-[1px] bg-gradient-to-r from-transparent to-violet-500/50 hidden md:block"></div>
-                </div>
-              </Link>
-              {/* -------------------------------------- */}
-
             </h1>
             
             <p className="text-base sm:text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed px-2">
