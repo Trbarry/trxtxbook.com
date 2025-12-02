@@ -102,8 +102,8 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
     <header 
       className={`fixed top-0 w-full z-50 transition-all duration-300 border-b 
       ${isMenuOpen 
-        // CORRECTION ICI : On garde le padding actuel (scrolled ou non) pour éviter le saut de hauteur
-        ? `bg-[#0a0a0f] border-transparent ${scrolled ? 'py-3' : 'py-5'}` 
+        // CORRECTION MAJEURE : Ajout de 'backdrop-blur-none' et forçage de l'opacité totale
+        ? `bg-[#0a0a0f] backdrop-blur-none border-transparent ${scrolled ? 'py-3' : 'py-5'}` 
         : scrolled 
           ? 'bg-[#0a0a0f]/90 backdrop-blur-md border-violet-900/30 py-3' 
           : 'bg-[#0a0a0f] border-transparent py-5'
