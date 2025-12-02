@@ -53,7 +53,13 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
       className={`fixed inset-0 bg-[#0a0a0f]/90 backdrop-blur-md z-[60] flex items-center justify-center p-4 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
       onClick={handleOverlayClick}
     >
-      <div className={`bg-[#0f0f13] rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto border border-violet-500/20 shadow-[0_0_40px_rgba(139,92,246,0.1)] p-6 custom-scrollbar relative transform transition-all duration-300 ${isVisible ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'}`}>
+      {/* ✅ AJOUT DE L'ATTRIBUT data-lenis-prevent 
+         C'est ça qui rend le contrôle du scroll à la modale
+      */}
+      <div 
+        data-lenis-prevent
+        className={`bg-[#0f0f13] rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto border border-violet-500/20 shadow-[0_0_40px_rgba(139,92,246,0.1)] p-6 custom-scrollbar relative transform transition-all duration-300 ${isVisible ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'}`}
+      >
         
         {/* Bouton Fermer */}
         <button 
