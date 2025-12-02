@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getOptimizedUrl } from '../lib/imageUtils';
 import { 
   Terminal, 
@@ -16,6 +16,62 @@ interface HeroProps {
   isLoaded: boolean;
   setShowProfile: (show: boolean) => void;
 }
+
+// --- NOUVEAU COMPOSANT : EFFET HACKER ---
+const HackerText = ({ text, className }: { text: string, className?: string }) => {
+  const [displayText, setDisplayText] = useState(text);
+  const [isHovering, setIsHovering] = useState(false);
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&";
+  
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    let iteration = 0;
+    
+    // Lancer l'animation au chargement ET au survol
+    const runAnimation = () => {
+      clearInterval(interval);
+      iteration = 0;
+      
+      interval = setInterval(() => {
+        setDisplayText(prev => 
+          text
+            .split("")
+            .map((letter, index) => {
+              if (index < iteration) {
+                return text[index];
+              }
+              return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join("")
+        );
+        
+        if (iteration >= text.length) { 
+          clearInterval(interval);
+        }
+        
+        iteration += 1 / 3;
+      }, 30);
+    };
+
+    runAnimation(); // Au montage
+
+    if (isHovering) {
+      runAnimation(); // Au survol
+    }
+
+    return () => clearInterval(interval);
+  }, [text, isHovering]);
+
+  return (
+    <span 
+      className={className} 
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      {displayText}
+    </span>
+  );
+};
 
 export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
   return (
@@ -46,49 +102,52 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
               En poste chez Moulinvest
             </div>
             
-            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-3 md:mb-6 tracking-tight">
-              <span className="bg-gradient-to-r from-white via-violet-200 to-violet-400 bg-clip-text text-transparent">
-                Tristan Barry
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-4 md:mb-8 tracking-tighter">
+              <span className="bg-gradient-to-r from-white via-violet-200 to-violet-400 bg-clip-text text-transparent cursor-default">
+                {/* ✅ Utilisation de l'effet Hacker ici */}
+                <HackerText text="Tristan Barry" />
               </span>
             </h1>
             
             <p className="text-base sm:text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed px-2">
               Technicien Système & Réseau le jour, <span className="text-violet-400 font-semibold">Pentester</span> la nuit.
               <br className="hidden md:block" />
-              <span className="block mt-2 text-sm md:text-lg">Bienvenue sur ma <span className="text-white border-b border-violet-500/50">Knowledge Base</span> personnelle.</span>
+              <span className="block mt-2 text-sm md:text-lg">
+                Exploration • Sécurisation • <span className="text-white border-b border-violet-500/50">Documentation</span>
+              </span>
             </p>
           </div>
 
           {/* Grille de Navigation */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mb-8 md:mb-12">
-            <Link to="/writeups" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-white/5 hover:border-violet-500/40 transition-all flex items-center md:block gap-4">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-violet-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0">
+            <Link to="/writeups" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-white/5 hover:border-violet-500/40 transition-all flex items-center md:block gap-4 hover:-translate-y-1 duration-300">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-violet-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                 <Terminal className="w-5 h-5 md:w-6 md:h-6 text-violet-400" />
               </div>
               <div className="text-left">
-                <h3 className="text-base md:text-xl font-bold text-white mb-0.5 md:mb-2">CTF Write-ups</h3>
+                <h3 className="text-base md:text-xl font-bold text-white mb-0.5 md:mb-2 group-hover:text-violet-300 transition-colors">CTF Write-ups</h3>
                 <p className="text-gray-400 text-xs md:text-sm line-clamp-1 md:line-clamp-none">Archives HTB & TryHackMe.</p>
               </div>
               <ArrowRight className="w-4 h-4 text-gray-600 ml-auto md:hidden" />
             </Link>
 
-            <Link to="/projects" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-white/5 hover:border-blue-500/40 transition-all flex items-center md:block gap-4">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0">
+            <Link to="/projects" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-white/5 hover:border-blue-500/40 transition-all flex items-center md:block gap-4 hover:-translate-y-1 duration-300">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                 <Database className="w-5 h-5 md:w-6 md:h-6 text-blue-400" />
               </div>
               <div className="text-left">
-                <h3 className="text-base md:text-xl font-bold text-white mb-0.5 md:mb-2">Lab & Projets</h3>
+                <h3 className="text-base md:text-xl font-bold text-white mb-0.5 md:mb-2 group-hover:text-blue-300 transition-colors">Lab & Projets</h3>
                 <p className="text-gray-400 text-xs md:text-sm line-clamp-1 md:line-clamp-none">Infrastructure & Scripts.</p>
               </div>
               <ArrowRight className="w-4 h-4 text-gray-600 ml-auto md:hidden" />
             </Link>
 
-            <Link to="/certifications" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-white/5 hover:border-green-500/40 transition-all flex items-center md:block gap-4">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-green-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0">
+            <Link to="/certifications" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-white/5 hover:border-green-500/40 transition-all flex items-center md:block gap-4 hover:-translate-y-1 duration-300">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-green-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                 <BookOpen className="w-5 h-5 md:w-6 md:h-6 text-green-400" />
               </div>
               <div className="text-left">
-                <h3 className="text-base md:text-xl font-bold text-white mb-0.5 md:mb-2">Certifications</h3>
+                <h3 className="text-base md:text-xl font-bold text-white mb-0.5 md:mb-2 group-hover:text-green-300 transition-colors">Certifications</h3>
                 <p className="text-gray-400 text-xs md:text-sm line-clamp-1 md:line-clamp-none">CPTS, eJPT, AZ-900.</p>
               </div>
               <ArrowRight className="w-4 h-4 text-gray-600 ml-auto md:hidden" />
@@ -97,7 +156,7 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
 
           {/* Actions & Stack */}
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6 bg-[#1a1a1f]/50 p-4 rounded-2xl border border-white/5 backdrop-blur-md">
-            <button onClick={() => setShowProfile(true)} className="w-full lg:w-auto px-6 py-3 bg-gradient-to-r from-violet-600 to-blue-600 text-white font-semibold rounded-xl flex items-center justify-center gap-2 text-sm">
+            <button onClick={() => setShowProfile(true)} className="w-full lg:w-auto px-6 py-3 bg-gradient-to-r from-violet-600 to-blue-600 text-white font-semibold rounded-xl flex items-center justify-center gap-2 text-sm hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all active:scale-95">
               <span>Découvrir mon profil</span>
               <Activity className="w-4 h-4" />
             </button>
@@ -116,9 +175,9 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
 
           {/* Indice Terminal */}
           <div className="flex justify-center w-full mt-8 mb-8">
-            <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-gray-600 font-mono bg-black/50 px-3 py-1.5 rounded-full border border-white/10">
+            <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-gray-600 font-mono bg-black/50 px-3 py-1.5 rounded-full border border-white/10 hover:border-white/20 transition-colors cursor-help group" title="Try pressing '²'">
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                <span className="hidden sm:inline">System Ready. Press ²</span>
+                <span className="hidden sm:inline group-hover:text-green-400 transition-colors">System Ready. Press ²</span>
                 <span className="sm:hidden">System Ready</span>
             </div>
           </div>
@@ -130,7 +189,7 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
 };
 
 const TechItem = ({ icon, label }: { icon: React.ReactNode, label: string }) => (
-    <div className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors cursor-default bg-white/5 px-2 py-1 rounded-md border border-white/5">
+    <div className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors cursor-default bg-white/5 px-2 py-1 rounded-md border border-white/5 hover:border-violet-500/30">
         {icon}
         <span className="text-[10px] font-medium">{label}</span>
     </div>
