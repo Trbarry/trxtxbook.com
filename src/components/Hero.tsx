@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getOptimizedUrl } from '../lib/imageUtils';
 import { 
   Terminal, 
@@ -17,7 +17,7 @@ interface HeroProps {
   setShowProfile: (show: boolean) => void;
 }
 
-// --- NOUVEAU COMPOSANT : EFFET HACKER ---
+// --- COMPOSANT : EFFET HACKER ---
 const HackerText = ({ text, className }: { text: string, className?: string }) => {
   const [displayText, setDisplayText] = useState(text);
   const [isHovering, setIsHovering] = useState(false);
@@ -27,7 +27,6 @@ const HackerText = ({ text, className }: { text: string, className?: string }) =
     let interval: NodeJS.Timeout;
     let iteration = 0;
     
-    // Lancer l'animation au chargement ET au survol
     const runAnimation = () => {
       clearInterval(interval);
       iteration = 0;
@@ -53,10 +52,10 @@ const HackerText = ({ text, className }: { text: string, className?: string }) =
       }, 30);
     };
 
-    runAnimation(); // Au montage
+    runAnimation();
 
     if (isHovering) {
-      runAnimation(); // Au survol
+      runAnimation();
     }
 
     return () => clearInterval(interval);
@@ -77,10 +76,14 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
   return (
     <section className="pt-28 pb-12 md:pt-32 md:pb-20 relative overflow-hidden min-h-[100dvh] flex flex-col justify-center bg-black">
       
-      {/* Background */}
+      {/* Background Optimisé */}
       <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* OPTIMISATION MOBILE : 
+           - Taille réduite à 1000px (au lieu de 1920px) car l'image est floutée
+           - Qualité réduite à 50 (suffisant pour du background sombre)
+        */}
         <img
-          src={getOptimizedUrl("https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80", 1920, 70)}
+          src={getOptimizedUrl("https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80", 1000, 50)}
           alt="Cyberpunk Background"
           fetchPriority="high"
           className="absolute inset-0 w-full h-full object-cover opacity-5 blur-sm"
@@ -104,7 +107,6 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
             
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-4 md:mb-8 tracking-tighter">
               <span className="bg-gradient-to-r from-white via-violet-200 to-violet-400 bg-clip-text text-transparent cursor-default">
-                {/* ✅ Utilisation de l'effet Hacker ici */}
                 <HackerText text="Tristan Barry" />
               </span>
             </h1>
