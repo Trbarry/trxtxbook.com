@@ -29,7 +29,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Empêcher le scroll de la page quand le menu est ouvert (Fix Ergonomie Mobile)
+  // Empêcher le scroll de la page quand le menu est ouvert
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -102,10 +102,11 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
     <header 
       className={`fixed top-0 w-full z-50 transition-all duration-300 border-b 
       ${isMenuOpen 
-        ? 'bg-[#0a0a0f] border-transparent py-5' // PRIORITÉ 1 : Si menu ouvert -> Fond Noir Total Opaque
+        // CORRECTION ICI : On garde le padding actuel (scrolled ou non) pour éviter le saut de hauteur
+        ? `bg-[#0a0a0f] border-transparent ${scrolled ? 'py-3' : 'py-5'}` 
         : scrolled 
-          ? 'bg-[#0a0a0f]/90 backdrop-blur-md border-violet-900/30 py-3' // PRIORITÉ 2 : Si scroll -> Transparence
-          : 'bg-[#0a0a0f] border-transparent py-5' // PRIORITÉ 3 : Top -> Fond Noir
+          ? 'bg-[#0a0a0f]/90 backdrop-blur-md border-violet-900/30 py-3' 
+          : 'bg-[#0a0a0f] border-transparent py-5'
       }`}
     >
       <nav className="container mx-auto px-6">
