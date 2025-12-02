@@ -1,22 +1,20 @@
-/**
- * Optimise les URLs d'images (Supabase Storage & Unsplash)
- */
+// src/lib/imageUtils.ts
+
 export const getOptimizedUrl = (url: string, width: number = 800, quality: number = 80) => {
   if (!url) return '';
 
-  // 1. Gestion Unsplash
+  // 1. Gestion Unsplash (inchangé)
   if (url.includes('images.unsplash.com')) {
-    // On nettoie l'URL des paramètres existants pour éviter les doublons
     const baseUrl = url.split('?')[0];
     return `${baseUrl}?auto=format&fit=crop&w=${width}&q=${quality}`;
   }
 
-  // 2. Gestion Supabase
+  // 2. Gestion Supabase : On passe par wsrv.nl pour le redimensionnement gratuit
   if (url.includes('supabase.co')) {
-    const separator = url.includes('?') ? '&' : '?';
-    return `${url}${separator}width=${width}&format=webp&quality=${quality}`;
+    // On encode l'URL originale pour la passer en paramètre
+    return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=${width}&q=${quality}&output=webp`;
   }
 
-  // 3. Fallback (Images locales ou autres)
+  // 3. Fallback
   return url;
 };
