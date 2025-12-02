@@ -115,29 +115,33 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
-  // --- INITIALISATION LENIS (SMOOTH SCROLL) ---
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      touchMultiplier: 2,
-    });
+  // src/App.tsx
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+useEffect(() => {
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    orientation: 'vertical',
+    gestureOrientation: 'vertical',
+    smoothWheel: true,
+    touchMultiplier: 2,
+    // ✅ AJOUTS POUR LA PERF :
+    infinite: false, // Désactive le scroll infini si activé par erreur
+  });
 
+  // Utiliser requestAnimationFrame standard
+  function raf(time: number) {
+    lenis.raf(time);
     requestAnimationFrame(raf);
-    setIsLoaded(true);
+  }
 
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
+  requestAnimationFrame(raf);
+  setIsLoaded(true);
+
+  return () => {
+    lenis.destroy();
+  };
+}, []);
 
   return (
     <Router>
