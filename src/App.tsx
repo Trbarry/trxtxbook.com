@@ -6,7 +6,7 @@ import Lenis from 'lenis';
 // SEO Component
 import { SEOHead } from './components/SEOHead';
 
-// Layout Components (Toujours affichés)
+// Layout Components
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { PageTransition } from './components/layout/PageTransition';
@@ -27,7 +27,7 @@ import { MouseTrail } from './components/MouseTrail';
 import { AnalyticsTracker } from './components/AnalyticsTracker';
 import { Terminal } from './components/Terminal';
 
-// --- LAZY LOADING DES PAGES ---
+// --- LAZY LOADING DES PAGES SECONDAIRES ---
 const WriteupsList = lazy(() => import('./components/WriteupsList').then(module => ({ default: module.WriteupsList })));
 const ProjectsList = lazy(() => import('./components/ProjectsList').then(module => ({ default: module.ProjectsList })));
 const CertificationsList = lazy(() => import('./pages/CertificationsList').then(module => ({ default: module.CertificationsList })));
@@ -45,20 +45,17 @@ const CPTSJourneyArticlePage = lazy(() => import('./pages/CPTSJourneyArticlePage
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then(module => ({ default: module.AnalyticsPage })));
 const SitemapGeneratorPage = lazy(() => import('./pages/SitemapGeneratorPage').then(module => ({ default: module.SitemapGeneratorPage })));
 
-
-// Sous-composant pour gérer les transitions de pages et les routes
-const AnimatedRoutes = ({ 
-  isLoaded, 
-  setShowProfile, 
-  activeSection, 
-  setActiveSection 
+// Sous-composant pour gérer les transitions de pages
+const AnimatedRoutes = ({
+  isLoaded,
+  setShowProfile,
+  activeSection,
+  setActiveSection
 }: any) => {
   const location = useLocation();
 
   return (
-    // mode="wait" : Attend la fin de l'animation de sortie avant de monter la nouvelle page
     <AnimatePresence mode="wait">
-      {/* Suspense : Affiche le loader pendant le chargement des chunks JS */}
       <Suspense fallback={
         <div className="min-h-screen flex items-center justify-center bg-black">
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-violet-500 border-t-transparent"></div>
@@ -112,23 +109,28 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
+  // --- INITIALISATION LENIS (SMOOTH SCROLL) ---
   useEffect(() => {
-    setIsLoaded(true);
-
-    // Initialisation du Smooth Scroll (Lenis)
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Effet "poids" satisfaisant
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing function "easeOutQuart"
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      touchMultiplier: 2, // Améliore la réactivité sur mobile
     });
 
-    function raf(time: any) {
+    function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
 
     requestAnimationFrame(raf);
 
-    // Nettoyage lors du démontage du composant
+    // Initialisation de l'état loaded
+    setIsLoaded(true);
+
+    // Nettoyage lors du démontage
     return () => {
       lenis.destroy();
     };
@@ -141,10 +143,10 @@ function App() {
         <SEOHead />
         <AnalyticsTracker />
 
-        {/* Terminal : Flottant au-dessus de tout (Z-Index élevé géré dans le composant) */}
+        {/* Le Terminal doit être ici pour flotter au-dessus de tout le reste */}
         <Terminal />
 
-        <Header 
+        <Header
           setShowProfile={setShowProfile}
           setActiveSection={setActiveSection}
           activeSection={activeSection}
@@ -152,7 +154,7 @@ function App() {
 
         <MouseTrail />
 
-        <AnimatedRoutes 
+        <AnimatedRoutes
           isLoaded={isLoaded}
           setShowProfile={setShowProfile}
           activeSection={activeSection}
