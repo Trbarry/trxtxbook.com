@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Search, 
-  Target, 
   Calendar, 
   Terminal, 
   Lock, 
   Hash, 
   FileWarning, 
-  Filter, 
   Shield,
   ArrowRight,
   AlertCircle
@@ -17,6 +15,7 @@ import { Writeup } from '../types/writeup';
 import { useNavigate } from 'react-router-dom';
 import { SEOHead } from './SEOHead';
 import { getOptimizedUrl } from '../lib/imageUtils';
+import { motion, AnimatePresence } from 'framer-motion'; // ✅ Import ajouté
 
 export const WriteupsList: React.FC = () => {
   const [writeups, setWriteups] = useState<Writeup[]>([]);
@@ -32,11 +31,9 @@ export const WriteupsList: React.FC = () => {
     fetchWriteups();
   }, []);
 
-  // Filtrage dynamique
   useEffect(() => {
     let results = writeups;
 
-    // Filtre Recherche
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       results = results.filter(w => 
@@ -46,7 +43,6 @@ export const WriteupsList: React.FC = () => {
       );
     }
 
-    // Filtre Plateforme
     if (selectedPlatform !== 'all') {
       results = results.filter(w => {
         if (selectedPlatform === 'htb') return w.slug.includes('hackthebox');
@@ -95,16 +91,11 @@ export const WriteupsList: React.FC = () => {
   };
 
   const getWriteupImage = (writeup: Writeup) => {
-    // 1. Priorité absolue : L'image définie dans la base de données (Supabase)
     if (writeup.images && writeup.images.length > 0) {
       return writeup.images[0];
     }
-
-    // 2. Fallbacks (Ancienne méthode "en dur", à garder au cas où)
     if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
     if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
-    
-    // 3. Image par défaut (Si rien n'est trouvé)
     return "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80";
   };
 
@@ -132,11 +123,9 @@ export const WriteupsList: React.FC = () => {
             </p>
           </div>
 
-          {/* Barre de Contrôle (Search & Filter) */}
+          {/* Barre de Contrôle */}
           <div className="max-w-6xl mx-auto mb-12">
             <div className="flex flex-col md:flex-row gap-4 p-4 bg-[#1a1a1f] rounded-2xl border border-white/5">
-              
-              {/* Search Input */}
               <div className="relative flex-1">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
                 <input 
@@ -148,7 +137,6 @@ export const WriteupsList: React.FC = () => {
                 />
               </div>
 
-              {/* Platform Filters */}
               <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
                 {[
                   { id: 'all', label: 'Tout' },
@@ -171,7 +159,7 @@ export const WriteupsList: React.FC = () => {
             </div>
           </div>
 
-          {/* État de chargement / Erreur */}
+          {/* État de chargement / Erreur / Grille */}
           {loading ? (
             <div className="flex justify-center py-32">
               <div className="animate-spin rounded-full h-12 w-12 border-2 border-violet-500 border-t-transparent"></div>
@@ -189,90 +177,96 @@ export const WriteupsList: React.FC = () => {
               <p className="text-gray-400">Essayez de modifier vos critères de recherche.</p>
             </div>
           ) : (
-            /* Grille de Résultats */
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {filteredWriteups.map((writeup) => {
-                const isActiveMachine = false;
-                
-                return (
-                  <div
-                    key={writeup.id}
-                    onClick={() => !isActiveMachine && navigate(`/writeups/${writeup.slug}`)}
-                    className={`group relative bg-[#1a1a1f] rounded-2xl border border-white/5 overflow-hidden flex flex-col h-full
-                             transition-all duration-300 ${isActiveMachine ? 'cursor-not-allowed opacity-80' : 'cursor-pointer hover:border-violet-500/30 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]'}`}
-                  >
-                    {/* Image Header */}
-                    <div className="relative h-48 overflow-hidden border-b border-white/5">
-                      <img
-                        src={getOptimizedUrl(getWriteupImage(writeup), 600)} // <-- Largeur 600px suffisante pour une carte
-                         alt={writeup.title}
-                         loading="lazy" // Ajoute aussi ça pour la perf
-                          className="..."
-                       />
-                      
-                      {/* Badge Platforme */}
-                      <div className="absolute top-4 left-4 z-10">
-                          <span className="px-2.5 py-1 bg-black/80 backdrop-blur border border-white/10 rounded text-[10px] font-bold uppercase tracking-wider text-white">
-                              {getPlatformLabel(writeup.slug || '')}
-                          </span>
-                      </div>
-
-                      {/* Overlay Active Machine */}
-                      {isActiveMachine && (
-                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 z-20 backdrop-blur-[2px]">
-                          <div className="flex items-center gap-2 text-yellow-500 mb-2">
-                              <Lock className="w-5 h-5" />
-                              <span className="font-bold tracking-widest uppercase">Restricted</span>
-                          </div>
-                          <span className="text-[10px] text-gray-400 uppercase tracking-wide border border-yellow-500/20 px-2 py-1 rounded bg-yellow-500/5">
-                              Active Machine
-                          </span>
+            /* ✅ GRILLE ANIMÉE */
+            <motion.div 
+              layout 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+            >
+              <AnimatePresence mode='popLayout'>
+                {filteredWriteups.map((writeup) => {
+                  const isActiveMachine = false;
+                  
+                  return (
+                    <motion.div
+                      layout
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.2 }}
+                      key={writeup.id}
+                      onClick={() => !isActiveMachine && navigate(`/writeups/${writeup.slug}`)}
+                      className={`group relative bg-[#1a1a1f] rounded-2xl border border-white/5 overflow-hidden flex flex-col h-full
+                               transition-all duration-300 ${isActiveMachine ? 'cursor-not-allowed opacity-80' : 'cursor-pointer hover:border-violet-500/30 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]'}`}
+                    >
+                      {/* Image Header */}
+                      <div className="relative h-48 overflow-hidden border-b border-white/5">
+                        <img
+                          src={getOptimizedUrl(getWriteupImage(writeup), 600)}
+                          alt={writeup.title}
+                          loading="lazy"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute top-4 left-4 z-10">
+                            <span className="px-2.5 py-1 bg-black/80 backdrop-blur border border-white/10 rounded text-[10px] font-bold uppercase tracking-wider text-white">
+                                {getPlatformLabel(writeup.slug || '')}
+                            </span>
                         </div>
-                      )}
-                    </div>
-
-                    {/* Contenu */}
-                    <div className="p-6 flex-1 flex flex-col">
-                      <div className="flex justify-between items-start mb-4">
-                          <span className={`text-[10px] font-bold px-2 py-1 rounded border uppercase tracking-wider ${getDifficultyStyles(writeup.difficulty)}`}>
-                              {writeup.difficulty || 'N/A'}
-                          </span>
-                          <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                              <Calendar className="w-3.5 h-3.5" />
-                              {new Date(writeup.created_at).toLocaleDateString('fr-FR')}
+                        {isActiveMachine && (
+                          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 z-20 backdrop-blur-[2px]">
+                            <div className="flex items-center gap-2 text-yellow-500 mb-2">
+                                <Lock className="w-5 h-5" />
+                                <span className="font-bold tracking-widest uppercase">Restricted</span>
+                            </div>
+                            <span className="text-[10px] text-gray-400 uppercase tracking-wide border border-yellow-500/20 px-2 py-1 rounded bg-yellow-500/5">
+                                Active Machine
+                            </span>
                           </div>
+                        )}
                       </div>
 
-                      <h3 className={`text-xl font-bold mb-3 line-clamp-1 ${isActiveMachine ? 'text-gray-500' : 'text-white group-hover:text-violet-400'} transition-colors`}>
-                        {writeup.title}
-                      </h3>
+                      {/* Contenu */}
+                      <div className="p-6 flex-1 flex flex-col">
+                        <div className="flex justify-between items-start mb-4">
+                            <span className={`text-[10px] font-bold px-2 py-1 rounded border uppercase tracking-wider ${getDifficultyStyles(writeup.difficulty)}`}>
+                                {writeup.difficulty || 'N/A'}
+                            </span>
+                            <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                                <Calendar className="w-3.5 h-3.5" />
+                                {new Date(writeup.created_at).toLocaleDateString('fr-FR')}
+                            </div>
+                        </div>
 
-                      <p className="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2 flex-grow">
-                          {isActiveMachine 
-                              ? <span className="flex items-center gap-2 text-yellow-500/80 italic"><FileWarning className="w-4 h-4"/> Contenu masqué pour conformité éthique.</span>
-                              : writeup.description || "Analyse technique détaillée."}
-                      </p>
+                        <h3 className={`text-xl font-bold mb-3 line-clamp-1 ${isActiveMachine ? 'text-gray-500' : 'text-white group-hover:text-violet-400'} transition-colors`}>
+                          {writeup.title}
+                        </h3>
 
-                      {/* Footer Card */}
-                      <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
-                          <div className="flex gap-2">
-                              {writeup.tags?.slice(0, 2).map((tag, i) => (
-                                  <span key={i} className="text-[10px] text-gray-500 bg-white/5 px-2 py-1 rounded flex items-center gap-1">
-                                      <Hash className="w-3 h-3 text-violet-500/50" />
-                                      {tag}
-                                  </span>
-                              ))}
-                          </div>
-                          
-                          {!isActiveMachine && (
-                              <ArrowRight className="w-4 h-4 text-violet-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-                          )}
+                        <p className="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2 flex-grow">
+                            {isActiveMachine 
+                                ? <span className="flex items-center gap-2 text-yellow-500/80 italic"><FileWarning className="w-4 h-4"/> Contenu masqué pour conformité éthique.</span>
+                                : writeup.description || "Analyse technique détaillée."}
+                        </p>
+
+                        {/* Footer Card */}
+                        <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
+                            <div className="flex gap-2">
+                                {writeup.tags?.slice(0, 2).map((tag, i) => (
+                                    <span key={i} className="text-[10px] text-gray-500 bg-white/5 px-2 py-1 rounded flex items-center gap-1">
+                                        <Hash className="w-3 h-3 text-violet-500/50" />
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                            
+                            {!isActiveMachine && (
+                                <ArrowRight className="w-4 h-4 text-violet-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                            )}
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
+            </motion.div>
           )}
         </div>
       </div>

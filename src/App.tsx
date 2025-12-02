@@ -1,16 +1,17 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import Lenis from 'lenis';
 
 // SEO Component
 import { SEOHead } from './components/SEOHead';
 
-// Layout Components (Gardés en statique car toujours affichés)
+// Layout Components (Toujours affichés)
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { PageTransition } from './components/layout/PageTransition';
 
-// Core Components (Page d'accueil - Gardés en statique pour le LCP)
+// Core Components (Page d'accueil)
 import { Hero } from './components/Hero';
 import { Stats } from './components/Stats';
 import { Formation } from './components/Formation';
@@ -18,7 +19,7 @@ import { Projects } from './components/Projects';
 import { Contact } from './components/Contact';
 import { Writeups } from './components/Writeups';
 
-// UI Components (Gardés en statique car légers ou critiques)
+// UI Components
 import { ProfileModal } from './components/ProfileModal';
 import { ScrollMenu } from './components/ScrollMenu';
 import { ScrollReveal } from './components/ScrollReveal';
@@ -26,15 +27,13 @@ import { MouseTrail } from './components/MouseTrail';
 import { AnalyticsTracker } from './components/AnalyticsTracker';
 import { Terminal } from './components/Terminal';
 
-// --- LAZY LOADING DES PAGES SECONDAIRES ---
-// Cela divise le bundle JavaScript et accélère le chargement initial
+// --- LAZY LOADING DES PAGES ---
 const WriteupsList = lazy(() => import('./components/WriteupsList').then(module => ({ default: module.WriteupsList })));
 const ProjectsList = lazy(() => import('./components/ProjectsList').then(module => ({ default: module.ProjectsList })));
 const CertificationsList = lazy(() => import('./pages/CertificationsList').then(module => ({ default: module.CertificationsList })));
 
 // Pages de détail et articles
 const WriteupPage = lazy(() => import('./pages/WriteupPage').then(module => ({ default: module.WriteupPage })));
-const DogWriteupPage = lazy(() => import('./pages/DogWriteupPage').then(module => ({ default: module.DogWriteupPage }))); // Gardé si besoin, mais normalement remplacé par WriteupPage dynamique
 const ArticlePage = lazy(() => import('./pages/ArticlePage').then(module => ({ default: module.ArticlePage })));
 const ADArticlePage = lazy(() => import('./pages/ADArticlePage').then(module => ({ default: module.ADArticlePage })));
 const SteamDeckArticlePage = lazy(() => import('./pages/SteamDeckArticlePage').then(module => ({ default: module.SteamDeckArticlePage })));
@@ -47,7 +46,7 @@ const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then(module => 
 const SitemapGeneratorPage = lazy(() => import('./pages/SitemapGeneratorPage').then(module => ({ default: module.SitemapGeneratorPage })));
 
 
-// Sous-composant pour gérer les transitions de pages
+// Sous-composant pour gérer les transitions de pages et les routes
 const AnimatedRoutes = ({ 
   isLoaded, 
   setShowProfile, 
@@ -57,9 +56,9 @@ const AnimatedRoutes = ({
   const location = useLocation();
 
   return (
-    // mode="wait" assure que l'ancienne page a fini de disparaitre avant que la nouvelle n'arrive
+    // mode="wait" : Attend la fin de l'animation de sortie avant de monter la nouvelle page
     <AnimatePresence mode="wait">
-      {/* Suspense gère l'état de chargement des composants Lazy */}
+      {/* Suspense : Affiche le loader pendant le chargement des chunks JS */}
       <Suspense fallback={
         <div className="min-h-screen flex items-center justify-center bg-black">
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-violet-500 border-t-transparent"></div>
@@ -67,7 +66,7 @@ const AnimatedRoutes = ({
       }>
         <Routes location={location} key={location.pathname}>
           
-          {/* PAGE D'ACCUEIL (Chargée statiquement) */}
+          {/* PAGE D'ACCUEIL */}
           <Route path="/" element={
             <PageTransition>
               <ScrollMenu activeSection={activeSection} setActiveSection={setActiveSection} />
@@ -82,18 +81,15 @@ const AnimatedRoutes = ({
             </PageTransition>
           } />
 
-          {/* LISTES (Lazy Loaded) */}
+          {/* LISTES */}
           <Route path="/writeups" element={<PageTransition><WriteupsList /></PageTransition>} />
           <Route path="/projects" element={<PageTransition><ProjectsList /></PageTransition>} />
           <Route path="/certifications" element={<PageTransition><CertificationsList /></PageTransition>} />
 
-          {/* DETAILS DYNAMIQUES (Le coeur de ton nouveau système) */}
+          {/* DETAILS DYNAMIQUES */}
           <Route path="/writeups/:slug" element={<PageTransition><WriteupPage /></PageTransition>} />
           
-          {/* Ancienne route statique Dog supprimée volontairement pour forcer le dynamique */}
-          {/* <Route path="/writeups/dog" element={<PageTransition><DogWriteupPage /></PageTransition>} /> */}
-          
-          {/* ARTICLES STATIQUES (Lazy Loaded) */}
+          {/* ARTICLES STATIQUES */}
           <Route path="/articles/smb-server" element={<PageTransition><ArticlePage /></PageTransition>} />
           <Route path="/articles/ad-network" element={<PageTransition><ADArticlePage /></PageTransition>} />
           <Route path="/articles/steam-deck-kali" element={<PageTransition><SteamDeckArticlePage /></PageTransition>} />
@@ -101,7 +97,7 @@ const AnimatedRoutes = ({
           <Route path="/articles/linux-mint-revival" element={<PageTransition><LinuxMintArticlePage /></PageTransition>} />
           <Route path="/articles/cpts-journey" element={<PageTransition><CPTSJourneyArticlePage /></PageTransition>} />
           
-          {/* ADMIN (Lazy Loaded) */}
+          {/* ADMIN */}
           <Route path="/admin/analytics" element={<PageTransition><AnalyticsPage /></PageTransition>} />
           <Route path="/admin/sitemap-generator" element={<PageTransition><SitemapGeneratorPage /></PageTransition>} />
         
@@ -118,6 +114,24 @@ function App() {
 
   useEffect(() => {
     setIsLoaded(true);
+
+    // Initialisation du Smooth Scroll (Lenis)
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Effet "poids" satisfaisant
+    });
+
+    function raf(time: any) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // Nettoyage lors du démontage du composant
+    return () => {
+      lenis.destroy();
+    };
   }, []);
 
   return (
@@ -127,7 +141,7 @@ function App() {
         <SEOHead />
         <AnalyticsTracker />
 
-        {/* Le Terminal doit être ici pour flotter au-dessus de tout le reste */}
+        {/* Terminal : Flottant au-dessus de tout (Z-Index élevé géré dans le composant) */}
         <Terminal />
 
         <Header 
