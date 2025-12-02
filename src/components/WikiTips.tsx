@@ -1,83 +1,114 @@
 import React, { useState, useEffect } from 'react';
-import { Coins, Zap, Check, Trophy } from 'lucide-react';
+import { Zap, Check, ShieldAlert, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '../lib/supabase';
 import confetti from 'canvas-confetti';
 
-interface WikiTipProps {
-  pageId: string;
-  initialLikes: number;
-}
-
-export const WikiTip: React.FC<WikiTipProps> = ({ pageId, initialLikes }) => {
-  // On force 0 si initialLikes est null/undefined
-  const [likes, setLikes] = useState(initialLikes || 0);
+export const WikiTip: React.FC = () => {
+  const [likes, setLikes] = useState(0);
   const [hasLiked, setHasLiked] = useState(false);
-  const [isSending, setIsSending] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [userIp, setUserIp] = useState<string | null>(null);
+
+  // ID Fixe défini dans le SQL
+  const GLOBAL_WIKI_ID = '00000000-0000-0000-0000-000000000000';
 
   useEffect(() => {
-    const storageKey = `wiki_like_${pageId}`;
-    if (localStorage.getItem(storageKey)) {
-      setHasLiked(true);
-    }
-    // Mise à jour si la prop change (navigation entre pages)
-    setLikes(initialLikes || 0);
-  }, [pageId, initialLikes]);
+    fetchData();
+  }, []);
 
-  const handleTip = async () => {
-    if (hasLiked || isSending) return;
-
-    setIsSending(true);
-    const newCount = likes + 1;
-    setLikes(newCount);
-    setHasLiked(true);
-    localStorage.setItem(`wiki_like_${pageId}`, 'true');
-
-    // Explosion de couleurs
-    confetti({
-      particleCount: 150,
-      spread: 70,
-      origin: { y: 0.8 },
-      colors: ['#8b5cf6', '#3b82f6', '#10b981', '#fbbf24'],
-      disableForReducedMotion: true
-    });
-
+  const fetchData = async () => {
     try {
-      await supabase.rpc('increment_wiki_likes', { page_id: pageId });
-    } catch (err) {
-      console.error("Erreur tip:", err);
-      // On ne rollback pas l'UI pour ne pas frustrer l'utilisateur
+      // 1. Récupérer l'IP du client (via un service tiers léger)
+      const ipRes = await fetch('https://api.ipify.org?format=json');
+      const ipData = await ipRes.json();
+      const ip = ipData.ip;
+      setUserIp(ip);
+
+      // 2. Récupérer le nombre de likes actuel
+      const { data: pageData } = await supabase
+        .from('wiki_pages')
+        .select('likes')
+        .eq('id', GLOBAL_WIKI_ID)
+        .single();
+
+      if (pageData) setLikes(pageData.likes);
+
+      // 3. Vérifier si cet IP a déjà voté (via Supabase pour être sûr)
+      const { data: voteData } = await supabase
+        .from('wiki_votes')
+        .select('id')
+        .eq('page_id', GLOBAL_WIKI_ID)
+        .eq('user_ip', ip)
+        .single();
+
+      if (voteData) setHasLiked(true);
+
+    } catch (error) {
+      console.error("Erreur init kudos:", error);
     } finally {
-      setIsSending(false);
+      setIsLoading(false);
     }
   };
 
-  return (
-    <div className="mt-16 pt-10 border-t border-white/5 flex flex-col items-center justify-center text-center">
-      <h4 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
-        <Zap className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-        Signal reçu ?
-      </h4>
-      <p className="text-gray-400 text-sm mb-8 max-w-md">
-        Si cette note t'a été utile, envoie un <span className="text-violet-400 font-medium">crédit de données</span> pour soutenir la base.
-      </p>
+  const handleVote = async () => {
+    if (hasLiked || !userIp) return;
 
+    // Optimistic Update
+    setHasLiked(true);
+    setLikes(prev => prev + 1);
+
+    // Confetti Cyber
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#8b5cf6', '#06b6d4', '#ffffff'] // Violet, Cyan, Blanc
+    });
+
+    try {
+      // Appel de la fonction SQL sécurisée
+      const { data: success, error } = await supabase.rpc('vote_for_wiki', { target_ip: userIp });
+      
+      if (error || !success) {
+        // Si le serveur rejette (doublon IP caché), on revert pas pour pas frustrer, 
+        // mais on log l'erreur.
+        console.warn("Vote rejeté par le serveur (IP déjà enregistrée ?)");
+      }
+    } catch (err) {
+      console.error("Erreur vote:", err);
+    }
+  };
+
+  if (isLoading) return (
+    <div className="flex items-center justify-center py-4">
+      <Loader2 className="w-5 h-5 text-violet-500 animate-spin" />
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col items-center justify-center w-full">
       <motion.button
-        whileHover={!hasLiked ? { scale: 1.02 } : {}}
+        whileHover={!hasLiked ? { scale: 1.02, y: -2 } : {}}
         whileTap={!hasLiked ? { scale: 0.98 } : {}}
-        onClick={handleTip}
+        onClick={handleVote}
         disabled={hasLiked}
         className={`
-          relative group flex items-center p-1.5 rounded-2xl border transition-all duration-500
+          relative group w-full md:w-auto min-w-[280px] flex items-center justify-between p-1.5 rounded-2xl border transition-all duration-500
           ${hasLiked 
-            ? 'bg-[#1a1a20] border-green-500/30 cursor-default' 
-            : 'bg-[#13131a] border-violet-500/30 hover:border-violet-500/60 hover:shadow-[0_0_40px_rgba(139,92,246,0.15)]'
+            ? 'bg-[#1a1a20] border-green-500/30 cursor-default shadow-[0_0_20px_rgba(16,185,129,0.1)]' 
+            : 'bg-gradient-to-b from-[#1a1a20] to-[#13131a] border-violet-500/30 hover:border-violet-500/60 hover:shadow-[0_0_30px_rgba(139,92,246,0.2)]'
           }
         `}
       >
-        {/* Partie Gauche : Icône + Texte */}
+        {/* Glow de fond au survol */}
+        {!hasLiked && (
+          <div className="absolute inset-0 rounded-2xl bg-violet-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        )}
+
+        {/* Partie Gauche : Badge */}
         <div className={`
-          flex items-center gap-3 px-6 py-3 rounded-xl transition-all duration-300
+          flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300
           ${hasLiked ? 'bg-green-500/10' : 'bg-white/5 group-hover:bg-violet-500/10'}
         `}>
           <div className={`p-1.5 rounded-full ${hasLiked ? 'text-green-400' : 'text-yellow-400'}`}>
@@ -92,52 +123,45 @@ export const WikiTip: React.FC<WikiTipProps> = ({ pageId, initialLikes }) => {
                 </motion.div>
               ) : (
                 <motion.div
-                  key="coin"
+                  key="zap"
                   initial={{ scale: 1 }}
                   exit={{ scale: 0, rotate: 180 }}
                 >
-                  <Coins className="w-5 h-5" />
+                  <Zap className="w-5 h-5 fill-current" />
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
-          <span className={`font-bold text-sm uppercase tracking-wider ${hasLiked ? 'text-green-400' : 'text-white'}`}>
-            {hasLiked ? "Envoyé" : "Envoyer un Tip"}
-          </span>
+          <div className="flex flex-col items-start">
+            <span className={`text-xs font-bold uppercase tracking-wider ${hasLiked ? 'text-green-400' : 'text-white'}`}>
+              {hasLiked ? "ACKNOWLEDGED" : "USEFUL CONTENT ?"}
+            </span>
+            {!hasLiked && <span className="text-[10px] text-gray-400">Cliquez pour valider</span>}
+          </div>
         </div>
 
-        {/* Séparateur */}
-        <div className="w-px h-8 bg-white/10 mx-2"></div>
-
-        {/* Partie Droite : Compteur (Bien visible maintenant) */}
-        <div className="px-6 flex flex-col items-center justify-center min-w-[80px]">
+        {/* Partie Droite : Compteur */}
+        <div className="px-6 flex flex-col items-end">
           <span className={`text-2xl font-bold font-mono leading-none ${hasLiked ? 'text-white' : 'text-violet-400 group-hover:text-violet-300'}`}>
             {likes}
           </span>
           <span className="text-[10px] text-gray-500 uppercase tracking-widest font-medium mt-1">
-            Crédits
+            Community Kudos
           </span>
         </div>
-
-        {/* Effet de lueur d'arrière-plan */}
-        {!hasLiked && (
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-violet-500/0 via-violet-500/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-        )}
       </motion.button>
 
-      {/* Petit message fun post-click */}
-      <AnimatePresence>
-        {hasLiked && (
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-6 flex items-center gap-2 px-3 py-1.5 bg-green-500/10 border border-green-500/20 rounded-full text-[10px] text-green-400 font-mono"
-          >
-            <Trophy className="w-3 h-3" />
-            <span>Achievement: Supporter Officiel</span>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Message IP Protection */}
+      {hasLiked && (
+        <motion.div 
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-3 flex items-center gap-1.5 text-[10px] text-gray-600 font-mono"
+        >
+          <ShieldAlert className="w-3 h-3" />
+          <span>Vote enregistré et lié à votre IP pour éviter le spam.</span>
+        </motion.div>
+      )}
     </div>
   );
 };

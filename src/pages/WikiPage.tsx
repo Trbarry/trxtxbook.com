@@ -162,7 +162,7 @@ const FileTree: React.FC<{ nodes: Record<string, TreeNode>; onSelect: (page: Wik
   );
 };
 
-// --- PAGE D'ACCUEIL WIKI (DESIGN PREMIUM) ---
+// --- PAGE D'ACCUEIL WIKI (DESIGN PREMIUM + KUDOS) ---
 const WikiWelcome = () => {
   const stats = [
     { label: "Nodes", value: "250+", icon: Database, color: "blue" },
@@ -174,7 +174,7 @@ const WikiWelcome = () => {
     <div className="flex flex-col items-center justify-center py-8 px-4 md:p-12 max-w-5xl mx-auto animate-in fade-in zoom-in duration-500 w-full">
       
       {/* Hero Header */}
-      <div className="text-center mb-12 relative">
+      <div className="text-center mb-10 relative">
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-violet-500/20 rounded-full blur-[100px] pointer-events-none"></div>
         
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium mb-6 shadow-[0_0_15px_rgba(139,92,246,0.2)]">
@@ -186,9 +186,14 @@ const WikiWelcome = () => {
           Wiki <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">Personnel</span>
         </h2>
         
-        <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+        <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8">
           Base de connaissances dynamique, centralisant mes notes techniques, procédures et retours d'expérience.
         </p>
+
+        {/* ✅ AJOUT DU BOUTON KUDOS ICI */}
+        <div className="mb-12">
+          <WikiTip /> 
+        </div>
       </div>
 
       {/* Stats Row */}
