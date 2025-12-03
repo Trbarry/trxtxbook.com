@@ -41,13 +41,13 @@ const SteamDeckArticlePage = lazy(() => import('./pages/SteamDeckArticlePage').t
 const ExegolArticlePage = lazy(() => import('./pages/ExegolArticlePage').then(module => ({ default: module.ExegolArticlePage })));
 const LinuxMintArticlePage = lazy(() => import('./pages/LinuxMintArticlePage').then(module => ({ default: module.LinuxMintArticlePage })));
 const CPTSJourneyArticlePage = lazy(() => import('./pages/CPTSJourneyArticlePage').then(module => ({ default: module.CPTSJourneyArticlePage })));
-const DogWriteupPage = lazy(() => import('./pages/DogWriteupPage').then(module => ({ default: module.DogWriteupPage })));
+const DogWriteupPage = lazy(() => import('./pages/DogWriteupPage').then(module => ({ default: module.DogWriteupPage }))); // Ajouté si le fichier existe
 
 // Pages Admin & Tools
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then(module => ({ default: module.AnalyticsPage })));
 const SitemapGeneratorPage = lazy(() => import('./pages/SitemapGeneratorPage').then(module => ({ default: module.SitemapGeneratorPage })));
 
-// ✅ NOUVELLE PAGE TROLL (HONEYPOT)
+// ✅ 1. IMPORT DE LA PAGE TROLL (HONEYPOT)
 const AdminTrollPage = lazy(() => import('./pages/AdminTrollPage').then(module => ({ default: module.AdminTrollPage })));
 
 // Sous-composant pour gérer les transitions de pages
@@ -96,7 +96,7 @@ const AnimatedRoutes = ({
           {/* DETAILS DYNAMIQUES */}
           <Route path="/writeups/:slug" element={<PageTransition><WriteupPage /></PageTransition>} />
           
-          {/* WRITE-UPS SPÉCIFIQUES (Si nécessaire) */}
+          {/* WRITE-UPS SPÉCIFIQUES */}
           <Route path="/writeups/dog" element={<PageTransition><DogWriteupPage /></PageTransition>} />
 
           {/* ARTICLES STATIQUES */}
@@ -111,7 +111,7 @@ const AnimatedRoutes = ({
           <Route path="/admin/analytics" element={<PageTransition><AnalyticsPage /></PageTransition>} />
           <Route path="/admin/sitemap-generator" element={<PageTransition><SitemapGeneratorPage /></PageTransition>} />
 
-          {/* ✅ ROUTES TROLL / HONEYPOT */}
+          {/* ✅ 2. ROUTES TROLL / HONEYPOT */}
           <Route path="/admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/wp-admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/login" element={<PageTransition><AdminTrollPage /></PageTransition>} />
