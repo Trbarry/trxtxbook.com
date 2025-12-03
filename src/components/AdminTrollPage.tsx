@@ -22,7 +22,7 @@ export const AdminTrollPage: React.FC = () => {
     ];
 
     let delay = 0;
-    fakeLogs.forEach((log, index) => {
+    fakeLogs.forEach((log) => {
       delay += Math.random() * 800;
       setTimeout(() => {
         setLines(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${log}`]);
@@ -42,7 +42,7 @@ export const AdminTrollPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4 relative overflow-hidden pt-28">
       
       {/* Background Matrix/Glitch subtil */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-red-900/10 via-black to-black pointer-events-none"></div>
