@@ -42,9 +42,10 @@ const ExegolArticlePage = lazy(() => import('./pages/ExegolArticlePage').then(mo
 const LinuxMintArticlePage = lazy(() => import('./pages/LinuxMintArticlePage').then(module => ({ default: module.LinuxMintArticlePage })));
 const CPTSJourneyArticlePage = lazy(() => import('./pages/CPTSJourneyArticlePage').then(module => ({ default: module.CPTSJourneyArticlePage })));
 
-// Pages Admin
+// Pages Admin & Tools
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then(module => ({ default: module.AnalyticsPage })));
 const SitemapGeneratorPage = lazy(() => import('./pages/SitemapGeneratorPage').then(module => ({ default: module.SitemapGeneratorPage })));
+const AdminTrollPage = lazy(() => import('./pages/AdminTrollPage').then(module => ({ default: module.AdminTrollPage })));
 
 // Sous-composant pour gérer les transitions de pages
 const AnimatedRoutes = ({
@@ -67,7 +68,7 @@ const AnimatedRoutes = ({
           {/* PAGE D'ACCUEIL */}
           <Route path="/" element={
             <>
-              {/* ✅ CORRECTION : ScrollMenu sorti du PageTransition pour rester fixe */}
+              {/* ScrollMenu sorti du PageTransition pour rester fixe */}
               <ScrollMenu activeSection={activeSection} setActiveSection={setActiveSection} />
               
               <PageTransition>
@@ -103,6 +104,11 @@ const AnimatedRoutes = ({
           {/* ADMIN */}
           <Route path="/admin/analytics" element={<PageTransition><AnalyticsPage /></PageTransition>} />
           <Route path="/admin/sitemap-generator" element={<PageTransition><SitemapGeneratorPage /></PageTransition>} />
+
+          {/* ZONE TROLL / HONEYPOT */}
+          <Route path="/admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
+          <Route path="/wp-admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
+          <Route path="/login" element={<PageTransition><AdminTrollPage /></PageTransition>} />
         
         </Routes>
       </Suspense>
@@ -115,33 +121,29 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
-  // src/App.tsx
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      touchMultiplier: 2,
+      infinite: false, 
+    });
 
-useEffect(() => {
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    orientation: 'vertical',
-    gestureOrientation: 'vertical',
-    smoothWheel: true,
-    touchMultiplier: 2,
-    // ✅ AJOUTS POUR LA PERF :
-    infinite: false, // Désactive le scroll infini si activé par erreur
-  });
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
 
-  // Utiliser requestAnimationFrame standard
-  function raf(time: number) {
-    lenis.raf(time);
     requestAnimationFrame(raf);
-  }
+    setIsLoaded(true);
 
-  requestAnimationFrame(raf);
-  setIsLoaded(true);
-
-  return () => {
-    lenis.destroy();
-  };
-}, []);
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   return (
     <Router>
