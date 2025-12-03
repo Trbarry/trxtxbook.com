@@ -15,7 +15,7 @@ export const CareerTimeline: React.FC = () => {
     },
     {
       year: "2024",
-      title: "Construction du Lab & Autodidacte",
+      title: "Reconversion Pro & Self-Learning",
       subtitle: "Proactivité & Projets Perso",
       description: "8 mois de discipline autodidacte. Organisation rigoureuse des révisions (TryHackMe, eJPT, CPTS) immédiatement appliquées dans des projets personnels concrets (Home Lab AD, Scripts) pour valider chaque compétence acquise.",
       icon: Server,
@@ -26,7 +26,6 @@ export const CareerTimeline: React.FC = () => {
       year: "2025 - 2027",
       title: "Alternance Moulinvest",
       subtitle: "Admin Sys/Réseau & Sécurité",
-      // ✅ DESCRIPTION MISE À JOUR : POLYVALENCE SUPPORT + PROJET + MENTORAT
       description: "Une expérience complète. Gestion simultanée du support utilisateur quotidien et de l'administration d'une infrastructure hybride complexe. Encadré par un expert, je mène des projets techniques variés (backlog riche) tout en proposant proactivement des améliorations de sécurité.",
       icon: Briefcase,
       color: "green",
@@ -34,12 +33,13 @@ export const CareerTimeline: React.FC = () => {
     },
     {
       year: "Futur",
-      title: "L'Horizon Cyber",
-      subtitle: "Réseau • Blue • Red • Pentest",
-      description: "L'objectif est de fusionner ces compétences. Utiliser la maîtrise du Réseau et de la Défense (Blue) pour devenir un Pentester (Red) redoutable. Un profil complet et polyvalent.",
+      title: "L'Horizon",
+      subtitle: "Vers une expertise globale", // Plus sobre et pro
+      // Description orientée "Vision 360" et "Ingénierie" plutôt que "Hacking pur"
+      description: "Mon ambition est de développer une vision transverse des systèmes d'information. Au-delà des silos techniques, je souhaite maîtriser l'ensemble de la chaîne — architecture, développement, infrastructure et sécurité — pour concevoir et maintenir des environnements complexes avec rigueur et pragmatisme.",
       icon: Zap,
       color: "purple",
-      tags: ["Réseau", "Blue Team", "Red Team", "Pentest"],
+      tags: ["Vision 360°", "Architecture", "Ingénierie", "Polyvalence"], // Tags plus matures
       isBlurry: true
     }
   ];
