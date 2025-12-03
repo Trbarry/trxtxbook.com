@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Home, BarChart2, BookOpen, FolderGit2, Terminal, Mail } from 'lucide-react';
 
 interface ScrollMenuProps {
@@ -8,14 +8,14 @@ interface ScrollMenuProps {
 
 export const ScrollMenu: React.FC<ScrollMenuProps> = ({ activeSection, setActiveSection }) => {
   
-  const menuItems = [
+  const menuItems = useMemo(() => [
     { id: 'home', icon: Home, label: 'Accueil' },
     { id: 'stats', icon: BarChart2, label: 'Stats' },
     { id: 'formation', icon: BookOpen, label: 'Formation' },
     { id: 'projects', icon: FolderGit2, label: 'Projets' },
     { id: 'writeups', icon: Terminal, label: 'Write-ups' },
     { id: 'contact', icon: Mail, label: 'Contact' }
-  ];
+  ], []);
 
   const handleScrollTo = (id: string) => {
     const element = document.getElementById(id);
@@ -29,40 +29,45 @@ export const ScrollMenu: React.FC<ScrollMenuProps> = ({ activeSection, setActive
         top: offsetPosition,
         behavior: 'smooth'
       });
+      // On met à jour manuellement pour un feedback immédiat au clic
       setActiveSection(id);
     }
   };
 
   useEffect(() => {
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          // Point de déclenchement (1/3 de l'écran)
-          const triggerPoint = window.innerHeight / 3;
-
-          for (const item of menuItems) {
-            const element = document.getElementById(item.id);
-            if (element) {
-              const rect = element.getBoundingClientRect();
-              // Si le haut de l'élément est au-dessus du trigger point 
-              // ET que le bas est en dessous, c'est la section active
-              if (rect.top <= triggerPoint && rect.bottom > triggerPoint) {
-                setActiveSection((prev) => (prev !== item.id ? item.id : prev));
-                break;
-              }
-            }
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
+    // Configuration de l'observateur
+    const observerOptions = {
+      root: null, // viewport
+      // Cette marge définit la "zone active" au centre de l'écran.
+      // L'élément doit traverser cette ligne horizontale invisible pour être considéré "actif".
+      rootMargin: '-45% 0px -55% 0px', 
+      threshold: 0
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [setActiveSection]);
+    const observerCallback: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // L'élément est entré dans la zone active
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // On observe chaque section correspondant aux items du menu
+    menuItems.forEach((item) => {
+      const element = document.getElementById(item.id);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    // Nettoyage à la destruction du composant
+    return () => {
+      observer.disconnect();
+    };
+  }, [menuItems, setActiveSection]);
 
   return (
     <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden lg:flex flex-col gap-4">
