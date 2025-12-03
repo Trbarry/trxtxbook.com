@@ -41,10 +41,13 @@ const SteamDeckArticlePage = lazy(() => import('./pages/SteamDeckArticlePage').t
 const ExegolArticlePage = lazy(() => import('./pages/ExegolArticlePage').then(module => ({ default: module.ExegolArticlePage })));
 const LinuxMintArticlePage = lazy(() => import('./pages/LinuxMintArticlePage').then(module => ({ default: module.LinuxMintArticlePage })));
 const CPTSJourneyArticlePage = lazy(() => import('./pages/CPTSJourneyArticlePage').then(module => ({ default: module.CPTSJourneyArticlePage })));
+const DogWriteupPage = lazy(() => import('./pages/DogWriteupPage').then(module => ({ default: module.DogWriteupPage })));
 
 // Pages Admin & Tools
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then(module => ({ default: module.AnalyticsPage })));
 const SitemapGeneratorPage = lazy(() => import('./pages/SitemapGeneratorPage').then(module => ({ default: module.SitemapGeneratorPage })));
+
+// ✅ NOUVELLE PAGE TROLL (HONEYPOT)
 const AdminTrollPage = lazy(() => import('./pages/AdminTrollPage').then(module => ({ default: module.AdminTrollPage })));
 
 // Sous-composant pour gérer les transitions de pages
@@ -93,6 +96,9 @@ const AnimatedRoutes = ({
           {/* DETAILS DYNAMIQUES */}
           <Route path="/writeups/:slug" element={<PageTransition><WriteupPage /></PageTransition>} />
           
+          {/* WRITE-UPS SPÉCIFIQUES (Si nécessaire) */}
+          <Route path="/writeups/dog" element={<PageTransition><DogWriteupPage /></PageTransition>} />
+
           {/* ARTICLES STATIQUES */}
           <Route path="/articles/smb-server" element={<PageTransition><ArticlePage /></PageTransition>} />
           <Route path="/articles/ad-network" element={<PageTransition><ADArticlePage /></PageTransition>} />
@@ -101,11 +107,11 @@ const AnimatedRoutes = ({
           <Route path="/articles/linux-mint-revival" element={<PageTransition><LinuxMintArticlePage /></PageTransition>} />
           <Route path="/articles/cpts-journey" element={<PageTransition><CPTSJourneyArticlePage /></PageTransition>} />
           
-          {/* ADMIN */}
+          {/* ADMIN & TOOLS */}
           <Route path="/admin/analytics" element={<PageTransition><AnalyticsPage /></PageTransition>} />
           <Route path="/admin/sitemap-generator" element={<PageTransition><SitemapGeneratorPage /></PageTransition>} />
 
-          {/* ZONE TROLL / HONEYPOT */}
+          {/* ✅ ROUTES TROLL / HONEYPOT */}
           <Route path="/admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/wp-admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/login" element={<PageTransition><AdminTrollPage /></PageTransition>} />
@@ -129,7 +135,7 @@ function App() {
       gestureOrientation: 'vertical',
       smoothWheel: true,
       touchMultiplier: 2,
-      infinite: false, 
+      infinite: false,
     });
 
     function raf(time: number) {
