@@ -18,6 +18,7 @@ import { Formation } from './components/Formation';
 import { Projects } from './components/Projects';
 import { Contact } from './components/Contact';
 import { Writeups } from './components/Writeups';
+import { CareerTimeline } from './components/CareerTimeline'; // <--- NOUVEL IMPORT
 
 // UI Components
 import { ProfileModal } from './components/ProfileModal';
@@ -47,7 +48,7 @@ const DogWriteupPage = lazy(() => import('./pages/DogWriteupPage').then(module =
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then(module => ({ default: module.AnalyticsPage })));
 const SitemapGeneratorPage = lazy(() => import('./pages/SitemapGeneratorPage').then(module => ({ default: module.SitemapGeneratorPage })));
 
-// ✅ IMPORT DE LA PAGE TROLL (C'EST ICI QUE ÇA MANQUAIT)
+// ✅ IMPORT DE LA PAGE TROLL
 const AdminTrollPage = lazy(() => import('./pages/AdminTrollPage').then(module => ({ default: module.AdminTrollPage })));
 
 // Sous-composant pour gérer les transitions de pages
@@ -79,6 +80,10 @@ const AnimatedRoutes = ({
                 </div>
                 <ScrollReveal><div id="stats"><Stats /></div></ScrollReveal>
                 <ScrollReveal><div id="formation"><Formation /></div></ScrollReveal>
+                
+                {/* --- AJOUT DE LA TIMELINE ICI --- */}
+                <ScrollReveal><CareerTimeline /></ScrollReveal>
+
                 <ScrollReveal><div id="projects"><Projects /></div></ScrollReveal>
                 <ScrollReveal><div id="writeups"><Writeups /></div></ScrollReveal>
                 <ScrollReveal><div id="contact"><Contact /></div></ScrollReveal>
@@ -108,7 +113,7 @@ const AnimatedRoutes = ({
           <Route path="/admin/analytics" element={<PageTransition><AnalyticsPage /></PageTransition>} />
           <Route path="/admin/sitemap-generator" element={<PageTransition><SitemapGeneratorPage /></PageTransition>} />
 
-          {/* ✅ ROUTES TROLL (C'EST ICI QUE ÇA MANQUAIT) */}
+          {/* ✅ ROUTES TROLL */}
           <Route path="/admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/wp-admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/login" element={<PageTransition><AdminTrollPage /></PageTransition>} />
