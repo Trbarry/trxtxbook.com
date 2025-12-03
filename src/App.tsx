@@ -41,13 +41,13 @@ const SteamDeckArticlePage = lazy(() => import('./pages/SteamDeckArticlePage').t
 const ExegolArticlePage = lazy(() => import('./pages/ExegolArticlePage').then(module => ({ default: module.ExegolArticlePage })));
 const LinuxMintArticlePage = lazy(() => import('./pages/LinuxMintArticlePage').then(module => ({ default: module.LinuxMintArticlePage })));
 const CPTSJourneyArticlePage = lazy(() => import('./pages/CPTSJourneyArticlePage').then(module => ({ default: module.CPTSJourneyArticlePage })));
-const DogWriteupPage = lazy(() => import('./pages/DogWriteupPage').then(module => ({ default: module.DogWriteupPage }))); // Ajouté si le fichier existe
+const DogWriteupPage = lazy(() => import('./pages/DogWriteupPage').then(module => ({ default: module.DogWriteupPage })));
 
 // Pages Admin & Tools
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then(module => ({ default: module.AnalyticsPage })));
 const SitemapGeneratorPage = lazy(() => import('./pages/SitemapGeneratorPage').then(module => ({ default: module.SitemapGeneratorPage })));
 
-// ✅ 1. IMPORT DE LA PAGE TROLL (HONEYPOT)
+// ✅ IMPORT DE LA PAGE TROLL (C'EST ICI QUE ÇA MANQUAIT)
 const AdminTrollPage = lazy(() => import('./pages/AdminTrollPage').then(module => ({ default: module.AdminTrollPage })));
 
 // Sous-composant pour gérer les transitions de pages
@@ -71,7 +71,6 @@ const AnimatedRoutes = ({
           {/* PAGE D'ACCUEIL */}
           <Route path="/" element={
             <>
-              {/* ScrollMenu sorti du PageTransition pour rester fixe */}
               <ScrollMenu activeSection={activeSection} setActiveSection={setActiveSection} />
               
               <PageTransition>
@@ -95,8 +94,6 @@ const AnimatedRoutes = ({
 
           {/* DETAILS DYNAMIQUES */}
           <Route path="/writeups/:slug" element={<PageTransition><WriteupPage /></PageTransition>} />
-          
-          {/* WRITE-UPS SPÉCIFIQUES */}
           <Route path="/writeups/dog" element={<PageTransition><DogWriteupPage /></PageTransition>} />
 
           {/* ARTICLES STATIQUES */}
@@ -111,7 +108,7 @@ const AnimatedRoutes = ({
           <Route path="/admin/analytics" element={<PageTransition><AnalyticsPage /></PageTransition>} />
           <Route path="/admin/sitemap-generator" element={<PageTransition><SitemapGeneratorPage /></PageTransition>} />
 
-          {/* ✅ 2. ROUTES TROLL / HONEYPOT */}
+          {/* ✅ ROUTES TROLL (C'EST ICI QUE ÇA MANQUAIT) */}
           <Route path="/admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/wp-admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/login" element={<PageTransition><AdminTrollPage /></PageTransition>} />
@@ -157,18 +154,10 @@ function App() {
         
         <SEOHead />
         <AnalyticsTracker />
-
-        {/* Le Terminal doit être ici pour flotter au-dessus de tout le reste */}
         <Terminal />
-
-        <Header
-          setShowProfile={setShowProfile}
-          setActiveSection={setActiveSection}
-          activeSection={activeSection}
-        />
-
+        <Header setShowProfile={setShowProfile} setActiveSection={setActiveSection} activeSection={activeSection} />
         <MouseTrail />
-
+        
         <AnimatedRoutes
           isLoaded={isLoaded}
           setShowProfile={setShowProfile}
@@ -177,7 +166,6 @@ function App() {
         />
 
         <Footer />
-
         {showProfile && <ProfileModal onClose={() => setShowProfile(false)} />}
       </div>
     </Router>
