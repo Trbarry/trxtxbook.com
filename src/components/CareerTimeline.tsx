@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Network, Server, Terminal, Target, Briefcase, ChevronDown, Sparkles, Shield, Zap } from 'lucide-react';
+import { Network, Server, Terminal, Target, Briefcase, ChevronDown, Sparkles, Zap } from 'lucide-react';
 
 export const CareerTimeline: React.FC = () => {
   const timelineData = [
@@ -25,21 +25,21 @@ export const CareerTimeline: React.FC = () => {
     {
       year: "2025 - 2027",
       title: "Alternance Moulinvest",
-      subtitle: "La réalité de l'entreprise",
-      description: "Technicien Système & Réseau. Gestion d'un parc hybride, projets de sécurisation AD, MCO et support niveau 2/3. Confrontation aux contraintes de production réelles.",
+      subtitle: "Admin Sys/Réseau & Sécurité",
+      description: "Admin système (AD On-Prem, AGDLP, GPO) & Hybride (Azure, Intune, Entra ID). Gestion réseau (Switch, VLAN, DHCP), support N1-3 et coordination de projets. Proposition proactive d'améliorations sécurité (Audits, Bonnes pratiques).",
       icon: Briefcase,
       color: "green",
-      tags: ["SysAdmin", "Support", "Projets"]
+      tags: ["SysAdmin", "Azure Hybride", "Sécurité"]
     },
     {
       year: "Futur",
       title: "L'Horizon Cyber",
       subtitle: "Réseau • Blue • Red • Pentest",
       description: "L'objectif est de fusionner ces compétences. Utiliser la maîtrise du Réseau et de la Défense (Blue) pour devenir un Pentester (Red) redoutable. Un profil complet et polyvalent.",
-      icon: Zap, // L'éclair pour l'énergie / le mélange
-      color: "purple", // Purple pour le mélange Red/Blue
+      icon: Zap,
+      color: "purple",
       tags: ["Réseau", "Blue Team", "Red Team", "Pentest"],
-      isBlurry: true // Nouveau flag pour l'effet visuel
+      isBlurry: true
     }
   ];
 

@@ -12,7 +12,9 @@ import {
   ArrowUpRight,
   X,
   Home,
-  BookOpen
+  BookOpen,
+  ShieldCheck, // Nouvel import pour la sécu
+  Users // Nouvel import pour la coordo/équipe
 } from 'lucide-react';
 
 interface ProfileModalProps {
@@ -23,10 +25,8 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Animation d'entrée fluide
     setIsVisible(true);
     
-    // Gestion fermeture Echap + Scroll Lock
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') handleClose();
     };
@@ -41,7 +41,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
 
   const handleClose = () => {
     setIsVisible(false);
-    setTimeout(onClose, 300); // Attendre la fin de l'animation
+    setTimeout(onClose, 300);
   };
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -53,15 +53,11 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
       className={`fixed inset-0 bg-[#0a0a0f]/90 backdrop-blur-md z-[60] flex items-center justify-center p-4 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
       onClick={handleOverlayClick}
     >
-      {/* ✅ AJOUT DE L'ATTRIBUT data-lenis-prevent 
-         C'est ça qui rend le contrôle du scroll à la modale
-      */}
       <div 
         data-lenis-prevent
         className={`bg-[#0f0f13] rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto border border-violet-500/20 shadow-[0_0_40px_rgba(139,92,246,0.1)] p-6 custom-scrollbar relative transform transition-all duration-300 ${isVisible ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'}`}
       >
         
-        {/* Bouton Fermer */}
         <button 
           onClick={handleClose}
           className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors bg-[#1a1a1f] p-2 rounded-full hover:bg-red-500/20 border border-white/5 z-20 group"
@@ -92,13 +88,11 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
 
         {/* BLOC 1 : MOULINVEST (HÉROS) */}
         <div className="group relative bg-gradient-to-br from-[#1a1a20] to-[#0f0f13] border border-violet-500/30 rounded-2xl p-8 mb-10 overflow-hidden transition-all duration-300 hover:border-violet-500/60 hover:shadow-[0_0_20px_rgba(139,92,246,0.15)]">
-          {/* Effet Glow */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-violet-600/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 group-hover:bg-violet-600/10 transition-all duration-700"></div>
           
           <div className="relative z-10">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
               <div className="flex items-center gap-5">
-                {/* Logo Moulinvest sur fond blanc */}
                 <div className="w-20 h-20 bg-white rounded-2xl p-2 flex items-center justify-center shadow-lg border-2 border-violet-500/20">
                   <img 
                     src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/Moulinvest-groupe.svg" 
@@ -111,7 +105,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                     Alternance chez Moulinvest
                     <ArrowUpRight className="w-5 h-5 text-violet-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </h3>
-                  <p className="text-violet-200/70 text-sm font-medium mt-1">2025 — 2027 • Technicien Réseau & Système</p>
+                  <p className="text-violet-200/70 text-sm font-medium mt-1">2025 — 2027 • Technicien Système & Réseau</p>
                 </div>
               </div>
               
@@ -128,20 +122,20 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
               <div className="md:col-span-3 space-y-4">
                 <h4 className="text-violet-100 font-semibold flex items-center gap-2 uppercase text-sm tracking-wider">
                   <Server className="w-4 h-4 text-violet-400" />
-                  Missions & Environnement
+                  Missions & Responsabilités
                 </h4>
                 <p className="text-gray-300 leading-relaxed text-[15px]">
-                  J'évolue dans un environnement technique <strong className="text-violet-200">riche et moderne</strong>. Au-delà du support, je participe activement à la gestion de l'infrastructure Cloud hybride et aux projets transverses. C'est le terrain idéal pour appliquer la rigueur et comprendre les enjeux d'une production critique.
+                  Au sein du service informatique, j'interviens sur la gestion complète du cycle de vie IT. De l'administration <strong className="text-violet-200">AD On-Premise</strong> à la gestion <strong className="text-violet-200">Cloud Hybride Azure</strong>, en passant par le support utilisateur N1 à N3. Mon rôle inclut aussi une dimension proactive sur la <strong className="text-violet-200">sécurité</strong> (audits, durcissement) et la coordination de projets transverses.
                 </p>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <ul className="grid grid-cols-1 gap-3 pt-2">
                     {[
-                        { icon: Network, text: "Archi. Réseau & Cloud Hybride" },
-                        { icon: Server, text: "Admin Sys (AD, Entra ID)" },
-                        { icon: Target, text: "Gestion de Parc (GLPI)" },
-                        { icon: Cpu, text: "Déploiements & Projets" },
+                        { icon: Server, text: "Admin Sys : AD (AGDLP/GPO/NTFS) & Cloud (Entra ID/Intune)" },
+                        { icon: Network, text: "Réseau : Switching, VLANs, DHCP & Infra Hybride" },
+                        { icon: ShieldCheck, text: "Sécurité : Audits de comptes, Veille & Hardening" },
+                        { icon: Users, text: "Projets : Coordination prestataires & Support N1/2/3" },
                     ].map((item, idx) => (
                         <li key={idx} className="flex items-center gap-3 text-sm text-gray-300 bg-[#13131a] p-3 rounded-lg border border-white/5 hover:border-violet-500/30 transition-colors">
-                            <item.icon className="w-4 h-4 text-violet-400" />
+                            <item.icon className="w-4 h-4 text-violet-400 shrink-0" />
                             {item.text}
                         </li>
                     ))}
@@ -155,7 +149,11 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                   Stack Technique
                 </h4>
                  <div className="flex flex-wrap gap-2 relative z-10">
-                    {['Active Directory', 'Entra ID', 'Intune', 'Windows Server', 'Cisco/HP', 'GLPI', 'PowerShell', 'Veeam'].map((tech) => (
+                    {[
+                      'Active Directory', 'GPO', 'AGDLP', 'NTFS', 
+                      'Azure / M365', 'Entra ID', 'Intune', 
+                      'VLAN / DHCP', 'GLPI', 'PowerShell'
+                    ].map((tech) => (
                         <span key={tech} className="px-3 py-1.5 bg-[#1f1f27] hover:bg-violet-500/20 text-gray-300 hover:text-violet-100 text-xs font-medium rounded-lg border border-white/10 hover:border-violet-500/30 transition-all duration-200 cursor-default">
                             {tech}
                         </span>
@@ -166,10 +164,11 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
           </div>
         </div>
 
+        {/* ... (Reste du composant inchangé : BLOC 2 et BLOC 3) ... */}
+        
         {/* BLOC 2 : L'ADN CYBER (PROACTIVITÉ & CERTIFS) */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
-            
-            {/* Colonne Gauche : Travail Actuel (Lab & Études) */}
+            {/* ... Contenu existant ... */}
             <div className="lg:col-span-2 bg-[#1a1a20] p-8 rounded-2xl border border-violet-500/10 hover:border-violet-500/30 transition-all duration-300 group">
                 <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
                     <div className="p-2 bg-blue-500/10 rounded-lg">
@@ -182,7 +181,6 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                 </p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Carte Home Lab */}
                     <div className="bg-[#13131a] p-5 rounded-xl border border-white/5 hover:border-violet-500/30 hover:bg-violet-500/5 transition-all">
                         <span className="text-xs text-violet-400 uppercase font-extrabold tracking-wider flex items-center gap-2">
                             <Home className="w-3.5 h-3.5" />
@@ -192,7 +190,6 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                         <p className="text-gray-500 text-xs mt-1">Simulations d'attaques & Défense</p>
                     </div>
 
-                    {/* Carte Prépas */}
                     <div className="bg-[#13131a] p-5 rounded-xl border border-white/5 hover:border-blue-500/30 hover:bg-blue-500/5 transition-all">
                         <span className="text-xs text-blue-400 uppercase font-extrabold tracking-wider flex items-center gap-2">
                             <BookOpen className="w-3.5 h-3.5" />
@@ -207,7 +204,6 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                 </div>
             </div>
 
-            {/* Colonne Droite : Badges Validés */}
             <div className="bg-[#1a1a20] p-8 rounded-2xl border border-violet-500/10 hover:border-violet-500/30 transition-all duration-300 flex flex-col justify-center">
                 <h3 className="text-sm font-bold text-gray-200 uppercase mb-6 flex items-center gap-3 tracking-wider">
                     <Award className="w-5 h-5 text-yellow-500" />
@@ -261,7 +257,6 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                 </div>
 
                 <div className="space-y-6">
-                     {/* Carte Philosophie */}
                      <div className="bg-[#1a1a20] p-6 rounded-2xl border border-violet-500/10 hover:border-yellow-500/30 hover:bg-yellow-500/5 transition-all duration-300 group">
                         <div className="flex items-start gap-4">
                             <div className="p-3 bg-yellow-500/10 rounded-xl group-hover:bg-yellow-500/20 transition-colors">
@@ -275,7 +270,6 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                             </div>
                         </div>
                     </div>
-                     {/* Carte Objectif */}
                      <div className="bg-[#1a1a20] p-6 rounded-2xl border border-violet-500/10 hover:border-red-500/30 hover:bg-red-500/5 transition-all duration-300 group">
                         <div className="flex items-start gap-4">
                             <div className="p-3 bg-red-500/10 rounded-xl group-hover:bg-red-500/20 transition-colors">
