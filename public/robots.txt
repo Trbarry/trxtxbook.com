@@ -12,6 +12,10 @@ Allow: /articles/
 
 # ❌ Exclusion des zones d'administration
 Disallow: /admin/
+Disallow: /wp-admin/
+
+# 🚩 DO NOT LOOK HERE (CTF)
+Disallow: /flag.txt
 
 # 🔧 Fichiers techniques à exclure de l'indexation
 Disallow: /_redirects
