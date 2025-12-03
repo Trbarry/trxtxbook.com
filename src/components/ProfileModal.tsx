@@ -13,8 +13,8 @@ import {
   X,
   Home,
   BookOpen,
-  ShieldCheck, // Nouvel import pour la sécu
-  Users // Nouvel import pour la coordo/équipe
+  ShieldCheck,
+  Users
 } from 'lucide-react';
 
 interface ProfileModalProps {
@@ -86,7 +86,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
           </div>
         </div>
 
-        {/* BLOC 1 : MOULINVEST (HÉROS) */}
+        {/* BLOC 1 : MOULINVEST */}
         <div className="group relative bg-gradient-to-br from-[#1a1a20] to-[#0f0f13] border border-violet-500/30 rounded-2xl p-8 mb-10 overflow-hidden transition-all duration-300 hover:border-violet-500/60 hover:shadow-[0_0_20px_rgba(139,92,246,0.15)]">
           <div className="absolute top-0 right-0 w-96 h-96 bg-violet-600/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 group-hover:bg-violet-600/10 transition-all duration-700"></div>
           
@@ -122,11 +122,16 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
               <div className="md:col-span-3 space-y-4">
                 <h4 className="text-violet-100 font-semibold flex items-center gap-2 uppercase text-sm tracking-wider">
                   <Server className="w-4 h-4 text-violet-400" />
-                  Missions & Responsabilités
+                  Une opportunité unique
                 </h4>
+                {/* ✅ DESCRIPTION MISE À JOUR : TON "CHANCE" + "TUTEUR" + "BACKLOG" */}
                 <p className="text-gray-300 leading-relaxed text-[15px]">
-                  Au sein du service informatique, j'interviens sur la gestion complète du cycle de vie IT. De l'administration <strong className="text-violet-200">AD On-Premise</strong> à la gestion <strong className="text-violet-200">Cloud Hybride Azure</strong>, en passant par le support utilisateur N1 à N3. Mon rôle inclut aussi une dimension proactive sur la <strong className="text-violet-200">sécurité</strong> (audits, durcissement) et la coordination de projets transverses.
+                  J'ai la chance d'occuper un poste d'une grande richesse où la polyvalence est la clé. Mon quotidien ne se limite pas au <strong className="text-violet-200">support utilisateur (N1 à N3)</strong> : je participe activement à la gestion de l'infrastructure et aux projets de fond (Admin Sys, Réseau, Sécurité).
                 </p>
+                <p className="text-gray-300 leading-relaxed text-[15px]">
+                  Encadré par un <strong className="text-violet-200">tuteur exceptionnel</strong> qui favorise l'autonomie, je puise dans un <strong className="text-violet-200">backlog de projets constant</strong> pour monter en compétence (Azure Hybride, GPO, VLANs) et proposer des améliorations concrètes.
+                </p>
+                
                 <ul className="grid grid-cols-1 gap-3 pt-2">
                     {[
                         { icon: Server, text: "Admin Sys : AD (AGDLP/GPO/NTFS) & Cloud (Entra ID/Intune)" },
@@ -164,20 +169,18 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
           </div>
         </div>
 
-        {/* ... (Reste du composant inchangé : BLOC 2 et BLOC 3) ... */}
-        
         {/* BLOC 2 : L'ADN CYBER (PROACTIVITÉ & CERTIFS) */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
-            {/* ... Contenu existant ... */}
+            
             <div className="lg:col-span-2 bg-[#1a1a20] p-8 rounded-2xl border border-violet-500/10 hover:border-violet-500/30 transition-all duration-300 group">
                 <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
                     <div className="p-2 bg-blue-500/10 rounded-lg">
                       <Terminal className="w-5 h-5 text-blue-400" />
                     </div>
-                    Proactivité & Auto-formation
+                    Proactivité & Projets Personnels
                 </h3>
                 <p className="text-gray-300 leading-relaxed mb-6">
-                    En parallèle de mon alternance, je consacre mes soirées à forger mon profil d'expert. Je ne me contente pas de la théorie : <strong className="text-blue-300">je pratique dans mon Home Lab et je prépare les certifs de haut niveau.</strong>
+                    En parallèle de mon alternance, je maintiens une <strong className="text-blue-300">routine de révision quotidienne</strong>. Autodidacte par conviction, je ne me contente pas de la théorie : je développe mes propres <strong className="text-blue-300">projets personnels (Home Lab, Scripts)</strong> pour valider mes connaissances et préparer activement mes certifications.
                 </p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

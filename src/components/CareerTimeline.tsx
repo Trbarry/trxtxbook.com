@@ -16,17 +16,18 @@ export const CareerTimeline: React.FC = () => {
     {
       year: "2024",
       title: "Construction du Lab & Autodidacte",
-      subtitle: "Le pivot vers la Cyber",
-      description: "Immersion totale : montage d'un Home Lab (AD, PfSense), plus de 40 machines HackTheBox/TryHackMe pwned. Passage de l'eJPT et préparation intensive.",
+      subtitle: "Proactivité & Projets Perso",
+      description: "8 mois de discipline autodidacte. Organisation rigoureuse des révisions (TryHackMe, eJPT, CPTS) immédiatement appliquées dans des projets personnels concrets (Home Lab AD, Scripts) pour valider chaque compétence acquise.",
       icon: Server,
       color: "violet",
-      tags: ["Active Directory", "Linux", "Virtualisation"]
+      tags: ["Autodidacte", "Home Lab", "Révisions"]
     },
     {
       year: "2025 - 2027",
       title: "Alternance Moulinvest",
       subtitle: "Admin Sys/Réseau & Sécurité",
-      description: "Admin système (AD On-Prem, AGDLP, GPO) & Hybride (Azure, Intune, Entra ID). Gestion réseau (Switch, VLAN, DHCP), support N1-3 et coordination de projets. Proposition proactive d'améliorations sécurité (Audits, Bonnes pratiques).",
+      // ✅ DESCRIPTION MISE À JOUR : POLYVALENCE SUPPORT + PROJET + MENTORAT
+      description: "Une expérience complète. Gestion simultanée du support utilisateur quotidien et de l'administration d'une infrastructure hybride complexe. Encadré par un expert, je mène des projets techniques variés (backlog riche) tout en proposant proactivement des améliorations de sécurité.",
       icon: Briefcase,
       color: "green",
       tags: ["SysAdmin", "Azure Hybride", "Sécurité"]
