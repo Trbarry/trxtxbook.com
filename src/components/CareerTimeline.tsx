@@ -26,7 +26,14 @@ export const CareerTimeline: React.FC = () => {
       year: "2025 - 2027",
       title: "Alternance Moulinvest",
       subtitle: "Admin Sys/Réseau & Sécurité",
-      description: "Une expérience complète. Gestion simultanée du support utilisateur quotidien et de l'administration d'une infrastructure hybride complexe. Encadré par un expert, je mène des projets techniques variés (backlog riche) tout en proposant proactivement des améliorations de sécurité.",
+      // Description enrichie avec JSX pour le style
+      description: (
+        <>
+          Une expérience pivot au cœur d'une infrastructure hybride. Au-delà du MCO, je pilote la structuration du parc via des <strong className="text-blue-400">GPO granulaires</strong> et le déploiement moderne sous <strong className="text-blue-400">Microsoft Intune</strong>.
+          <br className="mb-2" />
+          J'interviens sur la segmentation réseau (<strong className="text-green-400">VLANs</strong>, Switching) et j'apporte une plus-value <strong>SecOps</strong> unique : j'applique un <strong className="text-violet-400">Hardening</strong> proactif des systèmes en utilisant ma vision d'attaquant (<strong className="text-violet-400">Red Team</strong>) pour anticiper et combler les failles de sécurité internes.
+        </>
+      ),
       icon: Briefcase,
       color: "green",
       tags: ["SysAdmin", "Azure Hybride", "Sécurité"]
@@ -34,12 +41,11 @@ export const CareerTimeline: React.FC = () => {
     {
       year: "Futur",
       title: "L'Horizon",
-      subtitle: "Vers une expertise globale", // Plus sobre et pro
-      // Description orientée "Vision 360" et "Ingénierie" plutôt que "Hacking pur"
+      subtitle: "Vers une expertise globale",
       description: "Mon ambition est de développer une vision transverse des systèmes d'information. Au-delà des silos techniques, je souhaite maîtriser l'ensemble de la chaîne — architecture, développement, infrastructure et sécurité — pour concevoir et maintenir des environnements complexes avec rigueur et pragmatisme.",
       icon: Zap,
       color: "purple",
-      tags: ["Vision 360°", "Architecture", "Ingénierie", "Polyvalence"], // Tags plus matures
+      tags: ["Vision 360°", "Architecture", "Ingénierie", "Polyvalence"],
       isBlurry: true
     }
   ];
@@ -120,9 +126,10 @@ export const CareerTimeline: React.FC = () => {
                         {item.subtitle}
                       </p>
                       
-                      <p className="text-gray-400 text-sm leading-relaxed mb-4">
+                      {/* Description Container */}
+                      <div className="text-gray-400 text-sm leading-relaxed mb-4">
                         {item.description}
-                      </p>
+                      </div>
 
                       {/* Tags */}
                       <div className="flex flex-wrap gap-2">
