@@ -8,7 +8,12 @@ export const CareerTimeline: React.FC = () => {
       year: "2020 - 2023",
       title: "Technicien Fibre Optique",
       subtitle: "Le terrain & la rigueur",
-      description: "Interventions critiques sur infrastructures physiques. Gestion du stress, respect strict des procédures et travail en autonomie. La base de ma compréhension du réseau physique.",
+      // Ajout de couleurs/gras pour les termes clés
+      description: (
+        <>
+          Interventions critiques sur <strong className="text-blue-400">infrastructures physiques</strong>. Gestion du stress, respect strict des <strong className="text-blue-400">procédures</strong> et travail en autonomie. C'est ici que j'ai acquis ma compréhension fondamentale du <strong className="text-green-400">Réseau Physique</strong> (Couche 1).
+        </>
+      ),
       icon: Network,
       color: "blue",
       tags: ["Infrastructure", "Procédures", "Terrain"]
@@ -17,7 +22,12 @@ export const CareerTimeline: React.FC = () => {
       year: "2024",
       title: "Reconversion Pro & Self-Learning",
       subtitle: "Proactivité & Projets Perso",
-      description: "8 mois de discipline autodidacte. Organisation rigoureuse des révisions (TryHackMe, eJPT, CPTS) immédiatement appliquées dans des projets personnels concrets (Home Lab AD, Scripts) pour valider chaque compétence acquise.",
+      // Mise en valeur des certifs et de la méthode
+      description: (
+        <>
+          8 mois de discipline <strong className="text-violet-400">autodidacte</strong> intensive. Organisation rigoureuse des révisions (<strong className="text-violet-400">TryHackMe</strong>, <strong className="text-violet-400">eJPT</strong>, <strong className="text-violet-400">CPTS</strong>) immédiatement appliquées dans des projets concrets (<strong className="text-blue-400">Home Lab AD</strong>, Scripts) pour transformer la théorie en compétence réelle.
+        </>
+      ),
       icon: Server,
       color: "violet",
       tags: ["Autodidacte", "Home Lab", "Révisions"]
@@ -26,7 +36,7 @@ export const CareerTimeline: React.FC = () => {
       year: "2025 - 2027",
       title: "Alternance Moulinvest",
       subtitle: "Admin Sys/Réseau & Sécurité",
-      // Description enrichie avec JSX pour le style
+      // Intégration des termes techniques GPO/Intune/VLAN/Hardening
       description: (
         <>
           Une expérience pivot au cœur d'une infrastructure hybride. Au-delà du MCO, je pilote la structuration du parc via des <strong className="text-blue-400">GPO granulaires</strong> et le déploiement moderne sous <strong className="text-blue-400">Microsoft Intune</strong>.
@@ -42,10 +52,17 @@ export const CareerTimeline: React.FC = () => {
       year: "Futur",
       title: "L'Horizon",
       subtitle: "Vers une expertise globale",
-      description: "Mon ambition est de développer une vision transverse des systèmes d'information. Au-delà des silos techniques, je souhaite maîtriser l'ensemble de la chaîne — architecture, développement, infrastructure et sécurité — pour concevoir et maintenir des environnements complexes avec rigueur et pragmatisme.",
+      // Réécriture pour Bac+5, Off/Def et Polyvalence
+      description: (
+        <>
+          Mon cap est fixé : obtenir un <strong className="text-violet-400">Bac+5</strong> (Mastère Spécialisé) pour valider une expertise de haut niveau. Je souhaite fusionner ma passion pour la <strong className="text-violet-400">Sécurité Offensive</strong> et <strong className="text-blue-400">Défensive</strong> avec une maîtrise solide du <strong className="text-green-400">Réseau</strong> et de l'<strong className="text-blue-400">Architecture</strong>.
+          <br className="mb-2" />
+          Au-delà des silos techniques, je vise une <strong className="text-violet-400">polyvalence totale</strong> pour concevoir et maintenir des environnements complexes avec rigueur et pragmatisme.
+        </>
+      ),
       icon: Zap,
       color: "purple",
-      tags: ["Vision 360°", "Architecture", "Ingénierie", "Polyvalence"],
+      tags: ["Bac+5", "Blue & Red Team", "Architecture", "Polyvalence"],
       isBlurry: true
     }
   ];
@@ -126,7 +143,6 @@ export const CareerTimeline: React.FC = () => {
                         {item.subtitle}
                       </p>
                       
-                      {/* Description Container */}
                       <div className="text-gray-400 text-sm leading-relaxed mb-4">
                         {item.description}
                       </div>
