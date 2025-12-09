@@ -28,7 +28,6 @@ export const Writeups: React.FC = () => {
   const fetchWriteups = async () => {
     try {
       setError(null);
-      // On récupère les 3 derniers writeups publiés
       const { data, error } = await supabase
         .from('writeups')
         .select('*')
@@ -48,10 +47,10 @@ export const Writeups: React.FC = () => {
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty?.toLowerCase()) {
-      case 'facile': case 'easy': return 'text-green-400 border-green-500/30 bg-green-500/10';
-      case 'moyen': case 'medium': return 'text-orange-400 border-orange-500/30 bg-orange-500/10';
-      case 'difficile': case 'hard': case 'insane': return 'text-red-500 border-red-500/30 bg-red-500/10';
-      default: return 'text-gray-400 border-gray-500/30 bg-gray-500/10';
+      case 'facile': case 'easy': return 'text-green-600 dark:text-green-400 border-green-500/30 bg-green-500/10';
+      case 'moyen': case 'medium': return 'text-orange-600 dark:text-orange-400 border-orange-500/30 bg-orange-500/10';
+      case 'difficile': case 'hard': case 'insane': return 'text-red-600 dark:text-red-500 border-red-500/30 bg-red-500/10';
+      default: return 'text-gray-600 dark:text-gray-400 border-gray-500/30 bg-gray-500/10';
     }
   };
 
@@ -73,25 +72,26 @@ export const Writeups: React.FC = () => {
   };
 
   return (
-    <section id="writeups" className="py-24 bg-black relative">
+    // ✅ CHANGEMENT : bg-background
+    <section id="writeups" className="py-24 bg-background transition-colors duration-300 relative">
       <div className="container mx-auto px-6 relative z-10">
         
         {/* En-tête */}
         <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
           <div className="flex items-center gap-3">
-            <div className="p-3 bg-[#1a1a1f] rounded-xl border border-white/10">
-              <Terminal className="w-8 h-8 text-violet-500" />
+            <div className="p-3 bg-surface dark:bg-[#1a1a1f] rounded-xl border border-gray-200 dark:border-white/10 shadow-sm dark:shadow-none">
+              <Terminal className="w-8 h-8 text-violet-600 dark:text-violet-500" />
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-white">Rapports d'Intrusion</h2>
-              <p className="text-gray-500 text-sm mt-1">Documentation technique des machines compromises</p>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Rapports d'Intrusion</h2>
+              <p className="text-gray-600 dark:text-gray-500 text-sm mt-1">Documentation technique des machines compromises</p>
             </div>
           </div>
           
           <button
             onClick={() => navigate('/writeups')}
-            className="group flex items-center gap-2 text-sm font-medium bg-[#1a1a1f] text-gray-300 px-5 py-3 rounded-xl
-                     border border-white/10 hover:border-violet-500/50 hover:text-white transition-all duration-300"
+            className="group flex items-center gap-2 text-sm font-medium bg-surface dark:bg-[#1a1a1f] text-gray-700 dark:text-gray-300 px-5 py-3 rounded-xl
+                     border border-gray-200 dark:border-white/10 hover:border-violet-500/50 hover:text-violet-600 dark:hover:text-white transition-all duration-300 shadow-sm dark:shadow-none"
           >
             <span>Archives complètes</span>
             <ArrowRight className="w-4 h-4 transform transition-transform group-hover:translate-x-1" />
@@ -104,9 +104,9 @@ export const Writeups: React.FC = () => {
             <div className="animate-spin rounded-full h-12 w-12 border-4 border-violet-500 border-t-transparent"></div>
           </div>
         ) : error ? (
-          <div className="text-center py-12 bg-[#1a1a1f] rounded-xl border border-red-500/20">
+          <div className="text-center py-12 bg-surface dark:bg-[#1a1a1f] rounded-xl border border-red-500/20">
             <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-            <p className="text-gray-400">{error}</p>
+            <p className="text-gray-600 dark:text-gray-400">{error}</p>
           </div>
         ) : (
           /* Grille des Cards */
@@ -119,7 +119,8 @@ export const Writeups: React.FC = () => {
                 <div
                   key={writeup.id}
                   onClick={() => !isActiveMachine && navigate(`/writeups/${writeup.slug}`)}
-                  className={`group relative bg-[#1a1a1f] rounded-2xl border border-white/5 overflow-hidden flex flex-col h-full
+                  // ✅ CHANGEMENT : bg-surface et border dynamique
+                  className={`group relative bg-surface dark:bg-[#1a1a1f] rounded-2xl border border-gray-200 dark:border-white/5 overflow-hidden flex flex-col h-full shadow-sm dark:shadow-none
                            transition-all duration-300 ${isActiveMachine ? 'cursor-not-allowed opacity-80' : 'cursor-pointer hover:-translate-y-2 hover:border-violet-500/30 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]'}`}
                 >
                   {/* Image Header */}
@@ -128,9 +129,9 @@ export const Writeups: React.FC = () => {
                     src={getOptimizedUrl(getWriteupImage(writeup), 600)}
                      alt={writeup.title}
                     loading="lazy"
-                     className="..."
+                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                      />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1f] via-[#1a1a1f]/60 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-surface dark:from-[#1a1a1f] via-surface/60 dark:via-[#1a1a1f]/60 to-transparent" />
                     
                     {/* Badge Platforme */}
                     <div className="absolute top-4 left-4">
@@ -164,18 +165,18 @@ export const Writeups: React.FC = () => {
                         </div>
                     </div>
 
-                    <h3 className={`text-xl font-bold mb-3 line-clamp-1 ${isActiveMachine ? 'text-gray-500' : 'text-white group-hover:text-violet-400'} transition-colors`}>
+                    <h3 className={`text-xl font-bold mb-3 line-clamp-1 ${isActiveMachine ? 'text-gray-500' : 'text-gray-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400'} transition-colors`}>
                       {writeup.title}
                     </h3>
 
-                    <p className="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2 flex-grow">
+                    <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2 flex-grow">
                         {isActiveMachine 
                             ? "Le rapport est verrouillé car la machine est toujours active sur la plateforme. Conformité éthique." 
                             : writeup.description || "Analyse technique détaillée de la compromission : reconnaissance, exploitation et élévation de privilèges."}
                     </p>
 
                     {/* Footer Card */}
-                    <div className="mt-auto flex items-center justify-between border-t border-white/5 pt-4">
+                    <div className="mt-auto flex items-center justify-between border-t border-gray-200 dark:border-white/5 pt-4">
                         <div className="flex items-center gap-3">
                             {writeup.tags?.slice(0, 2).map((tag, i) => (
                                 <div key={i} className="flex items-center gap-1 text-xs text-gray-500">
@@ -186,7 +187,7 @@ export const Writeups: React.FC = () => {
                         </div>
                         
                         {!isActiveMachine && (
-                            <div className="flex items-center gap-2 text-xs font-bold text-violet-400 opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0">
+                            <div className="flex items-center gap-2 text-xs font-bold text-violet-600 dark:text-violet-400 opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0">
                                 Lire le rapport
                                 <ArrowRight className="w-3 h-3" />
                             </div>
