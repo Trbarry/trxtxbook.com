@@ -17,8 +17,9 @@ interface HeroProps {
   setShowProfile: (show: boolean) => void;
 }
 
-// --- COMPOSANT : EFFET HACKER ---
+// --- COMPOSANT : EFFET HACKER (Reste inchangé) ---
 const HackerText = ({ text, className }: { text: string, className?: string }) => {
+  // ... (Code du HackerText identique) ...
   const [displayText, setDisplayText] = useState(text);
   const [isHovering, setIsHovering] = useState(false);
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&";
@@ -74,21 +75,19 @@ const HackerText = ({ text, className }: { text: string, className?: string }) =
 
 export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
   return (
-    <section className="pt-28 pb-12 md:pt-32 md:pb-20 relative overflow-hidden min-h-[100dvh] flex flex-col justify-center bg-black">
+    // ✅ CHANGEMENT : bg-black -> bg-background
+    <section className="pt-28 pb-12 md:pt-32 md:pb-20 relative overflow-hidden min-h-[100dvh] flex flex-col justify-center bg-background transition-colors duration-300">
       
       {/* Background Optimisé */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* OPTIMISATION MOBILE : 
-           - Taille réduite à 1000px (au lieu de 1920px) car l'image est floutée
-           - Qualité réduite à 50 (suffisant pour du background sombre)
-        */}
         <img
           src={getOptimizedUrl("https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80", 1000, 50)}
           alt="Cyberpunk Background"
           fetchPriority="high"
           className="absolute inset-0 w-full h-full object-cover opacity-5 blur-sm"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-[#0a0a0f]/90 to-[#0a0a0f]" />
+        {/* ✅ CHANGEMENT : Gradients adaptés au background dynamique */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background transition-colors duration-300" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
       </div>
 
@@ -97,7 +96,7 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
           
           {/* En-tête Principal */}
           <div className="text-center mb-8 md:mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-[10px] sm:text-xs font-medium mb-4 md:mb-6 animate-fade-in-up hover:bg-violet-500/20 transition-colors cursor-default">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-500 dark:text-violet-300 text-[10px] sm:text-xs font-medium mb-4 md:mb-6 animate-fade-in-up hover:bg-violet-500/20 transition-colors cursor-default">
               <span className="relative flex h-1.5 w-1.5 md:h-2 md:w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 md:h-2 md:w-2 bg-green-500"></span>
@@ -106,58 +105,60 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
             </div>
             
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-4 md:mb-8 tracking-tighter">
-              <span className="bg-gradient-to-r from-white via-violet-200 to-violet-400 bg-clip-text text-transparent cursor-default">
+              {/* ✅ CHANGEMENT : Dégradé de texte adapté pour le mode clair (violet foncé) et sombre (blanc/violet) */}
+              <span className="bg-gradient-to-r from-gray-900 via-violet-700 to-violet-500 dark:from-white dark:via-violet-200 dark:to-violet-400 bg-clip-text text-transparent cursor-default">
                 <HackerText text="Tristan Barry" />
               </span>
             </h1>
             
-            <p className="text-base sm:text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed px-2">
-              Technicien Système & Réseau le jour, <span className="text-violet-400 font-semibold">Pentester</span> la nuit.
+            <p className="text-base sm:text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed px-2">
+              Technicien Système & Réseau le jour, <span className="text-violet-600 dark:text-violet-400 font-semibold">Pentester</span> la nuit.
               <br className="hidden md:block" />
               <span className="block mt-2 text-sm md:text-lg">
-                Exploration • Sécurisation • <span className="text-white border-b border-violet-500/50">Documentation</span>
+                Exploration • Sécurisation • <span className="text-gray-900 dark:text-white border-b border-violet-500/50">Documentation</span>
               </span>
             </p>
           </div>
 
           {/* Grille de Navigation */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mb-8 md:mb-12">
-            <Link to="/writeups" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-white/5 hover:border-violet-500/40 transition-all flex items-center md:block gap-4 hover:-translate-y-1 duration-300">
+            {/* ✅ CHANGEMENT : Cartes adaptées au mode clair (fond blanc/gris, texte sombre) */}
+            <Link to="/writeups" className="group bg-surface/80 dark:bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-gray-200 dark:border-white/5 hover:border-violet-500/40 transition-all flex items-center md:block gap-4 hover:-translate-y-1 duration-300 shadow-sm dark:shadow-none">
               <div className="w-10 h-10 md:w-12 md:h-12 bg-violet-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                <Terminal className="w-5 h-5 md:w-6 md:h-6 text-violet-400" />
+                <Terminal className="w-5 h-5 md:w-6 md:h-6 text-violet-600 dark:text-violet-400" />
               </div>
               <div className="text-left">
-                <h3 className="text-base md:text-xl font-bold text-white mb-0.5 md:mb-2 group-hover:text-violet-300 transition-colors">CTF Write-ups</h3>
-                <p className="text-gray-400 text-xs md:text-sm line-clamp-1 md:line-clamp-none">Archives HTB & TryHackMe.</p>
+                <h3 className="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-0.5 md:mb-2 group-hover:text-violet-600 dark:group-hover:text-violet-300 transition-colors">CTF Write-ups</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-xs md:text-sm line-clamp-1 md:line-clamp-none">Archives HTB & TryHackMe.</p>
               </div>
-              <ArrowRight className="w-4 h-4 text-gray-600 ml-auto md:hidden" />
+              <ArrowRight className="w-4 h-4 text-gray-400 dark:text-gray-600 ml-auto md:hidden" />
             </Link>
 
-            <Link to="/projects" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-white/5 hover:border-blue-500/40 transition-all flex items-center md:block gap-4 hover:-translate-y-1 duration-300">
+            <Link to="/projects" className="group bg-surface/80 dark:bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-gray-200 dark:border-white/5 hover:border-blue-500/40 transition-all flex items-center md:block gap-4 hover:-translate-y-1 duration-300 shadow-sm dark:shadow-none">
               <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                <Database className="w-5 h-5 md:w-6 md:h-6 text-blue-400" />
+                <Database className="w-5 h-5 md:w-6 md:h-6 text-blue-600 dark:text-blue-400" />
               </div>
               <div className="text-left">
-                <h3 className="text-base md:text-xl font-bold text-white mb-0.5 md:mb-2 group-hover:text-blue-300 transition-colors">Lab & Projets</h3>
-                <p className="text-gray-400 text-xs md:text-sm line-clamp-1 md:line-clamp-none">Infrastructure & Scripts.</p>
+                <h3 className="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-0.5 md:mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors">Lab & Projets</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-xs md:text-sm line-clamp-1 md:line-clamp-none">Infrastructure & Scripts.</p>
               </div>
-              <ArrowRight className="w-4 h-4 text-gray-600 ml-auto md:hidden" />
+              <ArrowRight className="w-4 h-4 text-gray-400 dark:text-gray-600 ml-auto md:hidden" />
             </Link>
 
-            <Link to="/certifications" className="group bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-white/5 hover:border-green-500/40 transition-all flex items-center md:block gap-4 hover:-translate-y-1 duration-300">
+            <Link to="/certifications" className="group bg-surface/80 dark:bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-gray-200 dark:border-white/5 hover:border-green-500/40 transition-all flex items-center md:block gap-4 hover:-translate-y-1 duration-300 shadow-sm dark:shadow-none">
               <div className="w-10 h-10 md:w-12 md:h-12 bg-green-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                <BookOpen className="w-5 h-5 md:w-6 md:h-6 text-green-400" />
+                <BookOpen className="w-5 h-5 md:w-6 md:h-6 text-green-600 dark:text-green-400" />
               </div>
               <div className="text-left">
-                <h3 className="text-base md:text-xl font-bold text-white mb-0.5 md:mb-2 group-hover:text-green-300 transition-colors">Certifications</h3>
-                <p className="text-gray-400 text-xs md:text-sm line-clamp-1 md:line-clamp-none">CPTS, eJPT, AZ-900.</p>
+                <h3 className="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-0.5 md:mb-2 group-hover:text-green-600 dark:group-hover:text-green-300 transition-colors">Certifications</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-xs md:text-sm line-clamp-1 md:line-clamp-none">CPTS, eJPT, AZ-900.</p>
               </div>
-              <ArrowRight className="w-4 h-4 text-gray-600 ml-auto md:hidden" />
+              <ArrowRight className="w-4 h-4 text-gray-400 dark:text-gray-600 ml-auto md:hidden" />
             </Link>
           </div>
 
           {/* Actions & Stack */}
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 bg-[#1a1a1f]/50 p-4 rounded-2xl border border-white/5 backdrop-blur-md">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 bg-surface/50 dark:bg-[#1a1a1f]/50 p-4 rounded-2xl border border-gray-200 dark:border-white/5 backdrop-blur-md shadow-sm dark:shadow-none">
             <button onClick={() => setShowProfile(true)} className="w-full lg:w-auto px-6 py-3 bg-gradient-to-r from-violet-600 to-blue-600 text-white font-semibold rounded-xl flex items-center justify-center gap-2 text-sm hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all active:scale-95">
               <span>Découvrir mon profil</span>
               <Activity className="w-4 h-4" />
@@ -166,7 +167,7 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
             {/* Stack Scrollable */}
             <div className="w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 hide-scrollbar">
                 <div className="flex items-center gap-4 px-2 min-w-max">
-                    <span className="text-xs font-medium uppercase tracking-wider text-gray-600 hidden lg:inline">Stack :</span>
+                    <span className="text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-600 hidden lg:inline">Stack :</span>
                     <TechItem icon={<Terminal size={14} />} label="Bash" />
                     <TechItem icon={<TerminalSquare size={14} />} label="PS" />
                     <TechItem icon={<Code2 size={14} />} label="Python" />
@@ -177,9 +178,9 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
 
           {/* Indice Terminal */}
           <div className="flex justify-center w-full mt-8 mb-8">
-            <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-gray-600 font-mono bg-black/50 px-3 py-1.5 rounded-full border border-white/10 hover:border-white/20 transition-colors cursor-help group" title="Try pressing '²'">
+            <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-600 font-mono bg-surface/50 dark:bg-black/50 px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 hover:border-violet-500/50 dark:hover:border-white/20 transition-colors cursor-help group" title="Try pressing '²'">
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                <span className="hidden sm:inline group-hover:text-green-400 transition-colors">System Ready. Press ²</span>
+                <span className="hidden sm:inline group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">System Ready. Press ²</span>
                 <span className="sm:hidden">System Ready</span>
             </div>
           </div>
@@ -190,8 +191,9 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
   );
 };
 
+// Sous-composant TechItem (aussi mis à jour)
 const TechItem = ({ icon, label }: { icon: React.ReactNode, label: string }) => (
-    <div className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors cursor-default bg-white/5 px-2 py-1 rounded-md border border-white/5 hover:border-violet-500/30">
+    <div className="flex items-center gap-1.5 text-gray-500 dark:text-gray-400 hover:text-violet-600 dark:hover:text-white transition-colors cursor-default bg-gray-100 dark:bg-white/5 px-2 py-1 rounded-md border border-gray-200 dark:border-white/5 hover:border-violet-500/30">
         {icon}
         <span className="text-[10px] font-medium">{label}</span>
     </div>
