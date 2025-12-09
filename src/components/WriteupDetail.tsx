@@ -23,13 +23,21 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
     if (d.includes('easy') || d.includes('facile')) return 'text-green-600 dark:text-green-400 border-green-200 dark:border-green-500/20 bg-green-100 dark:bg-green-500/5';
     if (d.includes('medium') || d.includes('moyen')) return 'text-orange-600 dark:text-orange-400 border-orange-200 dark:border-orange-500/20 bg-orange-100 dark:bg-orange-500/5';
     if (d.includes('hard') || d.includes('difficile')) return 'text-red-600 dark:text-red-500 border-red-200 dark:border-red-500/20 bg-red-100 dark:bg-red-500/5';
+    if (d.includes('insane')) return 'text-purple-600 dark:text-purple-500 border-purple-200 dark:border-purple-500/20 bg-purple-100 dark:bg-purple-500/5';
     return 'text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-500/20 bg-gray-100 dark:bg-gray-500/5';
   };
 
   const getWriteupImage = () => {
+    // 1. Priorité DB
     if (writeup.images && writeup.images.length > 0) return writeup.images[0];
+
+    // 2. Fallbacks Hardcodés (Sécurité)
     if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
     if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
+    if (writeup.slug === 'hackthebox-reddish') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/reddish.webp";
+    if (writeup.slug === 'tryhackme-skynet') return "https://tryhackme-images.s3.amazonaws.com/room-icons/1559e2e8a4e1a3.png";
+
+    // 3. Défaut
     return "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80";
   };
 

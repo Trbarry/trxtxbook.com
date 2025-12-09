@@ -50,6 +50,7 @@ export const WriteupsList: React.FC = () => {
     if (d.includes('easy') || d.includes('facile')) return 'text-green-600 dark:text-green-400 border-green-500/20 bg-green-500/10';
     if (d.includes('medium') || d.includes('moyen')) return 'text-orange-600 dark:text-orange-400 border-orange-500/20 bg-orange-500/10';
     if (d.includes('hard') || d.includes('difficile')) return 'text-red-600 dark:text-red-500 border-red-500/20 bg-red-500/10';
+    if (d.includes('insane')) return 'text-purple-600 dark:text-purple-500 border-purple-500/20 bg-purple-500/10';
     return 'text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-500/20 bg-gray-100 dark:bg-gray-500/5';
   };
 
@@ -60,9 +61,16 @@ export const WriteupsList: React.FC = () => {
   };
 
   const getWriteupImage = (writeup: Writeup) => {
+    // 1. Priorité à l'image stockée en base
     if (writeup.images && writeup.images.length > 0) return writeup.images[0];
+
+    // 2. Fallbacks de sécurité (Hardcoded)
     if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
     if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
+    if (writeup.slug === 'hackthebox-reddish') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/reddish.webp";
+    if (writeup.slug === 'tryhackme-skynet') return "https://tryhackme-images.s3.amazonaws.com/room-icons/1559e2e8a4e1a3.png";
+
+    // 3. Image par défaut générique
     return "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80";
   };
 
@@ -70,7 +78,6 @@ export const WriteupsList: React.FC = () => {
     <>
       <SEOHead title="Archives Write-ups & CTF | Tristan Barry" description="Base de connaissances techniques." />
       
-      {/* ✅ CHANGEMENT : bg-background */}
       <div className="min-h-screen pt-32 pb-24 bg-background transition-colors duration-300 text-gray-900 dark:text-gray-100">
         <div className="container mx-auto px-6">
           
@@ -128,7 +135,9 @@ export const WriteupsList: React.FC = () => {
             <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               <AnimatePresence mode='popLayout'>
                 {filteredWriteups.map((writeup) => {
+                  // Pour l'instant, aucune machine n'est activement restreinte
                   const isActiveMachine = false;
+                  
                   return (
                     <motion.div
                       layout
@@ -138,7 +147,6 @@ export const WriteupsList: React.FC = () => {
                       transition={{ duration: 0.2 }}
                       key={writeup.id}
                       onClick={() => !isActiveMachine && navigate(`/writeups/${writeup.slug}`)}
-                      // ✅ CHANGEMENT : Carte adaptative
                       className={`group relative bg-surface dark:bg-[#1a1a1f] rounded-2xl border border-gray-200 dark:border-white/5 overflow-hidden flex flex-col h-full shadow-sm dark:shadow-none
                                transition-all duration-300 ${isActiveMachine ? 'cursor-not-allowed opacity-80' : 'cursor-pointer hover:border-violet-500/30 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]'}`}
                     >
@@ -149,6 +157,17 @@ export const WriteupsList: React.FC = () => {
                                 {getPlatformLabel(writeup.slug || '')}
                             </span>
                         </div>
+                        {isActiveMachine && (
+                          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 z-20 backdrop-blur-[2px]">
+                            <div className="flex items-center gap-2 text-yellow-500 mb-2">
+                                <Lock className="w-5 h-5" />
+                                <span className="font-bold tracking-widest uppercase">Restricted</span>
+                            </div>
+                            <span className="text-[10px] text-gray-400 uppercase tracking-wide border border-yellow-500/20 px-2 py-1 rounded bg-yellow-500/5">
+                                Active Machine
+                            </span>
+                          </div>
+                        )}
                       </div>
 
                       <div className="p-6 flex-1 flex flex-col">
