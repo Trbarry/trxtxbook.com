@@ -34,8 +34,9 @@ export const WriteupPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen pt-24 pb-20 bg-[#0a0a0f] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-violet-500 border-t-transparent"></div>
+      // ✅ CHANGEMENT : bg-background et text adaptatif
+      <div className="min-h-screen pt-24 pb-20 bg-background transition-colors duration-300 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-violet-600 dark:border-violet-500 border-t-transparent"></div>
       </div>
     );
   }
@@ -47,8 +48,9 @@ export const WriteupPage: React.FC = () => {
           title="Write-up non trouvé - Tristan Barry"
           description="Le write-up demandé n'a pas été trouvé."
         />
-        <div className="min-h-screen pt-24 pb-20 bg-[#0a0a0f] flex items-center justify-center">
-          <p className="text-xl text-gray-400">Write-up non trouvé</p>
+        {/* ✅ CHANGEMENT : bg-background et text adaptatif */}
+        <div className="min-h-screen pt-24 pb-20 bg-background transition-colors duration-300 flex items-center justify-center">
+          <p className="text-xl text-gray-600 dark:text-gray-400">Write-up non trouvé</p>
         </div>
       </>
     );
@@ -64,7 +66,8 @@ export const WriteupPage: React.FC = () => {
         type="article"
         publishedTime={writeup.created_at}
       />
-      <div className="min-h-screen pt-24 pb-20 bg-[#0a0a0f]">
+      {/* ✅ CHANGEMENT : bg-background */}
+      <div className="min-h-screen pt-24 pb-20 bg-background transition-colors duration-300">
         <WriteupDetail writeup={writeup} />
       </div>
     </>
