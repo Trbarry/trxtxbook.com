@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
 
+// ✅ IMPORT DU THEME CONTEXT
+import { ThemeProvider } from './context/ThemeContext';
+
 // SEO Component
 import { SEOHead } from './components/SEOHead';
 
@@ -18,7 +21,7 @@ import { Formation } from './components/Formation';
 import { Projects } from './components/Projects';
 import { Contact } from './components/Contact';
 import { Writeups } from './components/Writeups';
-import { CareerTimeline } from './components/CareerTimeline'; // <--- NOUVEL IMPORT
+import { CareerTimeline } from './components/CareerTimeline';
 
 // UI Components
 import { ProfileModal } from './components/ProfileModal';
@@ -48,7 +51,7 @@ const DogWriteupPage = lazy(() => import('./pages/DogWriteupPage').then(module =
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then(module => ({ default: module.AnalyticsPage })));
 const SitemapGeneratorPage = lazy(() => import('./pages/SitemapGeneratorPage').then(module => ({ default: module.SitemapGeneratorPage })));
 
-// ✅ IMPORT DE LA PAGE TROLL
+// Routes Troll
 const AdminTrollPage = lazy(() => import('./pages/AdminTrollPage').then(module => ({ default: module.AdminTrollPage })));
 
 // Sous-composant pour gérer les transitions de pages
@@ -63,7 +66,7 @@ const AnimatedRoutes = ({
   return (
     <AnimatePresence mode="wait">
       <Suspense fallback={
-        <div className="min-h-screen flex items-center justify-center bg-black">
+        <div className="min-h-screen flex items-center justify-center bg-background">
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-violet-500 border-t-transparent"></div>
         </div>
       }>
@@ -81,7 +84,6 @@ const AnimatedRoutes = ({
                 <ScrollReveal><div id="stats"><Stats /></div></ScrollReveal>
                 <ScrollReveal><div id="formation"><Formation /></div></ScrollReveal>
                 
-                {/* --- AJOUT DE LA TIMELINE ICI --- */}
                 <ScrollReveal><CareerTimeline /></ScrollReveal>
 
                 <ScrollReveal><div id="projects"><Projects /></div></ScrollReveal>
@@ -113,7 +115,7 @@ const AnimatedRoutes = ({
           <Route path="/admin/analytics" element={<PageTransition><AnalyticsPage /></PageTransition>} />
           <Route path="/admin/sitemap-generator" element={<PageTransition><SitemapGeneratorPage /></PageTransition>} />
 
-          {/* ✅ ROUTES TROLL */}
+          {/* ROUTES TROLL */}
           <Route path="/admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/wp-admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/login" element={<PageTransition><AdminTrollPage /></PageTransition>} />
@@ -154,26 +156,29 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="min-h-screen relative text-gray-100 bg-black overflow-hidden selection:bg-violet-500/30">
-        
-        <SEOHead />
-        <AnalyticsTracker />
-        <Terminal />
-        <Header setShowProfile={setShowProfile} setActiveSection={setActiveSection} activeSection={activeSection} />
-        <MouseTrail />
-        
-        <AnimatedRoutes
-          isLoaded={isLoaded}
-          setShowProfile={setShowProfile}
-          activeSection={activeSection}
-          setActiveSection={setActiveSection}
-        />
+    <ThemeProvider> {/* ✅ Enveloppe globale pour le contexte de thème */}
+      <Router>
+        {/* Ajout des classes de transition et utilisation des variables CSS (bg-background, text-text) */}
+        <div className="min-h-screen relative text-text bg-background overflow-hidden selection:bg-violet-500/30 transition-colors duration-300">
+          
+          <SEOHead />
+          <AnalyticsTracker />
+          <Terminal />
+          <Header setShowProfile={setShowProfile} setActiveSection={setActiveSection} activeSection={activeSection} />
+          <MouseTrail />
+          
+          <AnimatedRoutes
+            isLoaded={isLoaded}
+            setShowProfile={setShowProfile}
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+          />
 
-        <Footer />
-        {showProfile && <ProfileModal onClose={() => setShowProfile(false)} />}
-      </div>
-    </Router>
+          <Footer />
+          {showProfile && <ProfileModal onClose={() => setShowProfile(false)} />}
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 
