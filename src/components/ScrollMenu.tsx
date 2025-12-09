@@ -20,7 +20,6 @@ export const ScrollMenu: React.FC<ScrollMenuProps> = ({ activeSection, setActive
   const handleScrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      // Offset pour compenser le header fixe
       const headerOffset = 100;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
@@ -29,17 +28,13 @@ export const ScrollMenu: React.FC<ScrollMenuProps> = ({ activeSection, setActive
         top: offsetPosition,
         behavior: 'smooth'
       });
-      // On met à jour manuellement pour un feedback immédiat au clic
       setActiveSection(id);
     }
   };
 
   useEffect(() => {
-    // Configuration de l'observateur
     const observerOptions = {
-      root: null, // viewport
-      // Cette marge définit la "zone active" au centre de l'écran.
-      // L'élément doit traverser cette ligne horizontale invisible pour être considéré "actif".
+      root: null,
       rootMargin: '-45% 0px -55% 0px', 
       threshold: 0
     };
@@ -47,7 +42,6 @@ export const ScrollMenu: React.FC<ScrollMenuProps> = ({ activeSection, setActive
     const observerCallback: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // L'élément est entré dans la zone active
           setActiveSection(entry.target.id);
         }
       });
@@ -55,7 +49,6 @@ export const ScrollMenu: React.FC<ScrollMenuProps> = ({ activeSection, setActive
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // On observe chaque section correspondant aux items du menu
     menuItems.forEach((item) => {
       const element = document.getElementById(item.id);
       if (element) {
@@ -63,7 +56,6 @@ export const ScrollMenu: React.FC<ScrollMenuProps> = ({ activeSection, setActive
       }
     });
 
-    // Nettoyage à la destruction du composant
     return () => {
       observer.disconnect();
     };
@@ -84,8 +76,8 @@ export const ScrollMenu: React.FC<ScrollMenuProps> = ({ activeSection, setActive
           >
             {/* Label (Tooltip) */}
             <span 
-              className={`absolute right-10 px-2 py-1 rounded bg-[#1a1a1f] border border-white/10 text-xs font-medium text-white
-                transition-all duration-300 transform origin-right
+              className={`absolute right-10 px-2 py-1 rounded bg-white dark:bg-[#1a1a1f] border border-gray-200 dark:border-white/10 text-xs font-medium text-gray-800 dark:text-white
+                transition-all duration-300 transform origin-right shadow-sm
                 ${isActive ? 'opacity-100 scale-100 translate-x-0' : 'opacity-0 scale-90 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'}
               `}
             >
@@ -96,8 +88,8 @@ export const ScrollMenu: React.FC<ScrollMenuProps> = ({ activeSection, setActive
             <div 
               className={`p-2 rounded-full border transition-all duration-300
                 ${isActive 
-                  ? 'bg-violet-600 border-violet-500 text-white shadow-[0_0_15px_rgba(139,92,246,0.5)] scale-110' 
-                  : 'bg-[#1a1a1f]/50 border-white/10 text-gray-500 hover:text-white hover:border-violet-500/50 hover:bg-[#1a1a1f]'
+                  ? 'bg-violet-600 border-violet-500 text-white shadow-lg scale-110' 
+                  : 'bg-white/80 dark:bg-[#1a1a1f]/50 border-gray-200 dark:border-white/10 text-gray-500 hover:text-gray-900 dark:hover:text-white hover:border-violet-500/50 hover:bg-white dark:hover:bg-[#1a1a1f]'
                 }
               `}
             >
