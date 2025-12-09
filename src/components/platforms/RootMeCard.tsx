@@ -16,24 +16,24 @@ export const RootMeCard: React.FC<RootMeCardProps> = ({ stats, onPlatformClick }
   return (
     <div
       onClick={() => onPlatformClick('rootme')}
-      className="group relative bg-[#1a1a1f]/80 backdrop-blur-sm p-6 rounded-2xl border border-white/5 
+      className="group relative bg-surface dark:bg-[#1a1a1f]/80 backdrop-blur-sm p-6 rounded-2xl border border-gray-200 dark:border-white/5 
                 hover:border-blue-500/50 transition-all duration-300 cursor-pointer
                 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]
-                flex flex-col h-full overflow-hidden"
+                flex flex-col h-full overflow-hidden shadow-sm dark:shadow-none"
     >
       <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
       <div className="relative z-10 flex items-center gap-4 mb-6">
         <div className="p-3 bg-blue-500/10 rounded-xl border border-blue-500/20 group-hover:scale-110 transition-transform duration-300">
-          <Brain className="w-8 h-8 text-blue-500" />
+          <Brain className="w-8 h-8 text-blue-600 dark:text-blue-500" />
         </div>
         <div>
-          <h3 className="text-xl font-bold text-white tracking-wide">Root-Me</h3>
-          <p className="text-blue-500 font-mono text-sm">Rank: {stats.rank}</p>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white tracking-wide">Root-Me</h3>
+          <p className="text-blue-600 dark:text-blue-500 font-mono text-sm">Rank: {stats.rank}</p>
         </div>
       </div>
 
-      <p className="relative z-10 text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+      <p className="relative z-10 text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
         La référence française. Challenges techniques pointus (Web Client, App System, Cryptanalyse).
       </p>
 
@@ -43,21 +43,20 @@ export const RootMeCard: React.FC<RootMeCardProps> = ({ stats, onPlatformClick }
           { icon: Shield, label: "Points", value: stats.points },
           { icon: Award, label: "Pwned", value: "4" }
         ].map((stat, i) => (
-          <div key={i} className="bg-[#0f0f13]/50 p-2 rounded-lg border border-white/5 text-center group-hover:border-blue-500/20 transition-colors">
-            <stat.icon className="w-4 h-4 text-blue-500 mx-auto mb-1" />
+          <div key={i} className="bg-gray-50 dark:bg-[#0f0f13]/50 p-2 rounded-lg border border-gray-200 dark:border-white/5 text-center group-hover:border-blue-500/20 transition-colors">
+            <stat.icon className="w-4 h-4 text-blue-600 dark:text-blue-500 mx-auto mb-1" />
             <p className="text-[10px] text-gray-500 uppercase font-bold">{stat.label}</p>
-            <p className="text-sm font-bold text-white">{stat.value}</p>
+            <p className="text-sm font-bold text-gray-900 dark:text-white">{stat.value}</p>
           </div>
         ))}
       </div>
 
-      {/* Lien Explicite Restauré */}
       <a
         href="https://www.root-me.org/Jecurl"
         target="_blank"
         rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
-        className="relative z-10 mt-auto flex items-center gap-2 text-blue-400 text-sm font-semibold group/link hover:underline"
+        className="relative z-10 mt-auto flex items-center gap-2 text-blue-600 dark:text-blue-400 text-sm font-semibold group/link hover:underline"
       >
         <span>Voir mon profil</span>
         <ExternalLink className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
