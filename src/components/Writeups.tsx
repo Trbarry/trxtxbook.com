@@ -62,17 +62,22 @@ export const Writeups: React.FC = () => {
   };
 
   const getWriteupImage = (writeup: Writeup) => {
+    // 1. Priorité aux images en base
     if (writeup.images && writeup.images.length > 0) {
       return writeup.images[0];
     }
     
+    // 2. Fallbacks statiques pour tes machines HTB principales
+    if (writeup.slug === 'hackthebox-forest') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/foresthtb.png";
     if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
     if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
+    if (writeup.slug === 'hackthebox-reddish') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/reddish.webp";
+    
+    // 3. Fallback générique
     return "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80";
   };
 
   return (
-    // ✅ CHANGEMENT : bg-background
     <section id="writeups" className="py-24 bg-background transition-colors duration-300 relative">
       <div className="container mx-auto px-6 relative z-10">
         
@@ -112,28 +117,26 @@ export const Writeups: React.FC = () => {
           /* Grille des Cards */
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {writeups.map((writeup) => {
-              // Logique "Machine Active"
               const isActiveMachine = false;
               
               return (
                 <div
                   key={writeup.id}
                   onClick={() => !isActiveMachine && navigate(`/writeups/${writeup.slug}`)}
-                  // ✅ CHANGEMENT : bg-surface et border dynamique
                   className={`group relative bg-surface dark:bg-[#1a1a1f] rounded-2xl border border-gray-200 dark:border-white/5 overflow-hidden flex flex-col h-full shadow-sm dark:shadow-none
-                           transition-all duration-300 ${isActiveMachine ? 'cursor-not-allowed opacity-80' : 'cursor-pointer hover:-translate-y-2 hover:border-violet-500/30 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]'}`}
+                             transition-all duration-300 ${isActiveMachine ? 'cursor-not-allowed opacity-80' : 'cursor-pointer hover:-translate-y-2 hover:border-violet-500/30 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]'}`}
                 >
                   {/* Image Header */}
                   <div className="relative h-48 overflow-hidden">
                     <img
-                    src={getOptimizedUrl(getWriteupImage(writeup), 600)}
-                     alt={writeup.title}
-                    loading="lazy"
-                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                     />
+                      src={getOptimizedUrl(getWriteupImage(writeup), 600)}
+                      alt={writeup.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-surface dark:from-[#1a1a1f] via-surface/60 dark:via-[#1a1a1f]/60 to-transparent" />
                     
-                    {/* Badge Platforme */}
+                    {/* Badge Plateforme */}
                     <div className="absolute top-4 left-4">
                         <span className="px-3 py-1 bg-black/60 backdrop-blur-md border border-white/10 rounded-lg text-xs font-bold text-white shadow-xl">
                             {getPlatformIcon(writeup.slug || '')}

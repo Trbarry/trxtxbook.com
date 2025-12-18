@@ -37,6 +37,7 @@ export const WriteupsList: React.FC = () => {
 
   const fetchWriteups = async () => {
     try {
+      setLoading(true);
       setError(null);
       const { data, error } = await supabase.from('writeups').select('*').eq('published', true).order('created_at', { ascending: false });
       if (error) throw error;
@@ -65,6 +66,7 @@ export const WriteupsList: React.FC = () => {
     if (writeup.images && writeup.images.length > 0) return writeup.images[0];
 
     // 2. Fallbacks de sécurité (Hardcoded)
+    if (writeup.slug === 'hackthebox-forest') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/foresthtb.png";
     if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
     if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
     if (writeup.slug === 'hackthebox-reddish') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/reddish.webp";
@@ -135,7 +137,6 @@ export const WriteupsList: React.FC = () => {
             <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               <AnimatePresence mode='popLayout'>
                 {filteredWriteups.map((writeup) => {
-                  // Pour l'instant, aucune machine n'est activement restreinte
                   const isActiveMachine = false;
                   
                   return (
