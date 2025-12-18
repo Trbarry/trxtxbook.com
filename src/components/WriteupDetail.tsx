@@ -31,13 +31,14 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
     // 1. Priorité DB
     if (writeup.images && writeup.images.length > 0) return writeup.images[0];
 
-    // 2. Fallbacks Hardcodés (Sécurité)
+    // 2. Fallbacks Hardcodés (Sécurité & Performance)
+    if (writeup.slug === 'hackthebox-forest') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/foresthtb.png";
     if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
     if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
     if (writeup.slug === 'hackthebox-reddish') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/reddish.webp";
     if (writeup.slug === 'tryhackme-skynet') return "https://tryhackme-images.s3.amazonaws.com/room-icons/1559e2e8a4e1a3.png";
 
-    // 3. Défaut
+    // 3. Image par défaut
     return "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80";
   };
 
@@ -54,18 +55,16 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
         <span>Retour aux archives</span>
       </button>
 
-      {/* ✅ CHANGEMENT : bg-surface */}
       <div className="bg-surface dark:bg-[#1a1a1f] rounded-2xl border border-gray-200 dark:border-white/5 overflow-hidden relative shadow-sm dark:shadow-none">
         
         {/* Header Image */}
         <div className="relative h-[300px] md:h-[400px] w-full overflow-hidden">
-            {/* ✅ CHANGEMENT : Gradient from-surface */}
             <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/50 to-transparent dark:from-[#1a1a1f] dark:via-[#1a1a1f]/50 dark:to-transparent z-10" />
             <img
-             src={getOptimizedUrl(getWriteupImage(), 1200)}
-             alt={writeup.title}
-             className="w-full h-full object-cover"
-             />
+              src={getOptimizedUrl(getWriteupImage(), 1200)}
+              alt={writeup.title}
+              className="w-full h-full object-cover"
+            />
 
             <div className="absolute bottom-0 left-0 w-full p-8 z-20">
                 <div className="flex flex-wrap gap-3 mb-4">
@@ -98,10 +97,9 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
             )}
         </div>
 
-        {/* Contenu */}
+        {/* Contenu Markdown */}
         {!isActiveMachine && (
             <div className="p-8 md:p-12">
-                {/* ✅ CHANGEMENT : prose-gray pour le mode jour */}
                 <div className="prose prose-gray dark:prose-invert prose-violet max-w-none 
                     prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white 
                     prose-h2:text-2xl prose-h2:border-b prose-h2:border-gray-200 dark:prose-h2:border-white/10 prose-h2:pb-4 prose-h2:mt-12
@@ -111,8 +109,8 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
                     prose-a:text-violet-600 dark:prose-a:text-violet-400 hover:prose-a:text-violet-500 dark:hover:prose-a:text-violet-300">
                     
                     <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-                           {writeup.content}
-                     </ReactMarkdown>
+                        {writeup.content}
+                    </ReactMarkdown>
                 </div>
 
                 <div className="mt-16 pt-8 border-t border-gray-200 dark:border-white/5 flex flex-wrap gap-2">
