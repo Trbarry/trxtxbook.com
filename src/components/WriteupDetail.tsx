@@ -28,7 +28,7 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
   };
 
   const getWriteupImage = () => {
-    // 1. Priorité DB
+    // 1. Priorité aux images stockées en base de données
     if (writeup.images && writeup.images.length > 0) return writeup.images[0];
 
     // 2. Fallbacks Hardcodés (Sécurité & Performance)
@@ -37,8 +37,11 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
     if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
     if (writeup.slug === 'hackthebox-reddish') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/reddish.webp";
     if (writeup.slug === 'tryhackme-skynet') return "https://tryhackme-images.s3.amazonaws.com/room-icons/1559e2e8a4e1a3.png";
+    
+    // Ajout spécifique pour Soccer avec le lien fourni
+    if (writeup.slug === 'htb-soccer') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/soccerhtb.png";
 
-    // 3. Image par défaut
+    // 3. Image par défaut si aucun slug ne correspond
     return "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80";
   };
 

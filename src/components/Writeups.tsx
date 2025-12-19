@@ -50,30 +50,34 @@ export const Writeups: React.FC = () => {
       case 'facile': case 'easy': return 'text-green-600 dark:text-green-400 border-green-500/30 bg-green-500/10';
       case 'moyen': case 'medium': return 'text-orange-600 dark:text-orange-400 border-orange-500/30 bg-orange-500/10';
       case 'difficile': case 'hard': case 'insane': return 'text-red-600 dark:text-red-500 border-red-500/30 bg-red-500/10';
-      default: return 'text-gray-600 dark:text-gray-400 border-gray-500/30 bg-gray-500/10';
+      default: return 'text-gray-600 dark:text-gray-400 border-gray-200 dark:border-white/10 bg-gray-500/10';
     }
   };
 
   const getPlatformIcon = (slug: string) => {
-    if (slug.includes('hackthebox')) return 'HTB';
-    if (slug.includes('tryhackme')) return 'THM';
-    if (slug.includes('root-me')) return 'RM';
+    const s = slug.toLowerCase();
+    if (s.includes('hackthebox') || s.startsWith('htb-')) return 'HTB';
+    if (s.includes('tryhackme') || s.startsWith('thm-')) return 'THM';
+    if (s.includes('root-me')) return 'RM';
     return 'CTF';
   };
 
   const getWriteupImage = (writeup: Writeup) => {
-    // 1. Priorité aux images en base
+    // 1. Priorité aux images en base de données
     if (writeup.images && writeup.images.length > 0) {
       return writeup.images[0];
     }
     
-    // 2. Fallbacks statiques pour tes machines HTB principales
+    // 2. Fallbacks statiques pour la cohérence visuelle
     if (writeup.slug === 'hackthebox-forest') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/foresthtb.png";
     if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
     if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
     if (writeup.slug === 'hackthebox-reddish') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/reddish.webp";
     
-    // 3. Fallback générique
+    // Ajout du fallback pour Soccer
+    if (writeup.slug === 'htb-soccer') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/soccerhtb.png";
+    
+    // 3. Fallback générique (Tech)
     return "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80";
   };
 
@@ -81,7 +85,7 @@ export const Writeups: React.FC = () => {
     <section id="writeups" className="py-24 bg-background transition-colors duration-300 relative">
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* En-tête */}
+        {/* En-tête de section */}
         <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
           <div className="flex items-center gap-3">
             <div className="p-3 bg-surface dark:bg-[#1a1a1f] rounded-xl border border-gray-200 dark:border-white/10 shadow-sm dark:shadow-none">
@@ -103,7 +107,7 @@ export const Writeups: React.FC = () => {
           </button>
         </div>
 
-        {/* État de chargement / Erreur */}
+        {/* Loading / Error States */}
         {loading ? (
           <div className="flex justify-center py-20">
             <div className="animate-spin rounded-full h-12 w-12 border-4 border-violet-500 border-t-transparent"></div>
@@ -114,9 +118,9 @@ export const Writeups: React.FC = () => {
             <p className="text-gray-600 dark:text-gray-400">{error}</p>
           </div>
         ) : (
-          /* Grille des Cards */
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {writeups.map((writeup) => {
+              // Note: isActiveMachine pourrait être lié à une colonne en DB si besoin
               const isActiveMachine = false;
               
               return (
@@ -126,7 +130,7 @@ export const Writeups: React.FC = () => {
                   className={`group relative bg-surface dark:bg-[#1a1a1f] rounded-2xl border border-gray-200 dark:border-white/5 overflow-hidden flex flex-col h-full shadow-sm dark:shadow-none
                              transition-all duration-300 ${isActiveMachine ? 'cursor-not-allowed opacity-80' : 'cursor-pointer hover:-translate-y-2 hover:border-violet-500/30 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]'}`}
                 >
-                  {/* Image Header */}
+                  {/* Image de couverture */}
                   <div className="relative h-48 overflow-hidden">
                     <img
                       src={getOptimizedUrl(getWriteupImage(writeup), 600)}
@@ -136,14 +140,14 @@ export const Writeups: React.FC = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-surface dark:from-[#1a1a1f] via-surface/60 dark:via-[#1a1a1f]/60 to-transparent" />
                     
-                    {/* Badge Plateforme */}
+                    {/* Badge de plateforme */}
                     <div className="absolute top-4 left-4">
                         <span className="px-3 py-1 bg-black/60 backdrop-blur-md border border-white/10 rounded-lg text-xs font-bold text-white shadow-xl">
                             {getPlatformIcon(writeup.slug || '')}
                         </span>
                     </div>
 
-                    {/* Overlay Machine Active */}
+                    {/* Overlay Machine Active (Éthique) */}
                     {isActiveMachine && (
                       <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 backdrop-blur-sm z-20">
                         <div className="p-3 bg-yellow-500/10 rounded-full border border-yellow-500/20 mb-2">
@@ -156,7 +160,7 @@ export const Writeups: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Contenu */}
+                  {/* Corps de la carte */}
                   <div className="p-6 pt-2 flex-1 flex flex-col">
                     <div className="flex justify-between items-start mb-4">
                         <span className={`text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider ${getDifficultyColor(writeup.difficulty)}`}>
@@ -178,7 +182,7 @@ export const Writeups: React.FC = () => {
                             : writeup.description || "Analyse technique détaillée de la compromission : reconnaissance, exploitation et élévation de privilèges."}
                     </p>
 
-                    {/* Footer Card */}
+                    {/* Footer de la carte */}
                     <div className="mt-auto flex items-center justify-between border-t border-gray-200 dark:border-white/5 pt-4">
                         <div className="flex items-center gap-3">
                             {writeup.tags?.slice(0, 2).map((tag, i) => (

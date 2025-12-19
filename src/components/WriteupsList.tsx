@@ -22,13 +22,18 @@ export const WriteupsList: React.FC = () => {
     let results = writeups;
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      results = results.filter(w => w.title.toLowerCase().includes(query) || w.description?.toLowerCase().includes(query) || w.tags?.some(tag => tag.toLowerCase().includes(query)));
+      results = results.filter(w => 
+        w.title.toLowerCase().includes(query) || 
+        w.description?.toLowerCase().includes(query) || 
+        w.tags?.some(tag => tag.toLowerCase().includes(query))
+      );
     }
     if (selectedPlatform !== 'all') {
       results = results.filter(w => {
-        if (selectedPlatform === 'htb') return w.slug.includes('hackthebox');
-        if (selectedPlatform === 'thm') return w.slug.includes('tryhackme');
-        if (selectedPlatform === 'rootme') return w.slug.includes('root-me');
+        const s = w.slug.toLowerCase();
+        if (selectedPlatform === 'htb') return s.includes('hackthebox') || s.startsWith('htb-');
+        if (selectedPlatform === 'thm') return s.includes('tryhackme') || s.startsWith('thm-');
+        if (selectedPlatform === 'rootme') return s.includes('root-me');
         return true;
       });
     }
@@ -50,14 +55,16 @@ export const WriteupsList: React.FC = () => {
     const d = difficulty?.toLowerCase() || '';
     if (d.includes('easy') || d.includes('facile')) return 'text-green-600 dark:text-green-400 border-green-500/20 bg-green-500/10';
     if (d.includes('medium') || d.includes('moyen')) return 'text-orange-600 dark:text-orange-400 border-orange-500/20 bg-orange-500/10';
-    if (d.includes('hard') || d.includes('difficile')) return 'text-red-600 dark:text-red-500 border-red-500/20 bg-red-500/10';
+    if (d.includes('hard') || d.includes('difficile')) return 'text-red-600 dark:text-red-500 border-red-500/20 bg-red-100 dark:bg-red-500/5';
     if (d.includes('insane')) return 'text-purple-600 dark:text-purple-500 border-purple-500/20 bg-purple-500/10';
     return 'text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-500/20 bg-gray-100 dark:bg-gray-500/5';
   };
 
   const getPlatformLabel = (slug: string) => {
-    if (slug.includes('hackthebox')) return 'HackTheBox';
-    if (slug.includes('tryhackme')) return 'TryHackMe';
+    const s = slug.toLowerCase();
+    if (s.includes('hackthebox') || s.startsWith('htb-')) return 'HackTheBox';
+    if (s.includes('tryhackme') || s.startsWith('thm-')) return 'TryHackMe';
+    if (s.includes('root-me')) return 'Root-Me';
     return 'CTF';
   };
 
@@ -71,6 +78,9 @@ export const WriteupsList: React.FC = () => {
     if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
     if (writeup.slug === 'hackthebox-reddish') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/reddish.webp";
     if (writeup.slug === 'tryhackme-skynet') return "https://tryhackme-images.s3.amazonaws.com/room-icons/1559e2e8a4e1a3.png";
+    
+    // Fallback Soccer
+    if (writeup.slug === 'htb-soccer') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/soccerhtb.png";
 
     // 3. Image par défaut générique
     return "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80";
