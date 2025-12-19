@@ -75,7 +75,7 @@ export const Writeups: React.FC = () => {
     if (writeup.slug === 'hackthebox-reddish') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/reddish.webp";
     
     // Ajout du fallback pour Soccer
-    if (writeup.slug === 'htb-soccer') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/soccerhtb.png";
+    if (writeup.slug === 'hackthebox-soccer') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/soccerhtb.png";
     
     // 3. Fallback générique (Tech)
     return "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80";
