@@ -1,7 +1,8 @@
 import React from 'react';
 import { 
   Cpu, Network, Shield, Zap, Box, Layers, ArrowLeft, 
-  Code, Tv, Activity, Terminal, Globe, Lock, HardDrive, GitBranch, Play
+  Code, Tv, Activity, Terminal, Globe, Lock, HardDrive, 
+  GitBranch, Play, Target, ShieldAlert 
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { useNavigate } from 'react-router-dom';
@@ -144,7 +145,7 @@ const HomeLabArticlePage = () => {
           </h2>
           <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
             <p>
-              Le choix du <strong>Lenovo ThinkCentre M720q Tiny</strong> est dicté par le pragmatisme technique. Équipé d'un <strong>Intel Core i5-8400T</strong>, ce nœud offre le ratio idéal entre consommation électrique et capacités de virtualisation pour un environnement tournant 24/7.
+              Le choix du <strong>Lenovo ThinkCentre M720q Tiny</strong> n'est pas esthétique, mais dicté par une efficacité opérationnelle stricte. Dans un environnement 24/7, le ratio <strong>Performance-per-Watt</strong> est le KPI (Key Performance Indicator) prioritaire.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
@@ -153,10 +154,10 @@ const HomeLabArticlePage = () => {
                   <Box className="w-5 h-5 text-violet-500" /> Pourquoi le format "Tiny" ?
                 </h3>
                 <p className="text-sm text-gray-400">
-                  Le châssis M720q offre une densité de calcul remarquable. L'<strong>Intel Core i5-8400T</strong> dispose de <strong>6 cœurs physiques</strong>, ce qui est crucial pour éviter l'<strong>over-provisioning</strong> CPU lors de l'exécution simultanée de plusieurs instances critiques.
+                  Le châssis M720q offre une densité de calcul remarquable. L'<strong>Intel Core i5-8400T</strong> (35W TDP) dispose de <strong>6 cœurs physiques</strong>, ce qui est crucial pour éviter l'<strong>over-provisioning</strong> CPU lors de l'exécution simultanée de plusieurs instances critiques.
                 </p>
                 <p className="text-sm text-gray-400">
-                  L'atout majeur reste le support de <strong>Intel QuickSync</strong> via l'iGPU, permettant un <strong>Hardware Transcoding</strong> fluide pour Jellyfin sans saturer les cœurs CPU. Sa modularité permet également une extension jusqu'à <strong>24GB de RAM</strong>, indispensable pour la montée en charge du lab.
+                  L'atout majeur reste le support de <strong>Intel QuickSync</strong> via l'iGPU, permettant un <strong>Hardware Transcoding</strong> fluide pour Jellyfin sans saturer les cœurs CPU. Sa modularité permet également une extension jusqu'à <strong>24GB de RAM</strong>.
                 </p>
               </div>
               <div className="space-y-4">
@@ -167,7 +168,7 @@ const HomeLabArticlePage = () => {
                   Sous <strong>Proxmox VE</strong>, la stratégie repose sur la réduction de la couche d'abstraction. L'utilisation de <strong>LXC (Linux Containers)</strong> permet de partager le <strong>Kernel</strong> de l'hôte, garantissant un <strong>overhead</strong> proche de zéro.
                 </p>
                 <p className="text-sm text-gray-400">
-                  D'ailleurs, mon instance <strong>LXC</strong> héberge <strong>exclusivement</strong> un moteur <strong>Docker</strong> : l'intégralité des micro-services y est orchestrée via <strong>docker-compose</strong>. Cette approche hybride combine la légèreté du container système avec la portabilité et la facilité de déploiement de l'<strong>Infrastructure as Code</strong>.
+                  Mon instance <strong>LXC</strong> héberge <strong>exclusivement</strong> un moteur <strong>Docker</strong> : l'intégralité des micro-services y est orchestrée via <strong>docker-compose</strong>. Cette approche hybride combine la légèreté du container système avec la portabilité de l'<strong>Infrastructure as Code</strong>.
                 </p>
               </div>
             </div>
@@ -189,7 +190,7 @@ const HomeLabArticlePage = () => {
                 <Zap className="w-5 h-5 text-violet-500" /> Kernel Optimization
               </h3>
               <p className="text-sm text-gray-400">
-                L'implémentation du <strong>Kernel 6.x</strong> assure une compatibilité native avec les dernières technologies de virtualisation. Le système est configuré pour le <strong>Hardware Passthrough</strong>, permettant d'exposer directement le contrôleur USB à l'instance de traitement pour réduire drastiquement la <strong>Latency</strong> de capture.
+                L'implémentation du <strong>Kernel 6.x</strong> assure une compatibilité native avec les dernières technologies de virtualisation. Le système est configuré pour le <strong>Hardware Passthrough</strong>, exposant directement le contrôleur USB à l'instance de traitement pour réduire drastiquement la <strong>Latency</strong>.
               </p>
             </div>
           </div>
@@ -302,7 +303,7 @@ const HomeLabArticlePage = () => {
                   <Box className="w-4 h-4" /> LED Management (SK6812)
                 </h4>
                 <p className="text-sm text-gray-400">
-                  L'utilisation de rubans <strong>SK6812 RGBNW</strong> (Neutral White) assure une colorimétrie plus naturelle et une meilleure profondeur lumineuse que les rubans RGB standards.
+                  L'utilisation de rubans <strong>SK6812 RGBNW</strong> (Neutral White) assure une colorimétrie plus naturelle que les rubans RGB standards.
                 </p>
               </div>
             </div>
@@ -325,7 +326,6 @@ const HomeLabArticlePage = () => {
             <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100 italic">Service Breakdown & Technical Utility</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
-              {/* Nginx Proxy Manager */}
               <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-10 h-10 bg-violet-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -334,11 +334,10 @@ const HomeLabArticlePage = () => {
                   <h4 className="text-white font-bold">Nginx Proxy Manager</h4>
                 </div>
                 <p className="text-xs text-gray-400 leading-relaxed">
-                  Agit comme le <strong>Reverse Proxy</strong> central. Il gère la terminaison <strong>SSL/TLS</strong> (Let's Encrypt), la redirection des sous-domaines internes et l'encapsulation des flux HTTP/HTTPS, évitant l'exposition directe des ports applicatifs.
+                  Agit comme le <strong>Reverse Proxy</strong> central. Il gère la terminaison <strong>SSL/TLS</strong>, la redirection des sous-domaines internes et l'encapsulation des flux HTTP/HTTPS.
                 </p>
               </div>
 
-              {/* Jellyfin */}
               <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-10 h-10 bg-violet-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -347,11 +346,10 @@ const HomeLabArticlePage = () => {
                   <h4 className="text-white font-bold">Jellyfin Media Server</h4>
                 </div>
                 <p className="text-xs text-gray-400 leading-relaxed">
-                  Le cœur du Media Center. Optimisé avec le passthrough <strong>Intel QuickSync</strong> pour le transcodage matériel 4K HDR. Il permet une lecture fluide sur tout type de client sans surcharge CPU.
+                  Le cœur du Media Center. Optimisé avec le passthrough <strong>Intel QuickSync</strong> pour le transcodage matériel 4K HDR fluide sans surcharge CPU.
                 </p>
               </div>
 
-              {/* Vaultwarden */}
               <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -360,11 +358,10 @@ const HomeLabArticlePage = () => {
                   <h4 className="text-white font-bold">Vaultwarden</h4>
                 </div>
                 <p className="text-xs text-gray-400 leading-relaxed">
-                  Version auto-hébergée de Bitwarden pour la <strong>Secrets Management</strong>. Stockage chiffrée des identifiants et secrets de l'infrastructure, garantissant une souveraineté totale sur les données sensibles du lab.
+                  Version auto-hébergée de Bitwarden. Stockage chiffrée des identifiants et secrets de l'infrastructure pour une souveraineté totale.
                 </p>
               </div>
 
-              {/* Gitea */}
               <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-10 h-10 bg-orange-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -373,11 +370,10 @@ const HomeLabArticlePage = () => {
                   <h4 className="text-white font-bold">Gitea (Git Service)</h4>
                 </div>
                 <p className="text-xs text-gray-400 leading-relaxed">
-                  Hébergement local des dépôts de code et de mes scripts d'automatisation. Utilisé pour le <strong>versioning</strong> de mon infrastructure (IaC) et comme alternative souveraine aux plateformes cloud tierces.
+                  Hébergement local des dépôts de code. Utilisé pour le <strong>versioning</strong> de mon infrastructure (IaC) et mes scripts d'automatisation.
                 </p>
               </div>
 
-              {/* Homepage */}
               <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-10 h-10 bg-fuchsia-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -386,11 +382,10 @@ const HomeLabArticlePage = () => {
                   <h4 className="text-white font-bold">Homepage Dashboard</h4>
                 </div>
                 <p className="text-xs text-gray-400 leading-relaxed">
-                  L'interface d'observabilité unifiée (<strong>Control Tower</strong>). Connectée via API aux autres services, elle permet de monitorer en temps réel l'état de santé du CPU, de la RAM et la disponibilité des containers Docker.
+                  L'interface d'observabilité unifiée (<strong>Control Tower</strong>). Monitorage en temps réel de l'état du CPU, de la RAM et des containers Docker via API.
                 </p>
               </div>
 
-              {/* Prowlarr & qBittorrent */}
               <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -399,34 +394,56 @@ const HomeLabArticlePage = () => {
                   <h4 className="text-white font-bold">qBittorrent & Prowlarr</h4>
                 </div>
                 <p className="text-xs text-gray-400 leading-relaxed">
-                  Le pipeline d'acquisition de données. <strong>Prowlarr</strong> centralise les indexeurs tandis que <strong>qBittorrent</strong> gère les transferts au sein d'un réseau Docker <strong>backend_net</strong> isolé.
+                  Pipeline d'acquisition de données automatisé. Communication isolée au sein d'un réseau Docker <strong>backend_net</strong> sans exposition WAN directe.
                 </p>
               </div>
             </div>
 
-            <h3 className="text-2xl font-semibold text-white mt-16 mb-6">Roadmap : Le pivot vers le Pentest Lab</h3>
-            <ul className="space-y-4 my-8">
-              <li className="flex items-start gap-3 bg-white/5 p-4 rounded-lg border border-white/5 hover:border-violet-500/20 transition-colors">
-                <div className="mt-1 bg-violet-500/20 p-1 rounded">
-                  <Code className="w-4 h-4 text-violet-400" />
-                </div>
-                <div>
-                  <h5 className="text-white font-bold text-sm underline decoration-violet-500/50">VLAN d'Attaque Isolé</h5>
-                  <p className="text-xs text-gray-400">Déploiement d'instances <strong>Exegol</strong> et Kali Linux au sein d'un segment réseau spécifique pour tester des vecteurs d'attaque sans risque.</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3 bg-white/5 p-4 rounded-lg border border-white/5 hover:border-violet-500/20 transition-colors">
-                <div className="mt-1 bg-violet-500/20 p-1 rounded">
-                  <Box className="w-4 h-4 text-violet-400" />
-                </div>
-                <div>
-                  <h5 className="text-white font-bold text-sm underline decoration-violet-500/50">Vulnerable Targets (HoneyPots)</h5>
-                  <p className="text-xs text-gray-400">Mise en place de machines vulnérables (style HTB/TryHackMe) pour pratiquer l'exploitation Active Directory et le pivotement réseau en local.</p>
-                </div>
-              </li>
-            </ul>
+            <h3 className="text-2xl font-semibold text-white mt-16 mb-6 flex items-center gap-3">
+              <Target className="w-6 h-6 text-violet-500" /> Roadmap : De la Défense à la Détection Active
+            </h3>
+            
+            <p className="text-gray-300 leading-relaxed mb-8">
+              L'étape ultime de ce <strong>HomeLab</strong> est de passer d'une posture de protection simple à une stratégie de <strong>Threat Hunting</strong>. L'objectif est de transformer le réseau en un terrain d'observation pour capturer et analyser les vecteurs d'attaque.
+            </p>
 
-            <div className="mt-16 pt-12 border-t border-white/5 text-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+              <div className="bg-violet-900/5 border border-violet-500/20 p-6 rounded-2xl relative overflow-hidden group hover:border-violet-500/40 transition-colors">
+                <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <ShieldAlert className="w-12 h-12 text-violet-500" />
+                </div>
+                <h4 className="text-white font-bold mb-3">Vulnerable Targets & HoneyPots</h4>
+                <p className="text-xs text-gray-400 leading-relaxed mb-4">
+                  Déploiement de sondes type <strong>Cowrie</strong> (SSH) ou <strong>HoneyProxy</strong>. Ces cibles permettront de monitorer les tentatives de <strong>Brute-force</strong> et d'extraire des <strong>IoC (Indicators of Compromise)</strong>.
+                </p>
+                <div className="flex gap-2">
+                  <span className="text-[9px] font-mono bg-violet-500/10 text-violet-400 px-2 py-0.5 rounded border border-violet-500/20">MALWARE ANALYSIS</span>
+                  <span className="text-[9px] font-mono bg-violet-500/10 text-violet-400 px-2 py-0.5 rounded border border-violet-500/20">LOG AGGREGATION</span>
+                </div>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 p-6 rounded-2xl relative overflow-hidden group hover:border-violet-500/40 transition-colors">
+                <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <Code className="w-12 h-12 text-violet-500" />
+                </div>
+                <h4 className="text-white font-bold mb-3">Active Directory Pentest Lab</h4>
+                <p className="text-xs text-gray-400 leading-relaxed mb-4">
+                  Mise en place d'un domaine Windows Server isolé pour pratiquer l'exploitation de protocoles comme <strong>Kerberos</strong> et le <strong>Lateral Movement</strong> (Préparation certifications <strong>OSCP / CPTS</strong>).
+                </p>
+                <div className="flex gap-2">
+                  <span className="text-[9px] font-mono bg-white/10 text-gray-400 px-2 py-0.5 rounded border border-white/5">VLAN ISOLATION</span>
+                  <span className="text-[9px] font-mono bg-white/10 text-gray-400 px-2 py-0.5 rounded border border-white/5">RED TEAMING</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-violet-900/20 to-transparent border-l-4 border-violet-500 p-6 my-12 rounded-r-xl">
+              <p className="text-sm italic text-gray-300 leading-relaxed">
+                "Un Honeypot n'est pas seulement un piège, c'est un miroir tendu vers l'attaquant pour comprendre ses intentions avant qu'il n'atteigne sa cible réelle."
+              </p>
+            </div>
+
+            <div className="mt-24 pt-12 border-t border-white/5 text-center">
               <p className="text-sm text-gray-500 italic">
                 Infrastructure scalable par design. Dernière mise à jour majeure : Décembre 2025.
               </p>
