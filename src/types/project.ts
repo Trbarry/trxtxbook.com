@@ -1,23 +1,26 @@
-const homelabInfrastructure: Project = {
+import { Project } from '../../types/project';
+
+export const HomeLabProject: Project = {
+  id: "homelab-infrastructure",
   title: "HomeLab Ecosystem & Edge Computing",
-  description: "Infrastructure de virtualisation haute disponibilité intégrant segmentation réseau L3 et traitement de flux 4K HDR.",
-  longDescription: "Ce projet documente la conception et le déploiement de mon infrastructure domestique. L'architecture repose sur un hyperviseur Proxmox VE pilotant des services critiques (OPNsense, Docker) et un cas d'étude hardware complexe : un système Ambilight DIY traitant des flux 4K HDR en temps réel avec une latence < 15ms.",
+  description: "Architecture de virtualisation avec segmentation réseau L3 et traitement de flux 4K HDR en temps réel.",
+  longDescription: "Conception d'un environnement de calcul hybride orienté cybersécurité. Ce projet documente l'implémentation d'un hyperviseur Proxmox VE, d'une micro-segmentation réseau via OPNsense, et d'un pipeline de traitement de signal complexe pour un système Ambilight DIY.",
   tags: ["Proxmox", "OPNsense", "Docker", "Network Security", "VLAN", "Hardware Engineering"],
-  image: "/projects/homelab-infra.jpg",
+  image: "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/Project-Tiny.webp", // Hero Image
   features: [
     "Architecture Zero-Trust via segmentation VLAN stricte",
     "Routage et Firewalling virtualisés sous OPNsense",
-    "Pipeline de traitement vidéo 4K HDR (Signal Processing)",
-    "Gestion centralisée des conteneurs via Docker Compose",
+    "Pipeline de traitement vidéo 4K HDR (Latency < 15ms)",
+    "Orchestration de services via Docker Compose",
     "Hardware Acceleration (QuickSync) pour le transcodage média"
   ],
   technicalDetails: [
     "Host: Lenovo M720q Tiny (i5-8400T / 24GB RAM)",
     "Hypervisor: Proxmox VE (Kernel 6.x)",
-    "Networking: OPNsense VM + Switch Managé (802.1Q Tagging)",
-    "Media Chain: Nvidia Shield Pro -> HDMI Downscaler -> USB 3.0 Capture",
-    "IoT Controller: ESP32 / WLED via Distributed Display Protocol (DDP)",
-    "Storage: NVMe Boot + Dedicated Media HDD Mounts"
+    "Networking: OPNsense VM + Managed Switch (802.1Q)",
+    "Processing: Hyperion.ng (LXC Passthrough)",
+    "IoT: ESP32 / WLED via Distributed Display Protocol (DDP)",
+    "Storage: NVMe Boot + Dedicated Media HDD"
   ],
   status: 'in-progress',
   timeline: "2025 - Présent",

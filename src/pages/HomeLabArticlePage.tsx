@@ -42,6 +42,19 @@ const HomeLabArticlePage = () => {
             <p>
               Le choix du <strong>Lenovo ThinkCentre M720q Tiny</strong> est dicté par le pragmatisme technique. Équipé d'un <strong>Intel Core i5-8400T</strong>, ce nœud offre le ratio idéal entre consommation électrique et capacités de virtualisation pour un environnement tournant 24/7.
             </p>
+
+            {/* VISUEL : LENOVO TINY */}
+            <div className="my-10 group relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+              <img 
+                src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/Project-Tiny.webp" 
+                alt="Lenovo ThinkCentre M720q Tiny Setup" 
+                className="relative rounded-xl border border-white/10 w-full object-cover shadow-2xl"
+              />
+              <p className="text-center text-xs text-gray-500 mt-4 italic font-mono">
+                Hardware Node: Lenovo M720q - 6 Cores / 6 Threads
+              </p>
+            </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
               <div className="bg-[#1a1a1f] p-6 rounded-xl border border-white/5 shadow-2xl">
@@ -60,6 +73,18 @@ const HomeLabArticlePage = () => {
                   L'intelligence du système repose sur le <strong>PCI/USB Passthrough</strong>. La carte de capture et l'iGPU sont mappés directement aux containers pour garantir une <strong>Latency</strong> ultra-faible et des performances natives.
                 </p>
               </div>
+            </div>
+
+            {/* VISUEL : PROXMOX DASHBOARD */}
+            <div className="my-10 p-2 bg-black/50 rounded-2xl border border-white/5 shadow-inner">
+              <img 
+                src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/proxmox.webp" 
+                alt="Proxmox VE Virtualization Dashboard" 
+                className="rounded-xl w-full grayscale-[0.3] hover:grayscale-0 transition-all duration-500"
+              />
+              <p className="text-center text-[10px] text-gray-600 mt-3 font-mono uppercase tracking-widest">
+                Infrastructure Overview: Virtual Machines & Containers (LXC)
+              </p>
             </div>
           </div>
         </section>
@@ -84,9 +109,9 @@ const HomeLabArticlePage = () => {
               </p>
             </div>
 
-            <h3 className="text-2xl font-semibold text-white mt-12 mb-6">Virtualiser la Gateway : OPNsense</h3>
+            <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100">Virtualiser la Gateway : OPNsense</h3>
             <p>
-              En remplaçant la box FAI par une instance <strong>OPNsense</strong> virtualisée, l'infrastructure gagne en granularité. Cela permet un contrôle total sur le <strong>Routing</strong> inter-VLAN et l'inspection des flux via <strong>IDS/IPS</strong>.
+              En remplaçant la gestion réseau de la box FAI par une instance <strong>OPNsense</strong> virtualisée, l'infrastructure gagne en granularité. Cela permet un contrôle total sur le <strong>Routing</strong> inter-VLAN et l'inspection des flux via <strong>IDS/IPS</strong>.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-10 text-center">
@@ -135,6 +160,18 @@ const HomeLabArticlePage = () => {
             <p>
               L'enjeu ici est de transformer un flux <strong>4K HDR</strong> massif en données colorimétriques exploitables par 300+ LEDs, avec une <strong>Latency</strong> cible inférieure à 15ms pour une immersion sans décalage.
             </p>
+
+            {/* VISUEL : HYPERION UI */}
+            <div className="my-10 p-4 bg-[#1a1a1f] rounded-2xl border border-violet-500/10">
+              <img 
+                src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/hyperion.webp" 
+                alt="Hyperion.ng Signal Processing Dashboard" 
+                className="rounded-lg w-full shadow-2xl"
+              />
+              <p className="text-center text-xs text-violet-400/60 mt-4 font-mono uppercase tracking-tight">
+                Signal Acquisition: Tone Mapping SDR/HDR & LED Layout Configuration
+              </p>
+            </div>
 
             <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100">La Chaîne d'Acquisition (Hardware Chain)</h3>
             <p>
