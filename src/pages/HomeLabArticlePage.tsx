@@ -89,6 +89,8 @@ const HomeLabArticlePage = () => {
           </div>
         </section>
 
+        // Remplace la Section 02 existante par celle-ci dans ton fichier HomeLabArticlePage.tsx
+
         {/* Section 2: Network Engineering & Security */}
         <section className="mb-20">
           <h2 className="text-3xl font-bold mb-8 flex items-center gap-3 text-violet-400">
@@ -97,7 +99,7 @@ const HomeLabArticlePage = () => {
           
           <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
             <p>
-              La sécurité d'un <strong>HomeLab</strong> ne repose pas sur la complexité d'un mot de passe, mais sur la rigueur de sa segmentation. L'objectif est d'appliquer le principe du moindre privilège à la couche réseau (L3).
+              La sécurité d'un <strong>HomeLab</strong> ne repose pas sur la complexité d'un mot de passe, mais sur la rigueur de sa segmentation et la finesse de son monitoring. L'objectif est d'appliquer le principe du moindre privilège à la couche réseau (L3) tout en maintenant une visibilité totale sur la couche applicative (L7).
             </p>
 
             <div className="bg-violet-900/10 border-l-4 border-violet-500 p-6 my-8 rounded-r-xl">
@@ -109,10 +111,43 @@ const HomeLabArticlePage = () => {
               </p>
             </div>
 
-            <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100">Virtualiser la Gateway : OPNsense</h3>
+            <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100">Virtualiser la Gateway : OPNsense & Observabilité</h3>
             <p>
-              En remplaçant la gestion réseau de la box FAI par une instance <strong>OPNsense</strong> virtualisée, l'infrastructure gagne en granularité. Cela permet un contrôle total sur le <strong>Routing</strong> inter-VLAN et l'inspection des flux via <strong>IDS/IPS</strong>.
+              En remplaçant la gestion réseau de la box FAI par une instance <strong>OPNsense</strong> virtualisée, l'infrastructure gagne en granularité. Le monitoring intégré via <strong>Insight</strong> et <strong>NetFlow</strong> permet de transformer des flux bruts en schémas mentaux clairs : qui parle à qui, sur quel port, et avec quel volume de données.
             </p>
+            
+            <p className="mt-4">
+              Cette surveillance n'est pas passive : elle sert à détecter des anomalies de comportement (ex: un ESP32 tentant de joindre le VLAN de Management) et à ajuster les politiques de <strong>Traffic Shaping</strong> pour garantir que le flux 4K HDR reste prioritaire sur les mises à jour système en arrière-plan.
+            </p>
+
+            {/* Focus ZenArmor (NGFW) */}
+            <div className="bg-[#1a1a1f] p-8 rounded-2xl border border-violet-500/20 my-12 relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-3 bg-violet-600/20 text-violet-400 text-[10px] font-bold uppercase tracking-widest">Next-Gen Filtering</div>
+              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <Shield className="w-6 h-6 text-violet-500" /> L7 Protection : ZenArmor (Sensei)
+              </h3>
+              <p className="text-sm text-gray-400 mb-6">
+                Là où un firewall standard s'arrête à l'IP et au Port, <strong>ZenArmor</strong> apporte une inspection de niveau <strong>Layer 7 (Application Layer)</strong>. C'est le cerveau de l'analyse comportementale du lab.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div className="p-4 bg-black/40 rounded-lg border border-white/5">
+                  <span className="text-violet-400 font-bold block mb-1">Application Control</span>
+                  Identification des flux chiffrés (TLS SNI) pour bloquer les services indésirables ou les trackers IoT sans casser le chiffrement.
+                </div>
+                <div className="p-4 bg-black/40 rounded-lg border border-white/5">
+                  <span className="text-violet-400 font-bold block mb-1">Web Content Filtering</span>
+                  Protection contre le <strong>Malware</strong> et le <strong>Phishing</strong> via une base de réputation mise à jour en temps réel, isolant les cibles vulnérables du lab.
+                </div>
+                <div className="p-4 bg-black/40 rounded-lg border border-white/5">
+                  <span className="text-violet-400 font-bold block mb-1">Advanced Reporting</span>
+                  Génération de dashboards précis sur l'usage des ressources réseau, essentiels pour le diagnostic de latence dans le pipeline vidéo.
+                </div>
+                <div className="p-4 bg-black/40 rounded-lg border border-white/5">
+                  <span className="text-violet-400 font-bold block mb-1">Threat Intelligence</span>
+                  Blocage automatique des adresses IP connues pour être des nœuds de botnets ou des scanners offensifs.
+                </div>
+              </div>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-10 text-center">
               <div className="p-5 bg-[#1a1a1f] border border-white/5 rounded-xl hover:border-violet-500/30 transition-colors">
@@ -128,24 +163,24 @@ const HomeLabArticlePage = () => {
               <div className="p-5 bg-[#1a1a1f] border border-white/5 rounded-xl hover:border-violet-500/30 transition-colors">
                 <span className="text-violet-400 font-mono text-[10px] font-bold uppercase tracking-widest">VLAN 30</span>
                 <h4 className="text-white font-bold mt-1">IoT / Ambilight</h4>
-                <p className="text-[11px] mt-2 text-gray-400"><strong>No WAN access</strong>. Communication isolée via protocole DDP (port 4048).</p>
+                <p className="text-[11px] mt-2 text-gray-400"><strong>No WAN access</strong>. Isolé par ZenArmor pour limiter le <strong>lateral movement</strong>.</p>
               </div>
             </div>
 
             <h3 className="text-2xl font-semibold text-white mt-12 mb-6 flex items-center gap-2">
-              <Box className="w-6 h-6 text-violet-500" /> Firewall Rules logic
+              <Box className="w-6 h-6 text-violet-500" /> IDS/IPS Logic : Suricata
             </h3>
             <p>
-              L'interopérabilité entre le service Hyperion (LXC) et l'ESP32 est sécurisée par une règle de filtrage unidirectionnelle stricte.
+              Pour compléter l'analyse comportementale de ZenArmor, une instance <strong>Suricata</strong> tourne en mode <strong>IDS (Intrusion Detection System)</strong>. Son utilité est de matcher les paquets contre des signatures connues de vulnérabilités, agissant comme une alarme en cas de tentative d'exploitation sur un service exposé.
             </p>
 
             <div className="bg-black/40 p-6 rounded-xl font-mono text-xs border border-white/5 my-8 relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-2 bg-violet-500/10 text-violet-400 text-[10px]">LOG_FW_BLOCK</div>
-              <p className="text-gray-500 mb-2"># Rule: Ambilight Data Stream Authorization</p>
-              <p><span className="text-violet-400 font-bold">PASS</span> from <span className="text-blue-400">LXC_HYPERION_IP</span></p>
-              <p>to <span className="text-blue-400">ESP32_WLED_IP</span></p>
-              <p>proto <span className="text-orange-400">UDP</span> port <span className="text-orange-400">4048</span></p>
-              <p className="mt-4 text-red-500/80 font-bold">BLOCK ALL (Inter-VLAN Default)</p>
+              <p className="text-gray-500 mb-2"># Policy: Deep Packet Inspection & L7 Filtering</p>
+              <p><span className="text-violet-400 font-bold">INSPECT</span> payload from <span className="text-blue-400">VLAN_IOT</span></p>
+              <p><span className="text-violet-400 font-bold">MATCH</span> app_type <span className="text-orange-400">"Streaming/Video"</span> -> ALLOW</p>
+              <p><span className="text-violet-400 font-bold">MATCH</span> category <span className="text-red-400">"Tracking/Ads"</span> -> DROP by ZENARMOR</p>
+              <p className="mt-4 text-red-500/80 font-bold">BLOCK ALL (Unknown Protocols)</p>
             </div>
           </div>
         </section>
