@@ -36,6 +36,7 @@ const WriteupsList = lazy(() => import('./components/WriteupsList').then(module 
 const ProjectsList = lazy(() => import('./components/ProjectsList').then(module => ({ default: module.ProjectsList })));
 const CertificationsList = lazy(() => import('./pages/CertificationsList').then(module => ({ default: module.CertificationsList })));
 const WikiPage = lazy(() => import('./pages/WikiPage').then(module => ({ default: module.WikiPage })));
+const LegalPage = lazy(() => import('./pages/LegalPage').then(module => ({ default: module.LegalPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
 
 // Pages de détail et articles
@@ -120,6 +121,9 @@ const AnimatedRoutes = ({
           <Route path="/admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/wp-admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/login" element={<PageTransition><AdminTrollPage /></PageTransition>} />
+
+          {/* PAGES LEGALES */}
+          <Route path="/mentions-legales" element={<PageTransition><LegalPage /></PageTransition>} />
 
           {/* CATCH-ALL ROUTE POUR 404 */}
           <Route path="*" element={<NotFoundPage />} />
