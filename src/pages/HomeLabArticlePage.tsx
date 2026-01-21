@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   Cpu, Network, Shield, Zap, Box, Layers, ArrowLeft, 
-  Code, Tv, Activity, Terminal, Globe, Lock, HardDrive, Search
+  Code, Tv, Activity, Terminal, Globe, Lock, HardDrive, GitBranch
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { useNavigate } from 'react-router-dom';
@@ -79,7 +79,7 @@ const DockerComposeWindow = () => (
     <div className="p-6 font-mono text-xs leading-relaxed overflow-x-auto">
       <div className="flex gap-4">
         <div className="text-gray-600 select-none text-right w-4">
-          1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11
+          1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15
         </div>
         <div>
           <span className="text-violet-400">services:</span><br/>
@@ -87,11 +87,14 @@ const DockerComposeWindow = () => (
           <span className="pl-8 text-gray-400">image:</span> <span className="text-emerald-400">jc21/nginx-proxy-manager:latest</span><br/>
           <span className="pl-8 text-gray-400">networks:</span><br/>
           <span className="pl-12 text-gray-500">-</span> <span className="text-blue-400">frontend_net</span><br/>
-          <span className="pl-12 text-gray-500">-</span> <span className="text-blue-400">backend_net</span><br/>
           <span className="pl-4 text-fuchsia-400">vaultwarden:</span><br/>
           <span className="pl-8 text-gray-400">image:</span> <span className="text-emerald-400">vaultwarden/server:latest</span><br/>
+          <span className="pl-8 text-gray-400">networks:</span><br/>
+          <span className="pl-12 text-gray-500">-</span> <span className="text-blue-400">backend_net</span><br/>
+          <span className="pl-4 text-fuchsia-400">gitea:</span><br/>
+          <span className="pl-8 text-gray-400">image:</span> <span className="text-emerald-400">gitea/gitea:latest</span><br/>
           <span className="pl-8 text-gray-400">environment:</span><br/>
-          <span className="pl-12 text-gray-500">-</span> <span className="text-gray-300">SIGNUPS_ALLOWED=false</span><br/>
+          <span className="pl-12 text-gray-500">-</span> <span className="text-gray-300">USER_UID=1000</span><br/>
           <span className="pl-8 text-gray-400">networks:</span><br/>
           <span className="pl-12 text-gray-500">-</span> <span className="text-blue-400">backend_net</span>
         </div>
@@ -150,10 +153,10 @@ const HomeLabArticlePage = () => {
                   <Box className="w-5 h-5 text-violet-500" /> Pourquoi le format "Tiny" ?
                 </h3>
                 <p className="text-sm text-gray-400">
-                  Le châssis M720q offre une densité de calcul remarquable. L'<strong>Intel Core i5-8400T</strong> dispose de <strong>6 cœurs physiques</strong>, ce qui est crucial pour éviter l'<strong>over-provisioning</strong> CPU lors de l'exécution simultanée de plusieurs instances critiques.
+                  Le châssis M720q offre une densité de calcul remarquable. L'<strong>Intel Core i5-8400T</strong> (35W TDP) dispose de <strong>6 cœurs physiques</strong>, ce qui est crucial pour éviter l'<strong>over-provisioning</strong> CPU lors de l'exécution simultanée de plusieurs instances critiques.
                 </p>
                 <p className="text-sm text-gray-400">
-                  L'atout majeur reste le support de <strong>Intel QuickSync</strong> via l'iGPU, permettant un <strong>Hardware Transcoding</strong> fluide sans saturer les cœurs CPU. Sa modularité permet également une extension jusqu'à <strong>24GB de RAM</strong>, indispensable pour la montée en charge du lab.
+                  L'atout majeur reste le support de <strong>Intel QuickSync</strong> via l'iGPU, permettant un <strong>Hardware Transcoding</strong> fluide pour Jellyfin sans saturer les cœurs CPU. Sa modularité permet également une extension jusqu'à <strong>24GB de RAM</strong>, indispensable pour la montée en charge du lab.
                 </p>
               </div>
               <div className="space-y-4">
@@ -344,7 +347,20 @@ const HomeLabArticlePage = () => {
                   <h4 className="text-white font-bold">Vaultwarden</h4>
                 </div>
                 <p className="text-xs text-gray-400 leading-relaxed">
-                  Version auto-hébergée de Bitwarden pour la <strong>Secrets Management</strong>. Stockage chiffré des identifiants et secrets de l'infrastructure, garantissant une souveraineté totale sur les données sensibles du lab.
+                  Version auto-hébergée de Bitwarden pour la <strong>Secrets Management</strong>. Stockage chiffrée des identifiants et secrets de l'infrastructure, garantissant une souveraineté totale sur les données sensibles du lab.
+                </p>
+              </div>
+
+              {/* Gitea */}
+              <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-10 h-10 bg-orange-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <GitBranch className="w-5 h-5 text-orange-400" />
+                  </div>
+                  <h4 className="text-white font-bold">Gitea (Git Service)</h4>
+                </div>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  Hébergement local des dépôts de code et de mes scripts d'automatisation. Utilisé pour le <strong>versioning</strong> de mon infrastructure (IaC) et comme alternative souveraine aux plateformes cloud tierces.
                 </p>
               </div>
 
@@ -375,7 +391,7 @@ const HomeLabArticlePage = () => {
               </div>
 
               {/* Hyperion.ng */}
-              <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group md:col-span-2">
+              <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group md:col-span-1">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-10 h-10 bg-orange-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Zap className="w-5 h-5 text-orange-400" />
@@ -383,7 +399,7 @@ const HomeLabArticlePage = () => {
                   <h4 className="text-white font-bold">Hyperion.ng</h4>
                 </div>
                 <p className="text-xs text-gray-400 leading-relaxed">
-                  Traitement de signal prioritaire. Ce container Docker analyse les flux vidéo entrants (via USB Grabber) et orchestre la colorimétrie des LEDs. Son déploiement via Docker garantit une portabilité totale du moteur de rendu Ambilight.
+                  Traitement de signal prioritaire. Ce container Docker analyse les flux vidéo entrants (via USB Grabber) et orchestre la colorimétrie des LEDs avec une <strong>Latency</strong> minimale.
                 </p>
               </div>
             </div>
@@ -396,7 +412,7 @@ const HomeLabArticlePage = () => {
                 </div>
                 <div>
                   <h5 className="text-white font-bold text-sm underline decoration-violet-500/50">VLAN d'Attaque Isolé</h5>
-                  <p className="text-xs text-gray-400">Déploiement d'instances <strong>Exegol</strong> et Kali Linux au sein d'un segment réseau spécifique pour tester des vecteurs d'attaque sans risque pour le reste de l'infra.</p>
+                  <p className="text-xs text-gray-400">Déploiement d'instances <strong>Exegol</strong> et Kali Linux au sein d'un segment réseau spécifique pour tester des vecteurs d'attaque sans risque.</p>
                 </div>
               </li>
               <li className="flex items-start gap-3 bg-white/5 p-4 rounded-lg border border-white/5 hover:border-violet-500/20 transition-colors">
