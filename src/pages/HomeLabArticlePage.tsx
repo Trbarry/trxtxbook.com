@@ -399,55 +399,58 @@ const HomeLabArticlePage = () => {
               </div>
             </div>
 
-            <h3 className="text-2xl font-semibold text-white mt-16 mb-6 flex items-center gap-3">
-              <Target className="w-6 h-6 text-violet-500" /> Roadmap : De la Défense à la Détection Active
-            </h3>
-            
-            <p className="text-gray-300 leading-relaxed mb-8">
-              L'étape ultime de ce <strong>HomeLab</strong> est de passer d'une posture de protection simple à une stratégie de <strong>Threat Hunting</strong>. L'objectif est de transformer le réseau en un terrain d'observation pour capturer et analyser les vecteurs d'attaque.
-            </p>
+            {/* Section Finale : Perspectives & Projets Envisagés */}
+<h3 className="text-2xl font-semibold text-white mt-16 mb-6 flex items-center gap-3">
+  <Target className="w-6 h-6 text-violet-500" /> Perspectives : L'évolution vers la Détection Active
+</h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
-              <div className="bg-violet-900/5 border border-violet-500/20 p-6 rounded-2xl relative overflow-hidden group hover:border-violet-500/40 transition-colors">
-                <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <ShieldAlert className="w-12 h-12 text-violet-500" />
-                </div>
-                <h4 className="text-white font-bold mb-3">Vulnerable Targets & HoneyPots</h4>
-                <p className="text-xs text-gray-400 leading-relaxed mb-4">
-                  Déploiement de sondes type <strong>Cowrie</strong> (SSH) ou <strong>HoneyProxy</strong>. Ces cibles permettront de monitorer les tentatives de <strong>Brute-force</strong> et d'extraire des <strong>IoC (Indicators of Compromise)</strong>.
-                </p>
-                <div className="flex gap-2">
-                  <span className="text-[9px] font-mono bg-violet-500/10 text-violet-400 px-2 py-0.5 rounded border border-violet-500/20">MALWARE ANALYSIS</span>
-                  <span className="text-[9px] font-mono bg-violet-500/10 text-violet-400 px-2 py-0.5 rounded border border-violet-500/20">LOG AGGREGATION</span>
-                </div>
-              </div>
+<p className="text-gray-300 leading-relaxed mb-8">
+  L'architecture actuelle pose les bases d'une infrastructure saine. Les projets suivants sont des <strong>évolutions envisageables</strong> pour transformer ce lab en un environnement d'analyse avancée. L'objectif est de passer d'une défense passive à une compréhension proactive des vecteurs de compromission.
+</p>
 
-              <div className="bg-white/5 border border-white/10 p-6 rounded-2xl relative overflow-hidden group hover:border-violet-500/40 transition-colors">
-                <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <Code className="w-12 h-12 text-violet-500" />
-                </div>
-                <h4 className="text-white font-bold mb-3">Active Directory Pentest Lab</h4>
-                <p className="text-xs text-gray-400 leading-relaxed mb-4">
-                  Mise en place d'un domaine Windows Server isolé pour pratiquer l'exploitation de protocoles comme <strong>Kerberos</strong> et le <strong>Lateral Movement</strong> (Préparation certifications <strong>OSCP / CPTS</strong>).
-                </p>
-                <div className="flex gap-2">
-                  <span className="text-[9px] font-mono bg-white/10 text-gray-400 px-2 py-0.5 rounded border border-white/5">VLAN ISOLATION</span>
-                  <span className="text-[9px] font-mono bg-white/10 text-gray-400 px-2 py-0.5 rounded border border-white/5">RED TEAMING</span>
-                </div>
-              </div>
-            </div>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+  {/* Projet Honeypots */}
+  <div className="bg-violet-900/5 border border-violet-500/20 p-6 rounded-2xl relative overflow-hidden group hover:border-violet-500/40 transition-colors">
+    <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+      <ShieldAlert className="w-12 h-12 text-violet-500" />
+    </div>
+    <h4 className="text-white font-bold mb-3">Sondes de Capture (Honeypots)</h4>
+    <p className="text-xs text-gray-400 leading-relaxed mb-4">
+      Projet de déploiement de sondes à haute interaction pour observer les comportements d'attaque en milieu contrôlé. L'analyse des journaux permettrait d'extraire des <strong>IoC (Indicators of Compromise)</strong> et d'étudier les techniques de <strong>Post-Exploitation</strong>.
+    </p>
+    <div className="flex gap-2">
+      <span className="text-[9px] font-mono bg-violet-500/10 text-violet-400 px-2 py-0.5 rounded border border-violet-500/20">THREAT INTELLIGENCE</span>
+      <span className="text-[9px] font-mono bg-violet-500/10 text-violet-400 px-2 py-0.5 rounded border border-violet-500/20">LOG ANALYSIS</span>
+    </div>
+  </div>
 
-            <div className="bg-gradient-to-r from-violet-900/20 to-transparent border-l-4 border-violet-500 p-6 my-12 rounded-r-xl">
-              <p className="text-sm italic text-gray-300 leading-relaxed">
-                "Un Honeypot n'est pas seulement un piège, c'est un miroir tendu vers l'attaquant pour comprendre ses intentions avant qu'il n'atteigne sa cible réelle."
-              </p>
-            </div>
+  {/* Projet AD Lab */}
+  <div className="bg-white/5 border border-white/10 p-6 rounded-2xl relative overflow-hidden group hover:border-violet-500/40 transition-colors">
+    <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+      <Code className="w-12 h-12 text-violet-500" />
+    </div>
+    <h4 className="text-white font-bold mb-3">Simulations Active Directory</h4>
+    <p className="text-xs text-gray-400 leading-relaxed mb-4">
+      Envisagé comme un segment isolé, ce module permettrait d'étudier les mécanismes de sécurité internes aux environnements Windows. Un terrain d'expérimentation pour le <strong>Hardening</strong> de contrôleurs de domaine et l'audit de politiques de groupe (GPO).
+    </p>
+    <div className="flex gap-2">
+      <span className="text-[9px] font-mono bg-white/10 text-gray-400 px-2 py-0.5 rounded border border-white/5">VLAN ISOLATION</span>
+      <span className="text-[9px] font-mono bg-white/10 text-gray-400 px-2 py-0.5 rounded border border-white/5">HARDENING</span>
+    </div>
+  </div>
+</div>
 
-            <div className="mt-24 pt-12 border-t border-white/5 text-center">
-              <p className="text-sm text-gray-500 italic">
-                Infrastructure scalable par design. Dernière mise à jour majeure : Décembre 2025.
-              </p>
-            </div>
+<div className="bg-gradient-to-r from-violet-900/20 to-transparent border-l-4 border-violet-500 p-6 my-12 rounded-r-xl">
+  <p className="text-sm italic text-gray-300 leading-relaxed">
+    "La cybersécurité est un cycle itératif : chaque défense implémentée est une opportunité d'étudier une nouvelle méthode d'attaque."
+  </p>
+</div>
+
+<div className="mt-24 pt-12 border-t border-white/5 text-center">
+  <p className="text-sm text-gray-500 italic">
+    Projet en évolution constante. Dernière mise à jour majeure : Janvier 2026.
+  </p>
+</div>
           </div>
         </section>
       </article>
