@@ -9,14 +9,16 @@ import { SteamDeckProject } from './projects/SteamDeckProject';
 import { ExegolProject } from './projects/ExegolProject';
 import { LinuxMintProject } from './projects/LinuxMintProject';
 import { CPTSJourneyProject } from './projects/CPTSJourneyProject';
+import { HomeLabProject } from './projects/HomeLabProjects'; // Import du projet maître
 import { getOptimizedUrl } from '../lib/imageUtils';
 
 export const Projects: React.FC = () => {
   const navigate = useNavigate();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  // Liste de tes projets importés
+  // HomeLabProject est placé en premier pour souligner l'infrastructure globale
   const projects: Project[] = [
+    HomeLabProject,
     CPTSJourneyProject, 
     LinuxMintProject, 
     ExegolProject, 
@@ -34,7 +36,6 @@ export const Projects: React.FC = () => {
   };
 
   return (
-    // ✅ CHANGEMENT : bg-background au lieu de bg-[#0a0a0f]
     <section id="projects" className="py-24 bg-background transition-colors duration-300 relative overflow-hidden">
       
       <div className="container mx-auto px-6 relative z-10">
@@ -76,7 +77,6 @@ export const Projects: React.FC = () => {
             >
               {/* Conteneur Image */}
               <div className="relative h-56 overflow-hidden">
-                {/* Overlay violet au repos */}
                 <div className="absolute inset-0 bg-violet-900/20 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
                 
                 <img 
@@ -86,10 +86,8 @@ export const Projects: React.FC = () => {
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 
-                {/* ✅ IMPORTANT : Le dégradé doit matcher la couleur de la carte (surface ou dark) */}
                 <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent dark:from-[#1a1a1f] dark:via-[#1a1a1f]/40 dark:to-transparent opacity-90 z-10" />
                 
-                {/* Badge Article */}
                 {project.articleUrl && (
                   <div className="absolute top-4 right-4 z-20">
                       <div className="bg-violet-600/90 backdrop-blur-sm text-white px-3 py-1.5 rounded-lg 
@@ -103,7 +101,6 @@ export const Projects: React.FC = () => {
 
               {/* Contenu Carte */}
               <div className="p-6 pt-0 flex-1 flex flex-col relative z-20">
-                {/* Icône flottante */}
                 <div className="-mt-8 mb-4">
                      <div className="w-14 h-14 bg-surface dark:bg-[#1a1a1f] rounded-xl border border-gray-200 dark:border-white/10 p-1 flex items-center justify-center shadow-xl group-hover:border-violet-500/50 transition-colors">
                         <Code className="w-6 h-6 text-violet-600 dark:text-violet-400" />
@@ -118,7 +115,6 @@ export const Projects: React.FC = () => {
                     {project.description}
                 </p>
                 
-                {/* Tags */}
                 <div className="flex flex-wrap gap-2 mt-auto">
                   {project.tags.slice(0, 3).map((tag, i) => (
                     <span 
