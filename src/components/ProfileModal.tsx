@@ -61,11 +61,11 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
             <div className="flex flex-wrap items-center gap-3 mt-3">
               <span className="flex items-center gap-1.5 bg-violet-500/10 text-violet-700 dark:text-violet-200 px-4 py-1.5 rounded-full text-sm font-medium border border-violet-500/20 shadow-sm">
                 <Briefcase className="w-3.5 h-3.5" />
-                Alternant Technicien Supérieur S&R
+                Apprenti Technicien S&R
               </span>
               <span className="flex items-center gap-1.5 bg-blue-500/10 text-blue-700 dark:text-blue-200 px-4 py-1.5 rounded-full text-sm font-medium border border-blue-500/20">
                 <Terminal className="w-3.5 h-3.5" />
-                Pentester en devenir
+                Curieux de Cybersécurité
               </span>
             </div>
           </div>
@@ -86,11 +86,10 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                   />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white tracking-wide flex items-center gap-2">
-                    Alternance chez Moulinvest
-                    <ArrowUpRight className="w-5 h-5 text-violet-600 dark:text-violet-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white tracking-wide">
+                    Parcours en alternance — Moulinvest
                   </h3>
-                  <p className="text-violet-600/70 dark:text-violet-200/70 text-sm font-medium mt-1">2025 — 2027 • Technicien Système & Réseau</p>
+                  <p className="text-violet-600/70 dark:text-violet-200/70 text-sm font-medium mt-1">2025 — 2027 • Apprentissage des fondamentaux Système & Réseau</p>
                 </div>
               </div>
               
@@ -99,7 +98,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                 </span>
-                Poste Actuel
+                En poste
               </div>
             </div>
 
@@ -107,21 +106,21 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
               <div className="md:col-span-3 space-y-4">
                 <h4 className="text-violet-700 dark:text-violet-100 font-semibold flex items-center gap-2 uppercase text-sm tracking-wider">
                   <Server className="w-4 h-4 text-violet-600 dark:text-violet-400" />
-                  Une opportunité unique
+                  Apprendre par la pratique
                 </h4>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-[15px]">
-                  J'ai la chance d'occuper un poste d'une grande richesse où la polyvalence est la clé. Mon quotidien ne se limite pas au <strong className="text-violet-700 dark:text-violet-200">support utilisateur (N1 à N3)</strong> : je participe activement à la gestion de l'infrastructure.
+                  Intégré au sein d'une équipe IT multi-sites, je découvre la réalité opérationnelle d'une infrastructure d'envergure. Mon rôle consiste à assimiler les processus de <strong className="text-violet-700 dark:text-violet-200">support (N1 à N3)</strong> tout en contribuant progressivement à l'évolution de l'architecture.
                 </p>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-[15px]">
-                  Encadré par un <strong className="text-violet-700 dark:text-violet-200">tuteur exceptionnel</strong>, je puise dans un <strong className="text-violet-700 dark:text-violet-200">backlog de projets constant</strong> pour monter en compétence.
+                  Bénéficiant d'un encadrement orienté vers la montée en compétences, j'interviens sur des périmètres variés pour consolider mes bases techniques.
                 </p>
                 
                 <ul className="grid grid-cols-1 gap-3 pt-2">
                     {[
-                        { icon: Server, text: "Admin Sys : AD (AGDLP/GPO/NTFS) & Cloud" },
-                        { icon: Network, text: "Réseau : Switching, VLANs, DHCP & Infra Hybride" },
-                        { icon: ShieldCheck, text: "Sécurité : Audits de comptes, Veille & Hardening" },
-                        { icon: Users, text: "Projets : Coordination prestataires & Support N1/2/3" },
+                        { icon: Server, text: "Bases Admin Sys : AD (AGDLP/GPO), gestion NTFS & Cloud" },
+                        { icon: Network, text: "Maintenance Réseau : Switching, VLANs & DHCP" },
+                        { icon: ShieldCheck, text: "Veille Sécurité : Audits de comptes & Hardening" },
+                        { icon: Users, text: "Accompagnement : Support utilisateur & suivi prestataires" },
                     ].map((item, idx) => (
                         <li key={idx} className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300 bg-white dark:bg-[#13131a] p-3 rounded-lg border border-gray-200 dark:border-white/5 hover:border-violet-500/30 transition-colors">
                             <item.icon className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />
@@ -135,7 +134,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                   <div className="absolute inset-0 bg-violet-500/5 opacity-0 group-hover/stack:opacity-100 transition-opacity"></div>
                   <h4 className="text-violet-700 dark:text-violet-100 font-semibold mb-4 flex items-center gap-2 uppercase text-sm tracking-wider relative z-10">
                   <Cpu className="w-4 h-4 text-blue-500 dark:text-blue-400" />
-                  Stack Technique
+                  Outils découverts
                 </h4>
                   <div className="flex flex-wrap gap-2 relative z-10">
                     {[
@@ -160,22 +159,22 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                     <div className="p-2 bg-blue-500/10 rounded-lg">
                       <Terminal className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                     </div>
-                    Proactivité & Projets Personnels
+                    Travail personnel & Veille
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                    En parallèle de mon alternance, je maintiens une <strong className="text-blue-600 dark:text-blue-300">routine de révision quotidienne</strong>. Autodidacte par conviction, je développe mes propres projets personnels pour confronter la théorie à la pratique.
+                    L'informatique évolue vite, c'est pourquoi je consacre une partie de mon temps libre à <strong className="text-blue-600 dark:text-blue-300">consolider mes acquis</strong>. Mon approche est simple : comprendre le fonctionnement d'une technologie avant d'apprendre à la sécuriser.
                 </p>
                 
                 <div className="grid grid-cols-1 gap-4">
                     <div className="bg-white dark:bg-[#13131a] p-5 rounded-xl border border-gray-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-500/5 transition-all">
                         <span className="text-xs text-blue-600 dark:text-blue-400 uppercase font-extrabold tracking-wider flex items-center gap-2">
                             <BookOpen className="w-3.5 h-3.5" />
-                            En préparation
+                            Axes de progression actuels
                         </span>
-                        <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
-                            <span className="bg-gray-50 dark:bg-[#1a1a20] p-2 rounded text-gray-700 dark:text-white font-semibold text-xs border border-gray-200 dark:border-white/5 flex items-center justify-center text-center">Microsoft Cloud</span>
-                            <span className="bg-gray-50 dark:bg-[#1a1a20] p-2 rounded text-gray-700 dark:text-white font-semibold text-xs border border-gray-200 dark:border-white/5 flex items-center justify-center text-center">CCNA (Réseau)</span>
-                            <span className="bg-gray-50 dark:bg-[#1a1a20] p-2 rounded text-gray-700 dark:text-white font-semibold text-xs border border-gray-200 dark:border-white/5 flex items-center justify-center text-center">OSCP (Offensive)</span>
+                        <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2 text-center">
+                            <span className="bg-gray-50 dark:bg-[#1a1a20] p-2 rounded text-gray-700 dark:text-white font-semibold text-xs border border-gray-200 dark:border-white/5">Exploration M365</span>
+                            <span className="bg-gray-50 dark:bg-[#1a1a20] p-2 rounded text-gray-700 dark:text-white font-semibold text-xs border border-gray-200 dark:border-white/5">Réseau (CCNA)</span>
+                            <span className="bg-gray-50 dark:bg-[#1a1a20] p-2 rounded text-gray-700 dark:text-white font-semibold text-xs border border-gray-200 dark:border-white/5">Sécurité Offensive</span>
                         </div>
                     </div>
                 </div>
@@ -184,15 +183,12 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
             <div className="bg-gray-50 dark:bg-[#1a1a20] p-8 rounded-2xl border border-gray-200 dark:border-violet-500/10 hover:border-violet-500/30 transition-all duration-300 flex flex-col justify-center">
                 <h3 className="text-sm font-bold text-gray-700 dark:text-gray-200 uppercase mb-6 flex items-center gap-3 tracking-wider">
                     <Award className="w-5 h-5 text-yellow-500" />
-                    Certifications Validées
+                    Étapes validées
                 </h3>
                 <ul className="space-y-4">
                     <li className="flex items-center justify-between p-3 bg-white dark:bg-[#13131a] rounded-xl border border-gray-200 dark:border-white/5 hover:border-green-500/30 transition-all group/item">
                         <span className="text-gray-700 dark:text-gray-100 font-medium">HTB CPTS</span>
-                        <div className="flex items-center gap-2">
-                            <span className="text-[10px] bg-green-500/10 text-green-600 dark:text-green-400 px-2 py-0.5 rounded border border-green-500/20 opacity-0 group-hover/item:opacity-100 transition-opacity">Expert</span>
-                            <CheckCircle2 className="w-5 h-5 text-green-500" />
-                        </div>
+                        <CheckCircle2 className="w-5 h-5 text-green-500" />
                     </li>
                     <li className="flex items-center justify-between p-3 bg-white dark:bg-[#13131a] rounded-xl border border-gray-200 dark:border-white/5 hover:border-green-500/30 transition-all">
                         <span className="text-gray-700 dark:text-gray-100 font-medium">eJPTv2</span>
@@ -212,18 +208,18 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                 <div className="p-2 bg-violet-500/10 rounded-lg">
                  <Network className="w-6 h-6 text-violet-600 dark:text-violet-500" />
                 </div>
-                Mon Background : De la Fibre à l'IT
+                Mon parcours : Du terrain vers les systèmes
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div className="space-y-6">
                     <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                        Avant de basculer dans le monde du système et de la cyber, j'ai été technicien fibre optique terrain. Cette expérience a façonné ma méthodologie : <strong className="text-violet-700 dark:text-violet-200">il n'y a pas de place pour l'approximation</strong>.
+                        Anciennement technicien fibre optique, mon passage par le terrain m'a enseigné la valeur de la <strong className="text-violet-700 dark:text-violet-200">rigueur méthodologique</strong>. J'ai appris que la fiabilité d'un service dépend avant tout de la précision apportée à sa mise en œuvre physique et logique.
                     </p>
                     <div className="bg-gray-50 dark:bg-[#1a1a20] p-6 rounded-2xl border border-gray-200 dark:border-white/5 hover:border-violet-500/20 transition-all">
-                        <h4 className="text-gray-900 dark:text-white font-semibold text-sm mb-4 uppercase tracking-wider">Acquis de terrain :</h4>
+                        <h4 className="text-gray-900 dark:text-white font-semibold text-sm mb-4 uppercase tracking-wider">Principes retenus :</h4>
                         <ul className="grid grid-cols-2 gap-y-3 gap-x-4">
-                            {['Gestion du stress', 'Travail d\'équipe', 'Rigueur & Précision', 'Autonomie'].map((skill) => (
+                            {['Méthodologie d\'audit', 'Travail collaboratif', 'Sens du détail', 'Gestion de l\'imprévu'].map((skill) => (
                                 <li key={skill} className="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 font-medium">
                                     <div className="w-2 h-2 rounded-sm bg-violet-500 shadow-[0_0_5px_rgba(139,92,246,0.5)]"></div>
                                     {skill}
@@ -240,7 +236,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                                 <Lightbulb className="w-6 h-6 text-yellow-600 dark:text-yellow-500" />
                             </div>
                             <div>
-                            <h4 className="font-bold text-gray-900 dark:text-white">Philosophie</h4>
+                            <h4 className="font-bold text-gray-900 dark:text-white">Philosophie de travail</h4>
                             <p className="text-yellow-700/80 dark:text-yellow-200/80 italic mt-2 text-lg font-medium">
                                 "Une journée sans apprendre est une journée perdue."
                             </p>
@@ -253,9 +249,9 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                                 <Target className="w-6 h-6 text-red-600 dark:text-red-500" />
                             </div>
                             <div>
-                            <h4 className="font-bold text-gray-900 dark:text-white">Objectif Long Terme</h4>
+                            <h4 className="font-bold text-gray-900 dark:text-white">Objectif professionnel</h4>
                             <p className="text-gray-600 dark:text-gray-300 mt-2 leading-relaxed">
-                                Devenir <strong>Expert Pentester / Red Team</strong> en capitalisant sur la double compétence : Infra Réelle + Expertise Offensive.
+                                Évoluer vers les métiers de l'<strong>audit de sécurité et du pentest</strong>, en m'appuyant sur une connaissance solide des infrastructures réelles.
                             </p>
                             </div>
                         </div>
