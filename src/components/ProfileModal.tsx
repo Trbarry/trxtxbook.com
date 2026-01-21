@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { 
   Briefcase, Target, Lightbulb, Server, Cpu, Network,
-  Terminal, Award, CheckCircle2, ArrowUpRight, X, BookOpen, ShieldCheck, Users,
-  Database, Lock, Cloud, Activity
+  Terminal, Award, CheckCircle2, X, BookOpen, ShieldCheck, 
+  Lock, Cloud, Activity, Globe
 } from 'lucide-react';
 
 interface ProfileModalProps {
   onClose: () => void;
 }
 
-// Structuration des compétences pour une meilleure lisibilité technique
 const techStack = [
   { label: 'AD DS & Entra ID', category: 'Identity' },
   { label: 'GPO Hardening', category: 'Governance' },
@@ -80,7 +79,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
               </span>
               <span className="flex items-center gap-1.5 bg-blue-500/10 text-blue-700 dark:text-blue-200 px-4 py-1.5 rounded-full text-sm font-semibold border border-blue-500/20">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                Cybersecurity Aspirant
+                Cybersecurity & Pentest
               </span>
             </div>
           </div>
@@ -113,7 +112,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                 </span>
-                Active Learning
+                Active Role
               </div>
             </div>
 
@@ -122,19 +121,19 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                 <div>
                   <h4 className="text-violet-700 dark:text-violet-300 font-bold flex items-center gap-2 uppercase text-xs tracking-[0.2em] mb-3">
                     <Activity className="w-4 h-4" />
-                    Missions & Immersion
+                    Focus Infra & Sécurité
                   </h4>
                   <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-[15px]">
-                    Au sein du pôle infrastructure, je participe au maintien en condition opérationnelle (**MCO**) d'un parc multi-sites. Mon apprentissage se concentre sur la sécurisation des accès et la transition vers une gestion hybride des identités.
+                    Au sein d'une infrastructure multi-sites, j'interviens sur le maintien opérationnel (**MCO**) et le durcissement (**Hardening**) des systèmes. Mon rôle inclut la gestion hybride des identités et la segmentation réseau.
                   </p>
                 </div>
                 
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {[
                     { icon: Lock, text: "Identity Management : AD DS, Entra ID & RBAC" },
-                    { icon: Server, text: "Admin Sys : Déploiement WDS, GPO Hardening" },
-                    { icon: Network, text: "Infrastructure : Switching & Segmentation L2/L3" },
-                    { icon: Cloud, text: "Modern Workplace : Intune & M365 Governance" },
+                    { icon: Server, text: "Admin Sys : GPO Hardening & WDS Deployment" },
+                    { icon: Network, text: "Network : VLAN Segmentation & L2/L3 Switching" },
+                    { icon: Cloud, text: "Cloud : Intune (MDM/MAM) & M365 Security" },
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300 bg-white dark:bg-[#13131a] p-4 rounded-xl border border-gray-200 dark:border-white/5 hover:border-violet-500/30 transition-all">
                       <item.icon className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />
@@ -148,7 +147,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                   <div className="absolute inset-0 bg-violet-500/5 opacity-0 group-hover/stack:opacity-100 transition-opacity"></div>
                   <h4 className="text-violet-700 dark:text-violet-300 font-bold mb-5 flex items-center gap-2 uppercase text-xs tracking-[0.2em] relative z-10">
                     <Cpu className="w-4 h-4" />
-                    Technical Stack
+                    Stack Technologique
                   </h4>
                   <div className="flex flex-wrap gap-2 relative z-10">
                     {techStack.map((tech) => (
@@ -169,33 +168,37 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                   <div className="p-2 bg-blue-500/10 rounded-lg">
                     <Terminal className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                   </div>
-                  Self-Learning & Pentest Lab
+                  Laboratoire & Auto-formation
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-                  Passionné par la **Sécurité Offensive**, je développe mes méthodologies d'audit sur des plateformes comme HTB et TryHackMe. Mon focus actuel est la **Post-Exploitation Windows** et les vulnérabilités Active Directory.
+                  Détenteur de la **CPTS**, je poursuis mon apprentissage vers l'expertise réseau et offensive. Mon environnement de prédilection est **Exegol** pour la versatilité des outils de pentest.
                 </p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="bg-white dark:bg-[#13131a] p-5 rounded-xl border border-gray-200 dark:border-white/5">
+                  <div className="bg-white dark:bg-[#13131a] p-5 rounded-xl border border-gray-200 dark:border-white/5 group/box">
                     <span className="text-[10px] text-blue-600 dark:text-blue-400 uppercase font-black tracking-widest flex items-center gap-2 mb-4">
-                      <BookOpen className="w-3.5 h-3.5" />
-                      Focus Études
+                      <Globe className="w-3.5 h-3.5" />
+                      Objectif Networking
                     </span>
                     <div className="space-y-2">
-                      <p className="text-sm font-bold text-gray-800 dark:text-gray-200">• CCNA Preparation</p>
-                      <p className="text-sm font-bold text-gray-800 dark:text-gray-200">• Active Directory Attacks</p>
-                      <p className="text-sm font-bold text-gray-800 dark:text-gray-200">• Python for Cyber</p>
+                      <p className="text-sm font-bold text-gray-800 dark:text-gray-200 flex items-center justify-between">
+                        CCNA Preparation
+                        <span className="text-[10px] bg-blue-500/10 text-blue-500 px-1.5 py-0.5 rounded">In Progress</span>
+                      </p>
+                      <p className="text-[11px] text-gray-500 italic leading-snug">Routage statique/dynamique, STP, VLAN Trunking & ACLs.</p>
                     </div>
                   </div>
                   <div className="bg-white dark:bg-[#13131a] p-5 rounded-xl border border-gray-200 dark:border-white/5">
-                    <span className="text-[10px] text-emerald-600 dark:text-emerald-400 uppercase font-black tracking-widest flex items-center gap-2 mb-4">
+                    <span className="text-[10px] text-red-600 dark:text-red-400 uppercase font-black tracking-widest flex items-center gap-2 mb-4">
                       <Target className="w-3.5 h-3.5" />
-                      Labs & Practice
+                      Objectif Offensive
                     </span>
                     <div className="space-y-2">
-                      <p className="text-sm font-bold text-gray-800 dark:text-gray-200">• Exegol Environment</p>
-                      <p className="text-sm font-bold text-gray-800 dark:text-gray-200">• HTB Machines (Medium+)</p>
-                      <p className="text-sm font-bold text-gray-800 dark:text-gray-200">• PortSwigger Academy</p>
+                      <p className="text-sm font-bold text-gray-800 dark:text-gray-200 flex items-center justify-between">
+                        OSCP (PEN-200)
+                        <span className="text-[10px] bg-red-500/10 text-red-500 px-1.5 py-0.5 rounded">In Progress</span>
+                      </p>
+                      <p className="text-[11px] text-gray-500 italic leading-snug">Exploitation d'infrastructures, PrivEsc avancée & Post-Exploit.</p>
                     </div>
                   </div>
                 </div>
@@ -204,28 +207,24 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
             <div className="bg-gray-50 dark:bg-[#1a1a20] p-8 rounded-2xl border border-gray-200 dark:border-violet-500/10 flex flex-col">
                 <h3 className="text-[11px] font-black text-gray-500 dark:text-gray-400 uppercase mb-6 flex items-center gap-3 tracking-[0.2em]">
                   <Award className="w-5 h-5 text-yellow-500" />
-                  Certifications
+                  Validated Credentials
                 </h3>
                 <ul className="space-y-3">
                     {[
-                      { name: "HTB CPTS", status: "Ongoing", color: "text-violet-500" },
+                      { name: "HTB CPTS", status: "Certified", color: "text-green-500" },
                       { name: "eJPTv2", status: "Certified", color: "text-green-500" },
                       { name: "Microsoft AZ-900", status: "Certified", color: "text-green-500" }
                     ].map((cert, i) => (
-                      <li key={i} className="flex items-center justify-between p-4 bg-white dark:bg-[#13131a] rounded-xl border border-gray-200 dark:border-white/5 group/item transition-all hover:scale-[1.02]">
+                      <li key={i} className="flex items-center justify-between p-4 bg-white dark:bg-[#13131a] rounded-xl border border-gray-200 dark:border-white/5 transition-all hover:border-violet-500/30">
                         <span className="text-gray-800 dark:text-gray-100 font-bold text-sm">{cert.name}</span>
-                        {cert.status === "Certified" ? (
-                          <CheckCircle2 className="w-5 h-5 text-green-500" />
-                        ) : (
-                          <span className="text-[9px] font-black uppercase px-2 py-1 bg-violet-500/10 text-violet-500 rounded border border-violet-500/20">Learning</span>
-                        )}
+                        <CheckCircle2 className={`w-5 h-5 ${cert.color}`} />
                       </li>
                     ))}
                 </ul>
             </div>
         </div>
 
-        {/* SECTION 3 : PHILOSOPHIE & PARCOURS */}
+        {/* SECTION 3 : PHILOSOPHIE */}
         <div className="border-t border-gray-200 dark:border-white/10 pt-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div>
@@ -233,27 +232,19 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                       <div className="p-2 bg-violet-500/10 rounded-lg">
                         <Network className="w-6 h-6 text-violet-600 dark:text-violet-500" />
                       </div>
-                      Background & Rigueur
+                      Transition Professionnelle
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed italic">
-                      "Mon expérience dans le déploiement de fibre optique m'a forgé une discipline de terrain : la sécurité logique d'un système ne vaut rien sans une infrastructure physique irréprochable et une méthodologie d'audit stricte."
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                      Issu du terrain (fibre optique), j'applique une rigueur de technicien aux problématiques logiques complexes. Mon approche repose sur la compréhension profonde des couches basses pour mieux sécuriser les couches hautes.
                     </p>
-                    <div className="mt-8 flex flex-wrap gap-4">
-                      {['Méthodologie Audit', 'Esprit d\'Analyse', 'Adaptabilité'].map(trait => (
-                        <div key={trait} className="flex items-center gap-2 px-3 py-1 bg-violet-500/5 border border-violet-500/10 rounded-md">
-                          <div className="w-1.5 h-1.5 rounded-full bg-violet-500" />
-                          <span className="text-xs font-bold text-gray-600 dark:text-violet-200">{trait}</span>
-                        </div>
-                      ))}
-                    </div>
                 </div>
 
                 <div className="space-y-6">
-                    <div className="bg-gradient-to-r from-yellow-500/5 to-transparent p-6 rounded-2xl border border-yellow-500/10 relative overflow-hidden">
+                    <div className="bg-gradient-to-r from-yellow-500/5 to-transparent p-6 rounded-2xl border border-yellow-500/10">
                         <div className="flex items-start gap-4">
                             <Lightbulb className="w-6 h-6 text-yellow-600 mt-1 shrink-0" />
                             <div>
-                              <h4 className="font-bold text-gray-900 dark:text-white text-sm uppercase tracking-wider">Mindset</h4>
+                              <h4 className="font-bold text-gray-900 dark:text-white text-sm uppercase tracking-wider">Philosophie</h4>
                               <p className="text-yellow-700/80 dark:text-yellow-200/80 italic mt-2 text-lg font-serif">
                                 « Une journée sans apprendre est une journée perdue. »
                               </p>
@@ -261,13 +252,13 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                         </div>
                     </div>
                     
-                    <div className="bg-gradient-to-r from-red-500/5 to-transparent p-6 rounded-2xl border border-red-500/10">
+                    <div className="bg-gradient-to-r from-violet-500/5 to-transparent p-6 rounded-2xl border border-violet-500/10">
                         <div className="flex items-start gap-4">
-                            <Target className="w-6 h-6 text-red-600 mt-1 shrink-0" />
+                            <Target className="w-6 h-6 text-violet-600 mt-1 shrink-0" />
                             <div>
-                              <h4 className="font-bold text-gray-900 dark:text-white text-sm uppercase tracking-wider">Objectif 2027</h4>
+                              <h4 className="font-bold text-gray-900 dark:text-white text-sm uppercase tracking-wider">Vision Long Terme</h4>
                               <p className="text-gray-600 dark:text-gray-300 mt-2 text-sm leading-relaxed">
-                                Devenir un expert en **Sécurité des Systèmes d'Information**, capable d'allier expertise technique (Pentest) et vision stratégique de l'infrastructure.
+                                Expertise en **Red Teaming** & **Audit de Sécurité**. Allier la maîtrise des infrastructures hybrides à la capacité d'évaluer leur résilience.
                               </p>
                             </div>
                         </div>
