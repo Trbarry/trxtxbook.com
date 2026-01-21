@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { 
   Briefcase, Target, Lightbulb, Server, Cpu, Network,
-  Terminal, Award, CheckCircle2, ArrowUpRight, X, Home, BookOpen, ShieldCheck, Users
+  Terminal, Award, CheckCircle2, ArrowUpRight, X, BookOpen, ShieldCheck, Users
 } from 'lucide-react';
 
 interface ProfileModalProps {
@@ -34,14 +34,12 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
   };
 
   return (
-    // Overlay toujours sombre pour le focus
     <div 
       className={`fixed inset-0 bg-black/60 backdrop-blur-md z-[60] flex items-center justify-center p-4 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
       onClick={handleOverlayClick}
     >
       <div 
         data-lenis-prevent
-        // ✅ CHANGEMENT : bg-surface
         className={`bg-surface dark:bg-[#0f0f13] rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto border border-gray-200 dark:border-violet-500/20 shadow-2xl p-6 custom-scrollbar relative transform transition-all duration-300 ${isVisible ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'}`}
       >
         
@@ -134,12 +132,12 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
               </div>
               
               <div className="md:col-span-2 bg-white/50 dark:bg-[#13131a]/80 rounded-2xl p-6 border border-gray-200 dark:border-white/10 flex flex-col justify-center hover:border-violet-500/30 transition-all relative overflow-hidden group/stack">
-                 <div className="absolute inset-0 bg-violet-500/5 opacity-0 group-hover/stack:opacity-100 transition-opacity"></div>
-                 <h4 className="text-violet-700 dark:text-violet-100 font-semibold mb-4 flex items-center gap-2 uppercase text-sm tracking-wider relative z-10">
+                  <div className="absolute inset-0 bg-violet-500/5 opacity-0 group-hover/stack:opacity-100 transition-opacity"></div>
+                  <h4 className="text-violet-700 dark:text-violet-100 font-semibold mb-4 flex items-center gap-2 uppercase text-sm tracking-wider relative z-10">
                   <Cpu className="w-4 h-4 text-blue-500 dark:text-blue-400" />
                   Stack Technique
                 </h4>
-                 <div className="flex flex-wrap gap-2 relative z-10">
+                  <div className="flex flex-wrap gap-2 relative z-10">
                     {[
                       'Active Directory', 'GPO', 'AGDLP', 'NTFS', 
                       'Azure / M365', 'Entra ID', 'Intune', 
@@ -149,7 +147,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                             {tech}
                         </span>
                     ))}
-                 </div>
+                  </div>
               </div>
             </div>
           </div>
@@ -165,28 +163,19 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                     Proactivité & Projets Personnels
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                    En parallèle de mon alternance, je maintiens une <strong className="text-blue-600 dark:text-blue-300">routine de révision quotidienne</strong>. Autodidacte par conviction, je développe mes propres <strong className="text-blue-600 dark:text-blue-300">projets personnels</strong>.
+                    En parallèle de mon alternance, je maintiens une <strong className="text-blue-600 dark:text-blue-300">routine de révision quotidienne</strong>. Autodidacte par conviction, je développe mes propres projets personnels pour confronter la théorie à la pratique.
                 </p>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="bg-white dark:bg-[#13131a] p-5 rounded-xl border border-gray-200 dark:border-white/5 hover:border-violet-500/30 hover:bg-violet-500/5 transition-all">
-                        <span className="text-xs text-violet-600 dark:text-violet-400 uppercase font-extrabold tracking-wider flex items-center gap-2">
-                            <Home className="w-3.5 h-3.5" />
-                            Laboratoire
-                        </span>
-                        <p className="text-gray-900 dark:text-white font-semibold mt-2">Home Lab Active Directory & Pentest</p>
-                        <p className="text-gray-500 text-xs mt-1">Simulations d'attaques & Défense</p>
-                    </div>
-
+                <div className="grid grid-cols-1 gap-4">
                     <div className="bg-white dark:bg-[#13131a] p-5 rounded-xl border border-gray-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-500/5 transition-all">
                         <span className="text-xs text-blue-600 dark:text-blue-400 uppercase font-extrabold tracking-wider flex items-center gap-2">
                             <BookOpen className="w-3.5 h-3.5" />
                             En préparation
                         </span>
-                        <div className="mt-2 flex flex-col gap-1">
-                            <span className="text-gray-700 dark:text-white font-semibold text-sm">• Microsoft Cloud</span>
-                            <span className="text-gray-700 dark:text-white font-semibold text-sm">• CCNA (Réseau)</span>
-                            <span className="text-gray-700 dark:text-white font-semibold text-sm">• OSCP (Offensive)</span>
+                        <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                            <span className="bg-gray-50 dark:bg-[#1a1a20] p-2 rounded text-gray-700 dark:text-white font-semibold text-xs border border-gray-200 dark:border-white/5 flex items-center justify-center text-center">Microsoft Cloud</span>
+                            <span className="bg-gray-50 dark:bg-[#1a1a20] p-2 rounded text-gray-700 dark:text-white font-semibold text-xs border border-gray-200 dark:border-white/5 flex items-center justify-center text-center">CCNA (Réseau)</span>
+                            <span className="bg-gray-50 dark:bg-[#1a1a20] p-2 rounded text-gray-700 dark:text-white font-semibold text-xs border border-gray-200 dark:border-white/5 flex items-center justify-center text-center">OSCP (Offensive)</span>
                         </div>
                     </div>
                 </div>
@@ -274,7 +263,6 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                 </div>
             </div>
         </div>
-
       </div>
     </div>
   );
