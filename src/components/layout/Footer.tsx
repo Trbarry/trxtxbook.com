@@ -7,7 +7,8 @@ import {
   Shield, 
   Cpu, 
   Activity,
-  GitBranch 
+  GitBranch,
+  ExternalLink // Ajouté pour le style
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -15,9 +16,7 @@ export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    // ✅ CHANGEMENT : Fond dynamique et bordure adaptée
     <footer className="bg-surface dark:bg-[#0f0f13] border-t border-gray-200 dark:border-violet-900/20 relative overflow-hidden transition-colors duration-300">
-      {/* Effet de fond subtil (gardé mais ajusté pour être visible/discret) */}
       <div className="absolute top-0 left-1/4 w-96 h-1 bg-gradient-to-r from-transparent via-violet-500/50 to-transparent blur-sm" />
 
       <div className="container mx-auto px-6 py-12">
@@ -37,7 +36,6 @@ export const Footer: React.FC = () => {
               Alternant Technicien Système & Réseau passionné par la Cybersécurité offensive. 
               Construction de laboratoires, CTF et sécurisation d'infrastructures.
             </p>
-            {/* Stack Technique */}
             <div className="flex items-center gap-2 text-xs text-gray-500 pt-2">
                 <Cpu className="w-3 h-3" />
                 <span>Propulsé par React • Vite • Tailwind • Supabase</span>
@@ -78,7 +76,7 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Colonne 3 : Connexion */}
+          {/* Colonne 3 : Réseaux */}
           <div>
             <h3 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <Shield className="w-4 h-4 text-blue-500" />
@@ -110,9 +108,18 @@ export const Footer: React.FC = () => {
 
         {/* Footer Bottom */}
         <div className="border-t border-gray-200 dark:border-white/5 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-gray-500">
-                © {currentYear} Tristan Barry. Tous droits réservés.
-            </p>
+            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+                <p className="text-xs text-gray-500">
+                    © {currentYear} Tristan Barry. Tous droits réservés.
+                </p>
+                {/* AJOUT : Lien Mentions Légales */}
+                <Link 
+                  to="/mentions-legales" 
+                  className="text-xs text-gray-500 hover:text-violet-600 dark:hover:text-violet-400 transition-colors underline decoration-gray-500/30 underline-offset-4"
+                >
+                  Mentions Légales
+                </Link>
+            </div>
             
             <div className="flex items-center gap-6">
                 <Link 
