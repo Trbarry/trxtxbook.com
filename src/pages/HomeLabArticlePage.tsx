@@ -1,7 +1,71 @@
 import React from 'react';
-import { Cpu, Network, Shield, Zap, Box, Layers, ArrowLeft, Code } from 'lucide-react';
+import { Cpu, Network, Shield, Zap, Box, Layers, ArrowLeft, Code, Tv, Activity } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { useNavigate } from 'react-router-dom';
+
+// Infographie technique du pipeline Hyperion
+const HyperionFlowVisual = () => (
+  <div className="my-12 p-8 bg-[#0a0a0f] rounded-2xl border border-white/5 relative overflow-hidden shadow-2xl">
+    <div className="absolute top-0 right-0 p-4 opacity-5">
+      <Activity className="w-32 h-32 text-violet-500" />
+    </div>
+    
+    <svg viewBox="0 0 800 300" className="w-full h-auto">
+      {/* Grilles de fond */}
+      <defs>
+        <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0" />
+          <stop offset="50%" stopColor="#8b5cf6" stopOpacity="1" />
+          <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      {/* Chemins de flux (Animation) */}
+      <path d="M150 150 H 650" stroke="url(#flowGradient)" strokeWidth="2" fill="none">
+        <animate attributeName="stroke-dasharray" from="0, 800" to="800, 0" dur="3s" repeatCount="indefinite" />
+      </path>
+
+      {/* Nœud 1: Source */}
+      <rect x="50" y="110" width="120" height="80" rx="8" fill="#1a1a1f" stroke="#333" />
+      <text x="110" y="145" textAnchor="middle" fill="#fff" fontSize="12" fontWeight="bold">SHIELD PRO</text>
+      <text x="110" y="165" textAnchor="middle" fill="#8b5cf6" fontSize="10" fontFamily="monospace">4K HDR Signal</text>
+
+      {/* Nœud 2: Splitter/Downscaler */}
+      <circle cx="280" cy="150" r="45" fill="#1a1a1f" stroke="#8b5cf6" strokeWidth="2" filter="url(#glow)" />
+      <text x="280" y="145" textAnchor="middle" fill="#fff" fontSize="11" fontWeight="bold">SPLITTER</text>
+      <text x="280" y="160" textAnchor="middle" fill="#aaa" fontSize="9">Hardware</text>
+      <text x="280" y="170" textAnchor="middle" fill="#aaa" fontSize="9">Downscale</text>
+
+      {/* Nœud 3: Hyperion (LXC) */}
+      <rect x="420" y="110" width="140" height="80" rx="8" fill="#1a1a1f" stroke="#8b5cf6" strokeWidth="2" filter="url(#glow)" />
+      <text x="490" y="140" textAnchor="middle" fill="#fff" fontSize="12" fontWeight="bold">HYPERION.NG</text>
+      <text x="490" y="155" textAnchor="middle" fill="#8b5cf6" fontSize="10" fontFamily="monospace">LXC Container</text>
+      <text x="490" y="175" textAnchor="middle" fill="#aaa" fontSize="9">Tone Mapping L7</text>
+
+      {/* Nœud 4: ESP32 */}
+      <rect x="630" y="110" width="120" height="80" rx="8" fill="#1a1a1f" stroke="#333" />
+      <text x="690" y="145" textAnchor="middle" fill="#fff" fontSize="12" fontWeight="bold">ESP32 / WLED</text>
+      <text x="690" y="165" textAnchor="middle" fill="#orange" fontSize="10" fontFamily="monospace">DDP Protocol</text>
+
+      {/* Légendes flèches */}
+      <text x="215" y="130" textAnchor="middle" fill="#555" fontSize="8" fontWeight="bold">HDMI 2.0</text>
+      <text x="365" y="130" textAnchor="middle" fill="#555" fontSize="8" fontWeight="bold">USB GRABBER</text>
+      <text x="595" y="130" textAnchor="middle" fill="#555" fontSize="8" fontWeight="bold">UDP 4048</text>
+    </svg>
+    
+    <div className="grid grid-cols-3 gap-4 mt-6 text-[10px] font-mono uppercase tracking-widest text-gray-500">
+      <div className="text-center">Input Stage</div>
+      <div className="text-center text-violet-400">Processing Stage</div>
+      <div className="text-center">Output Stage</div>
+    </div>
+  </div>
+);
 
 const HomeLabArticlePage = () => {
   const navigate = useNavigate();
@@ -43,6 +107,7 @@ const HomeLabArticlePage = () => {
               Le choix du <strong>Lenovo ThinkCentre M720q Tiny</strong> est dicté par le pragmatisme technique. Équipé d'un <strong>Intel Core i5-8400T</strong>, ce nœud offre le ratio idéal entre consommation électrique et capacités de virtualisation pour un environnement tournant 24/7.
             </p>
 
+            {/* VISUEL : LENOVO TINY */}
             <div className="my-10 group relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
               <img 
@@ -74,6 +139,7 @@ const HomeLabArticlePage = () => {
               </div>
             </div>
 
+            {/* VISUEL : PROXMOX DASHBOARD */}
             <div className="my-10 p-2 bg-black/50 rounded-2xl border border-white/5 shadow-inner">
               <img 
                 src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/proxmox.webp" 
@@ -113,34 +179,34 @@ const HomeLabArticlePage = () => {
             </p>
             
             <p className="mt-4">
-              Cette surveillance n'est pas passive : elle sert à détecter des anomalies de comportement et à ajuster les politiques de <strong>Traffic Shaping</strong> pour garantir que le flux 4K HDR reste prioritaire sur les flux de fond.
+              Cette surveillance n'est pas passive : elle sert à détecter des anomalies de comportement (ex: un ESP32 tentant de joindre le VLAN de Management) et à ajuster les politiques de <strong>Traffic Shaping</strong> pour garantir que le flux 4K HDR reste prioritaire sur les mises à jour système en arrière-plan.
             </p>
 
-            {/* Focus ZenArmor */}
+            {/* Focus ZenArmor (NGFW) */}
             <div className="bg-[#1a1a1f] p-8 rounded-2xl border border-violet-500/20 my-12 relative overflow-hidden">
               <div className="absolute top-0 right-0 p-3 bg-violet-600/20 text-violet-400 text-[10px] font-bold uppercase tracking-widest">Next-Gen Filtering</div>
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <Shield className="w-6 h-6 text-violet-500" /> L7 Protection : ZenArmor (Sensei)
               </h3>
               <p className="text-sm text-gray-400 mb-6">
-                Là où un firewall standard s'arrête à l'IP et au Port, <strong>ZenArmor</strong> apporte une inspection de niveau <strong>Layer 7</strong>. C'est le cerveau de l'analyse comportementale du lab.
+                Là où un firewall standard s'arrête à l'IP et au Port, <strong>ZenArmor</strong> apporte une inspection de niveau <strong>Layer 7 (Application Layer)</strong>. C'est le cerveau de l'analyse comportementale du lab.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                 <div className="p-4 bg-black/40 rounded-lg border border-white/5">
                   <span className="text-violet-400 font-bold block mb-1">Application Control</span>
-                  Identification des flux chiffrés (TLS SNI) pour bloquer les services indésirables ou les trackers IoT.
+                  Identification des flux chiffrés (TLS SNI) pour bloquer les services indésirables ou les trackers IoT sans casser le chiffrement.
                 </div>
                 <div className="p-4 bg-black/40 rounded-lg border border-white/5">
                   <span className="text-violet-400 font-bold block mb-1">Web Content Filtering</span>
-                  Protection contre le <strong>Malware</strong> et le <strong>Phishing</strong> via une base de réputation en temps réel.
+                  Protection contre le <strong>Malware</strong> et le <strong>Phishing</strong> via une base de réputation mise à jour en temps réel, isolant les cibles vulnérables du lab.
                 </div>
                 <div className="p-4 bg-black/40 rounded-lg border border-white/5">
                   <span className="text-violet-400 font-bold block mb-1">Advanced Reporting</span>
-                  Génération de dashboards précis sur l'usage des ressources réseau, essentiels pour le diagnostic.
+                  Génération de dashboards précis sur l'usage des ressources réseau, essentiels pour le diagnostic de latence dans le pipeline vidéo.
                 </div>
                 <div className="p-4 bg-black/40 rounded-lg border border-white/5">
                   <span className="text-violet-400 font-bold block mb-1">Threat Intelligence</span>
-                  Blocage automatique des adresses IP connues pour être des nœuds de botnets.
+                  Blocage automatique des adresses IP connues pour être des nœuds de botnets ou des scanners offensifs.
                 </div>
               </div>
             </div>
@@ -149,7 +215,7 @@ const HomeLabArticlePage = () => {
               <div className="p-5 bg-[#1a1a1f] border border-white/5 rounded-xl hover:border-violet-500/30 transition-colors">
                 <span className="text-violet-400 font-mono text-[10px] font-bold uppercase tracking-widest">VLAN 10</span>
                 <h4 className="text-white font-bold mt-1">Management</h4>
-                <p className="text-[11px] mt-2 text-gray-400">Interfaces d'administration. Accès <strong>Key-auth</strong> uniquement.</p>
+                <p className="text-[11px] mt-2 text-gray-400">Interfaces d'administration. Accès via <strong>Key-auth</strong> SSH uniquement.</p>
               </div>
               <div className="p-5 bg-[#1a1a1f] border border-white/5 rounded-xl hover:border-violet-500/30 transition-colors">
                 <span className="text-violet-400 font-mono text-[10px] font-bold uppercase tracking-widest">VLAN 20</span>
@@ -159,7 +225,7 @@ const HomeLabArticlePage = () => {
               <div className="p-5 bg-[#1a1a1f] border border-white/5 rounded-xl hover:border-violet-500/30 transition-colors">
                 <span className="text-violet-400 font-mono text-[10px] font-bold uppercase tracking-widest">VLAN 30</span>
                 <h4 className="text-white font-bold mt-1">IoT / Ambilight</h4>
-                <p className="text-[11px] mt-2 text-gray-400"><strong>No WAN access</strong>. Isolé par ZenArmor pour limiter le mouvement latéral.</p>
+                <p className="text-[11px] mt-2 text-gray-400">{"No WAN access"}. Isolé par ZenArmor pour limiter le <strong>lateral movement</strong>.</p>
               </div>
             </div>
 
@@ -167,16 +233,15 @@ const HomeLabArticlePage = () => {
               <Box className="w-6 h-6 text-violet-500" /> IDS/IPS Logic : Suricata
             </h3>
             <p>
-              Pour compléter l'analyse comportementale, une instance <strong>Suricata</strong> tourne en mode <strong>IDS</strong> pour matcher les paquets contre des signatures connues de vulnérabilités.
+              Pour compléter l'analyse comportementale de ZenArmor, une instance <strong>Suricata</strong> tourne en mode <strong>IDS (Intrusion Detection System)</strong>. Son utilité est de matcher les paquets contre des signatures connues de vulnérabilités, agissant comme une alarme en cas de tentative d'exploitation sur un service exposé.
             </p>
 
             <div className="bg-black/40 p-6 rounded-xl font-mono text-xs border border-white/5 my-8 relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-2 bg-violet-500/10 text-violet-400 text-[10px]">LOG_FW_BLOCK</div>
               <p className="text-gray-500 mb-2"># Policy: Deep Packet Inspection & L7 Filtering</p>
               <p><span className="text-violet-400 font-bold">INSPECT</span> payload from <span className="text-blue-400">VLAN_IOT</span></p>
-              {/* ✅ Correction : caractère '>' remplacé par '→' pour éviter l'erreur de build */}
-              <p><span className="text-violet-400 font-bold">MATCH</span> app_type <span className="text-orange-400">"Streaming/Video"</span> → ALLOW</p>
-              <p><span className="text-violet-400 font-bold">MATCH</span> category <span className="text-red-400">"Tracking/Ads"</span> → DROP by ZENARMOR</p>
+              <p><span className="text-violet-400 font-bold">MATCH</span> app_type <span className="text-orange-400">"Streaming/Video"</span> {"-> "} ALLOW</p>
+              <p><span className="text-violet-400 font-bold">MATCH</span> category <span className="text-red-400">"Tracking/Ads"</span> {"-> "} DROP by ZENARMOR</p>
               <p className="mt-4 text-red-500/80 font-bold">BLOCK ALL (Unknown Protocols)</p>
             </div>
           </div>
@@ -190,44 +255,21 @@ const HomeLabArticlePage = () => {
           
           <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
             <p>
-              L'enjeu est de transformer un flux <strong>4K HDR</strong> massif en données colorimétriques avec une <strong>Latency</strong> cible &lt; 15ms.
+              L'enjeu ici est de transformer un flux <strong>4K HDR</strong> massif en données colorimétriques exploitables par 300+ LEDs, avec une <strong>Latency</strong> cible inférieure à 15ms pour une immersion sans décalage.
             </p>
 
-            <div className="my-10 p-4 bg-[#1a1a1f] rounded-2xl border border-violet-500/10">
-              <img 
-                src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/hyperion.webp" 
-                alt="Hyperion.ng Signal Processing Dashboard" 
-                className="rounded-lg w-full shadow-2xl"
-              />
-              <p className="text-center text-xs text-violet-400/60 mt-4 font-mono uppercase tracking-tight">
-                Signal Acquisition: Tone Mapping SDR/HDR & LED Layout Configuration
-              </p>
-            </div>
+            {/* INFOGRAPHIE SVG ANIMÉE */}
+            <HyperionFlowVisual />
 
             <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100">La Chaîne d'Acquisition (Hardware Chain)</h3>
             <p>
-              J'utilise un splitter avec <strong>Downscaler</strong> matériel pour conserver l'image native sur la TV tout en envoyant un flux 1080p SDR à la carte de capture.
+              Les cartes de capture standard supportant rarement le 4K 60Hz HDR en boucle, j'utilise un splitter avec <strong>Downscaler</strong> matériel. Cela permet de conserver l'image native sur la TV tout en envoyant un flux 1080p SDR à la carte de capture.
             </p>
 
-            <div className="my-10 p-8 bg-[#1a1a1f] rounded-2xl border border-white/5 relative overflow-hidden shadow-inner">
-              <div className="absolute top-0 left-0 w-1 h-full bg-violet-500"></div>
-              <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center">
-                <div className="flex-1 p-3 bg-black/40 rounded border border-white/10 w-full md:w-auto">
-                  <span className="text-[10px] font-bold text-violet-400 tracking-tighter uppercase">SOURCE</span>
-                  <p className="text-xs font-mono mt-1 uppercase text-gray-300">Shield Pro (4K HDR)</p>
-                </div>
-                <div className="text-violet-500 font-bold rotate-90 md:rotate-0">→</div>
-                <div className="flex-1 p-3 bg-black/40 rounded border border-white/10 w-full md:w-auto">
-                  <span className="text-[10px] font-bold text-violet-400 tracking-tighter uppercase">PROCESSING</span>
-                  <p className="text-xs font-mono mt-1 uppercase text-gray-300">Hyperion LXC (Passthrough)</p>
-                </div>
-                <div className="text-violet-500 font-bold rotate-90 md:rotate-0">→</div>
-                <div className="flex-1 p-3 bg-black/40 rounded border border-white/10 w-full md:w-auto">
-                  <span className="text-[10px] font-bold text-violet-400 tracking-tighter uppercase">OUTPUT</span>
-                  <p className="text-xs font-mono mt-1 uppercase text-gray-300">ESP32 / WLED (DDP)</p>
-                </div>
-              </div>
-            </div>
+            <h3 className="text-2xl font-semibold text-white mt-12 mb-6">Le défi du Tone Mapping</h3>
+            <p>
+              Capturer du HDR via une carte SDR produit des couleurs "délavées". Pour pallier cela, <strong>Hyperion.ng</strong> traite le signal via un algorithme de <strong>Tone Mapping</strong> en temps réel, garantissant que les LEDs reflètent la dynamique réelle de l'image.
+            </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
               <div className="space-y-4">
@@ -235,7 +277,7 @@ const HomeLabArticlePage = () => {
                   <Layers className="w-4 h-4" /> DDP vs E1.31
                 </h4>
                 <p className="text-sm text-gray-400">
-                  Le protocole <strong>DDP</strong> permet un overhead réduit, indispensable pour piloter une haute densité de pixels.
+                  Le choix du protocole <strong>DDP (Distributed Display Protocol)</strong> permet un <strong>Network Overhead</strong> réduit par rapport à l'E1.31, indispensable pour piloter une haute densité de pixels sans congestion.
                 </p>
               </div>
               <div className="space-y-4">
@@ -243,7 +285,7 @@ const HomeLabArticlePage = () => {
                   <Box className="w-4 h-4" /> LED Management (SK6812)
                 </h4>
                 <p className="text-sm text-gray-400">
-                  L'utilisation de rubans <strong>SK6812 RGBNW</strong> assure une colorimétrie plus naturelle (Neutral White).
+                  L'utilisation de rubans <strong>SK6812 RGBNW</strong> (Neutral White) assure une colorimétrie plus naturelle et une meilleure profondeur lumineuse que les rubans RGB standards.
                 </p>
               </div>
             </div>
@@ -258,12 +300,38 @@ const HomeLabArticlePage = () => {
           
           <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
             <p>
-              La gestion de la stack logicielle repose sur Docker pour l'isolation et des routines d'automatisation pour le <strong>Lifecycle management</strong>.
+              Une infrastructure n'est pertinente que si elle est maintenable. La gestion de la stack logicielle repose sur une approche <strong>Infrastructure as Code</strong> simplifiée, utilisant Docker pour l'isolation des services et des routines d'automatisation pour le <strong>Lifecycle management</strong>.
             </p>
+
+            <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100">Container Orchestration (Multi-Service Stack)</h3>
+            <p>
+              Au-delà d'Hyperion, le nœud de calcul héberge une stack <strong>Docker Compose</strong> mutualisée. L'utilisation de réseaux Docker isolés (Internal Bridges) permet d'ajouter une couche de sécurité supplémentaire en empêchant les services de communiquer entre eux, sauf nécessité explicite.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+              <div className="bg-[#1a1a1f] p-6 rounded-xl border border-white/5 shadow-2xl relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-violet-500/5 -mr-8 -mt-8 rounded-full blur-2xl group-hover:bg-violet-500/10 transition-colors"></div>
+                <h4 className="text-white font-bold mb-3 flex items-center gap-2">
+                  <Layers className="w-4 h-4 text-violet-500" /> Service Mesh
+                </h4>
+                <p className="text-sm text-gray-400">
+                  Utilisation d'un <strong>Reverse Proxy</strong> pour centraliser les accès et gérer les certificats SSL. Chaque service est exposé via un DNS local, évitant l'exposition directe des ports sur l'hôte.
+                </p>
+              </div>
+              <div className="bg-[#1a1a1f] p-6 rounded-xl border border-white/5 shadow-2xl relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-violet-500/5 -mr-8 -mt-8 rounded-full blur-2xl group-hover:bg-violet-500/10 transition-colors"></div>
+                <h4 className="text-white font-bold mb-3 flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-violet-500" /> Maintenance & Backups
+                </h4>
+                <p className="text-sm text-gray-400">
+                  Routines de sauvegarde automatiques des configurations (LXC/VM) vers un stockage déporté. La mise à jour des images Docker est orchestrée pour garantir une <strong>uptime</strong> maximale des services critiques.
+                </p>
+              </div>
+            </div>
 
             <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100">Roadmap : Le pivot vers le Pentest Lab</h3>
             <p>
-              La prochaine itération prévoit l'intégration de ressources dédiées à la cybersécurité offensive.
+              Cette infrastructure est conçue pour être modulaire. La prochaine itération prévoit l'intégration de ressources dédiées à la cybersécurité offensive, transformant ce HomeLab en un environnement de <strong>Red Teaming</strong> complet.
             </p>
 
             <ul className="space-y-4 my-8">
@@ -273,7 +341,7 @@ const HomeLabArticlePage = () => {
                 </div>
                 <div>
                   <h5 className="text-white font-bold text-sm underline decoration-violet-500/50">VLAN d'Attaque Isolé</h5>
-                  <p className="text-xs text-gray-400">Déploiement d'instances <strong>Exegol</strong> et Kali Linux pour tester sans risque.</p>
+                  <p className="text-xs text-gray-400">Déploiement d'instances <strong>Exegol</strong> et Kali Linux au sein d'un segment réseau spécifique pour tester des vecteurs d'attaque sans risque pour le reste de l'infra.</p>
                 </div>
               </li>
               <li className="flex items-start gap-3 bg-white/5 p-4 rounded-lg border border-white/5 hover:border-violet-500/20 transition-colors">
@@ -281,15 +349,15 @@ const HomeLabArticlePage = () => {
                   <Box className="w-4 h-4 text-violet-400" />
                 </div>
                 <div>
-                  <h5 className="text-white font-bold text-sm underline decoration-violet-500/50">Vulnerable Targets</h5>
-                  <p className="text-xs text-gray-400">Machines vulnérables pour pratiquer l'exploitation AD et le pivotement en local.</p>
+                  <h5 className="text-white font-bold text-sm underline decoration-violet-500/50">Vulnerable Targets (HoneyPots)</h5>
+                  <p className="text-xs text-gray-400">Mise en place de machines vulnérables (style HTB/TryHackMe) pour pratiquer l'exploitation Active Directory et le pivotement réseau en local.</p>
                 </div>
               </li>
             </ul>
 
             <div className="mt-16 pt-12 border-t border-white/5 text-center">
               <p className="text-sm text-gray-500 italic">
-                Projet en évolution constante. Dernière mise à jour : Décembre 2025.
+                Projet en évolution constante. Dernière mise à jour majeure : Décembre 2025.
               </p>
             </div>
           </div>
