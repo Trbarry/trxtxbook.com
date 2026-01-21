@@ -89,8 +89,6 @@ const HomeLabArticlePage = () => {
           </div>
         </section>
 
-        // Remplace la Section 02 existante par celle-ci dans ton fichier HomeLabArticlePage.tsx
-
         {/* Section 2: Network Engineering & Security */}
         <section className="mb-20">
           <h2 className="text-3xl font-bold mb-8 flex items-center gap-3 text-violet-400">
