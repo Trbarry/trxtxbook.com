@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   Cpu, Network, Shield, Zap, Box, Layers, ArrowLeft, 
-  Code, Tv, Activity, Terminal, Globe, Lock, HardDrive, GitBranch
+  Code, Tv, Activity, Terminal, Globe, Lock, HardDrive, GitBranch, Play
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { useNavigate } from 'react-router-dom';
@@ -79,10 +79,14 @@ const DockerComposeWindow = () => (
     <div className="p-6 font-mono text-xs leading-relaxed overflow-x-auto">
       <div className="flex gap-4">
         <div className="text-gray-600 select-none text-right w-4">
-          1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15
+          1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17
         </div>
         <div>
           <span className="text-violet-400">services:</span><br/>
+          <span className="pl-4 text-fuchsia-400">jellyfin:</span><br/>
+          <span className="pl-8 text-gray-400">image:</span> <span className="text-emerald-400">jellyfin/jellyfin:latest</span><br/>
+          <span className="pl-8 text-gray-400">devices:</span><br/>
+          <span className="pl-12 text-gray-500">-</span> <span className="text-blue-400">/dev/dri:/dev/dri</span> <span className="text-gray-500"># iGPU QuickSync</span><br/>
           <span className="pl-4 text-fuchsia-400">nginx-proxy-manager:</span><br/>
           <span className="pl-8 text-gray-400">image:</span> <span className="text-emerald-400">jc21/nginx-proxy-manager:latest</span><br/>
           <span className="pl-8 text-gray-400">networks:</span><br/>
@@ -92,11 +96,7 @@ const DockerComposeWindow = () => (
           <span className="pl-8 text-gray-400">networks:</span><br/>
           <span className="pl-12 text-gray-500">-</span> <span className="text-blue-400">backend_net</span><br/>
           <span className="pl-4 text-fuchsia-400">gitea:</span><br/>
-          <span className="pl-8 text-gray-400">image:</span> <span className="text-emerald-400">gitea/gitea:latest</span><br/>
-          <span className="pl-8 text-gray-400">environment:</span><br/>
-          <span className="pl-12 text-gray-500">-</span> <span className="text-gray-300">USER_UID=1000</span><br/>
-          <span className="pl-8 text-gray-400">networks:</span><br/>
-          <span className="pl-12 text-gray-500">-</span> <span className="text-blue-400">backend_net</span>
+          <span className="pl-8 text-gray-400">image:</span> <span className="text-emerald-400">gitea/gitea:latest</span>
         </div>
       </div>
     </div>
@@ -153,7 +153,7 @@ const HomeLabArticlePage = () => {
                   <Box className="w-5 h-5 text-violet-500" /> Pourquoi le format "Tiny" ?
                 </h3>
                 <p className="text-sm text-gray-400">
-                  Le châssis M720q offre une densité de calcul remarquable. L'<strong>Intel Core i5-8400T</strong> (35W TDP) dispose de <strong>6 cœurs physiques</strong>, ce qui est crucial pour éviter l'<strong>over-provisioning</strong> CPU lors de l'exécution simultanée de plusieurs instances critiques.
+                  Le châssis M720q offre une densité de calcul remarquable. L'<strong>Intel Core i5-8400T</strong> dispose de <strong>6 cœurs physiques</strong>, ce qui est crucial pour éviter l'<strong>over-provisioning</strong> CPU lors de l'exécution simultanée de plusieurs instances critiques.
                 </p>
                 <p className="text-sm text-gray-400">
                   L'atout majeur reste le support de <strong>Intel QuickSync</strong> via l'iGPU, permettant un <strong>Hardware Transcoding</strong> fluide pour Jellyfin sans saturer les cœurs CPU. Sa modularité permet également une extension jusqu'à <strong>24GB de RAM</strong>, indispensable pour la montée en charge du lab.
@@ -338,6 +338,19 @@ const HomeLabArticlePage = () => {
                 </p>
               </div>
 
+              {/* Jellyfin */}
+              <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-10 h-10 bg-violet-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Play className="w-5 h-5 text-violet-400" />
+                  </div>
+                  <h4 className="text-white font-bold">Jellyfin Media Server</h4>
+                </div>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  Le cœur du Media Center. Optimisé avec le passthrough <strong>Intel QuickSync</strong> pour le transcodage matériel 4K HDR. Il permet une lecture fluide sur tout type de client sans surcharge CPU.
+                </p>
+              </div>
+
               {/* Vaultwarden */}
               <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group">
                 <div className="flex items-center gap-4 mb-4">
@@ -387,19 +400,6 @@ const HomeLabArticlePage = () => {
                 </div>
                 <p className="text-xs text-gray-400 leading-relaxed">
                   Le pipeline d'acquisition de données. <strong>Prowlarr</strong> centralise les indexeurs tandis que <strong>qBittorrent</strong> gère les transferts au sein d'un réseau Docker <strong>backend_net</strong> isolé.
-                </p>
-              </div>
-
-              {/* Hyperion.ng */}
-              <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group md:col-span-1">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-10 h-10 bg-orange-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Zap className="w-5 h-5 text-orange-400" />
-                  </div>
-                  <h4 className="text-white font-bold">Hyperion.ng</h4>
-                </div>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  Traitement de signal prioritaire. Ce container Docker analyse les flux vidéo entrants (via USB Grabber) et orchestre la colorimétrie des LEDs avec une <strong>Latency</strong> minimale.
                 </p>
               </div>
             </div>
