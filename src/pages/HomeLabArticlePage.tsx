@@ -98,60 +98,63 @@ const HomeLabArticlePage = () => {
         </header>
 
         {/* Section 1: The Compute Layer */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold mb-8 flex items-center gap-3 text-violet-400">
-            <Cpu className="w-8 h-8" /> 01. The Compute Layer
-          </h2>
-          <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
-            <p>
-              Le choix du <strong>Lenovo ThinkCentre M720q Tiny</strong> est dicté par le pragmatisme technique. Équipé d'un <strong>Intel Core i5-8400T</strong>, ce nœud offre le ratio idéal entre consommation électrique et capacités de virtualisation pour un environnement tournant 24/7.
-            </p>
+<section className="mb-20">
+  <h2 className="text-3xl font-bold mb-8 flex items-center gap-3 text-violet-400">
+    <Cpu className="w-8 h-8" /> 01. The Compute Layer
+  </h2>
+  <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
+    <p>
+      Le choix du <strong>Lenovo ThinkCentre M720q Tiny</strong> n'est pas esthétique, mais dicté par une efficacité opérationnelle stricte. Dans un environnement 24/7, le ratio <strong>Performance-per-Watt</strong> est le KPI (Key Performance Indicator) prioritaire.
+    </p>
 
-            {/* VISUEL : LENOVO TINY */}
-            <div className="my-10 group relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <img 
-                src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/Project-Tiny.webp" 
-                alt="Lenovo ThinkCentre M720q Tiny Setup" 
-                className="relative rounded-xl border border-white/10 w-full object-cover shadow-2xl"
-              />
-              <p className="text-center text-xs text-gray-500 mt-4 italic font-mono">
-                Hardware Node: Lenovo M720q - 6 Cores / 6 Threads
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
-              <div className="bg-[#1a1a1f] p-6 rounded-xl border border-white/5 shadow-2xl">
-                <h3 className="text-white font-bold mb-4 flex items-center gap-2">
-                  <Layers className="w-5 h-5 text-violet-500" /> Hyperviseur : Proxmox VE
-                </h3>
-                <p className="text-sm text-gray-400">
-                  Utilisation du <strong>Kernel 6.x</strong> pour une gestion optimisée des ressources. L'architecture repose sur une séparation stricte : les services légers en <strong>LXC</strong> pour minimiser l'<strong>overhead</strong>, et les briques critiques en <strong>VM</strong> isolées.
-                </p>
-              </div>
-              <div className="bg-[#1a1a1f] p-6 rounded-xl border border-white/5 shadow-2xl">
-                <h3 className="text-white font-bold mb-4 flex items-center gap-2">
-                  <Zap className="w-5 h-5 text-violet-500" /> Hardware Passthrough
-                </h3>
-                <p className="text-sm text-gray-400">
-                  L'intelligence du système repose sur le <strong>PCI/USB Passthrough</strong>. La carte de capture et l'iGPU sont mappés directement aux containers pour garantir une <strong>Latency</strong> ultra-faible et des performances natives.
-                </p>
-              </div>
-            </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
+      <div className="space-y-4">
+        <h3 className="text-white font-bold flex items-center gap-2">
+          <Box className="w-5 h-5 text-violet-500" /> Pourquoi le format "Tiny" ?
+        </h3>
+        <p className="text-sm text-gray-400">
+          Le châssis M720q offre une densité de calcul remarquable. L'<strong>Intel Core i5-8400T</strong> (35W TDP) dispose de <strong>6 cœurs physiques</strong>, ce qui est crucial pour éviter l'<strong>over-provisioning</strong> CPU lors de l'exécution simultanée de plusieurs instances critiques. 
+        </p>
+        <p className="text-sm text-gray-400">
+          L'atout majeur reste le support de <strong>Intel QuickSync</strong> via l'iGPU, permettant un <strong>Hardware Transcoding</strong> fluide pour Jellyfin sans saturer les cœurs CPU. Sa modularité permet également une extension jusqu'à <strong>24GB de RAM</strong>, indispensable pour la montée en charge du lab.
+        </p>
+      </div>
+      <div className="space-y-4">
+        <h3 className="text-white font-bold flex items-center gap-2">
+          <Layers className="w-5 h-5 text-violet-500" /> L'arbitrage LXC vs VM
+        </h3>
+        <p className="text-sm text-gray-400">
+          Sous <strong>Proxmox VE</strong>, la stratégie repose sur la réduction de la couche d'abstraction. L'utilisation de <strong>LXC (Linux Containers)</strong> permet de partager le <strong>Kernel</strong> de l'hôte, garantissant un <strong>overhead</strong> proche de zéro et une gestion dynamique de la RAM.
+        </p>
+        <p className="text-sm text-gray-400">
+          D'ailleurs, mon instance <strong>LXC</strong> est configurée de manière minimaliste pour héberger <strong>exclusivement</strong> un moteur <strong>Docker</strong> : l'intégralité des micro-services y est orchestrée via <strong>docker-compose</strong>. Cette approche hybride combine la légèreté du container système avec la portabilité et la facilité de déploiement de l'<strong>Infrastructure as Code</strong>.
+        </p>
+      </div>
+    </div>
 
-            {/* VISUEL : PROXMOX DASHBOARD */}
-            <div className="my-10 p-2 bg-black/50 rounded-2xl border border-white/5 shadow-inner">
-              <img 
-                src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/proxmox.webp" 
-                alt="Proxmox VE Virtualization Dashboard" 
-                className="rounded-xl w-full grayscale-[0.3] hover:grayscale-0 transition-all duration-500"
-              />
-              <p className="text-center text-[10px] text-gray-600 mt-3 font-mono uppercase tracking-widest">
-                Infrastructure Overview: Virtual Machines & Containers (LXC)
-              </p>
-            </div>
-          </div>
-        </section>
+    {/* VISUEL : LENOVO TINY SETUP */}
+    <div className="my-10 group relative">
+      <div className="absolute -inset-1 bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+      <img 
+        src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/Project-Tiny.webp" 
+        alt="Lenovo ThinkCentre M720q Tiny Setup" 
+        className="relative rounded-xl border border-white/10 w-full object-cover shadow-2xl"
+      />
+      <p className="text-center text-xs text-gray-500 mt-4 italic font-mono uppercase tracking-widest">
+        Node: i5-8400T | 24GB DDR4 | NVMe + SATA Storage Stack
+      </p>
+    </div>
+
+    <div className="bg-[#1a1a1f] p-6 rounded-xl border border-white/5 shadow-2xl my-10">
+      <h3 className="text-white font-bold mb-4 flex items-center gap-2">
+        <Zap className="w-5 h-5 text-violet-500" /> Kernel Optimization
+      </h3>
+      <p className="text-sm text-gray-400">
+        L'implémentation du <strong>Kernel 6.x</strong> assure une compatibilité native avec les dernières technologies de virtualisation. Le système est configuré pour le <strong>Hardware Passthrough</strong>, permettant d'exposer directement le contrôleur USB à l'instance de traitement pour réduire drastiquement la <strong>Latency</strong> de capture.
+      </p>
+    </div>
+  </div>
+</section>
 
         {/* Section 2: Network Engineering & Security */}
         <section className="mb-20">
@@ -232,18 +235,7 @@ const HomeLabArticlePage = () => {
             <h3 className="text-2xl font-semibold text-white mt-12 mb-6 flex items-center gap-2">
               <Box className="w-6 h-6 text-violet-500" /> IDS/IPS Logic : Suricata
             </h3>
-            <p>
-              Pour compléter l'analyse comportementale de ZenArmor, une instance <strong>Suricata</strong> tourne en mode <strong>IDS (Intrusion Detection System)</strong>. Son utilité est de matcher les paquets contre des signatures connues de vulnérabilités, agissant comme une alarme en cas de tentative d'exploitation sur un service exposé.
-            </p>
-
-            <div className="bg-black/40 p-6 rounded-xl font-mono text-xs border border-white/5 my-8 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-2 bg-violet-500/10 text-violet-400 text-[10px]">LOG_FW_BLOCK</div>
-              <p className="text-gray-500 mb-2"># Policy: Deep Packet Inspection & L7 Filtering</p>
-              <p><span className="text-violet-400 font-bold">INSPECT</span> payload from <span className="text-blue-400">VLAN_IOT</span></p>
-              <p><span className="text-violet-400 font-bold">MATCH</span> app_type <span className="text-orange-400">"Streaming/Video"</span> {"-> "} ALLOW</p>
-              <p><span className="text-violet-400 font-bold">MATCH</span> category <span className="text-red-400">"Tracking/Ads"</span> {"-> "} DROP by ZENARMOR</p>
-              <p className="mt-4 text-red-500/80 font-bold">BLOCK ALL (Unknown Protocols)</p>
-            </div>
+           
           </div>
         </section>
 
@@ -292,76 +284,105 @@ const HomeLabArticlePage = () => {
           </div>
         </section>
 
-        {/* Section 4: Orchestration & Future-Proofing */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold mb-8 flex items-center gap-3 text-violet-400">
-            <Box className="w-8 h-8" /> 04. Orchestration & Future-Proofing
-          </h2>
-          
-          <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
-            <p>
-              Une infrastructure n'est pertinente que si elle est maintenable. La gestion de la stack logicielle repose sur une approche <strong>Infrastructure as Code</strong> simplifiée, utilisant Docker pour l'isolation des services et des routines d'automatisation pour le <strong>Lifecycle management</strong>.
-            </p>
+        {/* Section 4: Orchestration & Ecosystem Management */}
+<section className="mb-20">
+  <h2 className="text-3xl font-bold mb-8 flex items-center gap-3 text-violet-400">
+    <Box className="w-8 h-8" /> 04. Orchestration & Ecosystem Management
+  </h2>
+  
+  <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
+    <p>
+      Une infrastructure n'est pertinente que si elle est maintenable. L'intégralité de la stack logicielle est pilotée par <strong>Docker Compose</strong> au sein d'un container <strong>LXC</strong> privilégié. Cette approche permet une isolation stricte des dépendances tout en facilitant le <strong>Lifecycle management</strong> (mises à jour, sauvegardes, portabilité).
+    </p>
 
-            <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100">Container Orchestration (Multi-Service Stack)</h3>
-            <p>
-              Au-delà d'Hyperion, le nœud de calcul héberge une stack <strong>Docker Compose</strong> mutualisée. L'utilisation de réseaux Docker isolés (Internal Bridges) permet d'ajouter une couche de sécurité supplémentaire en empêchant les services de communiquer entre eux, sauf nécessité explicite.
-            </p>
+    <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100">The Service Mesh: Access & Visibility</h3>
+    <p>
+      Le point d'entrée unique de l'écosystème repose sur un couple <strong>Reverse Proxy</strong> et <strong>Dashboard</strong>. Cette couche fait abstraction de la complexité technique pour offrir une interface utilisateur unifiée.
+    </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
-              <div className="bg-[#1a1a1f] p-6 rounded-xl border border-white/5 shadow-2xl relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-violet-500/5 -mr-8 -mt-8 rounded-full blur-2xl group-hover:bg-violet-500/10 transition-colors"></div>
-                <h4 className="text-white font-bold mb-3 flex items-center gap-2">
-                  <Layers className="w-4 h-4 text-violet-500" /> Service Mesh
-                </h4>
-                <p className="text-sm text-gray-400">
-                  Utilisation d'un <strong>Reverse Proxy</strong> pour centraliser les accès et gérer les certificats SSL. Chaque service est exposé via un DNS local, évitant l'exposition directe des ports sur l'hôte.
-                </p>
-              </div>
-              <div className="bg-[#1a1a1f] p-6 rounded-xl border border-white/5 shadow-2xl relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-violet-500/5 -mr-8 -mt-8 rounded-full blur-2xl group-hover:bg-violet-500/10 transition-colors"></div>
-                <h4 className="text-white font-bold mb-3 flex items-center gap-2">
-                  <Shield className="w-4 h-4 text-violet-500" /> Maintenance & Backups
-                </h4>
-                <p className="text-sm text-gray-400">
-                  Routines de sauvegarde automatiques des configurations (LXC/VM) vers un stockage déporté. La mise à jour des images Docker est orchestrée pour garantir une <strong>uptime</strong> maximale des services critiques.
-                </p>
-              </div>
-            </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+      <div className="bg-[#1a1a1f] p-6 rounded-xl border border-white/5 shadow-2xl relative overflow-hidden group">
+        <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+          <Network className="w-12 h-12 text-violet-500" />
+        </div>
+        <h4 className="text-white font-bold mb-3">Nginx Proxy Manager</h4>
+        <p className="text-sm text-gray-400">
+          Gestion centralisée des flux HTTP/HTTPS. Il assure la terminaison <strong>SSL/TLS</strong> et la résolution des noms de domaine internes, évitant l'exposition directe des ports applicatifs sur l'hôte Proxmox.
+        </p>
+      </div>
+      <div className="bg-[#1a1a1f] p-6 rounded-xl border border-white/5 shadow-2xl relative overflow-hidden group">
+        <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+          <Layers className="w-12 h-12 text-violet-500" />
+        </div>
+        <h4 className="text-white font-bold mb-3">Homepage Dashboard</h4>
+        <p className="text-sm text-gray-400">
+          La tour de contrôle du lab. Intégrée via API, elle affiche en temps réel l'état des containers, les statistiques de bande passante et les alertes de sécurité du <strong>firewall</strong>.
+        </p>
+      </div>
+    </div>
 
-            <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100">Roadmap : Le pivot vers le Pentest Lab</h3>
-            <p>
-              Cette infrastructure est conçue pour être modulaire. La prochaine itération prévoit l'intégration de ressources dédiées à la cybersécurité offensive, transformant ce HomeLab en un environnement de <strong>Red Teaming</strong> complet.
-            </p>
+    <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100">Automated Media Pipeline & Security</h3>
+    <p>
+      L'infrastructure gère de manière autonome le cycle de vie des données, du téléchargement sécurisé au stockage de secrets.
+    </p>
 
-            <ul className="space-y-4 my-8">
-              <li className="flex items-start gap-3 bg-white/5 p-4 rounded-lg border border-white/5 hover:border-violet-500/20 transition-colors">
-                <div className="mt-1 bg-violet-500/20 p-1 rounded">
-                  <Code className="w-4 h-4 text-violet-400" />
-                </div>
-                <div>
-                  <h5 className="text-white font-bold text-sm underline decoration-violet-500/50">VLAN d'Attaque Isolé</h5>
-                  <p className="text-xs text-gray-400">Déploiement d'instances <strong>Exegol</strong> et Kali Linux au sein d'un segment réseau spécifique pour tester des vecteurs d'attaque sans risque pour le reste de l'infra.</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3 bg-white/5 p-4 rounded-lg border border-white/5 hover:border-violet-500/20 transition-colors">
-                <div className="mt-1 bg-violet-500/20 p-1 rounded">
-                  <Box className="w-4 h-4 text-violet-400" />
-                </div>
-                <div>
-                  <h5 className="text-white font-bold text-sm underline decoration-violet-500/50">Vulnerable Targets (HoneyPots)</h5>
-                  <p className="text-xs text-gray-400">Mise en place de machines vulnérables (style HTB/TryHackMe) pour pratiquer l'exploitation Active Directory et le pivotement réseau en local.</p>
-                </div>
-              </li>
-            </ul>
-
-            <div className="mt-16 pt-12 border-t border-white/5 text-center">
-              <p className="text-sm text-gray-500 italic">
-                Projet en évolution constante. Dernière mise à jour majeure : Décembre 2025.
-              </p>
-            </div>
+    <div className="bg-[#1a1a1f] border border-white/5 rounded-2xl overflow-hidden my-10 shadow-2xl">
+      <div className="p-6 border-b border-white/5 bg-white/5">
+        <h4 className="text-white font-bold flex items-center gap-2">
+          <Zap className="w-5 h-5 text-violet-500" /> Data & Media Stack
+        </h4>
+      </div>
+      <div className="p-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="space-y-2">
+            <span className="text-violet-400 font-mono text-[10px] font-bold uppercase">Download / Automation</span>
+            <p className="text-sm text-gray-300"><strong>qBittorrent</strong> couplé à <strong>Prowlarr</strong> pour la gestion automatisée des indexeurs et des flux de données, le tout isolé via des réseaux Docker internes.</p>
           </div>
-        </section>
+          <div className="space-y-2">
+            <span className="text-violet-400 font-mono text-[10px] font-bold uppercase">IoT / Visuals</span>
+            <p className="text-sm text-gray-300"><strong>Hyperion.ng</strong> opérant en tant que service de traitement de signal prioritaire avec accès direct au matériel via <strong>USB Passthrough</strong>.</p>
+          </div>
+          <div className="space-y-2">
+            <span className="text-violet-400 font-mono text-[10px] font-bold uppercase">Security / Vault</span>
+            <p className="text-sm text-gray-300">Instance <strong>Vaultwarden</strong> (Bitwarden API) pour la gestion chiffrée des identifiants et des secrets de l'infrastructure, accessible uniquement via <strong>VLAN Management</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 className="text-2xl font-semibold text-white mt-12 mb-6">Roadmap : Le pivot vers le Pentest Lab</h3>
+    <p>
+      Cette architecture <strong>Docker-centric</strong> est conçue pour être modulaire. La prochaine itération prévoit l'intégration de ressources dédiées à la cybersécurité offensive.
+    </p>
+
+    <ul className="space-y-4 my-8">
+      <li className="flex items-start gap-3 bg-white/5 p-4 rounded-lg border border-white/5 hover:border-violet-500/20 transition-colors">
+        <div className="mt-1 bg-violet-500/20 p-1 rounded">
+          <Code className="w-4 h-4 text-violet-400" />
+        </div>
+        <div>
+          <h5 className="text-white font-bold text-sm underline decoration-violet-500/50">VLAN d'Attaque Isolé</h5>
+          <p className="text-xs text-gray-400">Déploiement d'instances <strong>Exegol</strong> et Kali Linux au sein d'un segment réseau spécifique pour tester des vecteurs d'attaque sans risque pour le reste de l'infra.</p>
+        </div>
+      </li>
+      <li className="flex items-start gap-3 bg-white/5 p-4 rounded-lg border border-white/5 hover:border-violet-500/20 transition-colors">
+        <div className="mt-1 bg-violet-500/20 p-1 rounded">
+          <Box className="w-4 h-4 text-violet-400" />
+        </div>
+        <div>
+          <h5 className="text-white font-bold text-sm underline decoration-violet-500/50">Vulnerable Targets (HoneyPots)</h5>
+          <p className="text-xs text-gray-400">Mise en place de machines vulnérables (style HTB/TryHackMe) pour pratiquer l'exploitation Active Directory et le pivotement réseau en local.</p>
+        </div>
+      </li>
+    </ul>
+
+    <div className="mt-16 pt-12 border-t border-white/5 text-center">
+      <p className="text-sm text-gray-500 italic">
+        Infrastructure scalable par design. Dernière mise à jour de la stack : Décembre 2025.
+      </p>
+    </div>
+  </div>
+</section>
       </article>
     </div>
   );
