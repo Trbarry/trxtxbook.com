@@ -10,7 +10,7 @@ import { ADProject } from './projects/ADProject';
 import { SteamDeckProject } from './projects/SteamDeckProject';
 import { LinuxMintProject } from './projects/LinuxMintProject';
 import { CPTSJourneyProject } from './projects/CPTSJourneyProject';
-import { HomeLabProject } from './projects/HomeLabProject'; // Import du nouveau projet maître
+import { HomeLabProject } from './projects/HomeLabProjects'; // Import du nouveau projet maître
 import { Project } from '../types/project';
 import { useNavigate } from 'react-router-dom';
 import { SEOHead } from './SEOHead';
