@@ -49,6 +49,9 @@ const LinuxMintArticlePage = lazy(() => import('./pages/LinuxMintArticlePage').t
 const CPTSJourneyArticlePage = lazy(() => import('./pages/CPTSJourneyArticlePage').then(module => ({ default: module.CPTSJourneyArticlePage })));
 const DogWriteupPage = lazy(() => import('./pages/DogWriteupPage').then(module => ({ default: module.DogWriteupPage })));
 
+// ✅ AJOUT : Article HomeLab & Ambilight
+const HomeLabArticlePage = lazy(() => import('./pages/HomeLabArticlePage'));
+
 // Pages Admin & Tools
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then(module => ({ default: module.AnalyticsPage })));
 const SitemapGeneratorPage = lazy(() => import('./pages/SitemapGeneratorPage').then(module => ({ default: module.SitemapGeneratorPage })));
@@ -113,6 +116,9 @@ const AnimatedRoutes = ({
           <Route path="/articles/linux-mint-revival" element={<PageTransition><LinuxMintArticlePage /></PageTransition>} />
           <Route path="/articles/cpts-journey" element={<PageTransition><CPTSJourneyArticlePage /></PageTransition>} />
           
+          {/* ✅ AJOUT : Route Deep Dive HomeLab */}
+          <Route path="/articles/homelab-infrastructure-deep-dive" element={<PageTransition><HomeLabArticlePage /></PageTransition>} />
+          
           {/* ADMIN & TOOLS */}
           <Route path="/admin/analytics" element={<PageTransition><AnalyticsPage /></PageTransition>} />
           <Route path="/admin/sitemap-generator" element={<PageTransition><SitemapGeneratorPage /></PageTransition>} />
@@ -164,9 +170,8 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider> {/* ✅ Enveloppe globale pour le contexte de thème */}
+    <ThemeProvider> 
       <Router>
-        {/* Ajout des classes de transition et utilisation des variables CSS (bg-background, text-text) */}
         <div className="min-h-screen relative text-text bg-background overflow-hidden selection:bg-violet-500/30 transition-colors duration-300">
           
           <SEOHead />

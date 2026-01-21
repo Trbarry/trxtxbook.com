@@ -10,6 +10,7 @@ import { ADProject } from './projects/ADProject';
 import { SteamDeckProject } from './projects/SteamDeckProject';
 import { LinuxMintProject } from './projects/LinuxMintProject';
 import { CPTSJourneyProject } from './projects/CPTSJourneyProject';
+import { HomeLabProject } from './projects/HomeLabProject'; // Import du nouveau projet maître
 import { Project } from '../types/project';
 import { useNavigate } from 'react-router-dom';
 import { SEOHead } from './SEOHead';
@@ -20,9 +21,15 @@ export const ProjectsList: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   
+  // HomeLabProject est placé en premier pour souligner l'infrastructure globale
   const allProjects: Project[] = [
-    CPTSJourneyProject, LinuxMintProject, ExegolProject, 
-    ADProject, SMBProject, SteamDeckProject
+    HomeLabProject,
+    CPTSJourneyProject, 
+    LinuxMintProject, 
+    ExegolProject, 
+    ADProject, 
+    SMBProject, 
+    SteamDeckProject
   ];
 
   const filteredProjects = allProjects.filter(p => 
@@ -34,15 +41,17 @@ export const ProjectsList: React.FC = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   const handleProjectClick = (project: Project) => {
-    if (project.articleUrl) { navigate(project.articleUrl); } 
-    else { setSelectedProject(project); }
+    if (project.articleUrl) { 
+      navigate(project.articleUrl); 
+    } else { 
+      setSelectedProject(project); 
+    }
   };
 
   return (
     <>
-      <SEOHead title="Projets & Lab | Tristan Barry" description="Portfolio de projets techniques." />
+      <SEOHead title="Projets & Lab | Tristan Barry" description="Portfolio de projets techniques et infrastructure HomeLab." />
 
-      {/* ✅ CHANGEMENT : bg-background */}
       <div className="min-h-screen pt-32 pb-24 bg-background transition-colors duration-300 text-gray-900 dark:text-gray-100">
         <div className="container mx-auto px-6">
           
@@ -55,7 +64,7 @@ export const ProjectsList: React.FC = () => {
               Lab & Projets
             </h1>
             <p className="text-gray-600 dark:text-gray-400 max-w-2xl text-lg leading-relaxed">
-              Déploiements d'infrastructure, scripts d'automatisation et outils de sécurité.
+              Déploiements d'infrastructure, <strong>HomeLab hardening</strong> et traitement de signal en temps réel.
               <br />
               <span className="text-sm font-mono text-violet-600 dark:text-violet-400 mt-2 block bg-gray-100 dark:bg-white/5 px-2 py-1 rounded w-fit mx-auto">
                 git clone https://github.com/Trbarry/projects
@@ -72,7 +81,7 @@ export const ProjectsList: React.FC = () => {
                 </div>
                 <input 
                   type="text"
-                  placeholder="Rechercher un projet (Python, Active Directory, Bash...)"
+                  placeholder="Rechercher un projet (VLAN, Proxmox, Active Directory, Bash...)"
                   className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/5 rounded-xl py-4 pl-10 pr-4 text-gray-900 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-600 font-mono text-sm focus:outline-none focus:border-violet-500/30 focus:bg-white dark:focus:bg-black/80 transition-all"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -98,12 +107,11 @@ export const ProjectsList: React.FC = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
                     transition={{ duration: 0.2 }}
-                    key={index} 
+                    key={project.id || index} 
                     onClick={() => handleProjectClick(project)}
-                    // ✅ CHANGEMENT : Carte adaptative bg-surface
                     className="group relative bg-surface dark:bg-[#1a1a1f] rounded-2xl border border-gray-200 dark:border-white/5 overflow-hidden flex flex-col h-full
-                             hover:border-violet-500/30 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)] 
-                             transition-all duration-300 cursor-pointer shadow-sm dark:shadow-none"
+                               hover:border-violet-500/30 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)] 
+                               transition-all duration-300 cursor-pointer shadow-sm dark:shadow-none"
                   >
                     {/* Image Header */}
                     <div className="relative h-56 overflow-hidden border-b border-gray-100 dark:border-white/5">
@@ -114,13 +122,12 @@ export const ProjectsList: React.FC = () => {
                         loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
-                      {/* Gradient adapté */}
                       <div className="absolute inset-0 bg-gradient-to-t from-surface dark:from-[#1a1a1f] via-surface/40 dark:via-[#1a1a1f]/40 to-transparent opacity-90 z-10" />
                       
                       {project.articleUrl && (
                         <div className="absolute top-4 right-4 z-20">
                             <div className="bg-white/90 dark:bg-black/80 backdrop-blur-md text-gray-900 dark:text-white px-3 py-1.5 rounded-lg 
-                                      flex items-center gap-1.5 text-[10px] font-bold border border-gray-200 dark:border-white/10 uppercase tracking-wide shadow-sm">
+                                          flex items-center gap-1.5 text-[10px] font-bold border border-gray-200 dark:border-white/10 uppercase tracking-wide shadow-sm">
                               <FileText className="w-3 h-3 text-violet-600 dark:text-white" />
                               Article
                             </div>
@@ -157,7 +164,9 @@ export const ProjectsList: React.FC = () => {
                           </div>
 
                           <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-white/5 text-sm font-medium">
-                              <span className="text-gray-500">Voir les détails</span>
+                              <span className="text-gray-500">
+                                {project.articleUrl ? 'Lire l\'étude de cas' : 'Voir les détails'}
+                              </span>
                               <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center text-gray-400 dark:text-white group-hover:bg-violet-600 group-hover:text-white transition-colors">
                                   {project.articleUrl ? <ArrowRight className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                               </div>
