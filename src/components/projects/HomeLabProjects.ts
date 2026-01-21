@@ -1,3 +1,4 @@
+// src/components/projects/HomeLabProject.ts
 import { Project } from '../../types/project';
 
 export const HomeLabProject: Project = {
@@ -6,7 +7,8 @@ export const HomeLabProject: Project = {
   description: "Infrastructure de virtualisation avec segmentation réseau L3 et traitement de flux 4K HDR en temps réel.",
   longDescription: "Conception d'un environnement de calcul hybride orienté cybersécurité. Ce projet documente l'implémentation d'un hyperviseur Proxmox VE, d'une micro-segmentation réseau via OPNsense, et d'un pipeline de traitement de signal complexe pour un système Ambilight DIY.",
   tags: ["Proxmox", "OPNsense", "Docker", "Network Security", "VLAN", "Hardware Engineering"],
-  image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=2000", // Image temporaire de serveur
+  // Utilisation de l'image de ton Lenovo Tiny pour la carte projet
+  image: "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/Project-Tiny.webp", 
   features: [
     "Architecture Zero-Trust via segmentation VLAN stricte",
     "Routage et Firewalling virtualisés sous OPNsense",
