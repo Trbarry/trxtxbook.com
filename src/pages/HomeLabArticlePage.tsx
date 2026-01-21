@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   Cpu, Network, Shield, Zap, Box, Layers, ArrowLeft, 
-  Code, Tv, Activity, Terminal, Globe, Lock, HardDrive 
+  Code, Tv, Activity, Terminal, Globe, Lock, HardDrive, Search
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { useNavigate } from 'react-router-dom';
@@ -63,7 +63,6 @@ const HyperionFlowVisual = () => (
   </div>
 );
 
-// Composant Visuel Docker Compose Style IDE
 const DockerComposeWindow = () => (
   <div className="relative rounded-xl overflow-hidden border border-white/10 bg-[#0d0d12] shadow-2xl my-10 group">
     <div className="flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/10">
@@ -142,7 +141,7 @@ const HomeLabArticlePage = () => {
           </h2>
           <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
             <p>
-              Le choix du <strong>Lenovo ThinkCentre M720q Tiny</strong> n'est pas esthétique, mais dicté par une efficacité opérationnelle stricte. Dans un environnement 24/7, le ratio <strong>Performance-per-Watt</strong> est le KPI (Key Performance Indicator) prioritaire.
+              Le choix du <strong>Lenovo ThinkCentre M720q Tiny</strong> est dicté par le pragmatisme technique. Équipé d'un <strong>Intel Core i5-8400T</strong>, ce nœud offre le ratio idéal entre consommation électrique et capacités de virtualisation pour un environnement tournant 24/7.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
@@ -151,10 +150,10 @@ const HomeLabArticlePage = () => {
                   <Box className="w-5 h-5 text-violet-500" /> Pourquoi le format "Tiny" ?
                 </h3>
                 <p className="text-sm text-gray-400">
-                  Le châssis M720q offre une densité de calcul remarquable. L'<strong>Intel Core i5-8400T</strong> (35W TDP) dispose de <strong>6 cœurs physiques</strong>, ce qui est crucial pour éviter l'<strong>over-provisioning</strong> CPU lors de l'exécution simultanée de plusieurs instances critiques.
+                  Le châssis M720q offre une densité de calcul remarquable. L'<strong>Intel Core i5-8400T</strong> dispose de <strong>6 cœurs physiques</strong>, ce qui est crucial pour éviter l'<strong>over-provisioning</strong> CPU lors de l'exécution simultanée de plusieurs instances critiques.
                 </p>
                 <p className="text-sm text-gray-400">
-                  L'atout majeur reste le support de <strong>Intel QuickSync</strong> via l'iGPU, permettant un <strong>Hardware Transcoding</strong> fluide pour Jellyfin sans saturer les cœurs CPU. Sa modularité permet également une extension jusqu'à <strong>24GB de RAM</strong>, indispensable pour la montée en charge du lab.
+                  L'atout majeur reste le support de <strong>Intel QuickSync</strong> via l'iGPU, permettant un <strong>Hardware Transcoding</strong> fluide sans saturer les cœurs CPU. Sa modularité permet également une extension jusqu'à <strong>24GB de RAM</strong>, indispensable pour la montée en charge du lab.
                 </p>
               </div>
               <div className="space-y-4">
@@ -162,10 +161,10 @@ const HomeLabArticlePage = () => {
                   <Layers className="w-5 h-5 text-violet-500" /> L'arbitrage LXC vs VM
                 </h3>
                 <p className="text-sm text-gray-400">
-                  Sous <strong>Proxmox VE</strong>, la stratégie repose sur la réduction de la couche d'abstraction. L'utilisation de <strong>LXC (Linux Containers)</strong> permet de partager le <strong>Kernel</strong> de l'hôte, garantissant un <strong>overhead</strong> proche de zéro et une gestion dynamique de la RAM.
+                  Sous <strong>Proxmox VE</strong>, la stratégie repose sur la réduction de la couche d'abstraction. L'utilisation de <strong>LXC (Linux Containers)</strong> permet de partager le <strong>Kernel</strong> de l'hôte, garantissant un <strong>overhead</strong> proche de zéro.
                 </p>
                 <p className="text-sm text-gray-400">
-                  D'ailleurs, mon instance <strong>LXC</strong> est configurée de manière minimaliste pour héberger <strong>exclusivement</strong> un moteur <strong>Docker</strong> : l'intégralité des micro-services y est orchestrée via <strong>docker-compose</strong>. Cette approche hybride combine la légèreté du container système avec la portabilité et la facilité de déploiement de l'<strong>Infrastructure as Code</strong>.
+                  D'ailleurs, mon instance <strong>LXC</strong> héberge <strong>exclusivement</strong> un moteur <strong>Docker</strong> : l'intégralité des micro-services y est orchestrée via <strong>docker-compose</strong>. Cette approche hybride combine la légèreté du container système avec la portabilité et la facilité de déploiement de l'<strong>Infrastructure as Code</strong>.
                 </p>
               </div>
             </div>
@@ -201,7 +200,7 @@ const HomeLabArticlePage = () => {
           
           <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
             <p>
-              La sécurité d'un <strong>HomeLab</strong> ne repose pas sur la complexité d'un mot de passe, mais sur la rigueur de sa segmentation et la finesse de son monitoring. L'objectif est d'appliquer le principe du moindre privilège à la couche réseau (L3) tout en maintenant une visibilité totale sur la couche applicative (L7).
+              La sécurité d'un <strong>HomeLab</strong> ne repose pas sur la complexité d'un mot de passe, mais sur la rigueur de sa segmentation. L'objectif est d'appliquer le principe du moindre privilège à la couche réseau (L3).
             </p>
 
             <div className="bg-violet-900/10 border-l-4 border-violet-500 p-6 my-8 rounded-r-xl">
@@ -209,17 +208,13 @@ const HomeLabArticlePage = () => {
                 <Shield className="w-4 h-4" /> Stratégie de Micro-Segmentation
               </h3>
               <p className="text-sm italic text-gray-400">
-                "La segmentation réseau est à l'infrastructure ce que les compartiments étanches sont à la coque d'un navire : une brèche dans un secteur ne doit pas compromettre l'intégrité globale."
+                "La segmentation réseau est à l'infrastructure ce que les compartiments étanches sont à la coque d'un navire."
               </p>
             </div>
 
             <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100">Virtualiser la Gateway : OPNsense & Observabilité</h3>
             <p>
               En remplaçant la gestion réseau de la box FAI par une instance <strong>OPNsense</strong> virtualisée, l'infrastructure gagne en granularité. Le monitoring intégré via <strong>Insight</strong> et <strong>NetFlow</strong> permet de transformer des flux bruts en schémas mentaux clairs.
-            </p>
-            
-            <p className="mt-4">
-              Cette surveillance sert à détecter des anomalies de comportement et à ajuster les politiques de <strong>Traffic Shaping</strong> pour garantir que le flux 4K HDR reste prioritaire sur les mises à jour système en arrière-plan.
             </p>
 
             {/* Focus ZenArmor (NGFW) */}
@@ -229,24 +224,16 @@ const HomeLabArticlePage = () => {
                 <Shield className="w-6 h-6 text-violet-500" /> L7 Protection : ZenArmor
               </h3>
               <p className="text-sm text-gray-400 mb-6">
-                Là où un firewall standard s'arrête à l'IP et au Port, <strong>ZenArmor</strong> apporte une inspection de niveau <strong>Layer 7 (Application Layer)</strong>. C'est le cerveau de l'analyse comportementale du lab.
+                Là où un firewall standard s'arrête à l'IP et au Port, <strong>ZenArmor</strong> apporte une inspection de niveau <strong>Layer 7 (Application Layer)</strong>.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                 <div className="p-4 bg-black/40 rounded-lg border border-white/5">
                   <span className="text-violet-400 font-bold block mb-1">Application Control</span>
-                  Identification des flux chiffrés (TLS SNI) pour bloquer les services indésirables ou les trackers IoT sans casser le chiffrement.
+                  Identification des flux chiffrés (TLS SNI) pour bloquer les services indésirables sans casser le chiffrement.
                 </div>
                 <div className="p-4 bg-black/40 rounded-lg border border-white/5">
                   <span className="text-violet-400 font-bold block mb-1">Web Content Filtering</span>
                   Protection contre le <strong>Malware</strong> et le <strong>Phishing</strong> via une base de réputation mise à jour en temps réel.
-                </div>
-                <div className="p-4 bg-black/40 rounded-lg border border-white/5">
-                  <span className="text-violet-400 font-bold block mb-1">Advanced Reporting</span>
-                  Génération de dashboards précis sur l'usage des ressources réseau, essentiels pour le diagnostic de latence vidéo.
-                </div>
-                <div className="p-4 bg-black/40 rounded-lg border border-white/5">
-                  <span className="text-violet-400 font-bold block mb-1">Threat Intelligence</span>
-                  Blocage automatique des adresses IP connues pour être des nœuds de botnets ou des scanners offensifs.
                 </div>
               </div>
             </div>
@@ -269,13 +256,6 @@ const HomeLabArticlePage = () => {
               </div>
             </div>
 
-            <h3 className="text-2xl font-semibold text-white mt-12 mb-6 flex items-center gap-2">
-              <Box className="w-6 h-6 text-violet-500" /> IDS/IPS Logic : Suricata
-            </h3>
-            <p>
-              Pour compléter l'analyse de ZenArmor, une instance <strong>Suricata</strong> tourne en mode <strong>IDS (Intrusion Detection System)</strong>. Son utilité est de matcher les paquets contre des signatures connues de vulnérabilités.
-            </p>
-
             <div className="bg-black/40 p-6 rounded-xl font-mono text-xs border border-white/5 my-8 relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-2 bg-violet-500/10 text-violet-400 text-[10px]">LOG_FW_BLOCK</div>
               <p className="text-gray-500 mb-2"># Policy: Deep Packet Inspection & L7 Filtering</p>
@@ -295,19 +275,14 @@ const HomeLabArticlePage = () => {
           
           <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
             <p>
-              L'enjeu ici est de transformer un flux <strong>4K HDR</strong> massif en données colorimétriques exploitables par 300+ LEDs, avec une <strong>Latency</strong> cible inférieure à 15ms pour une immersion sans décalage.
+              L'enjeu ici est de transformer un flux <strong>4K HDR</strong> massif en données colorimétriques exploitables par 300+ LEDs, avec une <strong>Latency</strong> cible inférieure à 15ms.
             </p>
 
             <HyperionFlowVisual />
 
-            <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100">La Chaîne d'Acquisition (Hardware Chain)</h3>
+            <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100">Le défi du Tone Mapping</h3>
             <p>
-              J'utilise un splitter avec <strong>Downscaler</strong> matériel. Cela permet de conserver l'image native sur la TV tout en envoyant un flux 1080p SDR à la carte de capture.
-            </p>
-
-            <h3 className="text-2xl font-semibold text-white mt-12 mb-6">Le défi du Tone Mapping</h3>
-            <p>
-              Pour pallier les couleurs "délavées" du HDR capturé en SDR, <strong>Hyperion.ng</strong> traite le signal via un algorithme de <strong>Tone Mapping</strong> en temps réel.
+              Pour pallier les couleurs "délavées" du HDR capturé en SDR, <strong>Hyperion.ng</strong> traite le signal via un algorithme de <strong>Tone Mapping</strong> en temps réel, garantissant que les LEDs reflètent la dynamique réelle de l'image.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
@@ -316,7 +291,7 @@ const HomeLabArticlePage = () => {
                   <Layers className="w-4 h-4" /> DDP vs E1.31
                 </h4>
                 <p className="text-sm text-gray-400">
-                  Le choix du protocole <strong>DDP (Distributed Display Protocol)</strong> permet un <strong>Network Overhead</strong> réduit, indispensable pour piloter une haute densité de pixels sans congestion.
+                  Le choix du protocole <strong>DDP (Distributed Display Protocol)</strong> permet un <strong>Network Overhead</strong> réduit, indispensable pour piloter une haute densité de pixels.
                 </p>
               </div>
               <div className="space-y-4">
@@ -324,7 +299,7 @@ const HomeLabArticlePage = () => {
                   <Box className="w-4 h-4" /> LED Management (SK6812)
                 </h4>
                 <p className="text-sm text-gray-400">
-                  L'utilisation de rubans <strong>SK6812 RGBNW</strong> (Neutral White) assure une colorimétrie plus naturelle que les rubans RGB standards.
+                  L'utilisation de rubans <strong>SK6812 RGBNW</strong> (Neutral White) assure une colorimétrie plus naturelle et une meilleure profondeur lumineuse que les rubans RGB standards.
                 </p>
               </div>
             </div>
@@ -344,74 +319,72 @@ const HomeLabArticlePage = () => {
 
             <DockerComposeWindow />
 
-            <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100 italic">Core Services Architecture</h3>
+            <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100 italic">Service Breakdown & Technical Utility</h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+              {/* Nginx Proxy Manager */}
               <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group">
-                <div className="w-10 h-10 bg-violet-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Globe className="w-5 h-5 text-violet-400" />
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-10 h-10 bg-violet-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Globe className="w-5 h-5 text-violet-400" />
+                  </div>
+                  <h4 className="text-white font-bold">Nginx Proxy Manager</h4>
                 </div>
-                <h4 className="text-white font-bold text-sm mb-2">Nginx Proxy Manager</h4>
-                <p className="text-[11px] text-gray-400 mb-4 italic">The Entry Point</p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-2 py-0.5 bg-black/50 rounded text-[9px] font-mono text-emerald-400">Port 80/443</span>
-                  <span className="px-2 py-0.5 bg-black/50 rounded text-[9px] font-mono text-blue-400">SSL termination</span>
-                </div>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  Agit comme le <strong>Reverse Proxy</strong> central. Il gère la terminaison <strong>SSL/TLS</strong> (Let's Encrypt), la redirection des sous-domaines internes et l'encapsulation des flux HTTP/HTTPS, évitant l'exposition directe des ports applicatifs.
+                </p>
               </div>
 
+              {/* Vaultwarden */}
               <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group">
-                <div className="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Shield className="w-5 h-5 text-emerald-400" />
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Shield className="w-5 h-5 text-emerald-400" />
+                  </div>
+                  <h4 className="text-white font-bold">Vaultwarden</h4>
                 </div>
-                <h4 className="text-white font-bold text-sm mb-2">Vaultwarden</h4>
-                <p className="text-[11px] text-gray-400 mb-4 italic">The Security Vault</p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-2 py-0.5 bg-black/50 rounded text-[9px] font-mono text-emerald-400">RSA 2048</span>
-                  <span className="px-2 py-0.5 bg-black/50 rounded text-[9px] font-mono text-blue-400">Encrypted DB</span>
-                </div>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  Version auto-hébergée de Bitwarden pour la <strong>Secrets Management</strong>. Stockage chiffré des identifiants et secrets de l'infrastructure, garantissant une souveraineté totale sur les données sensibles du lab.
+                </p>
               </div>
 
+              {/* Homepage */}
               <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group">
-                <div className="w-10 h-10 bg-fuchsia-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Activity className="w-5 h-5 text-fuchsia-400" />
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-10 h-10 bg-fuchsia-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Activity className="w-5 h-5 text-fuchsia-400" />
+                  </div>
+                  <h4 className="text-white font-bold">Homepage Dashboard</h4>
                 </div>
-                <h4 className="text-white font-bold text-sm mb-2">Homepage</h4>
-                <p className="text-[11px] text-gray-400 mb-4 italic">The Control Tower</p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-2 py-0.5 bg-black/50 rounded text-[9px] font-mono text-emerald-400">API Metrics</span>
-                  <span className="px-2 py-0.5 bg-black/50 rounded text-[9px] font-mono text-blue-400">Live Status</span>
-                </div>
-              </div>
-            </div>
-
-            <h3 className="text-2xl font-semibold text-white mt-12 mb-6 text-violet-100 italic">Media Automation & Signal Processing</h3>
-            <p>
-              Le flux de données est automatisé via une stack dédiée au contenu média, garantissant une intégration transparente avec le système <strong>Ambilight</strong>.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
-              <div className="flex items-center gap-6 p-6 bg-black/20 rounded-2xl border border-white/5 group hover:bg-white/5 transition-colors">
-                <div className="bg-blue-500/10 p-4 rounded-xl">
-                  <HardDrive className="w-8 h-8 text-blue-400" />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold text-sm">Prowlarr & qBittorrent</h4>
-                  <p className="text-[11px] text-gray-400 mt-1">
-                    Gestion automatisée des indexeurs et des téléchargements. Les services communiquent via un réseau Docker interne isolé.
-                  </p>
-                </div>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  L'interface d'observabilité unifiée (<strong>Control Tower</strong>). Connectée via API aux autres services, elle permet de monitorer en temps réel l'état de santé du CPU, de la RAM et la disponibilité des containers Docker.
+                </p>
               </div>
 
-              <div className="flex items-center gap-6 p-6 bg-black/20 rounded-2xl border border-white/5 group hover:bg-white/5 transition-colors">
-                <div className="bg-orange-500/10 p-4 rounded-xl">
-                  <Zap className="w-8 h-8 text-orange-400" />
+              {/* Prowlarr & qBittorrent */}
+              <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <HardDrive className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <h4 className="text-white font-bold">qBittorrent & Prowlarr</h4>
                 </div>
-                <div>
-                  <h4 className="text-white font-bold text-sm">Hyperion.ng</h4>
-                  <p className="text-[11px] text-gray-400 mt-1">
-                    Traitement de signal prioritaire avec accès direct au matériel via <strong>USB Passthrough</strong>.
-                  </p>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  Le pipeline d'acquisition de données. <strong>Prowlarr</strong> centralise les indexeurs tandis que <strong>qBittorrent</strong> gère les transferts au sein d'un réseau Docker <strong>backend_net</strong> isolé.
+                </p>
+              </div>
+
+              {/* Hyperion.ng */}
+              <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-all group md:col-span-2">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-10 h-10 bg-orange-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Zap className="w-5 h-5 text-orange-400" />
+                  </div>
+                  <h4 className="text-white font-bold">Hyperion.ng</h4>
                 </div>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  Traitement de signal prioritaire. Ce container Docker analyse les flux vidéo entrants (via USB Grabber) et orchestre la colorimétrie des LEDs. Son déploiement via Docker garantit une portabilité totale du moteur de rendu Ambilight.
+                </p>
               </div>
             </div>
 
@@ -423,7 +396,7 @@ const HomeLabArticlePage = () => {
                 </div>
                 <div>
                   <h5 className="text-white font-bold text-sm underline decoration-violet-500/50">VLAN d'Attaque Isolé</h5>
-                  <p className="text-xs text-gray-400">Déploiement d'instances <strong>Exegol</strong> et Kali Linux au sein d'un segment réseau spécifique pour tester des vecteurs d'attaque.</p>
+                  <p className="text-xs text-gray-400">Déploiement d'instances <strong>Exegol</strong> et Kali Linux au sein d'un segment réseau spécifique pour tester des vecteurs d'attaque sans risque pour le reste de l'infra.</p>
                 </div>
               </li>
               <li className="flex items-start gap-3 bg-white/5 p-4 rounded-lg border border-white/5 hover:border-violet-500/20 transition-colors">
@@ -432,7 +405,7 @@ const HomeLabArticlePage = () => {
                 </div>
                 <div>
                   <h5 className="text-white font-bold text-sm underline decoration-violet-500/50">Vulnerable Targets (HoneyPots)</h5>
-                  <p className="text-xs text-gray-400">Mise en place de machines vulnérables pour pratiquer l'exploitation Active Directory et le pivotement réseau en local.</p>
+                  <p className="text-xs text-gray-400">Mise en place de machines vulnérables (style HTB/TryHackMe) pour pratiquer l'exploitation Active Directory et le pivotement réseau en local.</p>
                 </div>
               </li>
             </ul>
