@@ -16,6 +16,9 @@ export default defineConfig({
     }
   },
   build: {
+    // ✅ Optimisation : Inlining des assets sous 20 Ko (inclut ton fichier CSS de 14.6 KiB)
+    // Cela supprime la "chaîne de requêtes critiques" et améliore ton First Contentful Paint.
+    assetsInlineLimit: 20000,
     rollupOptions: {
       output: {
         manualChunks: {
