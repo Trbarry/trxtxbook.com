@@ -108,6 +108,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
           <button 
             onClick={() => handleNavigation('/', 'home')}
             className="flex items-center space-x-2 group"
+            aria-label="Retour à l'accueil"
           >
             <div className="p-2 bg-violet-500/10 rounded-lg group-hover:bg-violet-500/20 transition-colors border border-violet-500/20">
               <Laptop className="w-6 h-6 text-violet-500 transition-transform duration-300 group-hover:-rotate-12" />
@@ -125,6 +126,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
             <button
                 onClick={toggleTheme}
                 className="p-2 rounded-lg bg-surface/50 border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400"
+                aria-label={theme === 'dark' ? "Passer en mode clair" : "Passer en mode sombre"}
             >
                 {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
@@ -132,7 +134,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 text-gray-500 dark:text-gray-400 hover:text-text transition-colors rounded-lg hover:bg-surface/50"
-              aria-label="Toggle menu"
+              aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -178,8 +180,9 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
             <button
               onClick={handleProfileClick}
               className={`mx-2 flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-violet-600 to-violet-500 text-white rounded-full hover:shadow-lg hover:shadow-violet-500/25 transition-all duration-300 border border-white/10 transform hover:scale-105`}
+              aria-label="Ouvrir le profil détaillé"
             >
-              <img src={imageUrl} alt="Profile" className="w-6 h-6 rounded-full border border-white/30" />
+              <img src={imageUrl} alt="Profil" className="w-6 h-6 rounded-full border border-white/30" />
               <span className="font-semibold text-sm">Mon Profil</span>
             </button>
 
@@ -196,7 +199,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg bg-surface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-violet-500 hover:border-violet-500 transition-all active:scale-95"
-              aria-label="Toggle Theme"
+              aria-label={theme === 'dark' ? "Passer en mode clair" : "Passer en mode sombre"}
               title={theme === 'dark' ? "Passer en mode clair" : "Passer en mode sombre"}
             >
               {theme === 'dark' ? (
@@ -209,6 +212,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
             <button
               onClick={() => handleNavigation('/', 'contact')}
               className={`px-3 py-2 text-sm uppercase tracking-wider hover:text-violet-400 transition-colors rounded-lg hover:bg-surface/50 ${activeSection === 'contact' ? 'text-violet-500 font-semibold' : 'text-gray-500 dark:text-gray-400'}`}
+              aria-label="Aller à la section contact"
             >
               Contact
             </button>
@@ -221,7 +225,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
               target="_blank" 
               rel="noopener noreferrer" 
               className="text-gray-400 hover:text-text hover:bg-surface/50 p-2.5 rounded-lg transition-all"
-              aria-label="GitHub"
+              aria-label="Accéder à mon GitHub"
             >
               <Github className="w-6 h-6" />
             </a>
@@ -230,14 +234,14 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
               target="_blank" 
               rel="noopener noreferrer" 
               className="text-gray-400 hover:text-blue-500 hover:bg-surface/50 p-2.5 rounded-lg transition-all"
-              aria-label="LinkedIn"
+              aria-label="Accéder à mon LinkedIn"
             >
               <Linkedin className="w-6 h-6" />
             </a>
             <a 
               href="mailto:tr.barrypro@gmail.com" 
               className="text-gray-400 hover:text-red-500 hover:bg-surface/50 p-2.5 rounded-lg transition-all"
-              aria-label="Email"
+              aria-label="M'envoyer un email"
             >
               <Mail className="w-6 h-6" />
             </a>
@@ -261,8 +265,9 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
                 <button
                   onClick={handleProfileClick}
                   className="w-full bg-violet-500 text-white px-6 py-4 rounded-xl hover:bg-violet-600 transition-all active:scale-95 flex items-center justify-center gap-3 shadow-lg shadow-violet-500/20"
+                  aria-label="Ouvrir mon profil détaillé"
                 >
-                  <img src={imageUrl} alt="Profile" className="w-8 h-8 rounded-full border-2 border-white/20" />
+                  <img src={imageUrl} alt="Profil" className="w-8 h-8 rounded-full border-2 border-white/20" />
                   <span className="font-bold text-lg">Mon Profil</span>
                 </button>
               </div>
@@ -302,15 +307,16 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
                 <button
                   onClick={() => handleNavigation('/', 'contact')}
                   className="text-xl font-medium uppercase tracking-wider text-center py-4 text-gray-500 dark:text-gray-400 hover:text-violet-400"
+                  aria-label="Aller à la section contact"
                 >
                   Contact
                 </button>
               </div>
 
               <div className="flex items-center justify-center gap-6 mt-8">
-                <a href="https://github.com/Trbarry" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface rounded-full text-gray-500 dark:text-gray-400 hover:text-text hover:bg-violet-500 transition-all border border-gray-200 dark:border-white/5"><Github className="w-6 h-6" /></a>
-                <a href="https://www.linkedin.com/in/tristan-barry-43b91b330/" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface rounded-full text-gray-500 dark:text-gray-400 hover:text-text hover:bg-blue-600 transition-all border border-gray-200 dark:border-white/5"><Linkedin className="w-6 h-6" /></a>
-                <a href="mailto:tr.barrypro@gmail.com" className="p-4 bg-surface rounded-full text-gray-500 dark:text-gray-400 hover:text-text hover:bg-red-500 transition-all border border-gray-200 dark:border-white/5"><Mail className="w-6 h-6" /></a>
+                <a href="https://github.com/Trbarry" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface rounded-full text-gray-500 dark:text-gray-400 hover:text-text hover:bg-violet-500 transition-all border border-gray-200 dark:border-white/5" aria-label="GitHub"><Github className="w-6 h-6" /></a>
+                <a href="https://www.linkedin.com/in/tristan-barry-43b91b330/" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface rounded-full text-gray-500 dark:text-gray-400 hover:text-text hover:bg-blue-600 transition-all border border-gray-200 dark:border-white/5" aria-label="LinkedIn"><Linkedin className="w-6 h-6" /></a>
+                <a href="mailto:tr.barrypro@gmail.com" className="p-4 bg-surface rounded-full text-gray-500 dark:text-gray-400 hover:text-text hover:bg-red-500 transition-all border border-gray-200 dark:border-white/5" aria-label="Email"><Mail className="w-6 h-6" /></a>
               </div>
             </div>
           </motion.div>
