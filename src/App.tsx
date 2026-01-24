@@ -3,33 +3,32 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
 
-// ✅ IMPORT DU THEME CONTEXT
+// ✅ Contextes et SEO
 import { ThemeProvider } from './context/ThemeContext';
-
-// SEO Component
 import { SEOHead } from './components/SEOHead';
 
-// Layout Components
+// ✅ Layout Components (Statiques car présents sur toutes les pages)
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { PageTransition } from './components/layout/PageTransition';
 
-// Core Components (Page d'accueil)
+// ✅ Core Components - Hero reste statique pour optimiser le LCP (Largest Contentful Paint)
 import { Hero } from './components/Hero';
-import { Stats } from './components/Stats';
-import { Formation } from './components/Formation';
-import { Projects } from './components/Projects';
-import { Contact } from './components/Contact';
-import { Writeups } from './components/Writeups';
-import { CareerTimeline } from './components/CareerTimeline';
 
-// UI Components
-import { ProfileModal } from './components/ProfileModal';
-import { ScrollMenu } from './components/ScrollMenu';
-import { ScrollReveal } from './components/ScrollReveal';
-import { MouseTrail } from './components/MouseTrail';
-import { AnalyticsTracker } from './components/AnalyticsTracker';
-import { Terminal } from './components/Terminal';
+// --- LAZY LOADING DES COMPOSANTS DE L'ACCUEIL (Below the fold) ---
+const Stats = lazy(() => import('./components/Stats').then(module => ({ default: module.Stats })));
+const Formation = lazy(() => import('./components/Formation').then(module => ({ default: module.Formation })));
+const Projects = lazy(() => import('./components/Projects').then(module => ({ default: module.Projects })));
+const Writeups = lazy(() => import('./components/Writeups').then(module => ({ default: module.Writeups })));
+const Contact = lazy(() => import('./components/Contact').then(module => ({ default: module.Contact })));
+const CareerTimeline = lazy(() => import('./components/CareerTimeline').then(module => ({ default: module.CareerTimeline })));
+
+// --- LAZY LOADING DES UI HELPERS ---
+const ProfileModal = lazy(() => import('./components/ProfileModal').then(module => ({ default: module.ProfileModal })));
+const ScrollMenu = lazy(() => import('./components/ScrollMenu').then(module => ({ default: module.ScrollMenu })));
+const MouseTrail = lazy(() => import('./components/MouseTrail').then(module => ({ default: module.MouseTrail })));
+const Terminal = lazy(() => import('./components/Terminal').then(module => ({ default: module.Terminal })));
+const AnalyticsTracker = lazy(() => import('./components/AnalyticsTracker').then(module => ({ default: module.AnalyticsTracker })));
 
 // --- LAZY LOADING DES PAGES SECONDAIRES ---
 const WriteupsList = lazy(() => import('./components/WriteupsList').then(module => ({ default: module.WriteupsList })));
@@ -39,7 +38,7 @@ const WikiPage = lazy(() => import('./pages/WikiPage').then(module => ({ default
 const LegalPage = lazy(() => import('./pages/LegalPage').then(module => ({ default: module.LegalPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
 
-// Pages de détail et articles
+// Articles et Writeups
 const WriteupPage = lazy(() => import('./pages/WriteupPage').then(module => ({ default: module.WriteupPage })));
 const ArticlePage = lazy(() => import('./pages/ArticlePage').then(module => ({ default: module.ArticlePage })));
 const ADArticlePage = lazy(() => import('./pages/ADArticlePage').then(module => ({ default: module.ADArticlePage })));
@@ -48,24 +47,33 @@ const ExegolArticlePage = lazy(() => import('./pages/ExegolArticlePage').then(mo
 const LinuxMintArticlePage = lazy(() => import('./pages/LinuxMintArticlePage').then(module => ({ default: module.LinuxMintArticlePage })));
 const CPTSJourneyArticlePage = lazy(() => import('./pages/CPTSJourneyArticlePage').then(module => ({ default: module.CPTSJourneyArticlePage })));
 const DogWriteupPage = lazy(() => import('./pages/DogWriteupPage').then(module => ({ default: module.DogWriteupPage })));
-
-// ✅ AJOUT : Article HomeLab & Ambilight
 const HomeLabArticlePage = lazy(() => import('./pages/HomeLabArticlePage'));
 
-// Pages Admin & Tools
+// Admin & Tools
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then(module => ({ default: module.AnalyticsPage })));
 const SitemapGeneratorPage = lazy(() => import('./pages/SitemapGeneratorPage').then(module => ({ default: module.SitemapGeneratorPage })));
-
-// Routes Troll
 const AdminTrollPage = lazy(() => import('./pages/AdminTrollPage').then(module => ({ default: module.AdminTrollPage })));
 
-// Sous-composant pour gérer les transitions de pages
+// Fallback léger pour les sections de l'accueil
+const SectionLoader = () => (
+  <div className="py-20 flex items-center justify-center">
+    <div className="animate-spin rounded-full h-8 w-8 border-2 border-violet-500 border-t-transparent"></div>
+  </div>
+);
+
+interface AnimatedRoutesProps {
+  isLoaded: boolean;
+  setShowProfile: (show: boolean) => void;
+  activeSection: string;
+  setActiveSection: (section: string) => void;
+}
+
 const AnimatedRoutes = ({
   isLoaded,
   setShowProfile,
   activeSection,
   setActiveSection
-}: any) => {
+}: AnimatedRoutesProps) => {
   const location = useLocation();
 
   return (
@@ -80,25 +88,29 @@ const AnimatedRoutes = ({
           {/* PAGE D'ACCUEIL */}
           <Route path="/" element={
             <>
-              <ScrollMenu activeSection={activeSection} setActiveSection={setActiveSection} />
+              <Suspense fallback={null}>
+                <ScrollMenu activeSection={activeSection} setActiveSection={setActiveSection} />
+              </Suspense>
               
               <PageTransition>
                 <div id="home">
                   <Hero isLoaded={isLoaded} setShowProfile={setShowProfile} />
                 </div>
-                <ScrollReveal><div id="stats"><Stats /></div></ScrollReveal>
-                <ScrollReveal><div id="formation"><Formation /></div></ScrollReveal>
-                
-                <ScrollReveal><CareerTimeline /></ScrollReveal>
 
-                <ScrollReveal><div id="projects"><Projects /></div></ScrollReveal>
-                <ScrollReveal><div id="writeups"><Writeups /></div></ScrollReveal>
-                <ScrollReveal><div id="contact"><Contact /></div></ScrollReveal>
+                {/* Chargement progressif des sections */}
+                <Suspense fallback={<SectionLoader />}>
+                  <div id="stats"><Stats /></div>
+                  <div id="formation"><Formation /></div>
+                  <CareerTimeline />
+                  <div id="projects"><Projects /></div>
+                  <div id="writeups"><Writeups /></div>
+                  <div id="contact"><Contact /></div>
+                </Suspense>
               </PageTransition>
             </>
           } />
 
-          {/* LISTES */}
+          {/* LISTES & PAGES SECONDAIRES */}
           <Route path="/writeups" element={<PageTransition><WriteupsList /></PageTransition>} />
           <Route path="/projects" element={<PageTransition><ProjectsList /></PageTransition>} />
           <Route path="/certifications" element={<PageTransition><CertificationsList /></PageTransition>} />
@@ -115,8 +127,6 @@ const AnimatedRoutes = ({
           <Route path="/articles/exegol-docker" element={<PageTransition><ExegolArticlePage /></PageTransition>} />
           <Route path="/articles/linux-mint-revival" element={<PageTransition><LinuxMintArticlePage /></PageTransition>} />
           <Route path="/articles/cpts-journey" element={<PageTransition><CPTSJourneyArticlePage /></PageTransition>} />
-          
-          {/* ✅ AJOUT : Route Deep Dive HomeLab */}
           <Route path="/articles/homelab-infrastructure-deep-dive" element={<PageTransition><HomeLabArticlePage /></PageTransition>} />
           
           {/* ADMIN & TOOLS */}
@@ -131,7 +141,7 @@ const AnimatedRoutes = ({
           {/* PAGES LEGALES */}
           <Route path="/mentions-legales" element={<PageTransition><LegalPage /></PageTransition>} />
 
-          {/* CATCH-ALL ROUTE POUR 404 */}
+          {/* CATCH-ALL 404 */}
           <Route path="*" element={<NotFoundPage />} />
         
         </Routes>
@@ -175,10 +185,15 @@ function App() {
         <div className="min-h-screen relative text-text bg-background overflow-hidden selection:bg-violet-500/30 transition-colors duration-300">
           
           <SEOHead />
-          <AnalyticsTracker />
-          <Terminal />
+          
+          {/* UI Helpers chargés en lazy pour ne pas alourdir le thread principal au démarrage */}
+          <Suspense fallback={null}>
+            <AnalyticsTracker />
+            <Terminal />
+            <MouseTrail />
+          </Suspense>
+
           <Header setShowProfile={setShowProfile} setActiveSection={setActiveSection} activeSection={activeSection} />
-          <MouseTrail />
           
           <AnimatedRoutes
             isLoaded={isLoaded}
@@ -188,7 +203,10 @@ function App() {
           />
 
           <Footer />
-          {showProfile && <ProfileModal onClose={() => setShowProfile(false)} />}
+          
+          <Suspense fallback={null}>
+            {showProfile && <ProfileModal onClose={() => setShowProfile(false)} />}
+          </Suspense>
         </div>
       </Router>
     </ThemeProvider>
