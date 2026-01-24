@@ -173,6 +173,19 @@ const HomeLabArticlePage = () => {
               </div>
             </div>
 
+            {/* Insertion du Dashboard Proxmox pour valider la couche logicielle */}
+            <div className="my-10 group relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-600/20 to-cyan-600/20 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+              <img 
+                src="https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/proxmox%20(1).webp" 
+                alt="Proxmox VE Dashboard - Node Overview" 
+                className="relative rounded-xl border border-white/10 w-full object-cover shadow-2xl"
+              />
+              <p className="text-center text-xs text-gray-500 mt-4 italic font-mono uppercase tracking-widest">
+                Proxmox VE 8.x Dashboard | Hypervisor Resource Management
+              </p>
+            </div>
+
             <div className="my-10 group relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
               <img 
