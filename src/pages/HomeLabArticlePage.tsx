@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   Cpu, Network, Shield, Zap, Box, Layers, ArrowLeft, 
   Code, Tv, Activity, Terminal, Globe, Lock, HardDrive, 
-  GitBranch, Play, Target, ShieldAlert 
+  GitBranch, Play, Target, ShieldAlert, FlaskConical, Lightbulb
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { useNavigate } from 'react-router-dom';
@@ -137,6 +137,37 @@ const HomeLabArticlePage = () => {
             "Transformer une contrainte domestique en un laboratoire de cybersécurité et de traitement de signal."
           </p>
         </header>
+
+        {/* Section 0: Introduction & Philosophy */}
+        <section className="mb-20">
+          <h2 className="text-3xl font-bold mb-8 flex items-center gap-3 text-violet-400">
+            <FlaskConical className="w-8 h-8" /> Genèse & Philosophie du Projet
+          </h2>
+          <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
+            <p>
+              Ce <strong>HomeLab</strong> n'est pas né d'un simple besoin de stockage, mais d'une volonté farouche de <strong>pratiquer</strong> et de s'approprier les technologies qui régissent les infrastructures modernes. Partant du postulat qu'une journée sans apprendre est une journée perdue, ce laboratoire est devenu mon terrain d'expérimentation principal pour ma <strong>reconversion stratégique</strong> dans l'IT et la cybersécurité.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+              <div className="p-6 bg-white/5 rounded-2xl border border-white/5">
+                <h4 className="text-white font-bold flex items-center gap-2 mb-3">
+                  <Lightbulb className="w-5 h-5 text-amber-400" /> Curiosité & Prise en main
+                </h4>
+                <p className="text-sm text-gray-400">
+                  Comprendre le <strong>"Pourquoi"</strong> avant le <strong>"Comment"</strong>. Ce projet m'a permis une prise en main directe de concepts complexes (virtualisation, IaC, routage) que l'on ne peut maîtriser qu'en se confrontant au déploiement réel.
+                </p>
+              </div>
+              <div className="p-6 bg-white/5 rounded-2xl border border-white/5">
+                <h4 className="text-white font-bold flex items-center gap-2 mb-3">
+                  <Shield className="w-5 h-5 text-emerald-400" /> Sécurité Prioritaire
+                </h4>
+                <p className="text-sm text-gray-400">
+                  Appliquer les standards du <strong>Hardening</strong> et de la micro-segmentation dans un environnement domestique pour en faire un bastion résilient, tout en préparant le terrain pour des analyses de menaces plus avancées.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Section 1: The Compute Layer */}
         <section className="mb-20">
