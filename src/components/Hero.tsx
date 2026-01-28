@@ -107,7 +107,7 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
             </h1>
             
             <p className="text-base sm:text-xl md:text-2xl text-gray-700 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed px-2">
-              Technicien Système & Réseau le jour, <span className="text-violet-700 dark:text-violet-400 font-bold">Pentester</span> la nuit.
+              Technicien Système & Réseau le jour, <span className="text-violet-700 dark:text-violet-400 font-bold">Apprenti Pentester</span> la nuit.
               <br className="hidden md:block" />
               <span className="block mt-2 text-sm md:text-lg">
                 Exploration • Sécurisation • <span className="text-gray-900 dark:text-white border-b-2 border-violet-500/50">Documentation</span>
