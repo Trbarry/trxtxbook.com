@@ -79,7 +79,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
               </span>
               <span className="flex items-center gap-1.5 bg-blue-500/10 text-blue-700 dark:text-blue-200 px-4 py-1.5 rounded-full text-sm font-semibold border border-blue-500/20">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                Cybersecurity & Pentest
+                Cybersécurité & Pentest
               </span>
             </div>
           </div>
@@ -112,7 +112,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                 </span>
-                Active Role
+                Poste Actuel
               </div>
             </div>
 
@@ -121,19 +121,21 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                 <div>
                   <h4 className="text-violet-700 dark:text-violet-300 font-bold flex items-center gap-2 uppercase text-xs tracking-[0.2em] mb-3">
                     <Activity className="w-4 h-4" />
-                    Focus Infra & Sécurité
+                    Support, Infra & Cloud
                   </h4>
                   <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-[15px]">
-                    Au sein d'une infrastructure multi-sites, j'interviens sur le maintien opérationnel <strong className="text-violet-600 dark:text-violet-400 font-bold">MCO</strong> et le durcissement <strong className="text-violet-600 dark:text-violet-400 font-bold">Hardening</strong> des systèmes. Mon rôle inclut la gestion hybride des identités et la segmentation réseau.
+                    En tant que technicien polyvalent, j'assure le <strong className="text-violet-600 dark:text-violet-400 font-bold">maintien opérationnel</strong> de l'infrastructure au quotidien, allant du <strong className="text-violet-600 dark:text-violet-400 font-bold">Support utilisateur (N1/N2)</strong> à la gestion de projets <strong className="text-violet-600 dark:text-violet-400 font-bold">Système et Réseau</strong>. Mon périmètre inclut l'administration complète de l'environnement <strong className="text-violet-600 dark:text-violet-400 font-bold">Cloud (M365, Entra ID, Intune)</strong> pour garantir une gestion moderne des postes et des accès.
+                    <br /><br />
+                    Ma culture <strong className="text-violet-600 dark:text-violet-400 font-bold">Red Team</strong> constitue un atout majeur : en adoptant une vision d'attaquant, j'apporte un regard critique qui permet d'identifier les vulnérabilités en amont et de renforcer concrètement la sécurité de l'entreprise.
                   </p>
                 </div>
                 
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {[
-                    { icon: Lock, text: "Identity Management : AD DS, Entra ID & RBAC" },
-                    { icon: Server, text: "Admin Sys : GPO Hardening & WDS Deployment" },
-                    { icon: Network, text: "Network : VLAN Segmentation & L2/L3 Switching" },
-                    { icon: Cloud, text: "Cloud : Intune (MDM/MAM) & M365 Security" },
+                    { icon: Lock, text: "Gestion des Identités : AD DS, Entra ID & RBAC" },
+                    { icon: Server, text: "Admin Sys : GPO Hardening & Projets Infra" },
+                    { icon: Network, text: "Network : Segmentation VLAN & Switching L2/L3" },
+                    { icon: Cloud, text: "Cloud : Intune (MDM/MAM) & Sécurité M365" },
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300 bg-white dark:bg-[#13131a] p-4 rounded-xl border border-gray-200 dark:border-white/5 hover:border-violet-500/30 transition-all">
                       <item.icon className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />
@@ -182,8 +184,8 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                     </span>
                     <div className="space-y-2">
                       <p className="text-sm font-bold text-gray-800 dark:text-gray-200 flex items-center justify-between">
-                        CCNA Preparation
-                        <span className="text-[10px] bg-blue-500/10 text-blue-500 px-1.5 py-0.5 rounded">In Progress</span>
+                        Préparation CCNA
+                        <span className="text-[10px] bg-blue-500/10 text-blue-500 px-1.5 py-0.5 rounded">En cours</span>
                       </p>
                       <p className="text-[11px] text-gray-500 italic leading-snug">Routage statique/dynamique, STP, VLAN Trunking & ACLs.</p>
                     </div>
@@ -196,7 +198,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                     <div className="space-y-2">
                       <p className="text-sm font-bold text-gray-800 dark:text-gray-200 flex items-center justify-between">
                         OSCP (PEN-200)
-                        <span className="text-[10px] bg-red-500/10 text-red-500 px-1.5 py-0.5 rounded">In Progress</span>
+                        <span className="text-[10px] bg-red-500/10 text-red-500 px-1.5 py-0.5 rounded">En cours</span>
                       </p>
                       <p className="text-[11px] text-gray-500 italic leading-snug">Exploitation d'infrastructures, PrivEsc avancée & Post-Exploit.</p>
                     </div>
@@ -207,13 +209,13 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
             <div className="bg-gray-50 dark:bg-[#1a1a20] p-8 rounded-2xl border border-gray-200 dark:border-violet-500/10 flex flex-col">
                 <h3 className="text-[11px] font-black text-gray-500 dark:text-gray-400 uppercase mb-6 flex items-center gap-3 tracking-[0.2em]">
                   <Award className="w-5 h-5 text-yellow-500" />
-                  Validated Credentials
+                  Certifications Validées
                 </h3>
                 <ul className="space-y-3">
                     {[
-                      { name: "HTB CPTS", status: "Certified", color: "text-green-500" },
-                      { name: "eJPTv2", status: "Certified", color: "text-green-500" },
-                      { name: "Microsoft AZ-900", status: "Certified", color: "text-green-500" }
+                      { name: "HTB CPTS", status: "Certifié", color: "text-green-500" },
+                      { name: "eJPTv2", status: "Certifié", color: "text-green-500" },
+                      { name: "Microsoft AZ-900", status: "Certifié", color: "text-green-500" }
                     ].map((cert, i) => (
                       <li key={i} className="flex items-center justify-between p-4 bg-white dark:bg-[#13131a] rounded-xl border border-gray-200 dark:border-white/5 transition-all hover:border-violet-500/30">
                         <span className="text-gray-800 dark:text-gray-100 font-bold text-sm">{cert.name}</span>
@@ -256,7 +258,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                         <div className="flex items-start gap-4">
                             <Target className="w-6 h-6 text-violet-600 mt-1 shrink-0" />
                             <div>
-                              <h4 className="font-bold text-gray-900 dark:text-white text-sm uppercase tracking-wider">Vision Long Terme</h4>
+                              <h4 className="font-bold text-gray-900 dark:text-white text-sm uppercase tracking-wider">Vision à Long Terme</h4>
                               <p className="text-gray-600 dark:text-gray-300 mt-2 text-sm leading-relaxed">
                                 Expertise en <strong className="text-violet-600 dark:text-violet-400 font-bold">Red Teaming</strong> & <strong className="text-violet-600 dark:text-violet-400 font-bold">Audit de Sécurité</strong>. Allier la maîtrise des infrastructures hybrides à la capacité d'évaluer leur résilience.
                               </p>
