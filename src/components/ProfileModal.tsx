@@ -12,12 +12,12 @@ interface ProfileModalProps {
 const techStack = [
   { label: 'AD DS & Entra ID', category: 'Identity' },
   { label: 'GPO Hardening', category: 'Governance' },
-  { label: 'RBAC (AGDLP)', category: 'Identity' },
-  { label: 'Hybrid Identity', category: 'Cloud' },
   { label: 'Microsoft Intune (MDM)', category: 'Endpoint' },
+  { label: 'Hybrid Identity', category: 'Cloud' },
   { label: 'Network Segmentation (VLANs)', category: 'Network' },
+  { label: 'Monitoring (PRTG)', category: 'Ops' },
+  { label: 'ITAM & Ticketing (GLPI)', category: 'Governance' },
   { label: 'PowerShell Automation', category: 'Ops' },
-  { label: 'ITAM (GLPI)', category: 'Governance' },
   { label: 'NTFS Permissions Audit', category: 'Security' },
   { label: 'M365 Security Center', category: 'Cloud' }
 ];
@@ -121,10 +121,10 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                 <div>
                   <h4 className="text-violet-700 dark:text-violet-300 font-bold flex items-center gap-2 uppercase text-xs tracking-[0.2em] mb-3">
                     <Activity className="w-4 h-4" />
-                    Support, Infra & Cloud
+                    Support, Infra & Supervision
                   </h4>
                   <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-[15px]">
-                    En tant que technicien polyvalent, j'assure le <strong className="text-violet-600 dark:text-violet-400 font-bold">maintien opérationnel</strong> de l'infrastructure au quotidien, allant du <strong className="text-violet-600 dark:text-violet-400 font-bold">Support utilisateur (N1/N2)</strong> à la gestion de projets <strong className="text-violet-600 dark:text-violet-400 font-bold">Système et Réseau</strong>. Mon périmètre inclut l'administration complète de l'environnement <strong className="text-violet-600 dark:text-violet-400 font-bold">Cloud (M365, Entra ID, Intune)</strong> pour garantir une gestion moderne des postes et des accès.
+                    En tant que technicien polyvalent, j'assure le <strong className="text-violet-600 dark:text-violet-400 font-bold">maintien opérationnel</strong> de l'infrastructure, allant du <strong className="text-violet-600 dark:text-violet-400 font-bold">Support (N1/N2)</strong> à la gestion de projets <strong className="text-violet-600 dark:text-violet-400 font-bold">Système et Réseau</strong>. Mon périmètre inclut l'administration Cloud (<strong className="text-violet-600 dark:text-violet-400 font-bold">M365, Entra ID, Intune</strong>) ainsi que le pilotage du parc via <strong className="text-violet-600 dark:text-violet-400 font-bold">GLPI</strong> et la supervision réseau avec <strong className="text-violet-600 dark:text-violet-400 font-bold">PRTG</strong>.
                     <br /><br />
                     Ma culture <strong className="text-violet-600 dark:text-violet-400 font-bold">Red Team</strong> constitue un atout majeur : en adoptant une vision d'attaquant, j'apporte un regard critique qui permet d'identifier les vulnérabilités en amont et de renforcer concrètement la sécurité de l'entreprise.
                   </p>
@@ -132,10 +132,10 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                 
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {[
-                    { icon: Lock, text: "Gestion des Identités : AD DS, Entra ID & RBAC" },
-                    { icon: Server, text: "Admin Sys : GPO Hardening & Projets Infra" },
-                    { icon: Network, text: "Network : Segmentation VLAN & Switching L2/L3" },
-                    { icon: Cloud, text: "Cloud : Intune (MDM/MAM) & Sécurité M365" },
+                    { icon: Cloud, text: "Cloud : M365, Entra ID & Intune" },
+                    { icon: Server, text: "Gestion de Parc : GLPI & AD DS" },
+                    { icon: Activity, text: "Monitoring : Supervision PRTG" },
+                    { icon: Network, text: "Réseau : Segmentation & Switching" },
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300 bg-white dark:bg-[#13131a] p-4 rounded-xl border border-gray-200 dark:border-white/5 hover:border-violet-500/30 transition-all">
                       <item.icon className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />
