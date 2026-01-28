@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { 
   Briefcase, Target, Lightbulb, Server, Cpu, Network,
-  Terminal, Award, CheckCircle2, X, BookOpen, ShieldCheck, 
+  Terminal, Award, CheckCircle2, X, ShieldCheck, 
   Lock, Cloud, Activity, Globe
 } from 'lucide-react';
 
@@ -124,7 +124,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                     Focus Infra & Sécurité
                   </h4>
                   <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-[15px]">
-                    Au sein d'une infrastructure multi-sites, j'interviens sur le maintien opérationnel (**MCO**) et le durcissement (**Hardening**) des systèmes. Mon rôle inclut la gestion hybride des identités et la segmentation réseau.
+                    Au sein d'une infrastructure multi-sites, j'interviens sur le maintien opérationnel <strong className="text-violet-600 dark:text-violet-400 font-bold">MCO</strong> et le durcissement <strong className="text-violet-600 dark:text-violet-400 font-bold">Hardening</strong> des systèmes. Mon rôle inclut la gestion hybride des identités et la segmentation réseau.
                   </p>
                 </div>
                 
@@ -171,7 +171,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                   Laboratoire & Auto-formation
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-                  Détenteur de la **CPTS**, je poursuis mon apprentissage vers l'expertise réseau et offensive. Mon environnement de prédilection est **Exegol** pour la versatilité des outils de pentest.
+                  Détenteur de la <strong className="text-blue-600 dark:text-blue-400 font-bold">CPTS</strong>, je poursuis mon apprentissage vers l'expertise réseau et offensive. Mon environnement de prédilection est <strong className="text-blue-600 dark:text-blue-400 font-bold">Exegol</strong> pour la versatilité des outils de pentest.
                 </p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -258,7 +258,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                             <div>
                               <h4 className="font-bold text-gray-900 dark:text-white text-sm uppercase tracking-wider">Vision Long Terme</h4>
                               <p className="text-gray-600 dark:text-gray-300 mt-2 text-sm leading-relaxed">
-                                Expertise en **Red Teaming** & **Audit de Sécurité**. Allier la maîtrise des infrastructures hybrides à la capacité d'évaluer leur résilience.
+                                Expertise en <strong className="text-violet-600 dark:text-violet-400 font-bold">Red Teaming</strong> & <strong className="text-violet-600 dark:text-violet-400 font-bold">Audit de Sécurité</strong>. Allier la maîtrise des infrastructures hybrides à la capacité d'évaluer leur résilience.
                               </p>
                             </div>
                         </div>
