@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { WriteupDetail } from '../components/WriteupDetail';
+import { DifficultyBackground } from '../components/DifficultyBackground';
 import { SEOHead } from '../components/SEOHead';
 import { Writeup } from '../types/writeup';
 
@@ -66,9 +67,12 @@ export const WriteupPage: React.FC = () => {
         type="article"
         publishedTime={writeup.created_at}
       />
-      {/* ✅ CHANGEMENT : bg-background */}
-      <div className="min-h-screen pt-24 pb-20 bg-background transition-colors duration-300">
-        <WriteupDetail writeup={writeup} />
+      {/* ✅ Arrière-plan dynamique selon la difficulté */}
+      <div className="min-h-screen pt-24 pb-20 bg-background transition-colors duration-300 relative">
+        <DifficultyBackground difficulty={writeup.difficulty} tags={writeup.tags} />
+        <div className="relative z-10">
+          <WriteupDetail writeup={writeup} />
+        </div>
       </div>
     </>
   );
