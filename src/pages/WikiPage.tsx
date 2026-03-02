@@ -176,13 +176,11 @@ const WikiWelcome: React.FC<{
   onSelect: (page: WikiPageType) => void;
 }> = ({ pages, onShowMasonry, onSelect }) => {
   const totalWords = pages.reduce((acc, p) => acc + (p.content?.split(/\s+/).length || 0), 0);
-  const totalTags = new Set(pages.flatMap(p => p.tags || [])).size;
   const lastUpdated = [...pages].sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()).slice(0, 5);
 
   const stats = [
     { label: "Notes", value: pages.length, icon: Database, color: "violet" },
     { label: "Mots", value: `${(totalWords / 1000).toFixed(1)}k`, icon: FileText, color: "blue" },
-    { label: "Tags", value: totalTags, icon: Hash, color: "indigo" },
   ];
 
   return (
@@ -191,8 +189,10 @@ const WikiWelcome: React.FC<{
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-600 dark:text-violet-300 text-xs font-medium mb-6 shadow-sm">
           <Brain className="w-3.5 h-3.5" /><span>Second Brain v2.5</span>
         </div>
-        <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">Wiki <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400">Personnel</span></h2>
-        <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8">Ma base de connaissances de {pages.length} notes interconnectées.</p>
+        <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">Notes <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400">Personnelles</span></h2>
+        <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8">
+          Mon environnement de travail partagé avec la communauté. Une démarche professionnelle pour diffuser mes connaissances, sans prétention ni syndrome du sauveur.
+        </p>
         
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           <button 
@@ -206,7 +206,7 @@ const WikiWelcome: React.FC<{
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-3xl mb-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-2xl mb-16">
         {stats.map((stat, i) => (
           <div key={i} className="bg-white dark:bg-[#13131a]/50 border border-gray-200 dark:border-white/5 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 shadow-sm group hover:border-violet-500/30 transition-all duration-300">
             <div className={`p-3 rounded-xl bg-violet-500/10 text-violet-500 group-hover:scale-110 transition-transform`}>
