@@ -1,20 +1,23 @@
 import { supabase } from './supabase';
 
-// ... (Garde l'interface AnalyticsData telle quelle) ...
-interface AnalyticsData {
+export interface AnalyticsData {
   unique_visitors: number;
   total_page_views: number;
   top_pages: Array<{ path: string; count: number }>;
   countries: Array<{ country: string; count: number }>;
   devices: Array<{ device: string; count: number }>;
+  referrers: Array<{ source: string; count: number }>;
+  languages: Array<{ lang: string; count: number }>;
   recent_visitors: Array<{
     visitor_id: string;
     page_path: string;
     country?: string;
     device_type?: string;
     browser?: string;
+    referrer?: string;
     created_at: string;
   }>;
+  traffic_chart: Array<{ time: string; visitors: number; views: number }>;
 }
 
 class SimpleAnalytics {

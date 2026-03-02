@@ -128,17 +128,18 @@ const WikiWelcome = () => {
   );
 };
 
+import { useWikiPages } from '../hooks/useWikiPages';
+
 // --- PAGE PRINCIPALE ---
 export const WikiPage: React.FC = () => {
-  const [pages, setPages] = useState<WikiPageType[]>([]);
+  const { pages = [], isLoading, error: fetchError } = useWikiPages();
   const [selectedPage, setSelectedPage] = useState<WikiPageType | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [loading, setLoading] = useState(true);
   const [tree, setTree] = useState<Record<string, TreeNode>>({});
   const [toc, setToc] = useState<TocItem[]>([]);
 
-  useEffect(() => { fetchPages(); if (window.innerWidth < 1024) setIsSidebarOpen(false); }, []);
+  useEffect(() => { if (window.innerWidth < 1024) setIsSidebarOpen(false); }, []);
   useEffect(() => {
     // (Logique Tree inchangée...)
     const newTree: Record<string, TreeNode> = {};
@@ -156,11 +157,6 @@ export const WikiPage: React.FC = () => {
   }, [pages, searchQuery]);
 
   useEffect(() => { if (selectedPage?.content) setToc(extractHeadings(selectedPage.content)); else setToc([]); }, [selectedPage]);
-
-  const fetchPages = async () => {
-    try { const { data, error } = await supabase.from('wiki_pages').select('*').eq('published', true); if (error) throw error; setPages(data || []); } 
-    catch (err) { console.error(err); } finally { setLoading(false); }
-  };
 
   return (
     <>
@@ -186,7 +182,7 @@ export const WikiPage: React.FC = () => {
             </div>
           </div>
           <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-            {loading ? <div className="flex justify-center py-20"><div className="w-8 h-8 border-2 border-violet-500/30 border-t-violet-500 rounded-full animate-spin"></div></div> : Object.keys(tree).length === 0 ? <div className="text-center py-12 text-gray-500"><p>Aucune donnée.</p></div> : <FileTree nodes={tree} onSelect={(page) => { setSelectedPage(page); if (window.innerWidth < 1024) setIsSidebarOpen(false); }} selectedId={selectedPage?.id} />}
+            {isLoading ? <div className="flex justify-center py-20"><div className="w-8 h-8 border-2 border-violet-500/30 border-t-violet-500 rounded-full animate-spin"></div></div> : Object.keys(tree).length === 0 ? <div className="text-center py-12 text-gray-500"><p>Aucune donnée.</p></div> : <FileTree nodes={tree} onSelect={(page) => { setSelectedPage(page); if (window.innerWidth < 1024) setIsSidebarOpen(false); }} selectedId={selectedPage?.id} />}
           </div>
         </aside>
 

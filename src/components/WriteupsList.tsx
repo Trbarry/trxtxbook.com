@@ -7,16 +7,16 @@ import { SEOHead } from './SEOHead';
 import { getOptimizedUrl } from '../lib/imageUtils';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import { useWriteups } from '../hooks/useWriteups';
+
 export const WriteupsList: React.FC = () => {
-  const [writeups, setWriteups] = useState<Writeup[]>([]);
+  const { writeups = [], isLoading, error: fetchError } = useWriteups();
   const [filteredWriteups, setFilteredWriteups] = useState<Writeup[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState<string>('all');
   const navigate = useNavigate();
 
-  useEffect(() => { window.scrollTo(0, 0); fetchWriteups(); }, []);
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   useEffect(() => {
     let results = writeups;
@@ -39,17 +39,6 @@ export const WriteupsList: React.FC = () => {
     }
     setFilteredWriteups(results);
   }, [searchQuery, selectedPlatform, writeups]);
-
-  const fetchWriteups = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const { data, error } = await supabase.from('writeups').select('*').eq('published', true).order('created_at', { ascending: false });
-      if (error) throw error;
-      setWriteups(data || []);
-      setFilteredWriteups(data || []);
-    } catch (err: any) { setError('Impossible de charger les archives.'); } finally { setLoading(false); }
-  };
 
   const getDifficultyStyles = (difficulty: string) => {
     const d = difficulty?.toLowerCase() || '';
@@ -136,7 +125,7 @@ export const WriteupsList: React.FC = () => {
             </div>
           </div>
 
-          {loading ? (
+          {isLoading ? (
             <div className="flex justify-center py-32"><div className="animate-spin rounded-full h-12 w-12 border-2 border-violet-500 border-t-transparent"></div></div>
           ) : filteredWriteups.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 text-center bg-surface dark:bg-[#1a1a1f]/50 rounded-2xl border border-gray-200 dark:border-white/5">

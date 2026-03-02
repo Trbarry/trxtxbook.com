@@ -4,30 +4,10 @@ import {
   Smartphone, Monitor, Tablet, MapPin, Activity, Shield,
   Link as LinkIcon, Languages, Clock, ArrowUpRight
 } from 'lucide-react';
-import { useAnalytics } from '../lib/analytics';
+import { AnalyticsData } from '../lib/analytics';
+import { useAnalyticsData } from '../hooks/useAnalyticsData';
 import { motion } from 'framer-motion';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-
-// Mise à jour de l'interface
-interface AnalyticsData {
-  unique_visitors: number;
-  total_page_views: number;
-  top_pages: Array<{ path: string; count: number }>;
-  countries: Array<{ country: string; count: number }>;
-  devices: Array<{ device: string; count: number }>;
-  referrers: Array<{ source: string; count: number }>;
-  languages: Array<{ lang: string; count: number }>;
-  recent_visitors: Array<{
-    visitor_id: string;
-    page_path: string;
-    country?: string;
-    device_type?: string;
-    browser?: string;
-    referrer?: string;
-    created_at: string;
-  }>;
-  traffic_chart: Array<{ time: string; visitors: number; views: number }>; // Nouveau champ
-}
 
 // Composant Custom Tooltip pour le graph
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -100,29 +80,12 @@ const ProgressBar = ({ label, value, max, colorClass = "violet" }: any) => (
 );
 
 export const AnalyticsDashboard: React.FC = () => {
-  const [data, setData] = useState<AnalyticsData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { analyticsData: data, isLoading, error, mutate: fetchAnalytics } = useAnalyticsData();
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
-  const { getAnalytics } = useAnalytics();
-
-  const fetchAnalytics = async () => {
-    try {
-      setLoading(true);
-      const analyticsData = await getAnalytics();
-      setData(analyticsData);
-      setLastUpdate(new Date());
-    } catch (error) {
-      console.error('Error fetching analytics:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
-    fetchAnalytics();
-    const interval = setInterval(fetchAnalytics, 2 * 60 * 1000);
-    return () => clearInterval(interval);
-  }, []);
+    if (data) setLastUpdate(new Date());
+  }, [data]);
 
   const getDeviceIcon = (type: string) => {
     switch (type) {
@@ -142,7 +105,7 @@ export const AnalyticsDashboard: React.FC = () => {
     }
   };
 
-  if (loading && !data) {
+  if (isLoading && !data) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
         <div className="relative">
@@ -181,8 +144,8 @@ export const AnalyticsDashboard: React.FC = () => {
               <Clock className="w-3 h-3" /> Synchro : {lastUpdate.toLocaleTimeString('fr-FR')}
             </span>
           </div>
-          <button onClick={fetchAnalytics} className="p-3 hover:bg-violet-500 hover:text-white text-gray-400 rounded-lg transition-all">
-            <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
+          <button onClick={() => fetchAnalytics()} className="p-3 hover:bg-violet-500 hover:text-white text-gray-400 rounded-lg transition-all">
+            <RefreshCw className={`w-5 h-5 ${isLoading ? 'animate-spin' : ''}`} />
           </button>
         </div>
       </div>
