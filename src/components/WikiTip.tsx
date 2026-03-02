@@ -130,7 +130,7 @@ export const WikiTip: React.FC<WikiTipProps> = ({ pageId, context = "article" })
             </motion.span>
           </AnimatePresence>
           <span className="text-[9px] text-gray-500 uppercase tracking-wider font-bold mt-1">
-            Kudos
+            Signaux
           </span>
         </div>
 

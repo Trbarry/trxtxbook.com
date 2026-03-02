@@ -6,5 +6,6 @@ export interface WikiPage {
   content: string;
   tags: string[];
   likes: number; // ✅ NOUVEAU
+  published: boolean;
   updated_at: string;
 }
