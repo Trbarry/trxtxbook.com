@@ -189,9 +189,9 @@ const WikiWelcome: React.FC<{
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-600 dark:text-violet-300 text-xs font-medium mb-6 shadow-sm">
           <Brain className="w-3.5 h-3.5" /><span>Second Brain v2.5</span>
         </div>
-        <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">Notes <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400">Personnelles</span></h2>
+        <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">Hacking <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400">Bowl of Rice</span></h2>
         <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8">
-          Mon environnement de travail partagé avec la communauté. Une démarche professionnelle pour diffuser mes connaissances, sans prétention ni syndrome du sauveur.
+          Mon environnement de travail partagé avec la communauté. Une démarche professionnelle pour diffuser mes connaissances, sans prétention.
         </p>
         
         <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -453,7 +453,7 @@ export const WikiPage: React.FC = () => {
           <div className="p-6 border-b border-gray-100 dark:border-white/5">
             <div className="flex items-center gap-3 mb-6 cursor-pointer" onClick={() => { setSelectedPage(null); setIsMasonryView(false); }}>
               <div className="p-2.5 bg-gradient-to-br from-violet-600 to-indigo-600 rounded-xl shadow-lg"><Book className="w-5 h-5 text-white" /></div>
-              <span className="font-bold text-xl text-gray-900 dark:text-white tracking-tight">Wiki TRTNX</span>
+              <span className="font-bold text-xl text-gray-900 dark:text-white tracking-tight">Hacking Bowl of Rice</span>
             </div>
             <div className="relative group">
               <div className="relative flex items-center bg-gray-50 dark:bg-[#0a0a0f] border border-gray-200 dark:border-white/10 rounded-xl focus-within:border-violet-500/50 transition-colors">

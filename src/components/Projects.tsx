@@ -8,7 +8,6 @@ import { ADProject } from './projects/ADProject';
 import { SteamDeckProject } from './projects/SteamDeckProject';
 import { ExegolProject } from './projects/ExegolProject';
 import { LinuxMintProject } from './projects/LinuxMintProject';
-import { CPTSJourneyProject } from './projects/CPTSJourneyProject';
 import { HomeLabProject } from './projects/HomeLabProjects'; // Import du projet maître
 import { getOptimizedUrl } from '../lib/imageUtils';
 
@@ -19,7 +18,6 @@ export const Projects: React.FC = () => {
   // HomeLabProject est placé en premier pour souligner l'infrastructure globale
   const projects: Project[] = [
     HomeLabProject,
-    CPTSJourneyProject, 
     LinuxMintProject, 
     ExegolProject, 
     ADProject, 

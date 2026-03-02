@@ -10,7 +10,16 @@ export function useWikiPages() {
       .eq('published', true);
     
     if (error) throw error;
-    return data || [];
+    
+    // Filter out duplicates or unwanted content
+    const filtered = (data || []).filter(page => {
+      // Remove CPTS duplicate if it's in a specific category or title
+      const isCptsDuplicate = page.category?.toLowerCase().includes('cpts') || 
+                             page.title?.toLowerCase().includes('cpts');
+      return !isCptsDuplicate;
+    });
+
+    return filtered;
   });
 
   return {
