@@ -27,6 +27,26 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
     return 'text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-500/20 bg-gray-100 dark:bg-gray-500/5';
   };
 
+  const getDifficultyAccent = (difficulty: string) => {
+    const d = difficulty?.toLowerCase() || '';
+    if (d.includes('easy') || d.includes('facile')) return 'green';
+    if (d.includes('medium') || d.includes('moyen')) return 'orange';
+    if (d.includes('hard') || d.includes('difficile')) return 'red';
+    if (d.includes('insane')) return 'purple';
+    return 'violet';
+  };
+
+  const accent = getDifficultyAccent(writeup.difficulty);
+  const accentColors: Record<string, { prose: string, border: string, shadow: string, glow: string }> = {
+    green: { prose: 'prose-green', border: 'border-green-500/30', shadow: 'shadow-green-500/10', glow: 'text-green-400' },
+    orange: { prose: 'prose-orange', border: 'border-orange-500/30', shadow: 'shadow-orange-500/10', glow: 'text-orange-400' },
+    red: { prose: 'prose-red', border: 'border-red-500/30', shadow: 'shadow-red-500/10', glow: 'text-red-500' },
+    purple: { prose: 'prose-purple', border: 'border-purple-500/30', shadow: 'shadow-purple-500/10', glow: 'text-purple-500' },
+    violet: { prose: 'prose-violet', border: 'border-violet-500/30', shadow: 'shadow-violet-500/10', glow: 'text-violet-400' }
+  };
+
+  const currentAccent = accentColors[accent];
+
   const getWriteupImage = () => {
     // 1. Priorité aux images stockées en base de données
     if (writeup.images && writeup.images.length > 0) return writeup.images[0];
@@ -58,31 +78,34 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
         <span>Retour aux archives</span>
       </button>
 
-      <div className="bg-surface dark:bg-[#1a1a1f] rounded-2xl border border-gray-200 dark:border-white/5 overflow-hidden relative shadow-sm dark:shadow-none">
+      <div className={`bg-surface/80 dark:bg-[#1a1a1f]/80 backdrop-blur-xl rounded-2xl border ${currentAccent.border} overflow-hidden relative shadow-2xl ${currentAccent.shadow} transition-all duration-500`}>
         
-        {/* Header Image */}
+        {/* Header Image with dynamic glow */}
         <div className="relative h-[300px] md:h-[400px] w-full overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/50 to-transparent dark:from-[#1a1a1f] dark:via-[#1a1a1f]/50 dark:to-transparent z-10" />
+            <div className={`absolute inset-0 bg-gradient-to-t from-surface dark:from-[#1a1a1f] via-transparent to-transparent z-10`} />
+            <div className={`absolute inset-0 bg-gradient-to-b from-transparent to-surface/90 dark:to-[#1a1a1f]/90 z-10`} />
             <img
               src={getOptimizedUrl(getWriteupImage(), 1200)}
               alt={writeup.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover scale-105"
             />
 
             <div className="absolute bottom-0 left-0 w-full p-8 z-20">
                 <div className="flex flex-wrap gap-3 mb-4">
-                    <span className="px-3 py-1 bg-white/90 dark:bg-black/60 backdrop-blur border border-gray-200 dark:border-white/10 rounded-lg text-xs font-bold text-violet-600 dark:text-violet-300 uppercase tracking-wider flex items-center gap-2">
+                    <span className={`px-3 py-1 bg-white/90 dark:bg-black/60 backdrop-blur border ${currentAccent.border} rounded-lg text-xs font-bold ${currentAccent.glow} uppercase tracking-wider flex items-center gap-2 shadow-lg`}>
                         <Target className="w-3 h-3" />
                         {writeup.platform || 'CTF'}
                     </span>
-                    <span className={`px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider border ${getDifficultyColor(writeup.difficulty)}`}>
+                    <span className={`px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider border shadow-lg ${getDifficultyColor(writeup.difficulty)}`}>
                         {writeup.difficulty}
                     </span>
                 </div>
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-2">{writeup.title}</h1>
-                <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400 text-sm">
-                    <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> {formatDate(writeup.created_at)}</span>
-                    <span className="flex items-center gap-2"><Award className="w-4 h-4" /> {writeup.points} pts</span>
+                <h1 className={`text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-2 tracking-tight drop-shadow-2xl`}>
+                    {writeup.title}
+                </h1>
+                <div className="flex items-center gap-4 text-gray-600 dark:text-gray-300 text-sm font-medium">
+                    <span className="flex items-center gap-2 bg-black/5 dark:bg-white/5 px-3 py-1 rounded-full backdrop-blur-sm"><Calendar className="w-4 h-4" /> {formatDate(writeup.created_at)}</span>
+                    <span className="flex items-center gap-2 bg-black/5 dark:bg-white/5 px-3 py-1 rounded-full backdrop-blur-sm"><Award className="w-4 h-4" /> {writeup.points} pts</span>
                 </div>
             </div>
 
@@ -102,24 +125,23 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
 
         {/* Contenu Markdown */}
         {!isActiveMachine && (
-            <div className="p-8 md:p-12">
-                <div className="prose prose-gray dark:prose-invert prose-violet max-w-none 
+            <div className="p-8 md:p-12 relative">
+                <div className={`prose prose-gray dark:prose-invert ${currentAccent.prose} max-w-none 
                     prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white 
                     prose-h2:text-2xl prose-h2:border-b prose-h2:border-gray-200 dark:prose-h2:border-white/10 prose-h2:pb-4 prose-h2:mt-12
-                    prose-code:text-violet-600 dark:prose-code:text-violet-300 prose-code:bg-gray-100 dark:prose-code:bg-black/50 prose-code:px-2 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
-                    prose-pre:bg-gray-900 dark:prose-pre:bg-[#0a0a0f] prose-pre:border prose-pre:border-gray-700 dark:prose-pre:border-white/10
-                    prose-strong:text-gray-900 dark:prose-strong:text-white 
-                    prose-a:text-violet-600 dark:prose-a:text-violet-400 hover:prose-a:text-violet-500 dark:hover:prose-a:text-violet-300">
+                    prose-code:text-gray-900 dark:prose-code:text-white prose-code:bg-gray-100 dark:prose-code:bg-black/50 prose-code:px-2 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
+                    prose-pre:bg-gray-900 dark:prose-pre:bg-black/80 prose-pre:border prose-pre:border-gray-700 dark:prose-pre:border-white/10 prose-pre:shadow-xl
+                    prose-strong:text-gray-900 dark:prose-strong:text-white`}>
                     
                     <ReactMarkdown rehypePlugins={[rehypeRaw]}>
                         {writeup.content}
                     </ReactMarkdown>
                 </div>
 
-                <div className="mt-16 pt-8 border-t border-gray-200 dark:border-white/5 flex flex-wrap gap-2">
-                    <Terminal className="w-5 h-5 text-gray-400 dark:text-gray-500 mr-2" />
+                <div className={`mt-16 pt-8 border-t ${currentAccent.border} flex flex-wrap gap-2`}>
+                    <Terminal className={`w-5 h-5 ${currentAccent.glow} mr-2`} />
                     {writeup.tags?.map((tag, i) => (
-                        <span key={i} className="px-3 py-1 bg-gray-100 dark:bg-[#0a0a0f] border border-gray-200 dark:border-white/10 rounded-full text-xs text-gray-500 dark:text-gray-400 font-mono flex items-center gap-1 hover:border-violet-500/50 hover:text-violet-600 dark:hover:text-violet-300 transition-colors cursor-default">
+                        <span key={i} className={`px-3 py-1 bg-gray-100/50 dark:bg-black/40 backdrop-blur border ${currentAccent.border} rounded-full text-xs text-gray-600 dark:text-gray-300 font-mono flex items-center gap-1 hover:border-violet-500/50 hover:text-violet-600 dark:hover:text-violet-300 transition-all cursor-default shadow-sm`}>
                             <Hash className="w-3 h-3 opacity-50" />
                             {tag}
                         </span>

@@ -52,23 +52,23 @@ export const DifficultyBackground: React.FC<DifficultyBackgroundProps> = ({ diff
 
     if (isEasy) {
       config.color = "#10b981"; // Green
-      config.particleCount = 50;
-      config.speedFactor = 0.3;
+      config.particleCount = 100;
+      config.speedFactor = 0.4;
       config.type = 'circle';
     } else if (isMedium) {
       config.color = "#f59e0b"; // Orange/Amber
-      config.particleCount = 80;
-      config.speedFactor = 0.6;
+      config.particleCount = 150;
+      config.speedFactor = 0.7;
       config.type = 'circle';
     } else if (isHard) {
       config.color = "#ef4444"; // Red
-      config.particleCount = 120;
-      config.speedFactor = 1.0;
+      config.particleCount = 200;
+      config.speedFactor = 1.2;
       config.type = 'flame';
     } else if (isInsane) {
       config.color = "#8b5cf6"; // Violet
-      config.particleCount = 150;
-      config.speedFactor = 1.2;
+      config.particleCount = 250;
+      config.speedFactor = 1.5;
       config.type = 'pixel';
     }
 
@@ -211,7 +211,7 @@ export const DifficultyBackground: React.FC<DifficultyBackgroundProps> = ({ diff
         zIndex: 0,
         width: "100%",
         height: "100%",
-        opacity: 0.5,
+        opacity: 0.7,
       }}
     />
   );
