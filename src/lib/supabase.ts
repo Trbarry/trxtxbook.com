@@ -14,12 +14,7 @@ try {
   throw new Error(`Invalid Supabase URL format: ${supabaseUrl}`);
 }
 
-console.log('Supabase configuration:', {
-  url: supabaseUrl,
-  hasAnonKey: !!supabaseAnonKey,
-  anonKeyLength: supabaseAnonKey?.length
-});
-
+// Supabase initialization with environment variables
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     persistSession: false

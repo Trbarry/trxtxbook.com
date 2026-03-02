@@ -11,39 +11,14 @@ import {
   Eye,
   Hash
 } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { useWriteups } from '../hooks/useWriteups';
 import { Writeup } from '../types/writeup';
 import { useNavigate } from 'react-router-dom';
 
 export const Writeups: React.FC = () => {
-  const [writeups, setWriteups] = useState<Writeup[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { writeups = [], isLoading: loading, error: fetchError } = useWriteups(3);
+  const error = fetchError ? 'Impossible de charger les rapports récents.' : null;
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetchWriteups();
-  }, []);
-
-  const fetchWriteups = async () => {
-    try {
-      setError(null);
-      const { data, error } = await supabase
-        .from('writeups')
-        .select('*')
-        .eq('published', true)
-        .order('created_at', { ascending: false })
-        .limit(3);
-
-      if (error) throw error;
-      setWriteups(data || []);
-    } catch (err: any) {
-      console.error('Error fetching writeups:', err);
-      setError('Impossible de charger les rapports récents.');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty?.toLowerCase()) {

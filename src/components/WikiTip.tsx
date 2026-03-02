@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Zap, Check, Heart, Sparkles, ThumbsUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { supabase } from '../lib/supabase';
+import { useWikiTip } from '../hooks/useWikiTip';
 import confetti from 'canvas-confetti';
 
 interface WikiTipProps {
@@ -10,49 +10,13 @@ interface WikiTipProps {
 }
 
 export const WikiTip: React.FC<WikiTipProps> = ({ pageId, context = "article" }) => {
-  const [likes, setLikes] = useState(0);
-  const [hasLiked, setHasLiked] = useState(false);
-  const [userIp, setUserIp] = useState<string | null>(null);
-  
   // ID Global par défaut
   const TARGET_ID = pageId || '00000000-0000-0000-0000-000000000000';
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const ipRes = await fetch('https://api.ipify.org?format=json');
-        const ipData = await ipRes.json();
-        const ip = ipData.ip;
-        setUserIp(ip);
-
-        const { data: pageData } = await supabase
-          .from('wiki_pages')
-          .select('likes')
-          .eq('id', TARGET_ID)
-          .single();
-
-        if (pageData) setLikes(pageData.likes);
-
-        const { data: voteData } = await supabase
-          .from('wiki_votes')
-          .select('id')
-          .eq('page_id', TARGET_ID)
-          .eq('user_ip', ip)
-          .single();
-
-        if (voteData) setHasLiked(true);
-      } catch (error) {
-        console.error("Erreur chargement:", error);
-      }
-    };
-    fetchData();
-  }, [TARGET_ID]);
+  
+  const { likes = 0, hasLiked, userIp, vote } = useWikiTip(TARGET_ID);
 
   const handleVote = async () => {
     if (hasLiked || !userIp) return;
-
-    setHasLiked(true);
-    setLikes(prev => prev + 1);
 
     // Boom ! Confettis Cyber (Violet/Cyan/Jaune)
     confetti({
@@ -65,10 +29,7 @@ export const WikiTip: React.FC<WikiTipProps> = ({ pageId, context = "article" })
     });
 
     try {
-      await supabase.rpc('vote_for_page', { 
-        target_page_id: TARGET_ID, 
-        target_ip: userIp 
-      });
+      await vote();
     } catch (err) {
       console.error("Erreur vote:", err);
     }
