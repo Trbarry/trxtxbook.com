@@ -102,7 +102,7 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
             
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-4 md:mb-8 tracking-tighter">
               <span className="bg-gradient-to-r from-gray-900 via-violet-700 to-violet-500 dark:from-white dark:via-violet-200 dark:to-violet-400 bg-clip-text text-transparent cursor-default">
-                <HackerText text="Hacking Bowl of Rice" />
+                <HackerText text="Tristan Barry" />
               </span>
             </h1>
             
