@@ -8,15 +8,24 @@ import {
   Menu, X, Calendar, Folder, FileText, Construction, 
   Layers, FolderOpen, CornerDownRight, Check, Copy, List,
   Brain, AlertTriangle, ShieldCheck, GraduationCap,
-  Terminal, Cpu, Activity, Database
+  Terminal, Cpu, Activity, Database, Sparkles
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WikiTip } from '../components/WikiTip';
+import { useWikiPages } from '../hooks/useWikiPages';
 
-// --- TYPES & HELPER (Inchangés) ---
-interface TreeNode { name: string; fullPath: string; children: Record<string, TreeNode>; page?: WikiPageType; isOpen: boolean; }
+// --- TYPES & HELPER ---
+interface TreeNode { 
+  name: string; 
+  fullPath: string; 
+  children: Record<string, TreeNode>; 
+  page?: WikiPageType; 
+  isOpen: boolean; 
+  count: number; 
+}
 interface TocItem { id: string; text: string; level: number; }
+
 const extractHeadings = (markdown: string): TocItem[] => {
   const lines = markdown.split('\n');
   const headings: TocItem[] = [];
@@ -27,7 +36,61 @@ const extractHeadings = (markdown: string): TocItem[] => {
   return headings;
 };
 
-// --- CODE BLOCK (Reste sombre pour lisibilité code) ---
+const getReadingTime = (text: string): number => {
+  const wordsPerMinute = 200;
+  const noOfWords = text.split(/\s+/g).length;
+  const minutes = noOfWords / wordsPerMinute;
+  return Math.ceil(minutes);
+};
+
+// --- BREADCRUMBS ---
+const Breadcrumbs: React.FC<{ category: string; title: string; onNavigate: (path: string) => void }> = ({ category, title, onNavigate }) => {
+  const parts = category.split('/').filter(p => p);
+  return (
+    <nav className="flex items-center gap-2 text-xs font-medium mb-6 overflow-x-auto no-scrollbar py-1">
+      <button onClick={() => onNavigate('')} className="text-gray-500 hover:text-violet-500 transition-colors flex items-center gap-1.5 whitespace-nowrap">
+        <Book size={14} />
+        <span>Wiki</span>
+      </button>
+      {parts.map((part, i) => (
+        <React.Fragment key={i}>
+          <ChevronRight size={12} className="text-gray-400 shrink-0" />
+          <span className="text-gray-500 whitespace-nowrap">{part}</span>
+        </React.Fragment>
+      ))}
+      <ChevronRight size={12} className="text-gray-400 shrink-0" />
+      <span className="text-violet-600 dark:text-violet-400 font-bold whitespace-nowrap">{title}</span>
+    </nav>
+  );
+};
+
+// --- CALLOUTS ---
+const Callout = ({ type, title, children }: { type: string; title?: string; children: React.ReactNode }) => {
+  const config: Record<string, { icon: any; color: string; bg: string; border: string; label: string }> = {
+    info: { icon: Brain, color: 'text-blue-500', bg: 'bg-blue-500/5', border: 'border-blue-500/20', label: 'Info' },
+    tip: { icon: Sparkles, color: 'text-green-500', bg: 'bg-green-500/5', border: 'border-green-500/20', label: 'Astuce' },
+    warning: { icon: AlertTriangle, color: 'text-amber-500', bg: 'bg-amber-500/5', border: 'border-amber-500/20', label: 'Attention' },
+    danger: { icon: X, color: 'text-red-500', bg: 'bg-red-500/5', border: 'border-red-500/20', label: 'Danger' },
+    note: { icon: FileText, color: 'text-violet-500', bg: 'bg-violet-500/5', border: 'border-violet-500/20', label: 'Note' },
+  };
+
+  const style = config[type.toLowerCase()] || config.note;
+  const Icon = style.icon;
+
+  return (
+    <div className={`my-6 rounded-xl border-l-4 ${style.border} ${style.bg} overflow-hidden shadow-sm`}>
+      <div className={`flex items-center gap-2 px-4 py-2 border-b border-white/5 font-bold uppercase tracking-wider text-[10px] ${style.color}`}>
+        <Icon size={14} />
+        <span>{title || style.label}</span>
+      </div>
+      <div className="px-4 py-3 prose-p:my-0 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+        {children}
+      </div>
+    </div>
+  );
+};
+
+// --- CODE BLOCK ---
 const CodeBlock = ({ children, className, ...props }: any) => {
   const [copied, setCopied] = useState(false);
   const match = /language-(\w+)/.exec(className || '');
@@ -77,7 +140,10 @@ const FileTree: React.FC<{ nodes: Record<string, TreeNode>; onSelect: (page: Wik
                 >
                   <span className={`text-gray-400 dark:text-gray-500 transition-transform duration-300 ${isFolderOpen ? 'rotate-90 text-violet-600 dark:text-violet-400' : ''}`}><ChevronRight size={14} /></span>
                   <span className={`transition-colors duration-300 ${isFolderOpen ? 'text-violet-600 dark:text-violet-300' : 'text-gray-600 dark:text-gray-400 group-hover/btn:text-gray-900 dark:group-hover/btn:text-gray-200'}`}>{isFolderOpen ? <FolderOpen size={15} /> : <Folder size={15} />}</span>
-                  <span className={`text-xs font-bold uppercase tracking-wider truncate transition-colors ${isFolderOpen ? 'text-gray-900 dark:text-white' : 'text-gray-500 dark:text-gray-400'}`}>{name}</span>
+                  <div className="flex items-center justify-between flex-1 min-w-0 pr-1">
+                    <span className={`text-xs font-bold uppercase tracking-wider truncate transition-colors ${isFolderOpen ? 'text-gray-900 dark:text-white' : 'text-gray-500 dark:text-gray-400'}`}>{name}</span>
+                    <span className="text-[10px] font-mono text-gray-400 dark:text-gray-500 bg-gray-200/50 dark:bg-white/5 px-1.5 py-0.5 rounded ml-2">{node.count}</span>
+                  </div>
                 </button>
                 <AnimatePresence>{isFolderOpen && (<motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} className="overflow-hidden"><FileTree nodes={node.children} onSelect={onSelect} selectedId={selectedId} depth={depth + 1} /></motion.div>)}</AnimatePresence>
               </div>
@@ -104,31 +170,192 @@ const FileTree: React.FC<{ nodes: Record<string, TreeNode>; onSelect: (page: Wik
 };
 
 // --- WIKI WELCOME ---
-const WikiWelcome = () => {
-  const stats = [{ label: "Nodes", value: "250+", icon: Database, color: "blue" }, { label: "Status", value: "Online", icon: Activity, color: "green" }, { label: "Last Update", value: "Today", icon: Calendar, color: "violet" }];
+const WikiWelcome: React.FC<{ 
+  pages: WikiPageType[]; 
+  onShowMasonry: () => void;
+  onSelect: (page: WikiPageType) => void;
+}> = ({ pages, onShowMasonry, onSelect }) => {
+  const totalWords = pages.reduce((acc, p) => acc + (p.content?.split(/\s+/).length || 0), 0);
+  const totalTags = new Set(pages.flatMap(p => p.tags || [])).size;
+  const lastUpdated = [...pages].sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()).slice(0, 5);
+
+  const stats = [
+    { label: "Notes", value: pages.length, icon: Database, color: "violet" },
+    { label: "Mots", value: `${(totalWords / 1000).toFixed(1)}k`, icon: FileText, color: "blue" },
+    { label: "Tags", value: totalTags, icon: Hash, color: "indigo" },
+  ];
+
   return (
-    <div className="flex flex-col items-center justify-center py-8 px-4 md:p-12 max-w-5xl mx-auto animate-in fade-in zoom-in duration-500 w-full">
+    <div className="flex flex-col items-center justify-start py-8 px-4 md:p-12 max-w-5xl mx-auto animate-in fade-in zoom-in duration-500 w-full overflow-y-auto custom-scrollbar">
       <div className="text-center mb-10 relative">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-600 dark:text-violet-300 text-xs font-medium mb-6 shadow-sm">
-          <Brain className="w-3.5 h-3.5" /><span>Second Brain v2.0</span>
+          <Brain className="w-3.5 h-3.5" /><span>Second Brain v2.5</span>
         </div>
         <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">Wiki <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400">Personnel</span></h2>
-        <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8">Base de connaissances dynamique.</p>
-        <div className="mb-12"><WikiTip context="global" /></div>
+        <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8">Ma base de connaissances de {pages.length} notes interconnectées.</p>
+        
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <button 
+            onClick={onShowMasonry}
+            className="px-6 py-3 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold transition-all shadow-lg shadow-violet-500/25 active:scale-95 flex items-center gap-2"
+          >
+            <Layers size={18} />
+            Tout Parcourir
+          </button>
+          <div className="w-full md:w-auto"><WikiTip context="global" /></div>
+        </div>
       </div>
-      <div className="grid grid-cols-3 gap-4 w-full max-w-2xl mb-12">
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-3xl mb-16">
         {stats.map((stat, i) => (
-          <div key={i} className="bg-white dark:bg-[#13131a]/50 border border-gray-200 dark:border-white/5 rounded-xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm dark:shadow-none">
-            <stat.icon className={`w-5 h-5 text-${stat.color}-500 dark:text-${stat.color}-400`} />
-            <div className="text-center"><div className="text-lg font-bold text-gray-900 dark:text-white">{stat.value}</div><div className="text-[10px] text-gray-500 uppercase tracking-wider">{stat.label}</div></div>
+          <div key={i} className="bg-white dark:bg-[#13131a]/50 border border-gray-200 dark:border-white/5 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 shadow-sm group hover:border-violet-500/30 transition-all duration-300">
+            <div className={`p-3 rounded-xl bg-violet-500/10 text-violet-500 group-hover:scale-110 transition-transform`}>
+              <stat.icon size={24} />
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-black text-gray-900 dark:text-white">{stat.value}</div>
+              <div className="text-[10px] text-gray-500 uppercase tracking-widest font-bold mt-1">{stat.label}</div>
+            </div>
           </div>
         ))}
+      </div>
+
+      <div className="w-full max-w-3xl text-left">
+        <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+          <Activity size={16} className="text-violet-500" />
+          Mises à jour récentes
+        </h3>
+        <div className="space-y-3">
+          {lastUpdated.map(page => (
+            <button
+              key={page.id}
+              onClick={() => onSelect(page)}
+              className="w-full text-left p-4 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:border-violet-500/50 hover:bg-white dark:hover:bg-white/10 transition-all flex items-center justify-between group"
+            >
+              <div className="flex items-center gap-4 overflow-hidden">
+                <div className="p-2 rounded-lg bg-white dark:bg-[#0a0a0f] border border-gray-200 dark:border-white/10 group-hover:text-violet-500 transition-colors">
+                  <FileText size={16} />
+                </div>
+                <div className="truncate">
+                  <div className="text-sm font-bold text-gray-900 dark:text-white truncate">{page.title}</div>
+                  <div className="text-[10px] text-gray-500 truncate">{page.category}</div>
+                </div>
+              </div>
+              <div className="text-[10px] text-gray-400 font-mono whitespace-nowrap ml-4">
+                {new Date(page.updated_at).toLocaleDateString('fr-FR')}
+              </div>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
-import { useWikiPages } from '../hooks/useWikiPages';
+// --- WIKI MASONRY ---
+const WikiMasonry: React.FC<{ 
+  pages: WikiPageType[]; 
+  onSelect: (page: WikiPageType) => void;
+  onClose: () => void;
+}> = ({ pages, onSelect, onClose }) => {
+  return (
+    <div className="flex-1 flex flex-col h-full overflow-hidden bg-white/50 dark:bg-[#0a0a0f]/50 backdrop-blur-3xl">
+      <div className="p-6 border-b border-gray-200 dark:border-white/5 flex items-center justify-between sticky top-0 z-20 bg-inherit backdrop-blur-md">
+        <div>
+          <h2 className="text-2xl font-black text-gray-900 dark:text-white flex items-center gap-3">
+            <Layers className="text-violet-500" />
+            Bibliothèque Complète
+          </h2>
+          <p className="text-xs text-gray-500 font-bold uppercase tracking-widest mt-1">{pages.length} Notes Indexées</p>
+        </div>
+        <button 
+          onClick={onClose}
+          className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full transition-colors"
+        >
+          <X size={24} />
+        </button>
+      </div>
+
+      <div className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {pages.map(page => (
+            <motion.button
+              key={page.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              onClick={() => onSelect(page)}
+              className="group text-left p-6 rounded-2xl bg-white dark:bg-[#13131a]/80 border border-gray-200 dark:border-white/5 hover:border-violet-500/50 hover:shadow-2xl hover:shadow-violet-500/10 transition-all flex flex-col gap-4 relative overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 w-1 h-0 group-hover:h-full bg-violet-600 transition-all duration-300" />
+              
+              <div className="flex items-center justify-between">
+                <div className="p-2 rounded-lg bg-gray-50 dark:bg-black/20 text-gray-400 group-hover:text-violet-500 transition-colors">
+                  <FileText size={18} />
+                </div>
+                <div className="text-[10px] font-mono text-gray-400 uppercase tracking-tighter">
+                  {new Date(page.updated_at).toLocaleDateString('fr-FR')}
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-gray-900 dark:text-white group-hover:text-violet-500 transition-colors line-clamp-2 leading-snug">
+                  {page.title}
+                </h4>
+                <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-2 truncate">
+                  {page.category}
+                </div>
+              </div>
+
+              <div className="mt-auto pt-4 border-t border-gray-100 dark:border-white/5 flex flex-wrap gap-1.5">
+                {page.tags?.slice(0, 3).map(tag => (
+                  <span key={tag} className="text-[9px] bg-gray-100 dark:bg-white/5 px-2 py-0.5 rounded text-gray-500">#{tag}</span>
+                ))}
+              </div>
+            </motion.button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// --- BACKLINKS ---
+const Backlinks: React.FC<{ 
+  currentPage: WikiPageType; 
+  allPages: WikiPageType[]; 
+  onSelect: (page: WikiPageType) => void 
+}> = ({ currentPage, allPages, onSelect }) => {
+  const links = allPages.filter(p => 
+    p.id !== currentPage.id && 
+    (p.content?.includes(currentPage.slug) || p.content?.includes(currentPage.title))
+  );
+
+  if (links.length === 0) return null;
+
+  return (
+    <div className="mt-16 pt-8 border-t border-gray-200 dark:border-white/5 text-left">
+      <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6 flex items-center gap-2">
+        <CornerDownRight size={14} />
+        Backlinks ({links.length})
+      </h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {links.map(link => (
+          <button
+            key={link.id}
+            onClick={() => onSelect(link)}
+            className="text-left p-4 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:border-violet-500/30 transition-all group"
+          >
+            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover:text-violet-500 transition-colors truncate">
+              {link.title}
+            </div>
+            <div className="text-[10px] text-gray-500 mt-1 truncate">{link.category}</div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 // --- PAGE PRINCIPALE ---
 export const WikiPage: React.FC = () => {
@@ -136,20 +363,75 @@ export const WikiPage: React.FC = () => {
   const [selectedPage, setSelectedPage] = useState<WikiPageType | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isMasonryView, setIsMasonryView] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [tree, setTree] = useState<Record<string, TreeNode>>({});
   const [toc, setToc] = useState<TocItem[]>([]);
 
+  // --- MARKDOWN COMPONENTS ---
+  const MarkdownComponents = {
+    code: CodeBlock,
+    h2: ({ children }: any) => <h2 id={String(children).toLowerCase().replace(/[^\w]+/g, '-')}>{children}</h2>,
+    img: ({ src, alt }: any) => (
+      <div className="my-8 rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10 shadow-lg group cursor-zoom-in" onClick={() => setSelectedImage(src)}>
+        <img src={src} alt={alt} className="w-full hover:scale-[1.02] transition-transform duration-500" />
+        {alt && <div className="px-4 py-2 bg-gray-50 dark:bg-white/5 text-[10px] text-gray-500 font-medium italic border-t border-gray-200 dark:border-white/10 text-center">{alt}</div>}
+      </div>
+    ),
+    blockquote: ({ children }: any) => {
+      const content = React.Children.toArray(children);
+      const firstChild = content[0] as any;
+      if (firstChild && firstChild.props && firstChild.props.children) {
+        const firstLine = String(firstChild.props.children[0] || '');
+        const match = firstLine.match(/^\[!(\w+)\]\s*(.*)/);
+        if (match) {
+          const type = match[1];
+          const title = match[2];
+          const remainingChildren = [{ ...firstChild, props: { ...firstChild.props, children: [firstChild.props.children.slice(1)] } }, ...content.slice(1)];
+          return <Callout type={type} title={title}>{remainingChildren}</Callout>;
+        }
+      }
+      return <blockquote className="border-l-4 border-violet-500 bg-violet-500/5 px-4 py-1 my-4 italic text-gray-400">{children}</blockquote>;
+    }
+  };
+
   useEffect(() => { if (window.innerWidth < 1024) setIsSidebarOpen(false); }, []);
   useEffect(() => {
-    // (Logique Tree inchangée...)
+    // --- LOGIQUE DE RECHERCHE AMÉLIORÉE ---
+    const calculateScore = (page: WikiPageType, query: string) => {
+      if (!query) return 1;
+      const q = query.toLowerCase();
+      let score = 0;
+      if (page.title?.toLowerCase().includes(q)) {
+        score += 100;
+        if (page.title.toLowerCase() === q) score += 200;
+      }
+      if (page.category?.toLowerCase().includes(q)) score += 50;
+      if (page.tags?.some(t => t.toLowerCase().includes(q))) score += 70;
+      const content = page.content?.toLowerCase() || '';
+      const occurrences = content.split(q).length - 1;
+      score += occurrences * 5;
+      return score;
+    };
+
+    const filteredPages = pages
+      .map(p => ({ page: p, score: calculateScore(p, searchQuery) }))
+      .filter(item => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map(item => item.page);
+
     const newTree: Record<string, TreeNode> = {};
-    const filteredPages = pages.filter(p => p.title.toLowerCase().includes(searchQuery.toLowerCase()) || p.category.toLowerCase().includes(searchQuery.toLowerCase()));
     filteredPages.forEach(page => {
       const parts = page.category.split('/').filter(p => p); 
       let currentLevel = newTree;
       parts.forEach((part, index) => {
-        if (!currentLevel[part]) currentLevel[part] = { name: part, fullPath: parts.slice(0, index + 1).join('/'), children: {}, isOpen: false };
-        if (index === parts.length - 1) currentLevel[part].children[page.title] = { name: page.title, fullPath: page.slug, children: {}, page: page, isOpen: false };
+        if (!currentLevel[part]) {
+          currentLevel[part] = { name: part, fullPath: parts.slice(0, index + 1).join('/'), children: {}, isOpen: false, count: 0 };
+        }
+        currentLevel[part].count++;
+        if (index === parts.length - 1) {
+          currentLevel[part].children[page.title] = { name: page.title, fullPath: page.slug, children: {}, page: page, isOpen: false, count: 1 };
+        }
         currentLevel = currentLevel[part].children;
       });
     });
@@ -162,15 +444,14 @@ export const WikiPage: React.FC = () => {
     <>
       <SEOHead title="Wiki & Knowledge Base" description="Base de connaissances" />
       
-      {/* ✅ CHANGEMENT : bg-background */}
       <div className="min-h-screen bg-background flex pt-24 pb-6 px-4 md:px-8 gap-6 overflow-hidden transition-colors duration-300">
         
         <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="lg:hidden fixed bottom-6 right-6 z-50 bg-violet-600 p-4 rounded-full shadow-lg text-white hover:bg-violet-500 transition-all active:scale-95">{isSidebarOpen ? <X /> : <Menu />}</button>
 
-        {/* SIDEBAR : bg-surface */}
+        {/* SIDEBAR */}
         <aside className={`fixed inset-y-24 left-4 lg:left-8 z-40 w-80 lg:relative lg:inset-auto lg:w-80 lg:block bg-surface/90 dark:bg-[#13131a]/80 backdrop-blur-xl border border-gray-200 dark:border-white/10 rounded-2xl flex flex-col transition-all duration-500 shadow-2xl ${isSidebarOpen ? 'translate-x-0 opacity-100' : '-translate-x-[120%] opacity-0 lg:translate-x-0 lg:opacity-100 lg:w-80'}`}>
           <div className="p-6 border-b border-gray-100 dark:border-white/5">
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-6 cursor-pointer" onClick={() => { setSelectedPage(null); setIsMasonryView(false); }}>
               <div className="p-2.5 bg-gradient-to-br from-violet-600 to-indigo-600 rounded-xl shadow-lg"><Book className="w-5 h-5 text-white" /></div>
               <span className="font-bold text-xl text-gray-900 dark:text-white tracking-tight">Wiki TRTNX</span>
             </div>
@@ -182,45 +463,47 @@ export const WikiPage: React.FC = () => {
             </div>
           </div>
           <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-            {isLoading ? <div className="flex justify-center py-20"><div className="w-8 h-8 border-2 border-violet-500/30 border-t-violet-500 rounded-full animate-spin"></div></div> : Object.keys(tree).length === 0 ? <div className="text-center py-12 text-gray-500"><p>Aucune donnée.</p></div> : <FileTree nodes={tree} onSelect={(page) => { setSelectedPage(page); if (window.innerWidth < 1024) setIsSidebarOpen(false); }} selectedId={selectedPage?.id} />}
+            {isLoading ? <div className="flex justify-center py-20"><div className="w-8 h-8 border-2 border-violet-500/30 border-t-violet-500 rounded-full animate-spin"></div></div> : Object.keys(tree).length === 0 ? <div className="text-center py-12 text-gray-500"><p>Aucune donnée.</p></div> : <FileTree nodes={tree} onSelect={(page) => { setSelectedPage(page); setIsMasonryView(false); if (window.innerWidth < 1024) setIsSidebarOpen(false); }} selectedId={selectedPage?.id} />}
           </div>
         </aside>
 
-        {/* MAIN CONTENT : bg-surface/40 */}
+        {/* MAIN CONTENT */}
         <main className="flex-1 bg-surface/50 dark:bg-[#13131a]/40 backdrop-blur-md border border-gray-200 dark:border-white/5 rounded-2xl overflow-hidden relative shadow-xl flex flex-col">
           {selectedPage ? (
             <div className="flex-1 overflow-y-auto custom-scrollbar p-6 md:p-12 scroll-smooth relative">
               <motion.div key={selectedPage.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="max-w-4xl mx-auto relative z-10">
-                <div className="mb-10 pb-8 border-b border-gray-200 dark:border-white/5">
+                
+                <Breadcrumbs category={selectedPage.category} title={selectedPage.title} onNavigate={(path) => { if (path === '') setSelectedPage(null); }} />
+
+                <div className="mb-10 pb-8 border-b border-gray-200 dark:border-white/5 text-left">
                   <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">{selectedPage.title}</h1>
                   <div className="flex flex-wrap items-center gap-3">
-                    <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 bg-white dark:bg-[#1a1a20] border border-gray-200 dark:border-white/10 px-3 py-1.5 rounded-full"><Calendar className="w-3 h-3" /><span>Updated: {new Date(selectedPage.updated_at).toLocaleDateString('fr-FR')}</span></div>
-                    {selectedPage.tags?.map(tag => <span key={tag} className="flex items-center gap-1 text-xs text-violet-600 dark:text-violet-300 bg-violet-50 dark:bg-violet-500/10 px-3 py-1.5 rounded-full border border-violet-200 dark:border-violet-500/20"><Hash className="w-3 h-3" /> {tag}</span>)}
+                    <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 bg-white dark:bg-[#1a1a20] border border-gray-200 dark:border-white/10 px-3 py-1.5 rounded-full"><Calendar className="w-3 h-3" /><span>Mis à jour le {new Date(selectedPage.updated_at).toLocaleDateString('fr-FR')}</span></div>
+                    <div className="flex items-center gap-2 text-xs text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-500/10 border border-violet-200 dark:border-violet-500/20 px-3 py-1.5 rounded-full"><Activity className="w-3 h-3" /><span>{getReadingTime(selectedPage.content)} min de lecture</span></div>
+                    {selectedPage.tags?.map(tag => <span key={tag} className="flex items-center gap-1 text-xs text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-white/5 px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10"><Hash className="w-3 h-3" /> {tag}</span>)}
                   </div>
                 </div>
 
-                <div className="min-h-[400px]">
-                  <div className="prose max-w-none 
-                      prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white
-                      prose-h1:text-3xl prose-h2:text-2xl prose-h2:mt-12 prose-h2:border-gray-200 dark:prose-h2:border-white/10
-                      prose-h3:text-xl prose-h3:text-violet-700 dark:prose-h3:text-violet-200
-                      prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed
-                      prose-strong:text-gray-900 dark:prose-strong:text-white
-                      prose-a:text-violet-600 dark:prose-a:text-violet-400
-                      prose-li:text-gray-700 dark:prose-li:text-gray-300
-                      prose-blockquote:border-violet-500 prose-blockquote:bg-violet-50 dark:prose-blockquote:bg-violet-500/5 prose-blockquote:text-gray-700 dark:prose-blockquote:text-gray-400
-                  ">
-                    <ReactMarkdown rehypePlugins={[rehypeRaw]} components={{ code: CodeBlock, h2: ({children}) => <h2 id={String(children).toLowerCase().replace(/[^\w]+/g, '-')}>{children}</h2> }}>{selectedPage.content}</ReactMarkdown>
+                <div className="min-h-[400px] text-left">
+                  <div className="prose max-w-none prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-h2:text-2xl prose-h2:mt-12 prose-h2:border-gray-200 dark:prose-h2:border-white/10 prose-h3:text-xl prose-h3:text-violet-700 dark:prose-h3:text-violet-200 prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-strong:text-gray-900 dark:prose-strong:text-white prose-a:text-violet-600 dark:prose-a:text-violet-400 prose-li:text-gray-700 dark:prose-li:text-gray-300 prose-blockquote:border-violet-500 prose-blockquote:bg-violet-50 dark:prose-blockquote:bg-violet-500/5 prose-blockquote:text-gray-700 dark:prose-blockquote:text-gray-400">
+                    <ReactMarkdown rehypePlugins={[rehypeRaw]} components={MarkdownComponents as any}>{selectedPage.content}</ReactMarkdown>
                   </div>
                 </div>
-                <div className="mt-16 pb-12 border-t border-gray-200 dark:border-white/5 pt-8"><WikiTip pageId={selectedPage.id} context="article" /></div>
+                <div className="mt-16 pb-12 border-t border-gray-200 dark:border-white/5 pt-8">
+                  <WikiTip pageId={selectedPage.id} context="article" />
+                  <Backlinks currentPage={selectedPage} allPages={pages} onSelect={setSelectedPage} />
+                </div>
               </motion.div>
             </div>
-          ) : <WikiWelcome />}
+          ) : isMasonryView ? (
+            <WikiMasonry pages={pages} onSelect={(p) => { setSelectedPage(p); setIsMasonryView(false); }} onClose={() => setIsMasonryView(false)} />
+          ) : (
+            <WikiWelcome pages={pages} onShowMasonry={() => setIsMasonryView(true)} onSelect={setSelectedPage} />
+          )}
           
           {selectedPage && toc.length > 0 && (
             <aside className="hidden xl:block w-72 border-l border-gray-200 dark:border-white/5 bg-gray-50/50 dark:bg-[#13131a]/30 p-8 overflow-y-auto custom-scrollbar">
-              <div className="sticky top-6">
+              <div className="sticky top-6 text-left">
                 <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6 flex items-center gap-2"><List size={14} />Sommaire</h4>
                 <div className="space-y-1 relative"><div className="absolute left-[3px] top-2 bottom-2 w-px bg-gray-300 dark:bg-white/5"></div>{toc.map((item) => (<a key={item.id} href={`#${item.id}`} className={`block text-sm py-1.5 pl-4 border-l-2 transition-all duration-200 hover:text-violet-600 dark:hover:text-violet-300 ${item.level === 3 ? 'ml-3 text-gray-500 dark:text-gray-500 border-transparent text-xs' : 'text-gray-600 dark:text-gray-400 border-transparent'}`} onClick={(e) => {e.preventDefault();document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });}}>{item.text}</a>))}</div>
               </div>
@@ -228,6 +511,15 @@ export const WikiPage: React.FC = () => {
           )}
         </main>
       </div>
+
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedImage(null)} className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-12 cursor-zoom-out">
+            <motion.img initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} src={selectedImage} className="max-w-full max-h-full rounded-xl shadow-2xl" alt="Zoom" />
+            <button onClick={() => setSelectedImage(null)} className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors"><X size={32} /></button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
