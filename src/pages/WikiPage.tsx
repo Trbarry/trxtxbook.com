@@ -454,23 +454,57 @@ export const WikiPage: React.FC = () => {
     <>
       <SEOHead title="Wiki & Knowledge Base" description="Base de connaissances" />
       
-      <div className="min-h-screen bg-background flex pt-20 md:pt-24 pb-4 md:pb-6 px-2 md:px-8 gap-0 md:gap-6 overflow-hidden transition-colors duration-300">
-        
+      {/* MOBILE TOP BAR WITH SEARCH */}
+      <div className="lg:hidden fixed top-16 left-0 right-0 z-30 bg-white/80 dark:bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/5 px-4 py-3 flex items-center gap-3">
+        <div className="flex-1 relative group">
+          <div className="relative flex items-center bg-gray-100 dark:bg-white/5 border border-transparent focus-within:border-violet-500/50 rounded-xl transition-all">
+            <Search className="ml-3 w-4 h-4 text-gray-400 group-focus-within:text-violet-500" />
+            <input 
+              type="text" 
+              placeholder="Rechercher dans le wiki..." 
+              className="w-full bg-transparent py-2.5 pl-2 pr-4 text-sm text-gray-900 dark:text-gray-200 focus:outline-none placeholder-gray-500 font-medium" 
+              value={searchQuery} 
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                if (e.target.value && !isMasonryView && !selectedPage) setIsMasonryView(true);
+              }} 
+            />
+            {searchQuery && (
+              <button 
+                onClick={() => setSearchQuery('')}
+                className="p-1.5 mr-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+              >
+                <X size={14} />
+              </button>
+            )}
+          </div>
+        </div>
         <button 
           onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
-          className="lg:hidden fixed bottom-6 right-6 z-50 bg-violet-600 p-4 rounded-full shadow-lg text-white hover:bg-violet-500 transition-all active:scale-95 flex items-center justify-center"
+          className="p-2.5 bg-violet-600/10 text-violet-600 rounded-xl border border-violet-600/20 active:scale-95 transition-all"
+        >
+          {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
+
+      <div className="min-h-screen bg-background flex pt-32 lg:pt-24 pb-4 md:pb-6 px-2 md:px-8 gap-0 md:gap-6 overflow-hidden transition-colors duration-300">
+        
+        {/* FAB for Mobile Navigation (kept but could be hidden if top bar is enough) */}
+        <button 
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
+          className="hidden lg:hidden fixed bottom-6 right-6 z-50 bg-violet-600 p-4 rounded-full shadow-lg text-white hover:bg-violet-500 transition-all active:scale-95 flex items-center justify-center"
         >
           {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
         {/* SIDEBAR */}
         <aside className={`fixed inset-y-0 left-0 z-40 w-full sm:w-80 lg:relative lg:inset-auto lg:w-80 lg:block bg-white dark:bg-[#0a0a0f] lg:bg-surface/90 lg:dark:bg-[#13131a]/80 backdrop-blur-xl border-r lg:border border-gray-200 dark:border-white/10 lg:rounded-2xl flex flex-col transition-all duration-500 shadow-2xl ${isSidebarOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0 lg:translate-x-0 lg:opacity-100 lg:w-80'}`}>
-          <div className="p-6 border-b border-gray-100 dark:border-white/5 pt-24 lg:pt-6">
-            <div className="flex items-center gap-3 mb-6 cursor-pointer" onClick={() => { setSelectedPage(null); setIsMasonryView(false); setSearchQuery(''); }}>
-              <div className="p-2.5 bg-gradient-to-br from-violet-600 to-indigo-600 rounded-xl shadow-lg"><Book className="w-5 h-5 text-white" /></div>
+          <div className="p-6 border-b border-gray-100 dark:border-white/5 pt-32 lg:pt-6">
+            <div className="flex items-center gap-3 mb-6 cursor-pointer" onClick={() => { setSelectedPage(null); setIsMasonryView(false); setSearchQuery(''); if (window.innerWidth < 1024) setIsSidebarOpen(false); }}>
+              <div className="p-2.5 bg-gradient-to-br from-violet-600 to-indigo-600 rounded-xl shadow-lg shrink-0"><Book className="w-5 h-5 text-white" /></div>
               <span className="font-bold text-xl text-gray-900 dark:text-white tracking-tight">Hacking Bowl of Rice</span>
             </div>
-            <div className="relative group">
+            <div className="relative group hidden lg:block">
               <div className="relative flex items-center bg-gray-50 dark:bg-[#0a0a0f] border border-gray-200 dark:border-white/10 rounded-xl focus-within:border-violet-500/50 transition-colors">
                 <Search className="ml-3 w-4 h-4 text-gray-400 group-focus-within:text-violet-500" />
                 <input type="text" placeholder="Explorer..." className="w-full bg-transparent py-3 pl-3 pr-4 text-sm text-gray-900 dark:text-gray-200 focus:outline-none placeholder-gray-500 dark:placeholder-gray-600 font-medium" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
