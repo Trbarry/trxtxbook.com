@@ -21,9 +21,20 @@ export function useWikiTip(pageId: string) {
     }
 
     // 2. Check IP via backend
-    const ipRes = await fetch('https://api.ipify.org?format=json');
-    const ipData = await ipRes.json();
-    const ip = ipData.ip;
+    let ip = 'unknown';
+    try {
+      const ipRes = await fetch('https://api.ipify.org?format=json');
+      if (ipRes.ok) {
+        const ipData = await ipRes.json();
+        ip = ipData.ip;
+      }
+    } catch (err) {
+      console.error('Failed to fetch IP:', err);
+    }
+
+    if (ip === 'unknown') {
+      return { hasLiked: false, ip: null };
+    }
 
     const { data } = await supabase
       .from('wiki_votes')

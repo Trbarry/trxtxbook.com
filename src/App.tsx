@@ -1,7 +1,8 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
+import { safeLazy as lazy } from './lib/safeLazy';
 
 // ✅ Contextes et SEO
 import { ThemeProvider } from './context/ThemeContext';

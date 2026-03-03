@@ -1,5 +1,5 @@
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://srmwnujqhxaopnffesgl.supabase.co https://images.unsplash.com https://wsrv.nl; connect-src 'self' https://srmwnujqhxaopnffesgl.supabase.co https://ipapi.co; frame-ancestors 'none'; form-action 'self'; base-uri 'self';
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://srmwnujqhxaopnffesgl.supabase.co https://images.unsplash.com https://wsrv.nl; connect-src 'self' https://srmwnujqhxaopnffesgl.supabase.co https://ipapi.co https://api.ipify.org; frame-ancestors 'none'; form-action 'self'; base-uri 'self';
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
