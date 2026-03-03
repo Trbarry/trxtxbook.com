@@ -52,12 +52,20 @@ const Breadcrumbs: React.FC<{ category: string; title: string; onNavigate: (path
         <Book size={14} />
         <span>Wiki</span>
       </button>
-      {parts.map((part, i) => (
-        <React.Fragment key={i}>
-          <ChevronRight size={12} className="text-gray-400 shrink-0" />
-          <span className="text-gray-500 whitespace-nowrap">{part}</span>
-        </React.Fragment>
-      ))}
+      {parts.map((part, i) => {
+        const cumulativePath = parts.slice(0, i + 1).join('/');
+        return (
+          <React.Fragment key={i}>
+            <ChevronRight size={12} className="text-gray-400 shrink-0" />
+            <button 
+              onClick={() => onNavigate(cumulativePath)}
+              className="text-gray-500 hover:text-violet-500 transition-colors whitespace-nowrap hover:underline underline-offset-4 decoration-violet-500/30"
+            >
+              {part}
+            </button>
+          </React.Fragment>
+        );
+      })}
       <ChevronRight size={12} className="text-gray-400 shrink-0" />
       <span className="text-violet-600 dark:text-violet-400 font-bold whitespace-nowrap">{title}</span>
     </nav>
@@ -368,6 +376,31 @@ export const WikiPage: React.FC = () => {
   const [tree, setTree] = useState<Record<string, TreeNode>>({});
   const [toc, setToc] = useState<TocItem[]>([]);
 
+  // --- LOGIQUE DE RECHERCHE AMÉLIORÉE ---
+  const calculateScore = (page: WikiPageType, query: string) => {
+    if (!query) return 1;
+    const q = query.toLowerCase();
+    let score = 0;
+    if (page.title?.toLowerCase().includes(q)) {
+      score += 100;
+      if (page.title.toLowerCase() === q) score += 200;
+    }
+    if (page.category?.toLowerCase().includes(q)) score += 50;
+    if (page.tags?.some(t => t.toLowerCase().includes(q))) score += 70;
+    const content = page.content?.toLowerCase() || '';
+    const occurrences = content.split(q).length - 1;
+    score += occurrences * 5;
+    return score;
+  };
+
+  const filteredPages = React.useMemo(() => {
+    return pages
+      .map(p => ({ page: p, score: calculateScore(p, searchQuery) }))
+      .filter(item => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map(item => item.page);
+  }, [pages, searchQuery]);
+
   // --- MARKDOWN COMPONENTS ---
   const MarkdownComponents = {
     code: CodeBlock,
@@ -397,29 +430,6 @@ export const WikiPage: React.FC = () => {
 
   useEffect(() => { if (window.innerWidth < 1024) setIsSidebarOpen(false); }, []);
   useEffect(() => {
-    // --- LOGIQUE DE RECHERCHE AMÉLIORÉE ---
-    const calculateScore = (page: WikiPageType, query: string) => {
-      if (!query) return 1;
-      const q = query.toLowerCase();
-      let score = 0;
-      if (page.title?.toLowerCase().includes(q)) {
-        score += 100;
-        if (page.title.toLowerCase() === q) score += 200;
-      }
-      if (page.category?.toLowerCase().includes(q)) score += 50;
-      if (page.tags?.some(t => t.toLowerCase().includes(q))) score += 70;
-      const content = page.content?.toLowerCase() || '';
-      const occurrences = content.split(q).length - 1;
-      score += occurrences * 5;
-      return score;
-    };
-
-    const filteredPages = pages
-      .map(p => ({ page: p, score: calculateScore(p, searchQuery) }))
-      .filter(item => item.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .map(item => item.page);
-
     const newTree: Record<string, TreeNode> = {};
     filteredPages.forEach(page => {
       const parts = page.category.split('/').filter(p => p); 
@@ -436,7 +446,7 @@ export const WikiPage: React.FC = () => {
       });
     });
     setTree(newTree);
-  }, [pages, searchQuery]);
+  }, [filteredPages]);
 
   useEffect(() => { if (selectedPage?.content) setToc(extractHeadings(selectedPage.content)); else setToc([]); }, [selectedPage]);
 
@@ -451,7 +461,7 @@ export const WikiPage: React.FC = () => {
         {/* SIDEBAR */}
         <aside className={`fixed inset-y-24 left-4 lg:left-8 z-40 w-80 lg:relative lg:inset-auto lg:w-80 lg:block bg-surface/90 dark:bg-[#13131a]/80 backdrop-blur-xl border border-gray-200 dark:border-white/10 rounded-2xl flex flex-col transition-all duration-500 shadow-2xl ${isSidebarOpen ? 'translate-x-0 opacity-100' : '-translate-x-[120%] opacity-0 lg:translate-x-0 lg:opacity-100 lg:w-80'}`}>
           <div className="p-6 border-b border-gray-100 dark:border-white/5">
-            <div className="flex items-center gap-3 mb-6 cursor-pointer" onClick={() => { setSelectedPage(null); setIsMasonryView(false); }}>
+            <div className="flex items-center gap-3 mb-6 cursor-pointer" onClick={() => { setSelectedPage(null); setIsMasonryView(false); setSearchQuery(''); }}>
               <div className="p-2.5 bg-gradient-to-br from-violet-600 to-indigo-600 rounded-xl shadow-lg"><Book className="w-5 h-5 text-white" /></div>
               <span className="font-bold text-xl text-gray-900 dark:text-white tracking-tight">Hacking Bowl of Rice</span>
             </div>
@@ -473,7 +483,16 @@ export const WikiPage: React.FC = () => {
             <div className="flex-1 overflow-y-auto custom-scrollbar p-6 md:p-12 scroll-smooth relative">
               <motion.div key={selectedPage.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="max-w-4xl mx-auto relative z-10">
                 
-                <Breadcrumbs category={selectedPage.category} title={selectedPage.title} onNavigate={(path) => { if (path === '') setSelectedPage(null); }} />
+                <Breadcrumbs 
+                  category={selectedPage.category} 
+                  title={selectedPage.title} 
+                  onNavigate={(path) => { 
+                    setSelectedPage(null);
+                    setSearchQuery(path);
+                    if (path !== '') setIsMasonryView(true);
+                    else setIsMasonryView(false);
+                  }} 
+                />
 
                 <div className="mb-10 pb-8 border-b border-gray-200 dark:border-white/5 text-left">
                   <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">{selectedPage.title}</h1>
@@ -496,7 +515,7 @@ export const WikiPage: React.FC = () => {
               </motion.div>
             </div>
           ) : isMasonryView ? (
-            <WikiMasonry pages={pages} onSelect={(p) => { setSelectedPage(p); setIsMasonryView(false); }} onClose={() => setIsMasonryView(false)} />
+            <WikiMasonry pages={filteredPages} onSelect={(p) => { setSelectedPage(p); setIsMasonryView(false); }} onClose={() => setIsMasonryView(false)} />
           ) : (
             <WikiWelcome pages={pages} onShowMasonry={() => setIsMasonryView(true)} onSelect={setSelectedPage} />
           )}
