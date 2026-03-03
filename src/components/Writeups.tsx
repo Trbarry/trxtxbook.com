@@ -24,9 +24,28 @@ export const Writeups: React.FC = () => {
     switch (difficulty?.toLowerCase()) {
       case 'facile': case 'easy': return 'text-green-600 dark:text-green-400 border-green-500/30 bg-green-500/10';
       case 'moyen': case 'medium': return 'text-orange-600 dark:text-orange-400 border-orange-500/30 bg-orange-500/10';
-      case 'difficile': case 'hard': case 'insane': return 'text-red-600 dark:text-red-500 border-red-500/30 bg-red-500/10';
+      case 'difficile': case 'hard': return 'text-red-600 dark:text-red-500 border-red-500/30 bg-red-500/10';
+      case 'insane': return 'text-purple-600 dark:text-purple-500 border-purple-500/30 bg-purple-500/10';
       default: return 'text-gray-600 dark:text-gray-400 border-gray-200 dark:border-white/10 bg-gray-500/10';
     }
+  };
+
+  const getDifficultyGlow = (difficulty: string) => {
+    const d = difficulty?.toLowerCase() || '';
+    if (d.includes('easy') || d.includes('facile')) return 'group-hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] group-hover:border-green-500/30';
+    if (d.includes('medium') || d.includes('moyen')) return 'group-hover:shadow-[0_0_30px_rgba(245,158,11,0.15)] group-hover:border-orange-500/30';
+    if (d.includes('hard') || d.includes('difficile')) return 'group-hover:shadow-[0_0_30px_rgba(239,68,68,0.15)] group-hover:border-red-500/30';
+    if (d.includes('insane')) return 'group-hover:shadow-[0_0_30px_rgba(139,92,246,0.2)] group-hover:border-purple-500/40';
+    return 'group-hover:shadow-[0_0_30px_rgba(139,92,246,0.1)] group-hover:border-violet-500/30';
+  };
+
+  const getDifficultyAccent = (difficulty: string) => {
+    const d = difficulty?.toLowerCase() || '';
+    if (d.includes('easy') || d.includes('facile')) return 'bg-green-500';
+    if (d.includes('medium') || d.includes('moyen')) return 'bg-orange-500';
+    if (d.includes('hard') || d.includes('difficile')) return 'bg-red-500';
+    if (d.includes('insane')) return 'bg-purple-600';
+    return 'bg-violet-600';
   };
 
   const getPlatformIcon = (slug: string) => {
@@ -103,8 +122,12 @@ export const Writeups: React.FC = () => {
                   key={writeup.id}
                   onClick={() => !isActiveMachine && navigate(`/writeups/${writeup.slug}`)}
                   className={`group relative bg-surface dark:bg-[#1a1a1f] rounded-2xl border border-gray-200 dark:border-white/5 overflow-hidden flex flex-col h-full shadow-sm dark:shadow-none
-                             transition-all duration-300 ${isActiveMachine ? 'cursor-not-allowed opacity-80' : 'cursor-pointer hover:-translate-y-2 hover:border-violet-500/30 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]'}`}
+                             transition-all duration-300 ${isActiveMachine ? 'cursor-not-allowed opacity-80' : `cursor-pointer hover:-translate-y-2 ${getDifficultyGlow(writeup.difficulty || '')}`}`}
                 >
+                  {/* Accent de difficulté */}
+                  {!isActiveMachine && (
+                    <div className={`absolute left-0 top-0 bottom-0 w-1 z-30 opacity-0 group-hover:opacity-100 transition-opacity ${getDifficultyAccent(writeup.difficulty || '')}`} />
+                  )}
                   {/* Image de couverture */}
                   <div className="relative h-48 overflow-hidden">
                     <img
