@@ -6,12 +6,43 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://srmwnujqhxaopnffesgl.supabase.co';
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNybXdudWpxaHhhb3BuZmZlc2dsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczOTg5ODkyMCwiZXhwIjoyMDU1NDc0OTIwfQ.RLd2mrctE3EDmXh4mGzUtofFv3yOcJmqwEwlXMgBEsI";
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNybXdudWpxaHhhb3BuZmZlc2dsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk4OTg5MjAsImV4cCI6MjA1NTQ3NDkyMH0.0oxzfA7twrPKlBzfDTL2ksyl9aV0mdImLrBCHYlr8Fs"; // Note: Use Service Role Key from .env if possible
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 const WRITEUPS_DIR = path.join(process.cwd(), '.write-up');
 const BUCKET_NAME = 'writeup-images';
+
+const DIFFICULTY_MAPPING = {
+  'HTB_Access': { difficulty: 'Easy', points: 20 },
+  'HTB_Administrator': { difficulty: 'Medium', points: 30 },
+  'HTB_Alert': { difficulty: 'Easy', points: 20 },
+  'HTB_Artificial': { difficulty: 'Medium', points: 30 },
+  'HTB_Backfire': { difficulty: 'Medium', points: 30 },
+  'HTB_Beep': { difficulty: 'Easy', points: 20 },
+  'HTB_Blue': { difficulty: 'Easy', points: 20 },
+  'HTB_Cap': { difficulty: 'Easy', points: 20 },
+  'HTB_Certified': { difficulty: 'Medium', points: 30 },
+  'HTB_Checker': { difficulty: 'Medium', points: 30 },
+  'HTB_Chemistry': { difficulty: 'Easy', points: 20 },
+  'HTB_Cicada': { difficulty: 'Medium', points: 30 },
+  'HTB_Code': { difficulty: 'Medium', points: 30 },
+  'HTB_Cypher': { difficulty: 'Medium', points: 30 },
+  'HTB_Editor': { difficulty: 'Easy', points: 20 },
+  'HTB_EscapeTwo': { difficulty: 'Medium', points: 30 },
+  'HTB_Heal': { difficulty: 'Medium', points: 30 },
+  'HTB_Heist': { difficulty: 'Easy', points: 20 },
+  'HTB_Help': { difficulty: 'Easy', points: 20 },
+  'HTB_Instant': { difficulty: 'Medium', points: 30 },
+  'HTB_Lame': { difficulty: 'Easy', points: 20 },
+  'HTB_Legacy': { difficulty: 'Easy', points: 20 },
+  'HTB_LinkVortex': { difficulty: 'Easy', points: 20 },
+  'HTB_Monteverde': { difficulty: 'Medium', points: 30 },
+  'HTB_Remote': { difficulty: 'Easy', points: 20 },
+  'HTB_TheFrizz': { difficulty: 'Hard', points: 40 },
+  'HTB_Titanic': { difficulty: 'Easy', points: 20 },
+  'HTB_Vintage': { difficulty: 'Easy', points: 20 }
+};
 
 async function uploadImage(filePath, fileName) {
   const fileBuffer = fs.readFileSync(filePath);
@@ -38,21 +69,16 @@ function extractMetadata(content, folderName) {
   const title = folderName.replace('HTB_', 'HackTheBox: ');
   const slug = folderName.toLowerCase().replace('_', '-');
   
-  // Try to find difficulty in content
-  let difficulty = 'Medium';
-  if (content.match(/Difficulté:?\s*Easy/i)) difficulty = 'Easy';
-  else if (content.match(/Difficulté:?\s*Medium/i)) difficulty = 'Medium';
-  else if (content.match(/Difficulté:?\s*Hard/i)) difficulty = 'Hard';
-  else if (content.match(/Difficulté:?\s*Insane/i)) difficulty = 'Insane';
-  
-  // Try to find points in content
-  const pointsMatch = content.match(/Points:?\s*(\d+)/i);
-  const points = pointsMatch ? parseInt(pointsMatch[1]) : (difficulty === 'Easy' ? 20 : (difficulty === 'Medium' ? 30 : 40));
+  // Use mapping if available, else try to find or use defaults
+  const mapped = DIFFICULTY_MAPPING[folderName] || {};
+  let difficulty = mapped.difficulty || 'Medium';
+  let points = mapped.points || 30;
   
   // Try to find OS in content
   let os = 'Windows';
   if (content.match(/OS:?\s*Linux/i) || content.match(/machine Linux/i)) os = 'Linux';
   else if (content.match(/OS:?\s*Windows/i) || content.match(/machine Windows/i)) os = 'Windows';
+  else if (content.match(/CentOS|Ubuntu|Debian|Linux/i)) os = 'Linux';
 
   // Description: clean up content and take first part
   let description = content
@@ -67,10 +93,10 @@ function extractMetadata(content, folderName) {
   const tags = [];
   if (content.match(/Active Directory/i)) tags.push('Active Directory');
   if (content.match(/SMB/i)) tags.push('SMB');
-  if (content.match(/Web/i) || content.match(/HTTP/i)) tags.push('Web');
+  if (content.match(/Web|HTTP|Apache|Nginx/i)) tags.push('Web');
   if (content.match(/Kerberos/i)) tags.push('Kerberos');
   if (content.match(/SQL/i)) tags.push('SQL');
-  if (content.match(/Privilege Escalation/i) || content.match(/Escalade de Privilèges/i)) tags.push('Privilege Escalation');
+  if (content.match(/Privilege Escalation|Escalade de Privilèges/i)) tags.push('Privilege Escalation');
   if (tags.length === 0) tags.push('HackTheBox');
 
   return { title, slug, difficulty, points, os, description, tags };
@@ -106,7 +132,7 @@ async function processWriteups() {
   <div class="os">OS: ${metadata.os}</div>
 </div>\n\n`;
 
-    // Remove the initial image link and headers that might be redundant
+    // Remove the initial image link
     let finalContent = content.replace(/!\[.*\]\(.*\)/, '').trim();
     finalContent = kaliHeader + finalContent;
 

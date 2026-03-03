@@ -1,5 +1,5 @@
 -- Migration to add writeups from .write-up directory
--- Generated on 2026-03-03T14:50:55.372Z
+-- Generated on 2026-03-03T14:54:43.137Z
 
 -- Writeup: HackTheBox: Access
 INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
@@ -7,8 +7,8 @@ VALUES (
   'HackTheBox: Access',
   'htb-access',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
+  <div class="difficulty">Difficulté: Easy</div>
+  <div class="points">Points: 20</div>
   <div class="os">OS: Linux</div>
 </div>
 
@@ -327,12 +327,12 @@ $Shortcut | Select-Object FullName, TargetPath, Arguments, WorkingDirectory
 **Analyse Offline via pylnker :**
 Sur une machine Linux, l''outil **pylnker.py** permet de parser la structure binaire du fichier pour extraire des métadonnées supplémentaires comme les **MAC Times** (Creation, Access, Modified) et le **Volume Serial Number**, ce qui est précieux lors d''une investigation de type **Forensics** pour tracer l''origine d''un déploiement de logiciel ou d''un script malveillant.',
   'HackTheBox',
-  'Medium',
-  30,
+  'Easy',
+  20,
   ARRAY['SMB', 'Web', 'Privilege Escalation'],
   'L''objectif de cette phase est d''identifier la surface d''attaque d''une machine Windows dont la configuration semble atypique pour cet OS (absence de ports SMB/RPC standards). L''attaque repose sur une chaîne d''extraction de données à partir de services...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-access-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -607,7 +607,7 @@ La machine **Administrator** illustre une chaîne de compromission **Active Dire
   ARRAY['Active Directory', 'SMB', 'Kerberos', 'Privilege Escalation'],
   'L''objectif initial est d''identifier la surface d''attaque de la machine **Administrator**, un **Domain Controller** Windows. Je commence par un scan **Nmap** exhaustif pour découvrir les services ouverts. Le scan révèle une panoplie de services classi...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-administrator-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -625,9 +625,9 @@ VALUES (
   'HackTheBox: Alert',
   'htb-alert',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
-  <div class="os">OS: Windows</div>
+  <div class="difficulty">Difficulté: Easy</div>
+  <div class="points">Points: 20</div>
+  <div class="os">OS: Linux</div>
 </div>
 
 # Phase 1 : Reconnaissance & Brèche Initiale
@@ -965,12 +965,12 @@ iptables -L -v
 ```
 Le trafic n''est accepté que s''il provient de l''interface **loopback** (`lo`). Bien qu''aucun service ne soit actuellement à l''écoute sur ce port, la règle reste active, provoquant l''absence de réponse (DROP) aux paquets SYN externes, ce qui explique le statut `filtered`.',
   'HackTheBox',
-  'Medium',
-  30,
+  'Easy',
+  20,
   ARRAY['Web', 'Privilege Escalation'],
   'La phase de reconnaissance commence par un scan **Nmap** exhaustif pour identifier la surface d''attaque externe. **Résultats :** * **Port 22 (SSH) :** OpenSSH 8.2p1 (Ubuntu). * **Port 80 (HTTP) :** Apache 2.4.41. Redirection vers `http://alert.htb/`....',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-alert-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -990,7 +990,7 @@ VALUES (
   '<div class="kali-header">
   <div class="difficulty">Difficulté: Medium</div>
   <div class="points">Points: 30</div>
-  <div class="os">OS: Windows</div>
+  <div class="os">OS: Linux</div>
 </div>
 
 ### Énumération Initiale
@@ -1275,7 +1275,7 @@ La compromission de la machine **Artificial** met en lumière plusieurs faibless
   ARRAY['Web', 'SQL', 'Privilege Escalation'],
   'La phase de reconnaissance commence par un scan **Nmap** complet pour identifier la surface d''attaque réseau. Le scan révèle deux ports ouverts : 1. **Port 22 (SSH)** : OpenSSH 8.2p1 (Ubuntu). 2. **Port 80 (HTTP)** : Nginx 1.18.0, redirigeant vers `h...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-artificial-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -1295,7 +1295,7 @@ VALUES (
   '<div class="kali-header">
   <div class="difficulty">Difficulté: Medium</div>
   <div class="points">Points: 30</div>
-  <div class="os">OS: Windows</div>
+  <div class="os">OS: Linux</div>
 </div>
 
 ### Énumération et Scanning
@@ -1566,7 +1566,7 @@ La compromission de **Backfire** met en lumière les risques critiques liés à 
   ARRAY['Web', 'Privilege Escalation'],
   'Je commence par une phase classique de reconnaissance avec **nmap** pour identifier la surface d''attaque. Le scan complet des ports TCP révèle trois services exposés et deux ports filtrés. **Résultats du scan :** * **Port 22 (SSH)** : OpenSSH 9.2p1 (...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-backfire-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -1584,9 +1584,9 @@ VALUES (
   'HackTheBox: Beep',
   'htb-beep',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
-  <div class="os">OS: Windows</div>
+  <div class="difficulty">Difficulté: Easy</div>
+  <div class="points">Points: 20</div>
+  <div class="os">OS: Linux</div>
 </div>
 
 # Phase 1 : Reconnaissance & Brèche Initiale
@@ -1898,12 +1898,12 @@ La compromission de Beep met en lumière plusieurs échecs critiques de sécurit
 3.  **Principe du moindre privilège non respecté :** L''utilisateur `asterisk` disposait de droits **Sudo** sur des binaires dangereux (`nmap`, `chmod`), transformant une compromission de service mineure en une prise de contrôle totale du serveur.
 4.  **Surface d''attaque excessive :** Trop de services inutiles (HylaFAX, Cyrus IMAP, MySQL, etc.) sont exposés, multipliant les points d''entrée potentiels. Une segmentation réseau ou un **Hardening** des services aurait limité l''impact.',
   'HackTheBox',
-  'Medium',
-  30,
+  'Easy',
+  20,
   ARRAY['Web', 'SQL', 'Privilege Escalation'],
   'L''énumération de **Beep** révèle une surface d''attaque particulièrement étendue. La machine semble héberger une suite complète de services de communication (PBX), ce qui multiplie les vecteurs d''entrée potentiels. Je commence par un scan **Nmap** com...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-beep-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -1921,8 +1921,8 @@ VALUES (
   'HackTheBox: Blue',
   'htb-blue',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
+  <div class="difficulty">Difficulté: Easy</div>
+  <div class="points">Points: 20</div>
   <div class="os">OS: Windows</div>
 </div>
 
@@ -2172,12 +2172,12 @@ L''analyse de la machine **Blue** révèle plusieurs faiblesses structurelles ty
 
 **Recommandation Red Team** : Toujours privilégier l''exploitation manuelle via Python dans des environnements instables, car **Metasploit** peut parfois provoquer un **BSOD (Blue Screen of Death)** sur les cibles x64 si la corruption du pool mémoire ne se déroule pas exactement comme prévu.',
   'HackTheBox',
-  'Medium',
-  30,
+  'Easy',
+  20,
   ARRAY['Active Directory', 'SMB', 'Kerberos', 'Privilege Escalation'],
   'Ma phase de reconnaissance commence par un scan **TCP** complet pour identifier la surface d''attaque. J''utilise **Nmap** avec une cadence élevée pour gagner en efficacité, suivi d''un scan de services ciblé. Le scan révèle les ports classiques d''un en...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-blue-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -2195,9 +2195,9 @@ VALUES (
   'HackTheBox: Cap',
   'htb-cap',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
-  <div class="os">OS: Windows</div>
+  <div class="difficulty">Difficulté: Easy</div>
+  <div class="points">Points: 20</div>
+  <div class="os">OS: Linux</div>
 </div>
 
 ### Phase 1 : Reconnaissance & Brèche Initiale
@@ -2383,12 +2383,12 @@ La compromission totale de **Cap** illustre parfaitement le danger des **Linux C
 2.  **Principe du Moindre Privilège** : Pour sécuriser cette machine, le développeur aurait dû utiliser des outils spécifiques comme **setcap** uniquement sur le binaire `tcpdump` lui-même, ou mieux, utiliser un **Group** dédié avec des permissions **Sudo** restreintes à une commande précise, plutôt que d''altérer les capacités globales de l''interpréteur système.
 3.  **Persistance & Post-Exploitation** : En tant que **root**, l''analyse des fichiers cachés montre que `.bash_history` et `.viminfo` étaient liés à `/dev/null`. C''est une technique anti-forensics courante pour masquer les actions des administrateurs ou des attaquants précédents sur la machine.',
   'HackTheBox',
-  'Medium',
-  30,
+  'Easy',
+  20,
   ARRAY['Web', 'Privilege Escalation'],
   'Je débute par un scan **Nmap** complet pour identifier les ports ouverts et les services associés. La machine présente une surface d''attaque standard pour un environnement Linux. Le scan révèle trois services actifs : * **Port 21 (FTP)** : vsFTPd 3.0...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-cap-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -2692,7 +2692,7 @@ La compromission de **Certified** illustre parfaitement la dangerosité des conf
   ARRAY['Active Directory', 'SMB', 'Web', 'Kerberos', 'Privilege Escalation'],
   'La machine **Certified** adopte un scénario de type **Assume-Breach**. Contrairement aux vecteurs d''entrée classiques via des vulnérabilités web, l''exercice débute avec un accès initial via des identifiants utilisateur compromis : `judith.mader` : `j...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-certified-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -2987,7 +2987,7 @@ La remédiation consisterait à utiliser des permissions SHM restreintes (`0600`
   ARRAY['Web', 'SQL', 'Privilege Escalation'],
   'L''énumération commence par un scan **Nmap** complet pour identifier la surface d''attaque. La machine expose trois ports : **SSH (22)** et deux services **HTTP (80, 8080)**. Le port 80 renvoie un **403 Forbidden**, suggérant un **Virtual Hosting**. En...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-checker-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -3005,9 +3005,9 @@ VALUES (
   'HackTheBox: Chemistry',
   'htb-chemistry',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
-  <div class="os">OS: Windows</div>
+  <div class="difficulty">Difficulté: Easy</div>
+  <div class="points">Points: 20</div>
+  <div class="os">OS: Linux</div>
 </div>
 
 ### Phase 1 : Reconnaissance & Brèche Initiale
@@ -3246,12 +3246,12 @@ app.router.add_static(''/assets/'', path=''static/'', follow_symlinks=True)
 *   **Privilèges excessifs** : L''application tourne avec les privilèges **root**, ce qui signifie que le **Path Traversal** n''est limité par aucune restriction de permissions système (DAC), permettant la lecture de fichiers sensibles comme `/etc/shadow` ou les clés **SSH**.
 *   **Isolation réseau** : La règle **IPTables** limitant l''accès au port 8080 suggère que l''administrateur était conscient du risque potentiel du service, mais a tenté de le sécuriser par l''obscurité et la segmentation plutôt que par une mise à jour logicielle.',
   'HackTheBox',
-  'Medium',
-  30,
+  'Easy',
+  20,
   ARRAY['Web', 'SQL', 'Privilege Escalation'],
   'Ma méthodologie débute par une phase d''énumération classique pour identifier la surface d''attaque. Le scan de ports révèle deux services exposés, dont un serveur web non standard sur le port 5000. J''utilise **nmap** pour cartographier les ports ouver...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-chemistry-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -3613,7 +3613,7 @@ Pour remédier à cela, il est impératif d''appliquer le principe du **Least Pr
   ARRAY['Active Directory', 'SMB', 'Kerberos', 'Privilege Escalation'],
   'L''énumération initiale commence par un scan **Nmap** exhaustif pour identifier la surface d''attaque de la cible. Les résultats indiquent un **Windows Domain Controller** (DC) classique au sein du domaine `cicada.htb`. Les services critiques identifié...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-cicada-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -3633,7 +3633,7 @@ VALUES (
   '<div class="kali-header">
   <div class="difficulty">Difficulté: Medium</div>
   <div class="points">Points: 30</div>
-  <div class="os">OS: Windows</div>
+  <div class="os">OS: Linux</div>
 </div>
 
 ### 1. Reconnaissance (Scanning & Énumération)
@@ -3938,7 +3938,7 @@ print([u.password for u in globals()[''User''].query.all()])
   ARRAY['Web', 'SQL', 'Privilege Escalation'],
   'Ma phase de reconnaissance commence par un scan **Nmap** exhaustif pour identifier la surface d''attaque. La machine expose deux services principaux. **Résultats :** * **Port 22 (SSH) :** OpenSSH 8.2p1 (Ubuntu 20.04). * **Port 5000 (HTTP) :** Serveur ...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-code-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -4236,7 +4236,7 @@ Le mot de passe trouvé dans le `.bash_history` de l''utilisateur `neo4j` (`cU4b
   ARRAY['Web', 'SQL', 'Privilege Escalation'],
   'La phase de reconnaissance commence par un scan **Nmap** exhaustif pour identifier la surface d''attaque réseau. Le scan révèle deux ports ouverts : * **Port 22 (SSH)** : OpenSSH 9.6p1. * **Port 80 (HTTP)** : Nginx 1.24.0, redirigeant vers `http://cyp...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-cypher-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -4254,9 +4254,9 @@ VALUES (
   'HackTheBox: Editor',
   'htb-editor',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
-  <div class="os">OS: Windows</div>
+  <div class="difficulty">Difficulté: Easy</div>
+  <div class="points">Points: 20</div>
+  <div class="os">OS: Linux</div>
 </div>
 
 ### 1. Reconnaissance Initiale & Scanning
@@ -4542,12 +4542,12 @@ ProtectSystem=strict
 
 La directive **NoNewPrivileges=true** est une mesure de sécurité critique au niveau du noyau (**kernel**). Lorsqu''elle est activée, le flag `PR_SET_NO_NEW_PRIVS` est positionné pour le processus et tous ses enfants. Cela empêche toute opération `execve()` d''accorder de nouveaux privilèges, rendant les binaires **SUID** (comme `su` ou `sudo`) inopérants, car le noyau refuse d''élever les privilèges du processus lors de l''exécution, même si le bit SUID est présent sur le fichier. C''est une excellente défense contre les escalades de privilèges locales via des binaires système mal configurés.',
   'HackTheBox',
-  'Medium',
-  30,
+  'Easy',
+  20,
   ARRAY['Web', 'SQL', 'Privilege Escalation'],
   'Ma méthodologie débute par une phase de **Port Scanning** agressive pour identifier la surface d''exposition. J''utilise **nmap** en deux passes : une détection rapide de tous les ports TCP, suivie d''une énumération précise des services. Le scan révèle...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-editor-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -4918,7 +4918,7 @@ La compromission de **EscapeTwo** met en lumière plusieurs faiblesses structure
   ARRAY['Active Directory', 'SMB', 'Kerberos', 'SQL', 'Privilege Escalation'],
   'La phase initiale repose sur une approche **Assume Breach**. Nous disposons d''un compte utilisateur de bas niveau : `rose / KxEPkKe6R8su`. L''objectif est d''énumérer la surface d''attaque pour identifier des vecteurs d''escalade ou de pivot. Le scan com...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-escapetwo-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -4938,7 +4938,7 @@ VALUES (
   '<div class="kali-header">
   <div class="difficulty">Difficulté: Medium</div>
   <div class="points">Points: 30</div>
-  <div class="os">OS: Windows</div>
+  <div class="os">OS: Linux</div>
 </div>
 
 ### 1. Reconnaissance & Énumération des Services
@@ -5224,7 +5224,7 @@ Cette technique de "Proxy None" est une méthode pragmatique pour limiter l''exp
   ARRAY['Web', 'SQL', 'Privilege Escalation'],
   'Ma phase de reconnaissance commence par un scan **Nmap** classique pour identifier les ports ouverts et les services associés. Le scan révèle deux ports : **22 (SSH)** et **80 (HTTP)**. Le serveur Web **Nginx** redirige vers `http://heal.htb/`. J''ajo...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-heal-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -5242,8 +5242,8 @@ VALUES (
   'HackTheBox: Heist',
   'htb-heist',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
+  <div class="difficulty">Difficulté: Easy</div>
+  <div class="points">Points: 20</div>
   <div class="os">OS: Windows</div>
 </div>
 
@@ -5488,12 +5488,12 @@ L''analyse de la compromission de **Heist** met en évidence plusieurs failles s
 3.  **Cisco Type 7 Vulnerability :** La phase initiale a reposé sur l''extraction de mots de passe depuis une configuration Cisco. L''utilisation de l''algorithme **Type 7** est une faute grave, car il s''agit d''un chiffrement réversible (XOR avec une clé statique) et non d''un hachage sécurisé.
 4.  **Information Leakage via RPC :** L''accès en lecture à l''**IPC$** a permis une énumération précise des utilisateurs via **SID Brute Forcing** (`lookupsids`), facilitant grandement les attaques par **Password Spraying**.',
   'HackTheBox',
-  'Medium',
-  30,
+  'Easy',
+  20,
   ARRAY['SMB', 'Web', 'Privilege Escalation'],
   'L''objectif de cette phase est de cartographier la surface d''attaque de la machine **Heist** et d''exploiter des informations fuitées pour obtenir un premier point d''ancrage sur le système via **WinRM**. Je débute par un scan **Nmap** complet pour iden...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-heist-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -5511,9 +5511,9 @@ VALUES (
   'HackTheBox: Help',
   'htb-help',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
-  <div class="os">OS: Windows</div>
+  <div class="difficulty">Difficulté: Easy</div>
+  <div class="points">Points: 20</div>
+  <div class="os">OS: Linux</div>
 </div>
 
 # Phase 1 : Reconnaissance & Brèche Initiale
@@ -5783,12 +5783,12 @@ L''**Introspection** était activée sur le point de terminaison **GraphQL** (po
 **4. Hygiène des mots de passe :**
 Le hash récupéré via **SQLi** a été cassé instantanément ("Welcome1"). Cela souligne l''importance de politiques de mots de passe robustes et de l''utilisation d''algorithmes de hachage modernes avec sel (comme **Argon2** ou **bcrypt**) au lieu de simples MD5 ou SHA1.',
   'HackTheBox',
-  'Medium',
-  30,
+  'Easy',
+  20,
   ARRAY['Web', 'SQL', 'Privilege Escalation'],
   'Ma méthodologie commence par un scan **Nmap** complet pour identifier la surface d''attaque. La machine présente trois ports ouverts, suggérant un vecteur d''entrée via des services web. **Résultats :** * **Port 22 (SSH) :** OpenSSH 7.2p2 (Ubuntu). * *...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-help-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -5808,7 +5808,7 @@ VALUES (
   '<div class="kali-header">
   <div class="difficulty">Difficulté: Medium</div>
   <div class="points">Points: 30</div>
-  <div class="os">OS: Windows</div>
+  <div class="os">OS: Linux</div>
 </div>
 
 # Phase 1 : Reconnaissance & Brèche Initiale
@@ -6066,7 +6066,7 @@ L''analyse de la machine **Instant** révèle plusieurs failles structurelles gr
   ARRAY['Web', 'SQL', 'Privilege Escalation'],
   'Ma méthodologie débute par un scan **Nmap** complet pour identifier la surface d''attaque réseau. Le scan révèle deux ports ouverts : * **22/tcp (SSH)** : OpenSSH 9.6p1. * **80/tcp (HTTP)** : Apache 2.4.58, redirigeant vers `http://instant.htb/`. J''aj...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-instant-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -6084,9 +6084,9 @@ VALUES (
   'HackTheBox: Lame',
   'htb-lame',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
-  <div class="os">OS: Windows</div>
+  <div class="difficulty">Difficulté: Easy</div>
+  <div class="points">Points: 20</div>
+  <div class="os">OS: Linux</div>
 </div>
 
 ### 1. Reconnaissance & Scanning
@@ -6350,12 +6350,12 @@ Le scan **Nmap** initial ne montrait que 5 ports. Une fois **root**, l''examen d
 
 Cette configuration illustre l''importance de la segmentation réseau et du durcissement (**Hardening**) via pare-feu, même si les services eux-mêmes restent vulnérables.',
   'HackTheBox',
-  'Medium',
-  30,
-  ARRAY['SMB', 'SQL', 'Privilege Escalation'],
+  'Easy',
+  20,
+  ARRAY['SMB', 'Web', 'SQL', 'Privilege Escalation'],
   'Ma méthodologie débute par une phase de **Port Scanning** agressive pour identifier la surface d''attaque. J''utilise **nmap** avec une vitesse d''émission élevée pour un premier tri, suivi d''un scan de services détaillé. **Résultats du scan :** * **Por...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-lame-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -6373,8 +6373,8 @@ VALUES (
   'HackTheBox: Legacy',
   'htb-legacy',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
+  <div class="difficulty">Difficulté: Easy</div>
+  <div class="points">Points: 20</div>
   <div class="os">OS: Windows</div>
 </div>
 
@@ -6610,12 +6610,12 @@ La compromission totale de **Legacy** démontre l''importance critique du **Patc
 2.  Le service **Browser** (via `\pipe\browser`) était accessible de manière anonyme, servant de point d''entrée pour les appels RPC de **MS08-067**.
 3.  L''absence de **DEP (Data Execution Prevention)** sur certains processus permettait une exécution de shellcode simplifiée en pile.',
   'HackTheBox',
-  'Medium',
-  30,
+  'Easy',
+  20,
   ARRAY['SMB', 'Privilege Escalation'],
   'Ma méthodologie débute par une phase de **Reconnaissance** classique pour identifier la surface d''attaque. Étant donné l''âge de la machine **Legacy**, je m''attends à trouver des services legacy potentiellement vulnérables. Je commence par un scan **T...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-legacy-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -6633,9 +6633,9 @@ VALUES (
   'HackTheBox: LinkVortex',
   'htb-linkvortex',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
-  <div class="os">OS: Windows</div>
+  <div class="difficulty">Difficulté: Easy</div>
+  <div class="points">Points: 20</div>
+  <div class="os">OS: Linux</div>
 </div>
 
 ### 1. External Enumeration & Service Scanning
@@ -6946,12 +6946,12 @@ Pour restaurer la visibilité totale lors de mes tests, j''ai modifié ces valeu
 
 Cette configuration est une bonne pratique standard pour limiter la fuite d''informations (Information Leakage) en environnement de production.',
   'HackTheBox',
-  'Medium',
-  30,
+  'Easy',
+  20,
   ARRAY['Web', 'Privilege Escalation'],
   'Ma reconnaissance commence par un scan **Nmap** agressif pour identifier les ports ouverts et les services associés sur la cible `10.10.11.47`. Le scan révèle deux services standards : * **Port 22 (SSH)** : OpenSSH 8.9p1 (Ubuntu). * **Port 80 (HTTP)*...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-linkvortex-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -7253,7 +7253,7 @@ L''analyse de ce vecteur révèle une nuance critique concernant les versions de
   ARRAY['Active Directory', 'SMB', 'Web', 'Kerberos', 'SQL', 'Privilege Escalation'],
   'L''objectif de cette phase est d''identifier la surface d''attaque d''une machine Windows typique d''un environnement **Active Directory** et d''obtenir un premier point d''appui via une faiblesse de politique de mots de passe. Je commence par un scan **Nma...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-monteverde-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -7271,8 +7271,8 @@ VALUES (
   'HackTheBox: Remote',
   'htb-remote',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
+  <div class="difficulty">Difficulté: Easy</div>
+  <div class="points">Points: 20</div>
   <div class="os">OS: Windows</div>
 </div>
 
@@ -7526,12 +7526,12 @@ La compromission de cette machine met en lumière deux failles architecturales m
 
 **Recommandation Red Team** : Toujours auditer les clés de registre `HKLM\SOFTWARE` pour les applications non-Microsoft lors de la phase d''énumération post-exploitation.',
   'HackTheBox',
-  'Medium',
-  30,
+  'Easy',
+  20,
   ARRAY['SMB', 'Web', 'SQL'],
   'Ma méthodologie débute par un scan complet des ports TCP pour identifier la surface d''attaque. La machine présente un grand nombre de services ouverts, typiques d''un environnement **Windows**, mais avec la présence inhabituelle de **NFS**. **Résultat...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-remote-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -7549,8 +7549,8 @@ VALUES (
   'HackTheBox: TheFrizz',
   'htb-thefrizz',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
+  <div class="difficulty">Difficulté: Hard</div>
+  <div class="points">Points: 40</div>
   <div class="os">OS: Windows</div>
 </div>
 
@@ -7818,12 +7818,12 @@ La compromission totale de **TheFrizz** met en lumière plusieurs failles struct
 4.  **Désactivation de NTLM** : La machine avait **NTLM** désactivé, forçant l''utilisation de **Kerberos**. Bien que cela soit une bonne pratique de durcissement, cela n''a pas empêché l''attaque car les identifiants crackés ont été utilisés pour forger des tickets (TGT/TGS) légitimes via `kinit`.
 5.  **Persistence WAPT** : L''analyse du répertoire `C:\wapt` montre que l''outil de déploiement logiciel stockait des mots de passe en **Base64** dans ses fichiers `.ini`. Un attaquant peut facilement transformer cette plateforme de gestion en un outil de distribution de malwares à l''échelle du parc informatique.',
   'HackTheBox',
-  'Medium',
-  30,
+  'Hard',
+  40,
   ARRAY['Active Directory', 'SMB', 'Web', 'Kerberos', 'SQL'],
   'Ma phase de reconnaissance commence par un scan **Nmap** exhaustif pour identifier la surface d''attaque. La machine présente un grand nombre de ports ouverts, typiques d''un environnement **Active Directory**. L''énumération révèle les points critiques...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-thefrizz-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -7841,9 +7841,9 @@ VALUES (
   'HackTheBox: Titanic',
   'htb-titanic',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
-  <div class="os">OS: Windows</div>
+  <div class="difficulty">Difficulté: Easy</div>
+  <div class="points">Points: 20</div>
+  <div class="os">OS: Linux</div>
 </div>
 
 ### Phase 1 : Reconnaissance & Brèche Initiale
@@ -8110,12 +8110,12 @@ L''exploitation de cette machine met en lumière plusieurs failles de configurat
 3.  **Principle of Least Privilege** : L''utilisation d''**ImageMagick** (un outil connu pour sa large surface d''attaque et ses nombreuses CVE historiques) par l''utilisateur **root** pour une tâche simple d''extraction de métadonnées est risquée. Un utilisateur dédié avec des permissions restreintes aurait dû être utilisé pour cette tâche.
 4.  **Information Leakage via Gitea** : La compromission initiale a été facilitée par l''exposition de la base de données **SQLite** de **Gitea** via une **Path Traversal**. Cela souligne l''importance de sécuriser les volumes Docker et de ne jamais stocker de secrets ou de bases de données dans des arborescences accessibles par le serveur web, même indirectement.',
   'HackTheBox',
-  'Medium',
-  30,
+  'Easy',
+  20,
   ARRAY['Web', 'SQL', 'Privilege Escalation'],
   'L''énumération commence par un scan **Nmap** complet pour identifier la surface d''attaque réseau. La machine expose deux services standards : **SSH** (22) et **HTTP** (80). Le serveur Web tourne sous **Apache 2.4.52** sur **Ubuntu**. Une redirection v...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-titanic-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -8133,8 +8133,8 @@ VALUES (
   'HackTheBox: Vintage',
   'htb-vintage',
   '<div class="kali-header">
-  <div class="difficulty">Difficulté: Medium</div>
-  <div class="points">Points: 30</div>
+  <div class="difficulty">Difficulté: Easy</div>
+  <div class="points">Points: 20</div>
   <div class="os">OS: Windows</div>
 </div>
 
@@ -8401,12 +8401,12 @@ La compromission totale de **Vintage** met en lumière plusieurs faiblesses stru
 3.  **Persistance via RBCD** : Le **Resource-Based Constrained Delegation** est souvent moins surveillé que la délégation traditionnelle. Le fait qu''un utilisateur puisse modifier cet attribut sur un **Domain Controller** est une configuration catastrophique. Dans un environnement durci, l''attribut `msDS-AllowedToActOnBehalfOfOtherIdentity` ne devrait jamais être modifiable par un utilisateur standard ou un administrateur de second rang.
 4.  **Hygiène DPAPI** : La présence de credentials administratifs dans le **Credential Manager** d''un utilisateur non-admin (**C.Neri**) facilite le mouvement latéral. L''utilisation de **LAPS** (Local Administrator Password Solution) et la restriction des sessions administratives sur les postes de travail auraient pu prévenir cette escalade.',
   'HackTheBox',
-  'Medium',
-  30,
+  'Easy',
+  20,
   ARRAY['Active Directory', 'SMB', 'Kerberos', 'SQL', 'Privilege Escalation'],
   'La phase de reconnaissance commence par un scan **Nmap** exhaustif pour identifier la surface d''attaque de la cible Windows. L''analyse des services confirme la présence d''un **Domain Controller** (DC01) pour le domaine **vintage.htb**. Un point criti...',
   true,
-  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/htb-vintage-cover.png'],
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
