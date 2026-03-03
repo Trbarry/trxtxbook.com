@@ -11,12 +11,19 @@ export function useWikiPages() {
     
     if (error) throw error;
     
-    // Filter out duplicates or unwanted content
-    const filtered = (data || []).filter(page => {
+    // Filter out duplicates, unwanted content, or empty/placeholder pages
+    const filtered = (data || []).filter((page: WikiPage) => {
       // Remove CPTS duplicate if it's in a specific category or title
       const isCptsDuplicate = page.category?.toLowerCase().includes('cpts') || 
                              page.title?.toLowerCase().includes('cpts');
-      return !isCptsDuplicate;
+      
+      // Hide empty pages (no content or placeholder)
+      const isEmpty = !page.content || 
+                     page.content.trim().length === 0 || 
+                     page.content.trim().toLowerCase() === 'en cours de rédaction' ||
+                     page.content.trim().toLowerCase() === 'coming soon';
+      
+      return !isCptsDuplicate && !isEmpty;
     });
 
     return filtered;
