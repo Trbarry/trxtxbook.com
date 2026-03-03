@@ -32,11 +32,20 @@ export const Writeups: React.FC = () => {
 
   const getDifficultyGlow = (difficulty: string) => {
     const d = difficulty?.toLowerCase() || '';
-    if (d.includes('easy') || d.includes('facile')) return 'group-hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] group-hover:border-green-500/30';
-    if (d.includes('medium') || d.includes('moyen')) return 'group-hover:shadow-[0_0_30px_rgba(245,158,11,0.15)] group-hover:border-orange-500/30';
-    if (d.includes('hard') || d.includes('difficile')) return 'group-hover:shadow-[0_0_30px_rgba(239,68,68,0.15)] group-hover:border-red-500/30';
-    if (d.includes('insane')) return 'group-hover:shadow-[0_0_30px_rgba(139,92,246,0.2)] group-hover:border-purple-500/40';
-    return 'group-hover:shadow-[0_0_30px_rgba(139,92,246,0.1)] group-hover:border-violet-500/30';
+    if (d.includes('easy') || d.includes('facile')) return 'group-hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.2)] group-hover:border-green-500/40';
+    if (d.includes('medium') || d.includes('moyen')) return 'group-hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.2)] group-hover:border-orange-500/40';
+    if (d.includes('hard') || d.includes('difficile')) return 'group-hover:shadow-[0_20px_40px_-15px_rgba(239,68,68,0.25)] group-hover:border-red-500/40';
+    if (d.includes('insane')) return 'group-hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.3)] group-hover:border-purple-500/50';
+    return 'group-hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.2)] group-hover:border-violet-500/40';
+  };
+
+  const getDifficultyHoverGradient = (difficulty: string) => {
+    const d = difficulty?.toLowerCase() || '';
+    if (d.includes('easy') || d.includes('facile')) return 'bg-[radial-gradient(circle_at_50%_0%,rgba(16,185,129,0.08),transparent_70%)]';
+    if (d.includes('medium') || d.includes('moyen')) return 'bg-[radial-gradient(circle_at_50%_0%,rgba(245,158,11,0.08),transparent_70%)]';
+    if (d.includes('hard') || d.includes('difficile')) return 'bg-[radial-gradient(circle_at_50%_0%,rgba(239,68,68,0.08),transparent_70%)]';
+    if (d.includes('insane')) return 'bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.12),transparent_70%)]';
+    return 'bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.08),transparent_70%)]';
   };
 
   const getDifficultyAccent = (difficulty: string) => {
@@ -124,9 +133,14 @@ export const Writeups: React.FC = () => {
                   className={`group relative bg-surface dark:bg-[#1a1a1f] rounded-2xl border border-gray-200 dark:border-white/5 overflow-hidden flex flex-col h-full shadow-sm dark:shadow-none
                              transition-all duration-300 ${isActiveMachine ? 'cursor-not-allowed opacity-80' : `cursor-pointer hover:-translate-y-2 ${getDifficultyGlow(writeup.difficulty || '')}`}`}
                 >
+                  {/* Effet de Gradient au Survol */}
+                  {!isActiveMachine && (
+                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none ${getDifficultyHoverGradient(writeup.difficulty || '')}`} />
+                  )}
+
                   {/* Accent de difficulté */}
                   {!isActiveMachine && (
-                    <div className={`absolute left-0 top-0 bottom-0 w-1 z-30 opacity-0 group-hover:opacity-100 transition-opacity ${getDifficultyAccent(writeup.difficulty || '')}`} />
+                    <div className={`absolute left-0 top-0 bottom-0 w-1 z-30 opacity-0 group-hover:opacity-100 group-hover:w-1.5 transition-all duration-300 ${getDifficultyAccent(writeup.difficulty || '')}`} />
                   )}
                   {/* Image de couverture */}
                   <div className="relative h-48 overflow-hidden">
