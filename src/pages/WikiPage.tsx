@@ -266,6 +266,35 @@ const WikiMasonry: React.FC<{
   onSelect: (page: WikiPageType) => void;
   onClose: () => void;
 }> = ({ pages, onSelect, onClose }) => {
+  const groupedPages = React.useMemo(() => {
+    const groups = pages.reduce((acc, page) => {
+      const rootCategory = page.category.split('/')[0] || 'Général';
+      if (!acc[rootCategory]) acc[rootCategory] = [];
+      acc[rootCategory].push(page);
+      return acc;
+    }, {} as Record<string, WikiPageType[]>);
+
+    // Trier les catégories alphabétiquement
+    return Object.keys(groups)
+      .sort()
+      .reduce((acc, key) => {
+        acc[key] = groups[key].sort((a, b) => a.title.localeCompare(b.title));
+        return acc;
+      }, {} as Record<string, WikiPageType[]>);
+  }, [pages]);
+
+  const getCategoryIcon = (category: string) => {
+    const lower = category.toLowerCase();
+    if (lower.includes('active directory') || lower.includes('ad')) return <ShieldCheck className="text-blue-500" />;
+    if (lower.includes('web')) return <Sparkles className="text-amber-500" />;
+    if (lower.includes('linux')) return <Terminal className="text-orange-500" />;
+    if (lower.includes('network') || lower.includes('réseau')) return <Activity className="text-emerald-500" />;
+    if (lower.includes('windows')) return <Cpu className="text-blue-400" />;
+    if (lower.includes('cloud')) return <Database className="text-cyan-500" />;
+    if (lower.includes('hardware')) return <Cpu className="text-gray-500" />;
+    return <Folder className="text-violet-500" />;
+  };
+
   return (
     <div className="flex-1 flex flex-col h-full overflow-hidden bg-white/50 dark:bg-[#0a0a0f]/50 backdrop-blur-3xl">
       <div className="p-6 border-b border-gray-200 dark:border-white/5 flex items-center justify-between sticky top-0 z-20 bg-inherit backdrop-blur-md">
@@ -284,45 +313,80 @@ const WikiMasonry: React.FC<{
         </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 custom-scrollbar">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-          {pages.map(page => (
-            <motion.button
-              key={page.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              onClick={() => onSelect(page)}
-              className="group text-left p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#13131a]/80 border border-gray-200 dark:border-white/5 hover:border-violet-500/50 hover:shadow-2xl hover:shadow-violet-500/10 transition-all flex flex-col gap-3 sm:gap-4 relative overflow-hidden"
+      <div className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 custom-scrollbar space-y-12">
+        {/* Navigation Rapide */}
+        <div className="flex flex-wrap gap-2 pb-6 border-b border-gray-200 dark:border-white/5">
+          {Object.keys(groupedPages).map(category => (
+            <button 
+              key={category}
+              onClick={() => {
+                const element = document.getElementById(`category-${category.toLowerCase().replace(/\s+/g, '-')}`);
+                element?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="px-3 py-1.5 rounded-full bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-violet-500 hover:border-violet-500/50 hover:bg-violet-500/5 transition-all flex items-center gap-2 group"
             >
-              <div className="absolute top-0 left-0 w-1 h-0 group-hover:h-full bg-violet-600 transition-all duration-300" />
-              
-              <div className="flex items-center justify-between">
-                <div className="p-1.5 sm:p-2 rounded-lg bg-gray-50 dark:bg-black/20 text-gray-400 group-hover:text-violet-500 transition-colors shrink-0">
-                  <FileText size={16} className="sm:w-4.5 sm:h-4.5" />
-                </div>
-                <div className="text-[9px] sm:text-[10px] font-mono text-gray-400 uppercase tracking-tighter">
-                  {new Date(page.updated_at).toLocaleDateString('fr-FR')}
-                </div>
-              </div>
-
-              <div className="min-w-0">
-                <h4 className="font-bold text-sm sm:text-base text-gray-900 dark:text-white group-hover:text-violet-500 transition-colors line-clamp-2 leading-snug">
-                  {page.title}
-                </h4>
-                <div className="text-[9px] sm:text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1.5 sm:mt-2 truncate">
-                  {page.category}
-                </div>
-              </div>
-
-              <div className="mt-auto pt-3 sm:pt-4 border-t border-gray-100 dark:border-white/5 flex flex-wrap gap-1 md:gap-1.5">
-                {page.tags?.slice(0, 3).map(tag => (
-                  <span key={tag} className="text-[8px] sm:text-[9px] bg-gray-100 dark:bg-white/5 px-2 py-0.5 rounded text-gray-500">#{tag}</span>
-                ))}
-              </div>
-            </motion.button>
+              <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700 group-hover:bg-violet-500 transition-colors"></span>
+              {category}
+            </button>
           ))}
         </div>
+
+        {Object.entries(groupedPages).map(([category, categoryPages]) => (
+          <div key={category} id={`category-${category.toLowerCase().replace(/\s+/g, '-')}`} className="space-y-6 scroll-mt-28">
+            <div className="flex items-center gap-3 border-b border-gray-200 dark:border-white/5 pb-4">
+              <div className="p-2 rounded-xl bg-gray-100 dark:bg-white/5 shadow-inner">
+                {getCategoryIcon(category)}
+              </div>
+              <div>
+                <h3 className="text-xl font-black text-gray-900 dark:text-white uppercase tracking-tight">
+                  {category}
+                </h3>
+                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">
+                  {categoryPages.length} {categoryPages.length > 1 ? 'Documents' : 'Document'}
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+              {categoryPages.map(page => (
+                <motion.button
+                  key={page.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  onClick={() => onSelect(page)}
+                  className="group text-left p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#13131a]/80 border border-gray-200 dark:border-white/5 hover:border-violet-500/50 hover:shadow-2xl hover:shadow-violet-500/10 transition-all flex flex-col gap-3 sm:gap-4 relative overflow-hidden"
+                >
+                  <div className="absolute top-0 left-0 w-1 h-0 group-hover:h-full bg-violet-600 transition-all duration-300" />
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="p-1.5 sm:p-2 rounded-lg bg-gray-50 dark:bg-black/20 text-gray-400 group-hover:text-violet-500 transition-colors shrink-0">
+                      <FileText size={16} className="sm:w-4.5 sm:h-4.5" />
+                    </div>
+                    <div className="text-[9px] sm:text-[10px] font-mono text-gray-400 uppercase tracking-tighter">
+                      {new Date(page.updated_at).toLocaleDateString('fr-FR')}
+                    </div>
+                  </div>
+
+                  <div className="min-w-0">
+                    <h4 className="font-bold text-sm sm:text-base text-gray-900 dark:text-white group-hover:text-violet-500 transition-colors line-clamp-2 leading-snug">
+                      {page.title}
+                    </h4>
+                    <div className="text-[9px] sm:text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1.5 sm:mt-2 truncate">
+                      {page.category}
+                    </div>
+                  </div>
+
+                  <div className="mt-auto pt-3 sm:pt-4 border-t border-gray-100 dark:border-white/5 flex flex-wrap gap-1 md:gap-1.5">
+                    {page.tags?.slice(0, 3).map(tag => (
+                      <span key={tag} className="text-[8px] sm:text-[9px] bg-gray-100 dark:bg-white/5 px-2 py-0.5 rounded text-gray-500">#{tag}</span>
+                    ))}
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
