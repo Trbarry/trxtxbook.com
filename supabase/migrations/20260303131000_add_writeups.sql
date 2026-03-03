@@ -1,9 +1,9 @@
 -- Migration to add writeups from .write-up directory
--- Generated on 2026-03-03T13:15:24.073Z
+-- Generated on 2026-03-03T13:17:46.603Z
 
 
 -- Writeup: Agile
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: Agile',
   'hackthebox-agile',
@@ -333,6 +333,7 @@ Avec cette clé, un attaquant ayant lu le code source (via la **LFI** initiale) 
   ARRAY['Flask', 'LFI', 'Werkzeug', 'Sudoedit', 'CVE-2023-22809'],
   'L''objectif de cette phase est d''identifier la surface d''attaque de la machine **Agile** et d''exploiter une vulnérabilité de lecture de fichiers pour compromettre le mode **Debug** du framework **Flask...',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/agilehtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -341,10 +342,11 @@ Avec cette clé, un attaquant ayant lu le code source (via la **LFI** initiale) 
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: Blackfield
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: Blackfield',
   'hackthebox-blackfield',
@@ -627,6 +629,7 @@ Cette configuration explique pourquoi même avec des privilèges de backup, l''a
   ARRAY['Active Directory', 'AS-REP Roasting', 'BloodHound', 'SeBackupPrivilege', 'LSASS'],
   'L''objectif de cette phase est de cartographier la surface d''attaque de la machine **Blackfield** et d''identifier un vecteur d''entrée via l''énumération des services **Active Directory** classiques.',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/blackfieldhtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -635,10 +638,11 @@ Cette configuration explique pourquoi même avec des privilèges de backup, l''a
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: CodeTwo
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: CodeTwo',
   'hackthebox-codetwo',
@@ -920,6 +924,7 @@ La compromission totale de **CodeTwo** met en lumière plusieurs faiblesses arch
   ARRAY['Active Directory', 'LDAP', 'Exchange', 'PowerShell'],
   'La phase de reconnaissance commence par un **TCP Port Scan** agressif pour identifier la surface d''attaque.',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/codetwohtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -928,10 +933,11 @@ La compromission totale de **CodeTwo** met en lumière plusieurs faiblesses arch
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: Delivery
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: Delivery',
   'hackthebox-delivery',
@@ -1162,6 +1168,7 @@ La compromission totale de **Delivery** met en lumière plusieurs faiblesses arc
   ARRAY['Mattermost', 'Hashcat', 'Ticket system'],
   'Ma méthodologie débute par un **Full TCP Port Scan** pour identifier la surface d''attaque exhaustive, suivi d''un scan de services pour déterminer les versions et les technologies en place.',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/deliveryhtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -1170,10 +1177,11 @@ La compromission totale de **Delivery** met en lumière plusieurs faiblesses arc
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: Driver
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: Driver',
   'hackthebox-driver',
@@ -1439,6 +1447,7 @@ L''analyse post-exploitation montre que la compromission de **Driver** repose su
   ARRAY['SMB', 'Printer', 'SCF', 'SPOOLER'],
   'La phase de reconnaissance commence par un scan **Nmap** exhaustif pour identifier la surface d''attaque. La cible est une machine Windows.',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/driverhtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -1447,10 +1456,11 @@ L''analyse post-exploitation montre que la compromission de **Driver** repose su
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: EarlyAccess
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: EarlyAccess',
   'hackthebox-earlyaccess',
@@ -1754,6 +1764,7 @@ L''analyse de la machine **EarlyAccess** révèle plusieurs points critiques :
   ARRAY['Web', 'SQLi', 'Enumeration'],
   'L''analyse commence par une phase classique de **Scanning** pour identifier la surface d''attaque.',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/earlyaccesshtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -1762,10 +1773,11 @@ L''analyse de la machine **EarlyAccess** révèle plusieurs points critiques :
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: Hospital
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: Hospital',
   'hackthebox-hospital',
@@ -2081,6 +2093,7 @@ copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\System32\config\SYS
   ARRAY['Web', 'RCE', 'Windows'],
   'Je commence par un scan **Nmap** complet pour identifier la surface d''attaque. La machine présente une quantité inhabituelle de ports ouverts, suggérant un rôle de **Domain Controller** (DC) tout en h...',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/hospitalhtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -2089,10 +2102,11 @@ copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\System32\config\SYS
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: LogForge
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: LogForge',
   'hackthebox-logforge',
@@ -2368,6 +2382,7 @@ Cette méthode "low-tech" est particulièrement efficace en environnement restre
   ARRAY['Log4j', 'Java', 'RCE', 'FTP'],
   'Je commence par une phase classique de reconnaissance avec **Nmap** pour identifier la surface d''attaque.',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/logforgehtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -2376,10 +2391,11 @@ Cette méthode "low-tech" est particulièrement efficace en environnement restre
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: Manager
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: Manager',
   'hackthebox-manager',
@@ -2662,6 +2678,7 @@ La compromission de cette machine met en lumière plusieurs failles structurelle
   ARRAY['Active Directory', 'MSSQL', 'RID Cycling'],
   'Ma reconnaissance commence par un scan **Nmap** exhaustif pour identifier la surface d''attaque. La présence de services comme **Kerberos (88)**, **LDAP (389/636)** et **SMB (445)** confirme immédiatem...',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/managerhtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -2670,10 +2687,11 @@ La compromission de cette machine met en lumière plusieurs failles structurelle
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: MetaTwo
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: MetaTwo',
   'hackthebox-metatwo',
@@ -2930,6 +2948,7 @@ La compromission de **MetaTwo** met en lumière plusieurs défaillances critique
   ARRAY['WordPress', 'XXE', 'WPScan'],
   'Ma phase de reconnaissance débute par un scan **Nmap** complet pour identifier la surface d''attaque.',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/metatwohtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -2938,10 +2957,11 @@ La compromission de **MetaTwo** met en lumière plusieurs défaillances critique
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: Nocturnal
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: Nocturnal',
   'hackthebox-nocturnal',
@@ -3228,6 +3248,7 @@ Cette phase démontre l''importance de comprendre les structures de fichiers bin
   ARRAY['Active Directory', 'Web', 'RCE'],
   'La phase de reconnaissance commence par un scan **Nmap** complet pour identifier les vecteurs d''attaque potentiels.',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/nocturnalhtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -3236,10 +3257,11 @@ Cette phase démontre l''importance de comprendre les structures de fichiers bin
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: Optimum
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: Optimum',
   'hackthebox-optimum',
@@ -3491,6 +3513,7 @@ La compromission totale d''**Optimum** met en lumière deux points critiques sou
   ARRAY['HFS', 'CVE-2014-6287', 'Kernel Exploit'],
   'La phase de reconnaissance commence par un scan **Nmap** exhaustif pour identifier la surface d''attaque. L''objectif est de découvrir les ports ouverts et les versions des services associés.',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/optimumhtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -3499,10 +3522,11 @@ La compromission totale d''**Optimum** met en lumière deux points critiques sou
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: Pressed
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: Pressed',
   'hackthebox-pressed',
@@ -3780,6 +3804,7 @@ En environnement de production, la remédiation aurait consisté à :
   ARRAY['WordPress', 'Backdoor'],
   'Ma phase de reconnaissance commence par un scan **Nmap** exhaustif pour identifier les ports ouverts et les services associés.',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/pressedhtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -3788,10 +3813,11 @@ En environnement de production, la remédiation aurait consisté à :
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: Sekhmet
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: Sekhmet',
   'hackthebox-sekhmet',
@@ -4100,6 +4126,7 @@ En utilisant des outils comme **Mimikatz** ou **SharpDPAPI** sur la session de `
   ARRAY['Node.js', 'Deserialization', 'ModSecurity', 'WAF Bypass'],
   'Je débute par un scan **Nmap** agressif pour identifier les surfaces d''attaque. Bien que la machine soit étiquetée comme Windows sur HTB, les premiers résultats pointent vers un environnement hybride ...',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/sekhmethtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -4108,10 +4135,11 @@ En utilisant des outils comme **Mimikatz** ou **SharpDPAPI** sur la session de `
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: Shoppy
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: Shoppy',
   'hackthebox-shoppy',
@@ -4419,6 +4447,7 @@ Pour corriger cette vulnérabilité, il est impératif de :
   ARRAY['Web', 'NoSQL Injection', 'Docker'],
   'Ma méthodologie commence par un scan **Nmap** complet pour identifier la surface d''attaque. Le serveur cible semble être une instance Linux (Debian) hébergeant plusieurs services web.',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/shoppyhtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -4427,10 +4456,11 @@ Pour corriger cette vulnérabilité, il est impératif de :
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: Trickster
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: Trickster',
   'hackthebox-trickster',
@@ -4714,6 +4744,7 @@ SecRule REQUEST_HEADERS:User-Agent "feroxbuster|ffuf|nmap|sqlmap" \
   ARRAY['Web', 'PrestaShop', 'RCE'],
   'Je commence par un scan **Nmap** agressif pour identifier les ports ouverts et les services associés.',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/tricksterhtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -4722,10 +4753,11 @@ SecRule REQUEST_HEADERS:User-Agent "feroxbuster|ffuf|nmap|sqlmap" \
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: UnderPass
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: UnderPass',
   'hackthebox-underpass',
@@ -4987,6 +5019,7 @@ L''analyse de la machine **UnderPass** met en lumière plusieurs faiblesses stru
   ARRAY['Web', 'Hashcat', 'Cracking'],
   'Ma phase de reconnaissance commence par un scan **Nmap** complet pour identifier les surfaces d''attaque TCP et UDP.',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/underpasshtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -4995,10 +5028,11 @@ L''analyse de la machine **UnderPass** met en lumière plusieurs faiblesses stru
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: Union
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: Union',
   'hackthebox-union',
@@ -5262,6 +5296,7 @@ La compromission totale de la machine **Union** repose sur une chaîne de vulné
   ARRAY['Web', 'SQLi', 'RCE'],
   'Ma phase de reconnaissance commence par un **Port Scanning** exhaustif pour identifier la surface d''attaque. Le scan initial révèle un seul port ouvert, ce qui concentre immédiatement mon attention su...',
   true,
+  ARRAY['https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/unionhtb.png'],
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -5270,10 +5305,11 @@ La compromission totale de la machine **Union** repose sur une chaîne de vulné
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
 
 -- Writeup: Scepter
-INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, created_at)
+INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)
 VALUES (
   'HackTheBox: Scepter',
   'hackthebox-scepter',
@@ -5800,6 +5836,7 @@ L''authentification PKINIT (**passwordless authentication**) est profondément l
   ARRAY['Active Directory', 'AD CS', 'ESC14', 'DCSync'],
   '**Scepter** est une machine Windows de niveau difficile (Hard) fortement axée sur l''Active Directory et l''exploitation des services de certificats (AD CS). Le chemin de compromission demande de la rig...',
   true,
+  NULL,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
   title = EXCLUDED.title,
@@ -5808,4 +5845,5 @@ L''authentification PKINIT (**passwordless authentication**) est profondément l
   difficulty = EXCLUDED.difficulty,
   points = EXCLUDED.points,
   tags = EXCLUDED.tags,
+  images = COALESCE(EXCLUDED.images, writeups.images),
   description = EXCLUDED.description;
