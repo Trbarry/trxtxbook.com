@@ -10,9 +10,9 @@ export const ArticlePage: React.FC = () => {
   return (
     <>
       <SEOHead 
-        title="Mini-Projet : Serveur SMB pour Streaming 4K HDR | Tristan Barry"
-        description="Solution simple mais efficace de streaming local."
-        keywords="SMB, streaming, 4K HDR, Android, serveur mobile, Kodi, réseau local"
+        title="Serveur SMB pour Streaming 4K HDR : Solution de Stockage Réseau | Tristan Barry"
+        description="Configuration d'un serveur SMB performant pour le streaming de contenus 4K HDR sur le réseau local. Optimisation des partages pour Kodi et Android TV."
+        keywords="SMB, Samba, Streaming 4K, HDR, NAS, Réseau local, Stockage réseau, Kodi, Android TV"
         url="https://trxtxbook.com/articles/smb-server"
         type="article"
       />

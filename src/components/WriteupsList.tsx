@@ -4,7 +4,7 @@ import { supabase } from '../lib/supabase';
 import { Writeup } from '../types/writeup';
 import { useNavigate } from 'react-router-dom';
 import { SEOHead } from './SEOHead';
-import { getOptimizedUrl } from '../lib/imageUtils';
+import { getOptimizedUrl, getWriteupImage } from '../lib/imageUtils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { useWriteups } from '../hooks/useWriteups';
@@ -84,27 +84,9 @@ export const WriteupsList: React.FC = () => {
     return 'CTF';
   };
 
-  const getWriteupImage = (writeup: Writeup) => {
-    // 1. Priorité à l'image stockée en base
-    if (writeup.images && writeup.images.length > 0) return writeup.images[0];
-
-    // 2. Fallbacks de sécurité (Hardcoded)
-    if (writeup.slug === 'hackthebox-forest') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/foresthtb.png";
-    if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
-    if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
-    if (writeup.slug === 'hackthebox-reddish') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/reddish.webp";
-    if (writeup.slug === 'tryhackme-skynet') return "https://tryhackme-images.s3.amazonaws.com/room-icons/1559e2e8a4e1a3.png";
-    
-    // Fallback Soccer
-    if (writeup.slug === 'hackthebox-soccer') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/soccerhtb.png";
-
-    // 3. Image par défaut générique
-    return "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80";
-  };
-
   return (
     <>
-      <SEOHead title="Archives Write-ups & CTF | Tristan Barry" description="Base de connaissances techniques." />
+      <SEOHead title="Archives Write-ups & CTF | Tristan Barry" description="Base de connaissances techniques regroupant mes rapports d'intrusion, analyses de vulnérabilités et résolutions de CTF sur HackTheBox, TryHackMe et d'autres plateformes." />
       
       <div className="min-h-screen pt-32 pb-24 bg-background transition-colors duration-300 text-gray-900 dark:text-gray-100">
         <div className="container mx-auto px-6">

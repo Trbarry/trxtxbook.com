@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import { getOptimizedUrl } from '../lib/imageUtils';
+import { getOptimizedUrl, getWriteupImage } from '../lib/imageUtils';
 import { Shield, Award, Calendar, Terminal, ArrowLeft, Lock, AlertTriangle, Target, Hash } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Writeup } from '../types/writeup';
@@ -47,24 +47,6 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
 
   const currentAccent = accentColors[accent];
 
-  const getWriteupImage = () => {
-    // 1. Priorité aux images stockées en base de données
-    if (writeup.images && writeup.images.length > 0) return writeup.images[0];
-
-    // 2. Fallbacks Hardcodés (Sécurité & Performance)
-    if (writeup.slug === 'hackthebox-forest') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/foresthtb.png";
-    if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
-    if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
-    if (writeup.slug === 'hackthebox-reddish') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/reddish.webp";
-    if (writeup.slug === 'tryhackme-skynet') return "https://tryhackme-images.s3.amazonaws.com/room-icons/1559e2e8a4e1a3.png";
-    
-    // Ajout spécifique pour Soccer avec le lien fourni
-    if (writeup.slug === 'hackthebox-soccer') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/soccerhtb.png";
-
-    // 3. Image par défaut si aucun slug ne correspond
-    return "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80";
-  };
-
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-700">
       
@@ -85,7 +67,7 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
             <div className={`absolute inset-0 bg-gradient-to-t from-surface dark:from-[#1a1a1f] via-transparent to-transparent z-10`} />
             <div className={`absolute inset-0 bg-gradient-to-b from-transparent to-surface/90 dark:to-[#1a1a1f]/90 z-10`} />
             <img
-              src={getOptimizedUrl(getWriteupImage(), 1200)}
+              src={getOptimizedUrl(getWriteupImage(writeup), 1200)}
               alt={writeup.title}
               className="w-full h-full object-cover scale-105"
             />
@@ -133,7 +115,20 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
                     prose-pre:bg-gray-900 dark:prose-pre:bg-black/80 prose-pre:border prose-pre:border-gray-700 dark:prose-pre:border-white/10 prose-pre:shadow-xl
                     prose-strong:text-gray-900 dark:prose-strong:text-white`}>
                     
-                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                    <ReactMarkdown 
+                        rehypePlugins={[rehypeRaw]}
+                        components={{
+                            img: ({ node, ...props }) => (
+                                <img
+                                    {...props}
+                                    src={getOptimizedUrl(props.src || '', 1000)}
+                                    className="rounded-lg border border-white/10 my-8 shadow-lg transition-transform hover:scale-[1.02] duration-500"
+                                    loading="lazy"
+                                    alt={props.alt || writeup.title}
+                                />
+                            )
+                        }}
+                    >
                         {writeup.content}
                     </ReactMarkdown>
                 </div>

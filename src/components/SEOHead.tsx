@@ -81,35 +81,61 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       <script type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "Person",
-          "name": "Tristan Barry",
-          "jobTitle": "Alternant Technicien Informatique",
-          "description": "Alternant BTS SIO SISR passionné d'informatique et de cybersécurité",
-          "url": "https://trxtxbook.com",
-          "sameAs": [
-            "https://www.linkedin.com/in/tristan-barry-43b91b330/",
-            "https://tryhackme.com/p/Tr.barry",
-            "https://app.hackthebox.com/profile/2129647"
-          ],
-          "knowsAbout": [
-            "Cybersécurité",
-            "Pentesting",
-            "Infrastructure IT",
-            "Réseaux informatiques",
-            "Administration système",
-            "Active Directory",
-            "Linux",
-            "Windows Server"
-          ],
-          "alumniOf": {
-            "@type": "EducationalOrganization",
-            "name": "BTS SIO option SISR"
-          },
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Saint-Étienne",
-            "addressCountry": "FR"
-          }
+          "@type": type === 'article' ? 'BlogPosting' : 'Person',
+          ...(type === 'article' ? {
+            "headline": title,
+            "description": description,
+            "image": image,
+            "datePublished": publishedTime,
+            "dateModified": modifiedTime || publishedTime,
+            "author": {
+              "@type": "Person",
+              "name": author,
+              "url": "https://trxtxbook.com"
+            },
+            "publisher": {
+              "@type": "Person",
+              "name": "Tristan Barry",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/assets/favicon.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": url
+            },
+            "keywords": keywords
+          } : {
+            "name": "Tristan Barry",
+            "jobTitle": "Alternant Technicien Informatique",
+            "description": "Alternant BTS SIO SISR passionné d'informatique et de cybersécurité",
+            "url": "https://trxtxbook.com",
+            "sameAs": [
+              "https://www.linkedin.com/in/tristan-barry-43b91b330/",
+              "https://tryhackme.com/p/Tr.barry",
+              "https://app.hackthebox.com/profile/2129647"
+            ],
+            "knowsAbout": [
+              "Cybersécurité",
+              "Pentesting",
+              "Infrastructure IT",
+              "Réseaux informatiques",
+              "Administration système",
+              "Active Directory",
+              "Linux",
+              "Windows Server"
+            ],
+            "alumniOf": {
+              "@type": "EducationalOrganization",
+              "name": "BTS SIO option SISR"
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Saint-Étienne",
+              "addressCountry": "FR"
+            }
+          })
         })}
       </script>
     </Helmet>

@@ -5,6 +5,7 @@ import { WriteupDetail } from '../components/WriteupDetail';
 import { DifficultyBackground } from '../components/DifficultyBackground';
 import { SEOHead } from '../components/SEOHead';
 import { Writeup } from '../types/writeup';
+import { getWriteupImage } from '../lib/imageUtils';
 
 export const WriteupPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -63,6 +64,7 @@ export const WriteupPage: React.FC = () => {
         title={`${writeup.title} - Write-up CTF | Tristan Barry`}
         description={writeup.description}
         keywords={`${writeup.tags.join(', ')}, CTF, cybersécurité, pentesting, ${writeup.platform}`}
+        image={getWriteupImage(writeup)}
         url={`https://trxtxbook.com/writeups/${writeup.slug}`}
         type="article"
         publishedTime={writeup.created_at}
