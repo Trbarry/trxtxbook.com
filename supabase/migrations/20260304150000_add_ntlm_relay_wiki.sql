@@ -1,4 +1,4 @@
--- Migration to add NTLM Relay Wiki Page
+-- Migration to add NTLM Relay Wiki Page (with WebP images)
 INSERT INTO wiki_pages (title, slug, category, content, tags, published, updated_at)
 VALUES (
   'L'Attaque NTLM Relay : Théorie, Pratique et Défense',
@@ -46,7 +46,7 @@ Il est impératif de ne pas confondre les deux termes, car leurs usages en **Pen
 *   **Hash NT :** Stocké dans la base **SAM** ou le processus **LSASS**. Utilisé pour les attaques **Pass-the-Hash**.
 *   **Net-NTLM (v1/v2) :** C''est la réponse au challenge circulant sur le réseau. Il peut être capturé (pour du cracking) ou relayé (pour de l''accès direct).
 
-![Schéma conceptuel de l''architecture binaire d''une attaque NTLM Relay illustrant la manipulation des structures de données NTLMSSP, montrant l''interception du flux hexadécimal entre une station de travail Windows 11 et un serveur de fichiers, avec une mise en évidence de la modification des flags de négociation pour désactiver les fonctions de sécurité optionnelles](https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/wiki/ntlm_relay_binary_arch.png)
+![Schéma conceptuel de l''architecture binaire d''une attaque NTLM Relay illustrant la manipulation des structures de données NTLMSSP, montrant l''interception du flux hexadécimal entre une station de travail Windows 11 et un serveur de fichiers, avec une mise en évidence de la modification des flags de négociation pour désactiver les fonctions de sécurité optionnelles](https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/wiki/ntlm_relay_binary_arch.webp)
 
 ### II. Les Vecteurs d''Interception (MitM)
 
@@ -110,7 +110,7 @@ sed -i ''s/SMB = On/SMB = Off/g'' /etc/responder/Responder.conf
 sed -i ''s/HTTP = On/HTTP = Off/g'' /etc/responder/Responder.conf
 ```
 
-![Visualisation d''une cartographie réseau générée dynamiquement montrant les vecteurs de propagation de l''attaque NTLM Relay, avec des liens rouges identifiant les serveurs dont le SMB Signing est désactivé et des icônes d''alerte sur les segments réseau utilisant encore les protocoles hérités LLMNR et NetBIOS](https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/wiki/network_recon_map.png)
+![Visualisation d''une cartographie réseau générée dynamiquement montrant les vecteurs de propagation de l''attaque NTLM Relay, avec des liens rouges identifiant les serveurs dont le SMB Signing est désactivé et des icônes d''alerte sur les segments réseau utilisant encore les protocoles hérités LLMNR et NetBIOS](https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/wiki/network_recon_map.webp)
 
 Cette phase préparatoire établit la fondation technique nécessaire. Une fois les cibles identifiées et les outils configurés, l''attaquant est prêt pour la phase d''exécution, qui consiste à capturer le flux d''authentification et à l''injecter vers les cibles identifiées comme vulnérables.
 
@@ -178,7 +178,7 @@ sequenceDiagram
     A->>W: POST /profile_user.form.php (Elevate Admin)
 ```
 
-![Représentation microscopique d''une injection de payload dans une structure de paquet HTTP, montrant le remplacement des tokens d''authentification et la manipulation des en-têtes Set-Cookie pour capturer une session d''administration Web via un relais NTLM](https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/wiki/http_relay_payload_injection.png)
+![Représentation microscopique d''une injection de payload dans une structure de paquet HTTP, montrant le remplacement des tokens d''authentification et la manipulation des en-têtes Set-Cookie pour capturer une session d''administration Web via un relais NTLM](https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/wiki/http_relay_payload_injection.webp)
 
 ### VI. Vecteurs Modernes : IPv6 Poisoning (mitm6)
 
@@ -243,14 +243,14 @@ flowchart TD
     P3 --> K2[Ajouter Admins au groupe ''Protected Users'']
 ```
 
-![Tableau de bord de monitoring SOC illustrant une vue éclatée des contre-mesures Active Directory, montrant des graphiques de réduction de l''usage NTLMv1 au profit de Kerberos et des alertes de blocage de tentatives de relais sur des serveurs critiques avec signature activée](https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/wiki/hardening_view.png)
+![Tableau de bord de monitoring SOC illustrant une vue éclatée des contre-mesures Active Directory, montrant des graphiques de réduction de l''usage NTLMv1 au profit de Kerberos et des alertes de blocage de tentatives de relais sur des serveurs critiques avec signature activée](https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/wiki/hardening_view.webp)
 
 ### Conclusion
 
 L''attaque **NTLM Relay** illustre parfaitement la persistance des vulnérabilités architecturales dans les systèmes hérités. Bien que complexe à mettre en œuvre contre des environnements modernisés (Windows Server 2025/Windows 11), elle reste une "Silver Bullet" dans la majorité des réseaux d''entreprise où la rétrocompatibilité prime sur la sécurité.
 
 La transition vers une architecture **Zero Trust** et l''abandon définitif de NTLM au profit de **Kerberos** (avec PKINIT ou AES) est l''unique solution pérenne. En attendant cette migration, l''activation systématique du **SMB Signing** et de l''**EPA** demeure le rempart le plus pragmatique pour tout ingénieur système soucieux de l''intégrité de sa forêt Active Directory.',
-  ARRAY['NTLM', 'Relay', 'Active Directory', 'SMB', 'MitM', 'Security', 'Poisoning'],
+  ARRAY['NTLM', 'Relay', 'Active Directory', 'SMB', 'MitM', 'Security', 'Poisoning', 'WebP'],
   true,
   now()
 ) ON CONFLICT (slug) DO UPDATE SET
