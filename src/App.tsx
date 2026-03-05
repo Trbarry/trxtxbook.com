@@ -138,6 +138,9 @@ const AnimatedRoutes = ({
           <Route path="/admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/wp-admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/login" element={<PageTransition><AdminTrollPage /></PageTransition>} />
+          <Route path="/admin_login" element={<PageTransition><AdminTrollPage /></PageTransition>} />
+          <Route path="/.env" element={<PageTransition><AdminTrollPage /></PageTransition>} />
+          <Route path="/config.php" element={<PageTransition><AdminTrollPage /></PageTransition>} />
 
           {/* LEGAL */}
           <Route path="/mentions-legales" element={<PageTransition><LegalPage /></PageTransition>} />

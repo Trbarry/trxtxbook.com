@@ -19,7 +19,7 @@ interface StatsProps {
   };
 }
 
-export const Stats: React.FC<StatsProps> = () => {
+export const Stats: React.FC = () => {
   const navigate = useNavigate();
 
   const handlePlatformClick = (platform: string) => {
