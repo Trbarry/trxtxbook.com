@@ -15,6 +15,8 @@ import { SEOHead } from '../components/SEOHead';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WikiTip } from '../components/WikiTip';
 import { useWikiPages } from '../hooks/useWikiPages';
+import { TableOfContents, TocItem } from '../components/TableOfContents';
+import { extractHeadings } from '../lib/markdownUtils';
 
 // --- TYPES & HELPER ---
 interface TreeNode { 
@@ -25,17 +27,6 @@ interface TreeNode {
   isOpen: boolean; 
   count: number; 
 }
-interface TocItem { id: string; text: string; level: number; }
-
-const extractHeadings = (markdown: string): TocItem[] => {
-  const lines = markdown.split('\n');
-  const headings: TocItem[] = [];
-  lines.forEach((line) => {
-    const match = line.match(/^(#{2,3})\s+(.+)$/);
-    if (match) { headings.push({ id: match[2].toLowerCase().replace(/[^\w]+/g, '-'), text: match[2], level: match[1].length }); }
-  });
-  return headings;
-};
 
 const getReadingTime = (text: string): number => {
   const wordsPerMinute = 200;
@@ -655,12 +646,7 @@ export const WikiPage: React.FC = () => {
           )}
           
           {selectedPage && toc.length > 0 && (
-            <aside className="hidden xl:block w-72 border-l border-gray-200 dark:border-white/5 bg-gray-50/50 dark:bg-[#13131a]/30 p-8 overflow-y-auto custom-scrollbar">
-              <div className="sticky top-6 text-left">
-                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6 flex items-center gap-2"><List size={14} />Sommaire</h4>
-                <div className="space-y-1 relative"><div className="absolute left-[3px] top-2 bottom-2 w-px bg-gray-300 dark:bg-white/5"></div>{toc.map((item) => (<a key={item.id} href={`#${item.id}`} className={`block text-sm py-1.5 pl-4 border-l-2 transition-all duration-200 hover:text-violet-600 dark:hover:text-violet-300 ${item.level === 3 ? 'ml-3 text-gray-500 dark:text-gray-500 border-transparent text-xs' : 'text-gray-600 dark:text-gray-400 border-transparent'}`} onClick={(e) => {e.preventDefault();document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });}}>{item.text}</a>))}</div>
-              </div>
-            </aside>
+            <TableOfContents items={toc} />
           )}
         </main>
       </div>
