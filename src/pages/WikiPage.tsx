@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { WikiPage as WikiPageType } from '../types/wiki';
 import ReactMarkdown from 'react-markdown';
@@ -431,6 +432,8 @@ const Backlinks: React.FC<{
 
 // --- PAGE PRINCIPALE ---
 export const WikiPage: React.FC = () => {
+  const { slug } = useParams();
+  const navigate = useNavigate();
   const { pages = [], isLoading, error: fetchError } = useWikiPages();
   const [selectedPage, setSelectedPage] = useState<WikiPageType | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -439,6 +442,31 @@ export const WikiPage: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [tree, setTree] = useState<Record<string, TreeNode>>({});
   const [toc, setToc] = useState<TocItem[]>([]);
+
+  // --- SYNCHRONISATION URL -> PAGE ---
+  useEffect(() => {
+    if (slug && pages.length > 0) {
+      const page = pages.find(p => p.slug === slug);
+      if (page) {
+        setSelectedPage(page);
+        setIsMasonryView(false);
+      }
+    } else if (!slug) {
+      setSelectedPage(null);
+    }
+  }, [slug, pages]);
+
+  const handlePageSelect = (page: WikiPageType) => {
+    navigate(`/wiki/${page.slug}`);
+  };
+
+  const handleGoHome = () => {
+    setSelectedPage(null);
+    setIsMasonryView(false);
+    setSearchQuery('');
+    navigate('/wiki');
+    if (window.innerWidth < 1024) setIsSidebarOpen(false);
+  };
 
   // --- LOGIQUE DE RECHERCHE AMÉLIORÉE ---
   const calculateScore = (page: WikiPageType, query: string) => {
@@ -516,7 +544,10 @@ export const WikiPage: React.FC = () => {
 
   return (
     <>
-      <SEOHead title="Wiki & Knowledge Base" description="Base de connaissances" />
+      <SEOHead 
+        title={selectedPage ? `${selectedPage.title} | Wiki` : "Wiki & Knowledge Base"} 
+        description={selectedPage ? `Note sur ${selectedPage.title} dans le wiki.` : "Base de connaissances"} 
+      />
       
       {/* MOBILE TOP BAR WITH SEARCH */}
       <div className="lg:hidden fixed top-16 left-0 right-0 z-30 bg-white/80 dark:bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/5 px-4 py-3 flex items-center gap-3">
@@ -564,7 +595,7 @@ export const WikiPage: React.FC = () => {
         {/* SIDEBAR */}
         <aside className={`fixed inset-y-0 left-0 z-40 w-full sm:w-80 lg:relative lg:inset-auto lg:w-80 lg:block bg-white dark:bg-[#0a0a0f] lg:bg-surface/90 lg:dark:bg-[#13131a]/80 backdrop-blur-xl border-r lg:border border-gray-200 dark:border-white/10 lg:rounded-2xl flex flex-col transition-all duration-500 shadow-2xl ${isSidebarOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0 lg:translate-x-0 lg:opacity-100 lg:w-80'}`}>
           <div className="p-6 border-b border-gray-100 dark:border-white/5 pt-32 lg:pt-6">
-            <div className="flex items-center gap-3 mb-6 cursor-pointer" onClick={() => { setSelectedPage(null); setIsMasonryView(false); setSearchQuery(''); if (window.innerWidth < 1024) setIsSidebarOpen(false); }}>
+            <div className="flex items-center gap-3 mb-6 cursor-pointer" onClick={handleGoHome}>
               <div className="p-2.5 bg-gradient-to-br from-violet-600 to-indigo-600 rounded-xl shadow-lg shrink-0"><Book className="w-5 h-5 text-white" /></div>
               <span className="font-bold text-xl text-gray-900 dark:text-white tracking-tight">Hacking Bowl of Rice</span>
             </div>
@@ -576,7 +607,7 @@ export const WikiPage: React.FC = () => {
             </div>
           </div>
           <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-            {isLoading ? <div className="flex justify-center py-20"><div className="w-8 h-8 border-2 border-violet-500/30 border-t-violet-500 rounded-full animate-spin"></div></div> : Object.keys(tree).length === 0 ? <div className="text-center py-12 text-gray-500"><p>Aucune donnée.</p></div> : <FileTree nodes={tree} onSelect={(page) => { setSelectedPage(page); setIsMasonryView(false); if (window.innerWidth < 1024) setIsSidebarOpen(false); }} selectedId={selectedPage?.id} />}
+            {isLoading ? <div className="flex justify-center py-20"><div className="w-8 h-8 border-2 border-violet-500/30 border-t-violet-500 rounded-full animate-spin"></div></div> : Object.keys(tree).length === 0 ? <div className="text-center py-12 text-gray-500"><p>Aucune donnée.</p></div> : <FileTree nodes={tree} onSelect={(page) => { handlePageSelect(page); if (window.innerWidth < 1024) setIsSidebarOpen(false); }} selectedId={selectedPage?.id} />}
           </div>
         </aside>
 
@@ -590,7 +621,7 @@ export const WikiPage: React.FC = () => {
                   category={selectedPage.category} 
                   title={selectedPage.title} 
                   onNavigate={(path) => { 
-                    setSelectedPage(null);
+                    navigate('/wiki');
                     setSearchQuery(path);
                     if (path !== '') setIsMasonryView(true);
                     else setIsMasonryView(false);
@@ -613,14 +644,14 @@ export const WikiPage: React.FC = () => {
                 </div>
                 <div className="mt-16 pb-12 border-t border-gray-200 dark:border-white/5 pt-8">
                   <WikiTip pageId={selectedPage.id} context="article" />
-                  <Backlinks currentPage={selectedPage} allPages={pages} onSelect={setSelectedPage} />
+                  <Backlinks currentPage={selectedPage} allPages={pages} onSelect={handlePageSelect} />
                 </div>
               </motion.div>
             </div>
           ) : isMasonryView ? (
-            <WikiMasonry pages={filteredPages} onSelect={(p) => { setSelectedPage(p); setIsMasonryView(false); }} onClose={() => setIsMasonryView(false)} />
+            <WikiMasonry pages={filteredPages} onSelect={handlePageSelect} onClose={() => setIsMasonryView(false)} />
           ) : (
-            <WikiWelcome pages={pages} onShowMasonry={() => setIsMasonryView(true)} onSelect={setSelectedPage} />
+            <WikiWelcome pages={pages} onShowMasonry={() => setIsMasonryView(true)} onSelect={handlePageSelect} />
           )}
           
           {selectedPage && toc.length > 0 && (

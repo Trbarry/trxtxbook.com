@@ -117,6 +117,7 @@ const AnimatedRoutes = ({
           <Route path="/projects" element={<PageTransition><ProjectsList /></PageTransition>} />
           <Route path="/certifications" element={<PageTransition><CertificationsList /></PageTransition>} />
           <Route path="/wiki" element={<PageTransition><WikiPage /></PageTransition>} />
+          <Route path="/wiki/:slug" element={<PageTransition><WikiPage /></PageTransition>} />
 
           {/* DETAILS ET ARTICLES */}
           <Route path="/writeups/:slug" element={<PageTransition><WriteupPage /></PageTransition>} />
