@@ -603,50 +603,51 @@ export const WikiPage: React.FC = () => {
         </aside>
 
         {/* MAIN CONTENT */}
-        <main className="flex-1 bg-white dark:bg-[#0a0a0f] lg:bg-surface/50 lg:dark:bg-[#13131a]/40 lg:backdrop-blur-md border-x lg:border border-gray-200 dark:border-white/5 lg:rounded-2xl overflow-hidden relative shadow-xl flex flex-col">
+        <main className="flex-1 bg-white dark:bg-[#0a0a0f] lg:bg-surface/50 lg:dark:bg-[#13131a]/40 lg:backdrop-blur-md border-x lg:border border-gray-200 dark:border-white/5 lg:rounded-2xl overflow-hidden relative shadow-xl flex flex-col xl:flex-row">
           {selectedPage ? (
-            <div className="flex-1 overflow-y-auto custom-scrollbar p-5 sm:p-8 md:p-12 scroll-smooth relative">
-              <motion.div key={selectedPage.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="max-w-4xl mx-auto relative z-10">
-                
-                <Breadcrumbs 
-                  category={selectedPage.category} 
-                  title={selectedPage.title} 
-                  onNavigate={(path) => { 
-                    navigate('/wiki');
-                    setSearchQuery(path);
-                    if (path !== '') setIsMasonryView(true);
-                    else setIsMasonryView(false);
-                  }} 
-                />
+            <div className="flex-1 flex flex-row overflow-hidden h-full">
+              <div className="flex-1 overflow-y-auto custom-scrollbar p-5 sm:p-8 md:p-12 scroll-smooth relative">
+                <motion.div key={selectedPage.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="max-w-4xl mx-auto relative z-10">
+                  
+                  <Breadcrumbs 
+                    category={selectedPage.category} 
+                    title={selectedPage.title} 
+                    onNavigate={(path) => { 
+                      navigate('/wiki');
+                      setSearchQuery(path);
+                      if (path !== '') setIsMasonryView(true);
+                      else setIsMasonryView(false);
+                    }} 
+                  />
 
-                <div className="mb-8 md:mb-10 pb-6 md:pb-8 border-b border-gray-200 dark:border-white/5 text-left">
-                  <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6 tracking-tight leading-tight uppercase">{selectedPage.title}</h1>
-                  <div className="flex flex-wrap items-center gap-2 md:gap-3">
-                    <div className="flex items-center gap-2 text-[10px] md:text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-[#1a1a20] border border-gray-200 dark:border-white/10 px-2.5 py-1 rounded-full"><Calendar className="w-3 h-3" /><span>Mis à jour le {new Date(selectedPage.updated_at).toLocaleDateString('fr-FR')}</span></div>
-                    <div className="flex items-center gap-2 text-[10px] md:text-xs text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-500/10 border border-violet-200 dark:border-violet-500/20 px-2.5 py-1 rounded-full"><Activity className="w-3 h-3" /><span>{getReadingTime(selectedPage.content)} min de lecture</span></div>
-                    {selectedPage.tags?.map(tag => <span key={tag} className="flex items-center gap-1 text-[10px] md:text-xs text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-white/5 px-2.5 py-1 rounded-full border border-gray-200 dark:border-white/10"><Hash className="w-3 h-3" /> {tag}</span>)}
+                  <div className="mb-8 md:mb-10 pb-6 md:pb-8 border-b border-gray-200 dark:border-white/5 text-left">
+                    <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6 tracking-tight leading-tight uppercase">{selectedPage.title}</h1>
+                    <div className="flex flex-wrap items-center gap-2 md:gap-3">
+                      <div className="flex items-center gap-2 text-[10px] md:text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-[#1a1a20] border border-gray-200 dark:border-white/10 px-2.5 py-1 rounded-full"><Calendar className="w-3 h-3" /><span>Mis à jour le {new Date(selectedPage.updated_at).toLocaleDateString('fr-FR')}</span></div>
+                      <div className="flex items-center gap-2 text-[10px] md:text-xs text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-500/10 border border-violet-200 dark:border-violet-500/20 px-2.5 py-1 rounded-full"><Activity className="w-3 h-3" /><span>{getReadingTime(selectedPage.content)} min de lecture</span></div>
+                      {selectedPage.tags?.map(tag => <span key={tag} className="flex items-center gap-1 text-[10px] md:text-xs text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-white/5 px-2.5 py-1 rounded-full border border-gray-200 dark:border-white/10"><Hash className="w-3 h-3" /> {tag}</span>)}
+                    </div>
                   </div>
-                </div>
 
-                <div className="min-h-[400px] text-left">
-                  <div className="prose max-w-none prose-sm sm:prose-base prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-h2:text-xl sm:prose-h2:text-2xl prose-h2:mt-10 sm:prose-h2:mt-12 prose-h2:pb-2 prose-h2:border-b prose-h2:border-gray-200 dark:prose-h2:border-white/10 prose-h3:text-lg sm:prose-h3:text-xl prose-h3:text-violet-700 dark:prose-h3:text-violet-200 prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-strong:text-gray-900 dark:prose-strong:text-white prose-a:text-violet-600 dark:prose-a:text-violet-400 prose-li:text-gray-700 dark:prose-li:text-gray-300 prose-blockquote:border-violet-500 prose-blockquote:bg-violet-50 dark:prose-blockquote:bg-violet-500/5 prose-blockquote:text-gray-700 dark:prose-blockquote:text-gray-400 prose-img:rounded-xl">
-                    <ReactMarkdown rehypePlugins={[rehypeRaw]} components={MarkdownComponents as any}>{selectedPage.content}</ReactMarkdown>
+                  <div className="min-h-[400px] text-left">
+                    <div className="prose max-w-none prose-sm sm:prose-base prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-h2:text-xl sm:prose-h2:text-2xl prose-h2:mt-10 sm:prose-h2:mt-12 prose-h2:pb-2 prose-h2:border-b prose-h2:border-gray-200 dark:prose-h2:border-white/10 prose-h3:text-lg sm:prose-h3:text-xl prose-h3:text-violet-700 dark:prose-h3:text-violet-200 prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-strong:text-gray-900 dark:prose-strong:text-white prose-a:text-violet-600 dark:prose-a:text-violet-400 prose-li:text-gray-700 dark:prose-li:text-gray-300 prose-blockquote:border-violet-500 prose-blockquote:bg-violet-50 dark:prose-blockquote:bg-violet-500/5 prose-blockquote:text-gray-700 dark:prose-blockquote:text-gray-400 prose-img:rounded-xl">
+                      <ReactMarkdown rehypePlugins={[rehypeRaw]} components={MarkdownComponents as any}>{selectedPage.content}</ReactMarkdown>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-16 pb-12 border-t border-gray-200 dark:border-white/5 pt-8">
-                  <WikiTip pageId={selectedPage.id} context="article" />
-                  <Backlinks currentPage={selectedPage} allPages={pages} onSelect={handlePageSelect} />
-                </div>
-              </motion.div>
+                  <div className="mt-16 pb-12 border-t border-gray-200 dark:border-white/5 pt-8">
+                    <WikiTip pageId={selectedPage.id} context="article" />
+                    <Backlinks currentPage={selectedPage} allPages={pages} onSelect={handlePageSelect} />
+                  </div>
+                </motion.div>
+              </div>
+              {toc.length > 0 && (
+                <TableOfContents items={toc} />
+              )}
             </div>
           ) : isMasonryView ? (
             <WikiMasonry pages={filteredPages} onSelect={handlePageSelect} onClose={() => setIsMasonryView(false)} />
           ) : (
             <WikiWelcome pages={pages} onShowMasonry={() => setIsMasonryView(true)} onSelect={handlePageSelect} />
-          )}
-          
-          {selectedPage && toc.length > 0 && (
-            <TableOfContents items={toc} />
           )}
         </main>
       </div>
