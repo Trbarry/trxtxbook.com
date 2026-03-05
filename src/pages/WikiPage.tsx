@@ -480,7 +480,14 @@ export const WikiPage: React.FC = () => {
   // --- MARKDOWN COMPONENTS ---
   const MarkdownComponents = {
     code: CodeBlock,
-    h2: ({ children }: any) => <h2 id={String(children).toLowerCase().replace(/[^\w]+/g, '-')}>{children}</h2>,
+    h2: ({ children }: any) => {
+      const id = String(children).toLowerCase().replace(/[^\w]+/g, '-').replace(/^-+|-+$/g, '');
+      return <h2 id={id}>{children}</h2>;
+    },
+    h3: ({ children }: any) => {
+      const id = String(children).toLowerCase().replace(/[^\w]+/g, '-').replace(/^-+|-+$/g, '');
+      return <h3 id={id}>{children}</h3>;
+    },
     img: ({ src, alt }: any) => (
       <div className="my-6 sm:my-8 rounded-xl sm:rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10 shadow-lg group cursor-zoom-in" onClick={() => setSelectedImage(src)}>
         <img src={src} alt={alt} className="w-full hover:scale-[1.02] transition-transform duration-500" />

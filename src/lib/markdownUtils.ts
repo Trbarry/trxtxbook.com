@@ -8,7 +8,7 @@ export const extractHeadings = (markdown: string): TocItem[] => {
     const match = line.match(/^(#{2,3})\s+(.+)$/);
     if (match) {
       headings.push({
-        id: match[2].toLowerCase().replace(/[^\w]+/g, '-'),
+        id: match[2].toLowerCase().replace(/[^\w]+/g, '-').replace(/^-+|-+$/g, ''),
         text: match[2],
         level: match[1].length
       });
