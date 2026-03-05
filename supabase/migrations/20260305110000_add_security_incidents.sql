@@ -1,20 +1,22 @@
--- Migration to add security_incidents table for honeypot and fuzzing detection
+-- Migration to reset and properly create security_incidents table
 
-CREATE TABLE IF NOT EXISTS security_incidents (
+DROP TABLE IF EXISTS security_incidents CASCADE;
+
+CREATE TABLE security_incidents (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     visitor_id text NOT NULL,
-    incident_type text NOT NULL, -- 'honeypot', 'fuzzing_attempt', 'unauthorized_access'
+    incident_type text NOT NULL, -- 'honeypot_hit', 'fuzzing_attempt', 'unauthorized_access'
     path text NOT NULL,
-    payload text,
+    payload jsonb, -- Changed to jsonb for better flexibility
     user_agent text,
     country text,
-    created_at timestamptz DEFAULT now()
+    created_at timestamptz NOT NULL DEFAULT now()
 );
 
 -- Enable RLS
 ALTER TABLE security_incidents ENABLE ROW LEVEL SECURITY;
 
--- Allow public to insert incidents (to capture attacks)
+-- Allow public to insert incidents
 CREATE POLICY "Public can insert security incidents"
     ON security_incidents
     FOR INSERT

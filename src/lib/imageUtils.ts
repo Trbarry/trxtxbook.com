@@ -28,11 +28,14 @@ export const getOptimizedUrl = (url: string, width: number = 800, quality: numbe
 /**
  * Récupère l'image associée à un write-up avec gestion des fallbacks
  */
-export const getWriteupImage = (writeup: Writeup) => {
-  // 1. Priorité aux images stockées en base de données
+export const getWriteupCoverImage = (writeup: Writeup) => {
+  // 1. Priorité à l'URL d'image de couverture explicite
+  if (writeup.cover_image_url) return writeup.cover_image_url;
+
+  // 2. Ensuite aux images stockées en base de données
   if (writeup.images && writeup.images.length > 0) return writeup.images[0];
 
-  // 2. Fallbacks Hardcodés (Sécurité & Performance)
+  // 3. Fallbacks Hardcodés (Sécurité & Performance)
   const fallbacks: Record<string, string> = {
     'hackthebox-forest': "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/foresthtb.png",
     'hackthebox-cat-analysis': "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png",
@@ -46,6 +49,6 @@ export const getWriteupImage = (writeup: Writeup) => {
     return fallbacks[writeup.slug];
   }
 
-  // 3. Image par défaut si aucun slug ne correspond
+  // 4. Image par défaut si aucun slug ne correspond
   return "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80";
 };

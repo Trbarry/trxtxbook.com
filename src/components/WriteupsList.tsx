@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Calendar, Terminal, Lock, Hash, FileWarning, Shield, ArrowRight, AlertCircle } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 import { Writeup } from '../types/writeup';
 import { useNavigate } from 'react-router-dom';
 import { SEOHead } from './SEOHead';
-import { getOptimizedUrl, getWriteupImage } from '../lib/imageUtils';
+import { getOptimizedUrl, getWriteupCoverImage } from '../lib/imageUtils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { useWriteups } from '../hooks/useWriteups';
@@ -145,7 +144,7 @@ export const WriteupsList: React.FC = () => {
             <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               <AnimatePresence mode='popLayout'>
                 {filteredWriteups.map((writeup) => {
-                  const isActiveMachine = false;
+                  const isActiveMachine = writeup.is_active ?? false;
                   
                   return (
                     <motion.div
@@ -169,7 +168,7 @@ export const WriteupsList: React.FC = () => {
                         <div className={`absolute left-0 top-0 bottom-0 w-1 z-30 opacity-0 group-hover:opacity-100 group-hover:w-1.5 transition-all duration-300 ${getDifficultyAccent(writeup.difficulty || '')}`} />
                       )}
                       <div className="relative h-48 overflow-hidden border-b border-gray-100 dark:border-white/5">
-                        <img src={getOptimizedUrl(getWriteupImage(writeup), 600)} alt={writeup.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <img src={getOptimizedUrl(getWriteupCoverImage(writeup), 600)} alt={writeup.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div className="absolute top-4 left-4 z-10">
                             <span className="px-2.5 py-1 bg-white/90 dark:bg-black/80 backdrop-blur border border-gray-200 dark:border-white/10 rounded text-[10px] font-bold uppercase tracking-wider text-gray-900 dark:text-white">
                                 {getPlatformLabel(writeup.slug || '')}

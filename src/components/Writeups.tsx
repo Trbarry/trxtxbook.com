@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getOptimizedUrl } from '../lib/imageUtils';
+import { getOptimizedUrl, getWriteupCoverImage } from '../lib/imageUtils';
 import { 
   Target, 
   ArrowRight, 
@@ -65,25 +65,6 @@ export const Writeups: React.FC = () => {
     return 'CTF';
   };
 
-  const getWriteupImage = (writeup: Writeup) => {
-    // 1. Priorité aux images en base de données
-    if (writeup.images && writeup.images.length > 0) {
-      return writeup.images[0];
-    }
-    
-    // 2. Fallbacks statiques pour la cohérence visuelle
-    if (writeup.slug === 'hackthebox-forest') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/foresthtb.png";
-    if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
-    if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
-    if (writeup.slug === 'hackthebox-reddish') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/reddish.webp";
-    
-    // Ajout du fallback pour Soccer
-    if (writeup.slug === 'hackthebox-soccer') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/soccerhtb.png";
-    
-    // 3. Fallback générique (Tech)
-    return "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80";
-  };
-
   return (
     <section id="writeups" className="py-24 bg-background transition-colors duration-300 relative">
       <div className="container mx-auto px-6 relative z-10">
@@ -124,7 +105,7 @@ export const Writeups: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {writeups.map((writeup) => {
               // Note: isActiveMachine pourrait être lié à une colonne en DB si besoin
-              const isActiveMachine = false;
+              const isActiveMachine = writeup.is_active ?? false;
               
               return (
                 <div
@@ -145,7 +126,7 @@ export const Writeups: React.FC = () => {
                   {/* Image de couverture */}
                   <div className="relative h-48 overflow-hidden">
                     <img
-                      src={getOptimizedUrl(getWriteupImage(writeup), 600)}
+                      src={getOptimizedUrl(getWriteupCoverImage(writeup), 600)}
                       alt={writeup.title}
                       loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"

@@ -11,4 +11,7 @@ export interface Writeup {
   published: boolean;
   description: string;
   images?: string[];
+  is_active?: boolean;
+  cover_image_url?: string;
+  likes_count?: number;
 }

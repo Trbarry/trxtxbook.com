@@ -1,38 +1,18 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { supabase } from '../lib/supabase';
+import { useWriteup } from '../hooks/useWriteups';
 import { WriteupDetail } from '../components/WriteupDetail';
 import { DifficultyBackground } from '../components/DifficultyBackground';
 import { SEOHead } from '../components/SEOHead';
-import { Writeup } from '../types/writeup';
-import { getWriteupImage } from '../lib/imageUtils';
+import { getWriteupCoverImage } from '../lib/imageUtils';
 
 export const WriteupPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [writeup, setWriteup] = React.useState<Writeup | null>(null);
-  const [loading, setLoading] = React.useState(true);
+  const { writeup, isLoading: loading } = useWriteup(slug);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchWriteup();
   }, [slug]);
-
-  const fetchWriteup = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('writeups')
-        .select('*')
-        .eq('slug', slug)
-        .single();
-
-      if (error) throw error;
-      setWriteup(data);
-    } catch (error) {
-      console.error('Error fetching writeup:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (loading) {
     return (
@@ -64,7 +44,7 @@ export const WriteupPage: React.FC = () => {
         title={`${writeup.title} - Write-up CTF | Tristan Barry`}
         description={writeup.description}
         keywords={`${writeup.tags.join(', ')}, CTF, cybersécurité, pentesting, ${writeup.platform}`}
-        image={getWriteupImage(writeup)}
+        image={getWriteupCoverImage(writeup)}
         url={`https://trxtxbook.com/writeups/${writeup.slug}`}
         type="article"
         publishedTime={writeup.created_at}

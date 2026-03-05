@@ -110,7 +110,7 @@ class SimpleAnalytics {
         visitor_id: this.visitorId || 'bot_detected',
         incident_type: type,
         path: path,
-        payload: payload ? JSON.stringify(payload) : null,
+        payload: payload || null,
         user_agent: navigator.userAgent,
         country: location.country || 'Unknown'
       });

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import { getOptimizedUrl, getWriteupImage } from '../lib/imageUtils';
+import { getOptimizedUrl, getWriteupCoverImage } from '../lib/imageUtils';
 import { Shield, Award, Calendar, Terminal, ArrowLeft, Lock, AlertTriangle, Target, Hash, List } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Writeup } from '../types/writeup';
@@ -14,7 +14,7 @@ interface WriteupDetailProps {
 
 export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
   const navigate = useNavigate();
-  const isActiveMachine = false;
+  const isActiveMachine = writeup?.is_active ?? false;
 
   const toc = React.useMemo(() => extractHeadings(writeup.content), [writeup.content]);
 
@@ -71,7 +71,7 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
               <div className={`absolute inset-0 bg-gradient-to-t from-surface dark:from-[#1a1a1f] via-transparent to-transparent z-10`} />
               <div className={`absolute inset-0 bg-gradient-to-b from-transparent to-surface/90 dark:to-[#1a1a1f]/90 z-10`} />
               <img
-                src={getOptimizedUrl(getWriteupImage(writeup), 1200)}
+                src={getOptimizedUrl(getWriteupCoverImage(writeup), 1200)}
                 alt={writeup.title}
                 className="w-full h-full object-cover scale-105"
               />

@@ -141,9 +141,12 @@ async function processWriteups() {
     const escapedDescription = metadata.description.replace(/'/g, "''");
     const tagsArray = `ARRAY[${Array.from(new Set(metadata.tags)).map(t => `'${t}'`).join(', ')}]`;
     const imagesArray = imageUrl ? `ARRAY['${imageUrl}']` : 'NULL';
+    const coverImageUrl = imageUrl ? `'${imageUrl}'` : 'NULL';
+    // is_active on HTB implies true if published
+    const isActive = 'true';
 
     sql += `-- Writeup: ${metadata.title}\n`;
-    sql += `INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, created_at)\n`;
+    sql += `INSERT INTO writeups (title, slug, content, platform, difficulty, points, tags, description, published, images, cover_image_url, is_active, created_at)\n`;
     sql += `VALUES (\n`;
     sql += `  '${escapedTitle}',\n`;
     sql += `  '${metadata.slug}',\n`;
@@ -155,6 +158,8 @@ async function processWriteups() {
     sql += `  '${escapedDescription}',\n`;
     sql += `  true,\n`;
     sql += `  ${imagesArray},\n`;
+    sql += `  ${coverImageUrl},\n`;
+    sql += `  ${isActive},\n`;
     sql += `  now()\n`;
     sql += `) ON CONFLICT (slug) DO UPDATE SET\n`;
     sql += `  title = EXCLUDED.title,\n`;
@@ -164,6 +169,8 @@ async function processWriteups() {
     sql += `  points = EXCLUDED.points,\n`;
     sql += `  tags = EXCLUDED.tags,\n`;
     sql += `  images = COALESCE(EXCLUDED.images, writeups.images),\n`;
+    sql += `  cover_image_url = COALESCE(EXCLUDED.cover_image_url, writeups.cover_image_url),\n`;
+    sql += `  is_active = EXCLUDED.is_active,\n`;
     sql += `  description = EXCLUDED.description;\n\n`;
   }
 
