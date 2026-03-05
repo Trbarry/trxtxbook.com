@@ -1,10 +1,27 @@
--- Migration to add NTLM Relay Wiki Page (with WebP images)
+-- Migration to add NTLM Relay Wiki Page (with WebP images and TOC)
 INSERT INTO wiki_pages (title, slug, category, content, tags, published, updated_at)
 VALUES (
-  'L'Attaque NTLM Relay : Théorie, Pratique et Défense',
+  'L''Attaque NTLM Relay : Théorie, Pratique et Défense',
   'ntlm-relay-attack-guide',
   'Pentest/Active Directory/Attaques',
-  '## PARTIE 1 : Fondations & Théorie de l''Attaque NTLM Relay
+  '> [!NOTE] Sommaire
+>
+>   *   [PARTIE 1 : Fondations & Théorie de l''Attaque NTLM Relay](#partie-1-fondations-th-orie-de-l-attaque-ntlm-relay)
+>     *   [I. Architecture & Concepts : Le mécanisme "Under the Hood"](#i-architecture-concepts-le-m-canisme-under-the-hood-)
+>     *   [II. Les Vecteurs d''Interception (MitM)](#ii-les-vecteurs-d-interception-mitm-)
+>     *   [III. The Lab Setup : Environnement de Reproduction](#iii-the-lab-setup-environnement-de-reproduction)
+>     *   [IV. Pre-requisites & Reconnaissance](#iv-pre-requisites-reconnaissance)
+>   *   [PARTIE 2 : Implémentation & Défense](#partie-2-impl-mentation-d-fense)
+>     *   [V. Step-by-Step Implementation : De l''interception à la session SOCKS](#v-step-by-step-implementation-de-l-interception-la-session-socks)
+>     *   [VI. Vecteurs Modernes : IPv6 Poisoning (mitm6)](#vi-vecteurs-modernes-ipv6-poisoning-mitm6-)
+>     *   [VII. Troubleshooting : Pourquoi le relais échoue-t-il ?](#vii-troubleshooting-pourquoi-le-relais-choue-t-il-)
+>     *   [VIII. Hardening & Blue Team : Sécuriser l''Infrastructure](#viii-hardening-blue-team-s-curiser-l-infrastructure)
+>     *   [Conclusion](#conclusion)
+>
+
+---
+
+## PARTIE 1 : Fondations & Théorie de l''Attaque NTLM Relay
 
 L''attaque **NTLM Relay** demeure, malgré son ancienneté, l''un des vecteurs de compromission les plus redoutables au sein des infrastructures **Active Directory** (AD). Contrairement à une attaque par force brute ou au **Cracking** hors ligne, le relais ne vise pas à retrouver le mot de passe en clair de l''utilisateur. Son objectif est de détourner une session d''authentification légitime pour obtenir un accès non autorisé à un service tiers (SMB, HTTP, LDAP, MSSQL). 
 
