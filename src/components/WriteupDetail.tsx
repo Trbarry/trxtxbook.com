@@ -140,7 +140,20 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
                                 <h3 id={String(children).toLowerCase().replace(/[^\w]+/g, '-')}>
                                   {children}
                                 </h3>
-                              )
+                              ),
+                              blockquote: ({ children }: any) => {
+                                const content = React.Children.toArray(children);
+                                const firstChild = content[0] as any;
+                                if (firstChild && firstChild.props && firstChild.props.children) {
+                                  const firstLine = String(firstChild.props.children[0] || '');
+                                  const match = firstLine.match(/^\[!(\w+)\]\s*(.*)/);
+                                  if (match) {
+                                    const title = match[2];
+                                    if (title.toLowerCase().includes('sommaire')) return null;
+                                  }
+                                }
+                                return <blockquote className="border-l-4 border-violet-500 bg-violet-500/5 px-4 py-1 my-4 italic text-gray-400">{children}</blockquote>;
+                              }
                           }}
                       >
                           {writeup.content}

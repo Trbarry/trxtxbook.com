@@ -42,7 +42,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ items }) => {
   if (items.length === 0) return null;
 
   return (
-    <aside className="hidden xl:block w-72 flex-shrink-0">
+    <aside className="hidden lg:block w-64 xl:w-72 flex-shrink-0">
       <div className="sticky top-24 self-start max-h-[calc(100vh-8rem)] overflow-y-auto custom-scrollbar pr-4 pb-8">
         <div className="relative p-6 rounded-2xl bg-[#0a0a0f]/60 backdrop-blur-md border border-white/5 shadow-2xl overflow-hidden group">
           {/* Violet accent border on the left */}

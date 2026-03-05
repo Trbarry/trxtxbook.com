@@ -503,6 +503,8 @@ export const WikiPage: React.FC = () => {
         if (match) {
           const type = match[1];
           const title = match[2];
+          // Ne pas afficher l'encadré Sommaire manuel s'il existe (doublon avec le composant TOC)
+          if (title.toLowerCase().includes('sommaire')) return null;
           const remainingChildren = [{ ...firstChild, props: { ...firstChild.props, children: [firstChild.props.children.slice(1)] } }, ...content.slice(1)];
           return <Callout type={type} title={title}>{remainingChildren}</Callout>;
         }
@@ -603,7 +605,7 @@ export const WikiPage: React.FC = () => {
         </aside>
 
         {/* MAIN CONTENT */}
-        <main className="flex-1 bg-white dark:bg-[#0a0a0f] lg:bg-surface/50 lg:dark:bg-[#13131a]/40 lg:backdrop-blur-md border-x lg:border border-gray-200 dark:border-white/5 lg:rounded-2xl overflow-hidden relative shadow-xl flex flex-col xl:flex-row">
+        <main className="flex-1 bg-white dark:bg-[#0a0a0f] lg:bg-surface/50 lg:dark:bg-[#13131a]/40 lg:backdrop-blur-md border-x lg:border border-gray-200 dark:border-white/5 lg:rounded-2xl overflow-hidden relative shadow-xl flex flex-col lg:flex-row">
           {selectedPage ? (
             <div className="flex-1 flex flex-row overflow-hidden h-full">
               <div className="flex-1 overflow-y-auto custom-scrollbar p-5 sm:p-8 md:p-12 scroll-smooth relative">
