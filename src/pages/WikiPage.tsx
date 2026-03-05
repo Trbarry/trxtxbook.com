@@ -16,6 +16,7 @@ import { WikiTip } from '../components/WikiTip';
 import { useWikiPages, useWikiPageContent, useWikiBacklinks } from '../hooks/useWikiPages';
 import { TableOfContents, TocItem } from '../components/TableOfContents';
 import { extractHeadings } from '../lib/markdownUtils';
+import Mermaid from '../components/Mermaid';
 
 // --- TYPES & HELPER ---
 interface TreeNode { 
@@ -96,6 +97,10 @@ const CodeBlock = ({ children, className, ...props }: any) => {
   const language = match ? match[1] : null;
   const content = String(children).replace(/\n$/, '');
   const handleCopy = async () => { await navigator.clipboard.writeText(content); setCopied(true); setTimeout(() => setCopied(false), 2000); };
+
+  if (language === 'mermaid') {
+    return <Mermaid chart={content} />;
+  }
 
   if (!match) return <code className="bg-gray-100 dark:bg-[#1a1a20] text-violet-700 dark:text-violet-200 px-1.5 py-0.5 rounded font-mono text-[13px] sm:text-sm border border-gray-200 dark:border-white/10 shadow-sm" {...props}>{children}</code>;
 
