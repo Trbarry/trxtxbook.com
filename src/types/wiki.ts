@@ -9,3 +9,5 @@ export interface WikiPage {
   published: boolean;
   updated_at: string;
 }
+
+export type WikiPageMetadata = Omit<WikiPage, 'content'>;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
-import { WikiPage as WikiPageType } from '../types/wiki';
+import { WikiPage as WikiPageType, WikiPageMetadata } from '../types/wiki';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import { 
@@ -14,7 +14,7 @@ import {
 import { SEOHead } from '../components/SEOHead';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WikiTip } from '../components/WikiTip';
-import { useWikiPages } from '../hooks/useWikiPages';
+import { useWikiPages, useWikiPageContent, useWikiBacklinks } from '../hooks/useWikiPages';
 import { TableOfContents, TocItem } from '../components/TableOfContents';
 import { extractHeadings } from '../lib/markdownUtils';
 
@@ -23,7 +23,7 @@ interface TreeNode {
   name: string; 
   fullPath: string; 
   children: Record<string, TreeNode>; 
-  page?: WikiPageType; 
+  page?: WikiPageMetadata; 
   isOpen: boolean; 
   count: number; 
 }
@@ -117,7 +117,7 @@ const CodeBlock = ({ children, className, ...props }: any) => {
 };
 
 // --- FILE TREE ---
-const FileTree: React.FC<{ nodes: Record<string, TreeNode>; onSelect: (page: WikiPageType) => void; selectedId?: string; depth?: number }> = ({ nodes, onSelect, selectedId, depth = 0 }) => {
+const FileTree: React.FC<{ nodes: Record<string, TreeNode>; onSelect: (page: WikiPageMetadata) => void; selectedId?: string; depth?: number }> = ({ nodes, onSelect, selectedId, depth = 0 }) => {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const toggle = (name: string) => setExpanded(prev => ({ ...prev, [name]: !prev[name] }));
 
@@ -171,16 +171,15 @@ const FileTree: React.FC<{ nodes: Record<string, TreeNode>; onSelect: (page: Wik
 
 // --- WIKI WELCOME ---
 const WikiWelcome: React.FC<{ 
-  pages: WikiPageType[]; 
+  pages: WikiPageMetadata[]; 
   onShowMasonry: () => void;
-  onSelect: (page: WikiPageType) => void;
+  onSelect: (page: WikiPageMetadata) => void;
 }> = ({ pages, onShowMasonry, onSelect }) => {
-  const totalWords = pages.reduce((acc, p) => acc + (p.content?.split(/\s+/).length || 0), 0);
   const lastUpdated = [...pages].sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()).slice(0, 5);
 
   const stats = [
     { label: "Notes", value: pages.length, icon: Database, color: "violet" },
-    { label: "Mots", value: `${(totalWords / 1000).toFixed(1)}k`, icon: FileText, color: "blue" },
+    { label: "Mots", value: "Massif", icon: FileText, color: "blue" },
   ];
 
   return (
@@ -254,8 +253,8 @@ const WikiWelcome: React.FC<{
 
 // --- WIKI MASONRY ---
 const WikiMasonry: React.FC<{ 
-  pages: WikiPageType[]; 
-  onSelect: (page: WikiPageType) => void;
+  pages: WikiPageMetadata[]; 
+  onSelect: (page: WikiPageMetadata) => void;
   onClose: () => void;
 }> = ({ pages, onSelect, onClose }) => {
   const groupedPages = React.useMemo(() => {
@@ -264,7 +263,7 @@ const WikiMasonry: React.FC<{
       if (!acc[rootCategory]) acc[rootCategory] = [];
       acc[rootCategory].push(page);
       return acc;
-    }, {} as Record<string, WikiPageType[]>);
+    }, {} as Record<string, WikiPageMetadata[]>);
 
     // Trier les catégories alphabétiquement
     return Object.keys(groups)
@@ -272,7 +271,7 @@ const WikiMasonry: React.FC<{
       .reduce((acc, key) => {
         acc[key] = groups[key].sort((a, b) => a.title.localeCompare(b.title));
         return acc;
-      }, {} as Record<string, WikiPageType[]>);
+      }, {} as Record<string, WikiPageMetadata[]>);
   }, [pages]);
 
   const getCategoryIcon = (category: string) => {
@@ -385,38 +384,41 @@ const WikiMasonry: React.FC<{
 };
 
 // --- BACKLINKS ---
+// --- BACKLINKS ---
 const Backlinks: React.FC<{ 
   currentPage: WikiPageType; 
-  allPages: WikiPageType[]; 
-  onSelect: (page: WikiPageType) => void 
-}> = ({ currentPage, allPages, onSelect }) => {
-  const links = allPages.filter(p => 
-    p.id !== currentPage.id && 
-    (p.content?.includes(currentPage.slug) || p.content?.includes(currentPage.title))
-  );
+  onSelect: (page: WikiPageMetadata) => void 
+}> = ({ currentPage, onSelect }) => {
+  const { backlinks = [], isLoading } = useWikiBacklinks(currentPage.slug, currentPage.title);
 
-  if (links.length === 0) return null;
+  if (!isLoading && backlinks.length === 0) return null;
 
   return (
     <div className="mt-12 md:mt-16 pt-6 md:pt-8 border-t border-gray-200 dark:border-white/5 text-left">
       <h3 className="text-[10px] md:text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 md:mb-6 flex items-center gap-2">
         <CornerDownRight size={12} className="md:w-3.5 md:h-3.5" />
-        Backlinks ({links.length})
+        Backlinks {isLoading ? "..." : `(${backlinks.length})`}
       </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
-        {links.map(link => (
-          <button
-            key={link.id}
-            onClick={() => onSelect(link)}
-            className="text-left p-3 md:p-4 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:border-violet-500/30 transition-all group"
-          >
-            <div className="text-xs md:text-sm font-bold text-gray-900 dark:text-white group-hover:text-violet-500 transition-colors truncate">
-              {link.title}
-            </div>
-            <div className="text-[9px] md:text-[10px] text-gray-500 mt-0.5 md:mt-1 truncate uppercase tracking-wider">{link.category}</div>
-          </button>
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="flex gap-4">
+          {[1, 2].map(i => <div key={i} className="h-16 flex-1 bg-gray-100 dark:bg-white/5 animate-pulse rounded-xl"></div>)}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+          {backlinks.map(link => (
+            <button
+              key={link.id}
+              onClick={() => onSelect(link)}
+              className="text-left p-3 md:p-4 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:border-violet-500/30 transition-all group"
+            >
+              <div className="text-xs md:text-sm font-bold text-gray-900 dark:text-white group-hover:text-violet-500 transition-colors truncate">
+                {link.title}
+              </div>
+              <div className="text-[9px] md:text-[10px] text-gray-500 mt-0.5 md:mt-1 truncate uppercase tracking-wider">{link.category}</div>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
@@ -425,8 +427,9 @@ const Backlinks: React.FC<{
 export const WikiPage: React.FC = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { pages = [], isLoading, error: fetchError } = useWikiPages();
-  const [selectedPage, setSelectedPage] = useState<WikiPageType | null>(null);
+  const { pages = [], isLoading: isLoadingList, error: fetchError } = useWikiPages();
+  const { page: selectedPage, isLoading: isLoadingContent } = useWikiPageContent(slug);
+  
   const [searchQuery, setSearchQuery] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMasonryView, setIsMasonryView] = useState(false);
@@ -434,33 +437,26 @@ export const WikiPage: React.FC = () => {
   const [tree, setTree] = useState<Record<string, TreeNode>>({});
   const [toc, setToc] = useState<TocItem[]>([]);
 
-  // --- SYNCHRONISATION URL -> PAGE ---
+  // --- SYNCHRONISATION URL -> UI STATE ---
   useEffect(() => {
-    if (slug && pages.length > 0) {
-      const page = pages.find(p => p.slug === slug);
-      if (page) {
-        setSelectedPage(page);
-        setIsMasonryView(false);
-      }
-    } else if (!slug) {
-      setSelectedPage(null);
+    if (slug) {
+      setIsMasonryView(false);
     }
-  }, [slug, pages]);
+  }, [slug]);
 
-  const handlePageSelect = (page: WikiPageType) => {
+  const handlePageSelect = (page: WikiPageMetadata) => {
     navigate(`/wiki/${page.slug}`);
   };
 
   const handleGoHome = () => {
-    setSelectedPage(null);
     setIsMasonryView(false);
     setSearchQuery('');
     navigate('/wiki');
     if (window.innerWidth < 1024) setIsSidebarOpen(false);
   };
 
-  // --- LOGIQUE DE RECHERCHE AMÉLIORÉE ---
-  const calculateScore = (page: WikiPageType, query: string) => {
+  // --- LOGIQUE DE RECHERCHE OPTIMISÉE (MÉTADONNÉES UNIQUEMENT) ---
+  const calculateScore = (page: WikiPageMetadata, query: string) => {
     if (!query) return 1;
     const q = query.toLowerCase();
     let score = 0;
@@ -470,9 +466,6 @@ export const WikiPage: React.FC = () => {
     }
     if (page.category?.toLowerCase().includes(q)) score += 50;
     if (page.tags?.some(t => t.toLowerCase().includes(q))) score += 70;
-    const content = page.content?.toLowerCase() || '';
-    const occurrences = content.split(q).length - 1;
-    score += occurrences * 5;
     return score;
   };
 
@@ -600,52 +593,77 @@ export const WikiPage: React.FC = () => {
             </div>
           </div>
           <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-            {isLoading ? <div className="flex justify-center py-20"><div className="w-8 h-8 border-2 border-violet-500/30 border-t-violet-500 rounded-full animate-spin"></div></div> : Object.keys(tree).length === 0 ? <div className="text-center py-12 text-gray-500"><p>Aucune donnée.</p></div> : <FileTree nodes={tree} onSelect={(page) => { handlePageSelect(page); if (window.innerWidth < 1024) setIsSidebarOpen(false); }} selectedId={selectedPage?.id} />}
+            {isLoadingList ? (
+              <div className="flex flex-col items-center justify-center py-20 gap-3">
+                <div className="w-8 h-8 border-2 border-violet-500/30 border-t-violet-500 rounded-full animate-spin"></div>
+                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Indexation...</span>
+              </div>
+            ) : Object.keys(tree).length === 0 ? (
+              <div className="text-center py-12 text-gray-500">
+                <p>Aucune donnée.</p>
+              </div>
+            ) : (
+              <FileTree nodes={tree} onSelect={(page) => { handlePageSelect(page); if (window.innerWidth < 1024) setIsSidebarOpen(false); }} selectedId={selectedPage?.id} />
+            )}
           </div>
         </aside>
 
         {/* MAIN CONTENT */}
         <main className="flex-1 bg-white dark:bg-[#0a0a0f] lg:bg-surface/50 lg:dark:bg-[#13131a]/40 lg:backdrop-blur-md border-x lg:border border-gray-200 dark:border-white/5 lg:rounded-2xl overflow-hidden relative shadow-xl flex flex-col lg:flex-row">
-          {selectedPage ? (
-            <div className="flex-1 flex flex-row overflow-hidden h-full">
-              <div className="flex-1 overflow-y-auto custom-scrollbar p-5 sm:p-8 md:p-12 scroll-smooth relative">
-                <motion.div key={selectedPage.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="max-w-4xl mx-auto relative z-10">
-                  
-                  <Breadcrumbs 
-                    category={selectedPage.category} 
-                    title={selectedPage.title} 
-                    onNavigate={(path) => { 
-                      navigate('/wiki');
-                      setSearchQuery(path);
-                      if (path !== '') setIsMasonryView(true);
-                      else setIsMasonryView(false);
-                    }} 
-                  />
-
-                  <div className="mb-8 md:mb-10 pb-6 md:pb-8 border-b border-gray-200 dark:border-white/5 text-left">
-                    <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6 tracking-tight leading-tight uppercase">{selectedPage.title}</h1>
-                    <div className="flex flex-wrap items-center gap-2 md:gap-3">
-                      <div className="flex items-center gap-2 text-[10px] md:text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-[#1a1a20] border border-gray-200 dark:border-white/10 px-2.5 py-1 rounded-full"><Calendar className="w-3 h-3" /><span>Mis à jour le {new Date(selectedPage.updated_at).toLocaleDateString('fr-FR')}</span></div>
-                      <div className="flex items-center gap-2 text-[10px] md:text-xs text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-500/10 border border-violet-200 dark:border-violet-500/20 px-2.5 py-1 rounded-full"><Activity className="w-3 h-3" /><span>{getReadingTime(selectedPage.content)} min de lecture</span></div>
-                      {selectedPage.tags?.map(tag => <span key={tag} className="flex items-center gap-1 text-[10px] md:text-xs text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-white/5 px-2.5 py-1 rounded-full border border-gray-200 dark:border-white/10"><Hash className="w-3 h-3" /> {tag}</span>)}
-                    </div>
-                  </div>
-
-                  <div className="min-h-[400px] text-left">
-                    <div className="prose max-w-none prose-sm sm:prose-base prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-h2:text-xl sm:prose-h2:text-2xl prose-h2:mt-10 sm:prose-h2:mt-12 prose-h2:pb-2 prose-h2:border-b prose-h2:border-gray-200 dark:prose-h2:border-white/10 prose-h3:text-lg sm:prose-h3:text-xl prose-h3:text-violet-700 dark:prose-h3:text-violet-200 prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-strong:text-gray-900 dark:prose-strong:text-white prose-a:text-violet-600 dark:prose-a:text-violet-400 prose-li:text-gray-700 dark:prose-li:text-gray-300 prose-blockquote:border-violet-500 prose-blockquote:bg-violet-50 dark:prose-blockquote:bg-violet-500/5 prose-blockquote:text-gray-700 dark:prose-blockquote:text-gray-400 prose-img:rounded-xl">
-                      <ReactMarkdown rehypePlugins={[rehypeRaw]} components={MarkdownComponents as any}>{selectedPage.content}</ReactMarkdown>
-                    </div>
-                  </div>
-                  <div className="mt-16 pb-12 border-t border-gray-200 dark:border-white/5 pt-8">
-                    <WikiTip pageId={selectedPage.id} context="article" />
-                    <Backlinks currentPage={selectedPage} allPages={pages} onSelect={handlePageSelect} />
-                  </div>
-                </motion.div>
+          {slug ? (
+            isLoadingContent ? (
+              <div className="flex-1 flex flex-col items-center justify-center p-12 gap-4">
+                <div className="w-12 h-12 border-4 border-violet-500/20 border-t-violet-500 rounded-full animate-spin"></div>
+                <div className="text-gray-500 font-bold uppercase tracking-[0.2em] text-xs">Chargement de la note...</div>
               </div>
-              {toc.length > 0 && (
-                <TableOfContents items={toc} />
-              )}
-            </div>
+            ) : selectedPage ? (
+              <div className="flex-1 flex flex-row overflow-hidden h-full">
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-5 sm:p-8 md:p-12 scroll-smooth relative">
+                  <motion.div key={selectedPage.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="max-w-4xl mx-auto relative z-10">
+                    
+                    <Breadcrumbs 
+                      category={selectedPage.category} 
+                      title={selectedPage.title} 
+                      onNavigate={(path) => { 
+                        navigate('/wiki');
+                        setSearchQuery(path);
+                        if (path !== '') setIsMasonryView(true);
+                        else setIsMasonryView(false);
+                      }} 
+                    />
+
+                    <div className="mb-8 md:mb-10 pb-6 md:pb-8 border-b border-gray-200 dark:border-white/5 text-left">
+                      <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6 tracking-tight leading-tight uppercase">{selectedPage.title}</h1>
+                      <div className="flex flex-wrap items-center gap-2 md:gap-3">
+                        <div className="flex items-center gap-2 text-[10px] md:text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-[#1a1a20] border border-gray-200 dark:border-white/10 px-2.5 py-1 rounded-full"><Calendar className="w-3 h-3" /><span>Mis à jour le {new Date(selectedPage.updated_at).toLocaleDateString('fr-FR')}</span></div>
+                        <div className="flex items-center gap-2 text-[10px] md:text-xs text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-500/10 border border-violet-200 dark:border-violet-500/20 px-2.5 py-1 rounded-full"><Activity className="w-3 h-3" /><span>{getReadingTime(selectedPage.content)} min de lecture</span></div>
+                        {selectedPage.tags?.map(tag => <span key={tag} className="flex items-center gap-1 text-[10px] md:text-xs text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-white/5 px-2.5 py-1 rounded-full border border-gray-200 dark:border-white/10"><Hash className="w-3 h-3" /> {tag}</span>)}
+                      </div>
+                    </div>
+
+                    <div className="min-h-[400px] text-left">
+                      <div className="prose max-w-none prose-sm sm:prose-base prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-h2:text-xl sm:prose-h2:text-2xl prose-h2:mt-10 sm:prose-h2:mt-12 prose-h2:pb-2 prose-h2:border-b prose-h2:border-gray-200 dark:prose-h2:border-white/10 prose-h3:text-lg sm:prose-h3:text-xl prose-h3:text-violet-700 dark:prose-h3:text-violet-200 prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-strong:text-gray-900 dark:prose-strong:text-white prose-a:text-violet-600 dark:prose-a:text-violet-400 prose-li:text-gray-700 dark:prose-li:text-gray-300 prose-blockquote:border-violet-500 prose-blockquote:bg-violet-50 dark:prose-blockquote:bg-violet-500/5 prose-blockquote:text-gray-700 dark:prose-blockquote:text-gray-400 prose-img:rounded-xl">
+                        <ReactMarkdown rehypePlugins={[rehypeRaw]} components={MarkdownComponents as any}>{selectedPage.content}</ReactMarkdown>
+                      </div>
+                    </div>
+                    <div className="mt-16 pb-12 border-t border-gray-200 dark:border-white/5 pt-8">
+                      <WikiTip pageId={selectedPage.id} context="article" />
+                      <Backlinks currentPage={selectedPage} onSelect={handlePageSelect} />
+                    </div>
+                  </motion.div>
+                </div>
+                {toc.length > 0 && (
+                  <TableOfContents items={toc} />
+                )}
+              </div>
+            ) : (
+              <div className="flex-1 flex flex-col items-center justify-center p-12 text-center">
+                <AlertTriangle className="w-12 h-12 text-amber-500 mb-4" />
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Note introuvable</h3>
+                <p className="text-gray-500 mb-6">La page que vous recherchez n'existe pas ou a été déplacée.</p>
+                <button onClick={handleGoHome} className="px-6 py-2 bg-violet-600 text-white rounded-lg font-bold">Retour à l'accueil</button>
+              </div>
+            )
           ) : isMasonryView ? (
             <WikiMasonry pages={filteredPages} onSelect={handlePageSelect} onClose={() => setIsMasonryView(false)} />
           ) : (
