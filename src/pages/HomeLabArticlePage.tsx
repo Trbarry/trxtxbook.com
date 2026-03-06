@@ -116,8 +116,11 @@ const HomeLabArticlePage = () => {
   return (
     <div className="min-h-screen bg-background text-gray-100 pt-32 pb-24 transition-colors duration-300">
       <SEOHead 
-        title="Deep Dive: HomeLab & Ambilight | Tristan Barry" 
-        description="Étude technique sur l'infrastructure HomeLab, segmentation réseau L3 et traitement de signal 4K HDR." 
+        title="HomeLab Ecosystem : Sécurité, Virtualisation & Ambilight 4K | Tristan Barry" 
+        description="Exploration technique de mon infrastructure HomeLab sous Proxmox. Segmentation réseau L3 avec OPNsense et ZenArmor, orchestration Docker, et système Ambilight HDR." 
+        keywords="HomeLab, Proxmox, OPNsense, ZenArmor, Docker, Virtualisation, Cybersécurité, Ambilight, Hyperion, Networking"
+        url="https://trxtxbook.com/projects/homelab"
+        type="article"
       />
       
       <article className="container mx-auto px-6 max-w-4xl">

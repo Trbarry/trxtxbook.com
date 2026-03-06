@@ -1,7 +1,8 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
+import { safeLazy as lazy } from './lib/safeLazy';
 
 // ✅ Contextes et SEO
 import { ThemeProvider } from './context/ThemeContext';
@@ -116,6 +117,7 @@ const AnimatedRoutes = ({
           <Route path="/projects" element={<PageTransition><ProjectsList /></PageTransition>} />
           <Route path="/certifications" element={<PageTransition><CertificationsList /></PageTransition>} />
           <Route path="/wiki" element={<PageTransition><WikiPage /></PageTransition>} />
+          <Route path="/wiki/:slug" element={<PageTransition><WikiPage /></PageTransition>} />
 
           {/* DETAILS ET ARTICLES */}
           <Route path="/writeups/:slug" element={<PageTransition><WriteupPage /></PageTransition>} />
@@ -136,6 +138,9 @@ const AnimatedRoutes = ({
           <Route path="/admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/wp-admin" element={<PageTransition><AdminTrollPage /></PageTransition>} />
           <Route path="/login" element={<PageTransition><AdminTrollPage /></PageTransition>} />
+          <Route path="/admin_login" element={<PageTransition><AdminTrollPage /></PageTransition>} />
+          <Route path="/.env" element={<PageTransition><AdminTrollPage /></PageTransition>} />
+          <Route path="/config.php" element={<PageTransition><AdminTrollPage /></PageTransition>} />
 
           {/* LEGAL */}
           <Route path="/mentions-legales" element={<PageTransition><LegalPage /></PageTransition>} />

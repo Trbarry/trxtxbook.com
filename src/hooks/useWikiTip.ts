@@ -14,16 +14,38 @@ export function useWikiTip(pageId: string) {
   });
 
   const { data: hasLiked, error: voteError, mutate: mutateVote } = useSWR(['wiki_vote', pageId], async () => {
-    const ipRes = await fetch('https://api.ipify.org?format=json');
-    const ipData = await ipRes.json();
-    const ip = ipData.ip;
+    // 1. Check localStorage first
+    const localKey = `wiki_voted_${pageId}`;
+    if (localStorage.getItem(localKey)) {
+      return { hasLiked: true, ip: 'stored' };
+    }
 
-    const { data, error } = await supabase
+    // 2. Check IP via backend
+    let ip = 'unknown';
+    try {
+      const ipRes = await fetch('https://api.ipify.org?format=json');
+      if (ipRes.ok) {
+        const ipData = await ipRes.json();
+        ip = ipData.ip;
+      }
+    } catch (err) {
+      console.error('Failed to fetch IP:', err);
+    }
+
+    if (ip === 'unknown') {
+      return { hasLiked: false, ip: null };
+    }
+
+    const { data } = await supabase
       .from('wiki_votes')
       .select('id')
       .eq('page_id', pageId)
       .eq('user_ip', ip)
-      .single();
+      .maybeSingle();
+    
+    if (data) {
+      localStorage.setItem(localKey, 'true');
+    }
     
     return { hasLiked: !!data, ip };
   });
@@ -32,8 +54,11 @@ export function useWikiTip(pageId: string) {
     if (hasLiked?.hasLiked || !hasLiked?.ip) return;
 
     // Optimistic update
-    mutateLikes(current => (current || 0) + 1, false);
+    mutateLikes((current: number | undefined) => (current || 0) + 1, false);
     mutateVote({ hasLiked: true, ip: hasLiked.ip }, false);
+    
+    // Store in localStorage immediately
+    localStorage.setItem(`wiki_voted_${pageId}`, 'true');
 
     try {
       const { error } = await supabase.rpc('vote_for_page', { 

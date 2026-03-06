@@ -1,36 +1,25 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+<<<<<<< HEAD
 import { supabase } from '../lib/supabase';
 import { Writeup } from '../types/writeup';
 import { PortSwiggerBaseArticle } from '../components/articles/portswigger/PortSwiggerBaseArticle';
 import { WriteupDetail } from '../components/WriteupDetail';
+=======
+import { useWriteup } from '../hooks/useWriteups';
+import { WriteupDetail } from '../components/WriteupDetail';
+import { DifficultyBackground } from '../components/DifficultyBackground';
+import { SEOHead } from '../components/SEOHead';
+import { getWriteupCoverImage } from '../lib/imageUtils';
+>>>>>>> 8934296eb67dd60afc8e6c696c49d05aa428bcbc
 
 export const WriteupPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [writeup, setWriteup] = React.useState<Writeup | null>(null);
-  const [loading, setLoading] = React.useState(true);
+  const { writeup, isLoading: loading } = useWriteup(slug);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchWriteup();
   }, [slug]);
-
-  const fetchWriteup = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('writeups')
-        .select('*')
-        .eq('slug', slug)
-        .single();
-
-      if (error) throw error;
-      setWriteup(data);
-    } catch (error) {
-      console.error('Error fetching writeup:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (loading) {
     return (
@@ -62,13 +51,17 @@ export const WriteupPage: React.FC = () => {
         title={`${writeup.title} - Write-up CTF | Tristan Barry`}
         description={writeup.description}
         keywords={`${writeup.tags.join(', ')}, CTF, cybersécurité, pentesting, ${writeup.platform}`}
+        image={getWriteupCoverImage(writeup)}
         url={`https://trxtxbook.com/writeups/${writeup.slug}`}
         type="article"
         publishedTime={writeup.created_at}
       />
-      {/* ✅ CHANGEMENT : bg-background */}
-      <div className="min-h-screen pt-24 pb-20 bg-background transition-colors duration-300">
-        <WriteupDetail writeup={writeup} />
+      {/* ✅ Arrière-plan dynamique selon la difficulté */}
+      <div className="min-h-screen pt-24 pb-20 bg-background transition-colors duration-300 relative">
+        <DifficultyBackground difficulty={writeup.difficulty} tags={writeup.tags} />
+        <div className="relative z-10">
+          <WriteupDetail writeup={writeup} />
+        </div>
       </div>
     </>
   );

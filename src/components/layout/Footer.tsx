@@ -122,6 +122,17 @@ export const Footer: React.FC = () => {
             </div>
             
             <div className="flex items-center gap-6">
+                {/* Honeypot link: Hidden for humans, but a juicy target for crawlers/fuzzers */}
+                <Link 
+                  to="/admin_login" 
+                  tabIndex={-1} 
+                  aria-hidden="true" 
+                  className="opacity-0 absolute pointer-events-none"
+                  style={{ fontSize: '1px' }}
+                >
+                  Admin Login Access
+                </Link>
+
                 <Link 
                   to="/admin/analytics" 
                   className="flex items-center gap-2 text-xs text-gray-500 hover:text-green-600 dark:hover:text-green-500 transition-colors"

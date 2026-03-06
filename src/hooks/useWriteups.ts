@@ -27,3 +27,32 @@ export function useWriteups(limit?: number) {
     mutate
   };
 }
+
+export function useWriteup(slug: string | undefined) {
+  const { data, error, isLoading, mutate } = useSWR<Writeup | null>(
+    slug ? ['writeup', slug] : null,
+    async () => {
+      if (!slug) return null;
+
+      const { data, error } = await supabase
+        .from('writeups')
+        .select('*')
+        .eq('slug', slug)
+        .single();
+      
+      if (error) throw error;
+      return data;
+    },
+    {
+      revalidateOnFocus: false,
+      dedupingInterval: 60000, // 1 minute
+    }
+  );
+
+  return {
+    writeup: data,
+    error,
+    isLoading,
+    mutate
+  };
+}

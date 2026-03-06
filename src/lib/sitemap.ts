@@ -30,6 +30,8 @@ const staticArticles: RouteConfig[] = [
   { path: '/articles/ad-network', priority: 0.8, changefreq: 'monthly' },
   { path: '/articles/smb-server', priority: 0.8, changefreq: 'monthly' },
   { path: '/articles/steam-deck-kali', priority: 0.8, changefreq: 'monthly' },
+  { path: '/articles/homelab-infrastructure-deep-dive', priority: 0.8, changefreq: 'monthly' },
+  { path: '/writeups/dog', priority: 0.8, changefreq: 'monthly' },
 ];
 
 export class SitemapGenerator {

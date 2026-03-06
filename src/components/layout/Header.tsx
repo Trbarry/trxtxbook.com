@@ -172,7 +172,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
                 }
               `}>
                 <Brain className={`w-3.5 h-3.5 ${location.pathname === '/wiki' ? 'text-violet-500 dark:text-violet-400' : 'text-gray-400 group-hover:text-violet-400'} transition-colors`} />
-                <span className="text-[11px] font-bold tracking-wider uppercase">Wiki</span>
+                <span className="text-[11px] font-bold tracking-wider uppercase">Wiki Bowl of Rice</span>
                 <Sparkles className="w-2.5 h-2.5 text-yellow-500 dark:text-yellow-300 animate-pulse" />
               </div>
             </Link>
@@ -293,7 +293,7 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
                   className="flex items-center justify-center gap-2 text-xl font-medium uppercase tracking-wider text-center py-4 border-b border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 hover:text-violet-400"
                 >
                   <Brain className="w-5 h-5" />
-                  Wiki
+                  Wiki Bowl of Rice
                   <Sparkles className="w-4 h-4 text-yellow-500" />
                 </Link>
                 <Link

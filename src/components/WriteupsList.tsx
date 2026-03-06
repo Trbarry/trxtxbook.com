@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Calendar, Terminal, Lock, Hash, FileWarning, Shield, ArrowRight, AlertCircle } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 import { Writeup } from '../types/writeup';
 import { useNavigate } from 'react-router-dom';
 import { SEOHead } from './SEOHead';
-import { getOptimizedUrl } from '../lib/imageUtils';
+import { getOptimizedUrl, getWriteupCoverImage } from '../lib/imageUtils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { useWriteups } from '../hooks/useWriteups';
@@ -51,6 +50,33 @@ export const WriteupsList: React.FC = () => {
     return 'text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-500/20 bg-gray-100 dark:bg-gray-500/5';
   };
 
+  const getDifficultyGlow = (difficulty: string) => {
+    const d = difficulty?.toLowerCase() || '';
+    if (d.includes('easy') || d.includes('facile')) return 'group-hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.2)] group-hover:border-green-500/40';
+    if (d.includes('medium') || d.includes('moyen')) return 'group-hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.2)] group-hover:border-orange-500/40';
+    if (d.includes('hard') || d.includes('difficile')) return 'group-hover:shadow-[0_20px_40px_-15px_rgba(239,68,68,0.25)] group-hover:border-red-500/40';
+    if (d.includes('insane')) return 'group-hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.3)] group-hover:border-purple-500/50';
+    return 'group-hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.2)] group-hover:border-violet-500/40';
+  };
+
+  const getDifficultyHoverGradient = (difficulty: string) => {
+    const d = difficulty?.toLowerCase() || '';
+    if (d.includes('easy') || d.includes('facile')) return 'bg-[radial-gradient(circle_at_50%_0%,rgba(16,185,129,0.08),transparent_70%)]';
+    if (d.includes('medium') || d.includes('moyen')) return 'bg-[radial-gradient(circle_at_50%_0%,rgba(245,158,11,0.08),transparent_70%)]';
+    if (d.includes('hard') || d.includes('difficile')) return 'bg-[radial-gradient(circle_at_50%_0%,rgba(239,68,68,0.08),transparent_70%)]';
+    if (d.includes('insane')) return 'bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.12),transparent_70%)]';
+    return 'bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.08),transparent_70%)]';
+  };
+
+  const getDifficultyAccent = (difficulty: string) => {
+    const d = difficulty?.toLowerCase() || '';
+    if (d.includes('easy') || d.includes('facile')) return 'bg-green-500';
+    if (d.includes('medium') || d.includes('moyen')) return 'bg-orange-500';
+    if (d.includes('hard') || d.includes('difficile')) return 'bg-red-500';
+    if (d.includes('insane')) return 'bg-purple-600';
+    return 'bg-violet-600';
+  };
+
   const getPlatformLabel = (slug: string) => {
     const s = slug.toLowerCase();
     if (s.includes('hackthebox') || s.startsWith('htb-')) return 'HackTheBox';
@@ -60,27 +86,9 @@ export const WriteupsList: React.FC = () => {
     return 'CTF';
   };
 
-  const getWriteupImage = (writeup: Writeup) => {
-    // 1. Priorité à l'image stockée en base
-    if (writeup.images && writeup.images.length > 0) return writeup.images[0];
-
-    // 2. Fallbacks de sécurité (Hardcoded)
-    if (writeup.slug === 'hackthebox-forest') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/foresthtb.png";
-    if (writeup.slug === 'hackthebox-cat-analysis') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/cat.htb.png";
-    if (writeup.slug === 'hackthebox-dog') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/profile-images/dog.png";
-    if (writeup.slug === 'hackthebox-reddish') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/reddish.webp";
-    if (writeup.slug === 'tryhackme-skynet') return "https://tryhackme-images.s3.amazonaws.com/room-icons/1559e2e8a4e1a3.png";
-    
-    // Fallback Soccer
-    if (writeup.slug === 'hackthebox-soccer') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/soccerhtb.png";
-
-    // 3. Image par défaut générique
-    return "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80";
-  };
-
   return (
     <>
-      <SEOHead title="Archives Write-ups & CTF | Tristan Barry" description="Base de connaissances techniques." />
+      <SEOHead title="Archives Write-ups & CTF | Tristan Barry" description="Base de connaissances techniques regroupant mes rapports d'intrusion, analyses de vulnérabilités et résolutions de CTF sur HackTheBox, TryHackMe et d'autres plateformes." />
       
       <div className="min-h-screen pt-32 pb-24 bg-background transition-colors duration-300 text-gray-900 dark:text-gray-100">
         <div className="container mx-auto px-6">
@@ -139,7 +147,7 @@ export const WriteupsList: React.FC = () => {
             <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               <AnimatePresence mode='popLayout'>
                 {filteredWriteups.map((writeup) => {
-                  const isActiveMachine = false;
+                  const isActiveMachine = writeup.is_active ?? false;
                   
                   return (
                     <motion.div
@@ -151,10 +159,19 @@ export const WriteupsList: React.FC = () => {
                       key={writeup.id}
                       onClick={() => !isActiveMachine && navigate(`/writeups/${writeup.slug}`)}
                       className={`group relative bg-surface dark:bg-[#1a1a1f] rounded-2xl border border-gray-200 dark:border-white/5 overflow-hidden flex flex-col h-full shadow-sm dark:shadow-none
-                               transition-all duration-300 ${isActiveMachine ? 'cursor-not-allowed opacity-80' : 'cursor-pointer hover:border-violet-500/30 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]'}`}
+                               transition-all duration-300 ${isActiveMachine ? 'cursor-not-allowed opacity-80' : `cursor-pointer hover:-translate-y-1 ${getDifficultyGlow(writeup.difficulty || '')}`}`}
                     >
+                      {/* Effet de Gradient au Survol */}
+                      {!isActiveMachine && (
+                        <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none ${getDifficultyHoverGradient(writeup.difficulty || '')}`} />
+                      )}
+
+                      {/* Accent de difficulté */}
+                      {!isActiveMachine && (
+                        <div className={`absolute left-0 top-0 bottom-0 w-1 z-30 opacity-0 group-hover:opacity-100 group-hover:w-1.5 transition-all duration-300 ${getDifficultyAccent(writeup.difficulty || '')}`} />
+                      )}
                       <div className="relative h-48 overflow-hidden border-b border-gray-100 dark:border-white/5">
-                        <img src={getOptimizedUrl(getWriteupImage(writeup), 600)} alt={writeup.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <img src={getOptimizedUrl(getWriteupCoverImage(writeup), 600)} alt={writeup.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div className="absolute top-4 left-4 z-10">
                             <span className="px-2.5 py-1 bg-white/90 dark:bg-black/80 backdrop-blur border border-gray-200 dark:border-white/10 rounded text-[10px] font-bold uppercase tracking-wider text-gray-900 dark:text-white">
                                 {getPlatformLabel(writeup.slug || '')}

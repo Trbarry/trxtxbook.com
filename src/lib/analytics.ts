@@ -21,14 +21,12 @@ export interface AnalyticsData {
 }
 
 class SimpleAnalytics {
-  private visitorId: string;
+  private visitorId: string | null = null;
   private isBot: boolean = false;
 
   constructor() {
     this.isBot = this.detectBot();
-    if (!this.isBot) {
-      this.visitorId = this.getOrCreateVisitorId();
-    }
+    this.visitorId = this.getOrCreateVisitorId();
   }
 
   private detectBot(): boolean {
@@ -103,6 +101,24 @@ class SimpleAnalytics {
     }
   }
 
+  async trackSecurityIncident(type: string, path: string, payload?: any) {
+    // Unlike page views, we DO track bots here because bots are often the ones fuzzing
+    try {
+      const location = await this.getLocation();
+      
+      await supabase.from('security_incidents').insert({
+        visitor_id: this.visitorId || 'bot_detected',
+        incident_type: type,
+        path: path,
+        payload: payload || null,
+        user_agent: navigator.userAgent,
+        country: location.country || 'Unknown'
+      });
+    } catch (error) {
+      if (import.meta.env.DEV) console.error('Security tracking failed:', error);
+    }
+  }
+
   async getAnalytics(): Promise<AnalyticsData | null> {
     try {
       const { data, error } = await supabase.rpc('get_simple_analytics');
@@ -121,8 +137,11 @@ export const useAnalytics = () => {
   const trackPageView = (path: string) => {
     analytics.trackPageView(path);
   };
+  const trackSecurityIncident = (type: string, path: string, payload?: any) => {
+    analytics.trackSecurityIncident(type, path, payload);
+  };
   const getAnalytics = () => {
     return analytics.getAnalytics();
   };
-  return { trackPageView, getAnalytics };
+  return { trackPageView, trackSecurityIncident, getAnalytics };
 };
