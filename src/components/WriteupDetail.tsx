@@ -41,6 +41,12 @@ export const WriteupDetail: React.FC<WriteupDetailProps> = ({ writeup }) => {
     // Ajout spécifique pour Soccer avec le lien fourni
     if (writeup.slug === 'hackthebox-soccer') return "https://srmwnujqhxaopnffesgl.supabase.co/storage/v1/object/public/writeup-images/soccerhtb.png";
 
+    // PortSwigger DA handling (if DA is a single image URL)
+    if (writeup.platform === 'portswigger' && writeup.da_asset) {
+        // Supposons que da_asset contient l'URL optimisée ou le chemin stocké
+        return writeup.da_asset;
+    }
+
     // 3. Image par défaut si aucun slug ne correspond
     return "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80";
   };

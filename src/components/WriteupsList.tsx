@@ -31,9 +31,11 @@ export const WriteupsList: React.FC = () => {
     if (selectedPlatform !== 'all') {
       results = results.filter(w => {
         const s = w.slug.toLowerCase();
-        if (selectedPlatform === 'htb') return s.includes('hackthebox') || s.startsWith('htb-');
-        if (selectedPlatform === 'thm') return s.includes('tryhackme') || s.startsWith('thm-');
-        if (selectedPlatform === 'rootme') return s.includes('root-me');
+        const p = w.platform?.toLowerCase() || '';
+        if (selectedPlatform === 'htb') return s.includes('hackthebox') || s.startsWith('htb-') || p.includes('hackthebox');
+        if (selectedPlatform === 'thm') return s.includes('tryhackme') || s.startsWith('thm-') || p.includes('tryhackme');
+        if (selectedPlatform === 'rootme') return s.includes('root-me') || p.includes('root-me');
+        if (selectedPlatform === 'portswigger') return s.includes('portswigger') || p.includes('portswigger');
         return true;
       });
     }
@@ -54,6 +56,7 @@ export const WriteupsList: React.FC = () => {
     if (s.includes('hackthebox') || s.startsWith('htb-')) return 'HackTheBox';
     if (s.includes('tryhackme') || s.startsWith('thm-')) return 'TryHackMe';
     if (s.includes('root-me')) return 'Root-Me';
+    if (s.includes('portswigger') || s.includes('psw')) return 'PortSwigger';
     return 'CTF';
   };
 
@@ -109,7 +112,7 @@ export const WriteupsList: React.FC = () => {
               </div>
 
               <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
-                {[ { id: 'all', label: 'Tout' }, { id: 'htb', label: 'HackTheBox' }, { id: 'thm', label: 'TryHackMe' }, { id: 'rootme', label: 'Root-Me' } ].map((platform) => (
+                {[ { id: 'all', label: 'Tout' }, { id: 'htb', label: 'HackTheBox' }, { id: 'thm', label: 'TryHackMe' }, { id: 'rootme', label: 'Root-Me' }, { id: 'portswigger', label: 'PortSwigger' } ].map((platform) => (
                   <button
                     key={platform.id}
                     onClick={() => setSelectedPlatform(platform.id)}

@@ -34,6 +34,7 @@ export const Writeups: React.FC = () => {
     if (s.includes('hackthebox') || s.startsWith('htb-')) return 'HTB';
     if (s.includes('tryhackme') || s.startsWith('thm-')) return 'THM';
     if (s.includes('root-me')) return 'RM';
+    if (s.includes('portswigger') || s.includes('psw')) return 'PSW';
     return 'CTF';
   };
 

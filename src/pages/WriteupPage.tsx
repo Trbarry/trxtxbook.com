@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
-import { WriteupDetail } from '../components/WriteupDetail';
-import { SEOHead } from '../components/SEOHead';
 import { Writeup } from '../types/writeup';
+import { PortSwiggerBaseArticle } from '../components/articles/portswigger/PortSwiggerBaseArticle';
+import { WriteupDetail } from '../components/WriteupDetail';
 
 export const WriteupPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();

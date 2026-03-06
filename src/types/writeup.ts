@@ -11,4 +11,5 @@ export interface Writeup {
   published: boolean;
   description: string;
   images?: string[];
+  da_asset?: string; // Champ pour l'actif de Direction Artistique (DA)
 }
