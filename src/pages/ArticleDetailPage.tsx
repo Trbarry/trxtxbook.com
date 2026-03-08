@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Clock, Calendar, Hash, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, Hash, AlertTriangle, Heart, Eye } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { TableOfContents } from '../components/TableOfContents';
 import { MarkdownRenderer } from '../components/MarkdownRenderer';
-import { useArticle, useArticles } from '../hooks/useArticles';
+import { ReadingProgressBar } from '../components/ReadingProgressBar';
+import { useArticle, useArticles, useArticleViews, useLikeArticle } from '../hooks/useArticles';
 import { extractHeadings } from '../lib/markdownUtils';
 
 const getReadingTime = (text: string): number => {
-  const words = text.split(/\s+/g).length;
-  return Math.ceil(words / 200);
+  const words = text.trim().split(/\s+/g).length;
+  return Math.max(1, Math.ceil(words / 200));
 };
 
 export const ArticleDetailPage: React.FC = () => {
@@ -20,6 +21,8 @@ export const ArticleDetailPage: React.FC = () => {
   const { article, isLoading } = useArticle(slug);
   const { articles = [] } = useArticles();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const views = useArticleViews(slug);
+  const { liked, count: likeCount, toggle: toggleLike } = useLikeArticle(article);
 
   const toc = React.useMemo(
     () => (article?.content ? extractHeadings(article.content) : []),
@@ -54,6 +57,8 @@ export const ArticleDetailPage: React.FC = () => {
 
   return (
     <>
+      <ReadingProgressBar />
+
       <SEOHead
         title={`${article.title} | Tristan Barry`}
         description={article.description || `Guide technique : ${article.title}`}
@@ -109,9 +114,14 @@ export const ArticleDetailPage: React.FC = () => {
                     {article.description}
                   </p>
                 )}
+
+                {/* Méta */}
                 <div className="flex flex-wrap items-center gap-3">
                   <span className="flex items-center gap-1.5 text-xs text-gray-500 bg-gray-100 dark:bg-white/5 px-3 py-1 rounded-full border border-gray-200 dark:border-white/10">
                     <Clock className="w-3 h-3" />{getReadingTime(article.content)} min de lecture
+                  </span>
+                  <span className="flex items-center gap-1.5 text-xs text-gray-500 bg-gray-100 dark:bg-white/5 px-3 py-1 rounded-full border border-gray-200 dark:border-white/10">
+                    <Eye className="w-3 h-3" />{views.toLocaleString('fr-FR')} vues
                   </span>
                   <span className="flex items-center gap-1.5 text-xs text-gray-500 bg-gray-100 dark:bg-white/5 px-3 py-1 rounded-full border border-gray-200 dark:border-white/10">
                     <Calendar className="w-3 h-3" />Mis à jour le {new Date(article.updated_at).toLocaleDateString('fr-FR')}
@@ -127,9 +137,28 @@ export const ArticleDetailPage: React.FC = () => {
               {/* Contenu Markdown */}
               <MarkdownRenderer content={article.content} onImageClick={setSelectedImage} />
 
+              {/* Like button */}
+              <div className="mt-16 flex justify-center">
+                <button
+                  onClick={toggleLike}
+                  disabled={liked}
+                  className={`group flex items-center gap-3 px-6 py-3 rounded-2xl border transition-all duration-300 ${
+                    liked
+                      ? 'bg-violet-500/10 border-violet-500/30 text-violet-500 cursor-default'
+                      : 'bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-500 hover:border-violet-500/50 hover:text-violet-500 hover:bg-violet-500/5'
+                  }`}
+                >
+                  <Heart
+                    className={`w-5 h-5 transition-transform ${liked ? 'fill-violet-500 scale-110' : 'group-hover:scale-110'}`}
+                  />
+                  <span className="font-mono text-sm font-bold">{likeCount}</span>
+                  <span className="text-sm">{liked ? 'Merci !' : 'Cet article vous a aidé ?'}</span>
+                </button>
+              </div>
+
               {/* Articles liés */}
               {related.length > 0 && (
-                <div className="mt-16 pt-8 border-t border-gray-200 dark:border-white/10">
+                <div className="mt-12 pt-8 border-t border-gray-200 dark:border-white/10">
                   <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Articles liés</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {related.map(rel => (
