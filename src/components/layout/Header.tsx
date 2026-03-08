@@ -150,6 +150,13 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
               Write-ups
             </Link>
             <Link
+              to="/articles"
+              className={`px-3 py-2 text-sm uppercase tracking-wider hover:text-violet-400 transition-colors rounded-lg hover:bg-surface/50 ${location.pathname.startsWith('/articles') ? 'text-violet-500 font-semibold' : 'text-gray-500 dark:text-gray-400'}`}
+              onClick={() => setActiveSection('articles')}
+            >
+              Articles
+            </Link>
+            <Link
               to="/projects"
               className={`px-3 py-2 text-sm uppercase tracking-wider hover:text-violet-400 transition-colors rounded-lg hover:bg-surface/50 ${location.pathname === '/projects' ? 'text-violet-500 font-semibold' : 'text-gray-500 dark:text-gray-400'}`}
               onClick={() => setActiveSection('projects')}
@@ -286,6 +293,13 @@ export const Header: React.FC<HeaderProps> = ({ setShowProfile, setActiveSection
                   className="text-xl font-medium uppercase tracking-wider text-center py-4 border-b border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 hover:text-violet-400"
                 >
                   Projects
+                </Link>
+                <Link
+                  to="/articles"
+                  onClick={() => { setIsMenuOpen(false); setActiveSection('articles'); }}
+                  className="text-xl font-medium uppercase tracking-wider text-center py-4 border-b border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 hover:text-violet-400"
+                >
+                  Articles
                 </Link>
                 <Link
                   to="/wiki"
