@@ -1,17 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-<<<<<<< HEAD
-import { supabase } from '../lib/supabase';
-import { Writeup } from '../types/writeup';
-import { PortSwiggerBaseArticle } from '../components/articles/portswigger/PortSwiggerBaseArticle';
-import { WriteupDetail } from '../components/WriteupDetail';
-=======
 import { useWriteup } from '../hooks/useWriteups';
 import { WriteupDetail } from '../components/WriteupDetail';
 import { DifficultyBackground } from '../components/DifficultyBackground';
 import { SEOHead } from '../components/SEOHead';
 import { getWriteupCoverImage } from '../lib/imageUtils';
->>>>>>> 8934296eb67dd60afc8e6c696c49d05aa428bcbc
 
 export const WriteupPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -23,7 +16,6 @@ export const WriteupPage: React.FC = () => {
 
   if (loading) {
     return (
-      // ✅ CHANGEMENT : bg-background et text adaptatif
       <div className="min-h-screen pt-24 pb-20 bg-background transition-colors duration-300 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-4 border-violet-600 dark:border-violet-500 border-t-transparent"></div>
       </div>
@@ -37,7 +29,6 @@ export const WriteupPage: React.FC = () => {
           title="Write-up non trouvé - Tristan Barry"
           description="Le write-up demandé n'a pas été trouvé."
         />
-        {/* ✅ CHANGEMENT : bg-background et text adaptatif */}
         <div className="min-h-screen pt-24 pb-20 bg-background transition-colors duration-300 flex items-center justify-center">
           <p className="text-xl text-gray-600 dark:text-gray-400">Write-up non trouvé</p>
         </div>
@@ -56,7 +47,6 @@ export const WriteupPage: React.FC = () => {
         type="article"
         publishedTime={writeup.created_at}
       />
-      {/* ✅ Arrière-plan dynamique selon la difficulté */}
       <div className="min-h-screen pt-24 pb-20 bg-background transition-colors duration-300 relative">
         <DifficultyBackground difficulty={writeup.difficulty} tags={writeup.tags} />
         <div className="relative z-10">
