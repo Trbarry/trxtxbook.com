@@ -3,29 +3,14 @@ import { Code, ExternalLink, FileText, FolderGit2, ArrowRight } from 'lucide-rea
 import { useNavigate } from 'react-router-dom';
 import { ProjectDetail } from './ProjectDetail';
 import { Project } from '../types/project';
-import { SMBProject } from './projects/SMBProject';
-import { ADProject } from './projects/ADProject';
-import { SteamDeckProject } from './projects/SteamDeckProject';
-import { ExegolProject } from './projects/ExegolProject';
-import { LinuxMintProject } from './projects/LinuxMintProject';
-import { CPTSJourneyProject } from './projects/CPTSJourneyProject';
-import { HomeLabProject } from './projects/HomeLabProjects'; // Import du projet maître
+import { HomeLabProject } from './projects/HomeLabProjects';
 import { getOptimizedUrl } from '../lib/imageUtils';
 
 export const Projects: React.FC = () => {
   const navigate = useNavigate();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  // HomeLabProject est placé en premier pour souligner l'infrastructure globale
-  const projects: Project[] = [
-    HomeLabProject,
-    CPTSJourneyProject, 
-    LinuxMintProject, 
-    ExegolProject, 
-    ADProject, 
-    SMBProject, 
-    SteamDeckProject
-  ];
+  const projects: Project[] = [HomeLabProject];
 
   const handleProjectClick = (project: Project) => {
     if (project.articleUrl) {

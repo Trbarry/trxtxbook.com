@@ -1,10 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, Search, Clock, Calendar, Hash, ChevronRight, Tag } from 'lucide-react';
+import { BookOpen, Search, Clock, Calendar, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { SEOHead } from '../components/SEOHead';
 import { useArticles } from '../hooks/useArticles';
 import { ArticleMetadata } from '../types/article';
+import { STATIC_ARTICLES, CPTS_ARTICLE } from '../data/staticArticles';
 
 const getReadingTime = (description: string): number => {
   // Estimation basée sur la description (le contenu complet n'est pas chargé ici)
@@ -75,17 +76,24 @@ const ArticleCard: React.FC<{ article: ArticleMetadata; onClick: () => void; ind
 
 export const ArticlesListPage: React.FC = () => {
   const navigate = useNavigate();
-  const { articles = [], isLoading } = useArticles();
+  const { articles: dbArticles = [], isLoading } = useArticles();
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
+  // Merge: CPTS en premier, puis autres statiques, puis DB (dédoublonnage par slug)
+  const allArticles = useMemo(() => {
+    const dbSlugs = new Set(dbArticles.map(a => a.slug));
+    const staticOnly = [CPTS_ARTICLE, ...STATIC_ARTICLES].filter(a => !dbSlugs.has(a.slug));
+    return [...staticOnly, ...dbArticles];
+  }, [dbArticles]);
+
   const categories = useMemo(() => {
-    const cats = new Set(articles.map(a => a.category));
+    const cats = new Set(allArticles.map(a => a.category));
     return Array.from(cats).sort();
-  }, [articles]);
+  }, [allArticles]);
 
   const filtered = useMemo(() => {
-    return articles.filter(a => {
+    return allArticles.filter(a => {
       const matchesSearch = !search ||
         a.title.toLowerCase().includes(search.toLowerCase()) ||
         a.description.toLowerCase().includes(search.toLowerCase()) ||
@@ -93,7 +101,7 @@ export const ArticlesListPage: React.FC = () => {
       const matchesCategory = !activeCategory || a.category === activeCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [articles, search, activeCategory]);
+  }, [allArticles, search, activeCategory]);
 
   return (
     <>
@@ -178,6 +186,7 @@ export const ArticlesListPage: React.FC = () => {
                   index={i}
                   onClick={() => navigate(`/articles/${article.slug}`)}
                 />
+
               ))}
             </div>
           )}

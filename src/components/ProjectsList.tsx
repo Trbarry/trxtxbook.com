@@ -4,13 +4,7 @@ import {
   FolderGit2, Search, FileText, Eye, ArrowRight, Cpu, Code
 } from 'lucide-react';
 import { ProjectDetail } from './ProjectDetail';
-import { ExegolProject } from './projects/ExegolProject';
-import { SMBProject } from './projects/SMBProject';
-import { ADProject } from './projects/ADProject';
-import { SteamDeckProject } from './projects/SteamDeckProject';
-import { LinuxMintProject } from './projects/LinuxMintProject';
-import { CPTSJourneyProject } from './projects/CPTSJourneyProject';
-import { HomeLabProject } from './projects/HomeLabProjects'; // Import du nouveau projet maître
+import { HomeLabProject } from './projects/HomeLabProjects';
 import { Project } from '../types/project';
 import { useNavigate } from 'react-router-dom';
 import { SEOHead } from './SEOHead';
@@ -21,16 +15,7 @@ export const ProjectsList: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   
-  // HomeLabProject est placé en premier pour souligner l'infrastructure globale
-  const allProjects: Project[] = [
-    HomeLabProject,
-    CPTSJourneyProject, 
-    LinuxMintProject, 
-    ExegolProject, 
-    ADProject, 
-    SMBProject, 
-    SteamDeckProject
-  ];
+  const allProjects: Project[] = [HomeLabProject];
 
   const filteredProjects = allProjects.filter(p => 
     p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||

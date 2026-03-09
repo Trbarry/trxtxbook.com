@@ -2,6 +2,7 @@ import React from 'react';
 import { BookOpen, ArrowRight, Clock, ChevronRight, Trophy, Globe } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useArticles } from '../hooks/useArticles';
+import { STATIC_ARTICLES } from '../data/staticArticles';
 
 export const Articles: React.FC = () => {
   const { articles = [], isLoading } = useArticles();
@@ -103,16 +104,16 @@ export const Articles: React.FC = () => {
           </div>
         </div>
 
-        {/* Cards DB */}
+        {/* Cards articles statiques + DB */}
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[1, 2, 3].map(i => (
               <div key={i} className="h-48 bg-surface dark:bg-[#1a1a1f] animate-pulse rounded-2xl border border-gray-200 dark:border-white/5" />
             ))}
           </div>
-        ) : latest.length === 0 ? null : (
+        ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {latest.map((article) => (
+            {[...STATIC_ARTICLES, ...latest].map((article) => (
               <div
                 key={article.id}
                 onClick={() => navigate(`/articles/${article.slug}`)}
