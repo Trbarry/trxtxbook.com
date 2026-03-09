@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { WikiPage as WikiPageType, WikiPageMetadata } from '../types/wiki';
 import ReactMarkdown from 'react-markdown';
@@ -446,8 +446,6 @@ export const WikiPage: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMasonryView, setIsMasonryView] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [tree, setTree] = useState<Record<string, TreeNode>>({});
-  const [toc, setToc] = useState<TocItem[]>([]);
   const [isQuickSwitcherOpen, setIsQuickSwitcherOpen] = useState(false);
 
   // --- SYNCHRONISATION URL -> UI STATE ---
@@ -457,41 +455,36 @@ export const WikiPage: React.FC = () => {
     }
   }, [slug]);
 
-  const handlePageSelect = (page: WikiPageMetadata) => {
+  const handlePageSelect = useCallback((page: WikiPageMetadata) => {
     navigate(`/wiki/${page.slug}`);
-  };
+  }, [navigate]);
 
-  const handleGoHome = () => {
+  const handleGoHome = useCallback(() => {
     setIsMasonryView(false);
     setSearchQuery('');
     navigate('/wiki');
     if (window.innerWidth < 1024) setIsSidebarOpen(false);
-  };
+  }, [navigate]);
 
   // --- LOGIQUE DE RECHERCHE OPTIMISÉE (MÉTADONNÉES UNIQUEMENT) ---
-  const calculateScore = (page: WikiPageMetadata, query: string) => {
-    if (!query) return 1;
-    const q = query.toLowerCase();
-    let score = 0;
-    if (page.title?.toLowerCase().includes(q)) {
-      score += 100;
-      if (page.title.toLowerCase() === q) score += 200;
-    }
-    if (page.category?.toLowerCase().includes(q)) score += 50;
-    if (page.tags?.some(t => t.toLowerCase().includes(q))) score += 70;
-    return score;
-  };
-
-  const filteredPages = React.useMemo(() => {
+  const filteredPages = useMemo(() => {
+    const q = searchQuery.toLowerCase();
     return pages
-      .map(p => ({ page: p, score: calculateScore(p, searchQuery) }))
+      .map(p => {
+        if (!searchQuery) return { page: p, score: 1 };
+        let score = 0;
+        if (p.title?.toLowerCase().includes(q)) { score += 100; if (p.title.toLowerCase() === q) score += 200; }
+        if (p.category?.toLowerCase().includes(q)) score += 50;
+        if (p.tags?.some(t => t.toLowerCase().includes(q))) score += 70;
+        return { page: p, score };
+      })
       .filter(item => item.score > 0)
       .sort((a, b) => b.score - a.score)
       .map(item => item.page);
   }, [pages, searchQuery]);
 
   // --- MARKDOWN COMPONENTS ---
-  const MarkdownComponents = {
+  const MarkdownComponents = useMemo(() => ({
     code: CodeBlock,
     h2: ({ children }: any) => {
       const id = String(children).toLowerCase().replace(/[^\w]+/g, '-').replace(/^-+|-+$/g, '');
@@ -543,7 +536,7 @@ export const WikiPage: React.FC = () => {
     td: ({ children }: any) => (
       <td className="px-4 py-3 text-gray-700 dark:text-gray-300 align-top">{children}</td>
     ),
-  };
+  }), [setSelectedImage]);
 
   useEffect(() => { if (window.innerWidth < 1024) setIsSidebarOpen(false); }, []);
 
@@ -559,16 +552,17 @@ export const WikiPage: React.FC = () => {
     return () => window.removeEventListener('keydown', handler);
   }, []);
 
-  const handleTagClick = (tag: string) => {
+  const handleTagClick = useCallback((tag: string) => {
     setSearchQuery(tag);
     setIsMasonryView(true);
     navigate('/wiki');
     if (window.innerWidth < 1024) setIsSidebarOpen(false);
-  };
-  useEffect(() => {
+  }, [navigate]);
+
+  const tree = useMemo(() => {
     const newTree: Record<string, TreeNode> = {};
     filteredPages.forEach(page => {
-      const parts = page.category.split('/').filter(p => p); 
+      const parts = page.category.split('/').filter(p => p);
       let currentLevel = newTree;
       parts.forEach((part, index) => {
         if (!currentLevel[part]) {
@@ -581,10 +575,10 @@ export const WikiPage: React.FC = () => {
         currentLevel = currentLevel[part].children;
       });
     });
-    setTree(newTree);
+    return newTree;
   }, [filteredPages]);
 
-  useEffect(() => { if (selectedPage?.content) setToc(extractHeadings(selectedPage.content)); else setToc([]); }, [selectedPage]);
+  const toc = useMemo(() => selectedPage?.content ? extractHeadings(selectedPage.content) : [], [selectedPage?.content]);
 
   return (
     <>
