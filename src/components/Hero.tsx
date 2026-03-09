@@ -117,13 +117,19 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
               </div>
             </Link>
 
-            <Link to="/articles" className="group bg-surface/80 dark:bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-5 rounded-xl md:rounded-2xl border border-gray-200 dark:border-white/5 hover:border-amber-500/40 transition-all flex flex-col gap-3 hover:-translate-y-1 duration-300 shadow-sm dark:shadow-none">
-              <div className="w-10 h-10 bg-amber-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                <FileText className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+            <Link to="/articles/cpts-journey" className="group bg-surface/80 dark:bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-5 rounded-xl md:rounded-2xl border border-violet-500/20 hover:border-violet-500/50 transition-all flex flex-col gap-3 hover:-translate-y-1 duration-300 shadow-sm dark:shadow-none relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative flex items-start justify-between">
+                <div className="w-10 h-10 bg-violet-500/15 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <FileText className="w-5 h-5 text-violet-500 dark:text-violet-400" />
+                </div>
+                <span className="text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-violet-500/20 text-violet-400 border border-violet-500/30">
+                  CPTS
+                </span>
               </div>
-              <div className="text-left">
-                <h3 className="text-sm md:text-base font-bold text-gray-900 dark:text-white mb-0.5 md:mb-1 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">Articles</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-xs line-clamp-2">Techniques & Veille.</p>
+              <div className="relative text-left">
+                <h3 className="text-sm md:text-base font-bold text-gray-900 dark:text-white mb-0.5 md:mb-1 group-hover:text-violet-600 dark:group-hover:text-violet-300 transition-colors">Mon article phare</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-xs line-clamp-2">Journey CPTS — HTB.</p>
               </div>
             </Link>
 
