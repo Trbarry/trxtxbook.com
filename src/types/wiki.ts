@@ -5,9 +5,13 @@ export interface WikiPage {
   category: string;
   content: string;
   tags: string[];
-  likes: number; // ✅ NOUVEAU
+  likes: number;
   published: boolean;
   updated_at: string;
 }
 
 export type WikiPageMetadata = Omit<WikiPage, 'content'>;
+
+export interface WikiSearchResult extends WikiPageMetadata {
+  snippet: string;
+}

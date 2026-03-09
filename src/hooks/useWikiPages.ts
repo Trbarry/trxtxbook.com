@@ -1,6 +1,7 @@
 import useSWR from 'swr';
+import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
-import { WikiPage, WikiPageMetadata } from '../types/wiki';
+import { WikiPage, WikiPageMetadata, WikiSearchResult } from '../types/wiki';
 
 /**
  * Hook pour récupérer la liste de toutes les pages du wiki (métadonnées uniquement)
@@ -66,6 +67,38 @@ export function useWikiPageContent(slug: string | undefined) {
     error,
     isLoading,
     mutate
+  };
+}
+
+/**
+ * Hook full-text search avec debounce (300ms)
+ * Utilise la fonction RPC search_wiki_pages qui cherche dans title + category + content + tags
+ */
+export function useWikiSearch(query: string) {
+  const [debouncedQuery, setDebouncedQuery] = useState(query);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedQuery(query.trim()), 300);
+    return () => clearTimeout(timer);
+  }, [query]);
+
+  const { data, isLoading } = useSWR<WikiSearchResult[]>(
+    debouncedQuery.length >= 2 ? ['wiki_search', debouncedQuery] : null,
+    async () => {
+      const { data, error } = await supabase.rpc('search_wiki_pages', {
+        search_query: debouncedQuery,
+        result_limit: 25,
+      });
+      if (error) throw error;
+      return (data || []) as WikiSearchResult[];
+    },
+    { revalidateOnFocus: false }
+  );
+
+  return {
+    results: data || [],
+    isLoading: isLoading && debouncedQuery.length >= 2,
+    query: debouncedQuery,
   };
 }
 

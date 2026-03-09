@@ -13,6 +13,7 @@ import {
 import { SEOHead } from '../components/SEOHead';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WikiTip } from '../components/WikiTip';
+import { WikiQuickSwitcher } from '../components/WikiQuickSwitcher';
 import { useWikiPages, useWikiPageContent, useWikiBacklinks } from '../hooks/useWikiPages';
 import { TableOfContents, TocItem } from '../components/TableOfContents';
 import { extractHeadings } from '../lib/markdownUtils';
@@ -374,7 +375,13 @@ const WikiMasonry: React.FC<{
 
                   <div className="mt-auto pt-3 sm:pt-4 border-t border-gray-100 dark:border-white/5 flex flex-wrap gap-1 md:gap-1.5">
                     {page.tags?.slice(0, 3).map(tag => (
-                      <span key={tag} className="text-[8px] sm:text-[9px] bg-gray-100 dark:bg-white/5 px-2 py-0.5 rounded text-gray-500">#{tag}</span>
+                      <span
+                        key={tag}
+                        onClick={e => { e.stopPropagation(); handleTagClick(tag); }}
+                        className="text-[8px] sm:text-[9px] bg-gray-100 dark:bg-white/5 hover:bg-violet-500/10 hover:text-violet-500 px-2 py-0.5 rounded text-gray-500 cursor-pointer transition-colors"
+                      >
+                        #{tag}
+                      </span>
                     ))}
                   </div>
                 </motion.button>
@@ -440,6 +447,7 @@ export const WikiPage: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [tree, setTree] = useState<Record<string, TreeNode>>({});
   const [toc, setToc] = useState<TocItem[]>([]);
+  const [isQuickSwitcherOpen, setIsQuickSwitcherOpen] = useState(false);
 
   // --- SYNCHRONISATION URL -> UI STATE ---
   useEffect(() => {
@@ -518,6 +526,25 @@ export const WikiPage: React.FC = () => {
   };
 
   useEffect(() => { if (window.innerWidth < 1024) setIsSidebarOpen(false); }, []);
+
+  // Cmd+K / Ctrl+K → ouvre le quick switcher
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsQuickSwitcherOpen(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, []);
+
+  const handleTagClick = (tag: string) => {
+    setSearchQuery(tag);
+    setIsMasonryView(true);
+    navigate('/wiki');
+    if (window.innerWidth < 1024) setIsSidebarOpen(false);
+  };
   useEffect(() => {
     const newTree: Record<string, TreeNode> = {};
     filteredPages.forEach(page => {
@@ -596,11 +623,24 @@ export const WikiPage: React.FC = () => {
               <div className="p-2.5 bg-gradient-to-br from-violet-600 to-indigo-600 rounded-xl shadow-lg shrink-0"><Book className="w-5 h-5 text-white" /></div>
               <span className="font-bold text-xl text-gray-900 dark:text-white tracking-tight">Hacking Bowl of Rice</span>
             </div>
-            <div className="relative group hidden lg:block">
-              <div className="relative flex items-center bg-gray-50 dark:bg-[#0a0a0f] border border-gray-200 dark:border-white/10 rounded-xl focus-within:border-violet-500/50 transition-colors">
+            <div className="hidden lg:flex flex-col gap-2">
+              <div className="relative flex items-center bg-gray-50 dark:bg-[#0a0a0f] border border-gray-200 dark:border-white/10 rounded-xl focus-within:border-violet-500/50 transition-colors group">
                 <Search className="ml-3 w-4 h-4 text-gray-400 group-focus-within:text-violet-500" />
-                <input type="text" placeholder="Explorer..." className="w-full bg-transparent py-3 pl-3 pr-4 text-sm text-gray-900 dark:text-gray-200 focus:outline-none placeholder-gray-500 dark:placeholder-gray-600 font-medium" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+                <input type="text" placeholder="Filtrer..." className="w-full bg-transparent py-3 pl-3 pr-4 text-sm text-gray-900 dark:text-gray-200 focus:outline-none placeholder-gray-500 dark:placeholder-gray-600 font-medium" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
               </div>
+              <button
+                onClick={() => setIsQuickSwitcherOpen(true)}
+                className="flex items-center justify-between w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-[#0a0a0f] text-gray-400 hover:text-violet-500 hover:border-violet-500/40 transition-colors group"
+              >
+                <span className="flex items-center gap-2 text-xs font-medium">
+                  <Search size={13} />
+                  Recherche full-text
+                </span>
+                <div className="flex items-center gap-0.5">
+                  <kbd className="text-[9px] border border-gray-200 dark:border-white/10 rounded px-1 py-0.5 font-mono group-hover:border-violet-500/40">⌘</kbd>
+                  <kbd className="text-[9px] border border-gray-200 dark:border-white/10 rounded px-1 py-0.5 font-mono group-hover:border-violet-500/40">K</kbd>
+                </div>
+              </button>
             </div>
           </div>
           <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
@@ -648,7 +688,11 @@ export const WikiPage: React.FC = () => {
                       <div className="flex flex-wrap items-center gap-2 md:gap-3">
                         <div className="flex items-center gap-2 text-[10px] md:text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-[#1a1a20] border border-gray-200 dark:border-white/10 px-2.5 py-1 rounded-full"><Calendar className="w-3 h-3" /><span>Mis à jour le {new Date(selectedPage.updated_at).toLocaleDateString('fr-FR')}</span></div>
                         <div className="flex items-center gap-2 text-[10px] md:text-xs text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-500/10 border border-violet-200 dark:border-violet-500/20 px-2.5 py-1 rounded-full"><Activity className="w-3 h-3" /><span>{getReadingTime(selectedPage.content)} min de lecture</span></div>
-                        {selectedPage.tags?.map(tag => <span key={tag} className="flex items-center gap-1 text-[10px] md:text-xs text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-white/5 px-2.5 py-1 rounded-full border border-gray-200 dark:border-white/10"><Hash className="w-3 h-3" /> {tag}</span>)}
+                        {selectedPage.tags?.map(tag => (
+                          <button key={tag} onClick={() => handleTagClick(tag)} className="flex items-center gap-1 text-[10px] md:text-xs text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-white/5 hover:bg-violet-500/10 hover:text-violet-600 dark:hover:text-violet-400 hover:border-violet-500/30 px-2.5 py-1 rounded-full border border-gray-200 dark:border-white/10 transition-colors">
+                            <Hash className="w-3 h-3" /> {tag}
+                          </button>
+                        ))}
                       </div>
                     </div>
 
@@ -682,6 +726,12 @@ export const WikiPage: React.FC = () => {
           )}
         </main>
       </div>
+
+      <WikiQuickSwitcher
+        isOpen={isQuickSwitcherOpen}
+        onClose={() => setIsQuickSwitcherOpen(false)}
+        onSelect={(page) => { handlePageSelect(page); setIsQuickSwitcherOpen(false); }}
+      />
 
       <AnimatePresence>
         {selectedImage && (
