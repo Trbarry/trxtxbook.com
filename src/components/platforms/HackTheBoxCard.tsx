@@ -1,16 +1,25 @@
-import React from 'react';
-import { ExternalLink, Sword, User, Monitor } from 'lucide-react';
+import React, { useState } from 'react';
+import { ExternalLink, ChevronDown, ChevronUp, Sword, Trophy } from 'lucide-react';
 import { HTB_STATS } from '../../data/hackTheBoxProgress';
 
-const HTB_BRAND = '#9FEF00';
-const HTB_DIM   = 'rgba(159,239,0,';
+const HTB   = '#9FEF00';
+const DIM   = (a: number) => `rgba(159,239,0,${a})`;
+
+const DIFF_CONFIG = [
+  { label: 'Easy',   color: '#9FEF00', key: 'easy'   as const },
+  { label: 'Medium', color: '#ffaf00', key: 'medium' as const },
+  { label: 'Hard',   color: '#ff6b35', key: 'hard'   as const },
+  { label: 'Insane', color: '#ff3e3e', key: 'insane' as const },
+];
 
 interface Props {
   onPlatformClick: (platform: string) => void;
 }
 
 export const HackTheBoxCard: React.FC<Props> = ({ onPlatformClick }) => {
-  const machinePct = Math.round((HTB_STATS.machines / HTB_STATS.totalMachines) * 100);
+  const [expanded, setExpanded] = useState(false);
+  const { machines, difficulty, season } = HTB_STATS;
+  const machinePct = Math.round((machines.solved / machines.total) * 100);
 
   return (
     <div
@@ -20,82 +29,109 @@ export const HackTheBoxCard: React.FC<Props> = ({ onPlatformClick }) => {
                  flex flex-col overflow-hidden shadow-sm dark:shadow-none"
     >
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-           style={{ background: `${HTB_DIM}0.03)` }} />
+           style={{ background: DIM(0.03) }} />
 
       {/* Header */}
       <div className="relative z-10 p-6 pb-4">
         <div className="flex items-start justify-between gap-3 mb-4">
           <div className="flex items-center gap-3">
             <div className="p-2.5 rounded-xl border group-hover:scale-110 transition-transform duration-300 shrink-0"
-                 style={{ background: `${HTB_DIM}0.1)`, borderColor: `${HTB_DIM}0.2)` }}>
-              <Sword className="w-6 h-6" style={{ color: HTB_BRAND }} />
+                 style={{ background: DIM(0.1), borderColor: DIM(0.2) }}>
+              <Sword className="w-6 h-6" style={{ color: HTB }} />
             </div>
             <div>
               <h3 className="text-base font-bold text-gray-900 dark:text-white leading-tight">HackTheBox</h3>
-              <p className="font-mono text-xs" style={{ color: HTB_BRAND }}>{HTB_STATS.rank}</p>
+              <p className="font-mono text-xs" style={{ color: HTB }}>{HTB_STATS.rank}</p>
             </div>
           </div>
           <div className="shrink-0 text-right">
-            <div className="text-2xl font-black text-gray-900 dark:text-white">{HTB_STATS.points}</div>
-            <div className="text-[10px] text-gray-400 font-mono">points</div>
+            <div className="text-2xl font-black text-gray-900 dark:text-white">#{HTB_STATS.globalRank}</div>
+            <div className="text-[10px] text-gray-400 font-mono">{HTB_STATS.flags} flags</div>
           </div>
         </div>
 
         {/* Machines progress bar */}
         <div className="w-full h-1.5 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden mb-1">
-          <div
-            className="h-full rounded-full transition-all duration-700"
-            style={{ width: `${machinePct}%`, background: `linear-gradient(to right, ${HTB_BRAND}, #c8ff4d)` }}
-          />
+          <div className="h-full rounded-full transition-all duration-700"
+               style={{ width: `${machinePct}%`, background: `linear-gradient(to right, ${HTB}, #c8ff4d)` }} />
         </div>
         <div className="flex justify-between text-[10px] font-mono text-gray-400 mb-4">
-          <span>{HTB_STATS.machines}/{HTB_STATS.totalMachines} machines</span>
+          <span>{machines.solved}/{machines.total} machines</span>
           <span>{machinePct}%</span>
         </div>
 
-        {/* User vs System owns */}
+        {/* Difficulty bars */}
         <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <span className="text-[9px] font-bold uppercase tracking-wider w-24 shrink-0" style={{ color: HTB_BRAND }}>User Owns</span>
-            <div className="flex-1 h-1 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full rounded-full transition-all duration-700"
-                   style={{ width: `${Math.round((HTB_STATS.userOwns / HTB_STATS.totalMachines) * 100)}%`, background: HTB_BRAND }} />
+          {DIFF_CONFIG.map(({ label, color, key }) => (
+            <div key={key} className="flex items-center gap-2">
+              <span className="text-[9px] font-bold uppercase tracking-wider w-14 shrink-0" style={{ color }}>{label}</span>
+              <div className="flex-1 h-1 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
+                <div className="h-full rounded-full transition-all duration-700"
+                     style={{ width: `${difficulty[key]}%`, background: color }} />
+              </div>
+              <span className="text-[10px] font-mono text-gray-400 w-8 text-right shrink-0">{difficulty[key]}%</span>
             </div>
-            <span className="text-[10px] font-mono text-gray-400 w-12 text-right shrink-0">{HTB_STATS.userOwns}/{HTB_STATS.totalMachines}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-[9px] font-bold uppercase tracking-wider w-24 shrink-0 text-gray-400">System Owns</span>
-            <div className="flex-1 h-1 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full rounded-full transition-all duration-700"
-                   style={{ width: `${Math.round((HTB_STATS.systemOwns / HTB_STATS.totalMachines) * 100)}%`, background: '#6ab04c' }} />
-            </div>
-            <span className="text-[10px] font-mono text-gray-400 w-12 text-right shrink-0">{HTB_STATS.systemOwns}/{HTB_STATS.totalMachines}</span>
-          </div>
+          ))}
         </div>
       </div>
 
-      {/* Ownership badge */}
-      <div className="relative z-10 px-6 py-3 border-t border-gray-100 dark:border-white/5 flex items-center gap-3">
-        <div className="flex items-center gap-1.5">
-          <User size={10} style={{ color: HTB_BRAND }} />
-          <span className="text-[9px] text-gray-400 uppercase font-bold tracking-wider">Ownership</span>
-          <span className="text-[10px] font-mono font-bold ml-1" style={{ color: HTB_BRAND }}>{HTB_STATS.ownership}%</span>
+      {/* Season badge */}
+      <div className="relative z-10 px-6 py-3 border-t border-gray-100 dark:border-white/5">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Trophy size={10} style={{ color: '#cd7f32' }} />
+            <span className="text-[9px] text-gray-400 uppercase font-bold tracking-wider">Season {season.number}</span>
+            <span className="text-[9px] px-1.5 py-0.5 rounded font-bold font-mono"
+                  style={{ background: 'rgba(205,127,50,0.15)', color: '#cd7f32' }}>
+              {season.tier}
+            </span>
+          </div>
+          <span className="text-[10px] font-mono text-gray-400">#{season.rank} · {season.flags}/{season.totalFlags} flags</span>
         </div>
-        <div className="flex items-center gap-1.5 ml-auto">
-          <Monitor size={10} className="text-gray-400" />
-          <span className="text-[9px] text-gray-400 uppercase font-bold tracking-wider">Progression</span>
-          <span className="text-[10px] font-mono font-bold text-gray-900 dark:text-white ml-1">{HTB_STATS.progression}%</span>
-        </div>
+
+        {expanded && (
+          <div className="mt-3 space-y-2">
+            {[
+              { label: 'Challenges', solved: HTB_STATS.challenges.solved, total: HTB_STATS.challenges.total },
+              { label: 'Sherlocks',  solved: HTB_STATS.sherlocks.solved,  total: HTB_STATS.sherlocks.total  },
+              { label: 'Pro Labs',   solved: HTB_STATS.proLabs.solved,     total: HTB_STATS.proLabs.total    },
+              { label: 'Fortresses', solved: HTB_STATS.fortresses.solved,  total: HTB_STATS.fortresses.total },
+            ].map(({ label, solved, total }) => {
+              const pct = Math.round((solved / total) * 100);
+              return (
+                <div key={label}>
+                  <div className="flex items-center justify-between mb-0.5">
+                    <span className="text-[10px] text-gray-600 dark:text-gray-400">{label}</span>
+                    <span className="text-[9px] font-mono text-gray-400">{solved}/{total}</span>
+                  </div>
+                  <div className="w-full h-1 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-full rounded-full transition-all duration-500"
+                         style={{ width: `${pct}%`, background: pct > 0 ? HTB : '#d1d5db' }} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* Footer */}
-      <div className="relative z-10 mt-auto px-6 py-3 border-t border-gray-100 dark:border-white/5 flex items-center justify-end">
+      <div className="relative z-10 mt-auto px-6 py-3 border-t border-gray-100 dark:border-white/5 flex items-center justify-between">
+        <button
+          onClick={() => setExpanded(v => !v)}
+          className="flex items-center gap-1 text-[10px] text-gray-400 font-medium transition-colors"
+          onMouseEnter={e => (e.currentTarget.style.color = HTB)}
+          onMouseLeave={e => (e.currentTarget.style.color = '')}
+        >
+          {expanded ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+          {expanded ? 'Réduire' : 'Voir tout le contenu'}
+        </button>
         <a
           href="https://app.hackthebox.com/profile/2129647"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-1 text-[10px] font-semibold hover:underline"
-          style={{ color: HTB_BRAND }}
+          style={{ color: HTB }}
           onClick={e => e.stopPropagation()}
         >
           hackthebox.com <ExternalLink size={10} />
