@@ -44,7 +44,7 @@ export const Stats: React.FC = () => {
           <TryHackMeCard stats={stats.tryhackme} onPlatformClick={handlePlatformClick} />
           <HackTheBoxCard stats={stats.hackthebox} onPlatformClick={handlePlatformClick} />
           <RootMeCard stats={stats.rootme} onPlatformClick={handlePlatformClick} />
-          <PortSwiggerCard stats={stats.portswigger as any} onPlatformClick={handlePlatformClick} />
+          <PortSwiggerCard onPlatformClick={handlePlatformClick} />
         </div>
       </div>
     </section>

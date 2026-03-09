@@ -1,65 +1,139 @@
-import React from 'react';
-import { Globe, ExternalLink, Target, BookOpen, FileText } from 'lucide-react';
+import React, { useState } from 'react';
+import { ExternalLink, ChevronDown, ChevronUp, CheckCircle2, Shield } from 'lucide-react';
+import { PORTSWIGGER_LEVELS, PORTSWIGGER_CATEGORIES, MASTERED, TOP_CATEGORIES } from '../../data/portswiggerProgress';
 
-interface PortSwiggerStats {
-  lab_count: number;
-  challenges_completed?: number;
-}
-
-interface PortSwiggerCardProps {
-  stats: PortSwiggerStats;
+interface Props {
   onPlatformClick: (platform: string) => void;
 }
 
-export const PortSwiggerCard: React.FC<PortSwiggerCardProps> = ({ stats, onPlatformClick }) => {
+const LEVEL_CONFIG = {
+  apprentice:   { label: 'Apprentice',   color: 'bg-emerald-500', text: 'text-emerald-500', border: 'border-emerald-500/20', bg: 'bg-emerald-500/10' },
+  practitioner: { label: 'Practitioner', color: 'bg-blue-500',    text: 'text-blue-500',    border: 'border-blue-500/20',    bg: 'bg-blue-500/10'    },
+  expert:       { label: 'Expert',       color: 'bg-violet-500',  text: 'text-violet-500',  border: 'border-violet-500/20',  bg: 'bg-violet-500/10'  },
+};
+
+export const PortSwiggerCard: React.FC<Props> = ({ onPlatformClick }) => {
+  const [expanded, setExpanded] = useState(false);
+  const { total } = PORTSWIGGER_LEVELS;
+
   return (
     <div
-      onClick={() => onPlatformClick('portswigger')}
-      className="group relative bg-surface dark:bg-[#1a1a1f]/80 backdrop-blur-sm p-6 rounded-2xl border border-gray-200 dark:border-white/5 
-                hover:border-blue-500/50 transition-all duration-300 cursor-pointer
-                hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]
-                flex flex-col h-full overflow-hidden shadow-sm dark:shadow-none"
+      className="group relative bg-surface dark:bg-[#1a1a1f]/80 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-white/5
+                 hover:border-orange-500/40 transition-all duration-300
+                 hover:shadow-[0_0_30px_rgba(249,115,22,0.08)]
+                 flex flex-col overflow-hidden shadow-sm dark:shadow-none"
     >
-      <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <div className="absolute inset-0 bg-orange-500/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-      <div className="relative z-10 flex items-center gap-4 mb-6">
-        <div className="p-3 bg-blue-500/10 rounded-xl border border-blue-500/20 group-hover:scale-110 transition-transform duration-300">
-          <Globe className="w-8 h-8 text-blue-600 dark:text-blue-500" />
-        </div>
-        <div>
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white tracking-wide">PortSwigger Web Security Academy</h3>
-          <p className="text-blue-600 dark:text-blue-500 font-mono text-sm">Labs {stats.lab_count} Complétés</p>
-        </div>
-      </div>
-
-      <p className="relative z-10 text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
-        Laboratoires pratiques centrés sur les vulnérabilités Web et leur exploitation.
-      </p>
-
-      <div className="relative z-10 grid grid-cols-3 gap-2 mb-6">
-        {[
-          { icon: BookOpen, label: "Labs", value: stats.lab_count.toString() },
-          { icon: Target, label: "Complétés", value: stats.challenges_completed?.toString() ?? '?' },
-          { icon: FileText, label: "Writeups", value: "N/A" } // Sera mis à jour avec le nombre de writeups
-        ].map((stat, i) => (
-          <div key={i} className="bg-gray-50 dark:bg-[#0f0f13]/50 p-2 rounded-lg border border-gray-200 dark:border-white/5 text-center group-hover:border-blue-500/20 transition-colors">
-            <stat.icon className="w-4 h-4 text-blue-600 dark:text-blue-500 mx-auto mb-1" />
-            <p className="text-[10px] text-gray-500 uppercase font-bold">{stat.label}</p>
-            <p className="text-sm font-bold text-gray-900 dark:text-white">{stat.value}</p>
+      {/* Header */}
+      <div className="relative z-10 p-6 pb-4">
+        <div className="flex items-start justify-between gap-3 mb-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 bg-orange-500/10 rounded-xl border border-orange-500/20 group-hover:scale-110 transition-transform duration-300 shrink-0">
+              <Shield className="w-6 h-6 text-orange-500" />
+            </div>
+            <div>
+              <h3 className="text-base font-bold text-gray-900 dark:text-white leading-tight">PortSwigger</h3>
+              <p className="text-orange-500 font-mono text-xs">Web Security Academy</p>
+            </div>
           </div>
-        ))}
+          {/* Global % ring */}
+          <div className="shrink-0 text-right">
+            <div className="text-2xl font-black text-gray-900 dark:text-white">{total.pct}%</div>
+            <div className="text-[10px] text-gray-400 font-mono">{total.solved}/{total.total} labs</div>
+          </div>
+        </div>
+
+        {/* Global progress bar */}
+        <div className="w-full h-1.5 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden mb-4">
+          <div
+            className="h-full bg-gradient-to-r from-orange-500 to-amber-400 rounded-full transition-all duration-700"
+            style={{ width: `${total.pct}%` }}
+          />
+        </div>
+
+        {/* Level breakdown */}
+        <div className="space-y-2">
+          {(Object.entries(LEVEL_CONFIG) as [keyof typeof LEVEL_CONFIG, typeof LEVEL_CONFIG[keyof typeof LEVEL_CONFIG]][]).map(([key, cfg]) => {
+            const lvl = PORTSWIGGER_LEVELS[key];
+            return (
+              <div key={key} className="flex items-center gap-2">
+                <span className={`text-[9px] font-bold uppercase tracking-wider w-20 shrink-0 ${cfg.text}`}>{cfg.label}</span>
+                <div className="flex-1 h-1 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full ${cfg.color} rounded-full transition-all duration-700`}
+                    style={{ width: `${lvl.pct}%` }}
+                  />
+                </div>
+                <span className="text-[10px] font-mono text-gray-400 w-12 text-right shrink-0">
+                  {lvl.solved}/{lvl.total}
+                </span>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
-      <a
-        href="https://portswigger.net/web-security/writeup" // Lien général, à ajuster si besoin
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={(e) => e.stopPropagation()}
-        className="relative z-10 mt-auto flex items-center gap-2 text-blue-600 dark:text-blue-400 text-sm font-semibold group/link hover:underline"
-      >
-        <span>Accéder à la section Writeups</span>
-        <ExternalLink className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
-      </a>
+      {/* Mastered topics */}
+      {MASTERED.length > 0 && (
+        <div className="relative z-10 px-6 py-3 border-t border-gray-100 dark:border-white/5">
+          <p className="text-[9px] text-gray-400 uppercase font-bold tracking-widest mb-2 flex items-center gap-1.5">
+            <CheckCircle2 size={10} className="text-emerald-500" />
+            100% maîtrisé
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {MASTERED.map(c => (
+              <span key={c.name} className="text-[9px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full font-medium">
+                {c.name}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Expandable — toutes les catégories */}
+      {expanded && (
+        <div className="relative z-10 px-6 py-3 border-t border-gray-100 dark:border-white/5">
+          <p className="text-[9px] text-gray-400 uppercase font-bold tracking-widest mb-3">Progression par catégorie</p>
+          <div className="space-y-2 max-h-64 overflow-y-auto pr-1 custom-scrollbar">
+            {PORTSWIGGER_CATEGORIES.map(c => {
+              const pct = Math.round((c.solved / c.total) * 100);
+              const color = pct === 100 ? 'bg-emerald-500' : pct >= 50 ? 'bg-blue-500' : pct > 0 ? 'bg-orange-500' : 'bg-gray-200 dark:bg-white/10';
+              return (
+                <div key={c.name}>
+                  <div className="flex items-center justify-between mb-0.5">
+                    <span className="text-[10px] text-gray-600 dark:text-gray-400 truncate mr-2">{c.name}</span>
+                    <span className="text-[9px] font-mono text-gray-400 shrink-0">{c.solved}/{c.total}</span>
+                  </div>
+                  <div className="w-full h-1 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
+                    <div className={`h-full ${color} rounded-full transition-all duration-500`} style={{ width: `${pct}%` }} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Footer */}
+      <div className="relative z-10 mt-auto px-6 py-3 border-t border-gray-100 dark:border-white/5 flex items-center justify-between">
+        <button
+          onClick={() => setExpanded(v => !v)}
+          className="flex items-center gap-1 text-[10px] text-gray-400 hover:text-orange-500 transition-colors font-medium"
+        >
+          {expanded ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+          {expanded ? 'Réduire' : 'Voir toutes les catégories'}
+        </button>
+        <a
+          href="https://portswigger.net/web-security/all-labs"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1 text-[10px] text-orange-500 hover:underline font-semibold"
+          onClick={e => e.stopPropagation()}
+        >
+          WSA <ExternalLink size={10} />
+        </a>
+      </div>
     </div>
   );
 };
