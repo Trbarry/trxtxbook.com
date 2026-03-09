@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { getOptimizedUrl } from '../lib/imageUtils';
 import {
   Terminal,
@@ -9,7 +9,8 @@ import {
   Code2,
   TerminalSquare,
   Container,
-  FileText
+  FileText,
+  ChevronDown
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -20,53 +21,33 @@ interface HeroProps {
 
 const HackerText = ({ text, className }: { text: string, className?: string }) => {
   const [displayText, setDisplayText] = useState(text);
-  const [isHovering, setIsHovering] = useState(false);
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&";
-  
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const iterationRef = useRef(0);
+
+  const runAnimation = useCallback(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    iterationRef.current = 0;
+
+    intervalRef.current = setInterval(() => {
+      setDisplayText(
+        text.split("").map((_, index) => {
+          if (index < iterationRef.current) return text[index];
+          return chars[Math.floor(Math.random() * chars.length)];
+        }).join("")
+      );
+      iterationRef.current += 1 / 3;
+      if (iterationRef.current >= text.length) clearInterval(intervalRef.current!);
+    }, 30);
+  }, [text]);
+
   useEffect(() => {
-    let interval: NodeJS.Timeout;
-    let iteration = 0;
-    
-    const runAnimation = () => {
-      clearInterval(interval);
-      iteration = 0;
-      
-      interval = setInterval(() => {
-        setDisplayText(prev => 
-          text
-            .split("")
-            .map((letter, index) => {
-              if (index < iteration) {
-                return text[index];
-              }
-              return chars[Math.floor(Math.random() * chars.length)];
-            })
-            .join("")
-        );
-        
-        if (iteration >= text.length) { 
-          clearInterval(interval);
-        }
-        
-        iteration += 1 / 3;
-      }, 30);
-    };
-
     runAnimation();
-
-    if (isHovering) {
-      runAnimation();
-    }
-
-    return () => clearInterval(interval);
-  }, [text, isHovering]);
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+  }, [runAnimation]);
 
   return (
-    <span 
-      className={className} 
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-    >
+    <span className={className} onMouseEnter={runAnimation}>
       {displayText}
     </span>
   );
@@ -180,10 +161,9 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
           </div>
 
           <div className="flex justify-center w-full mt-8 mb-8">
-            <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-gray-600 dark:text-gray-500 font-bold bg-surface/50 dark:bg-black/50 px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 hover:border-violet-500/50 dark:hover:border-white/20 transition-colors cursor-help group" title="Try pressing '²'">
-                <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                <span className="hidden sm:inline group-hover:text-green-700 dark:group-hover:text-green-400 transition-colors">System Ready. Press ²</span>
-                <span className="sm:hidden">System Ready</span>
+            <div className="flex flex-col items-center gap-1.5 text-gray-400 dark:text-gray-600 animate-bounce cursor-default select-none">
+              <span className="text-[9px] uppercase tracking-[0.2em] font-bold">Scroll</span>
+              <ChevronDown size={16} />
             </div>
           </div>
         </div>
