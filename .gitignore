@@ -97,3 +97,12 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+
+# Dossiers de travail locaux
+.wiki_clean/
+.Pentestin_Leadsheetv2/
+.doc/
+plans/
+.mcp.json
+.refactor_progress.json
+.claude/
