@@ -26,11 +26,16 @@ const Mermaid: React.FC<MermaidProps> = ({ chart }) => {
       // Nettoyer le contenu précédent
       ref.current.innerHTML = '';
       
+      const sanitize = (raw: string): string => {
+        // Quote node labels in [] that contain parentheses — Mermaid parses () as stadium shape
+        // Before: [Cible (Port en écoute)]  After: ["Cible (Port en écoute)"]
+        return raw.replace(/\[([^\]"]*[()][^\]"]*)\]/g, '["$1"]');
+      };
+
       const renderChart = async () => {
         try {
-          // Générer un ID unique pour mermaid
           const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
-          const { svg } = await mermaid.render(id, chart);
+          const { svg } = await mermaid.render(id, sanitize(chart));
           if (ref.current) {
             ref.current.innerHTML = svg;
           }
