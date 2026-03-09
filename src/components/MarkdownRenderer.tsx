@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
 import { Check, Copy, X, Brain, AlertTriangle, FileText, Sparkles } from 'lucide-react';
 import Mermaid from './Mermaid';
 
@@ -107,7 +108,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, onI
   const components = buildMarkdownComponents(onImageClick);
   return (
     <div className={`prose max-w-none prose-sm sm:prose-base prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-h2:text-xl sm:prose-h2:text-2xl prose-h2:mt-10 sm:prose-h2:mt-12 prose-h2:pb-2 prose-h2:border-b prose-h2:border-gray-200 dark:prose-h2:border-white/10 prose-h3:text-lg sm:prose-h3:text-xl prose-h3:text-violet-700 dark:prose-h3:text-violet-200 prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-strong:text-gray-900 dark:prose-strong:text-white prose-a:text-violet-600 dark:prose-a:text-violet-400 prose-li:text-gray-700 dark:prose-li:text-gray-300 prose-blockquote:border-violet-500 prose-blockquote:bg-violet-50 dark:prose-blockquote:bg-violet-500/5 prose-img:rounded-xl ${className}`}>
-      <ReactMarkdown rehypePlugins={[rehypeRaw]} components={components as any}>{content}</ReactMarkdown>
+      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={components as any}>{content}</ReactMarkdown>
     </div>
   );
 };
