@@ -50,6 +50,28 @@ export const CodeBlock = ({ children, className, ...props }: any) => {
 
 export const buildMarkdownComponents = (onImageClick?: (src: string) => void) => ({
   code: CodeBlock,
+  table: ({ children }: any) => (
+    <div className="my-6 overflow-x-auto rounded-xl border border-gray-200 dark:border-white/10 shadow-sm custom-scrollbar">
+      <table className="w-full min-w-max text-sm border-collapse">{children}</table>
+    </div>
+  ),
+  thead: ({ children }: any) => (
+    <thead className="bg-gray-50 dark:bg-white/5 text-left">{children}</thead>
+  ),
+  tbody: ({ children }: any) => (
+    <tbody className="divide-y divide-gray-100 dark:divide-white/5">{children}</tbody>
+  ),
+  tr: ({ children }: any) => (
+    <tr className="transition-colors hover:bg-gray-50/80 dark:hover:bg-white/[0.03]">{children}</tr>
+  ),
+  th: ({ children }: any) => (
+    <th className="px-4 py-3 text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-white/10 whitespace-nowrap">
+      {children}
+    </th>
+  ),
+  td: ({ children }: any) => (
+    <td className="px-4 py-3 text-gray-700 dark:text-gray-300 align-top">{children}</td>
+  ),
   h2: ({ children }: any) => { const id = String(children).toLowerCase().replace(/[^\w]+/g, '-').replace(/^-+|-+$/g, ''); return <h2 id={id}>{children}</h2>; },
   h3: ({ children }: any) => { const id = String(children).toLowerCase().replace(/[^\w]+/g, '-').replace(/^-+|-+$/g, ''); return <h3 id={id}>{children}</h3>; },
   img: ({ src, alt }: any) => (
