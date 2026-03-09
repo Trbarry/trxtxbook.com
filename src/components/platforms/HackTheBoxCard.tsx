@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
-import { ExternalLink, ChevronDown, ChevronUp, Sword, Trophy } from 'lucide-react';
+import { ExternalLink, ChevronDown, ChevronUp, Sword } from 'lucide-react';
 import { HTB_STATS } from '../../data/hackTheBoxProgress';
 
-const HTB   = '#9FEF00';
-const DIM   = (a: number) => `rgba(159,239,0,${a})`;
+const HTB = '#9FEF00';
+const DIM = (a: number) => `rgba(159,239,0,${a})`;
 
+// Palette severity cohérente : vert → jaune → orange → rouge
 const DIFF_CONFIG = [
   { label: 'Easy',   color: '#9FEF00', key: 'easy'   as const },
-  { label: 'Medium', color: '#ffaf00', key: 'medium' as const },
-  { label: 'Hard',   color: '#ff6b35', key: 'hard'   as const },
-  { label: 'Insane', color: '#ff3e3e', key: 'insane' as const },
+  { label: 'Medium', color: '#f0c040', key: 'medium' as const },
+  { label: 'Hard',   color: '#f07040', key: 'hard'   as const },
+  { label: 'Insane', color: '#e03535', key: 'insane' as const },
+];
+
+const CONTENT = [
+  { label: 'Challenges', s: HTB_STATS.challenges },
+  { label: 'Sherlocks',  s: HTB_STATS.sherlocks  },
+  { label: 'Pro Labs',   s: HTB_STATS.proLabs     },
+  { label: 'Fortresses', s: HTB_STATS.fortresses  },
 ];
 
 interface Props {
@@ -18,7 +26,7 @@ interface Props {
 
 export const HackTheBoxCard: React.FC<Props> = ({ onPlatformClick }) => {
   const [expanded, setExpanded] = useState(false);
-  const { machines, difficulty, season } = HTB_STATS;
+  const { machines, difficulty } = HTB_STATS;
   const machinePct = Math.round((machines.solved / machines.total) * 100);
 
   return (
@@ -60,11 +68,11 @@ export const HackTheBoxCard: React.FC<Props> = ({ onPlatformClick }) => {
           <span>{machinePct}%</span>
         </div>
 
-        {/* Difficulty bars */}
+        {/* Difficulty bars — labels gris, barres colorées */}
         <div className="space-y-2">
           {DIFF_CONFIG.map(({ label, color, key }) => (
             <div key={key} className="flex items-center gap-2">
-              <span className="text-[9px] font-bold uppercase tracking-wider w-14 shrink-0" style={{ color }}>{label}</span>
+              <span className="text-[9px] font-bold uppercase tracking-wider w-14 shrink-0 text-gray-400">{label}</span>
               <div className="flex-1 h-1 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
                 <div className="h-full rounded-full transition-all duration-700"
                      style={{ width: `${difficulty[key]}%`, background: color }} />
@@ -75,34 +83,18 @@ export const HackTheBoxCard: React.FC<Props> = ({ onPlatformClick }) => {
         </div>
       </div>
 
-      {/* Season badge */}
-      <div className="relative z-10 px-6 py-3 border-t border-gray-100 dark:border-white/5">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Trophy size={10} style={{ color: '#cd7f32' }} />
-            <span className="text-[9px] text-gray-400 uppercase font-bold tracking-wider">Season {season.number}</span>
-            <span className="text-[9px] px-1.5 py-0.5 rounded font-bold font-mono"
-                  style={{ background: 'rgba(205,127,50,0.15)', color: '#cd7f32' }}>
-              {season.tier}
-            </span>
-          </div>
-          <span className="text-[10px] font-mono text-gray-400">#{season.rank} · {season.flags}/{season.totalFlags} flags</span>
-        </div>
-
-        {expanded && (
-          <div className="mt-3 space-y-2">
-            {[
-              { label: 'Challenges', solved: HTB_STATS.challenges.solved, total: HTB_STATS.challenges.total },
-              { label: 'Sherlocks',  solved: HTB_STATS.sherlocks.solved,  total: HTB_STATS.sherlocks.total  },
-              { label: 'Pro Labs',   solved: HTB_STATS.proLabs.solved,     total: HTB_STATS.proLabs.total    },
-              { label: 'Fortresses', solved: HTB_STATS.fortresses.solved,  total: HTB_STATS.fortresses.total },
-            ].map(({ label, solved, total }) => {
-              const pct = Math.round((solved / total) * 100);
+      {/* Expandable — contenu */}
+      {expanded && (
+        <div className="relative z-10 px-6 py-3 border-t border-gray-100 dark:border-white/5">
+          <p className="text-[9px] text-gray-400 uppercase font-bold tracking-widest mb-3">Tout le contenu</p>
+          <div className="space-y-2">
+            {CONTENT.map(({ label, s }) => {
+              const pct = Math.round((s.solved / s.total) * 100);
               return (
                 <div key={label}>
                   <div className="flex items-center justify-between mb-0.5">
                     <span className="text-[10px] text-gray-600 dark:text-gray-400">{label}</span>
-                    <span className="text-[9px] font-mono text-gray-400">{solved}/{total}</span>
+                    <span className="text-[9px] font-mono text-gray-400">{s.solved}/{s.total}</span>
                   </div>
                   <div className="w-full h-1 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
                     <div className="h-full rounded-full transition-all duration-500"
@@ -112,8 +104,8 @@ export const HackTheBoxCard: React.FC<Props> = ({ onPlatformClick }) => {
               );
             })}
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Footer */}
       <div className="relative z-10 mt-auto px-6 py-3 border-t border-gray-100 dark:border-white/5 flex items-center justify-between">
