@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { getOptimizedUrl } from '../lib/imageUtils';
-import { 
-  Terminal, 
-  BookOpen, 
-  ArrowRight, 
-  Database, 
-  Activity, 
-  Code2,           
-  TerminalSquare,  
-  Container        
+import {
+  Terminal,
+  BookOpen,
+  ArrowRight,
+  Database,
+  Activity,
+  Code2,
+  TerminalSquare,
+  Container,
+  FileText
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -115,38 +116,45 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded, setShowProfile }) => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mb-8 md:mb-12">
-            <Link to="/writeups" className="group bg-surface/80 dark:bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-gray-200 dark:border-white/5 hover:border-violet-500/40 transition-all flex items-center md:block gap-4 hover:-translate-y-1 duration-300 shadow-sm dark:shadow-none">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-violet-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                <Terminal className="w-5 h-5 md:w-6 md:h-6 text-violet-600 dark:text-violet-400" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-12">
+            <Link to="/writeups" className="group bg-surface/80 dark:bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-5 rounded-xl md:rounded-2xl border border-gray-200 dark:border-white/5 hover:border-violet-500/40 transition-all flex flex-col gap-3 hover:-translate-y-1 duration-300 shadow-sm dark:shadow-none">
+              <div className="w-10 h-10 bg-violet-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <Terminal className="w-5 h-5 text-violet-600 dark:text-violet-400" />
               </div>
               <div className="text-left">
-                <h3 className="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-0.5 md:mb-2 group-hover:text-violet-700 dark:group-hover:text-violet-300 transition-colors">CTF Write-ups</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-xs md:text-sm line-clamp-1 md:line-clamp-none">Archives HTB & TryHackMe.</p>
+                <h3 className="text-sm md:text-base font-bold text-gray-900 dark:text-white mb-0.5 md:mb-1 group-hover:text-violet-700 dark:group-hover:text-violet-300 transition-colors">CTF Write-ups</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-xs line-clamp-2">Archives HTB & TryHackMe.</p>
               </div>
-              <ArrowRight className="w-4 h-4 text-gray-400 dark:text-gray-600 ml-auto md:hidden" />
             </Link>
 
-            <Link to="/projects" className="group bg-surface/80 dark:bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-gray-200 dark:border-white/5 hover:border-blue-500/40 transition-all flex items-center md:block gap-4 hover:-translate-y-1 duration-300 shadow-sm dark:shadow-none">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                <Database className="w-5 h-5 md:w-6 md:h-6 text-blue-600 dark:text-blue-400" />
+            <Link to="/projects" className="group bg-surface/80 dark:bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-5 rounded-xl md:rounded-2xl border border-gray-200 dark:border-white/5 hover:border-blue-500/40 transition-all flex flex-col gap-3 hover:-translate-y-1 duration-300 shadow-sm dark:shadow-none">
+              <div className="w-10 h-10 bg-blue-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <Database className="w-5 h-5 text-blue-600 dark:text-blue-400" />
               </div>
               <div className="text-left">
-                <h3 className="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-0.5 md:mb-2 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">Lab & Projets</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-xs md:text-sm line-clamp-1 md:line-clamp-none">Infrastructure & Scripts.</p>
+                <h3 className="text-sm md:text-base font-bold text-gray-900 dark:text-white mb-0.5 md:mb-1 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">Lab & Projets</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-xs line-clamp-2">Infrastructure & Scripts.</p>
               </div>
-              <ArrowRight className="w-4 h-4 text-gray-400 dark:text-gray-600 ml-auto md:hidden" />
             </Link>
 
-            <Link to="/certifications" className="group bg-surface/80 dark:bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-gray-200 dark:border-white/5 hover:border-green-500/40 transition-all flex items-center md:block gap-4 hover:-translate-y-1 duration-300 shadow-sm dark:shadow-none">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-green-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                <BookOpen className="w-5 h-5 md:w-6 md:h-6 text-green-600 dark:text-green-400" />
+            <Link to="/articles" className="group bg-surface/80 dark:bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-5 rounded-xl md:rounded-2xl border border-gray-200 dark:border-white/5 hover:border-amber-500/40 transition-all flex flex-col gap-3 hover:-translate-y-1 duration-300 shadow-sm dark:shadow-none">
+              <div className="w-10 h-10 bg-amber-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <FileText className="w-5 h-5 text-amber-600 dark:text-amber-400" />
               </div>
               <div className="text-left">
-                <h3 className="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-0.5 md:mb-2 group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors">Certifications</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-xs md:text-sm line-clamp-1 md:line-clamp-none">CPTS, eJPT, AZ-900.</p>
+                <h3 className="text-sm md:text-base font-bold text-gray-900 dark:text-white mb-0.5 md:mb-1 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">Articles</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-xs line-clamp-2">Techniques & Veille.</p>
               </div>
-              <ArrowRight className="w-4 h-4 text-gray-400 dark:text-gray-600 ml-auto md:hidden" />
+            </Link>
+
+            <Link to="/certifications" className="group bg-surface/80 dark:bg-[#1a1a1f]/80 backdrop-blur-sm p-4 md:p-5 rounded-xl md:rounded-2xl border border-gray-200 dark:border-white/5 hover:border-green-500/40 transition-all flex flex-col gap-3 hover:-translate-y-1 duration-300 shadow-sm dark:shadow-none">
+              <div className="w-10 h-10 bg-green-500/10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <BookOpen className="w-5 h-5 text-green-600 dark:text-green-400" />
+              </div>
+              <div className="text-left">
+                <h3 className="text-sm md:text-base font-bold text-gray-900 dark:text-white mb-0.5 md:mb-1 group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors">Certifications</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-xs line-clamp-2">CPTS, eJPT, AZ-900.</p>
+              </div>
             </Link>
           </div>
 
