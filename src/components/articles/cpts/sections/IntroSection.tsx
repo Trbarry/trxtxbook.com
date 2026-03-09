@@ -1,5 +1,5 @@
 import React from 'react';
-import { Target, Users, BookOpen, Monitor, Brain, FileText, Award } from 'lucide-react';
+import { Target, Users, BookOpen, Monitor, Brain, FileText, Award, ArrowRight, Shield } from 'lucide-react';
 
 export const IntroSection: React.FC = () => (
   <section className="mb-16">
@@ -134,6 +134,45 @@ export const IntroSection: React.FC = () => (
                 C’est une super certif pour <strong>valider tes bases</strong> en réseau et pentest.
               </p>
             </div>
+
+            {/* De l’eJPT à la CPTS */}
+            <div className="flex items-center gap-2 mb-2">
+              <ArrowRight className="w-6 h-6 text-violet-400" />
+              <span className="text-xl font-semibold text-violet-300">De l’eJPT à la CPTS</span>
+            </div>
+            <p className="text-gray-300">
+              Mais juste après, en creusant les modules CPTS…
+              J’ai mesuré <strong>l’écart</strong>. La CPTS, c’était autrement plus <strong>avancé</strong>, autrement plus <strong>réaliste</strong>.<br />
+              La eJPT m’avait confirmé que j’<strong>avais dépassé le stade débutant</strong> — mais il me restait encore beaucoup de chemin pour être vraiment solide.
+              C’est là que la CPTS prenait tout son sens.
+            </p>
+
+            {/* Pourquoi la CPTS d’abord ? */}
+            <div className="flex items-center gap-2 mb-2">
+              <Shield className="w-6 h-6 text-violet-400" />
+              <span className="text-xl font-semibold text-violet-300">Pourquoi la CPTS d’abord ?</span>
+            </div>
+            <p className="text-gray-300">
+              J’ai choisi la CPTS plutôt que de foncer directement sur l’<strong>OSCP</strong> parce que je voulais <strong>me former sérieusement</strong> — pas juste griller les étapes.
+              Et soyons honnêtes : l’OSCP est <strong>cher</strong>, et j’ai vu beaucoup de retours disant que le contenu de la formation est moyen.
+              Le <strong>contenu HTB</strong>, lui, est d’<strong>excellente qualité</strong>.
+              Les modules sont <strong>denses, structurés et pratiques</strong>.
+              Et la certification CPTS est <strong>abordable</strong>, ce qui compte quand on se finance seul.
+            </p>
+            <div className="bg-violet-900/20 rounded-lg p-4 space-y-2">
+              <p className="text-violet-300 font-semibold flex items-center gap-2">
+                <Shield className="w-5 h-5 text-violet-400" />
+                <span>CPTS : Le choix intelligent</span>
+              </p>
+              <p className="text-gray-300">
+                Je vois la CPTS comme une <strong>étape technique sérieuse</strong> avant de tenter l’OSCP plus tard, surtout pour la <strong>visibilité RH</strong>.<br />
+                Mais là, la CPTS était le <strong>choix pragmatique et réaliste</strong> pour là où j’en étais.
+                Un super contenu, des <strong>challenges concrets</strong>, et un examen qui oblige à <strong>penser comme un pentesteur</strong> — pas juste à suivre des étapes.
+              </p>
+            </div>
+            <p className="text-gray-400 text-base italic mt-2">
+              <span className="text-violet-400 font-semibold">Conseil :</span> Si tu es dans cette situation — quelque part entre <strong>"débutant" et "prêt pour de vraies missions"</strong> — la CPTS est une excellente façon de <strong>progresser sans se cramer ni se ruiner</strong>.
+            </p>
           </div>
         </div>
       </div>

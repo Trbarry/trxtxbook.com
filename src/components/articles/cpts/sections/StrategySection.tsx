@@ -1,5 +1,5 @@
 import React from 'react';
-import { Brain, BookOpen, Calendar, Monitor, FileText, Zap, Terminal, Users, TrendingUp, Clock } from 'lucide-react';
+import { Brain, BookOpen, Calendar, Monitor, FileText, Zap, Terminal, Users, TrendingUp, Clock, CheckCircle2 } from 'lucide-react';
 
 export const StrategySection: React.FC = () => (
   <section className="mb-16">
@@ -99,25 +99,106 @@ export const StrategySection: React.FC = () => (
               <BookOpen className="w-6 h-6 text-violet-400" />
               <span className="text-xl font-semibold text-violet-300">La playlist IppSec CPTS</span>
             </div>
+            <div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
+              <BookOpen className="w-5 h-5 text-violet-400" />
+              <span className="text-gray-300">
+                J’ai attaqué la
+                <a href="https://www.youtube.com/watch?v=H9FcE_FMZio&list=PLidcsTyj9JXItWpbRtTg6aDEj10_F17x5"
+                  target="_blank"
+                  className="text-violet-400 hover:underline font-semibold ml-1"
+                  rel="noopener noreferrer"
+                >
+                  playlist CPTS d’IppSec
+                </a>
+                . Ces boxes sont <strong>brillamment sélectionnées</strong>. Certaines ont des vulnérabilités quasi identiques à la CPTS. Et surtout, elles te forcent à :
+              </span>
+            </div>
+            <ul className="list-disc ml-8 text-gray-300 space-y-1">
+              <li><strong>Enchaîner plusieurs étapes</strong> sans aucun guidage</li>
+              <li><strong>Structurer ton workflow</strong> comme dans un vrai pentest</li>
+              <li><strong>Gérer les pivots et scénarios post-exploitation</strong> tout seul</li>
+            </ul>
             <p className="text-gray-300">
-              J’ai attaqué la  
-              <a href="https://www.youtube.com/watch?v=H9FcE_FMZio&list=PLidcsTyj9JXItWpbRtTg6aDEj10_F17x5"
-                target="_blank"
-                className="text-violet-400 hover:underline font-semibold ml-1"
-                rel="noopener noreferrer"
-              >
-                playlist CPTS d’IppSec
-              </a>
-              . Les boxes sont <strong>super bien sélectionnées</strong>.
+              Ces boxes m’ont vraiment <strong>boosté la confiance</strong>.
+              Après avoir fini la playlist, je me suis dit : <em>"Ok, là je suis vraiment prêt pour les 10 jours d’exam."</em>
             </p>
+
+            <div className="flex items-center gap-2 mb-2">
+              <TrendingUp className="w-6 h-6 text-violet-400" />
+              <span className="text-xl font-semibold text-violet-300">Méthodes de préparation alternatives</span>
+            </div>
+            <div className="bg-violet-900/20 rounded-lg p-4">
+              <p className="text-gray-300 mb-2">
+                💬 Je sais que certains utilisent aussi les <strong>ProLabs</strong> ou s’attaquent aux <strong>boxes hard/insane</strong> pour préparer, mais personnellement, je n’en ai pas eu besoin.
+                À mon avis, si tu :
+              </p>
+              <ul className="list-disc ml-8 text-gray-300 space-y-1">
+                <li>termines le parcours CPTS <strong>sérieusement</strong>,</li>
+                <li>associes les modules à des boxes pertinentes <strong>régulièrement</strong>,</li>
+                <li>suis la playlist IppSec <strong>au bon moment</strong>,</li>
+              </ul>
+              <p className="text-gray-300 mt-2">
+                …alors tu as <strong>tout ce qu’il te faut</strong>.
+                Pas besoin d’en faire trop. Le parcours CPTS seul est déjà <strong>riche et complet</strong>.
+              </p>
+            </div>
 
             <div className="bg-violet-900/20 rounded-lg p-4 flex items-center gap-2">
               <Clock className="w-5 h-5 text-violet-400" />
               <span className="text-gray-300">
-                <strong>Conseil perso :</strong>
-                N’attends pas trop après avoir fini le cursus avant d’attaquer la playlist IppSec.
+                <strong>Conseil perso :</strong> N’attends pas trop après avoir fini le cursus avant d’attaquer la playlist IppSec — tu risques d’oublier des détails clés.
+                Mais ne te lance pas trop tôt non plus.
+                Assure-toi d’avoir des bases solides issues des modules avant de plonger. <strong>Fais confiance au processus</strong>.
               </span>
             </div>
+          </div>
+        </div>
+
+        {/* Final Sprint */}
+        <div>
+          <h3 className="text-2xl font-semibold text-violet-400 mb-6 flex items-center gap-2">
+            <Zap className="w-6 h-6" />
+            Préparation finale & Sprint avant l’examen
+          </h3>
+          <div className="bg-[#2a2a2f] p-6 rounded-lg space-y-6">
+            <div className="flex items-center gap-3 mb-2">
+              <Clock className="w-6 h-6 text-violet-400" />
+              <h4 className="text-xl font-semibold text-violet-300">J-10 : Pause stratégique</h4>
+            </div>
+            <p className="text-gray-300 text-lg">
+              À <strong>J-10</strong>, j’avais déjà terminé l’intégralité du <strong>parcours d’apprentissage</strong>, les <strong>boxes HTB</strong>, et toute la <strong>playlist IppSec</strong>.<br />
+              J’ai donc décidé de prendre une vraie pause — environ <strong>3 à 4 jours complets</strong> sans toucher à un clavier.
+            </p>
+
+            <div className="flex items-center gap-2 mb-2">
+              <Brain className="w-6 h-6 text-violet-400" />
+              <span className="text-xl font-semibold text-violet-300">Le repos, c’est essentiel</span>
+            </div>
+            <div className="bg-violet-900/20 rounded-lg p-4">
+              <span className="text-gray-300">
+                Je suis convaincu que <strong>se reposer est aussi important que grinder</strong>.
+                Ton cerveau a besoin de temps pour digérer et organiser tout ce que tu as appris.
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2 mb-2">
+              <FileText className="w-6 h-6 text-violet-400" />
+              <span className="text-xl font-semibold text-violet-300">Organisation des notes & révision</span>
+            </div>
+            <p className="text-gray-300">
+              Une fois revenu frais, j’ai passé le temps restant à relire <strong>toutes mes notes</strong> et à les structurer proprement dans <strong>Obsidian</strong>.
+              J’ai tout organisé par phase de pentest pour pouvoir retrouver n’importe quelle technique ou commande rapidement si besoin.
+            </p>
+
+            <div className="flex items-center gap-2 mb-2">
+              <CheckCircle2 className="w-6 h-6 text-violet-400" />
+              <span className="text-xl font-semibold text-violet-300">Mode préparation finale</span>
+            </div>
+            <p className="text-gray-300">
+              C’était mon seul objectif durant ces 10 jours.
+              Plus de labs, plus de boxes, plus de distractions.
+              Juste du peaufinage, de la sérénité, et de la préparation.
+            </p>
           </div>
         </div>
       </div>
