@@ -1,78 +1,55 @@
-import React, { useState } from 'react';
-import { Award, Calendar, Target, BookOpen, Brain, Shield, Terminal, Users, Lightbulb, CheckCircle2, Clock, FileText, Zap, Coffee, Monitor, Network, Lock, Code, ArrowRight, TrendingUp, Cpu, Database, ChevronDown, Globe } from 'lucide-react';
-import { CPTSJourneyArticleFrench } from './CPTSJourneyArticleFrench';
-import { CPTSJourneyArticleEnglish } from './CPTSJourneyArticleEnglish';
+import React, { useState } from ‘react’;
+import { Award, Calendar, CheckCircle2, FileText } from ‘lucide-react’;
+import { CPTSJourneyArticleFrench } from ‘./CPTSJourneyArticleFrench’;
+import { CPTSJourneyArticleEnglish } from ‘./CPTSJourneyArticleEnglish’;
 
 export const CPTSJourneyArticle: React.FC = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState<'en' | 'fr'>('en'); // Changé de 'fr' à 'en'
-  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState<’en’ | ‘fr’>(‘en’);
 
   const languages = {
     en: {
-  label: 'English',
-  flag: '🇺🇸',
-  title: 'CPTS Review : from INE EJPT to HackTheBox CPTS certified',
-  subtitle: 'A focused 5-month journey to CPTS certification – From eJPT foundations to hands-on professional grade hacking',
-  finalMessage: 'From junior pentester to confident CPTS-certified hacker – this journey was intense, but every hour brought real progress. I’m not at the finish line, but I’ve built a strong base for professional growth.',
-  journeyComplete: 'Major Milestone Reached'
-},
-
+      label: ‘English’,
+      flag: ‘🇺🇸’,
+      title: ‘CPTS Review : from INE EJPT to HackTheBox CPTS certified’,
+      subtitle: ‘A focused 5-month journey to CPTS certification – From eJPT foundations to hands-on professional grade hacking’,
+    },
     fr: {
-      label: 'Français',
-      flag: '🇫🇷',
-      title: 'CPTS Review : De l\'EJPT a la CPTS de HackTheBox',
-      subtitle: 'Un parcours complet de 5 mois vers la certification CPTS - Retour d\'expérience complet du niveau junior a la validation de la CPTS',
-      finalMessage: 'Du pentester junior au professionnel certifié CPTS - ce parcours a été transformateur. Le chemin était difficile, mais chaque heure investie en valait la peine pour les compétences et la confiance acquises.',
-      journeyComplete: 'Parcours Terminé'
+      label: ‘Français’,
+      flag: ‘🇫🇷’,
+      title: ‘CPTS Review : De l\’EJPT a la CPTS de HackTheBox’,
+      subtitle: ‘Un parcours complet de 5 mois vers la certification CPTS - Retour d\’expérience complet du niveau junior a la validation de la CPTS’,
     }
   };
 
   const currentLang = languages[selectedLanguage];
 
-  const toggleLanguageDropdown = () => {
-    setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
-  };
-
-  const selectLanguage = (lang: 'en' | 'fr') => {
+  const selectLanguage = (lang: ‘en’ | ‘fr’) => {
+    if (lang === selectedLanguage) return;
     setSelectedLanguage(lang);
-    setIsLanguageDropdownOpen(false);
+    window.scrollTo({ top: 0, behavior: ‘smooth’ });
   };
 
   return (
     <article className="max-w-4xl mx-auto px-6 py-12">
-      {/* Sélecteur de langue */}
+      {/* Language toggle — fixed pill */}
       <div className="fixed top-24 right-6 z-50">
-        <div className="relative">
-          <button
-            onClick={toggleLanguageDropdown}
-            className="flex items-center gap-2 bg-[#1a1a1f] border border-violet-900/20 hover:border-violet-500/50 
-                     px-4 py-2 rounded-lg transition-all duration-300 shadow-lg backdrop-blur-sm"
-          >
-            <Globe className="w-4 h-4 text-violet-400" />
-            <span className="text-sm font-medium">{currentLang.flag} {currentLang.label}</span>
-            <ChevronDown className={`w-4 h-4 text-violet-400 transition-transform duration-300 
-                                  ${isLanguageDropdownOpen ? 'rotate-180' : ''}`} />
-          </button>
-
-          {isLanguageDropdownOpen && (
-            <div className="absolute top-full right-0 mt-2 bg-[#1a1a1f] border border-violet-900/20 
-                          rounded-lg shadow-xl backdrop-blur-sm min-w-[160px] overflow-hidden">
-              {Object.entries(languages).map(([key, lang]) => (
-                <button
-                  key={key}
-                  onClick={() => selectLanguage(key as 'en' | 'fr')}
-                  className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-violet-500/10 
-                            transition-colors duration-200 ${selectedLanguage === key ? 'bg-violet-500/20' : ''}`}
-                >
-                  <span className="text-lg">{lang.flag}</span>
-                  <span className="text-sm font-medium">{lang.label}</span>
-                  {selectedLanguage === key && (
-                    <CheckCircle2 className="w-4 h-4 text-violet-400 ml-auto" />
-                  )}
-                </button>
-              ))}
-            </div>
-          )}
+        <div className="flex items-center bg-[#1a1a1f] border border-violet-900/30 rounded-xl shadow-lg overflow-hidden backdrop-blur-sm">
+          {([‘en’, ‘fr’] as const).map((lang, i) => (
+            <React.Fragment key={lang}>
+              {i > 0 && <div className="w-px h-6 bg-violet-900/40" />}
+              <button
+                onClick={() => selectLanguage(lang)}
+                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-all duration-200
+                  ${selectedLanguage === lang
+                    ? ‘bg-violet-600 text-white’
+                    : ‘text-gray-400 hover:text-gray-200 hover:bg-violet-500/10’
+                  }`}
+              >
+                <span>{languages[lang].flag}</span>
+                <span className="hidden sm:inline">{languages[lang].label}</span>
+              </button>
+            </React.Fragment>
+          ))}
         </div>
       </div>
 
