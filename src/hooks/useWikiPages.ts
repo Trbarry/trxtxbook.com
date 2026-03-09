@@ -14,20 +14,20 @@ export function useWikiPages() {
       .from('wiki_pages')
       .select('id, title, slug, category, tags, likes, published, updated_at')
       .eq('published', true);
-    
+
     if (error) throw error;
-    
+
     // Filter out duplicates or unwanted content
     const filtered = (data || []).filter((page: WikiPageMetadata) => {
       // Remove CPTS duplicate if it's in a specific category or title
-      const isCptsDuplicate = page.category?.toLowerCase().includes('cpts') || 
+      const isCptsDuplicate = page.category?.toLowerCase().includes('cpts') ||
                              page.title?.toLowerCase().includes('cpts');
-      
+
       return !isCptsDuplicate;
     });
 
     return filtered;
-  });
+  }, { revalidateOnFocus: false, dedupingInterval: 60000 });
 
   return {
     pages: data,
@@ -120,10 +120,11 @@ export function useWikiBacklinks(slug: string | undefined, title: string | undef
         .neq('slug', slug)
         .or(`content.ilike.%${slug}%,content.ilike.%${title}%`)
         .limit(10);
-      
+
       if (error) throw error;
       return data || [];
-    }
+    },
+    { revalidateOnFocus: false, dedupingInterval: 60000 }
   );
 
   return {

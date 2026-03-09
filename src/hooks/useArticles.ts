@@ -13,7 +13,7 @@ export function useArticles() {
 
     if (error) throw error;
     return data || [];
-  });
+  }, { revalidateOnFocus: false, dedupingInterval: 60000 });
 
   return { articles: data, error, isLoading };
 }

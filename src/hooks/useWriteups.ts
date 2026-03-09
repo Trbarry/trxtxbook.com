@@ -9,16 +9,16 @@ export function useWriteups(limit?: number) {
       .select('*')
       .eq('published', true)
       .order('created_at', { ascending: false });
-    
+
     if (limit) {
       query = query.limit(limit);
     }
 
     const { data, error } = await query;
-    
+
     if (error) throw error;
     return data || [];
-  });
+  }, { revalidateOnFocus: false, dedupingInterval: 60000 });
 
   return {
     writeups: data,
