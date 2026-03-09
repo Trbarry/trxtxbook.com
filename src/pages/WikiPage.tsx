@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { WikiPage as WikiPageType, WikiPageMetadata } from '../types/wiki';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
 import { 
   Search, Book, ChevronRight, ChevronDown, Hash, 
   Menu, X, Calendar, Folder, FileText, Construction, 
@@ -515,14 +516,33 @@ export const WikiPage: React.FC = () => {
         if (match) {
           const type = match[1];
           const title = match[2];
-          // Ne pas afficher l'encadré Sommaire manuel s'il existe (doublon avec le composant TOC)
           if (title.toLowerCase().includes('sommaire')) return null;
           const remainingChildren = [{ ...firstChild, props: { ...firstChild.props, children: [firstChild.props.children.slice(1)] } }, ...content.slice(1)];
           return <Callout type={type} title={title}>{remainingChildren}</Callout>;
         }
       }
       return <blockquote className="border-l-4 border-violet-500 bg-violet-500/5 px-4 py-1 my-4 italic text-gray-400">{children}</blockquote>;
-    }
+    },
+    table: ({ children }: any) => (
+      <div className="my-6 overflow-x-auto rounded-xl border border-gray-200 dark:border-white/10 shadow-sm custom-scrollbar">
+        <table className="w-full min-w-max text-sm border-collapse">{children}</table>
+      </div>
+    ),
+    thead: ({ children }: any) => (
+      <thead className="bg-gray-50 dark:bg-white/5 text-left">{children}</thead>
+    ),
+    tbody: ({ children }: any) => (
+      <tbody className="divide-y divide-gray-100 dark:divide-white/5">{children}</tbody>
+    ),
+    tr: ({ children }: any) => (
+      <tr className="transition-colors hover:bg-gray-50/80 dark:hover:bg-white/[0.03]">{children}</tr>
+    ),
+    th: ({ children }: any) => (
+      <th className="px-4 py-3 text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-white/10 whitespace-nowrap">{children}</th>
+    ),
+    td: ({ children }: any) => (
+      <td className="px-4 py-3 text-gray-700 dark:text-gray-300 align-top">{children}</td>
+    ),
   };
 
   useEffect(() => { if (window.innerWidth < 1024) setIsSidebarOpen(false); }, []);
@@ -698,7 +718,7 @@ export const WikiPage: React.FC = () => {
 
                     <div className="min-h-[400px] text-left">
                       <div className="prose max-w-none prose-sm sm:prose-base prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-h2:text-xl sm:prose-h2:text-2xl prose-h2:mt-10 sm:prose-h2:mt-12 prose-h2:pb-2 prose-h2:border-b prose-h2:border-gray-200 dark:prose-h2:border-white/10 prose-h3:text-lg sm:prose-h3:text-xl prose-h3:text-violet-700 dark:prose-h3:text-violet-200 prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-strong:text-gray-900 dark:prose-strong:text-white prose-a:text-violet-600 dark:prose-a:text-violet-400 prose-li:text-gray-700 dark:prose-li:text-gray-300 prose-blockquote:border-violet-500 prose-blockquote:bg-violet-50 dark:prose-blockquote:bg-violet-500/5 prose-blockquote:text-gray-700 dark:prose-blockquote:text-gray-400 prose-img:rounded-xl">
-                        <ReactMarkdown rehypePlugins={[rehypeRaw]} components={MarkdownComponents as any}>{selectedPage.content}</ReactMarkdown>
+                        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={MarkdownComponents as any}>{selectedPage.content}</ReactMarkdown>
                       </div>
                     </div>
                     <div className="mt-16 pb-12 border-t border-gray-200 dark:border-white/5 pt-8">
