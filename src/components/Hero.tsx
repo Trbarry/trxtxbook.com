@@ -3,7 +3,6 @@ import { getOptimizedUrl } from '../lib/imageUtils';
 import {
   Terminal,
   BookOpen,
-  ArrowRight,
   Database,
   Activity,
   Code2,

@@ -35,8 +35,6 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       <meta name="author" content={author} />
       <meta name="robots" content="index, follow" />
       <meta name="language" content="fr-FR" />
-      <meta name="revisit-after" content="7 days" />
-      
       {/* Dates */}
       {publishedTime && <meta name="article:published_time" content={publishedTime} />}
       {modifiedTime && <meta name="article:modified_time" content={modifiedTime} />}
