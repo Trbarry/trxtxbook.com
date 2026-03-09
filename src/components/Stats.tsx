@@ -5,23 +5,6 @@ import { HackTheBoxCard } from './platforms/HackTheBoxCard';
 import { RootMeCard } from './platforms/RootMeCard';
 import { PortSwiggerCard } from './platforms/PortSwiggerCard';
 
-// ... interfaces restent identiques ...
-interface StatsData {
-  rank: string;
-  points?: number;
-  challenges?: number;
-  lab_count?: number;
-}
-
-interface StatsProps {
-  stats: {
-    tryhackme: StatsData;
-    hackthebox: StatsData;
-    rootme: StatsData;
-    portswigger: StatsData;
-  };
-}
-
 export const Stats: React.FC = () => {
   const navigate = useNavigate();
 
@@ -29,21 +12,13 @@ export const Stats: React.FC = () => {
     navigate(`/writeups?platform=${platform.toLowerCase()}`);
   };
 
-  const stats = {
-    tryhackme: { rank: "Top 3%", machines: 25, challenges: 45 },
-    hackthebox: { rank: "Bientôt Pro Hacker", points: 228, machines: "11/20", progression: "80.68" },
-    rootme: { rank: "7462", points: 1745, challenges: 83 },
-    portswigger: { lab_count: 15, challenges_completed: 12 }
-  };
-
   return (
-    // ✅ CHANGEMENT : bg-background au lieu de bg-[#0d0d12]
     <section className="py-12 bg-background transition-colors duration-300">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          <TryHackMeCard stats={stats.tryhackme} onPlatformClick={handlePlatformClick} />
-          <HackTheBoxCard stats={stats.hackthebox} onPlatformClick={handlePlatformClick} />
-          <RootMeCard stats={stats.rootme} onPlatformClick={handlePlatformClick} />
+          <TryHackMeCard onPlatformClick={handlePlatformClick} />
+          <HackTheBoxCard onPlatformClick={handlePlatformClick} />
+          <RootMeCard onPlatformClick={handlePlatformClick} />
           <PortSwiggerCard onPlatformClick={handlePlatformClick} />
         </div>
       </div>
