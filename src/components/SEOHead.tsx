@@ -14,7 +14,7 @@ interface SEOHeadProps {
 }
 
 export const SEOHead: React.FC<SEOHeadProps> = ({
-  title = "Tristan Barry - Alternant Technicien Informatique | Portfolio IT & Cybersécurité",
+  title = "Tristan Barry - Pentester & Technicien IT | Portfolio Cybersécurité",
   description = "Portfolio en IT & cybersécurité | Alternant BTS SIO SISR passionné d'informatique et de cybersécurité | Projets personnels en infrastructure, réseaux et sécurité | Partage de write-ups CTF et progression sur les plateformes comme Hack The Box & TryHackMe.",
   keywords = "Tristan Barry, technicien informatique, BTS SIO SISR, cybersécurité, pentesting, hack the box, tryhackme, write-ups, CTF, infrastructure, réseaux, alternance, Saint-Étienne, Lyon",
   image = "https://images.unsplash.com/photo-1550439062-609e1531270e?auto=format&fit=crop&q=80",
@@ -51,6 +51,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
+      <meta property="og:image:alt" content={title} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:locale" content="fr_FR" />
@@ -62,6 +63,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
+      <meta name="twitter:site" content="@TristanBarry" />
       <meta name="twitter:creator" content="@TristanBarry" />
       
       {/* Métadonnées techniques */}
@@ -108,8 +110,8 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
             "keywords": keywords
           } : {
             "name": "Tristan Barry",
-            "jobTitle": "Alternant Technicien Informatique",
-            "description": "Alternant BTS SIO SISR passionné d'informatique et de cybersécurité",
+            "jobTitle": "Pentester & Technicien Système Réseau",
+            "description": "Alternant BTS SIO SISR passionné de cybersécurité et de pentesting",
             "url": "https://trxtxbook.com",
             "sameAs": [
               "https://www.linkedin.com/in/tristan-barry-43b91b330/",

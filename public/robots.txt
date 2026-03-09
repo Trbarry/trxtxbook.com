@@ -9,6 +9,7 @@ Allow: /writeups
 Allow: /projects
 Allow: /certifications
 Allow: /articles/
+Allow: /wiki
 
 # ❌ Exclusion des zones d'administration
 Disallow: /admin/
