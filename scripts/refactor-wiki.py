@@ -28,8 +28,8 @@ PROGRESS_FILE = Path(__file__).parent.parent / ".refactor_progress.json"
 GEMINI_API_KEY    = os.environ.get("GEMINI_API_KEY", "")
 GEMINI_MODEL      = "gemini-3.1-flash-lite-preview"
 GEMINI_API_URL    = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
-REQUEST_DELAY     = 5   # secondes entre chaque appel API (free tier ~15 RPM, 1500 RPD)
-MAX_RETRIES       = 3
+REQUEST_DELAY     = 1   # secondes entre chaque appel API (paid tier ~1000 RPM)
+MAX_RETRIES       = 5
 
 SUPABASE_URL      = "https://srmwnujqhxaopnffesgl.supabase.co"
 SUPABASE_KEY      = os.environ.get(
@@ -222,6 +222,31 @@ AUDIT :
 NOTE NETTOYÉE :
 {content}"""
 
+PROMPT_CREATE = """Tu es un expert en pentest offensif niveau CPTS (HackTheBox Academy).
+Le fichier de notes suivant est vide. Génère une note de pentest complète sur ce sujet.
+
+Sujet : {title}
+Catégorie / phase pentest : {category}
+
+La note doit :
+- Être au niveau CPTS réel : commandes concrètes avec tous les flags importants, exemples de sortie réels
+- Couvrir : contexte/théorie rapide, prérequis, commandes principales, cas d'usage courants, contre-mesures/OPSEC
+- Respecter le format wiki : pas d'emojis, pas de langage IA ("voici", "j'espère", etc.), gras intentionnel uniquement
+- Utiliser les structures : H2 (##) sections, H3 (###) sous-sections, ```bash/powershell/python blocs de code
+- Inclure un diagramme Mermaid (flowchart ou sequenceDiagram) si le sujet implique un flux d'attaque
+- Utiliser des callouts pertinents :
+  > [!danger] prérequis bloquants ou risques détection
+  > [!warning] limitations ou cas particuliers
+  > [!tip] astuces pratiques
+  > [!info] contexte théorique
+- Ne PAS commencer par un H1 (le titre est rendu par l'UI)
+- Viser 600-1000 mots de contenu technique
+
+À la toute dernière ligne, ajoute exactement (remplace les tags) :
+TAGS: tag1, tag2, tag3, tag4, tag5
+
+Retourne uniquement le contenu markdown suivi de la ligne TAGS:, rien d'autre."""
+
 # ─────────────────────────── API GEMINI ────────────────────────────────────
 
 def call_gemini(prompt: str, label: str = "") -> str:
@@ -256,7 +281,7 @@ def call_gemini(prompt: str, label: str = "") -> str:
         except urllib.error.HTTPError as e:
             body = e.read().decode("utf-8", errors="replace")
             if e.code == 429:
-                wait = 30 * attempt
+                wait = 10 * attempt
                 print(f"  ⏳ Rate limit (429), attente {wait}s... [{label}]")
                 time.sleep(wait)
             else:
@@ -295,13 +320,73 @@ def process_file(md_file: Path, progress: dict, file_index: int, file_total: int
         return progress[key].get("metadata")
 
     content = md_file.read_text(encoding="utf-8", errors="replace").strip()
+    meta    = file_to_metadata(md_file)
 
     if len(content) < 50:
-        print(f"  ⚠  Fichier vide/trop court, skip")
-        progress[key] = {"status": "skipped", "reason": "too_short"}
-        return None
+        title = meta["title"]
+        # Détection junk : titre sans voyelles (ex: dfsdsfdsf)
+        vowels = set("aeiouAEIOU")
+        if not any(c in vowels for c in title):
+            print(f"  ✗  Nom de fichier invalide (junk), skip")
+            progress[key] = {"status": "skipped", "reason": "junk_filename"}
+            return None
 
-    meta = file_to_metadata(md_file)
+        # Détection doublon par slug
+        existing_slugs = {
+            v["metadata"]["slug"]
+            for v in progress.values()
+            if v.get("status") == "done" and "metadata" in v
+        }
+        if meta["slug"] in existing_slugs:
+            print(f"  ✗  Doublon détecté (slug existant), skip")
+            progress[key] = {"status": "skipped", "reason": "duplicate_slug"}
+            return None
+
+        # Génération depuis zéro (1 passe)
+        print(f"  📄  Fichier vide → génération depuis le titre")
+        print(f"  🔗  slug → {meta['slug']}")
+        try:
+            t0 = time.time()
+            print(f"  └─ [1/1] Génération...", end="", flush=True)
+            generated = call_gemini(
+                PROMPT_CREATE.format(title=title, category=meta["category"]),
+                label=f"create:{meta['slug'][:40]}"
+            )
+            # Extraire la ligne TAGS: à la fin
+            lines = generated.splitlines()
+            tags_line = ""
+            if lines and lines[-1].startswith("TAGS:"):
+                tags_line = lines[-1]
+                generated = "\n".join(lines[:-1]).rstrip()
+            meta["tags"] = [t.strip() for t in tags_line.replace("TAGS:", "").split(",") if t.strip()]
+
+            gen_words = len(generated.split())
+            print(f" ✓ ({fmt_time(time.time()-t0)}) | {gen_words}w générés")
+            if meta["tags"]:
+                print(f"  │   tags: {', '.join(meta['tags'])}")
+
+            relative    = md_file.relative_to(WIKI_DIR)
+            output_file = OUTPUT_DIR / relative
+            output_file.parent.mkdir(parents=True, exist_ok=True)
+            output_file.write_text(generated, encoding="utf-8")
+
+            elapsed = time.time() - start_time
+            avg_per = elapsed / file_index
+            remaining = avg_per * (file_total - file_index)
+            print(f"  ✓  Sauvegardé → .wiki_clean/{relative}")
+            print(f"  ⏱  Fichier: {fmt_time(time.time()-t0)} | Écoulé: {fmt_time(elapsed)} | Restant: ~{fmt_time(remaining)}")
+
+            progress[key] = {
+                "status":       "done",
+                "output_path":  str(output_file),
+                "metadata":     meta,
+                "processed_at": datetime.now().isoformat()
+            }
+            return meta
+        except Exception as e:
+            print(f"\n  ✗  ERREUR génération: {e}")
+            progress[key] = {"status": "error", "error": str(e)}
+            return None
     words = len(content.split())
     print(f"  📄  {words} mots | catégorie → {meta['category']}")
     print(f"  🔗  slug → {meta['slug']}")
