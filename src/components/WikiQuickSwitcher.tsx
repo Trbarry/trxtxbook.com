@@ -181,21 +181,21 @@ export const WikiQuickSwitcher: React.FC<Props> = ({ isOpen, onClose, onSelect }
             </div>
 
             {/* Footer */}
-            <div className="px-4 py-2.5 border-t border-gray-100 dark:border-white/10 flex items-center gap-4 text-[10px] text-gray-400 bg-gray-50/50 dark:bg-white/2">
+            <div className="px-4 py-2.5 border-t border-gray-100 dark:border-white/10 flex items-center gap-4 text-[10px] text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-white/[0.03]">
               <span className="flex items-center gap-1.5">
-                <kbd className="border border-gray-200 dark:border-white/10 rounded px-1.5 py-0.5 font-mono bg-white dark:bg-white/5">↑↓</kbd>
+                <kbd className="border border-gray-300 dark:border-white/20 rounded px-1.5 py-0.5 font-mono bg-white dark:bg-white/10 text-gray-700 dark:text-gray-200">↑↓</kbd>
                 naviguer
               </span>
               <span className="flex items-center gap-1.5">
-                <kbd className="border border-gray-200 dark:border-white/10 rounded px-1.5 py-0.5 font-mono bg-white dark:bg-white/5">↵</kbd>
+                <kbd className="border border-gray-300 dark:border-white/20 rounded px-1.5 py-0.5 font-mono bg-white dark:bg-white/10 text-gray-700 dark:text-gray-200">↵</kbd>
                 ouvrir
               </span>
               <span className="flex items-center gap-1.5">
-                <kbd className="border border-gray-200 dark:border-white/10 rounded px-1.5 py-0.5 font-mono bg-white dark:bg-white/5">Esc</kbd>
+                <kbd className="border border-gray-300 dark:border-white/20 rounded px-1.5 py-0.5 font-mono bg-white dark:bg-white/10 text-gray-700 dark:text-gray-200">Esc</kbd>
                 fermer
               </span>
               {results.length > 0 && (
-                <span className="ml-auto text-gray-300 dark:text-gray-600">
+                <span className="ml-auto text-gray-400 dark:text-gray-500">
                   {results.length} résultat{results.length > 1 ? 's' : ''}
                 </span>
               )}
