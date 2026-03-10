@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { SEOHead } from '../components/SEOHead';
 import { useArticles } from '../hooks/useArticles';
 import { ArticleMetadata } from '../types/article';
-import { STATIC_ARTICLES, CPTS_ARTICLE } from '../data/staticArticles';
 
 const getReadingTime = (description: string): number => {
   // Estimation basée sur la description (le contenu complet n'est pas chargé ici)
@@ -80,20 +79,13 @@ export const ArticlesListPage: React.FC = () => {
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
-  // Merge: CPTS en premier, puis autres statiques, puis DB (dédoublonnage par slug)
-  const allArticles = useMemo(() => {
-    const dbSlugs = new Set(dbArticles.map(a => a.slug));
-    const staticOnly = [CPTS_ARTICLE, ...STATIC_ARTICLES].filter(a => !dbSlugs.has(a.slug));
-    return [...staticOnly, ...dbArticles];
+  const categories = useMemo(() => {
+    const cats = new Set(dbArticles.map(a => a.category));
+    return Array.from(cats).sort();
   }, [dbArticles]);
 
-  const categories = useMemo(() => {
-    const cats = new Set(allArticles.map(a => a.category));
-    return Array.from(cats).sort();
-  }, [allArticles]);
-
   const filtered = useMemo(() => {
-    return allArticles.filter(a => {
+    return dbArticles.filter(a => {
       const matchesSearch = !search ||
         a.title.toLowerCase().includes(search.toLowerCase()) ||
         a.description.toLowerCase().includes(search.toLowerCase()) ||
@@ -101,7 +93,7 @@ export const ArticlesListPage: React.FC = () => {
       const matchesCategory = !activeCategory || a.category === activeCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [allArticles, search, activeCategory]);
+  }, [dbArticles, search, activeCategory]);
 
   return (
     <>
