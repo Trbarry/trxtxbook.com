@@ -68,7 +68,7 @@ const ArticleCard: React.FC<{ article: ArticleMetadata; onClick: () => void; ind
         </div>
         <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-white/5 text-sm font-medium">
           <span className="flex items-center gap-1.5 text-gray-500 text-xs font-mono">
-            <Clock size={11} /> ~15 min
+            <Clock size={11} /> ~{article.reading_time} min
           </span>
           <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center text-gray-400 dark:text-white group-hover:bg-violet-600 group-hover:text-white transition-colors">
             <ArrowRight className="w-4 h-4" />

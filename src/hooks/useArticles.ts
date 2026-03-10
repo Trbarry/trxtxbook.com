@@ -7,7 +7,7 @@ export function useArticles() {
   const { data, error, isLoading } = useSWR<ArticleMetadata[]>('articles_metadata', async () => {
     const { data, error } = await supabase
       .from('articles')
-      .select('id, title, slug, category, description, tags, cover_image_url, likes, published, created_at, updated_at')
+      .select('id, title, slug, category, description, tags, cover_image_url, likes, reading_time, published, created_at, updated_at')
       .eq('published', true)
       .order('updated_at', { ascending: false });
 

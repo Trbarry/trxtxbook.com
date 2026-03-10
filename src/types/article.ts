@@ -8,6 +8,7 @@ export interface Article {
   tags: string[];
   cover_image_url?: string;
   likes: number;
+  reading_time: number;
   published: boolean;
   created_at: string;
   updated_at: string;
