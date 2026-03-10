@@ -46,6 +46,7 @@ const ArticlesListPage = lazy(() => import('./pages/ArticlesListPage').then(m =>
 const ArticleDetailPage = lazy(() => import('./pages/ArticleDetailPage').then(m => ({ default: m.ArticleDetailPage })));
 const DogWriteupPage = lazy(() => import('./pages/DogWriteupPage').then(m => ({ default: m.DogWriteupPage })));
 const CPTSJourneyArticlePage = lazy(() => import('./pages/CPTSJourneyArticlePage').then(m => ({ default: m.CPTSJourneyArticlePage })));
+const ProjectPage = lazy(() => import('./pages/ProjectPage').then(m => ({ default: m.ProjectPage })));
 
 // Admin & Outils
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then(m => ({ default: m.AnalyticsPage })));
@@ -113,6 +114,7 @@ const AnimatedRoutes = ({
           {/* LISTES ET PAGES SECONDAIRES */}
           <Route path="/writeups" element={<PageTransition><WriteupsList /></PageTransition>} />
           <Route path="/projects" element={<PageTransition><ProjectsList /></PageTransition>} />
+          <Route path="/projects/:slug" element={<PageTransition><ProjectPage /></PageTransition>} />
           <Route path="/certifications" element={<PageTransition><CertificationsList /></PageTransition>} />
           <Route path="/wiki" element={<PageTransition><WikiPage /></PageTransition>} />
           <Route path="/wiki/:slug" element={<PageTransition><WikiPage /></PageTransition>} />

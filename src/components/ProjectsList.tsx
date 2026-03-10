@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { getOptimizedUrl } from '../lib/imageUtils';
-import {
-  FolderGit2, Search, FileText, Eye, ArrowRight, Cpu, Code
-} from 'lucide-react';
-import { ProjectDetail } from './ProjectDetail';
-import { Project } from '../types/project';
+import { FolderGit2, Search, ArrowRight, Cpu, Code } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useProjects } from '../hooks/useProjects';
 import { SEOHead } from './SEOHead';
@@ -13,7 +9,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 export const ProjectsList: React.FC = () => {
   const navigate = useNavigate();
   const { projects, isLoading } = useProjects();
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredProjects = projects.filter(p =>
@@ -21,14 +16,6 @@ export const ProjectsList: React.FC = () => {
     p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
     p.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
   );
-
-  const handleProjectClick = (project: Project) => {
-    if (project.article_url) {
-      navigate(project.article_url);
-    } else {
-      setSelectedProject(project);
-    }
-  };
 
   return (
     <>
@@ -96,7 +83,7 @@ export const ProjectsList: React.FC = () => {
                     exit={{ opacity: 0, scale: 0.9 }}
                     transition={{ duration: 0.2 }}
                     key={project.id}
-                    onClick={() => handleProjectClick(project)}
+                    onClick={() => navigate(`/projects/${project.slug}`)}
                     className="group relative bg-surface dark:bg-[#1a1a1f] rounded-2xl border border-gray-200 dark:border-white/5 overflow-hidden flex flex-col h-full
                                hover:border-violet-500/30 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]
                                transition-all duration-300 cursor-pointer shadow-sm dark:shadow-none"
@@ -112,15 +99,6 @@ export const ProjectsList: React.FC = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-surface dark:from-[#1a1a1f] via-surface/40 dark:via-[#1a1a1f]/40 to-transparent opacity-90 z-10" />
 
-                      {project.article_url && (
-                        <div className="absolute top-4 right-4 z-20">
-                          <div className="bg-white/90 dark:bg-black/80 backdrop-blur-md text-gray-900 dark:text-white px-3 py-1.5 rounded-lg
-                                        flex items-center gap-1.5 text-[10px] font-bold border border-gray-200 dark:border-white/10 uppercase tracking-wide shadow-sm">
-                            <FileText className="w-3 h-3 text-violet-600 dark:text-white" />
-                            Article
-                          </div>
-                        </div>
-                      )}
                     </div>
 
                     {/* Contenu */}
@@ -152,11 +130,9 @@ export const ProjectsList: React.FC = () => {
                         </div>
 
                         <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-white/5 text-sm font-medium">
-                          <span className="text-gray-500">
-                            {project.article_url ? 'Lire l\'étude de cas' : 'Voir les détails'}
-                          </span>
+                          <span className="text-gray-500">Voir les détails</span>
                           <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center text-gray-400 dark:text-white group-hover:bg-violet-600 group-hover:text-white transition-colors">
-                            {project.article_url ? <ArrowRight className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                            <ArrowRight className="w-4 h-4" />
                           </div>
                         </div>
                       </div>
@@ -167,7 +143,6 @@ export const ProjectsList: React.FC = () => {
             </motion.div>
           )}
         </div>
-        {selectedProject && <ProjectDetail project={selectedProject} onClose={() => setSelectedProject(null)} isModal={true} />}
       </div>
     </>
   );

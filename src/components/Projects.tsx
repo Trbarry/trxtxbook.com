@@ -1,22 +1,15 @@
-import React, { useState } from 'react';
-import { Code, FileText, FolderGit2, ArrowRight } from 'lucide-react';
+import React from 'react';
+import { Code, FolderGit2, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { ProjectDetail } from './ProjectDetail';
-import { Project } from '../types/project';
 import { useProjects } from '../hooks/useProjects';
 import { getOptimizedUrl } from '../lib/imageUtils';
 
 export const Projects: React.FC = () => {
   const navigate = useNavigate();
   const { projects, isLoading } = useProjects();
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const handleProjectClick = (project: Project) => {
-    if (project.article_url) {
-      navigate(project.article_url);
-    } else {
-      setSelectedProject(project);
-    }
+  const handleProjectClick = (slug: string) => {
+    navigate(`/projects/${slug}`);
   };
 
   return (
@@ -60,7 +53,7 @@ export const Projects: React.FC = () => {
             {projects.map((project, index) => (
               <div
                 key={project.id}
-                onClick={() => handleProjectClick(project)}
+                onClick={() => handleProjectClick(project.slug)}
                 className="group relative bg-surface dark:bg-[#1a1a1f] rounded-2xl border border-gray-200 dark:border-white/5 overflow-hidden
                           hover:border-violet-500/50 transition-all duration-300 cursor-pointer
                           hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)] flex flex-col h-full shadow-sm dark:shadow-none"
@@ -76,15 +69,6 @@ export const Projects: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface dark:from-[#1a1a1f] via-surface/40 dark:via-[#1a1a1f]/40 to-transparent opacity-90 z-10" />
 
-                  {project.article_url && (
-                    <div className="absolute top-4 right-4 z-20">
-                      <div className="bg-violet-600/90 backdrop-blur-sm text-white px-3 py-1.5 rounded-lg
-                                flex items-center gap-1.5 text-xs font-bold shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                        <FileText className="w-3.5 h-3.5" />
-                        Article disponible
-                      </div>
-                    </div>
-                  )}
                 </div>
 
                 {/* Contenu Carte */}
@@ -122,14 +106,6 @@ export const Projects: React.FC = () => {
           </div>
         )}
 
-        {/* Modal */}
-        {selectedProject && (
-          <ProjectDetail
-            project={selectedProject}
-            onClose={() => setSelectedProject(null)}
-            isModal={true}
-          />
-        )}
       </div>
     </section>
   );
