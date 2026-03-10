@@ -14,9 +14,9 @@ interface SEOHeadProps {
 }
 
 export const SEOHead: React.FC<SEOHeadProps> = ({
-  title = "Tristan Barry - Pentester & Technicien IT | Portfolio Cybersécurité",
-  description = "Portfolio en IT & cybersécurité | Alternant BTS SIO SISR passionné d'informatique et de cybersécurité | Projets personnels en infrastructure, réseaux et sécurité | Partage de write-ups CTF et progression sur les plateformes comme Hack The Box & TryHackMe.",
-  keywords = "Tristan Barry, technicien informatique, BTS SIO SISR, cybersécurité, pentesting, hack the box, tryhackme, write-ups, CTF, infrastructure, réseaux, alternance, Saint-Étienne, Lyon",
+  title = "Tristan Barry - Apprenti Pentester | Portfolio Cybersécurité",
+  description = "Portfolio en cybersécurité | Apprenti Pentester passionné d'Active Directory, d'offensive security et de CTF | Projets personnels en infrastructure, réseaux et sécurité | Write-ups HTB & TryHackMe.",
+  keywords = "Tristan Barry, apprenti pentester, cybersécurité, pentesting, Active Directory, hack the box, tryhackme, write-ups, CTF, infrastructure, réseaux, Saint-Étienne, Lyon",
   image = "https://images.unsplash.com/photo-1550439062-609e1531270e?auto=format&fit=crop&w=1200&h=630&q=85",
   url = "https://trxtxbook.com/",
   type = "website",

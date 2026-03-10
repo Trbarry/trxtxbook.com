@@ -1,32 +1,19 @@
 import React, { useState } from 'react';
-import { Code, ExternalLink, FileText, FolderGit2, ArrowRight } from 'lucide-react';
+import { Code, FileText, FolderGit2, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { ProjectDetail } from './ProjectDetail';
 import { Project } from '../types/project';
-import { SMBProject } from './projects/SMBProject';
-import { ADProject } from './projects/ADProject';
-import { SteamDeckProject } from './projects/SteamDeckProject';
-import { ExegolProject } from './projects/ExegolProject';
-import { LinuxMintProject } from './projects/LinuxMintProject';
-import { HomeLabProject } from './projects/HomeLabProjects';
+import { useProjects } from '../hooks/useProjects';
 import { getOptimizedUrl } from '../lib/imageUtils';
 
 export const Projects: React.FC = () => {
   const navigate = useNavigate();
+  const { projects, isLoading } = useProjects();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const projects: Project[] = [
-    HomeLabProject,
-    LinuxMintProject,
-    ExegolProject,
-    ADProject,
-    SMBProject,
-    SteamDeckProject
-  ];
-
   const handleProjectClick = (project: Project) => {
-    if (project.articleUrl) {
-      navigate(project.articleUrl);
+    if (project.article_url) {
+      navigate(project.article_url);
     } else {
       setSelectedProject(project);
     }
@@ -34,7 +21,6 @@ export const Projects: React.FC = () => {
 
   return (
     <section id="projects" className="py-24 bg-background transition-colors duration-300 relative overflow-hidden">
-      
       <div className="container mx-auto px-6 relative z-10">
         {/* En-tête de section */}
         <div className="flex flex-col md:flex-row items-center justify-between mb-16 gap-6">
@@ -48,7 +34,7 @@ export const Projects: React.FC = () => {
               </span>
             </h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-xl mt-4">
-                De l'administration système à la cybersécurité : découvrez mes déploiements, scripts et documentations techniques.
+              De l'administration système à la cybersécurité : découvrez mes déploiements, scripts et documentations techniques.
             </p>
           </div>
 
@@ -63,72 +49,78 @@ export const Projects: React.FC = () => {
         </div>
 
         {/* Grille des Projets */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <div 
-              key={index} 
-              onClick={() => handleProjectClick(project)}
-              className="group relative bg-surface dark:bg-[#1a1a1f] rounded-2xl border border-gray-200 dark:border-white/5 overflow-hidden
-                        hover:border-violet-500/50 transition-all duration-300 cursor-pointer
-                        hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)] flex flex-col h-full shadow-sm dark:shadow-none"
-            >
-              {/* Conteneur Image */}
-              <div className="relative h-56 overflow-hidden">
-                <div className="absolute inset-0 bg-violet-900/20 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
-                
-                <img 
-                src={getOptimizedUrl(project.image, 600)}
-                alt={project.title}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent dark:from-[#1a1a1f] dark:via-[#1a1a1f]/40 dark:to-transparent opacity-90 z-10" />
-                
-                {project.articleUrl && (
-                  <div className="absolute top-4 right-4 z-20">
-                      <div className="bg-violet-600/90 backdrop-blur-sm text-white px-3 py-1.5 rounded-lg 
+        {isLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3].map(i => (
+              <div key={i} className="h-80 bg-surface dark:bg-[#1a1a1f] animate-pulse rounded-2xl border border-gray-200 dark:border-white/5" />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <div
+                key={project.id}
+                onClick={() => handleProjectClick(project)}
+                className="group relative bg-surface dark:bg-[#1a1a1f] rounded-2xl border border-gray-200 dark:border-white/5 overflow-hidden
+                          hover:border-violet-500/50 transition-all duration-300 cursor-pointer
+                          hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)] flex flex-col h-full shadow-sm dark:shadow-none"
+              >
+                {/* Conteneur Image */}
+                <div className="relative h-56 overflow-hidden border-b border-gray-100 dark:border-white/5">
+                  <div className="absolute inset-0 bg-violet-900/20 group-hover:bg-transparent transition-colors z-10 duration-500" />
+                  <img
+                    src={getOptimizedUrl(project.image_url, 600)}
+                    alt={project.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface dark:from-[#1a1a1f] via-surface/40 dark:via-[#1a1a1f]/40 to-transparent opacity-90 z-10" />
+
+                  {project.article_url && (
+                    <div className="absolute top-4 right-4 z-20">
+                      <div className="bg-violet-600/90 backdrop-blur-sm text-white px-3 py-1.5 rounded-lg
                                 flex items-center gap-1.5 text-xs font-bold shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                         <FileText className="w-3.5 h-3.5" />
                         Article disponible
                       </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Contenu Carte */}
-              <div className="p-6 pt-0 flex-1 flex flex-col relative z-20">
-                <div className="-mt-8 mb-4">
-                     <div className="w-14 h-14 bg-surface dark:bg-[#1a1a1f] rounded-xl border border-gray-200 dark:border-white/10 p-1 flex items-center justify-center shadow-xl group-hover:border-violet-500/50 transition-colors">
-                        <Code className="w-6 h-6 text-violet-600 dark:text-violet-400" />
-                     </div>
-                </div>
-
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors mb-3 line-clamp-1">
-                  {project.title}
-                </h3>
-                
-                <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 leading-relaxed line-clamp-3 flex-grow">
-                    {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {project.tags.slice(0, 3).map((tag, i) => (
-                    <span 
-                      key={i} 
-                      className="text-[10px] uppercase font-bold tracking-wider bg-violet-500/5 text-violet-600 dark:text-violet-300 px-2 py-1 rounded border border-violet-500/10"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                  {project.tags.length > 3 && (
-                      <span className="text-[10px] px-2 py-1 text-gray-500 font-medium">+ {project.tags.length - 3}</span>
+                    </div>
                   )}
                 </div>
+
+                {/* Contenu Carte */}
+                <div className="p-6 pt-0 flex-1 flex flex-col relative z-20">
+                  <div className="-mt-8 mb-4">
+                    <div className="w-14 h-14 bg-surface dark:bg-[#1a1a1f] rounded-xl border border-gray-200 dark:border-white/10 p-1 flex items-center justify-center shadow-xl group-hover:border-violet-500/50 transition-colors">
+                      <Code className="w-6 h-6 text-violet-600 dark:text-violet-400" />
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors mb-3 line-clamp-1">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 leading-relaxed line-clamp-3 flex-grow">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {project.tags.slice(0, 3).map((tag, i) => (
+                      <span
+                        key={i}
+                        className="text-[10px] uppercase font-bold tracking-wider bg-violet-500/5 text-violet-600 dark:text-violet-300 px-2 py-1 rounded border border-violet-500/10"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                    {project.tags.length > 3 && (
+                      <span className="text-[10px] px-2 py-1 text-gray-500 font-medium">+ {project.tags.length - 3}</span>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* Modal */}
         {selectedProject && (

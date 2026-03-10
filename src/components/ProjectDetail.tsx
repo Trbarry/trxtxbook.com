@@ -15,8 +15,8 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose, 
   const navigate = useNavigate();
 
   const handleArticleClick = () => {
-    if (project.articleUrl) {
-      navigate(project.articleUrl);
+    if (project.article_url) {
+      navigate(project.article_url);
     }
   };
 
@@ -27,7 +27,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose, 
       {/* En-tête avec image */}
       <div className="relative h-[300px] overflow-hidden group">
         <img
-          src={getOptimizedUrl(project.image, 1200)}
+          src={getOptimizedUrl(project.image_url, 1200)}
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
@@ -38,7 +38,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose, 
           <div className="flex items-center justify-between mb-4">
             {/* Titre toujours lisible car sur l'image/gradient */}
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white relative z-10">{project.title}</h2>
-            {project.articleUrl && (
+            {project.article_url && (
               <button
                 onClick={handleArticleClick}
                 className="px-4 py-2 bg-white/90 dark:bg-violet-500/20 text-violet-600 dark:text-violet-300 rounded-lg 
@@ -80,7 +80,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose, 
         {/* ✅ CHANGEMENT : Typography adaptative (prose-gray en jour, invert en nuit) */}
         <div className="prose prose-gray dark:prose-invert max-w-none mb-8">
           <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-6">
-            {project.longDescription}
+            {project.long_description}
           </p>
 
           <h3 className="text-xl font-semibold text-violet-600 dark:text-violet-400 mb-4">Fonctionnalités</h3>
@@ -95,7 +95,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose, 
 
           <h3 className="text-xl font-semibold text-violet-600 dark:text-violet-400 mt-8 mb-4">Détails Techniques</h3>
           <ul className="space-y-3">
-            {project.technicalDetails.map((detail, index) => (
+            {project.technical_details.map((detail, index) => (
               <li key={index} className="flex items-start gap-3">
                 <Code className="w-5 h-5 text-violet-600 dark:text-violet-400 mt-1 shrink-0" />
                 <span className="text-gray-700 dark:text-gray-300">{detail}</span>
@@ -131,7 +131,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose, 
               <ExternalLink className="w-4 h-4 transform transition-transform group-hover:translate-x-1" />
             </a>
           )}
-          {project.articleUrl && !isModal && (
+          {project.article_url && !isModal && (
             <button
               onClick={handleArticleClick}
               className="flex items-center gap-2 px-4 py-2 bg-violet-50 dark:bg-violet-500/20 text-violet-700 dark:text-violet-300
