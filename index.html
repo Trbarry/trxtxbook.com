@@ -66,6 +66,17 @@
     </script>
   </head>
   <body>
+    <div id="bg-depth" style="
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139, 92, 246, 0.09) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 50% 115%, rgba(0, 0, 0, 0.45) 0%, transparent 65%),
+        radial-gradient(ellipse 35% 70% at 0% 50%,   rgba(0, 0, 0, 0.3)  0%, transparent 60%),
+        radial-gradient(ellipse 35% 70% at 100% 50%, rgba(0, 0, 0, 0.3)  0%, transparent 60%);
+    "></div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

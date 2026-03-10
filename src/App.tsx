@@ -195,9 +195,6 @@ function App() {
       <Router>
         <div className="min-h-screen relative text-text bg-background overflow-hidden selection:bg-violet-500/30 transition-colors duration-300">
 
-          {/* Fond stylisé — depth effect */}
-          <div className="fixed inset-0 pointer-events-none z-0 depth-bg" aria-hidden="true" />
-
           <SEOHead />
           
           {/* ✅ UI Helpers en Suspense pour optimiser le thread principal */}
