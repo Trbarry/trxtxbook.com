@@ -45,6 +45,7 @@ const WriteupPage = lazy(() => import('./pages/WriteupPage').then(m => ({ defaul
 const ArticlesListPage = lazy(() => import('./pages/ArticlesListPage').then(m => ({ default: m.ArticlesListPage })));
 const ArticleDetailPage = lazy(() => import('./pages/ArticleDetailPage').then(m => ({ default: m.ArticleDetailPage })));
 const DogWriteupPage = lazy(() => import('./pages/DogWriteupPage').then(m => ({ default: m.DogWriteupPage })));
+const CPTSJourneyArticlePage = lazy(() => import('./pages/CPTSJourneyArticlePage').then(m => ({ default: m.CPTSJourneyArticlePage })));
 
 // Admin & Outils
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then(m => ({ default: m.AnalyticsPage })));
@@ -120,6 +121,7 @@ const AnimatedRoutes = ({
           <Route path="/writeups/:slug" element={<PageTransition><WriteupPage /></PageTransition>} />
           <Route path="/writeups/dog" element={<PageTransition><DogWriteupPage /></PageTransition>} />
           <Route path="/articles" element={<PageTransition><ArticlesListPage /></PageTransition>} />
+          <Route path="/articles/cpts-journey" element={<PageTransition><CPTSJourneyArticlePage /></PageTransition>} />
           <Route path="/articles/:slug" element={<PageTransition><ArticleDetailPage /></PageTransition>} />
           
           {/* ADMIN & TOOLS */}
