@@ -47,6 +47,12 @@ const ArticleDetailPage = lazy(() => import('./pages/ArticleDetailPage').then(m 
 const DogWriteupPage = lazy(() => import('./pages/DogWriteupPage').then(m => ({ default: m.DogWriteupPage })));
 const CPTSJourneyArticlePage = lazy(() => import('./pages/CPTSJourneyArticlePage').then(m => ({ default: m.CPTSJourneyArticlePage })));
 const ProjectPage = lazy(() => import('./pages/ProjectPage').then(m => ({ default: m.ProjectPage })));
+const HomeLabProjectPage = lazy(() => import('./pages/HomeLabProjectPage'));
+const ADProjectPage = lazy(() => import('./pages/ADProjectPage').then(m => ({ default: m.ADProjectPage })));
+const ExegolProjectPage = lazy(() => import('./pages/ExegolProjectPage').then(m => ({ default: m.ExegolProjectPage })));
+const LinuxMintProjectPage = lazy(() => import('./pages/LinuxMintProjectPage').then(m => ({ default: m.LinuxMintProjectPage })));
+const SteamDeckProjectPage = lazy(() => import('./pages/SteamDeckProjectPage').then(m => ({ default: m.SteamDeckProjectPage })));
+const SMBProjectPage = lazy(() => import('./pages/SMBProjectPage').then(m => ({ default: m.SMBProjectPage })));
 
 // Admin & Outils
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then(m => ({ default: m.AnalyticsPage })));
@@ -114,6 +120,12 @@ const AnimatedRoutes = ({
           {/* LISTES ET PAGES SECONDAIRES */}
           <Route path="/writeups" element={<PageTransition><WriteupsList /></PageTransition>} />
           <Route path="/projects" element={<PageTransition><ProjectsList /></PageTransition>} />
+          <Route path="/projects/homelab-infrastructure" element={<PageTransition><HomeLabProjectPage /></PageTransition>} />
+          <Route path="/projects/ad-network" element={<PageTransition><ADProjectPage /></PageTransition>} />
+          <Route path="/projects/exegol" element={<PageTransition><ExegolProjectPage /></PageTransition>} />
+          <Route path="/projects/linux-mint" element={<PageTransition><LinuxMintProjectPage /></PageTransition>} />
+          <Route path="/projects/steam-deck-kali" element={<PageTransition><SteamDeckProjectPage /></PageTransition>} />
+          <Route path="/projects/smb-server" element={<PageTransition><SMBProjectPage /></PageTransition>} />
           <Route path="/projects/:slug" element={<PageTransition><ProjectPage /></PageTransition>} />
           <Route path="/certifications" element={<PageTransition><CertificationsList /></PageTransition>} />
           <Route path="/wiki" element={<PageTransition><WikiPage /></PageTransition>} />
