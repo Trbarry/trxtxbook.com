@@ -44,11 +44,7 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(m => ({ defa
 const WriteupPage = lazy(() => import('./pages/WriteupPage').then(m => ({ default: m.WriteupPage })));
 const ArticlesListPage = lazy(() => import('./pages/ArticlesListPage').then(m => ({ default: m.ArticlesListPage })));
 const ArticleDetailPage = lazy(() => import('./pages/ArticleDetailPage').then(m => ({ default: m.ArticleDetailPage })));
-const ADArticlePage = lazy(() => import('./pages/ADArticlePage').then(m => ({ default: m.ADArticlePage })));
-const LinuxMintArticlePage = lazy(() => import('./pages/LinuxMintArticlePage').then(m => ({ default: m.LinuxMintArticlePage })));
-const CPTSJourneyArticlePage = lazy(() => import('./pages/CPTSJourneyArticlePage').then(m => ({ default: m.CPTSJourneyArticlePage })));
 const DogWriteupPage = lazy(() => import('./pages/DogWriteupPage').then(m => ({ default: m.DogWriteupPage })));
-const HomeLabArticlePage = lazy(() => import('./pages/HomeLabArticlePage'));
 
 // Admin & Outils
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then(m => ({ default: m.AnalyticsPage })));
@@ -124,10 +120,6 @@ const AnimatedRoutes = ({
           <Route path="/writeups/:slug" element={<PageTransition><WriteupPage /></PageTransition>} />
           <Route path="/writeups/dog" element={<PageTransition><DogWriteupPage /></PageTransition>} />
           <Route path="/articles" element={<PageTransition><ArticlesListPage /></PageTransition>} />
-          <Route path="/articles/ad-network" element={<PageTransition><ADArticlePage /></PageTransition>} />
-          <Route path="/articles/linux-mint-revival" element={<PageTransition><LinuxMintArticlePage /></PageTransition>} />
-          <Route path="/articles/cpts-journey" element={<PageTransition><CPTSJourneyArticlePage /></PageTransition>} />
-          <Route path="/articles/homelab-infrastructure-deep-dive" element={<PageTransition><HomeLabArticlePage /></PageTransition>} />
           <Route path="/articles/:slug" element={<PageTransition><ArticleDetailPage /></PageTransition>} />
           
           {/* ADMIN & TOOLS */}
