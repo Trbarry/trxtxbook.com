@@ -10,7 +10,6 @@ import { ADProject } from './projects/ADProject';
 import { SteamDeckProject } from './projects/SteamDeckProject';
 import { LinuxMintProject } from './projects/LinuxMintProject';
 import { HomeLabProject } from './projects/HomeLabProjects';
-import { CPTSJourneyProject } from './projects/CPTSJourneyProject';
 import { Project } from '../types/project';
 import { useNavigate } from 'react-router-dom';
 import { SEOHead } from './SEOHead';
@@ -22,7 +21,6 @@ export const ProjectsList: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   
   const allProjects: Project[] = [
-    CPTSJourneyProject,
     HomeLabProject,
     LinuxMintProject,
     ExegolProject,

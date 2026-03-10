@@ -9,7 +9,6 @@ import { SteamDeckProject } from './projects/SteamDeckProject';
 import { ExegolProject } from './projects/ExegolProject';
 import { LinuxMintProject } from './projects/LinuxMintProject';
 import { HomeLabProject } from './projects/HomeLabProjects';
-import { CPTSJourneyProject } from './projects/CPTSJourneyProject';
 import { getOptimizedUrl } from '../lib/imageUtils';
 
 export const Projects: React.FC = () => {
@@ -17,7 +16,6 @@ export const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const projects: Project[] = [
-    CPTSJourneyProject,
     HomeLabProject,
     LinuxMintProject,
     ExegolProject,
