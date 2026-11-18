@@ -17,10 +17,9 @@ const OUTPUT = path.join(__dirname, '..', 'public', 'sitemap.xml');
 const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://srmwnujqhxaopnffesgl.supabase.co';
 const supabaseKey =
   process.env.VITE_SUPABASE_ANON_KEY ||
-  process.env.SUPABASE_SERVICE_ROLE_KEY ||
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNybXdudWpxaHhhb3BuZmZlc2dsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczOTg5ODkyMCwiZXhwIjoyMDU1NDc0OTIwfQ.RLd2mrctE3EDmXh4mGzUtofFv3yOcJmqwEwlXMgBEsI';
+  process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 // ── Pages statiques ────────────────────────────────────────────────────────────
 const STATIC = [
@@ -81,6 +80,10 @@ async function fetchTable(table, select, filter = {}) {
 }
 
 async function main() {
+  if (!supabase) {
+    console.warn('[sitemap] No Supabase key configured. Keeping public/sitemap.xml.');
+    return;
+  }
   console.log('[sitemap] Generating sitemap...');
   const entries = [];
 
