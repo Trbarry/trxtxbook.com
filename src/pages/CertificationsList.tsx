@@ -29,7 +29,7 @@ export const CertificationsList: React.FC = () => {
               Formation & Certifications
             </h1>
             <p className="text-gray-600 dark:text-gray-400 max-w-2xl text-lg leading-relaxed">
-              Validation continue de mes compétences offensives et défensives.
+              Je suis actuellement la formation AIS chez FORMATIK.
               <br />
               <span className="text-sm font-mono text-violet-600 dark:text-violet-400 mt-2 block">
                 Roadmap: CPTS Validée → Objectif OSCP

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import { 
   Briefcase, Target, Lightbulb, Server, Cpu, Network,
   Terminal, Award, CheckCircle2, X, ShieldCheck, 
-  Lock, Cloud, Activity, Globe
+  Cloud, Activity, Globe
 } from 'lucide-react';
 
 interface ProfileModalProps {
@@ -23,72 +23,72 @@ const techStack = [
 ];
 
 export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
-  useEffect(() => {
-    setIsVisible(true);
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') handleClose();
-    };
-    window.addEventListener('keydown', handleEsc);
+  useLayoutEffect(() => {
+    const dialog = dialogRef.current;
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    dialog?.showModal();
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     return () => {
-      window.removeEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'unset';
+      dialog?.close();
+      document.body.style.overflow = previousOverflow;
+      opener?.focus({ preventScroll: true });
     };
   }, []);
 
-  const handleClose = () => {
-    setIsVisible(false);
-    setTimeout(onClose, 300);
-  };
-
-  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) handleClose();
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+    if (e.target === e.currentTarget) onClose();
   };
 
   return (
-    <div 
-      className={`fixed inset-0 bg-black/70 backdrop-blur-md z-[60] flex items-center justify-center p-4 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+    <dialog
+      ref={dialogRef}
+      aria-labelledby="profile-title"
+      className="fixed inset-0 m-0 h-full w-full max-h-none max-w-none border-0 text-text bg-transparent backdrop:bg-neutral-900/40 z-[60] open:flex items-center justify-center p-4"
       onClick={handleOverlayClick}
+      onCancel={event => { event.preventDefault(); onClose(); }}
     >
       <div 
         data-lenis-prevent
-        className={`bg-surface dark:bg-[#0f0f13] rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto border border-gray-200 dark:border-violet-500/20 shadow-2xl p-6 md:p-10 custom-scrollbar relative transform transition-all duration-300 ${isVisible ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'}`}
+        className="bg-surface rounded-xl max-w-5xl w-full max-h-[90vh] overflow-y-auto border border-line shadow-lg p-6 md:p-10 custom-scrollbar relative"
       >
         
         <button 
-          onClick={handleClose}
-          className="absolute top-6 right-6 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors bg-gray-100 dark:bg-[#1a1a1f] p-2 rounded-full border border-gray-200 dark:border-white/5 z-20 group"
+          type="button"
+          aria-label="Fermer le profil"
+          onClick={onClose}
+          className="absolute top-5 right-5 text-muted hover:text-accent transition-colors bg-background p-2 rounded-full border border-line z-20"
         >
-          <X className="w-5 h-5 group-hover:rotate-90 transition-transform" />
+          <X className="w-5 h-5" />
         </button>
 
         {/* En-tête Profil */}
         <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-12 relative">
-          <div className="absolute -top-10 -left-10 w-32 h-32 bg-violet-600/10 rounded-full blur-3xl pointer-events-none"></div>
-          
           <div className="relative">
-            <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-gray-900 via-violet-700 to-violet-500 dark:from-white dark:via-violet-200 dark:to-violet-400 bg-clip-text text-transparent tracking-tight">
+            <h2 id="profile-title" className="pr-10 text-4xl md:text-5xl font-semibold text-text tracking-tight">
               Tristan Barry
             </h2>
             <div className="flex flex-wrap items-center gap-3 mt-4">
               <span className="flex items-center gap-1.5 bg-violet-500/10 text-violet-700 dark:text-violet-200 px-4 py-1.5 rounded-full text-sm font-semibold border border-violet-500/20 shadow-sm">
                 <Briefcase className="w-3.5 h-3.5" />
-                Apprenti Technicien S&R
+                Technicien systèmes et réseaux
               </span>
               <span className="flex items-center gap-1.5 bg-blue-500/10 text-blue-700 dark:text-blue-200 px-4 py-1.5 rounded-full text-sm font-semibold border border-blue-500/20">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                Cybersécurité & Pentest
+                Certifié CPTS
               </span>
             </div>
+            <p className="mt-4 max-w-2xl text-gray-700 dark:text-gray-300 leading-relaxed">
+              Je travaille chez Moulinvest et je suis la formation Administrateur d’infrastructures sécurisées (AIS) chez FORMATIK.
+              Depuis peu, je pratique aussi le bug bounty sur mon temps libre.
+            </p>
           </div>
         </div>
 
         {/* SECTION 1 : EXPÉRIENCE PROFESSIONNELLE */}
-        <div className="group relative bg-gradient-to-br from-gray-50 to-white dark:from-[#1a1a20] dark:to-[#0f0f13] border border-gray-200 dark:border-violet-500/30 rounded-2xl p-8 mb-10 overflow-hidden transition-all duration-300 hover:border-violet-500/60 shadow-sm">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-violet-600/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 group-hover:bg-violet-600/10 transition-all duration-700"></div>
-          
+        <div className="bg-background border border-line rounded-xl p-5 md:p-8 mb-10">
           <div className="relative z-10">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
               <div className="flex items-center gap-5">
@@ -242,7 +242,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                 </div>
 
                 <div className="space-y-6">
-                    <div className="bg-gradient-to-r from-yellow-500/5 to-transparent p-6 rounded-2xl border border-yellow-500/10">
+                    <div className="bg-background p-6 rounded-xl border border-line">
                         <div className="flex items-start gap-4">
                             <Lightbulb className="w-6 h-6 text-yellow-600 mt-1 shrink-0" />
                             <div>
@@ -254,7 +254,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
                         </div>
                     </div>
                     
-                    <div className="bg-gradient-to-r from-violet-500/5 to-transparent p-6 rounded-2xl border border-violet-500/10">
+                    <div className="bg-background p-6 rounded-xl border border-line">
                         <div className="flex items-start gap-4">
                             <Target className="w-6 h-6 text-violet-600 mt-1 shrink-0" />
                             <div>
@@ -269,6 +269,6 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
             </div>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 };

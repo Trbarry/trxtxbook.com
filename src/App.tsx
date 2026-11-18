@@ -1,7 +1,6 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import { useState, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import Lenis from 'lenis';
 import { safeLazy as lazy } from './lib/safeLazy';
 
 // ✅ Contextes et SEO
@@ -28,7 +27,6 @@ const CareerTimeline = lazy(() => import('./components/CareerTimeline').then(m =
 // --- LAZY LOADING DES UI HELPERS ---
 const ProfileModal = lazy(() => import('./components/ProfileModal').then(m => ({ default: m.ProfileModal })));
 const ScrollMenu = lazy(() => import('./components/ScrollMenu').then(m => ({ default: m.ScrollMenu })));
-const MouseTrail = lazy(() => import('./components/MouseTrail').then(m => ({ default: m.MouseTrail })));
 const AnalyticsTracker = lazy(() => import('./components/AnalyticsTracker').then(m => ({ default: m.AnalyticsTracker })));
 const Terminal = lazy(() => import('./components/Terminal').then(m => ({ default: m.Terminal })));
 
@@ -62,20 +60,18 @@ const AdminTrollPage = lazy(() => import('./pages/AdminTrollPage').then(m => ({ 
 // Fallback léger pour les chargements de sections
 const SectionLoader = () => (
   <div className="py-20 flex items-center justify-center">
-    <div className="animate-spin rounded-full h-8 w-8 border-2 border-violet-500 border-t-transparent"></div>
+    <div className="animate-spin rounded-full h-8 w-8 border-2 border-accent border-t-transparent"></div>
   </div>
 );
 
 // ✅ INTERFACE PROPS POUR ANIMATED ROUTES
 interface AnimatedRoutesProps {
-  isLoaded: boolean;
   setShowProfile: (show: boolean) => void;
   activeSection: string;
   setActiveSection: (section: string) => void;
 }
 
 const AnimatedRoutes = ({
-  isLoaded,
   setShowProfile,
   activeSection,
   setActiveSection
@@ -86,7 +82,7 @@ const AnimatedRoutes = ({
     <AnimatePresence mode="wait">
       <Suspense fallback={
         <div className="min-h-screen flex items-center justify-center bg-background">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-violet-500 border-t-transparent"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-accent border-t-transparent"></div>
         </div>
       }>
         <Routes location={location} key={location.pathname}>
@@ -94,24 +90,21 @@ const AnimatedRoutes = ({
           {/* PAGE D'ACCUEIL */}
           <Route path="/" element={
             <>
-              <Suspense fallback={null}>
-                <ScrollMenu activeSection={activeSection} setActiveSection={setActiveSection} />
-              </Suspense>
-              
               <PageTransition>
                 <div id="home">
-                  <Hero isLoaded={isLoaded} setShowProfile={setShowProfile} />
+                  <Hero setShowProfile={setShowProfile} />
                 </div>
                 
                 {/* ✅ Chargement progressif des sections pour ne pas bloquer le Hero */}
                 <Suspense fallback={<SectionLoader />}>
-                  <div id="stats"><Stats /></div>
+                  <ScrollMenu activeSection={activeSection} setActiveSection={setActiveSection} />
+                  <div id="parcours"><CareerTimeline /></div>
                   <div id="formation"><Formation /></div>
-                  <CareerTimeline />
-                  <div id="projects"><Projects /></div>
-                  <div id="writeups"><Writeups /></div>
-                  <div id="articles"><Articles /></div>
-                  <div id="contact"><Contact /></div>
+                  <Projects />
+                  <Writeups />
+                  <Articles />
+                  <div id="stats"><Stats /></div>
+                  <Contact />
                 </Suspense>
               </PageTransition>
             </>
@@ -163,37 +156,12 @@ const AnimatedRoutes = ({
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
-  const [isLoaded, setIsLoaded] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-    setIsLoaded(true);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
 
   return (
     <ThemeProvider> 
       <Router>
-        <div className="min-h-screen relative text-text bg-background overflow-hidden selection:bg-violet-500/30 transition-colors duration-300">
+        <div className="min-h-screen relative text-text bg-background overflow-hidden transition-colors duration-300">
 
           <SEOHead />
           
@@ -201,7 +169,6 @@ function App() {
           <Suspense fallback={null}>
             <AnalyticsTracker />
             <Terminal />
-            <MouseTrail />
           </Suspense>
 
           <Header setShowProfile={setShowProfile} setActiveSection={setActiveSection} activeSection={activeSection} />
@@ -209,7 +176,6 @@ function App() {
           {/* ✅ Balise sémantique <main> pour l'accessibilité */}
           <main id="main-content">
             <AnimatedRoutes
-              isLoaded={isLoaded}
               setShowProfile={setShowProfile}
               activeSection={activeSection}
               setActiveSection={setActiveSection}

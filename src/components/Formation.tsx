@@ -16,9 +16,12 @@ export const Formation: React.FC = () => {
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center gap-3">
             <Award className="w-8 h-8 text-violet-600 dark:text-violet-500" />
-            <h2 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-500 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
-              Formation & Certifications
-            </h2>
+            <div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-500 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
+                Formation & Certifications
+              </h2>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Formation actuelle · AIS chez FORMATIK</p>
+            </div>
           </div>
           <button
             onClick={handleCertificationClick}

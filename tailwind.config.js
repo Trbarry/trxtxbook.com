@@ -1,3 +1,19 @@
+import typography from '@tailwindcss/typography';
+
+const petrol = {
+  50: '#edf7f5',
+  100: '#d5eae6',
+  200: '#b0d7d0',
+  300: '#87beb7',
+  400: '#64a8a0',
+  500: '#287976',
+  600: '#12605f',
+  700: '#104f50',
+  800: '#113f40',
+  900: '#102f31',
+  950: '#0a2022',
+};
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -5,35 +21,26 @@ export default {
   theme: {
     extend: {
       colors: {
-        'cyber-violet': {
-          50: '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#a78bfa',
-          500: '#8b5cf6',
-          600: '#7c3aed',
-          700: '#6d28d9',
-          800: '#5b21b6',
-          900: '#4c1d95',
-        },
-        // Nos variables CSS dynamiques (Rappel de la config précédente)
+        // Les pages existantes utilisent encore ces noms pour l’accent du site.
+        'cyber-violet': petrol,
+        violet: petrol,
+        purple: petrol,
+        indigo: petrol,
+        petrol,
         background: 'rgb(var(--background) / <alpha-value>)',
         surface: 'rgb(var(--surface) / <alpha-value>)',
         text: 'rgb(var(--text) / <alpha-value>)',
-        
-        'night-900': '#0a0a0f',
+        muted: 'rgb(var(--muted) / <alpha-value>)',
+        line: 'rgb(var(--line) / <alpha-value>)',
+        accent: 'rgb(var(--accent) / <alpha-value>)',
+        'night-900': '#191c1c',
       },
-      // ... reste de ta config (backgroundImage, fontFamily, animation...)
       backgroundImage: {
-        'halo-violet': `
-          radial-gradient(circle at 50% 20%, rgba(139, 92, 246, 0.12), transparent 70%),
-          radial-gradient(circle at 90% 10%, rgba(139, 92, 246, 0.06), transparent 40%),
-          radial-gradient(ellipse at 10% 90%, rgba(139, 92, 246, 0.08), transparent 40%)
-        `,
+        'halo-violet': 'radial-gradient(ellipse at 70% 0%, rgb(var(--accent) / 0.05), transparent 65%)',
       },
       fontFamily: {
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['system-ui', 'sans-serif'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'Consolas', 'monospace'],
       },
       animation: {
         'glow': 'glow 2s ease-in-out infinite',
@@ -63,8 +70,5 @@ export default {
       },
     },
   },
-  // ✅ C'EST ICI QU'IL FAUT AJOUTER LE PLUGIN :
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [typography],
 };

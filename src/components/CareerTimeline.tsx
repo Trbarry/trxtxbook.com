@@ -1,184 +1,52 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Network, Server, Terminal, Target, Briefcase, ChevronDown, Sparkles, Zap } from 'lucide-react';
+const experience = [
+  {
+    period: 'Depuis 2025',
+    title: 'Technicien systèmes et réseaux',
+    context: 'Moulinvest',
+    description: 'Je gère le parc avec Microsoft Intune et les stratégies de groupe. Je travaille aussi sur la segmentation du réseau et la sécurité des systèmes.',
+  },
+  {
+    period: '2024',
+    title: 'Reconversion en informatique',
+    context: 'Formation en autonomie',
+    description: 'Pendant huit mois, j’ai alterné les exercices sur TryHackMe et la mise en pratique sur mon propre lab Active Directory.',
+  },
+  {
+    period: '2020 – 2023',
+    title: 'Technicien fibre optique',
+    context: 'Interventions sur le terrain',
+    description: 'J’intervenais sur les installations de fibre optique. Ces années de terrain m’ont appris comment fonctionne la couche physique du réseau.',
+  },
+];
 
-export const CareerTimeline: React.FC = () => {
-  const timelineData = [
-    {
-      year: "2020 - 2023",
-      title: "Technicien Fibre Optique",
-      subtitle: "Le terrain & la rigueur",
-      description: (
-        <>
-          Interventions critiques sur <strong className="text-blue-600 dark:text-blue-400">infrastructures physiques</strong>. Gestion du stress, respect strict des <strong className="text-blue-600 dark:text-blue-400">procédures</strong> et travail en autonomie. C'est ici que j'ai acquis ma compréhension fondamentale du <strong className="text-green-600 dark:text-green-400">Réseau Physique</strong> (Couche 1).
-        </>
-      ),
-      icon: Network,
-      color: "blue",
-      tags: ["Infrastructure", "Procédures", "Terrain"]
-    },
-    {
-      year: "2024",
-      title: "Reconversion Pro & Self-Learning",
-      subtitle: "Proactivité & Projets Perso",
-      description: (
-        <>
-          8 mois de discipline <strong className="text-violet-600 dark:text-violet-400">autodidacte</strong> intensive. Organisation rigoureuse des révisions (<strong className="text-violet-600 dark:text-violet-400">TryHackMe</strong>, <strong className="text-violet-600 dark:text-violet-400">eJPT</strong>, <strong className="text-violet-600 dark:text-violet-400">CPTS</strong>) immédiatement appliquées dans des projets concrets (<strong className="text-blue-600 dark:text-blue-400">Home Lab AD</strong>, Scripts).
-        </>
-      ),
-      icon: Server,
-      color: "violet",
-      tags: ["Autodidacte", "Home Lab", "Révisions"]
-    },
-    {
-      year: "2025 - 2027",
-      title: "Alternance Moulinvest",
-      subtitle: "Admin Sys/Réseau & Sécurité",
-      description: (
-        <>
-          Une expérience pivot au cœur d'une infrastructure hybride. Pilotage de la structuration du parc via des <strong className="text-blue-600 dark:text-blue-400">GPO granulaires</strong> et déploiement moderne sous <strong className="text-blue-600 dark:text-blue-400">Microsoft Intune</strong>.
-          <br className="mb-2" />
-          Segmentation réseau (<strong className="text-green-600 dark:text-green-400">VLANs</strong>) et <strong className="text-violet-600 dark:text-violet-400">Hardening</strong> proactif des systèmes avec une vision d'attaquant (<strong className="text-violet-600 dark:text-violet-400">Red Team</strong>).
-        </>
-      ),
-      icon: Briefcase,
-      color: "green",
-      tags: ["SysAdmin", "Azure Hybride", "Sécurité"]
-    },
-    {
-      year: "Futur",
-      title: "L'Horizon",
-      subtitle: "Vers une expertise globale",
-      description: (
-        <>
-          Mon cap est fixé : obtenir un <strong className="text-violet-600 dark:text-violet-400">Bac+5</strong> (Mastère Spécialisé). Je souhaite fusionner ma passion pour la <strong className="text-violet-600 dark:text-violet-400">Sécurité Offensive</strong> et <strong className="text-blue-600 dark:text-blue-400">Défensive</strong> avec une maîtrise solide du <strong className="text-green-600 dark:text-green-400">Réseau</strong> et de l'<strong className="text-blue-600 dark:text-blue-400">Architecture</strong>.
-        </>
-      ),
-      icon: Zap,
-      color: "purple",
-      tags: ["Bac+5", "Blue & Red Team", "Architecture", "Polyvalence"],
-      isBlurry: true
-    }
-  ];
-
+export function CareerTimeline() {
   return (
-    // ✅ CHANGEMENT : bg-background
-    <section id="timeline" className="py-24 bg-background transition-colors duration-300 relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-violet-500/20 to-transparent" />
-      
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-500 dark:from-white dark:to-gray-400">
-              Trajectoire Professionnelle
-            </span>
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
-            De l'infrastructure physique à la sécurité offensive : une évolution guidée par la curiosité technique.
-          </p>
+    <section id="timeline" aria-labelledby="timeline-heading" className="border-y border-line bg-surface px-5 py-12 sm:px-8 md:py-16">
+      <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1fr_2fr] lg:gap-12 lg:px-8">
+        <div>
+          <h2 id="timeline-heading" className="font-serif text-4xl tracking-tight text-text md:text-5xl">Mon parcours</h2>
+          <p className="mt-3 max-w-xs text-base leading-relaxed text-muted">De la fibre optique à l’administration des systèmes et des réseaux.</p>
         </div>
-
-        <div className="max-w-4xl mx-auto relative">
-          {/* Ligne verticale centrale */}
-          <div className="absolute left-[19px] md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500/20 via-violet-500/50 to-purple-500/20 md:-translate-x-1/2" />
-
-          <div className="space-y-12">
-            {timelineData.map((item, index) => {
-              const isEven = index % 2 === 0;
-              const Icon = item.icon;
-              
-              // Gestion des couleurs dynamiques (Light: text-600 / Dark: text-400)
-              const colorConfig: Record<string, string> = {
-                blue: "text-blue-600 dark:text-blue-400 bg-blue-500/5 dark:bg-blue-500/10 border-blue-200 dark:border-blue-500/20 group-hover:border-blue-400 dark:group-hover:border-blue-500/50",
-                violet: "text-violet-600 dark:text-violet-400 bg-violet-500/5 dark:bg-violet-500/10 border-violet-200 dark:border-violet-500/20 group-hover:border-violet-400 dark:group-hover:border-violet-500/50",
-                green: "text-green-600 dark:text-green-400 bg-green-500/5 dark:bg-green-500/10 border-green-200 dark:border-green-500/20 group-hover:border-green-400 dark:group-hover:border-green-500/50",
-                purple: "text-purple-600 dark:text-purple-400 bg-purple-500/5 dark:bg-purple-500/10 border-purple-200 dark:border-purple-500/20 group-hover:border-purple-400 dark:group-hover:border-purple-500/50"
-              };
-
-              const activeClass = colorConfig[item.color];
-
-              return (
-                <motion.div 
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`relative flex flex-col md:flex-row gap-8 ${isEven ? 'md:flex-row-reverse' : ''}`}
-                >
-                  {/* Point central (Icon) */}
-                  <div className="absolute left-0 md:left-1/2 w-10 h-10 -translate-x-[1px] md:-translate-x-1/2 flex items-center justify-center rounded-full bg-surface dark:bg-[#0a0a0f] border-2 border-gray-200 dark:border-[#1a1a1f] z-10 shadow-lg dark:shadow-[0_0_15px_rgba(0,0,0,0.8)]">
-                    <div className={`w-3 h-3 rounded-full ${item.color === 'purple' ? 'bg-purple-500 animate-pulse shadow-[0_0_10px_#a855f7]' : `bg-${item.color}-500`}`} />
-                  </div>
-
-                  {/* Contenu Vide (pour l'alignement sur desktop) */}
-                  <div className="hidden md:block flex-1" />
-
-                  {/* Carte de contenu */}
-                  <div className="flex-1 pl-12 md:pl-0">
-                    <div className={`
-                      group relative p-6 rounded-2xl bg-surface dark:bg-[#1a1a1f] border transition-all duration-500 shadow-sm dark:shadow-none
-                      ${activeClass}
-                      ${item.isBlurry ? 'backdrop-blur-sm bg-opacity-60 border-dashed' : 'hover:-translate-y-1 hover:shadow-xl'}
-                    `}>
-                      
-                      {/* Date Badge */}
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-black/40 border border-gray-200 dark:border-white/5 text-xs font-mono mb-4 text-gray-600 dark:text-gray-300 shadow-sm dark:shadow-none">
-                        <CalendarIcon className="w-3 h-3" />
-                        {item.year}
-                      </div>
-
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1 flex items-center gap-2">
-                        {item.title}
-                        {item.isBlurry && <Sparkles className="w-4 h-4 text-purple-500 animate-pulse" />}
-                      </h3>
-                      
-                      <p className={`text-sm font-medium mb-3 opacity-90 text-${item.color}-600 dark:text-${item.color}-400 flex flex-wrap gap-2`}>
-                        {item.subtitle}
-                      </p>
-                      
-                      <div className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4">
-                        {item.description}
-                      </div>
-
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-2">
-                        {item.tags.map((tag, i) => (
-                          <span key={i} className={`text-[10px] px-2 py-1 rounded border ${item.isBlurry ? 'bg-purple-500/5 text-purple-700 dark:text-purple-200 border-purple-200 dark:border-purple-500/30' : 'bg-gray-100 dark:bg-black/30 border-gray-200 dark:border-white/5 text-gray-600 dark:text-gray-400'}`}>
-                            #{tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Icône de fond décorative */}
-                      <Icon className={`absolute right-4 top-4 w-24 h-24 pointer-events-none transition-opacity duration-500 text-gray-900 dark:text-white ${item.isBlurry ? 'opacity-[0.03] blur-[2px]' : 'opacity-[0.03]'}`} />
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-          
-          {/* Indicateur de suite */}
-          <div className="flex justify-center mt-16">
-            <div className="p-4 rounded-full bg-gradient-to-b from-transparent to-purple-500/5 border border-purple-500/20">
-               <div className="flex flex-col items-center gap-2 text-gray-500 text-xs font-mono uppercase tracking-widest">
-                  <span>Loading Future...</span>
-                  <div className="flex gap-1">
-                    <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0s' }}></span>
-                    <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
-                    <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></span>
-                  </div>
-               </div>
+        <ol className="divide-y divide-line border-y border-line">
+          {experience.map(({ period, title, context, description }) => (
+            <li key={period} className="grid gap-2 py-5 sm:grid-cols-[7rem_1fr] sm:gap-5">
+              <span className="pt-0.5 text-sm font-medium tabular-nums text-accent">{period}</span>
+              <div>
+                <h3 className="text-xl font-semibold leading-tight text-text">{title}</h3>
+                <p className="mt-1 text-sm font-semibold text-muted">{context}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{description}</p>
+              </div>
+            </li>
+          ))}
+          <li className="grid gap-2 py-5 sm:grid-cols-[7rem_1fr] sm:gap-5">
+            <span className="pt-0.5 text-sm font-medium text-accent">À terme</span>
+            <div>
+              <h3 className="text-xl font-semibold leading-tight text-text">Poursuivre jusqu’au bac +5</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">J’aimerais approfondir l’architecture réseau et la sécurité offensive et défensive.</p>
             </div>
-          </div>
-        </div>
+          </li>
+        </ol>
       </div>
     </section>
   );
-};
-
-const CalendarIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-);
+}

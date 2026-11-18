@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Calendar, ExternalLink, Shield, CheckCircle2, Lock, BookOpen, FileText, Target, Network, Server, Code } from 'lucide-react';
+import { Award, Calendar, ExternalLink, Shield, Lock, BookOpen, FileText, Target, Network, Server, Code } from 'lucide-react';
 
 export const BTSCertification = () => {
   return (
@@ -7,13 +7,7 @@ export const BTSCertification = () => {
       <div className="p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
-            <div className="flex items-center gap-4">
-              <h3 className="text-xl font-semibold text-blue-400">BTS SIO option SISR</h3>
-              <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4" />
-                En cours
-              </span>
-            </div>
+            <h3 className="text-xl font-semibold text-blue-400">BTS SIO option SISR</h3>
             <span className="text-sm bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full inline-block mt-2">
               Services Informatiques aux Organisations
             </span>

@@ -23,7 +23,7 @@ export const Terminal: React.FC = () => {
   const navigate = useNavigate();
 
   const fileSystem: Record<string, string> = {
-    'readme.txt': "Bienvenue sur mon portfolio. Je suis Tristan, alternant SysAdmin et passionné de Cyber.",
+    'readme.txt': "Je suis Tristan, technicien systèmes et réseaux chez Moulinvest. Je suis la formation AIS chez FORMATIK.",
     'contact.txt': "Email: tr.barrypro@gmail.com\nTel: Encrypted[...]",
     'todo.md': "- [x] BTS SIO\n- [ ] OSCP\n- [ ] Master Cyber",
     'secret.txt': "Flag{Y0u_F0und_Th3_Term1n4l_Ch4mp10n}"
@@ -124,7 +124,7 @@ export const Terminal: React.FC = () => {
                     <div><span className="text-blue-600 dark:text-blue-400 font-bold">OS</span>: Arch Linux x86_64</div>
                     <div><span className="text-blue-600 dark:text-blue-400 font-bold">Host</span>: Lenovo IdeaPad Slim 5</div>
                     <div><span className="text-blue-600 dark:text-blue-400 font-bold">Kernel</span>: 6.8.9-arch1-1</div>
-                    <div><span className="text-blue-600 dark:text-blue-400 font-bold">Role</span>: Alternant SysAdmin & Pentester</div>
+                    <div><span className="text-blue-600 dark:text-blue-400 font-bold">Role</span>: Technicien systèmes et réseaux</div>
                 </div>
             </div>
         )});

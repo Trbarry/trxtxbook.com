@@ -18,7 +18,7 @@ export const CPTSJourneyArticlePage: React.FC = () => {
         publishedTime="2025-01-20T00:00:00+00:00"
         modifiedTime="2025-01-20T00:00:00+00:00"
       />
-      <div className="min-h-screen pt-24 pb-20 bg-[#0a0a0f]">
+      <div className="min-h-screen bg-background pb-16 pt-24 text-text">
         <CPTSJourneyArticle />
       </div>
     </>

@@ -1,40 +1,21 @@
 import React from 'react';
-import { 
-  Github, 
-  Linkedin, 
-  Mail, 
-  Terminal, 
-  Shield, 
-  Cpu, 
-  Activity,
-  GitBranch,
-  ExternalLink // Ajouté pour le style
-} from 'lucide-react';
+import { Activity, Cpu, Github, Linkedin, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-surface dark:bg-[#0f0f13] border-t border-gray-200 dark:border-violet-900/20 relative overflow-hidden transition-colors duration-300">
-      <div className="absolute top-0 left-1/4 w-96 h-1 bg-gradient-to-r from-transparent via-violet-500/50 to-transparent blur-sm" />
+    <footer className="border-t border-gray-200 bg-surface dark:border-white/10">
 
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           
           {/* Colonne 1 : Identité */}
           <div className="col-span-1 md:col-span-2 space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="p-2 bg-violet-500/10 rounded-lg border border-violet-500/20">
-                <Terminal className="w-6 h-6 text-violet-600 dark:text-violet-400" />
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-500 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
-                Tristan Barry
-              </span>
-            </div>
+            <p className="text-xl font-semibold tracking-tight text-text">Tristan Barry</p>
             <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed max-w-sm">
-              Alternant Technicien Système & Réseau passionné par la Cybersécurité offensive. 
-              Construction de laboratoires, CTF et sécurisation d'infrastructures.
+              Technicien systèmes et réseaux chez Moulinvest, en formation AIS chez FORMATIK.
             </p>
             <div className="flex items-center gap-2 text-xs text-gray-500 pt-2">
                 <Cpu className="w-3 h-3" />
@@ -44,32 +25,27 @@ export const Footer: React.FC = () => {
 
           {/* Colonne 2 : Navigation Rapide */}
           <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-              <GitBranch className="w-4 h-4 text-violet-500" />
+            <h3 className="font-semibold text-text mb-4">
               Plan du site
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/writeups" className="text-gray-600 dark:text-gray-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors flex items-center gap-2 group">
-                  <span className="w-1 h-1 bg-violet-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                <Link to="/writeups" className="text-gray-600 dark:text-gray-400 hover:underline underline-offset-4">
                   Write-ups
                 </Link>
               </li>
               <li>
-                <Link to="/projects" className="text-gray-600 dark:text-gray-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors flex items-center gap-2 group">
-                  <span className="w-1 h-1 bg-violet-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                <Link to="/projects" className="text-gray-600 dark:text-gray-400 hover:underline underline-offset-4">
                   Projets & Lab
                 </Link>
               </li>
               <li>
-                <Link to="/wiki" className="text-gray-600 dark:text-gray-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors flex items-center gap-2 group">
-                  <span className="w-1 h-1 bg-violet-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                <Link to="/wiki" className="text-gray-600 dark:text-gray-400 hover:underline underline-offset-4">
                   Wiki
                 </Link>
               </li>
               <li>
-                <Link to="/certifications" className="text-gray-600 dark:text-gray-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors flex items-center gap-2 group">
-                  <span className="w-1 h-1 bg-violet-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                <Link to="/certifications" className="text-gray-600 dark:text-gray-400 hover:underline underline-offset-4">
                   Certifications
                 </Link>
               </li>
@@ -78,28 +54,27 @@ export const Footer: React.FC = () => {
 
           {/* Colonne 3 : Réseaux */}
           <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-              <Shield className="w-4 h-4 text-blue-500" />
+            <h3 className="font-semibold text-text mb-4">
               Réseaux
             </h3>
             <div className="flex flex-col space-y-3">
               <a href="https://www.linkedin.com/in/tristan-barry-43b91b330/" 
                  target="_blank" 
                  rel="noopener noreferrer"
-                 className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-violet-600 dark:hover:text-white transition-colors group">
-                <Linkedin className="w-5 h-5 text-blue-600 dark:text-blue-500 group-hover:scale-110 transition-transform" />
+                 className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:underline underline-offset-4">
+                <Linkedin className="w-4 h-4" />
                 <span className="text-sm">LinkedIn</span>
               </a>
               <a href="https://github.com/Trbarry" 
                  target="_blank" 
                  rel="noopener noreferrer"
-                 className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-violet-600 dark:hover:text-white transition-colors group">
-                <Github className="w-5 h-5 text-purple-600 dark:text-purple-500 group-hover:scale-110 transition-transform" />
+                 className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:underline underline-offset-4">
+                <Github className="w-4 h-4" />
                 <span className="text-sm">GitHub</span>
               </a>
               <a href="mailto:tr.barrypro@gmail.com" 
-                 className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-violet-600 dark:hover:text-white transition-colors group">
-                <Mail className="w-5 h-5 text-red-600 dark:text-red-500 group-hover:scale-110 transition-transform" />
+                 className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:underline underline-offset-4">
+                <Mail className="w-4 h-4" />
                 <span className="text-sm">Email Pro</span>
               </a>
             </div>
@@ -115,7 +90,7 @@ export const Footer: React.FC = () => {
                 {/* AJOUT : Lien Mentions Légales */}
                 <Link 
                   to="/mentions-legales" 
-                  className="text-xs text-gray-500 hover:text-violet-600 dark:hover:text-violet-400 transition-colors underline decoration-gray-500/30 underline-offset-4"
+                  className="text-xs text-gray-500 hover:text-text transition-colors underline decoration-gray-500/30 underline-offset-4"
                 >
                   Mentions Légales
                 </Link>
@@ -135,11 +110,11 @@ export const Footer: React.FC = () => {
 
                 <Link 
                   to="/admin/analytics" 
-                  className="flex items-center gap-2 text-xs text-gray-500 hover:text-green-600 dark:hover:text-green-500 transition-colors"
+                  className="flex items-center gap-2 text-xs text-gray-500 hover:text-text transition-colors"
                   title="Voir les statistiques"
                 >
                   <Activity className="w-3 h-3" />
-                  <span className="font-mono">System Status: Online</span>
+                  <span>Statistiques du site</span>
                 </Link>
             </div>
         </div>

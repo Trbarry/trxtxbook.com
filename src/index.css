@@ -2,29 +2,121 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Définition des couleurs dynamiques (Format RGB pour la transparence Tailwind) */
 @layer base {
   :root {
-    /* Mode CLAIR (Light Mode) - Style "Ingénieur / Corporate" */
-    --background: 245 247 250; /* Un gris très très clair, moins agressif que le blanc pur */
+    color-scheme: light;
+    --background: 246 247 244;
     --surface: 255 255 255;
-    --text: 23 23 23;          /* Presque noir */
+    --text: 37 43 42;
+    --muted: 82 94 91;
+    --line: 209 216 212;
+    --accent: 18 96 95;
   }
 
-  /* Mode SOMBRE (Dark Mode) - Ton style actuel */
   .dark {
-    --background: 10 10 15;    /* Ton #0a0a0f converti en RGB */
-    --surface: 26 26 31;       /* Ton #1a1a1f */
-    --text: 255 255 255;
+    color-scheme: dark;
+    --background: 25 28 28;
+    --surface: 35 39 39;
+    --text: 237 240 237;
+    --muted: 175 187 182;
+    --line: 66 75 72;
+    --accent: 133 200 187;
+  }
+
+  body {
+    @apply bg-background font-sans text-text;
+    overflow-x: hidden;
+  }
+
+  :where(code, kbd, pre, samp) {
+    @apply font-mono;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+  }
+
+  :where(article p, .prose p) {
+    line-height: 1.75;
+    overflow-wrap: break-word;
+  }
+
+  :where(h1, h2, h3, h4, [id]) {
+    scroll-margin-top: 6rem;
   }
 }
 
-body {
-  @apply bg-background text-text transition-colors duration-300;
-  font-family: 'JetBrains Mono', monospace;
-  overflow-x: hidden;
-  position: relative;
+.page-content .from-gray-900.bg-clip-text {
+  color: rgb(var(--text));
+  background-image: none;
 }
 
+.page-content [class~="via-[#1a1a1f]"][class~="to-[#0f0f14]"] {
+  background: rgb(var(--line));
+}
 
-/* ... le reste du CSS ... */
+/* Les anciens dossiers techniques ont leurs propres surfaces sombres. */
+:root:not(.dark) .page-content > .min-h-screen:has(> article) {
+  color: rgb(var(--text));
+  background-color: rgb(var(--background));
+
+  & :is([class~="bg-[#1a1a1f]"]:not(pre), [class~="bg-white/5"]) {
+    background-color: rgb(var(--surface));
+  }
+
+  & :is([class~="bg-[#2a2a2f]"]:not(pre), [class~="bg-black/40"]) {
+    background-color: rgb(var(--background));
+  }
+
+  & :is(.text-gray-200, .text-gray-300, .text-gray-400, .text-gray-500):not(pre *, code *, [class~="bg-[#0d0d12]"] *, article [class~="bg-[#0a0a0f]"] *) {
+    color: rgb(var(--muted));
+  }
+
+  & :is(h2, h3, h4, ul, details).text-white,
+  & :is(h1, h2, h3).bg-clip-text {
+    color: rgb(var(--text));
+    background-image: none;
+  }
+
+  & :is(.text-violet-100, .text-violet-300, .text-violet-400):not(pre *, code *) {
+    color: rgb(var(--accent));
+  }
+
+  & :is([class~="border-white/5"], [class~="border-white/10"]) {
+    border-color: rgb(var(--line));
+  }
+
+  & [class~="from-[#0f0f14]"] {
+    background: rgb(var(--surface));
+  }
+
+  & .prose-invert {
+    @apply prose-stone;
+  }
+}
+
+.page-content svg [fill="#8b5cf6"] {
+  fill: #6daea7;
+}
+
+.page-content svg [stroke="#8b5cf6"] {
+  stroke: #6daea7;
+}
+
+.page-content svg [stop-color="#8b5cf6"] {
+  stop-color: #6daea7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
-import { Award, Calendar, CheckCircle2, FileText } from 'lucide-react';
+import React from 'react';
+import { useSearchParams } from 'react-router-dom';
+import './CPTSJourneyArticle.css';
+import { Award, Calendar, FileText } from 'lucide-react';
 import { CPTSJourneyArticleFrench } from './CPTSJourneyArticleFrench';
 import { CPTSJourneyArticleEnglish } from './CPTSJourneyArticleEnglish';
 
 export const CPTSJourneyArticle: React.FC = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState<'en' | 'fr'>('en');
+  const [params, setParams] = useSearchParams();
+  const selectedLanguage = params.get('lang') === 'fr' ? 'fr' : 'en';
 
   const languages = {
     en: {
       label: 'English',
-      flag: '🇺🇸',
-      title: 'CPTS Review : from INE EJPT to HackTheBox CPTS certified',
+      title: 'From INE eJPT to Hack The Box CPTS',
       subtitle: 'A focused 5-month journey to CPTS certification – From eJPT foundations to hands-on professional grade hacking',
     },
     fr: {
       label: 'Français',
-      flag: '🇫🇷',
-      title: 'CPTS Review : De l\'EJPT a la CPTS de HackTheBox',
-      subtitle: 'Un parcours complet de 5 mois vers la certification CPTS - Retour d\'expérience complet du niveau junior a la validation de la CPTS',
+      title: 'De l’eJPT à la CPTS de Hack The Box',
+      subtitle: 'Un parcours complet de 5 mois vers la certification CPTS - retour d’expérience du niveau junior à la validation de la CPTS',
     }
   };
 
@@ -25,60 +26,51 @@ export const CPTSJourneyArticle: React.FC = () => {
 
   const selectLanguage = (lang: 'en' | 'fr') => {
     if (lang === selectedLanguage) return;
-    setSelectedLanguage(lang);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const next = new URLSearchParams(params);
+    next.set('lang', lang);
+    setParams(next, { replace: true });
   };
 
   return (
-    <article className="max-w-4xl mx-auto px-6 py-12">
-      {/* Language toggle — fixed pill */}
-      <div className="fixed top-24 right-6 z-50">
-        <div className="flex items-center bg-[#1a1a1f] border border-violet-900/30 rounded-xl shadow-lg overflow-hidden backdrop-blur-sm">
-          {(['en', 'fr'] as const).map((lang, i) => (
-            <React.Fragment key={lang}>
-              {i > 0 && <div className="w-px h-6 bg-violet-900/40" />}
-              <button
-                onClick={() => selectLanguage(lang)}
-                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-all duration-200
-                  ${selectedLanguage === lang
-                    ? 'bg-violet-600 text-white'
-                    : 'text-gray-400 hover:text-gray-200 hover:bg-violet-500/10'
-                  }`}
+    <article lang={selectedLanguage} className="mx-auto max-w-4xl px-5 pb-12 sm:px-8">
+      <header className="mb-9 border-b border-line pb-7">
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+          <span className="text-sm font-semibold text-accent">Hack The Box / CPTS</span>
+          <div role="group" aria-label={selectedLanguage === 'fr' ? 'Langue de lecture' : 'Reading language'} className="flex gap-1 rounded-md border border-line bg-surface p-1">
+            {(['en', 'fr'] as const).map(lang => (
+              <button key={lang} type="button" lang={lang}
+                onClick={() => selectLanguage(lang)} aria-pressed={selectedLanguage === lang}
+                className={`min-h-10 rounded px-3 text-sm font-medium ${selectedLanguage === lang
+                  ? 'bg-accent text-surface'
+                  : 'text-muted hover:text-text'}`}
               >
-                <span>{languages[lang].flag}</span>
-                <span className="hidden sm:inline">{languages[lang].label}</span>
+                {languages[lang].label}
               </button>
-            </React.Fragment>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-
-      {/* En-tête */}
-      <header className="text-center mb-16 space-y-6">
-        <h1 className="text-5xl font-bold bg-gradient-to-r from-violet-400 to-violet-600 bg-clip-text text-transparent leading-tight">
+        <h1 className="max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-text sm:text-5xl">
           {currentLang.title}
         </h1>
-        <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-          {currentLang.subtitle}
-        </p>
-        <div className="flex items-center justify-center gap-6 text-sm text-gray-500">
-          <div className="flex items-center gap-2 bg-[#1a1a1f] px-4 py-2 rounded-lg">
-            <Calendar className="w-4 h-4" />
-            <span>{selectedLanguage === 'en' ? 'January - May 2025' : 'Janvier - Mai 2025'}</span>
-          </div>
-          <div className="flex items-center gap-2 bg-[#1a1a1f] px-4 py-2 rounded-lg">
-            <Award className="w-4 h-4 text-violet-400" />
-            <span>{selectedLanguage === 'en' ? 'CPTS Certified' : 'Certifié CPTS'}</span>
-          </div>
-          <div className="flex items-center gap-2 bg-[#1a1a1f] px-4 py-2 rounded-lg">
-            <FileText className="w-4 h-4 text-green-400" />
-            <span>{selectedLanguage === 'en' ? '190-page Report' : 'Rapport de 190 pages'}</span>
-          </div>
+        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">{currentLang.subtitle}</p>
+        <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
+          <span className="inline-flex items-center gap-2">
+            <Calendar aria-hidden="true" className="h-4 w-4" />
+            {selectedLanguage === 'en' ? 'January – May 2025' : 'Janvier – mai 2025'}
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <Award aria-hidden="true" className="h-4 w-4" />
+            {selectedLanguage === 'en' ? 'CPTS Certified' : 'Certifié CPTS'}
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <FileText aria-hidden="true" className="h-4 w-4" />
+            {selectedLanguage === 'en' ? '190-page Report' : 'Rapport de 190 pages'}
+          </span>
         </div>
       </header>
-
-      {/* Contenu selon la langue sélectionnée */}
-      {selectedLanguage === 'fr' ? <CPTSJourneyArticleFrench /> : <CPTSJourneyArticleEnglish />}
+      <div className="cpts-reading">
+        {selectedLanguage === 'fr' ? <CPTSJourneyArticleFrench /> : <CPTSJourneyArticleEnglish />}
+      </div>
     </article>
   );
 };

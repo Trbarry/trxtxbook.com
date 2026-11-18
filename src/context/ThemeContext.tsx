@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useLayoutEffect, useState } from 'react';
 
 type Theme = 'dark' | 'light';
 
@@ -8,26 +8,33 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const themePreference = 'trxtxbook:theme:v2';
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // On vérifie le localStorage, sinon on force 'dark' par défaut pour ton style
   const [theme, setTheme] = useState<Theme>(() => {
-    const savedTheme = localStorage.getItem('theme');
-    return (savedTheme as Theme) || 'dark';
+    try {
+      return localStorage.getItem(themePreference) === 'dark' ? 'dark' : 'light';
+    } catch {
+      return 'light';
+    }
   });
 
-  useEffect(() => {
-    const root = window.document.documentElement;
-    // On retire l'ancienne classe et on met la nouvelle
-    root.classList.remove('light', 'dark');
-    root.classList.add(theme);
-    
-    // On sauvegarde
-    localStorage.setItem('theme', theme);
+  useLayoutEffect(() => {
+    document.documentElement.classList.toggle('light', theme === 'light');
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute(
+      'content', theme === 'light' ? '#f6f7f4' : '#191c1c',
+    );
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    try {
+      localStorage.setItem(themePreference, next);
+    } catch {
+      // Le choix reste actif pour cette visite si le stockage est indisponible.
+    }
   };
 
   return (

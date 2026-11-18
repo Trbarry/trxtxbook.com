@@ -1,0 +1,33 @@
+.cpts-reading :is([class~="bg-[#1a1a1f]"], [class~="from-[#0f0f14]"], [class~="from-violet-500/10"]) {
+  background: rgb(var(--surface));
+}
+
+.cpts-reading :is([class~="bg-[#2a2a2f]"], [class~="bg-violet-900/20"]) {
+  background: rgb(var(--background));
+}
+
+.cpts-reading :is([class*="border-violet-"], [class*="border-white/"]) {
+  border-color: rgb(var(--line));
+}
+
+.cpts-reading :is(.text-violet-300, .text-violet-400, .text-blue-300, .text-green-300, .text-pink-300) {
+  color: rgb(var(--accent));
+}
+
+.cpts-reading :is(.text-gray-300, .text-gray-400) {
+  color: rgb(var(--muted));
+}
+
+.cpts-reading .text-white:not(pre, pre *),
+.cpts-reading .text-red-400 {
+  color: rgb(var(--text));
+}
+
+.cpts-reading details[open] {
+  --tw-ring-color: rgb(var(--accent));
+}
+
+.cpts-reading :is(a:hover, a:focus-visible) {
+  color: rgb(var(--accent));
+  text-decoration: underline;
+}

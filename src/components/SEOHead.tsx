@@ -14,9 +14,9 @@ interface SEOHeadProps {
 }
 
 export const SEOHead: React.FC<SEOHeadProps> = ({
-  title = "Tristan Barry - Apprenti Pentester | Portfolio Cybersécurité",
-  description = "Portfolio en cybersécurité | Apprenti Pentester passionné d'Active Directory, d'offensive security et de CTF | Projets personnels en infrastructure, réseaux et sécurité | Write-ups HTB & TryHackMe.",
-  keywords = "Tristan Barry, apprenti pentester, cybersécurité, pentesting, Active Directory, hack the box, tryhackme, write-ups, CTF, infrastructure, réseaux, Saint-Étienne, Lyon",
+  title = "Tristan Barry | Systèmes, réseaux et cybersécurité",
+  description = "Tristan Barry, technicien systèmes et réseaux chez Moulinvest, suit la formation AIS chez FORMATIK. Découvrez ses projets et son retour sur la certification CPTS.",
+  keywords = "Tristan Barry, CPTS, bug bounty, cybersécurité, pentesting, Active Directory, hack the box, tryhackme, write-ups, CTF, infrastructure, réseaux, Saint-Étienne, Lyon",
   image = "https://images.unsplash.com/photo-1550439062-609e1531270e?auto=format&fit=crop&w=1200&h=630&q=85",
   url = "https://trxtxbook.com/",
   type = "website",
@@ -108,8 +108,8 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
             "keywords": keywords
           } : {
             "name": "Tristan Barry",
-            "jobTitle": "Pentester & Technicien Système Réseau",
-            "description": "Alternant BTS SIO SISR passionné de cybersécurité et de pentesting",
+            "jobTitle": "Technicien systèmes et réseaux",
+            "description": "En poste chez Moulinvest et en formation AIS chez FORMATIK. Certifié CPTS, Tristan Barry débute en bug bounty sur son temps libre.",
             "url": "https://trxtxbook.com",
             "sameAs": [
               "https://www.linkedin.com/in/tristan-barry-43b91b330/",
